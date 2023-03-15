@@ -1,0 +1,11 @@
+[Unit]
+Description=Wallpaper
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/home/saying/.linuxConfig/wallpaperengine/wallpaper.sh
+Restart=on-failure
+
+[Install]
+WantedBy=graphical.target

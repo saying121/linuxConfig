@@ -1,0 +1,12 @@
+registry=https://registry.npm.taobao.org
+; 开源镜像: http://npm.taobao.org/mirrors
+; Node.js 镜像: http://npm.taobao.org/mirrors/node
+; alinode 镜像: http://npm.taobao.org/mirrors/alinode
+; phantomjs 镜像: http://npm.taobao.org/mirrors/phantomjs
+; ChromeDriver 镜像: http://npm.taobao.org/mirrors/chromedriver
+; OperaDriver 镜像: http://npm.taobao.org/mirrors/operadriver
+; Selenium 镜像: http://npm.taobao.org/mirrors/selenium
+; Node.js 文档镜像: http://npm.taobao.org/mirrors/node/latest/docs/api/index.html
+; NPM 镜像: https://npm.taobao.org/mirrors/npm/
+; electron 镜像: https://npm.taobao.org/mirrors/electron/
+; node-inspector 镜像: https://npm.taobao.org/mirrors/node-inspector/

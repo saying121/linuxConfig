@@ -1,0 +1,121 @@
+icons_format = "{icon}"
+
+[theme]
+theme = "modern"
+[theme.overrides]
+idle_bg = "#123456"
+idle_fg = "#abcdef"
+
+[icons]
+icons = "awesome4"
+[icons.overrides]
+bat = " | | "
+bat_full = " |X| "
+bat_charging = " |^| "
+bat_discharging = " |v| "
+
+[[block]]
+block = "focused_window"
+[block.format]
+full = " $title.str(max_w:150) | Missing"
+short = " $title.str(max_w:50) | Missing"
+
+# [[block]]
+# block = "load"
+# format = " $icon 1min avg: $1m.eng(w:4) "
+# interval = 1
+
+[[block]]
+block = "temperature"
+# format = " $icon $max max "
+format_alt = " $icon $min min, $max max, $average avg "
+# interval = 10
+# chip = "*-isa-*"
+
+[[block]]
+block = "cpu"
+interval = 1
+format_alt = " $icon $barchart $utilization "
+format = " $icon $utilization{ $boost|} "
+
+[[block]]
+block = "memory"
+format = " $icon $mem_used $mem_used_percents.eng(w:1) "
+format_alt = " $icon_swap $swap_free.eng(w:3,u:B,p:M)/$swap_total.eng(w:3,u:B,p:M)($swap_used_percents.eng(w:2)) "
+interval = 30
+warning_mem = 70
+critical_mem = 90
+
+# [[block]]
+# block = "nvidia_gpu"
+
+# [[block]]
+# block = "external_ip"
+# format = " $version "
+# format = " $ip $country_code "
+
+[[block]]
+block = "net"
+missing_format =" $icon × "
+format = " $icon {$signal_strength $frequency $speed_down $speed_up $frequency|Wired connection} "
+format_alt = " $icon {$signal_strength $bitrate $ssid $frequency|Wired connection} via $device "
+
+[[block]]
+block = "service_status"
+service = "clash"
+active_format = " ^icon_tea "
+inactive_format = " no ^icon_tea "
+
+# [[block]]
+# block = "disk_space"
+# path = "/"
+# info_type = "available"
+# alert_unit = "GB"
+# interval = 20
+# warning = 20.0
+# alert = 10.0
+# format = " $icon root: $available.eng(w:2) "
+
+[[block]]
+block = "memory"
+format = " $icon $mem_total_used_percents.eng(w:2) "
+format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
+
+[[block]]
+block = "sound"
+[[block.click]]
+button = "left"
+# cmd = "pavucontrol"
+
+[[block]]
+block = "music"
+format = " $icon {$volume_icon $player.str(max_w:8) $combo.str(max_w:15,rot_interval:0.5) $prev $play $next|} "
+# interface_name_exclude = [".*kdeconnect.*", "mpd", ""]
+seek_step_secs = 1
+[[block.click]]
+button = "left"
+action = "play_pause"
+[[block.click]]
+button = "up"
+action = "volume_up"
+[[block.click]]
+button = "down"
+action = "volume_down"
+[[block.click]]
+button = "forward"
+action = "seek_forward"
+[[block.click]]
+button = "back"
+action = "seek_backward"
+
+# [[block]]
+# block = "time"
+# interval = 5
+# format = " $timestamp.datetime(f:'%a %d/%m %R') "
+
+[[block]]
+block = "time"
+interval = 60
+[block.format]
+full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R', l:fr_BE) "
+short = " $icon $timestamp.datetime(f:%T) "

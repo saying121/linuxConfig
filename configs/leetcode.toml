@@ -1,0 +1,59 @@
+# usually you don't wanna change those
+[sys]
+categories = [
+  "algorithms",
+  "concurrency",
+  "database",
+  "shell"
+]
+
+langs = [
+  "bash",
+  "c",
+  "cpp",
+  "csharp",
+  "golang",
+  "java",
+  "javascript",
+  "kotlin",
+  "mysql",
+  "php",
+  "python",
+  "python3",
+  "ruby",
+  "rust",
+  "scala",
+  "swift"
+]
+
+[sys.urls]
+base = "https://leetcode.cn"
+graphql = "https://leetcode.cn/graphql"
+login = "https://leetcode.cn/accounts/login/"
+problems = "https://leetcode.cn/api/problems/$category/"
+problem = "https://leetcode.cn/problems/$slug/description/"
+tag = "https://leetcode.cn/tag/$slug/"
+test = "https://leetcode.cn/problems/$slug/interpret_solution/"
+session = "https://leetcode.cn/session/"
+submit = "https://leetcode.cn/problems/$slug/submit/"
+submissions = "https://leetcode.cn/api/submissions/$slug"
+submission = "https://leetcode.cn/submissions/detail/$id/"
+verify = "https://leetcode.cn/submissions/detail/$id/check/"
+favorites = "https://leetcode.cn/list/api/questions"
+favorite_delete = "https://leetcode.cn/list/api/questions/$hash/$id"
+
+[code]
+editor = "nvim"
+lang = "python3"
+pick = "${fid}.${slug}"
+submission = "${fid}.${slug}.${sid}.${ac}"
+
+[cookies]
+csrf = "${csrftoken}"
+session = "${LEETCODE_SESSION}"
+
+[storage]
+cache = "Problems"
+code = "code"
+root = "~/.leetcode"
+scripts = "scripts"

@@ -1,0 +1,9 @@
+nvim/undodir/*
+nvim/backupdir/*
+logs/*
+./ranger/plugins/
+.vale.ini
+styles/
+node_modules/
+package-lock.json
+package.json

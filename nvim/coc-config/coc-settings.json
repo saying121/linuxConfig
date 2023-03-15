@@ -1,0 +1,6 @@
+{
+    "pyright.inlayHints.variableTypes": true,
+    "pyright.completion.importSupport": true,
+    "python.analysis.typeCheckingMode": "off",
+    "coc.preferences.extensionUpdateCheck": "weekly"
+}
