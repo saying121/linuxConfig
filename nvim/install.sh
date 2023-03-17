@@ -14,7 +14,7 @@ sudo $pacMan ranger fzf trash-cli python3 python-pip nvm npm lolcat shfmt ripgre
 rustup install stable beta nightly
 
 yay -S --noconfirm powershell-lts-bin powershell-editor-services
-()
+
 yay -S --noconfirm libldap24 mssql-scripter
 
 export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node

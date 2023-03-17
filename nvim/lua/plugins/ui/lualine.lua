@@ -98,11 +98,6 @@ return {
                         color = { fg = "#000000" },
                         -- color = { fg = "ff9e64" },
                     },
-                    -- {
-                    --     require("noice").api.status.command.get,
-                    --     cond = require("noice").api.status.command.has,
-                    --     color = { fg = "ff9e64" },
-                    -- },
                 },
                 lualine_b = { "branch", "diagnostics" },
                 lualine_c = {

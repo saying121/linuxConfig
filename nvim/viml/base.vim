@@ -21,7 +21,7 @@ set listchars=tab:>>,space:·                                   " 换行和tab�
 set list
 set number                                                     " 显示行号
 set relativenumber                                             " 相对行号
-syntax off                                                     " 语法高亮，用nvim-treesitter高亮
+syntax on                                                     " 语法高亮，用nvim-treesitter高亮
 set hlsearch                                                   " 搜索结果高亮
 set incsearch                                                  " 搜索输入时动态高亮
 set showmatch                                                  " 高亮显示匹配括号

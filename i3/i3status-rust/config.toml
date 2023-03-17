@@ -17,8 +17,9 @@ bat_discharging = " |v| "
 [[block]]
 block = "focused_window"
 [block.format]
-full = " $title.str(max_w:150) | Missing"
-short = " $title.str(max_w:50) | Missing"
+full = " $title.str(max_w:100,rot_interval:0.5) | Missing"
+short = " $title.str(max_w:50,rot_interval:0.5) | Missing"
+
 
 # [[block]]
 # block = "load"
@@ -39,6 +40,12 @@ format_alt = " $icon $barchart $utilization "
 format = " $icon $utilization{ $boost|} "
 
 [[block]]
+block = "net"
+# missing_format =" $icon × "
+format = " $icon {$signal_strength $speed_down $speed_up $frequency|Wired connection} "
+format_alt = " $icon {$signal_strength $bitrate $ssid $frequency|Wired connection} via $device "
+
+[[block]]
 block = "memory"
 format = " $icon $mem_used $mem_used_percents.eng(w:1) "
 format_alt = " $icon_swap $swap_free.eng(w:3,u:B,p:M)/$swap_total.eng(w:3,u:B,p:M)($swap_used_percents.eng(w:2)) "
@@ -54,17 +61,11 @@ critical_mem = 90
 # format = " $version "
 # format = " $ip $country_code "
 
-[[block]]
-block = "net"
-missing_format =" $icon × "
-format = " $icon {$signal_strength $frequency $speed_down $speed_up $frequency|Wired connection} "
-format_alt = " $icon {$signal_strength $bitrate $ssid $frequency|Wired connection} via $device "
-
-[[block]]
-block = "service_status"
-service = "clash"
-active_format = " ^icon_tea "
-inactive_format = " no ^icon_tea "
+# [[block]]
+# block = "service_status"
+# service = "clash"
+# active_format = " ^icon_tea "
+# inactive_format = " no ^icon_tea "
 
 # [[block]]
 # block = "disk_space"
@@ -77,11 +78,6 @@ inactive_format = " no ^icon_tea "
 # format = " $icon root: $available.eng(w:2) "
 
 [[block]]
-block = "memory"
-format = " $icon $mem_total_used_percents.eng(w:2) "
-format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
-
-[[block]]
 block = "sound"
 [[block.click]]
 button = "left"
@@ -89,12 +85,14 @@ button = "left"
 
 [[block]]
 block = "music"
-format = " $icon {$volume_icon $player.str(max_w:8) $combo.str(max_w:15,rot_interval:0.5) $prev $play $next|} "
+# format = " $icon {$player.str(max_w:8) $volume_icon $combo.str(max_w:15,rot_interval:0.5) $prev $play $next|} "
+format = " $icon {$player.str(max_w:8) $volume_icon $combo.str(max_w:15,rot_interval:0.5) $prev $next|} "
 # interface_name_exclude = [".*kdeconnect.*", "mpd", ""]
 seek_step_secs = 1
 [[block.click]]
 button = "left"
 action = "play_pause"
+# cmd="wezterm start musicfox"
 [[block.click]]
 button = "up"
 action = "volume_up"
@@ -117,5 +115,6 @@ action = "seek_backward"
 block = "time"
 interval = 60
 [block.format]
-full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R', l:fr_BE) "
+# full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R', l:fr_BE) "
+full = " $icon $timestamp.datetime(f:'%Y-%m-%d %R', l:fr_BE) "
 short = " $icon $timestamp.datetime(f:%T) "

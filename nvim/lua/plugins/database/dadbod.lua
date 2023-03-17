@@ -16,6 +16,17 @@ return {
                 vim.keymap.set("n", "<leader>d", "<cmd>DBUIToggle<cr>", { noremap = true, silent = true })
 
                 vim.g.db_ui_tmp_query_location = "~/sql"
+                vim.g.db_ui_show_database_icon = 1
+                vim.cmd([[
+                function s:buffer_name_generator(table)
+                    if empty(a:table.label)
+                      return strftime('%Y-%m-%d')
+                    endif
+                    return a:table.label.'-'.strftime('%Y-%m-%d').'.sql'
+                endfunction
+
+                let g:Db_ui_buffer_name_generator = function('s:buffer_name_generator')
+                ]])
                 vim.g.db_ui_icons = {
                     expanded = {
                         db = "▾ ",

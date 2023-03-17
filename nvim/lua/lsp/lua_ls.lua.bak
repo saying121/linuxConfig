@@ -5,12 +5,13 @@ table.insert(runtime_path, "lua/?/init.lua")
 
 return {
     Lua = {
+        completion = {
+            -- callSnippet = "Both",
+            callSnippet = "Replace",
+        },
         runtime = {
             version = "LuaJIT",
             path = runtime_path,
-        },
-        completion = {
-            callSnippet = "Both",
         },
         diagnostics = {
             globals = {

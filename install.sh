@@ -99,9 +99,9 @@ installWaydroid() {
 
 installI3() {
     # 取代xorg-xbacklight
-    sudo $pacMan acpilight
+    sudo $pacMan acpilight betterlockscreen dex
     sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
-    yay -S --needed --noconfirm i3wm i3status i3status-rust feh
+    yay -S --needed --noconfirm i3wm i3status i3status-rust feh xidlehook
     # i3-gaps-kde-git
     # ~/.linuxConfig/kde/use-i3.sh
 }
@@ -144,7 +144,7 @@ allInstall() {
     sudo $pacMan wireshark-qt wireshark-cli termshark kismet wifite
 
     # 文件管理器
-    sudo $pacMan dolphin konsole
+    sudo $pacMan dolphin konsole qt5ct kvantum
 
     # 输入法相关 中文输入法,支持vim+寄存器的clip
     sudo $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \

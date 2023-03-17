@@ -40,6 +40,7 @@ alias lal='ll -a'
 alias lla='ll -a'
 alias tree='exa -F -T --icons'
 alias ltree='tree -l'
+alias rewall='systemctl --user restart wallpaperengine.service'
 
 cat() {
     if [[ $1 =~ '\.md' ]]; then
@@ -68,8 +69,6 @@ else
 fi
 unset releaseDic
 
-# export TERM='kitty'
-
 # wsl
 if [[ $(uname -a | grep -c WSL) != 0 ]]; then
     alias proxy="source ~/.linuxConfig/scripts/proxy.sh"
@@ -97,8 +96,6 @@ alias rt='trash-restore'
 alias tran='trans -j -d en:zh'
 alias upgrade='sudo pacman -Sy --needed --noconfirm archlinux-keyring archlinuxcn-keyring && sudo powerpill -Su --noconfirm && yay -Syu'
 alias upaur='paru -Syu --noconfirm'
-
-alias musicfox='/opt/go-musicfox/musicfox'
 
 if [[ $(grep -c cpv ~/.zshrc) != 0 && $SHELL == '/usr/bin/zsh' ]]; then
     alias cp='cpv -hhh'

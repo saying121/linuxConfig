@@ -4,7 +4,7 @@ Description=Wallpaper
 [Service]
 Type=simple
 Restart=always
-ExecStart=/home/saying/.linuxConfig/wallpaperengine/wallpaper.sh
+ExecStart=$HOME/.linuxConfig/wallpaperengine/wallpaper.sh
 Restart=on-failure
 
 [Install]

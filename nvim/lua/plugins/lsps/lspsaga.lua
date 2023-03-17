@@ -132,10 +132,9 @@ return {
         -- Show line diagnostics
         -- You can pass argument ++unfocus to
         -- unfocus the show_line_diagnostics floating window
-        if vim.bo.filetype == "markdown" then
+        if vim.bo.filetype == "markdown" or "zsh" then
             local theopts = { noremap = true, silent = true }
             keymap("n", "<space>gg", vim.diagnostic.open_float, theopts)
-            keymap("n", "[d", vim.diagnostic.goto_prev, theopts)
         else
             keymap("n", "<space>gg", "<cmd>Lspsaga show_line_diagnostics<CR>")
         end
@@ -147,7 +146,7 @@ return {
         -- keymap("n", "<space>ll", "<cmd>Lspsaga show_buf_diagnostics<CR>")
         -- Diagnostic jump
         keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
-        keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_n")
+        keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
         -- Diagnostic jump with filters such as only jumping to an error
         keymap("n", "[e", function()
             require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })

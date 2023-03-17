@@ -34,6 +34,9 @@ fi
 
 [[ -d ~/.config ]] || mkdir ~/.config
 
+# qt5ct
+rm -rf ~/.config/qt5ct
+ln -sf ~/.linuxConfig/qt5ct ~/.config
 # clang-format
 ln -sf ~/.linuxConfig/formatters/clang-format ~/.clang-format
 # stylua
@@ -103,6 +106,11 @@ if [[ ! $(uname -a | grep -c WSL) != 0 ]]; then
     # i3
     ln -sf ~/.linuxConfig/i3 ~/.config
     ln -sf ~/.linuxConfig/i3/i3status-rust ~/.config
+    ln -sf ~/.linuxConfig/wallpaperengine/betterlockscreen ~/.config
+    sudo cp -f ~/.linuxConfig/custom-services/betterlockscreen@.service /usr/lib/systemd/system/
+    xset dpms 1200 1200 1200
+    xset s 900 900
+    sudo systemctl enable betterlockscreen@$USER
     # 语言
     ln -sf ~/.linuxConfig/configs/xprofile ~/.xprofile
     # 输入法

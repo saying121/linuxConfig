@@ -2,6 +2,7 @@ return {
     "hrsh7th/cmp-nvim-lua",
     ft = "lua",
     config = function()
+        vim.fn.rand()
         local cmp = require("cmp")
         cmp.setup.filetype("lua", {
             -- Set configuration for specific filetype.

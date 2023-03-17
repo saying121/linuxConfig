@@ -1,5 +1,6 @@
 return {
     require("plugins.lsps.null-ls"),
+    require("plugins.lsps.neodev"),
     require("plugins.lsps.nvim-lspconfig"),
     require("plugins.lsps.nvim-treesitter"),
     require("plugins.lsps.rime-ls"),

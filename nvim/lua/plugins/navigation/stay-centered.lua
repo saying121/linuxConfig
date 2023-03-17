@@ -10,6 +10,7 @@ return {
         vim.api.nvim_set_var("stay-centered#skip_filetypes", {
             "dashboard",
             "lspsagafinder",
+            "sagacodeaction",
         })
         require("stay-centered")
     end,

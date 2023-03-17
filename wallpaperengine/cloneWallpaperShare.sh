@@ -19,13 +19,13 @@ git checkout main
 yay -S linux-wallpaperengine-git
 
 if [[ ! -d ~/.config/systemd/user ]]; then
-	mkdir -p ~/.config/systemd/user
+    mkdir -p ~/.config/systemd/user
 fi
 if [[ ! -f ~/.config/systemd/user/wallpaper.service ]]; then
-    cp ~/.linuxConfig/custom-services/wallpaper.service ~/.config/systemd/user/wallpaper.service
-
+    cp -f ~/.linuxConfig/custom-services/wallpaperengine.service ~/.config/systemd/user/wallpaperengine.service
+    sed -i "s#ExecStart=.*/.linuxConfig/wallpaperengine/wallpaper.sh#ExecStart=$HOME/.linuxConfig/wallpaperengine/wallpaper.sh#" ~/.config/systemd/user/wallpaperengine.service
     sudo systemctl daemon-reload
-    systemctl --user enable wallpaper.service
+    systemctl --user enable wallpaperengine.service
 fi
 
 # cd ~/.local/share/wallpaperengine
