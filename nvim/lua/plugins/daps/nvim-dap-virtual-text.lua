@@ -1,6 +1,5 @@
 return {
     "theHamsta/nvim-dap-virtual-text",
-    keys = require("plugins.daps.the_keys"),
     config = function()
         require("nvim-dap-virtual-text").setup({
             enabled = true,

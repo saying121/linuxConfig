@@ -2,24 +2,28 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
     build = ":TSUpdate",
-    ft = "dashboard",
     dependencies = {
         "HiPhish/nvim-ts-rainbow2",
-        require("plugins.lsps.lspsaga"),
     },
     config = function()
+        local installed_list = {
+            "bash",
+            "c",
+            "java",
+            "lua",
+            "python",
+            "vim",
+            "markdown",
+            "markdown_inline",
+            "awk",
+        }
+        -- 如果没有安装高亮就用默认的
+        if installed_list[vim.bo.filetype] == nil then
+            vim.cmd("syntax on")
+        end
+
         require("nvim-treesitter.configs").setup({
-            ensure_installed = {
-                "bash",
-                "c",
-                "java",
-                "lua",
-                "python",
-                "vim",
-                "markdown",
-                "markdown_inline",
-                "awk",
-            },
+            ensure_installed = installed_list,
             sync_install = true,
             auto_install = true,
             incremental_selection = {

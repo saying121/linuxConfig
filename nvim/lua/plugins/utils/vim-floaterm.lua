@@ -1,9 +1,9 @@
 return {
     "voldikss/vim-floaterm",
-    lazy = true,
     keys = {
         { "<space>tt", mode = "n", desc = "floaterm" },
         { "<space>tr", mode = "n", desc = "float ranger" },
+        { "<A-d>", mode = "n", desc = "配置lldb的runinterminal" },
     },
     cmd = { "FloatermNew" },
     -- ft = 'dashboard',
@@ -16,5 +16,10 @@ return {
         keymap("n", "<space>ki", ":FloatermKill<CR>", opts)
         keymap("n", "<space>pr", ":FloatermPrev<CR>", opts)
         keymap("n", "<space>ne", ":FloatermNext<CR>", opts)
+        vim.keymap.set(
+            { "n", "t" },
+            "<A-d>",
+            "<cmd>FloatermNew echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope<cr>"
+        )
     end,
 }

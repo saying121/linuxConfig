@@ -94,8 +94,8 @@ alias tl='trash-list'
 alias rt='trash-restore'
 
 alias tran='trans -j -d en:zh'
-alias upgrade='sudo pacman -Sy --needed --noconfirm archlinux-keyring archlinuxcn-keyring && sudo powerpill -Su --noconfirm && yay -Syu'
-alias upaur='paru -Syu --noconfirm'
+
+alias upgrade='yay -Syu --noconfirm'
 
 if [[ $(grep -c cpv ~/.zshrc) != 0 && $SHELL == '/usr/bin/zsh' ]]; then
     alias cp='cpv -hhh'

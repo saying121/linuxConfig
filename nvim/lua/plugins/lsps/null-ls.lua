@@ -1,5 +1,8 @@
+---@diagnostic disable: unused-local
 return {
     "jose-elias-alvarez/null-ls.nvim",
+    -- cond=false,
+    -- priority = 1000,
     ft = {
         "angular",
         "css",
@@ -45,6 +48,7 @@ return {
             null_ls.builtins.diagnostics.pylint,
             null_ls.builtins.diagnostics.vale,
             null_ls.builtins.diagnostics.zsh,
+            null_ls.builtins.formatting.beautysh,
             null_ls.builtins.diagnostics.sqlfluff.with({
                 extra_args = { "--dialect", "mysql" }, -- change to your dialect
                 filetypes = { "sql", "mysql" },
@@ -52,11 +56,6 @@ return {
             -- js
             null_ls.builtins.diagnostics.eslint,
         }
-        if vim.o.filetype == "zsh" then
-            table.insert(sources_table, null_ls.builtins.formatting.beautysh)
-        else
-            table.insert(sources_table, null_ls.builtins.formatting.shfmt)
-        end
 
         null_ls.setup({
             sources = sources_table,

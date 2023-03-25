@@ -1,9 +1,13 @@
 return {
     "hrsh7th/nvim-cmp",
-    event = require("plugins.cmps.cmp_events"),
-    keys = require("plugins.cmps.cmp_keys"),
+    event = "InsertEnter",
+    keys = {
+        { ":", mode = { "n", "v", "t" } },
+        { "/", mode = { "n", "v", "t" } },
+        { "?", mode = { "n", "v", "t" } },
+    },
     dependencies = {
-        "hrsh7th/cmp-cmdline",
+        require("plugins.cmps.cmd-cmdline"),
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-buffer",
         "f3fora/cmp-spell",
@@ -52,7 +56,6 @@ return {
         local cmp = require("cmp")
         local compare = require("cmp.config.compare")
 
-        -- local cmp_rime = require 'cmp_rime'
         cmp.setup({
             matching = {
                 disallow_fuzzy_matching = false,
@@ -75,11 +78,11 @@ return {
                     vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
                     vim_item.menu = ({
                         nvim_lsp = "[LSP]",
-                        buffer = "[Buf]",
-                        path = "[Path]",
                         luasnip = "[LuaSnip]",
+                        path = "[Path]",
+                        buffer = "[Buf]",
                         spell = "[spell]",
-                        nvim_lua = "[Lua]",
+                        cmp_git = "[git]",
                         latex_symbols = "[Latex]",
                     })[entry.source.name]
                     return vim_item
@@ -95,8 +98,6 @@ return {
                         luasnip.expand_or_jump()
                     elseif has_words_before() then
                         cmp.complete()
-                    elseif vim.fn.col(".") == 1 then
-                        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
                     else
                         fallback()
                     end
@@ -115,16 +116,24 @@ return {
                 -- ['<C-Space>'] = cmp.mapping.complete(),
                 ["<C-e>"] = cmp.mapping.abort(),
                 ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                ["<Space>"] = cmp.mapping(function(fallback)
+                    local entry = cmp.get_selected_entry()
+                    if entry and entry.source.name == "nvim_lsp" and entry.source.source.client.name == "rime_ls" then
+                        cmp.confirm({
+                            behavior = cmp.ConfirmBehavior.Replace,
+                            select = true,
+                        })
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
                 -- ["<C-Space>"] = require("cmp_rime").mapping.toggle_menu,
                 -- ["<Space>"] = require("cmp_rime").mapping.space_commit,
                 -- ["<CR>"] = require("cmp_rime").mappings.confirm,
 
-                -- ["<C-n>"] = cmp_rime.mapping.select_next_item,
-                -- ["<C-p>"] = cmp_rime.mapping.select_prev_item,
-                -- 或者这样, 目前是等效的
                 -- ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
                 -- ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-                --
+
                 -- ["."] = require("cmp_rime").mapping.page_down,
                 -- [","] = require("cmp_rime").mapping.page_up,
                 --
@@ -135,8 +144,8 @@ return {
             }),
             -- 分级显示，上一级有补全就不会显示下一级
             sources = cmp.config.sources({
-                { name = "nvim_lsp" },
                 { name = "luasnip" },
+                { name = "nvim_lsp", keyword_length = 2 },
                 { name = "path" },
             }, {
                 { name = "buffer" },
@@ -151,7 +160,7 @@ return {
             sorting = {
                 -- rime-ls
                 comparators = {
-                    require("cmp.config.compare").sort_text, -- 这个放第一个, 其他的随意
+                    -- require("cmp.config.compare").sort_text, -- 这个放第一个, 其他的随意
                     compare.sort_test,
                     compare.offset,
                     compare.exact,
@@ -162,21 +171,6 @@ return {
                     compare.order,
                 },
             },
-        })
-
-        cmp.setup.cmdline({ "/", "?" }, {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = {
-                { name = "buffer" },
-            },
-        })
-        cmp.setup.cmdline(":", {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources({
-                { name = "cmdline" },
-            }, {
-                { name = "path" },
-            }),
         })
 
         vim.opt.spell = true

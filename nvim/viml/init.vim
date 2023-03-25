@@ -8,7 +8,6 @@ source ~/.config/nvim/viml/functions.vim
 
 source ~/.config/nvim/viml/autocmds.vim
 
-
 " ----------------------
 
 if exists('g:neovide')
@@ -20,5 +19,8 @@ endif
 if !has('nvim')
     source ~/.config/nvim/vim-config/vimrc.vim
     source ~/.config/nvim/viml/statusline-config.vim
-    set scrolloff=99                                               " 在光标上下展现多少行
+    set scrolloff=23                                               " 在光标上下展现多少行
+    set signcolumn=yes
+else
+    set signcolumn=yes:1
 endif

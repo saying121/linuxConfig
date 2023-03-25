@@ -1,7 +1,14 @@
 return {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    keys = require("plugins.telescopes.telescope_keys"),
+    keys = {
+        { "<leader>ff", mode = "n" },
+        { "<leader>fw", mode = "n" },
+        { "<leader>bf", mode = "n" },
+        { "<leader>go", mode = "n" },
+        { "<space>a", mode = "n" },
+        { "<M-p>", mode = "n" },
+    },
     ft = { "dashboard" },
     version = "0.1.0",
     dependencies = {
@@ -9,6 +16,7 @@ return {
         "nvim-lua/plenary.nvim",
         require("plugins.telescopes.telescope-fzf-native"),
         require("plugins.telescopes.project"),
+        require("plugins.telescopes.telescope-dap"),
     },
     config = function()
         local builtin, keymap = require("telescope.builtin"), vim.keymap.set
@@ -20,9 +28,8 @@ return {
         keymap("n", "<leader>bf", builtin.buffers, opts)
         keymap("n", "<leader>go", builtin.oldfiles, opts)
         keymap("n", "<space>a", builtin.treesitter, opts)
-        keymap("n", "<M-p>", telescope.extensions.projects.projects, opts)
+        -- keymap("n", "<M-p>", telescope.extensions.projects.projects, opts)
 
-        require("telescope").load_extension("projects")
         require("telescope").load_extension("noice")
 
         telescope.setup({

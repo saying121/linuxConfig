@@ -14,12 +14,6 @@ Server = http://mirrors.aliyun.com/archlinux/$repo/os/$arch
 Server = https://mirrors.aliyun.com/archlinux/$repo/os/$arch
 Server = http://mirrors.163.com/archlinux/$repo/os/$arch' | sudo tee /etc/pacman.d/mirrorlist
 
-installPowerpill
+sudo pacman -Syyuu --noconfirm
 
-which powerpill >/dev/null
-if [[ $? == 0 ]]; then
-	sudo powerpill -Syyuu --noconfirm
-else
-	sudo pacman -Syyuu --noconfirm
-fi
 sudo pacman -Fyy

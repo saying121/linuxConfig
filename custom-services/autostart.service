@@ -1,0 +1,8 @@
+[Install]
+WantedBy=autostart.target
+
+[Unit]
+Description=<service description>
+
+[Service]
+ExecStart=/usr/bin/dex -a ~/.config/autostart/

@@ -22,12 +22,7 @@ fi
 
 # 启用command-not-found
 if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
-    which powerpill >/dev/null
-    if [[ $? == 0 ]]; then
-        pacMan="powerpill -S --needed --noconfirm"
-    else
-        pacMan="pacman -S --needed --noconfirm"
-    fi
+    pacMan="pacman -S --needed --noconfirm"
     sudo $pacMan pkgfile
     unset pacMan
     sudo pkgfile -u

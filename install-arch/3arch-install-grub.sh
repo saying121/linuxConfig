@@ -1,17 +1,12 @@
 #! /bin/bash
 
-which powerpill >/dev/null
-if [[ $? == 0 ]]; then
-	pacMan="powerpill -S --needed --noconfirm"
-else
-    pacMan="pacman -S --needed --noconfirm"
-fi
+pacMan="pacman -S --needed --noconfirm"
 
 # 引导和微码
 if [[ $(lscpu | grep -c AMD) != 0 ]]; then
-	sudo $pacMan amd-ucode
+    sudo $pacMan amd-ucode
 elif [[ $(lscpu | grep -c Intel) != 0 ]]; then
-	sudo $pacMan intel-ucode
+    sudo $pacMan intel-ucode
 fi
 sudo $pacMan grub efibootmgr os-prober
 

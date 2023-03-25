@@ -2,20 +2,36 @@ return {
     "mfussenegger/nvim-dap",
     lazy = true,
     -- event = 'VimEnter',
-    keys = require("plugins.daps.the_keys"),
+    keys = {
+        { "<space>b", mode = "n" },
+        { "<space>B", mode = "n" },
+        { "<leader>tb", mode = "n" },
+        { "<leader>sc", mode = "n" },
+        { "<leader>cl", mode = "n" },
+    },
     cmd = {
         "PBToggleBreakpoint",
         "PBClearAllBreakpoints",
         "PBSetConditionalBreakpoint",
     },
+    dependencies = {
+        require("plugins.daps.nvim-dap-ui"),
+        require("plugins.daps.nvim-dap-virtual-text"),
+        require("plugins.daps.persistent-breakpoints"),
+    },
     config = function()
         -- 对各个语言的配置
         require("dap-conf.python")
-        require("dap-conf.c")
+        -- require("dap-conf.lldb-vscode")
+        require("dap-conf.codelldb")
+        -- require("dap-conf.rust-lldb")
         -- ---------------------------------------------------
 
         vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
+        vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "", linehl = "", numhl = "" })
+        vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "", linehl = "", numhl = "" })
         vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
+        vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "", linehl = "", numhl = "" })
 
         local dap = require("dap")
         local keymap = vim.keymap.set
@@ -46,7 +62,6 @@ return {
         keymap("n", "<space>dr", dap.repl.open, opts)
         keymap("n", "<space>dl", dap.run_last, opts)
 
-        -- local dap = require('dap')
         local dapui = require("dapui")
         -- 自动开启ui
         dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -57,17 +72,17 @@ return {
         -- 自动关闭ui
         dap.listeners.before.event_terminated["dapui_config"] = function()
             vim.api.nvim_command("DapVirtualTextEnable")
-            -- dapui.close()
+            dapui.close()
             vim.opt.laststatus = 3
         end
         dap.listeners.before.event_exited["dapui_config"] = function()
             vim.api.nvim_command("DapVirtualTextEnable")
-            -- dapui.close()
+            dapui.close()
             vim.opt.laststatus = 3
         end
         dap.listeners.before.disconnect["dapui_config"] = function()
             vim.api.nvim_command("DapVirtualTextEnable")
-            -- dapui.close()
+            dapui.close()
             vim.opt.laststatus = 3
         end
         -- TODO wait dap-ui for fix terminal layout

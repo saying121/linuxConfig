@@ -1,8 +1,8 @@
 set encoding=utf-8                                             " VIM打开文件用的内部编码
 scriptencoding utf-8
-" 出现CONVERSION ERROR就输入指令:w ++enc=utf-8 强制转码
 " filetype plugin indent on
 filetype plugin on
+syntax off                                                     " 语法高亮，用nvim-treesitter高亮
 set ttimeout ttimeoutlen=10                                    " 设置切换模式的延迟时间
 set history=100
 set mouse=a                                                    " 鼠标可用
@@ -21,7 +21,6 @@ set listchars=tab:>>,space:·                                   " 换行和tab�
 set list
 set number                                                     " 显示行号
 set relativenumber                                             " 相对行号
-syntax on                                                     " 语法高亮，用nvim-treesitter高亮
 set hlsearch                                                   " 搜索结果高亮
 set incsearch                                                  " 搜索输入时动态高亮
 set showmatch                                                  " 高亮显示匹配括号
@@ -41,7 +40,7 @@ set smarttab                                                   " 根据文件中
 set expandtab                                                  " 把TAB换成空格
 set softtabstop=4                                              " 将连续数量的空格视作一个tab,可以一次删除
 
-set updatetime=10                                              " swap时文件,防止崩溃,和CursorHole事件时间间隔
+set updatetime=10000                                           " swap时文件,防止崩溃,和CursorHole事件时间间隔，用 antoinemadec/FixCursorHold.nvim 解耦CursorHole
 set directory=~/.local/share/nvim/swapFile                     " swap文件位置
 set writebackup                                                " 保存成功就删除
 set backup                                                     " 写入前备份文件
@@ -53,10 +52,7 @@ set updatecount=100                                            " 交换文件刷
 set undofile                                                   " 撤销文件
 set undodir=~/.local/share/nvim/undodir                        " 指定撤销文件目录
 
-set signcolumn=no
-
-" set scrolloff=17                                               " 在光标上下展现多少行
-" set scrolloff=99                                               " 在光标上下展现多少行
+" set scrolloff=23                                               " 在光标上下展现多少行
 set sidescrolloff=99                                           " 横向展示的列
 
 set termguicolors

@@ -3,4 +3,5 @@ return {
     require("plugins.navigation.stay-centered"),
     require("plugins.navigation.leap-flit"),
     require("plugins.navigation.nvim-tree"),
+    require("plugins.navigation.windows"),
 }

@@ -1,15 +1,15 @@
 #!/bin/bash
 
 polybartheme() {
-	git clone --depth=1 https://github.com/adi1090x/polybar-themes.git
-	cd polybar-themes || return
-	chmod +x setup.sh
-	./setup.sh
-	cd ..
-	rm -rf polybar-themes
+    git clone --depth=1 https://github.com/adi1090x/polybar-themes.git
+    cd polybar-themes || return
+    chmod +x setup.sh
+    ./setup.sh
+    cd ..
+    rm -rf polybar-themes
 }
 if [[ ! -d ~/.config/polybar/hack ]]; then
-	polybartheme
+    polybartheme
 fi
 
 # sudo pacman -S --needed pkg-config libuv cairo libxcb python3 xcb-proto xcb-util-image xcb-util-wm python-sphinx python-packaging \
@@ -38,12 +38,8 @@ echo '#!/usr/bin/env bash
 
 installSystray() {
 
-    which powerpill >/dev/null
-	if [[ $? == 0 ]]; then
-		pacMan="powerpill -S --needed --noconfirm"
-	else
-		pacMan="pacman -S --needed --noconfirm"
-	fi
-	sudo $pacMan libayatana-appindicator gtk3
+    pacMan="pacman -S --needed --noconfirm"
+
+    sudo $pacMan libayatana-appindicator gtk3
     unset pacMan
 }

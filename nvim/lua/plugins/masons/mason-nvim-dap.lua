@@ -7,6 +7,7 @@ return {
                 "delve",
                 -- "javadbg",
                 "python",
+                "codelldb",
             },
             -- Can either be:
             --   - { exclude: string[] }: All adapters set up via mason-nvim-dap, except the ones provided in the list, are automatically installed.

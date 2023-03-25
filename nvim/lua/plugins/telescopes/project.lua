@@ -1,7 +1,11 @@
 return {
     "ahmedkhalf/project.nvim",
-    lazy = true,
     config = function()
+        require("telescope").load_extension("projects")
+
+        local opts = { noremap = true, silent = true }
+        vim.keymap.set("n", "<M-p>", require("telescope").extensions.projects.projects, opts)
+
         require("nvim-tree").setup({
             sync_root_with_cwd = true,
             respect_buf_cwd = true,

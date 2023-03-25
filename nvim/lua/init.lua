@@ -1,6 +1,2 @@
--- require 'lazy-config'
+---@diagnostic disable: unused-local
 local ok, _ = pcall(require, "lazy-config")
----@diagnostic disable-next-line: empty-block
-if not ok then
-    -- require("lazy-config")
-end

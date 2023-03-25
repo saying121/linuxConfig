@@ -54,15 +54,31 @@ return {
 
         local function lsp_clients()
             local msg = "No Active Lsp"
-            -- local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-            local buf_ft = vim.bo.ft
+            local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+            -- local buf_ft = vim.bo.ft
             local clients = vim.lsp.get_active_clients()
             if next(clients) == nil then
                 return msg
             end
             for _, client in ipairs(clients) do
                 local filetypes = client.config.filetypes
-                if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                if
+                    filetypes
+                    and vim.fn.index(filetypes, buf_ft) ~= -1
+                    and client.name ~= "null-ls"
+                    and client.name ~= "rime_ls"
+                then
+                    return client.name
+                end
+            end
+            for _, client in ipairs(clients) do
+                local filetypes = client.config.filetypes
+                if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and client.name ~= "rime_ls" then
+                    return client.name
+                end
+            end
+            for _, client in ipairs(clients) do
+                if client ~= nil then
                     return client.name
                 end
             end
@@ -90,26 +106,77 @@ return {
                 },
             },
             sections = {
-                -- lualine_a = { "mode" },
                 lualine_a = {
+                    -- "mode",
                     {
-                        require("noice").api.statusline.mode.get,
-                        cond = require("noice").api.statusline.mode.has,
+                        require("noice").api.status.mode.get,
+                        cond = require("noice").api.status.mode.has,
                         color = { fg = "#000000" },
                         -- color = { fg = "ff9e64" },
                     },
+                    -- {
+                    --     "windows",
+                    --     show_filename_only = true, -- Shows shortened relative path when set to false.
+                    --     show_modified_status = true, -- Shows indicator when the window is modified.
+                    --     mode = 0, -- 0: Shows window name
+                    --     -- 1: Shows window index
+                    --     -- 2: Shows window name + window index
+                    --
+                    --     max_length = vim.o.columns * 2 / 3, -- Maximum width of windows component,
+                    --     -- it can also be a function that returns
+                    --     -- the value of `max_length` dynamically.
+                    --     filetype_names = {
+                    --         TelescopePrompt = "Telescope",
+                    --         dashboard = "Dashboard",
+                    --         -- packer = "Packer",
+                    --         -- fzf = "FZF",
+                    --         -- alpha = "Alpha",
+                    --     }, -- Shows specific window name for that filetype ( { `filetype` = `window_name`, ... } )
+                    --     disabled_buftypes = { "quickfix", "prompt" }, -- Hide a window if its buffer's type is disabled
+                    -- },
                 },
                 lualine_b = { "branch", "diagnostics" },
                 lualine_c = {
-                    "%.50F",
+                    {
+                        "filesize",
+                    },
+                    {
+                        "filename",
+                        file_status = true, -- Displays file status (readonly status, modified status)
+                        newfile_status = false, -- Display new file status (new file means no write after created)
+                        path = 3, -- 0: Just the filename
+                        -- 1: Relative path
+                        -- 2: Absolute path
+                        -- 3: Absolute path, with tilde as the home directory
+
+                        shorting_target = 40, -- Shortens path to leave 40 spaces in the window
+                        -- for other components. (terrible name, any suggestions?)
+                        symbols = {
+                            modified = "[+]", -- Text to show when the file is modified.
+                            readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+                            unnamed = "[No Name]", -- Text to show for unnamed buffers.
+                            newfile = "[New]", -- Text to show for newly created file before first write
+                        },
+                    },
                 },
                 lualine_x = {
-                    "%M",
                     {
                         require("noice").api.status.message.get_hl,
                         cond = require("noice").api.status.message.has,
                     },
-                    "filetype",
+                    -- {
+                    --     require("noice").api.status.search.get,
+                    --     cond = require("noice").api.status.search.has,
+                    --     color = { fg = "ff9e64" },
+                    -- },
+                    {
+                        "filetype",
+                        colored = true, -- Displays filetype icon in color if set to true
+                        icon_only = false, -- Display only an icon for filetype
+                        icon = { align = "left" }, -- Display filetype icon on the right hand side
+                        -- icon =    {'X', align='right'}
+                        -- Icon string ^ in table is ignored in filetype component
+                    },
                     {
                         lsp_clients,
                         -- icon = " LSP:",
@@ -117,10 +184,15 @@ return {
                     },
                     "encoding",
                     "fileformat",
+                },
+                lualine_y = {
                     linux_distro,
                 },
-                lualine_y = { "location", "%L" },
-                lualine_z = { "progress" },
+                lualine_z = {
+                    "location",
+                    "%L",
+                    -- "progress",
+                },
             },
             inactive_sections = {
                 lualine_a = {},
@@ -135,6 +207,7 @@ return {
             inactive_winbar = {},
             extensions = {},
         })
+
         vim.opt.laststatus = 3
     end,
 }

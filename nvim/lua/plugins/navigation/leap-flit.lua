@@ -1,30 +1,38 @@
 return {
     "ggandor/leap.nvim",
-    lazy = true,
     keys = {
-        { "m", mode = { "x", "o", "n" } },
-        { "M", mode = { "x", "o", "n" } },
+        { "gs", mode = { "x", "o", "n" } },
+        { "gS", mode = { "x", "o", "n" } },
+        { "gm", mode = { "x", "o", "n" } },
+        { "x", mode = { "x", "o" } },
+        { "x", mode = { "x", "o" } },
         { "f" },
         { "F" },
     },
     dependencies = {
         {
             "ggandor/flit.nvim",
-            lazy = true,
-            keys = { { "f" }, { "F" } },
+            config = function()
+                require("flit").setup({
+                    keys = { f = "f", F = "F", t = "t", T = "T" },
+                    -- A string like "nv", "nvo", "o", etc.
+                    labeled_modes = "v",
+                    multiline = true,
+                    -- Like `leap`s similar argument (call-specific overrides).
+                    -- E.g.: opts = { equivalence_classes = {} }
+                    opts = {},
+                })
+            end,
         },
     },
     config = function()
         local opts = { noremap = true, silent = true }
-        vim.keymap.set({ "x", "o", "n" }, "gm", "<Plug>(leap-cross-window)", opts)
-        require("flit").setup({
-            keys = { f = "f", F = "F", t = "t", T = "T" },
-            -- A string like "nv", "nvo", "o", etc.
-            labeled_modes = "v",
-            multiline = true,
-            -- Like `leap`s similar argument (call-specific overrides).
-            -- E.g.: opts = { equivalence_classes = {} }
-            opts = {},
-        })
+        local keymap = vim.keymap.set
+        keymap({ "n", "x", "o" }, "gs", "<Plug>(leap-forward-to)", opts)
+        keymap({ "x", "o" }, "x", "<Plug>(leap-forward-till)", opts)
+        keymap({ "n", "x", "o" }, "gS", "<Plug>(leap-backward-to)", opts)
+        keymap({ "x", "o" }, "X", "<Plug>(leap-backward-till)", opts)
+        keymap({ "n", "x", "o" }, "gm", "<Plug>(leap-from-window)", opts)
+        -- keymap({ "n", "x", "o" }, "gw", "<Plug>(leap-cross-window)", opts)
     end,
 }

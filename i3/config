@@ -11,10 +11,10 @@ client.focused #FF0000 #CC0000 #ffffff #2e9ef4     #285577
 default_border pixel 4
 hide_edge_borders smart
 # none|vertical|horizontal|both|smart
-for_window [class="^.*"] border pixel 5 
+for_window [class="^.*"] border pixel 5
 # 窗口边框设置n像素
 new_window 1pixel # 去除标题栏
-gaps inner 3 
+gaps inner 3
 # 窗口之间缝隙
 gaps outer 0
 
@@ -30,6 +30,7 @@ for_window [class="obs"] floating enable,move position center
 for_window [title="uTools"] floating enable,move position center
 for_window [title="ImageMagick"] floating enable,move position center
 for_window [title="Wine"] floating enable,move position center
+# for_window [class="Graphviz"] floating enable,move position center
 
 # win键
 set $mod Mod4
@@ -59,19 +60,21 @@ bindsym Mod1+b exec blueman-manager
 
 focus_follows_mouse no # 鼠标点击才改变焦点
 
-exec_always --no-startup-id $HOME/.linuxConfig/scripts/enable_keymap.sh
+exec --no-startup-id $HOME/.linuxConfig/scripts/enable_keymap.sh
 exec --no-startup-id numlockx on # 开启小键盘
 exec --no-startup-id fusuma # 触摸板
 exec --no-startup-id dunst & # 桌面通知
 exec --no-startup-id fcitx5 & # fcitx5 输入法
 exec --no-startup-id nm-applet
-exec --no-startup-id utools
+# exec --no-startup-id utools
+# exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # exec_always --no-startup-id picom --config ~/.config/i3/picom/picom-ftlabs-git.conf -b
 exec_always --no-startup-id picom --experimental-backends --config ~/.config/i3/picom/picom-yaocccc.conf -b
 # exec_always feh --bg-scale "path_to_wallpaper" # 设置壁纸
 # feh --bg-fill --no-fehbg --randomize ~/Pictures/wallpaper.jpg
 exec systemctl --user start wallpaperengine.service
-# exec_always --no-startup-id copyq & # 剪切板管理器
+# exec --no-startup-id copyq & # 剪切板管理器
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -85,7 +88,7 @@ bindsym Mod4+semicolon exec betterlockscreen -l dim --off 600
 
 
 # 屏幕亮度
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10    
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 
 # 声音

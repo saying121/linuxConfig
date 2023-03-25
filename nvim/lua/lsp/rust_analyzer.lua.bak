@@ -15,7 +15,7 @@ return {
             previewRustcOutput = true,
         },
         inlayHints = {
-            bindingModeHints = { enable = false },
+            bindingModeHints = { enable = true },
             chainingHints = { enable = true },
             closingBraceHints = {
                 enable = true,

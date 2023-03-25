@@ -1,9 +1,18 @@
 return {
     "glepnir/lspsaga.nvim",
-    -- event = 'BufRead',
-    commit = "438b54cba00fca27d280ae4d9242615282045bcb",
+    -- Do make sure that your LSP plugins, like lsp-zero or lsp-config, are loaded before loading lspsaga.
+    event = "VeryLazy",
+    cond = function()
+        if vim.bo.ft == "zsh" then
+            return false
+        end
+        return true
+    end,
+    -- commit = "438b54cba00fca27d280ae4d9242615282045bcb",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
+        -- Please make sure you install markdown and markdown_inline parser
+        "nvim-treesitter/nvim-treesitter",
     },
     config = function()
         require("lspsaga").setup({
@@ -22,8 +31,8 @@ return {
                 keys = {
                     jump_to = "p",
                     edit = { "o", "<CR>" },
-                    vsplit = "s",
-                    split = "i",
+                    vsplit = "v",
+                    split = "s",
                     tabe = "t",
                     quit = { "q", "<ESC>" },
                     close_in_preview = "<ESC>",
@@ -42,16 +51,16 @@ return {
                 show_server_name = true,
                 keys = {
                     -- string | table type
-                    quit = "q",
+                    quit = { "q", "<ESC>" },
                     exec = "<CR>",
                 },
             },
             lightbulb = {
                 enable = true,
                 enable_in_insert = true,
-                sign = false,
+                sign = true,
                 sign_priority = 40,
-                virtual_text = true,
+                virtual_text = false,
             },
             diagnostic = {
                 show_code_action = true,
@@ -95,8 +104,8 @@ return {
                 show_detail = false,
                 keys = {
                     edit = "e",
-                    vsplit = "s",
-                    split = "i",
+                    vsplit = "v",
+                    split = "s",
                     tabe = "t",
                     jump = "o",
                     quit = "q",

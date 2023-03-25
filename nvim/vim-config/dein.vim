@@ -20,6 +20,7 @@ call dein#add('tpope/vim-surround',{
             \ })
 
 call dein#add('prabirshrestha/vim-lsp')
+call dein#add('antoinemadec/FixCursorHold.nvim')
 call dein#add('mattn/vim-lsp-settings')
 
 call dein#add('prabirshrestha/asyncomplete.vim')
@@ -43,5 +44,7 @@ call dein#add('wsdjeg/dein-ui.vim',{
 call dein#end()
 call dein#save_state()
 " -------------------------------------------
+
+let g:cursorhold_updatetime=50
 
 nnoremap <F2> :call dein#install()<CR>

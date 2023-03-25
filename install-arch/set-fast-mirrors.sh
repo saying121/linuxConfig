@@ -10,15 +10,8 @@ source ./set-pacman.sh
 sudo pacman -S --needed --noconfirm pacman-contrib
 # 获取最快的所有中国镜像。
 curl -s "https://archlinux.org/mirrorlist/?country=CN&protocol=https&use_mirror_status=on" |
-	sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n all - |
-	sudo tee /etc/pacman.d/mirrorlist
+    sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n all - |
+    sudo tee /etc/pacman.d/mirrorlist
 
-installPowerpill
-
-which powerpill >/dev/null
-if [[ $? == 0 ]]; then
-	sudo powerpill -Syyuu --noconfirm
-else
-	sudo pacman -Syyuu --noconfirm
-fi
+sudo pacman -Syyuu --noconfirm
 sudo pacman -Fyy

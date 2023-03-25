@@ -11,7 +11,6 @@ nnoremap ,, ggVG
 vnoremap <A-j> :m '>+1<cr>gv=gv
 vnoremap <A-k> :m '<-2<cr>gv=gv
 
-" 映射按键
 nnoremap <silent><space>cc :cclose<CR>
 nnoremap ` %
 vnoremap ` %
@@ -24,8 +23,15 @@ vnoremap j gj
 nnoremap k gk
 vnoremap k gk
 
+nnoremap <up> g<up>
+nnoremap <down> g<down>
+
+nnoremap <home> g<home>
+nnoremap <end> g<end>
+
 nnoremap $ g$
 nnoremap 0 g0
+nnoremap ^ g^
 
 set wrap
 
@@ -46,7 +52,7 @@ vnoremap > >gv
 "+ 是在系统剪切板中表示选择后Ctrl+c复制的内容
 set clipboard^=unnamed          " *寄存器
 set clipboard^=unnamedplus          " +寄存器
-nnoremap Y  y$
+nnoremap Y y$
 
 " 创建tab
 nnoremap <silent><leader>tn :tabnew<CR>

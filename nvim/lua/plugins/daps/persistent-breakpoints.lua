@@ -1,6 +1,5 @@
 return {
     "Weissle/persistent-breakpoints.nvim",
-    keys = require("plugins.daps.the_keys"),
     config = function()
         require("persistent-breakpoints").setup({
             save_dir = vim.fn.stdpath("data") .. "/nvim_checkpoints",

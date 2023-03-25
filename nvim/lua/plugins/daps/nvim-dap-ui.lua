@@ -1,6 +1,5 @@
 return {
     "rcarriga/nvim-dap-ui",
-    keys = require("plugins.daps.the_keys"),
     config = function()
         local dapui, keymap = require("dapui"), vim.keymap.set
         local opts = { noremap = true, silent = true }

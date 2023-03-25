@@ -8,12 +8,7 @@ export HTTP_PROXY=http://127.0.0.1:7890
 
 get_package_manager() {
     if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
-        which powerpill >/dev/null
-        if [[ $? == 0 ]]; then
-            echo "powerpill -S --needed --noconfirm"
-        else
-            echo "pacman -S --needed --noconfirm"
-        fi
+        echo "pacman -S --needed --noconfirm"
     else
         echo 'Can not use.'
         exit 0
@@ -22,57 +17,36 @@ get_package_manager() {
 pacMan=$(get_package_manager)
 
 # 必装
-if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
-    sudo pacman -Syu --noconfirm
-    sudo $pacMan archlinuxcn-keyring archlinux-keyring
-    # if [[ $? != 0 ]]; then
-    # if ! sudo pacman -S --needed --noconfirm archlinuxcn-keyring; then
-    # 	sudo rm -rf /etc/pacman.d/gnupg
-    # 	sudo pacman-key --init
-    # 	sudo pacman-key --populate archlinux
-    # 	sudo pacman-key --populate archlinuxcn
-    # fi
-    sudo pacman -Syyu --noconfirm
-    sudo $pacMan yay paru
-    # 开发工具
-    sudo $pacMan dnsutils networkmanager fd tree \
-        jdk17-openjdk python-pip go clash rustup lua-language-server rust-analyzer
-    rustup install stable beta nightly
+sudo pacman -Syu --noconfirm
+sudo $pacMan archlinuxcn-keyring archlinux-keyring
+# if [[ $? != 0 ]]; then
+# if ! sudo pacman -S --needed --noconfirm archlinuxcn-keyring; then
+# 	sudo rm -rf /etc/pacman.d/gnupg
+# 	sudo pacman-key --init
+# 	sudo pacman-key --populate archlinux
+# 	sudo pacman-key --populate archlinuxcn
+# fi
 
-    # 调用关于clash的脚本，配置clash
-    ~/.linuxConfig/scripts/configClash.sh
-fi
+sudo pacman -Syyu --noconfirm
+sudo $pacMan yay paru
 
-sudo $pacMan neofetch figlet ffmpeg \
+sudo $pacMan kitty terminology wezterm
+
+# 开发工具
+sudo $pacMan inetutils dnsutils networkmanager fd tree \
+    clash
+
+# 调用关于clash的脚本，配置clash
+~/.linuxConfig/scripts/configClash.sh
+
+sudo $pacMan figlet ffmpeg \
     bc man net-tools psmisc sudo ripgrep fzf trash-cli wget \
-    nano vim bash zsh zsh-autosuggestions zsh-syntax-highlighting exa bat \
-    neovim git lazygit python3 nvm shfmt shellcheck lolcat luarocks composer eslint cronie sqlite \
-    vale-git lldb npm
+    vim bash exa bat \
+    neovim lolcat git lazygit composer eslint cronie sqlite
 
-sudo npm i -g neovim npm-check-updates awk-language-server bash-language-server neovim sql-language-server emmet-ls
-sudo npm install --save-dev --save-exact prettier
-pip3 install black isort pynvim pipenv tldr pylsp-rope debugpy vim-vint
+~/.linuxConfig/nvim/install.sh
 
-# nodejs
-export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
-source /usr/share/nvm/init-nvm.sh
-nvm install v18.13.0
-nvm install v16.19.0 # nvim 插件sniprun需要低版本
-nvm alias default v18.13.0
-
-# nvim 安装插件
-if [[ ! -d ~/.local/share/nvim/lazy/lazy.nvim ]]; then
-    git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=stable ~/.local/share/nvim/lazy/lazy.nvim
-fi
-if [[ ! -d ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim ]]; then
-    git clone https://github.com/Shougo/dein.vim ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim
-fi
-
-vim -i NONE -c "call dein#install()" -c "qa"
-nvim "+Lazy! sync" +qa
-# 给lldb配置runInTerminal
-echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-
+sudo $pacMan zsh zsh-autosuggestions zsh-syntax-highlighting
 # 安装oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # omz plug
@@ -95,7 +69,6 @@ installWaydroid() {
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 # installWaydroid
-# **********************************************************************************************************
 
 installI3() {
     # 取代xorg-xbacklight
@@ -104,6 +77,9 @@ installI3() {
     yay -S --needed --noconfirm i3wm i3status i3status-rust feh xidlehook
     # i3-gaps-kde-git
     # ~/.linuxConfig/kde/use-i3.sh
+
+    # 蓝牙前端
+    sudo $pacMan blueman
 }
 
 # 安装lf文件浏览器
@@ -118,18 +94,13 @@ allInstall() {
         openssh ntfs-3g exfat-utils viu \
         pandoc xdg-utils youtube-dl numlockx rsync arch-install-scripts \
         gimagereader-qt tesseract-data-eng tesseract-data-chi_sim \
-        alsa qbittorrent steam wezterm
-
-    # 中文字体
-    sudo $pacMan adobe-source-han-serif-cn-fonts \
-        adobe-source-han-sans-cn-fonts \
-        wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
-        noto-fonts-extra
+        alsa qbittorrent steam mpv
 
     # 缺失的驱动
     yay -S --needed --noconfirm \
         ast-firmware upd72020x-fw aic94xx-firmware wd719x-firmware
     sudo $pacMan linux-firmware-qlogic
+
     # 防火墙
     sudo $pacMan firewalld
     sudo systemctl enable firewalld
@@ -137,8 +108,7 @@ allInstall() {
     # 翻译
     sudo $pacMan translate-shell ldr-translate-qt goldendict
 
-    # powerpill
-    sudo $pacMan pacman-contrib powerpill reflector python3-aur python3-threaded_servers
+    sudo $pacMan pacman-contrib
 
     # installWireshark cmd:tshark
     sudo $pacMan wireshark-qt wireshark-cli termshark kismet wifite
@@ -148,11 +118,11 @@ allInstall() {
 
     # 输入法相关 中文输入法,支持vim+寄存器的clip
     sudo $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
-        fcitx5-pinyin-zhwiki fcitx5-material-color vim-fcitx xclip fcitx5-table-other
+        fcitx5-pinyin-zhwiki vim-fcitx xclip fcitx5-table-other catppuccin-fcitx5-git
 
     # Music
     yay -S --needed --noconfirm \
-        yesplaymusic netease-cloud-music go-musicfox-bin
+        yesplaymusic netease-cloud-music go-musicfox-git
 
     # sddm主题的依赖
     sudo $pacMan gst-libav phonon-qt5-gstreamer gst-plugins-good qt5-quickcontrols qt5-graphicaleffects qt5-multimedia
@@ -163,8 +133,8 @@ allInstall() {
     sudo $pacMan pulseaudio-bluetooth bluez bluez-utils pulsemixer \
         xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
         pulseaudio-alsa pavucontrol
-    # 蓝牙前端
-    sudo $pacMan blueman
+    sudo $pacMan acpilight
+    sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
 
     # 下载工具
     sudo $pacMan lux-dl
@@ -187,8 +157,7 @@ allInstall() {
     # komorebi
 
     # input-remapper
-    yay -S --needed --noconfirm \
-        input-remapper-git
+    yay -S --needed --noconfirm input-remapper-git
     sudo systemctl enable input-remapper
     sudo systemctl start input-remapper
     input-remapper-control --command start --device "Keyboard K380 Keyboard" --preset "capslock+"
@@ -201,9 +170,9 @@ allInstall() {
     newgrp vboxusers
 
     # 各种查看系统信息的软件
-    sudo $pacMan htop atop iotop iftop glances nvtop sysstat
+    sudo $pacMan htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
     yay -S --needed --noconfirm \
-        gotop cpufetch gpufetch-git
+        gotop cpufetch gpufetch-git hardinfo neofetch
     pip3 install nvitop gpustat
 
     # 浏览器
@@ -226,8 +195,11 @@ allInstall() {
     # 热点
     sudo $pacMan linux-wifi-hotspot bash-completion haveged
 
-    sudo $pacMan kitty mpv terminology ttf-hack-nerd
-    # 刷新字体
+    # 中文字体
+    sudo $pacMan adobe-source-han-serif-cn-fonts \
+        adobe-source-han-sans-cn-fonts \
+        wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
+        noto-fonts-extra ttf-hack-nerd ttf-sil-padauk
     fc-cache -fv
 
     # rofi
@@ -235,6 +207,15 @@ allInstall() {
     ~/.linuxConfig/rofi/install-rofi-theme.sh
 
     python -m pip install konsave
+
+    # gnome 显示效果好一点
+    sudo $pacMan polkit polkit-qt5 polkit-gnome
+    # polkit-kde-agent
+
+    sudo $pacMan wine
+
+    # pdf
+    sudo $pacMan python-pymupdf python-fonttools python-pillow bibtool termpdf.py-git
 }
 
 # aur才有的软件
@@ -243,7 +224,6 @@ yayInstall() {
     yay -S --needed --noconfirm \
         xnviewmp fontpreview \
         wps-office-cn ttf-wps-fonts \
-        rime-ls rime-essay
     # copyq  networkmanager-dmenu-bluetoothfix-git  networkmanager-dmenu-git  archlinux-tweak-tool-git
 }
 
@@ -253,14 +233,9 @@ startServer() {
     sudo systemctl start bluetooth sshd NetworkManager
 }
 
-# 不是WLS再进行
-if [[ ! $(uname -a | grep -c WSL) != 0 ]]; then
-    allInstall
-    installI3
-    if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
-        yayInstall
-    fi
-    startServer
-fi
+allInstall
+installI3
+yayInstall
+startServer
 
 unset pacMan

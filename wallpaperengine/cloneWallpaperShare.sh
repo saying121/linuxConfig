@@ -16,16 +16,20 @@ echo "share" >>.git/info/sparse-checkout
 
 git checkout main
 
-yay -S linux-wallpaperengine-git
+if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
+    yay -S linux-wallpaperengine-git
+fi
 
 if [[ ! -d ~/.config/systemd/user ]]; then
     mkdir -p ~/.config/systemd/user
 fi
 if [[ ! -f ~/.config/systemd/user/wallpaper.service ]]; then
     cp -f ~/.linuxConfig/custom-services/wallpaperengine.service ~/.config/systemd/user/wallpaperengine.service
+    # 脚本的绝对路径
     sed -i "s#ExecStart=.*/.linuxConfig/wallpaperengine/wallpaper.sh#ExecStart=$HOME/.linuxConfig/wallpaperengine/wallpaper.sh#" ~/.config/systemd/user/wallpaperengine.service
-    sudo systemctl daemon-reload
-    systemctl --user enable wallpaperengine.service
+    systemctl --user daemon-reload
+    # 好像只能通过其他方式自启动
+    # systemctl --user enable wallpaperengine.service
 fi
 
 # cd ~/.local/share/wallpaperengine

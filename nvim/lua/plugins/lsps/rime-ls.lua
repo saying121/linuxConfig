@@ -1,6 +1,9 @@
 return {
     "wlh320/rime-ls",
-    -- event = 'BufRead',
+    event = "BufReadPre",
+    keys = {
+        "zh",
+    },
     config = function()
         local R = {}
         function R.setup_rime()

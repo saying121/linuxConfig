@@ -1,17 +1,13 @@
 local nvim_lsp = {
     "neovim/nvim-lspconfig",
-    event = "BufRead",
+    event = "BufReadPre",
     dependencies = {
+        -- 依赖会先加载
+        require("plugins.lsps.neodev"),
         "hrsh7th/cmp-nvim-lsp",
-    },
-    keys = {
-        { "<leader>rs", mode = "n" },
-        { "<leader>st", mode = "n" },
     },
     config = function()
         require("lspconfig.ui.windows").default_options.border = "single"
-        vim.keymap.set({ "n", "v" }, "<leader>rs", ":LspRestart<cr>", { silent = true, noremap = true })
-        vim.keymap.set({ "n", "v" }, "<leader>st", ":LspStart<cr>", { silent = true, noremap = true })
 
         local signs = {
             { name = "DiagnosticSignError", text = " " },
@@ -31,13 +27,13 @@ local nvim_lsp = {
         })
         vim.diagnostic.config({
             virtual_text = true,
-            signs = false,
+            signs = true,
             update_in_insert = true,
             underline = true,
             float = { border = "single" },
         })
 
-        local LSP = require("plugins.lsps.lsp_attach")
+        local LSP = require("public.lsp_attach")
 
         -- 要禁用某个 lsp 就去改后缀名
         local lsp_path = vim.fn.stdpath("config") .. "/lua/lsp"

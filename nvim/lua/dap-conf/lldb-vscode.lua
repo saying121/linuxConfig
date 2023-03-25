@@ -1,4 +1,5 @@
 local dap = require("dap")
+
 dap.adapters.lldb = {
     type = "executable",
     command = "/usr/bin/lldb-vscode", -- adjust as needed, must be absolute path
@@ -10,6 +11,7 @@ dap.configurations.cpp = {
         type = "lldb",
         request = "launch",
         program = function()
+            ---@diagnostic disable-next-line: redundant-parameter
             return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/build/", "file")
         end,
         cwd = "${workspaceFolder}",
@@ -23,7 +25,6 @@ dap.configurations.cpp = {
         runInTerminal = true,
     },
 }
-
 -- If you want to use this for Rust and C, add something like this:
 
 dap.configurations.c = dap.configurations.cpp
@@ -64,5 +65,6 @@ dap.configurations.rust[1]["program"] = function()
 
     -- 调用函数，传入当前工作目录作为参数
     local really_root = get_git_root(vim.fn.getcwd())
+    ---@diagnostic disable-next-line: redundant-parameter
     return vim.fn.input("Path to executable: ", really_root .. "/target/debug/", "file")
 end

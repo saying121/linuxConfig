@@ -20,7 +20,7 @@ augroup END
 " 写入自动删除行末空格
 augroup blank
     autocmd!
-    autocmd BufWrite *.vim,*.sh,*.lua,*.py,*.java :%s/\s\+$//e
+    autocmd BufWrite * :%s/\s\+$//e
 augroup END
 
 " 自动创建视图

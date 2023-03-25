@@ -1,16 +1,14 @@
+-- 必须在nvim-lspconfig之前加载
 return {
     "folke/neodev.nvim",
     ft = "lua",
-    dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
-    },
     config = function()
         require("neodev").setup({
             library = {
                 enabled = true, -- when not enabled, neodev will not change any settings to the LSP server
                 -- these settings will be used for your Neovim config directory
                 runtime = true, -- runtime path
-                types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+                types = true,   -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
                 plugins = true, -- installed opt or start plugins in packpath
                 -- you can also specify the list of plugins to make available as a workspace library
                 -- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
@@ -27,25 +25,6 @@ return {
             -- much faster, but needs a recent built of lua-language-server
             -- needs lua-language-server >= 3.6.0
             pathStrict = true,
-        })
-
-        local LSP = require("plugins.lsps.lsp_attach")
-
-        vim.lsp.start({
-            name = "lua_ls",
-            cmd = { "lua-language-server" },
-            before_init = require("neodev.lsp").before_init,
-            root_dir = vim.fn.getcwd(),
-            capabilities = LSP.capabilities,
-            on_attach = LSP.on_attach,
-            flags = LSP.lsp_flags,
-            settings = {
-                Lua = {
-                    completion = {
-                        callSnippet = "Replace",
-                    },
-                },
-            },
         })
     end,
 }
