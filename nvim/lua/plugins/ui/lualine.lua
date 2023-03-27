@@ -139,6 +139,7 @@ return {
                 lualine_c = {
                     {
                         "filesize",
+                        color = { bg = "#0a1d47" },
                     },
                     {
                         "filename",

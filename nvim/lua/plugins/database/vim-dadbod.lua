@@ -9,7 +9,6 @@ return {
         "DBUIFindBuffer",
     },
     dependencies = {
-        require("plugins.database.vim-dadbd-completion"),
-        require("plugins.database.vim-dadbod-ui"),
+        require("public.merge").get_dependencies_table("database"),
     },
 }

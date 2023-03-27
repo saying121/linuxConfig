@@ -107,7 +107,9 @@ ln -sf ~/.linuxConfig/configs/konsave-conf.yaml ~/.config/konsave/conf.yaml
 # keymap
 rm -rf ~/.config/input-remapper
 ln -sf ~/.linuxConfig/input-remapper ~/.config
+[[ -d ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/ ]] || mkdir ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/
 ln -sf ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/capslock+.json
+[[ -d ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ / ]] || mkdir ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /
 ln -sf ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /capslock+.json
 # 触摸板手势
 rm -rf ~/.config/fusuma
@@ -117,12 +119,6 @@ ln -sf ~/.linuxConfig/i3 ~/.config
 ln -sf ~/.linuxConfig/i3/i3status-rust ~/.config
 ln -sf ~/.linuxConfig/wallpaperengine/betterlockscreen ~/.config
 sudo cp -f ~/.linuxConfig/custom-services/betterlockscreen@.service /usr/lib/systemd/system/
-xset +dpms
-# 电源时间
-xset dpms 1200 1800 2400
-# 屏保时间
-xset s 900 900
-sudo systemctl enable betterlockscreen@$USER
 # 语言
 ln -sf ~/.linuxConfig/configs/xprofile ~/.xprofile
 # 输入法

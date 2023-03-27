@@ -2,9 +2,7 @@ return {
     "williamboman/mason.nvim",
     cmd = "Mason",
     dependencies = {
-        require("plugins.masons.mason-lspconfig"),
-        require("plugins.masons.mason-null-ls"),
-        require("plugins.masons.mason-nvim-dap"),
+        require("public.merge").get_dependencies_table("mason"),
     },
     config = function()
         require("mason").setup({

@@ -14,9 +14,7 @@ return {
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         "nvim-lua/plenary.nvim",
-        require("plugins.telescopes.telescope-fzf-native"),
-        require("plugins.telescopes.project"),
-        require("plugins.telescopes.telescope-dap"),
+        require("public.merge").get_dependencies_table("telescope"),
     },
     config = function()
         local builtin, keymap = require("telescope.builtin"), vim.keymap.set

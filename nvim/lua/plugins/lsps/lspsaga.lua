@@ -8,7 +8,7 @@ return {
         end
         return true
     end,
-    -- commit = "438b54cba00fca27d280ae4d9242615282045bcb",
+    commit = "04617d1f5b1cfbdd2a99d9765ef04fc6ae415622",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         -- Please make sure you install markdown and markdown_inline parser
@@ -28,12 +28,14 @@ return {
             finder = {
                 --percentage
                 max_height = 0.5,
+                force_max_height = false,
                 keys = {
                     jump_to = "p",
                     edit = { "o", "<CR>" },
                     vsplit = "v",
                     split = "s",
                     tabe = "t",
+                    tabnew = "r",
                     quit = { "q", "<ESC>" },
                     close_in_preview = "<ESC>",
                 },
@@ -44,11 +46,11 @@ return {
                 split = "<C-c>i",
                 tabe = "<C-c>t",
                 quit = "q",
-                close = "<Esc>",
             },
             code_action = {
                 num_shortcut = true,
                 show_server_name = true,
+                extend_gitsigns = true,
                 keys = {
                     -- string | table type
                     quit = { "q", "<ESC>" },
@@ -63,6 +65,10 @@ return {
                 virtual_text = false,
             },
             diagnostic = {
+                on_insert = true,
+                on_insert_follow = false,
+                insert_winblend = 0,
+                show_virt_line = true,
                 show_code_action = true,
                 show_source = true,
                 jump_num_shortcut = true,
@@ -118,14 +124,13 @@ return {
             },
         })
         -- vim.wo.winbar /
-        vim.wo.stl = require("lspsaga.symbolwinbar"):get_winbar()
+        -- vim.wo.stl = require("lspsaga.symbolwinbar"):get_winbar()
         local keymap = vim.keymap.set
         -- LSP finder - Find the symbol's definition
         -- If there is no definition, it will instead be hidden
         -- When you use an action in finder like "open vsplit",
         -- you can use <C-t> to jump back
         keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
-        -- Code action
         keymap({ "n", "v" }, "<M-CR>", "<cmd>Lspsaga code_action<CR>")
         -- Rename all occurrences of the hovered word for the entire file
         keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>")
@@ -141,16 +146,14 @@ return {
         -- Show line diagnostics
         -- You can pass argument ++unfocus to
         -- unfocus the show_line_diagnostics floating window
-        if vim.bo.filetype == "markdown" or "zsh" then
+        if vim.bo.filetype == "markdown" then
             local theopts = { noremap = true, silent = true }
             keymap("n", "<space>gg", vim.diagnostic.open_float, theopts)
         else
             keymap("n", "<space>gg", "<cmd>Lspsaga show_line_diagnostics<CR>")
         end
 
-        -- Show cursor diagnostics
-        -- Like show_line_diagnostics, it supports passing the ++unfocus argument
-        keymap("n", "<space>sd", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+        -- keymap("n", "<space>sw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
         -- Show buffer diagnostics
         -- keymap("n", "<space>ll", "<cmd>Lspsaga show_buf_diagnostics<CR>")
         -- Diagnostic jump

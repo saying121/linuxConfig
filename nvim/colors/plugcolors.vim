@@ -46,3 +46,4 @@ highlight Folded guibg=NONE cterm=NONE "guifg=red ctermfg=NONE
 highlight FoldColumn guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
 highlight SignColumn ctermbg=NONE guifg=DarkCyan ctermfg=NONE gui=italic guibg=NONE
 " highlight Folded ctermbg=0 ctermfg=169
+highlight GitSignsCurrentLineBlame ctermbg=NONE guifg=#2a76ac ctermfg=NONE gui=italic guibg=NONE

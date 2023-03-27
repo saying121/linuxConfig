@@ -70,18 +70,6 @@ installWaydroid() {
 }
 # installWaydroid
 
-installI3() {
-    # 取代xorg-xbacklight
-    sudo $pacMan acpilight betterlockscreen dex
-    sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
-    yay -S --needed --noconfirm i3wm i3status i3status-rust feh xidlehook
-    # i3-gaps-kde-git
-    # ~/.linuxConfig/kde/use-i3.sh
-
-    # 蓝牙前端
-    sudo $pacMan blueman
-}
-
 # 安装lf文件浏览器
 sudo $pacMan lf
 sudo $pacMan perl-image-exiftool mdcat libreoffice-fresh highlight git-delta atool bat chafa colordiff coreutils fontforge gnupg poppler source-highlight transmission-cli jq pandoc mupdf-tools ffmpegthumbnailer xournalpp openscad ueberzug
@@ -133,8 +121,25 @@ allInstall() {
     sudo $pacMan pulseaudio-bluetooth bluez bluez-utils pulsemixer \
         xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
         pulseaudio-alsa pavucontrol
+    # 取代xorg-xbacklight
     sudo $pacMan acpilight
     sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
+
+    # i3
+    sudo $pacMan betterlockscreen dex
+    sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
+    yay -S --needed --noconfirm i3wm i3status i3status-rust feh xidlehook
+    # i3-gaps-kde-git
+    # ~/.linuxConfig/kde/use-i3.sh
+
+    # 蓝牙前端
+    sudo $pacMan blueman
+    xset +dpms
+    # 电源时间
+    xset dpms 1200 1800 2400
+    # 屏保时间
+    xset s 900 900
+    sudo systemctl enable betterlockscreen@$USER
 
     # 下载工具
     sudo $pacMan lux-dl
@@ -148,11 +153,11 @@ allInstall() {
 
     # installWallpaper
     # sudo $pacMan extra-cmake-modules plasma-framework gst-libav \
-    #     base-devel mpv python-websockets qt5-declarative qt5-websockets qt5-webchannel \
-    #     vulkan-headers cmake glfw-x11 vulkan-devel vulkan-radeon
+        #     base-devel mpv python-websockets qt5-declarative qt5-websockets qt5-webchannel \
+        #     vulkan-headers cmake glfw-x11 vulkan-devel vulkan-radeon
     # yay -S --needed --noconfirm \
-    #     renderdoc plasma5-wallpapers-wallpaper-engine \
-    sudo $pacMan gifsicle ffmpeg
+        #     renderdoc plasma5-wallpapers-wallpaper-engine \
+        sudo $pacMan gifsicle ffmpeg
     yay -S --needed --noconfirm linux-wallpaperengine-git
     # komorebi
 
@@ -224,7 +229,7 @@ yayInstall() {
     yay -S --needed --noconfirm \
         xnviewmp fontpreview \
         wps-office-cn ttf-wps-fonts \
-    # copyq  networkmanager-dmenu-bluetoothfix-git  networkmanager-dmenu-git  archlinux-tweak-tool-git
+        # copyq  networkmanager-dmenu-bluetoothfix-git  networkmanager-dmenu-git  archlinux-tweak-tool-git
 }
 
 # 开启服务
@@ -234,7 +239,6 @@ startServer() {
 }
 
 allInstall
-installI3
 yayInstall
 startServer
 

@@ -1,7 +1,21 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", {
+local specs = {
+    { import = "plugins" },
+}
+
+local path = vim.fn.stdpath("config") .. "/lua/plugins"
+
+-- 导入plugins文件夹下面的文件夹，里面的文件
+for _, file_name in pairs(vim.fn.readdir(path)) do
+    if string.sub(file_name, #file_name - 3) ~= ".lua" then
+        table.insert(specs, { import = "plugins." .. file_name })
+    end
+end
+
+require("lazy").setup({
+    spec = specs,
     root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
     defaults = {
         lazy = false, -- should plugins be lazy-loaded?
@@ -32,6 +46,9 @@ require("lazy").setup("plugins", {
         size = { width = 0.8, height = 0.8 }, -- a number <1 is a percentage., >1 is a fixed size
         -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
         border = "double",
+        -- border = "rounded",
+        -- border = "shadow",
+        -- border = "single",
         -- border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
         -- border = { "/", "-", "\\", "|" },
         -- border = { "", "", "", ">", "", "", "", "<" },
@@ -41,8 +58,7 @@ require("lazy").setup("plugins", {
         browser = nil, ---@type string?
         throttle = 20, -- how frequently should the ui process render events
         custom_keys = {
-            -- you can define custom key maps here.
-            -- To disable one of the defaults, set it to false
+            -- you can define custom key maps here. To disable one of the defaults, set it to false
 
             -- open lazygit log
             ["<localleader>l"] = function(plugin)

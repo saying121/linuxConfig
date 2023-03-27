@@ -1,6 +1,5 @@
 return {
     "mfussenegger/nvim-dap",
-    lazy = true,
     -- event = 'VimEnter',
     keys = {
         { "<space>b", mode = "n" },
@@ -15,9 +14,7 @@ return {
         "PBSetConditionalBreakpoint",
     },
     dependencies = {
-        require("plugins.daps.nvim-dap-ui"),
-        require("plugins.daps.nvim-dap-virtual-text"),
-        require("plugins.daps.persistent-breakpoints"),
+        require("public.merge").get_dependencies_table("dap"),
     },
     config = function()
         -- 对各个语言的配置

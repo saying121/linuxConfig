@@ -26,19 +26,21 @@ M.on_attach = function(client, bufnr)
         vim.lsp.buf.format({ async = true })
     end, bufopts)
 
-    if vim.bo.filetype == 'rust' then
+    if vim.bo.filetype == "rust" then
         local rt = require("rust-tools")
-        -- Hover actions
         vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
     end
 
     local cap = client.server_capabilities
     if cap.documentHighlightProvider then
-        vim.cmd("augroup LspHighlight")
-        vim.cmd("autocmd!")
-        vim.cmd("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
-        vim.cmd("autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()")
-        vim.cmd("augroup END")
+        vim.api.nvim_create_autocmd({ "CursorHold", "CursorMoved" }, {
+            group = vim.api.nvim_create_augroup("LspHighlight", { clear = true }),
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.document_highlight()
+                vim.lsp.buf.clear_references()
+            end,
+        })
     end
 end
 

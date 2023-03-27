@@ -7,13 +7,10 @@ return {
         { "?", mode = { "n", "v", "t" } },
     },
     dependencies = {
-        require("plugins.cmps.cmd-cmdline"),
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-buffer",
         "f3fora/cmp-spell",
-        require("plugins.cmps.LuaSnip"),
-        require("plugins.cmps.cmp-rime"),
-        require("plugins.cmps.nvim-autopairs"),
+        require("public.merge").get_dependencies_table("cmp"),
     },
     config = function()
         local kind_icons = {
