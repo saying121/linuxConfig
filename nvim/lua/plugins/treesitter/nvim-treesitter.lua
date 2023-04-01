@@ -3,7 +3,7 @@ return {
     event = "VeryLazy",
     build = ":TSUpdate",
     dependencies = {
-        "HiPhish/nvim-ts-rainbow2",
+        require("public.merge").get_dependencies_table("treesitter"),
     },
     config = function()
         local installed_list = {
@@ -17,20 +17,22 @@ return {
             "markdown_inline",
             "awk",
         }
+
         -- 如果没有安装高亮就用默认的
-        if installed_list[vim.bo.filetype] == nil then
+        if require("nvim-treesitter.parsers").available_parsers()[vim.bo.filetype] == nil then
             vim.cmd("syntax on")
         end
 
         require("nvim-treesitter.configs").setup({
-            ensure_installed = installed_list,
-            sync_install = true,
+            -- ensure_installed = installed_list,
+            ensure_installed = "all",
+            sync_install = false,
             auto_install = true,
             incremental_selection = {
                 enable = true,
                 keymaps = {
                     init_selection = "<CR>",
-                    node_incremental = "a",
+                    node_incremental = "A",
                     scope_incremental = "<CR>",
                     node_decremental = "<BS>",
                 },
@@ -54,6 +56,23 @@ return {
                     if ok and stats and stats.size > max_filesize then
                         return true
                     end
+
+                    local line_count = vim.api.nvim_buf_line_count(0)
+                    if line_count > 2000 then
+                        return true
+                    end
+
+                    local max_column = 0
+                    for i = 1, line_count do
+                        local line = vim.api.nvim_buf_get_lines(0, i - 1, i, true)[1]
+                        local columns = vim.api.nvim_strwidth(line)
+                        if columns > max_column then
+                            max_column = columns
+                        end
+                    end
+                    if max_column > 1500 then
+                        return true
+                    end
                 end,
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                 -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -61,18 +80,8 @@ return {
                 -- Instead of true it can also be a list of languages
                 additional_vim_regex_highlighting = false,
             },
-            rainbow = {
-                enable = true,
-                -- list of languages you want to disable the plugin for
-                disable = { "jsx", "cpp" },
-                -- Which query to use for finding delimiters
-                query = "rainbow-parens",
-                -- Highlight the entire buffer all at once
-                strategy = require("ts-rainbow.strategy.global"),
-                -- Do not enable for files with more than n lines
-                max_file_lines = 3000,
-            },
         })
+
         vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
             pattern = { "*" },
             group = vim.api.nvim_create_augroup("TS_FOLD_WORKAROUND", { clear = true }),

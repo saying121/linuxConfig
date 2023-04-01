@@ -15,6 +15,7 @@ pip3 install black isort pynvim pipenv tldr pylsp-rope debugpy vim-vint neovim
 
 rustup install stable beta nightly
 rustup component add rust-analyzer clippy rustfmt
+# yay -S --noconfirm python-gdbgui
 
 yay -S --noconfirm powershell-lts-bin powershell-editor-services
 

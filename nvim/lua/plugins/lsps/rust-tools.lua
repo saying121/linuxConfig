@@ -5,10 +5,17 @@ return {
         "neovim/nvim-lspconfig",
         "nvim-lua/plenary.nvim",
         "mfussenegger/nvim-dap",
+        "mattn/webapi-vim",
     },
     config = function()
         local rt = require("rust-tools")
         local LSP = require("public.lsp_attach")
+        local keymap, opts = vim.keymap.set, { noremap = true, silent = true }
+        keymap("n", "<C-space>", ":RustHoverActions<CR>", opts)
+        keymap("n", "<leader><up>", ":RustMoveItemUp<CR>", opts)
+        keymap("n", "<leader><down>", ":RustMoveItemDown<CR>", opts)
+        keymap("n", "<leader>R", ":RustRunnables<CR>", opts)
+        -- keymap("n", "<C-p>", ":tabnew<cr>:RustOpenCargo<CR>", opts)
 
         local extension_path = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/codelldb/extension/"
         local codelldb_path = extension_path .. "adapter/codelldb"
@@ -18,7 +25,7 @@ return {
             tools = {
                 -- how to execute terminal commands
                 -- options right now: termopen / quickfix
-                executor = require("rust-tools.executors").termopen,
+                executor = require("rust-tools.executors").toggleterm,
                 -- callback to execute once rust-analyzer is done initializing the workspace
                 -- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
                 on_initialized = nil,
@@ -36,10 +43,10 @@ return {
                     show_parameter_hints = true,
                     -- prefix for parameter hints
                     -- default: "<-"
-                    parameter_hints_prefix = "<- ",
+                    parameter_hints_prefix = "<-- ",
                     -- prefix for all the other hints (type, chaining)
                     -- default: "=>"
-                    other_hints_prefix = "=> ",
+                    other_hints_prefix = "==> ",
                     -- whether to align to the length of the longest line in the file
                     max_len_align = false,
                     -- padding from the left if max_len_align is true
@@ -49,7 +56,8 @@ return {
                     -- padding from the right if right_align is true
                     right_align_padding = 7,
                     -- The color of the hints
-                    highlight = "Comment",
+                    -- highlight = "Comment",
+                    highlight = "RustInlayHints",
                 },
                 -- options same as lsp hover / vim.lsp.util.open_floating_preview()
                 hover_actions = {

@@ -8,7 +8,8 @@ return {
         end
         return true
     end,
-    commit = "04617d1f5b1cfbdd2a99d9765ef04fc6ae415622",
+    commit = "abb0e427ffd70cb5b240f17d996b7c84cd55d001",
+    -- commit = "3ae79a1bd03d3ab90f965f0276051d09791d34cf",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         -- Please make sure you install markdown and markdown_inline parser
@@ -28,6 +29,7 @@ return {
             finder = {
                 --percentage
                 max_height = 0.5,
+                min_width = 30,
                 force_max_height = false,
                 keys = {
                     jump_to = "p",
@@ -50,7 +52,7 @@ return {
             code_action = {
                 num_shortcut = true,
                 show_server_name = true,
-                extend_gitsigns = true,
+                extend_gitsigns = false,
                 keys = {
                     -- string | table type
                     quit = { "q", "<ESC>" },
@@ -82,6 +84,8 @@ return {
                     exec_action = "o",
                     quit = "q",
                     go_action = "g",
+                    expand_or_jump = "<CR>",
+                    quit_in_show = { "q", "<ESC>" },
                 },
             },
             rename = {
@@ -143,6 +147,15 @@ return {
         keymap("n", "gD", ":Lspsaga peek_definition<CR>")
         -- Go to definition
         keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
+        -- Peek type definition
+        -- You can edit the file containing the type definition in the floating window
+        -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
+        -- It also supports tagstack
+        -- Use <C-t> to jump back
+        keymap("n", "gY", "<cmd>Lspsaga peek_type_definition<CR>")
+
+        -- Go to type definition
+        keymap("n", "gy", "<cmd>Lspsaga goto_type_definition<CR>")
         -- Show line diagnostics
         -- You can pass argument ++unfocus to
         -- unfocus the show_line_diagnostics floating window

@@ -1,6 +1,5 @@
 scriptencoding utf-8
 
-
 " let g:mkdp_preview_options = {
 "     \ 'mkit': {},
 "     \ 'katex': {},

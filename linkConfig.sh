@@ -42,6 +42,9 @@ cp -f ~/.linuxConfig/custom-services/autostart.target ~/.config/systemd/user
 sudo systemctl --user daemon-reload
 sudo systemctl --user enable autostart.service
 
+# gitui
+rm ~/.config/gitui
+ln -sf ~/.linuxConfig/gitui ~/.config
 # qt5ct
 rm -rf ~/.config/qt5ct
 ln -sf ~/.linuxConfig/qt5ct ~/.config
@@ -67,8 +70,8 @@ ln -sf ~/.linuxConfig/nvim/viml/init.vim ~/.vimrc
 # coc
 ln -sf ~/.linuxConfig/nvim/coc-config/coc-settings.json ~/.vim/coc-settings.json
 
-# zshrc
-ln -sf ~/.linuxConfig/shells/.zshrc ~/.zshrc
+# # zshrc
+# ln -sf ~/.linuxConfig/shells/.zshrc ~/.zshrc
 # bashrc
 ln -sf ~/.linuxConfig/shells/bashrc ~/.bashrc
 [[ -d ~/.local/shells ]] || mkdir ~/.local/shells
@@ -104,13 +107,6 @@ ln -sf ~/.linuxConfig/terminology ~/.config
 # konsave config
 [[ -d ~/.config/konsave ]] || mkdir -p ~/.config/konsave
 ln -sf ~/.linuxConfig/configs/konsave-conf.yaml ~/.config/konsave/conf.yaml
-# keymap
-rm -rf ~/.config/input-remapper
-ln -sf ~/.linuxConfig/input-remapper ~/.config
-[[ -d ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/ ]] || mkdir ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/
-ln -sf ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/capslock+.json
-[[ -d ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ / ]] || mkdir ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /
-ln -sf ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /capslock+.json
 # 触摸板手势
 rm -rf ~/.config/fusuma
 ln -sf ~/.linuxConfig/fusuma ~/.config
@@ -121,6 +117,8 @@ ln -sf ~/.linuxConfig/wallpaperengine/betterlockscreen ~/.config
 sudo cp -f ~/.linuxConfig/custom-services/betterlockscreen@.service /usr/lib/systemd/system/
 # 语言
 ln -sf ~/.linuxConfig/configs/xprofile ~/.xprofile
+# xinit
+ln -sf ~/.linuxConfig/configs/xinitrc ~/.xinitrc
 # 输入法
 rm -rf ~/.config/fcitx
 rm -rf ~/.config/fcitx5
@@ -136,12 +134,15 @@ if [[ $(xinput list | grep "[tT]ouchpad" -c) != 0 ]]; then
 fi
 # sddm
 [[ -d /etc/sddm.conf.d ]] || sudo mkdir -p /etc/sddm.conf.d
-if [[ -f /etc/sddm.conf.d/kde_settings.conf ]]; then
-    echo '已有sddm配置'
-else
-    sudo cp ~/.linuxConfig/configs/sddm.conf /etc/sddm.conf.d/kde_settings.conf
-fi
+sudo cp ~/.linuxConfig/configs/sddm.conf /etc/sddm.conf.d/kde_settings.conf
+sudo cp ~/.linuxConfig/configs/kde_setting.conf /etc/sddm.conf.d/kde_settings.conf
 # obs
 [[ -d ~/.config/obs-studio ]] || mkdir ~/.config/obs-studio
 [[ -d ~/Videos/obs ]] || mkdir -p ~/Videos/obs
-# 自启动程序
+# keymap
+rm -rf ~/.config/input-remapper
+ln -sf ~/.linuxConfig/input-remapper ~/.config
+[[ -d ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/ ]] || mkdir ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/
+ln -sf ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/capslock+.json
+[[ -d ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ / ]] || mkdir ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /
+ln -sf ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /capslock+.json

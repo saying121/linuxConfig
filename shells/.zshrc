@@ -97,27 +97,27 @@ zstyle ':omz:plugins:pip' lazy yes
 
 
 plugins=(
-	git gitignore git-open
-	command-not-found
-	cp
-	extract
-	fzf-tab
-	history-substring-search
-	vscode
-	web-search
-	nvm
+    git gitignore git-open
+    command-not-found
+    cp
+    extract
+    fzf-tab
+    history-substring-search
+    vscode
+    web-search
+    nvm
     # vi-mode
-	thefuck
-	pip
-	alias-finder
-	last-working-dir
+    thefuck
+    pip
+    alias-finder
+    last-working-dir
 )
 eval "$(lua ~/.oh-my-zsh/custom/plugins/z/z.lua --init zsh)"
 # colored-man-pages
 
 if [[ -d $ZSH ]]; then
-	# shellcheck disable=1091,2086
-	source $ZSH/oh-my-zsh.sh
+    # shellcheck disable=1091,2086
+    source $ZSH/oh-my-zsh.sh
 fi
 
 # User configuration

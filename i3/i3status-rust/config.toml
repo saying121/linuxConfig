@@ -42,8 +42,13 @@ format = " $icon $utilization{ $boost|} "
 [[block]]
 block = "net"
 # missing_format =" $icon × "
-format = " $icon {$signal_strength $speed_down $speed_up $frequency|Wired connection} "
+format = " $icon {$signal_strength  $speed_down  $speed_up $frequency|Wired connection} "
 format_alt = " $icon {$signal_strength $bitrate $ssid $frequency|Wired connection} via $device "
+
+[[block]]
+block = "external_ip"
+# format = " $version "
+format = " $ip $country_code "
 
 [[block]]
 block = "memory"
@@ -55,11 +60,6 @@ critical_mem = 90
 
 # [[block]]
 # block = "nvidia_gpu"
-
-# [[block]]
-# block = "external_ip"
-# format = " $version "
-# format = " $ip $country_code "
 
 # [[block]]
 # block = "service_status"

@@ -1,3 +1,7 @@
+-- 参考 :h dadbod.txt,链接数据库例如
+-- mysql://[<user>[:<password>]@][<host>[:<port>]]/[database]
+-- mysql://root:123456@127.0.0.1
+
 return {
     "kristijanhusak/vim-dadbod-ui",
     config = function()

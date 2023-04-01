@@ -26,7 +26,6 @@ return {
         "yaml",
         "tex",
         "asciidoc",
-        "rust",
         "lua",
         "zsh",
     },

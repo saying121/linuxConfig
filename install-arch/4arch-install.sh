@@ -9,13 +9,12 @@ pacMan="pacman -S --needed --noconfirm"
 # kde桌面，终端
 sudo $pacMan xorg kitty wezterm \
     networkmanager wget sddm
-# plasma packagekit-qt5 packagekit appstream-qt appstream
 
 # 中文字体
 sudo $pacMan adobe-source-han-serif-cn-fonts \
     adobe-source-han-sans-cn-fonts \
     wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
-    noto-fonts-extra
+    noto-fonts-extra ttf-hack-nerd
 
 sudo $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
     fcitx5-pinyin-zhwiki catppuccin-fcitx5-git fcitx5-table-other vim-fcitx xclip \

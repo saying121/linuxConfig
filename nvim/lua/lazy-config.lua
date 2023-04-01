@@ -9,7 +9,8 @@ local path = vim.fn.stdpath("config") .. "/lua/plugins"
 
 -- 导入plugins文件夹下面的文件夹，里面的文件
 for _, file_name in pairs(vim.fn.readdir(path)) do
-    if string.sub(file_name, #file_name - 3) ~= ".lua" then
+    -- if string.sub(file_name, #file_name - 3) ~= ".lua" then
+    if not vim.endswith(file_name, ".lua") then
         table.insert(specs, { import = "plugins." .. file_name })
     end
 end

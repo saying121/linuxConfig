@@ -5,86 +5,6 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     config = function()
-        local function get_distro()
-            local file = io.open("/etc/os-release", "r")
-            if file then
-                for line in file:lines() do
-                    if line:match("^ID=") then
-                        return line:gsub("ID=", ""):gsub('"', "")
-                    end
-                end
-                file:close()
-            end
-            return nil
-        end
-
-        local function linux_distro()
-            if os.getenv("TERMUX_VERSION") ~= nil then
-                return "OS:"
-            end
-
-            local distro = {
-                arch = "",
-                kali = "",
-                ubuntu = "",
-                suse = "",
-                manjaro = "",
-                pop = "",
-            }
-
-            local uname = vim.loop.os_uname()
-            if uname.sysname == "Linux" then
-                local your_distro = get_distro()
-
-                if distro[your_distro] ~= nil then
-                    return "OS:" .. distro[your_distro]
-                else
-                    return "OS:" .. "Linux"
-                end
-            end
-
-            if vim.fn.has("win") then
-                return "OS:"
-            elseif vim.fn.has("mac") then
-                return "OS:"
-            end
-
-            return uname.sysname
-        end
-
-        local function lsp_clients()
-            local msg = "No Active Lsp"
-            local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-            -- local buf_ft = vim.bo.ft
-            local clients = vim.lsp.get_active_clients()
-            if next(clients) == nil then
-                return msg
-            end
-            for _, client in ipairs(clients) do
-                local filetypes = client.config.filetypes
-                if
-                    filetypes
-                    and vim.fn.index(filetypes, buf_ft) ~= -1
-                    and client.name ~= "null-ls"
-                    and client.name ~= "rime_ls"
-                then
-                    return client.name
-                end
-            end
-            for _, client in ipairs(clients) do
-                local filetypes = client.config.filetypes
-                if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and client.name ~= "rime_ls" then
-                    return client.name
-                end
-            end
-            for _, client in ipairs(clients) do
-                if client ~= nil then
-                    return client.name
-                end
-            end
-            return msg
-        end
-
         require("lualine").setup({
             options = {
                 icons_enabled = true,
@@ -161,15 +81,16 @@ return {
                     },
                 },
                 lualine_x = {
-                    {
-                        require("noice").api.status.message.get_hl,
-                        cond = require("noice").api.status.message.has,
-                    },
+                    -- {
+                    --     require("noice").api.status.message.get_hl,
+                    --     cond = require("noice").api.status.message.has,
+                    -- },
                     -- {
                     --     require("noice").api.status.search.get,
                     --     cond = require("noice").api.status.search.has,
                     --     color = { fg = "ff9e64" },
                     -- },
+                    { "%M" },
                     {
                         "filetype",
                         colored = true, -- Displays filetype icon in color if set to true
@@ -179,7 +100,7 @@ return {
                         -- Icon string ^ in table is ignored in filetype component
                     },
                     {
-                        lsp_clients,
+                        require("public.get_some_info").lsp_clients,
                         -- icon = " LSP:",
                         icon = " :",
                     },
@@ -187,7 +108,7 @@ return {
                     "fileformat",
                 },
                 lualine_y = {
-                    linux_distro,
+                    require("public.get_some_info").linux_distro,
                 },
                 lualine_z = {
                     "location",
@@ -206,7 +127,16 @@ return {
             tabline = {},
             winbar = {},
             inactive_winbar = {},
-            extensions = {},
+            extensions = {
+                "lazy",
+                "trouble",
+                "nvim-tree",
+                "quickfix",
+                "toggleterm",
+                "nvim-dap-ui",
+                "man",
+                "aerial",
+            },
         })
 
         vim.opt.laststatus = 3

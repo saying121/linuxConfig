@@ -4,9 +4,7 @@ return {
     keys = {
         { "<leader>ff", mode = "n" },
         { "<leader>fw", mode = "n" },
-        { "<leader>bf", mode = "n" },
         { "<leader>go", mode = "n" },
-        { "<space>a", mode = "n" },
         { "<M-p>", mode = "n" },
     },
     ft = { "dashboard" },
@@ -23,9 +21,7 @@ return {
 
         keymap("n", "<leader>ff", builtin.find_files, opts)
         keymap("n", "<leader>fw", builtin.live_grep, opts)
-        keymap("n", "<leader>bf", builtin.buffers, opts)
         keymap("n", "<leader>go", builtin.oldfiles, opts)
-        keymap("n", "<space>a", builtin.treesitter, opts)
         -- keymap("n", "<M-p>", telescope.extensions.projects.projects, opts)
 
         require("telescope").load_extension("noice")

@@ -34,3 +34,4 @@ if [[ -f ~/.zshrc.pre-oh-my-zsh ]]; then
     rm ~/.zshrc.pre-oh-my-zsh
 fi
 ln -sf ~/.linuxConfig/shells/.zshrc ~/.zshrc
+pip install thefuck

@@ -9,5 +9,6 @@ function LspInfos.get_lsp_name()
 end
 
 local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap("n", "<leader>ls", ":lua LspInfos.get_lsp_name()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>ll", ":lua =vim.lsp.get_active_clients()<CR>", opts)
+local keymap = vim.keymap.set
+keymap("n", "<leader>ls", LspInfos.get_lsp_name, opts)
+keymap("n", "<leader>ll", ":lua =vim.lsp.get_active_clients()<CR>", opts)

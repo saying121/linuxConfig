@@ -24,12 +24,8 @@ M.on_attach = function(client, bufnr)
     -- keymap('n', '<M-cr>', vim.lsp.buf.code_action, bufopts)
     keymap("n", "<space>f", function()
         vim.lsp.buf.format({ async = true })
+        -- vim.cmd([[normal zR]])
     end, bufopts)
-
-    if vim.bo.filetype == "rust" then
-        local rt = require("rust-tools")
-        vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-    end
 
     local cap = client.server_capabilities
     if cap.documentHighlightProvider then

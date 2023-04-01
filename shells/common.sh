@@ -1,5 +1,4 @@
 # vim:fileencoding=utf-8:ft=sh
-# 自带的
 # enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     # shellcheck disable=2015
@@ -7,8 +6,8 @@ if [ -x /usr/bin/dircolors ]; then
     export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
 
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -76,8 +75,6 @@ if [[ $(uname -a | grep -c WSL) != 0 ]]; then
     . ~/.linuxConfig/scripts/proxy.sh set
 fi
 
-# source /usr/share/nvm/init-nvm.sh
-
 # 自己的alias
 # ImageMagick must be installed for icat to work.
 alias icat="kitty +kitten icat"
@@ -86,6 +83,7 @@ alias ueber="~/.linuxConfig/ueber.sh"
 
 alias clhconf="~/.linuxConfig/scripts/configClash.sh"
 alias clhres="sudo systemctl restart clash.service"
+alias clhstp="sudo systemctl stop clash.service"
 alias clhsts="systemctl status clash.service"
 
 # alias rm="gio trash"
@@ -97,12 +95,12 @@ alias tran='trans -j -d en:zh'
 
 alias upgrade='yay -Syu --noconfirm'
 
-if [[ $(grep -c cpv ~/.zshrc) != 0 && $SHELL == '/usr/bin/zsh' ]]; then
+if [[ $(grep -c OMZP::cp ~/.zshrc) != 0 && $SHELL == '/usr/bin/zsh' ]]; then
     alias cp='cpv -hhh'
 fi
 
 # avoid open nested ranger instances
-r() {
+ranger() {
     if [ -z "$RANGER_LEVEL" ]; then
         /usr/bin/ranger "$@"
     else
@@ -110,14 +108,13 @@ r() {
     fi
 }
 alias .r='source ranger'
+alias r='ranger'
 
 # lf
 LFCD="$HOME/.config/lf/lfcd.sh"
 source $LFCD
 
-# if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
-
-export DISPLAY=:0
+# export DISPLAY=:0
 
 # config tldr
 export TLDR_COLOR_NAME="cyan"

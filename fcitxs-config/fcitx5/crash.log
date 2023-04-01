@@ -1,0 +1,20 @@
+=========================
+Fcitx 5.0.23 -- Get Signal No.: 11
+Date: try "date -d @1680009456" if you are using GNU date ***
+ProcessID: 3983
+fcitx5(+0x12e9c)[0x5600e7a06e9c]
+/usr/lib/libc.so.6(+0x38f50)[0x7f6752c51f50]
+/usr/lib/libc.so.6(+0x3b3ac)[0x7f6752c543ac]
+/usr/lib/libc.so.6(+0x3b5b0)[0x7f6752c545b0]
+/usr/lib/libQt5XcbQpa.so.5(+0x35069)[0x7f674be3f069]
+/usr/lib/libQt5XcbQpa.so.5(+0x648c8)[0x7f674be6e8c8]
+/usr/lib/libglib-2.0.so.0(g_main_context_dispatch+0x19b)[0x7f675129953b]
+/usr/lib/libglib-2.0.so.0(+0xb7219)[0x7f67512f6219]
+/usr/lib/libglib-2.0.so.0(g_main_context_iteration+0x32)[0x7f67512981a2]
+/usr/lib/libQt5Core.so.5(_ZN20QEventDispatcherGlib13processEventsE6QFlagsIN10QEventLoop17ProcessEventsFlagEE+0x6c)[0x7f674b0d8c6c]
+/usr/lib/libQt5Core.so.5(_ZN10QEventLoop4execE6QFlagsINS_17ProcessEventsFlagEE+0x12c)[0x7f674b0866ec]
+/usr/lib/libQt5Core.so.5(_ZN16QCoreApplication4execEv+0x99)[0x7f674b091219]
+/usr/lib/fcitx5/fcitx5imemojipicker.so(_Z8gui_mainiPPc+0x331)[0x7f6750ca4761]
+/usr/lib/libstdc++.so.6(+0xd72c3)[0x7f6752ed72c3]
+/usr/lib/libc.so.6(+0x85bb5)[0x7f6752c9ebb5]
+/usr/lib/libc.so.6(+0x107d90)[0x7f6752d20d90]

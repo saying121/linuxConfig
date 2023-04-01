@@ -1,6 +1,13 @@
 return {
     "glepnir/dashboard-nvim",
-    event = "VimEnter",
+    -- event = "VimEnter",
+    cond = function()
+        -- 判断命令行启动有几个参数，第一个是nvim,第二个一般是文件名
+        if #vim.v.argv == 2 then
+            return false
+        end
+        return true
+    end,
     config = function()
         vim.cmd([[highlight DashBoardFooter gui=italic guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE]])
         vim.cmd([[highlight DashBoardShortCut gui=italic guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE]])
