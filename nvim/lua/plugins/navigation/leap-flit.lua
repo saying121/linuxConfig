@@ -1,9 +1,10 @@
 return {
     "ggandor/leap.nvim",
     keys = {
-        { "gs", mode = { "x", "o", "n" } },
-        { "gS", mode = { "x", "o", "n" } },
+        { "\'", mode = { "x", "o", "n" } },
+        { "\"", mode = { "x", "o", "n" } },
         { "gm", mode = { "x", "o", "n" } },
+        -- { "gw", mode = { "x", "o", "n" } },
         { "x", mode = { "x", "o" } },
         { "x", mode = { "x", "o" } },
         { "f" },
@@ -28,9 +29,9 @@ return {
     config = function()
         local opts = { noremap = true, silent = true }
         local keymap = vim.keymap.set
-        keymap({ "n", "x", "o" }, "gs", "<Plug>(leap-forward-to)", opts)
+        keymap({ "n", "x", "o" }, "\'", "<Plug>(leap-forward-to)", opts)
+        keymap({ "n", "x", "o" }, "\"", "<Plug>(leap-backward-to)", opts)
         keymap({ "x", "o" }, "x", "<Plug>(leap-forward-till)", opts)
-        keymap({ "n", "x", "o" }, "gS", "<Plug>(leap-backward-to)", opts)
         keymap({ "x", "o" }, "X", "<Plug>(leap-backward-till)", opts)
         keymap({ "n", "x", "o" }, "gm", "<Plug>(leap-from-window)", opts)
         -- keymap({ "n", "x", "o" }, "gw", "<Plug>(leap-cross-window)", opts)

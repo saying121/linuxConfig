@@ -7,7 +7,6 @@ return {
         { "<leader>go", mode = "n" },
         { "<M-p>", mode = "n" },
     },
-    ft = { "dashboard" },
     version = "0.1.0",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
@@ -17,7 +16,6 @@ return {
     config = function()
         local builtin, keymap = require("telescope.builtin"), vim.keymap.set
         local opts = { noremap = true, silent = true }
-        local telescope = require("telescope")
 
         keymap("n", "<leader>ff", builtin.find_files, opts)
         keymap("n", "<leader>fw", builtin.live_grep, opts)
@@ -26,12 +24,13 @@ return {
 
         require("telescope").load_extension("noice")
 
+        local telescope = require("telescope")
         telescope.setup({
             defaults = {
                 -- Default configuration for telescope goes here:
                 -- config_key = value,
                 mappings = {
-                    i = {
+                i = {
                         -- map actions.which_key to <C-h> (default: <C-/>)
                         -- actions.which_key shows the mappings for your picker,
                         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
@@ -49,6 +48,10 @@ return {
                 --   picker_config_key = value,
                 --   ...
                 -- }
+                find_files = {
+                    -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+                    find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+                },
                 -- Now the picker_config_key will be applied every time you call this
                 -- builtin picker
             },

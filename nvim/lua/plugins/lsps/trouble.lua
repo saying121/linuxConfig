@@ -4,19 +4,19 @@ return {
         { "<space>ll", mode = { "n" } },
         { "<space>lw", mode = { "n" } },
         { "<space>ld", mode = { "n" } },
-        { "gr", mode = { "n" } },
-        { "gi", mode = { "n" } },
+        -- { "gr", mode = { "n" } },
+        -- { "gi", mode = { "n" } },
     },
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
     config = function()
         local opts = { silent = true, noremap = true }
-        vim.keymap.set("n", "<space>ll", ":TroubleToggle<CR>", opts)
+        vim.keymap.set("n", "<space>ll", ":TroubleToggle document_diagnostics<CR>", opts)
         vim.keymap.set("n", "<space>lw", ":TroubleToggle workspace_diagnostics<CR>", opts)
         vim.keymap.set("n", "<space>ld", ":TroubleToggle document_diagnostics<CR>", opts)
-        vim.keymap.set("n", "gr", ":TroubleToggle lsp_references<CR>", opts)
-        vim.keymap.set("n", "gi", ":TroubleToggle lsp_implementation<CR>", opts)
+        -- vim.keymap.set("n", "gr", ":TroubleToggle lsp_references<CR>", opts)
+        -- vim.keymap.set("n", "gi", ":TroubleToggle lsp_implementation<CR>", opts)
 
         require("trouble").setup({
             position = "bottom", -- position of the list can be: bottom, top, left, right

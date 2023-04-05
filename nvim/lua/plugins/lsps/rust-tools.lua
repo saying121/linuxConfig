@@ -15,7 +15,15 @@ return {
         keymap("n", "<leader><up>", ":RustMoveItemUp<CR>", opts)
         keymap("n", "<leader><down>", ":RustMoveItemDown<CR>", opts)
         keymap("n", "<leader>R", ":RustRunnables<CR>", opts)
-        -- keymap("n", "<C-p>", ":tabnew<cr>:RustOpenCargo<CR>", opts)
+        keymap("n", "<C-g>", ":RustOpenCargo<CR>", opts)
+        keymap("n", "<S-CR>", ":RustExpandMacro<CR>", opts)
+        -- local function open_cargo()
+        --     vim.api.nvim_command("tabnew")
+        --     rt.open_cargo_toml.open_cargo_toml()
+        --     -- vim.api.nvim_command("tabnew" .. '| lua require("rust-tools").open_cargo_toml.open_cargo_toml()')
+        -- end
+        -- keymap("n", "<C-g>", open_cargo, opts)
+        -- rt.open_cargo_toml.open_cargo_toml()
 
         local extension_path = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/codelldb/extension/"
         local codelldb_path = extension_path .. "adapter/codelldb"
@@ -43,10 +51,12 @@ return {
                     show_parameter_hints = true,
                     -- prefix for parameter hints
                     -- default: "<-"
-                    parameter_hints_prefix = "<-- ",
+                    -- parameter_hints_prefix = "<-- ",
+                    parameter_hints_prefix = " — ",
                     -- prefix for all the other hints (type, chaining)
                     -- default: "=>"
-                    other_hints_prefix = "==> ",
+                    -- other_hints_prefix = "==> ",
+                    other_hints_prefix = " — ",
                     -- whether to align to the length of the longest line in the file
                     max_len_align = false,
                     -- padding from the left if max_len_align is true

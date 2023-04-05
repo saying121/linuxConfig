@@ -8,8 +8,8 @@ return {
         end
         return true
     end,
+    -- commit = "d73a826b05f76da72866ebf601464da2686fd122",
     commit = "abb0e427ffd70cb5b240f17d996b7c84cd55d001",
-    -- commit = "3ae79a1bd03d3ab90f965f0276051d09791d34cf",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         -- Please make sure you install markdown and markdown_inline parser

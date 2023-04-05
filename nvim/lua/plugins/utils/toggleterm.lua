@@ -1,7 +1,6 @@
 return {
     "akinsho/toggleterm.nvim",
     version = "*",
-    -- lazy = true,
     cmd = { "ToggleTerm" },
     config = function()
         require("toggleterm").setup({
@@ -12,6 +11,7 @@ return {
                     return vim.o.columns * 0.4
                 end
             end,
+            direction = "float",
             -- open_mapping = [[<c-\>]],
         })
         -- local term_width = vim.o.columns

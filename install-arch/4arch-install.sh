@@ -51,4 +51,4 @@ fi
 systemctl enable sddm NetworkManager
 # 手动start
 # systemctl start sddm NetworkManager
-echo 'run ^d/exit then run "umount -R /mnt"'
+echo 'run "^d" or "C-d" or "exit" then run "umount -R /mnt"'

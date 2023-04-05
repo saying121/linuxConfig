@@ -79,8 +79,8 @@ return {
     text_background_opacity = 1,
     use_fancy_tab_bar = true,
     tab_bar_at_bottom = true,
-    default_cursor_style = 'SteadyBar', -- Acceptable values are SteadyBlock, BlinkingBlock, SteadyUnderline, BlinkingUnderline, SteadyBar, and BlinkingBar.
-
+    hide_tab_bar_if_only_one_tab = true,
+    default_cursor_style = "SteadyBar", -- Acceptable values are SteadyBlock, BlinkingBlock, SteadyUnderline, BlinkingUnderline, SteadyBar, and BlinkingBar.
     -- colors = { tab_bar = tabbar },
     keys = {
         { key = "k", mods = "SHIFT|CTRL", action = act.ScrollByLine(-1) },

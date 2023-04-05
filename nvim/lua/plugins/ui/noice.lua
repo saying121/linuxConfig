@@ -24,8 +24,8 @@ return {
                 -- NOTE: If you enable messages, then the cmdline is enabled automatically.
                 -- This is a current Neovim limitation.
                 enabled = true, -- enables the Noice messages UI
-                view = "popup", -- default view for messages
-                -- view = "mini", -- default view for messages
+                -- view = "popup", -- default view for messages
+                view = "mini", -- default view for messages
                 view_error = "notify", -- view for errors
                 view_warn = "mini", -- view for warnings
                 view_history = "messages", -- view for :messages
@@ -91,7 +91,8 @@ return {
                 -- The default routes will forward notifications to nvim-notify
                 -- Benefit of using Noice for this is the routing and consistent history view
                 enabled = true,
-                view = "popup",
+                -- view = "popup",
+                view = "notify",
             },
             lsp = {
                 progress = {
@@ -220,23 +221,7 @@ return {
                     filter = {
                         event = "msg_show",
                         kind = "",
-                        find = "healthchecks",
-                    },
-                    opts = { skip = true },
-                },
-                {
-                    filter = {
-                        event = "msg_show",
-                        kind = "",
                         find = "no targets",
-                    },
-                    opts = { skip = true },
-                },
-                {
-                    filter = {
-                        event = "msg_show",
-                        kind = "",
-                        find = "No information available",
                     },
                     opts = { skip = true },
                 },

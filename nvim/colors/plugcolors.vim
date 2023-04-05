@@ -32,7 +32,6 @@ highlight TelescopeResultsNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
 highlight LazyProgressDone guibg=NONE cterm=NONE guifg=red ctermfg=NONE
 highlight LazyProp guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight DashBoardFooter guibg=NONE cterm=NONE guifg=red ctermfg=NONE
 
 highlight FloatBorder guibg=NONE
 " highlight LspFloatWinNormal guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
@@ -48,4 +47,10 @@ highlight SignColumn ctermbg=NONE guifg=DarkCyan ctermfg=NONE gui=italic guibg=N
 " highlight Folded ctermbg=0 ctermfg=169
 highlight GitSignsCurrentLineBlame ctermbg=NONE guifg=#2a76ac ctermfg=NONE gui=italic guibg=NONE
 
-highlight RustInlayHints ctermbg=NONE guifg=#737ad2 ctermfg=NONE gui=bold guibg=NONE
+" highlight RustInlayHints ctermbg=NONE guifg=#733ac2 ctermfg=NONE gui=bold guibg=NONE
+highlight RustInlayHints ctermbg=NONE guifg=#565f99 ctermfg=NONE gui=bold guibg=NONE
+
+highlight DashBoardIcon gui=italic guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
+highlight DashBoardShortCut gui=italic guibg=NONE cterm=NONE guifg=darkyellow ctermfg=NONE
+highlight DashBoardCenter gui=bold guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
+highlight DashBoardFooter gui=italic guibg=NONE cterm=NONE guifg=darkred ctermfg=NONE

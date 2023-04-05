@@ -19,19 +19,34 @@ nnoremap <silent><leader>x :x<CR>
 
 nnoremap j gj
 vnoremap j gj
+onoremap j gj
 
 nnoremap k gk
 vnoremap k gk
+onoremap k gk
 
 nnoremap <up> g<up>
+vnoremap <up> g<up>
+onoremap <up> g<up>
+
 nnoremap <down> g<down>
+vnoremap <down> g<down>
+onoremap <down> g<down>
 
 nnoremap <home> g<home>
 nnoremap <end> g<end>
 
 nnoremap $ g$
+vnoremap $ g$
+onoremap $ g$
+
 nnoremap 0 g0
+vnoremap 0 g0
+onoremap 0 g0
+
 nnoremap ^ g^
+vnoremap ^ g^
+onoremap ^ g^
 
 set wrap
 
@@ -39,6 +54,7 @@ set wrap
 nnoremap L g$
 vnoremap L g_
 onoremap L g_
+
 nnoremap H g^
 vnoremap H g^
 onoremap H g^

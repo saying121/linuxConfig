@@ -15,26 +15,31 @@ get_package_manager() {
     fi
 }
 pacMan=$(get_package_manager)
+aurPkg='yay -S --needed --noconfirm'
 
 # 必装
 sudo pacman -Syu --noconfirm
 sudo $pacMan archlinuxcn-keyring archlinux-keyring
 # if [[ $? != 0 ]]; then
-# if ! sudo pacman -S --needed --noconfirm archlinuxcn-keyring; then
-# 	sudo rm -rf /etc/pacman.d/gnupg
-# 	sudo pacman-key --init
-# 	sudo pacman-key --populate archlinux
-# 	sudo pacman-key --populate archlinuxcn
+#     if ! sudo pacman -S --needed --noconfirm archlinuxcn-keyring; then
+#         sudo rm -rf /etc/pacman.d/gnupg
+#         sudo pacman-key --init
+#         sudo pacman-key --populate archlinux
+#         sudo pacman-key --populate archlinuxcn
+#     fi
 # fi
 
 sudo pacman -Syyu --noconfirm
 sudo $pacMan yay paru
+yay -Syyu --noconfirm
 
 sudo $pacMan kitty terminology wezterm
 
 # 开发工具
 sudo $pacMan inetutils dnsutils networkmanager fd tree \
     clash
+# 路由跟踪
+sudo $pacMan traceroute mtr
 
 # 调用关于clash的脚本，配置clash
 ~/.linuxConfig/scripts/configClash.sh
@@ -44,15 +49,10 @@ sudo $pacMan figlet ffmpeg \
     vim bash exa bat \
     neovim lolcat git lazygit composer eslint cronie sqlite
 
+# neovim,vim plugins
 ~/.linuxConfig/nvim/install.sh
 
-# sudo $pacMan zsh zsh-autosuggestions zsh-syntax-highlighting
-# 安装oh-my-zsh
-# sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# omz plug
-# ~/.linuxConfig/shells/ohmyzsh.sh
-
-# zi
+# zsh
 ~/.linuxConfig/shells/install_zi.sh
 
 # ranger
@@ -61,155 +61,140 @@ sudo $pacMan libcaca w3m imagemagick librsvg ffmpegthumbnailer highlight p7zip a
     libarchive unrar unzip poppler calibre epub-thumbnailer-git transmission-cli \
     perl-image-exiftool mediainfo odt2txt jq jupyter-nbconvert fontforge djvulibre \
     openscad drawio-desktop-bin
+
 cd ~/.linuxConfig && git submodule update --init --recursive || echo ''
 
 # 安装lf文件浏览器
 sudo $pacMan lf
 sudo $pacMan perl-image-exiftool mdcat libreoffice-fresh highlight git-delta atool bat chafa colordiff coreutils fontforge gnupg poppler source-highlight transmission-cli jq pandoc mupdf-tools ffmpegthumbnailer xournalpp openscad ueberzug
-# sudo $pacMan poppler atool unrar p7zip w3m jq pandoc git-delta mupdf-tools perl-image-exiftool mdcat bat highlight libreoffice-fresh imagemagick ffmpegthumbnailer xournalpp transmission-cli openscad
-yay -S --needed --noconfirm ctpv-git stpv-git epub2txt-git
+$aurPkg ctpv-git epub2txt-git
 
-allInstall() {
-    # sudo pacman -Syu --noconfirm
-    sudo $pacMan foliate festival festival-english \
-        openssh ntfs-3g exfat-utils viu \
-        pandoc xdg-utils youtube-dl numlockx rsync arch-install-scripts \
-        gimagereader-qt tesseract-data-eng tesseract-data-chi_sim \
-        alsa qbittorrent steam mpv
+# sudo pacman -Syu --noconfirm
+sudo $pacMan foliate festival festival-english \
+    openssh ntfs-3g exfat-utils viu \
+    pandoc xdg-utils youtube-dl numlockx rsync arch-install-scripts \
+    gimagereader-qt tesseract-data-eng tesseract-data-chi_sim \
+    alsa qbittorrent steam mpv
 
-    # 缺失的驱动
-    yay -S --needed --noconfirm \
-        ast-firmware upd72020x-fw aic94xx-firmware wd719x-firmware
-    sudo $pacMan linux-firmware-qlogic
+# 缺失的驱动
+$aurPkg ast-firmware upd72020x-fw aic94xx-firmware wd719x-firmware
+sudo $pacMan linux-firmware-qlogic
 
-    # 防火墙
-    sudo $pacMan firewalld
-    sudo systemctl enable firewalld
+# 防火墙
+sudo $pacMan firewalld
+sudo systemctl enable firewalld
 
-    # 翻译
-    sudo $pacMan translate-shell ldr-translate-qt goldendict
+# 翻译
+sudo $pacMan translate-shell ldr-translate-qt goldendict
 
-    sudo $pacMan pacman-contrib
+sudo $pacMan pacman-contrib
 
-    # installWireshark cmd:tshark
-    sudo $pacMan wireshark-qt wireshark-cli termshark kismet wifite
+# installWireshark cmd:tshark
+sudo $pacMan wireshark-qt wireshark-cli termshark kismet wifite
 
-    # 文件管理器
-    sudo $pacMan dolphin konsole qt5ct kvantum
+# 文件管理器
+sudo $pacMan dolphin konsole qt5ct kvantum
 
-    # 输入法相关 中文输入法,支持vim+寄存器的clip
-    sudo $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
-        fcitx5-pinyin-zhwiki vim-fcitx xclip fcitx5-table-other catppuccin-fcitx5-git
+# 输入法相关 中文输入法,支持vim+寄存器的clip
+sudo $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
+    fcitx5-pinyin-zhwiki vim-fcitx xclip fcitx5-table-other catppuccin-fcitx5-git
 
-    # Music
-    yay -S --needed --noconfirm \
-        go-musicfox-git
+# Music
+$aurPkg go-musicfox-git
 
-    # sddm主题的依赖
-    sudo $pacMan gst-libav phonon-qt5-gstreamer gst-plugins-good qt5-quickcontrols qt5-graphicaleffects qt5-multimedia
-    yay -S --needed --noconfirm \
-        sddm sddm-conf-git xinit-xsession
-    yay -S --needed --noconfirm \
-        sddm-theme-aerial-git
+# sddm主题的依赖
+sudo $pacMan gst-libav phonon-qt5-gstreamer gst-plugins-good qt5-quickcontrols qt5-graphicaleffects qt5-multimedia
+$aurPkg sddm sddm-conf-git xinit-xsession
+$aurPkg sddm-theme-aerial-git
 
-    # x11,蓝牙耳机自动切换，pavucontrol:音量控制
-    sudo $pacMan pulseaudio-bluetooth bluez bluez-utils pulsemixer \
-        xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
-        pulseaudio-alsa pavucontrol
-    # 取代xorg-xbacklight
-    sudo $pacMan acpilight
-    sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
+# x11,蓝牙耳机自动切换，pavucontrol:音量控制
+sudo $pacMan pulseaudio-bluetooth bluez bluez-utils pulsemixer \
+    xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
+    pulseaudio-alsa pavucontrol
+# 取代xorg-xbacklight
+sudo $pacMan acpilight
+sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
 
-    # i3
-    sudo $pacMan betterlockscreen dex
-    sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
-    yay -S --needed --noconfirm i3wm i3status i3status-rust feh xidlehook
-    # i3-gaps-kde-git
-    # ~/.linuxConfig/kde/use-i3.sh
+# i3
+sudo $pacMan betterlockscreen dex
+sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
+$aurPkg i3-wm i3status i3status-rust autotiling feh xidlehook
+makepkg -si ~/.linuxConfig/i3/picom/PKGBUILD
+# i3-gaps-kde-git
+# ~/.linuxConfig/kde/use-i3.sh
 
-    # 蓝牙前端
-    sudo $pacMan blueman
-    xset +dpms
-    # 电源时间
-    xset dpms 1200 1800 2400
-    # 屏保时间
-    xset s 900 900
-    sudo systemctl enable betterlockscreen@$USER
+# 蓝牙前端
+sudo $pacMan blueman
+xset +dpms
+# 电源时间
+xset dpms 1200 1800 2400
+# 屏保时间
+xset s 900 900
+sudo systemctl enable betterlockscreen@$USER
 
-    # 下载工具
-    sudo $pacMan lux-dl
+# 下载工具
+sudo $pacMan lux-dl
 
-    # polybar
-    sudo $pacMan polybar picom
-    ~/.linuxConfig/i3/polybar/install-polybar-theme.sh
+# polybar
+sudo $pacMan polybar
+~/.linuxConfig/i3/polybar/install-polybar-theme.sh
 
-    # installGimp
-    sudo $pacMan gimp gvfs gutenprint
+# installGimp
+sudo $pacMan gimp gvfs gutenprint
 
-    # input-remapper
-    yay -S --needed --noconfirm input-remapper-git
-    sudo systemctl enable input-remapper
-    sudo systemctl start input-remapper
-    input-remapper-control --command start --device "Keyboard K380 Keyboard" --preset "capslock+"
-    input-remapper-control --command start --device "AT Translated Set 2 keyboard" --preset "capslock+"
-    input-remapper-control --command start --device "SINO WEALTH Gaming KB " --preset "capslock+"
+# input-remapper
+$aurPkg input-remapper-git
+sudo systemctl enable input-remapper
+sudo systemctl start input-remapper
+input-remapper-control --command start --device "Keyboard K380 Keyboard" --preset "capslock+"
+input-remapper-control --command start --device "AT Translated Set 2 keyboard" --preset "capslock+"
+input-remapper-control --command start --device "SINO WEALTH Gaming KB " --preset "capslock+"
 
-    # 各种查看系统信息的软件
-    sudo $pacMan htop atop iotop iftop glances sysstat plasma-systemmonitor
-    yay -S --needed --noconfirm \
-        gotop cpufetch hardinfo neofetch
+# 各种查看系统信息的软件
+sudo $pacMan htop atop iotop iftop glances sysstat plasma-systemmonitor
+$aurPkg gotop cpufetch hardinfo neofetch
 
-    # 浏览器
-    yay -S --needed --noconfirm \
-        microsoft-edge-stable-bin google-chrome
+# 浏览器
+$aurPkg microsoft-edge-stable-bin google-chrome
 
-    # 编辑器，ide
-    yay -S --needed --noconfirm \
-        visual-studio-code-bin intellij-idea-ultimate-edition
+# 编辑器，ide
+$aurPkg visual-studio-code-bin intellij-idea-ultimate-edition
 
-    # 截图,录屏,剪辑
-    sudo $pacMan flameshot obs-studio shotcut
+# 截图,录屏,剪辑
+sudo $pacMan flameshot obs-studio shotcut
 
-    # 触摸板
-    yay -S --needed --noconfirm \
-        ruby-fusuma
-    sudo gpasswd -a "$USER" input
-    newgrp input
+# 触摸板
+$aurPkg ruby-fusuma
+sudo gpasswd -a "$USER" input
+newgrp input
 
-    # 热点
-    sudo $pacMan linux-wifi-hotspot bash-completion haveged
+# 热点
+sudo $pacMan linux-wifi-hotspot bash-completion haveged
 
-    # 中文字体
-    sudo $pacMan adobe-source-han-serif-cn-fonts \
-        adobe-source-han-sans-cn-fonts \
-        wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
-        noto-fonts-extra ttf-hack-nerd ttf-sil-padauk
-    fc-cache -fv
+# 中文字体
+sudo $pacMan adobe-source-han-serif-cn-fonts \
+    adobe-source-han-sans-cn-fonts \
+    wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
+    noto-fonts-extra ttf-hack-nerd ttf-sil-padauk
+fc-cache -fv
 
-    # rofi
-    sudo $pacMan rofi
-    ~/.linuxConfig/rofi/install-rofi-theme.sh
+# rofi
+sudo $pacMan rofi
+~/.linuxConfig/rofi/install-rofi-theme.sh
 
-    python -m pip install konsave
+python -m pip install konsave
 
-    # gnome 显示效果好一点
-    sudo $pacMan polkit polkit-qt5 polkit-gnome
-    # polkit-kde-agent
+# gnome 显示效果好一点
+sudo $pacMan polkit polkit-qt5 polkit-gnome # polkit-kde-agent
 
-    # pdf
-    sudo $pacMan python-pymupdf python-fonttools python-pillow bibtool termpdf.py-git
-}
-allInstall
+# pdf
+sudo $pacMan python-pymupdf python-fonttools python-pillow bibtool termpdf.py-git
 
 # aur才有的软件
-yayInstall() {
-    yay -Syyu --noconfirm
-    yay -S --needed --noconfirm \
-        xnviewmp fontpreview \
-        wps-office-cn ttf-wps-fonts \
-        # copyq  networkmanager-dmenu-bluetoothfix-git  networkmanager-dmenu-git  archlinux-tweak-tool-git
-}
-yayInstall
+$aurPkg xnviewmp fontpreview
+# wps
+$aurPkg wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn ttf-ms-fonts # wps-office
+# copyq networkmanager-dmenu-bluetoothfix-git networkmanager-dmenu-git archlinux-tweak-tool-git
 
 # 开启服务
 startServer() {

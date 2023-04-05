@@ -31,16 +31,6 @@ fi
 # alias lla='ls -al'
 # alias l='ls -CF'
 
-alias ls='exa -F --icons'
-alias ld='exa -FD --icons'
-alias ll='exa -FlHhig --time-style long-iso --git --icons'
-alias la='exa -F --all'
-alias lal='ll -a'
-alias lla='ll -a'
-alias tree='exa -F -T --icons'
-alias ltree='tree -l'
-alias rewall='systemctl --user restart wallpaperengine.service'
-
 cat() {
     if [[ $1 =~ '\.md' ]]; then
         mdcat $1
@@ -76,8 +66,22 @@ if [[ $(uname -a | grep -c WSL) != 0 ]]; then
 fi
 
 # 自己的alias
-# ImageMagick must be installed for icat to work.
+alias ls='exa -F --icons'
+alias ld='exa -FD --icons'
+alias ll='exa -FlHhig --time-style long-iso --git --icons'
+alias la='exa -F --all'
+alias lal='ll -a'
+alias lla='ll -a'
+alias tree='exa -F -T --icons'
+alias ltree='tree -l'
+
+alias nvid='i3 move scratchpad && neovide'
+alias show='i3 scratchpad show'
+
+alias rewall='systemctl --user restart wallpaperengine.service'
+
 alias icat="kitty +kitten icat"
+# ImageMagick must be installed for icat to work.
 alias imgcat="wezterm imgcat"
 alias ueber="~/.linuxConfig/ueber.sh"
 

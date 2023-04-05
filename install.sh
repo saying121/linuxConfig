@@ -3,6 +3,7 @@
 export ALL_PROXY=http://127.0.0.1:7890
 export HTTPS_PROXY=http://127.0.0.1:7890
 export HTTP_PROXY=http://127.0.0.1:7890
+
 # link config
 ~/.linuxConfig/linkConfig.sh
 
@@ -15,18 +16,18 @@ get_package_manager() {
     fi
 }
 pacMan=$(get_package_manager)
+aurPkg='yay -S --needed --noconfirm'
 
 ~/.linuxConfig/must_install.sh
 
+ln -sf ~/.linuxConfig/configs/cargo-config.toml ~/.cargo/config.toml
 cargo install leetcode-cli
 
 # Music
-yay -S --needed --noconfirm \
-    yesplaymusic netease-cloud-music
+$aurPkg yesplaymusic netease-cloud-music
 
 # sddm theme
-yay -S --needed --noconfirm \
-    sddm-theme-aerial-git sddm-theme-catppuccin-git \
+$aurPkg sddm-theme-aerial-git sddm-theme-catppuccin-git \
     sddm-theme-astronaut sddm-elegant-theme-git sddm-catppuccin-git \
     sddm-theme-corners-git simplicity-sddm-theme-git sddm-sugar-dark \
     sddm-nordic-theme-git
@@ -36,11 +37,9 @@ sudo $pacMan plasma packagekit-qt5 packagekit appstream-qt appstream
 # sudo $pacMan extra-cmake-modules plasma-framework gst-libav \
     #     base-devel mpv python-websockets qt5-declarative qt5-websockets qt5-webchannel \
     #     vulkan-headers cmake glfw-x11 vulkan-devel vulkan-radeon
-# yay -S --needed --noconfirm \
-    #     renderdoc plasma5-wallpapers-wallpaper-engine \
-    sudo $pacMan gifsicle ffmpeg
-yay -S --needed --noconfirm linux-wallpaperengine-git
-# komorebi
+# $aurPkg renderdoc plasma5-wallpapers-wallpaper-engine
+sudo $pacMan gifsicle ffmpeg
+$aurPkg linux-wallpaperengine-git # komorebi
 
 # installVirtualBox
 sudo $pacMan virtualbox virtualbox-host-dkms
@@ -51,15 +50,14 @@ sudo $pacMan wine
 
 # 各种查看系统信息的软件
 sudo $pacMan htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
-yay -S --needed --noconfirm \
-    gotop cpufetch gpufetch-git hardinfo neofetch
+$aurPkg gotop cpufetch gpufetch-git hardinfo neofetch
 pip3 install nvitop gpustat
 
 installWaydroid() {
     sudo $pacMan waydroid linux-zen linux-zen-headers
-    yay -S --needed --noconfirm waydroid-image python-pyclip
+    $aurPkg waydroid-image python-pyclip
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 # installWaydroid
 
-unset pacMan
+unset pacMan aurPkg

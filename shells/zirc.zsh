@@ -36,7 +36,7 @@ zi ice wait lucid; zi snippet OMZ::lib/directories.zsh
 zi ice wait lucid; zi snippet OMZP::git
 zi ice wait lucid; zi snippet OMZP::gitignore
 
-zi ice wait lucid; zi light z-shell/z-a-rust
+# zi ice wait lucid; zi light z-shell/z-a-rust
 zi ice wait lucid; zi light paulirish/git-open.git
 zi ice wait lucid; zi light lesonky/web-search.git
 
@@ -102,3 +102,9 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 # ZSH_HIGHLIGHT_STYLES[bracket-level-4]=fg=yellow,bold
 # ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
 # ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
+
+
+# export PATH=~/.rustup/toolchains/beta-x86_64-unknown-linux-gnu/bin/:$PATH
+# export PATH=~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/:$PATH
+
+export PYTHONPATH=~/.local/lib/python3.10/site-packages

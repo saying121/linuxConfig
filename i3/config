@@ -18,6 +18,8 @@ gaps inner 3
 # 窗口之间缝隙
 gaps outer 0
 
+workspace_auto_back_and_forth yes
+
 
 for_window [class="Engrampa"] floating enable;
 for_window [class="main.py"] floating enable; # ldr 兰译
@@ -32,12 +34,26 @@ for_window [title="ImageMagick"] floating enable,move position center
 for_window [title="Wine"] floating enable,move position center
 # for_window [class="Graphviz"] floating enable,move position center
 
-# win键
+# win键Mode4 Mod1是alt
 set $mod Mod4
+
+bindsym Mod1+s scratchpad show floating toggle
+bindsym Mod1+m move scratchpad
+
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
+
+exec_always --no-startup-id autotiling
+
+# 锁屏 秒为单位
+# betterlockscreen -u path/to/pictures
+exec --no-startup-id xidlehook --detect-sleep --not-when-fullscreen --timer 900 "betterlockscreen -l dim" ""
+bindsym Mod4+semicolon exec betterlockscreen -l dim --off 600
 
 for_window [class="QQ"] floating enable;  # ,move container to workspace 4
 bindsym $mod+q [class="QQ"] focus
-for_window [class="weixin"] floating enable,move container to workspace 4
+for_window [class="weixin"] floating enable;  # ,move container to workspace 4
 bindsym Mod1+w [class="weixin"] focus
 
 bindsym $mod+Return exec wezterm
@@ -51,44 +67,14 @@ bindsym $mod+Shift+s exec ~/.linuxConfig/i3/flameshot-i3.sh # 截图
 
 bindsym $mod+e exec dolphin
 
-# Mod1是alt
+# 音量控制
 for_window [class="Pavucontrol"] floating enable;
 bindsym Mod1+q exec pavucontrol
 
 for_window [class="Blueman-manager"] floating enable;
-bindsym Mod1+b exec blueman-manager
+bindsym $mod+b exec blueman-manager
 
 focus_follows_mouse no # 鼠标点击才改变焦点
-
-exec --no-startup-id $HOME/.linuxConfig/scripts/enable_keymap.sh
-exec --no-startup-id numlockx on # 开启小键盘
-exec --no-startup-id fusuma # 触摸板
-exec --no-startup-id dunst & # 桌面通知
-exec --no-startup-id fcitx5 & # fcitx5 输入法
-exec --no-startup-id nm-applet
-exec --no-startup-id cfw
-# exec --no-startup-id utools
-# exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-# exec_always --no-startup-id picom --config ~/.config/i3/picom/picom-ftlabs-git.conf -b
-exec_always --no-startup-id picom --experimental-backends --config ~/.config/i3/picom/picom-yaocccc.conf -b
-# exec_always feh --bg-scale "path_to_wallpaper" # 设置壁纸
-# feh --bg-fill --no-fehbg --randomize ~/Pictures/wallpaper.jpg
-
-# exec systemctl --user start wallpaperengine.service
-
-# exec --no-startup-id copyq & # 剪切板管理器
-
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex --autostart --environment i3
-
-
-# 锁屏 秒为单位
-# betterlockscreen -u path/to/pictures
-exec --no-startup-id xidlehook --detect-sleep --not-when-fullscreen --timer 900 "betterlockscreen -l dim" ""
-bindsym Mod4+semicolon exec betterlockscreen -l dim --off 600
-
 
 # 屏幕亮度
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
@@ -221,7 +207,6 @@ bindsym $mod+Ctrl+8 move container to workspace number $ws8
 bindsym $mod+Ctrl+9 move container to workspace number $ws9
 bindsym $mod+Ctrl+0 move container to workspace number $ws10
 
-
 # 移动容器前/后一个工作区不跟随
 bindsym $mod+Ctrl+h     move container to workspace prev
 bindsym $mod+Ctrl+l     move container to workspace next
@@ -261,10 +246,9 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 9
+font pango:monospace 8
 
 bar {
     # bash xrandr 获取

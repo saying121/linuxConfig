@@ -11,7 +11,7 @@ return {
             -- - "append" (Mason's bin location is put at the end of PATH)
             -- - "skip" (doesn't modify PATH)
             ---@type '"prepend"' | '"append"' | '"skip"'
-            PATH = "prepend",
+            PATH = "append",
             pip = {
                 -- Whether to upgrade pip to the latest version in the virtual environment before installing packages.
                 upgrade_pip = true,

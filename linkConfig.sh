@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 环境变量
-if [[ $(grep -c mason /etc/profile) == 0 ]]; then
+if [[ $(grep -c PROXY /etc/profile) == 0 ]]; then
     # shellcheck disable=2016
     echo '
 export ALL_PROXY=http://127.0.0.1:7890
@@ -15,20 +15,15 @@ export EDITOR='nvim'
 export ECORE_IMF_MODULE="xim"
 export XMODIFIERS="@im=none"
 
-export PATH=~/.cargo/bin:~/.local/bin:$PATH
-export PATH=$PATH:~/.local/share/nvim/mason/bin
 export PATH=/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application:$PATH
 
 export PATH=~/go/bin:$PATH
-export PATH=/usr/lib/w3m:$PATH
-export PATH=~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$PATH
 export GOPATH=~/go
+export PATH=/usr/lib/w3m:$PATH
 
 export XDG_DATA_HOME=~/.local/share
 export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
-
-export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
     ' | sudo tee -a /etc/profile
 
     source /etc/profile
@@ -42,6 +37,8 @@ cp -f ~/.linuxConfig/custom-services/autostart.target ~/.config/systemd/user
 sudo systemctl --user daemon-reload
 sudo systemctl --user enable autostart.service
 
+# cargo crates
+ln -sf ~/.linuxConfig/configs/cargo-config.toml ~/.cargo/config.toml
 # gitui
 rm ~/.config/gitui
 ln -sf ~/.linuxConfig/gitui ~/.config
@@ -50,6 +47,7 @@ rm -rf ~/.config/qt5ct
 ln -sf ~/.linuxConfig/qt5ct ~/.config
 # clang-format
 ln -sf ~/.linuxConfig/formatters/clang-format ~/.clang-format
+ln -sf ~/.linuxConfig/formatters/prettierrc.json  ~/.prettierrc.json
 # stylua
 ln -sf ~/.linuxConfig/formatters/stylua ~/.config
 # w3m

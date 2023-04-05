@@ -1,6 +1,8 @@
 scriptencoding utf-8
 
-set guifont=hack\ nerd\ font:h9.0   ":w4.5
+set guifont=hack\ nerd\ font:h9.0:w1
+" set guifont=hack\ nerd\ font,1x1
+set guifontwide=1
 " g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
 let g:neovide_transparency = 0.8
 let g:transparency = 0.8
@@ -27,7 +29,8 @@ let g:neovide_cursor_vfx_opacity = 200.0
 let g:neovide_cursor_vfx_particle_lifetime = 1.2
 let g:neovide_cursor_vfx_particle_density = 10.0
 let g:neovide_cursor_vfx_particle_speed = 10.0
-" augroup Resresh
-"     autocmd!
-"     autocmd WinEnter,InsertLeave * normal <C-l>
-" augroup END
+
+augroup Scratchpad
+    autocmd!
+    autocmd VimLeave * !i3 scratchpad show floating toggle
+augroup END

@@ -8,15 +8,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
-
-
-
-
-
-
-
     xrdb -merge $sysresources
-
 fi
 
 if [ -f $sysmodmap ]; then
@@ -24,15 +16,7 @@ if [ -f $sysmodmap ]; then
 fi
 
 if [ -f "$userresources" ]; then
-
-
-
-
-
-
-
     xrdb -merge "$userresources"
-
 fi
 
 if [ -f "$usermodmap" ]; then
@@ -48,6 +32,26 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
+# 开机自启的程序
+exec "$HOME"/.linuxConfig/scripts/enable_keymap.sh &
+exec fusuma & # 触摸板
+exec dunst & # 桌面通知
+exec fcitx5 & # fcitx5 输入法
+exec nm-applet &
+exec cfw &
+
+# exec picom --config ~/.config/i3/picom/picom-ftlabs-git.conf -b
+exec picom --experimental-backends --config ~/.config/i3/picom/picom-yaocccc.conf -b &
+
+# exec --no-startup-id copyq & # 剪切板管理器
+# exec  utools
+# exec  /usr/lib/polkit-kde-authentication-agent-1
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# exec_always feh --bg-scale "path_to_wallpaper" # 设置壁纸
+# feh --bg-fill --no-fehbg --randomize ~/Pictures/wallpaper.jpg
 exec systemctl --user start wallpaperengine.service &
+
 exec /usr/bin/i3-with-shmlog
 # exec /usr/bin/startplasma-x11
+# exec /usr/bin/bspwm

@@ -4,7 +4,7 @@ return {
     keys = {
         { "<M-y>", mode = { "n", "v" }, desc = "translate" },
         -- { '<M-c>', mode = { 'n', 'v' }, desc = 'translate' },
-        { "<M-r>", mode = { "n", "v" }, desc = "translate" },
+        -- { "<M-r>", mode = { "n", "v" }, desc = "translate" },
         { "<M-x>", mode = "n", desc = "translate" },
     },
     config = function()
@@ -19,8 +19,8 @@ return {
         -- vim.api.nvim_set_keymap('n', '<M-c>', '<Plug>Translate', opts)
         -- vim.api.nvim_set_keymap('v', '<M-c>', '<Plug>TranslateV', opts)
         -- Replace the text with translation
-        keymap("n", "<M-r>", "<Plug>TranslateR", opts)
-        keymap("v", "<M-r>", "<Plug>TranslateRV", opts)
+        -- keymap("n", "<M-r>", "<Plug>TranslateR", opts)
+        -- keymap("v", "<M-r>", "<Plug>TranslateRV", opts)
         -- Translate the text in clipboard
         keymap("n", "<M-x>", "<Plug>TranslateX", opts)
     end,

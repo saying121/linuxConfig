@@ -24,7 +24,7 @@ return {
         "vim",
         "vue",
         "yaml",
-        "tex",
+        -- "tex",
         "asciidoc",
         "lua",
         "zsh",
@@ -37,8 +37,12 @@ return {
         local sources_table = {
             null_ls.builtins.formatting.black,
             null_ls.builtins.formatting.isort,
-
-            null_ls.builtins.formatting.sql_formatter,
+            -- null_ls.builtins.formatting.sql_formatter.with({
+            --     filetypes = { "sql", "mysql" },
+            -- }),
+            null_ls.builtins.formatting.sqlformat.with({
+                filetypes = { "sql", "mysql" },
+            }),
             null_ls.builtins.formatting.json_tool,
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.formatting.stylua,
