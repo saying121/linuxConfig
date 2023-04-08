@@ -52,6 +52,26 @@ return {
                 word = false,
                 cyclic = true,
             }),
+            augend.constant.new({
+                elements = { "++", "--" },
+                word = false,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = { "!==", "===" },
+                word = false,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = { "MAX", "MIN" },
+                word = false,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = { "max", "min" },
+                word = false,
+                cyclic = true,
+            }),
 
             augend.hexcolor.new({
                 case = "lower",

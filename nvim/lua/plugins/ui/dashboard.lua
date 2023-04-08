@@ -6,7 +6,7 @@ return {
         if vim.fn.exists("neovide") ~= 0 then
             return true
         end
-        if #vim.v.argv <= 1 then
+        if #vim.v.argv <= 2 then
             return true
         end
         return false
@@ -21,7 +21,7 @@ return {
         local function get_random_file_path(dir_name)
             local dir_path = vim.fn.stdpath("config") .. "/dashboard/" .. dir_name
             local file_name = vim.fn.readdir(dir_path)
-            -- local file_name = { 'rust_Swamp_Land.cat' } -- 测试某个
+            -- local file_name = { 'skull.cat' } -- 测试某个
             return dir_path .. "/" .. file_name[get_rand(file_name)]
         end
 

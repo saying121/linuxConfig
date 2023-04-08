@@ -10,6 +10,7 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-buffer",
         "f3fora/cmp-spell",
+        "lukas-reineke/cmp-rg",
         require("public.merge").get_dependencies_table("cmp"),
     },
     config = function()
@@ -74,16 +75,36 @@ return {
                 format = function(entry, vim_item)
                     vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
                     vim_item.menu = ({
-                        nvim_lsp = "[LSP]",
-                        luasnip = "[LuaSnip]",
-                        path = "[Path]",
                         buffer = "[Buf]",
-                        spell = "[spell]",
-                        cmp_git = "[git]",
+                        cmdline = "[Cmd]",
+                        cmp_git = "[Git]",
+                        crates  = "[Crates]",
                         latex_symbols = "[Latex]",
+                        luasnip = "[LuaSnip]",
+                        nvim_lsp = "[LSP]",
+                        path = "[Path]",
+                        rg  = "[Rg]",
+                        spell = "[Spell]",
+                        vim_dadbod_completion = "[DB]",
+                        zsh = "[Zsh]",
                     })[entry.source.name]
                     return vim_item
                 end,
+            },
+            -- 分级显示，上一级有补全就不会显示下一级
+            sources = cmp.config.sources({
+                { name = "luasnip", trigger_characters = { "s", "n" } },
+                { name = "nvim_lsp", keyword_length = 1 },
+                { name = "path" },
+                { name = "rg", keyword_length = 4 },
+            }, {
+                { name = "buffer" },
+            }, {
+                { name = "spell" },
+                { name = "rime" },
+            }),
+            experimental = {
+                ghost_text = true,
             },
             mapping = cmp.mapping.preset.insert({
                 ["<Tab>"] = cmp.mapping(function(fallback)
@@ -139,21 +160,6 @@ return {
                 -- -- 数字选词也可独立设置, 可设置1-9
                 -- ["1"] = require("cmp_rime").mapping["1"],
             }),
-            -- 分级显示，上一级有补全就不会显示下一级
-            sources = cmp.config.sources({
-                { name = "luasnip" },
-                { name = "nvim_lsp", keyword_length = 2 },
-                { name = "path" },
-            }, {
-                { name = "buffer" },
-            }, {
-                { name = "spell" },
-                { name = "nerdfonts" },
-                { name = "rime" },
-            }),
-            experimental = {
-                ghost_text = true,
-            },
             sorting = {
                 -- rime-ls
                 comparators = {

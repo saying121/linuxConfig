@@ -37,7 +37,12 @@ FONT=tcvn8x16
 FONT_MAP=8859-2
 ' | sudo tee -a /etc/vconsole.conf
 
-read -p 'Input your pc name: ' pc_name
+read -p '
+
+*******************************
+****  Input your pc name:  ****
+*******************************
+' pc_name
 
 if [[ $(grep -c "$pc_name" /etc/hosts) = 0 ]]; then
     echo "127.0.0.1   localhost

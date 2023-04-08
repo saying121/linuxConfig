@@ -1,24 +1,18 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
+    cond = function()
+        if vim.bo.filetype == "dashboard" then
+            return false
+        end
+        return true
+    end,
     build = ":TSUpdate",
     dependencies = {
         require("public.merge").get_dependencies_table("treesitter"),
     },
     config = function()
-        local installed_list = {
-            "bash",
-            "c",
-            "java",
-            "lua",
-            "python",
-            "vim",
-            "markdown",
-            "markdown_inline",
-            "awk",
-        }
-
-        -- 如果没有安装高亮就用默认的
+        -- 如果没有可用高亮就用默认的
         if require("nvim-treesitter.parsers").available_parsers()[vim.bo.filetype] == nil then
             vim.cmd("syntax on")
         end

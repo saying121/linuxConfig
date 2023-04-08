@@ -54,3 +54,8 @@ highlight DashBoardIcon gui=italic guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
 highlight DashBoardShortCut gui=italic guibg=NONE cterm=NONE guifg=darkyellow ctermfg=NONE
 highlight DashBoardCenter gui=bold guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
 highlight DashBoardFooter gui=italic guibg=NONE cterm=NONE guifg=darkred ctermfg=NONE
+
+
+" highlight BufferLineTab guibg=blue guifg=Blue
+" highlight BufferLineTabSeparator guibg=Blue guifg=Blue
+" highlight BufferLineTabSeparatorSelected guibg=Blue guifg=Blue

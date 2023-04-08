@@ -71,14 +71,15 @@ bindsym $mod+e exec dolphin
 for_window [class="Pavucontrol"] floating enable;
 bindsym Mod1+q exec pavucontrol
 
+# 蓝牙
 for_window [class="Blueman-manager"] floating enable;
 bindsym $mod+b exec blueman-manager
 
 focus_follows_mouse no # 鼠标点击才改变焦点
 
 # 屏幕亮度
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 
 # 声音
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%

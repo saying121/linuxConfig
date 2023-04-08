@@ -8,8 +8,8 @@ return {
         end
         return true
     end,
-    -- commit = "d73a826b05f76da72866ebf601464da2686fd122",
-    commit = "abb0e427ffd70cb5b240f17d996b7c84cd55d001",
+    commit = "3a341e3181ff845ca20e93ce66da967400cba606",
+    -- commit = "abb0e427ffd70cb5b240f17d996b7c84cd55d001",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         -- Please make sure you install markdown and markdown_inline parser
@@ -126,6 +126,20 @@ return {
                 enable = true,
                 frequency = 7,
             },
+            ui = {
+                -- This option only works in Neovim 0.9
+                title = true,
+                -- Border type can be single, double, rounded, solid, shadow.
+                border = "single",
+                winblend = 0,
+                expand = "",
+                collapse = "",
+                code_action = "💡",
+                incoming = " ",
+                outgoing = " ",
+                hover = " ",
+                kind = {},
+            },
         })
         -- vim.wo.winbar /
         -- vim.wo.stl = require("lspsaga.symbolwinbar"):get_winbar()
@@ -183,7 +197,23 @@ return {
         keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
         -- To disable it just use ":Lspsaga hover_doc ++quiet"
         -- Pressing the key twice will enter the hover window
-        keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+        -- keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+
+        -- 和 crates.nvim 集成
+        local function show_documentation()
+            local filetype = vim.bo.filetype
+            if vim.tbl_contains({ "vim", "help" }, filetype) then
+                vim.cmd("h " .. vim.fn.expand("<cword>"))
+            elseif vim.tbl_contains({ "man" }, filetype) then
+                vim.cmd("Man " .. vim.fn.expand("<cword>"))
+            elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+                require("crates").show_popup()
+            else
+                vim.cmd([[Lspsaga hover_doc]])
+            end
+        end
+        keymap("n", "K", show_documentation, { silent = true })
+
         -- If you want to jump to the hover window you should use the wincmd command "<C-w>w"
         keymap("n", "zk", "<cmd>Lspsaga hover_doc ++keep<CR>")
         -- Call hierarchy

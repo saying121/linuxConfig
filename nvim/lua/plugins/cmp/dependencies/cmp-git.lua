@@ -1,6 +1,12 @@
 return {
     "petertriho/cmp-git",
-    ft = "gitcommit",
+    -- ft = "gitcommit",
+    cond = function()
+        if vim.bo.ft == "gitcommit" then
+            return true
+        end
+        return false
+    end,
     dependencies = {
         "nvim-lua/plenary.nvim",
     },

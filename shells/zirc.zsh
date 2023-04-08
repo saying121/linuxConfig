@@ -1,9 +1,14 @@
-source ~/.linuxConfig/shells/zshrc
-
 typeset -A ZI
 ZI[BIN_DIR]="${HOME}/.zi/bin"
 source "${ZI[BIN_DIR]}/zi.zsh"
 
+# 自定义
+source ~/.linuxConfig/shells/zshrc
+
+# 自定义的 zsh lib directories
+zi ice wait lucid; source ~/.linuxConfig/shells/directories.zsh
+
+# last-working-dir thefuck 要用
 ZSH_CACHE_DIR=~/.zi/cache
 
 export NVM_DIR="$HOME/.nvm"
@@ -27,11 +32,9 @@ zi ice wait lucid; zi snippet OMZP::alias-finder
 
 zi ice wait lucid; zi snippet OMZ::lib/clipboard.zsh
 zi ice wait lucid; zi snippet OMZ::lib/functions.zsh
-# zi ice wait lucid; zi snippet OMZ::lib/completion.zsh
 zi ice wait lucid; zi snippet OMZ::lib/history.zsh
-zi ice wait lucid; zi snippet OMZ::lib/key-bindings.zsh
+# zi ice wait lucid; zi snippet OMZ::lib/key-bindings.zsh
 zi ice wait lucid; zi snippet OMZ::lib/git.zsh
-zi ice wait lucid; zi snippet OMZ::lib/directories.zsh
 
 zi ice wait lucid; zi snippet OMZP::git
 zi ice wait lucid; zi snippet OMZP::gitignore
@@ -58,53 +61,9 @@ zi ice wait lucid; zi light z-shell/F-Sy-H
 zi light zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
-# zi light zsh-users/zsh-syntax-highlighting
-#
-# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-# ZSH_HIGHLIGHT_STYLES[default]=none
-# ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=white,underline
-# ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=cyan,bold
-# ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=green,underline
-# ZSH_HIGHLIGHT_STYLES[global-alias]=fg=green,bold
-# ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,underline
-# ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold
-# ZSH_HIGHLIGHT_STYLES[autodirectory]=fg=green,underline
-# ZSH_HIGHLIGHT_STYLES[path]=bold
-# ZSH_HIGHLIGHT_STYLES[path_pathseparator]=
-# ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]=
-# ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
-# ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=blue,bold
-# ZSH_HIGHLIGHT_STYLES[command-substitution]=none
-# ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]=fg=magenta,bold
-# ZSH_HIGHLIGHT_STYLES[process-substitution]=none
-# ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=magenta,bold
-# ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=green
-# ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=green
-# ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=none
-# ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=blue,bold
-# ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=yellow
-# ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=yellow
-# ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=yellow
-# ZSH_HIGHLIGHT_STYLES[rc-quote]=fg=magenta
-# ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=magenta,bold
-# ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=magenta,bold
-# ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]=fg=magenta,bold
-# ZSH_HIGHLIGHT_STYLES[assign]=none
-# ZSH_HIGHLIGHT_STYLES[redirection]=fg=blue,bold
-# ZSH_HIGHLIGHT_STYLES[comment]=fg=black,bold
-# ZSH_HIGHLIGHT_STYLES[named-fd]=none
-# ZSH_HIGHLIGHT_STYLES[numeric-fd]=none
-# ZSH_HIGHLIGHT_STYLES[arg0]=fg=cyan
-# ZSH_HIGHLIGHT_STYLES[bracket-error]=fg=red,bold
-# ZSH_HIGHLIGHT_STYLES[bracket-level-1]=fg=blue,bold
-# ZSH_HIGHLIGHT_STYLES[bracket-level-2]=fg=green,bold
-# ZSH_HIGHLIGHT_STYLES[bracket-level-3]=fg=magenta,bold
-# ZSH_HIGHLIGHT_STYLES[bracket-level-4]=fg=yellow,bold
-# ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
-# ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
-
-
-# export PATH=~/.rustup/toolchains/beta-x86_64-unknown-linux-gnu/bin/:$PATH
-# export PATH=~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/:$PATH
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
 
 export PYTHONPATH=~/.local/lib/python3.10/site-packages
+
+zmodload zsh/zpty

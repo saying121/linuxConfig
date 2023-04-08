@@ -44,7 +44,7 @@ favorite_delete = "https://leetcode.cn/list/api/questions/$hash/$id"
 
 [code]
 editor = "nvim"
-lang = "python3"
+lang = "rust"
 pick = "${fid}.${slug}"
 submission = "${fid}.${slug}.${sid}.${ac}"
 

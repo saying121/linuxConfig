@@ -68,7 +68,7 @@ fi
 # 自己的alias
 alias ls='exa -F --icons'
 alias ld='exa -FD --icons'
-alias ll='exa -FlHhig --time-style long-iso --git --icons'
+alias ll='exa -FlHhig --time-style long-iso --icons --git'
 alias la='exa -F --all'
 alias lal='ll -a'
 alias lla='ll -a'

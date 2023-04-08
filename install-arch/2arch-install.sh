@@ -12,9 +12,19 @@ locale-gen
 timedatectl set-ntp true
 hwclock --systohc
 
-echo "Input root's passwd"
+echo "
+
+*******************************
+****  Input root's passwd  ****
+*******************************
+"
 passwd
-read -p 'Creat a new user,input your username: ' username
+read -p '
+
+***********************************************
+**** Creat a new user,input your username: ****
+***********************************************
+' username
 useradd -m -G wheel -s /bin/zsh "$username"
 passwd "$username"
 unset username
