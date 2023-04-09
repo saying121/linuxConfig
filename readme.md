@@ -46,32 +46,12 @@ $ git submodule update --init --recursive
 
 # 正常用就运行，包含常用的软件
 $ ~/.linuxConfig/install.sh clashlink
-
-# kde+i3就运行
-$ ~/.linuxConfig/i3/use-i3.sh
-
-# 换回kwin运行
-$ ~/.linuxConfig/i3/use-kwin.sh
-# 切换配置有些问题，因为配置经常会变，默认为i3的配置，默认没有问题
-```
-
-## 切换配置
-
-```bash
-# 导入配置，在kde目录下的*.knsv文件
-$ konsave -i *.knsv
-
-# 列出配置选项
-$ konsave -l
-
-# 应用配置
-$ konsave -a profile
 ```
 
 ## Grub 主题
 
 `./xenlism-grub-4k-kali`从[ kde store ](https://store.kde.org/p/1440862)界面下载，自行选择是否安装。
-wget 无法从浏览器下载链接下载文件，就放进了仓库。进入`./xenlism-grub-4k-kali`运行`./grub-theme.sh`来安装。
+`wget` 无法从浏览器下载链接下载文件，就放进了仓库。进入`./xenlism-grub-4k-kali`运行`./grub-theme.sh`来安装。
 
 ## Nvidia，自行选择是否安装，最好看 archwiki 。
 

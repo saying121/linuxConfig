@@ -1,12 +1,12 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
-    cond = function()
-        if vim.bo.filetype == "dashboard" then
-            return false
-        end
-        return true
-    end,
+    -- cond = function()
+    --     if vim.bo.filetype == "dashboard" then
+    --         return false
+    --     end
+    --     return true
+    -- end,
     build = ":TSUpdate",
     dependencies = {
         require("public.merge").get_dependencies_table("treesitter"),

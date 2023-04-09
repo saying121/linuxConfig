@@ -8,7 +8,7 @@ return {
     --     return false
     -- end,
     version = "v0.3.0",
-    event='BufWinEnter Cargo.toml',
+    event = "BufWinEnter Cargo.toml",
     dependencies = {
         "nvim-lua/plenary.nvim",
     },
@@ -50,11 +50,10 @@ return {
         -- keymap("n", "<leader>cD", crates.open_documentation, opts)
         -- keymap("n", "<leader>cC", crates.open_crates_io, opts)
 
-        vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+        vim.api.nvim_create_autocmd({ "BufWinEnter Cargo.toml" }, {
             pattern = { "Cargo.toml" },
             group = vim.api.nvim_create_augroup("CreatesReload", { clear = true }),
             callback = function()
-                vim.cmd([[normal! i]])
                 crates.reload()
             end,
         })

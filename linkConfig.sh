@@ -37,8 +37,6 @@ cp -f ~/.linuxConfig/custom-services/autostart.target ~/.config/systemd/user
 sudo systemctl --user daemon-reload
 sudo systemctl --user enable autostart.service
 
-# cargo crates
-ln -sf ~/.linuxConfig/configs/cargo-config.toml ~/.cargo/config.toml
 # gitui
 rm ~/.config/gitui
 ln -sf ~/.linuxConfig/gitui ~/.config

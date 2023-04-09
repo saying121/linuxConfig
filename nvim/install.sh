@@ -20,6 +20,8 @@ rustup install stable beta nightly
 rustup component add rust-analyzer clippy rustfmt --toolchain stable
 rustup component add rust-analyzer clippy rustfmt --toolchain nightly
 rustup component add rust-analyzer clippy rustfmt --toolchain beta
+# 切换 crates 源
+cargo install crm
 
 $aurPkg powershell-lts-bin powershell-editor-services
 
