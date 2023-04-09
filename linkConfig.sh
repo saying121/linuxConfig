@@ -1,5 +1,15 @@
 #!/bin/bash
 
+echo "会取代现有配置，输入no跳过
+此部分非必须
+yes/no"
+
+read -r answer
+if [[ ! $answer = yes ]]; then
+	exit 0
+fi
+
+
 # 环境变量
 if [[ $(grep -c PROXY /etc/profile) == 0 ]]; then
     # shellcheck disable=2016
@@ -38,10 +48,10 @@ sudo systemctl --user daemon-reload
 sudo systemctl --user enable autostart.service
 
 # gitui
-rm ~/.config/gitui
+mv ~/.config/gitui ~/.config/gitui_bak
 ln -sf ~/.linuxConfig/gitui ~/.config
 # qt5ct
-rm -rf ~/.config/qt5ct
+mv ~/.config/qt5ct ~/.config/qt5ct_bak
 ln -sf ~/.linuxConfig/qt5ct ~/.config
 # clang-format
 ln -sf ~/.linuxConfig/formatters/clang-format ~/.clang-format
@@ -52,10 +62,10 @@ ln -sf ~/.linuxConfig/formatters/stylua ~/.config
 [[ -d ~/.w3m ]] || mkdir ~/.w3m
 ln -sf ~/.linuxConfig/configs/w3m-config ~/.w3m/config
 # pip
-rm -rf ~/.pip
+mv ~/.pip ~/.pip_bak
 ln -sf ~/.linuxConfig/.pip ~/
 # nvim
-rm -rf ~/.config/nvim
+mv ~/.config/nvim ~/.config/nvim_bak
 ln -sf ~/.linuxConfig/nvim ~/.config
 [[ -d ~/.local/share/rime-ls-nvim ]] || mkdir ~/.local/share/rime-ls-nvim
 ln -sf ~/.linuxConfig/configs/rime-ls-user.yaml ~/.local/share/rime-ls-nvim/user.yaml
@@ -72,10 +82,10 @@ ln -sf ~/.linuxConfig/nvim/coc-config/coc-settings.json ~/.vim/coc-settings.json
 ln -sf ~/.linuxConfig/shells/bashrc ~/.bashrc
 [[ -d ~/.local/shells ]] || mkdir ~/.local/shells
 # ranger
-rm -rf ~/.config/ranger
+mv ~/.config/ranger ~/.config/ranger_bak
 ln -sf ~/.linuxConfig/ranger ~/.config
 # lf
-rm -rf ~/.config/lf
+mv ~/.config/lf ~/.config/lf_bak
 ln -sf ~/.linuxConfig/lf ~/.config
 # tldr
 ln -sf ~/.linuxConfig/configs/tldrrc ~/.tldrrc
@@ -92,19 +102,19 @@ ln -sf ~/.linuxConfig/configs/leetcode.toml ~/.leetcode/leetcode.toml
 [[ -d ~/.config/flameshot ]] || mkdir -p ~/.config/flameshot
 ln -sf ~/.linuxConfig/configs/flameshot.ini ~/.config/flameshot/flameshot.ini
 # kitty
-rm -rf ~/.config/kitty
+mv ~/.config/kitty ~/.config/kitty_bak
 ln -sf ~/.linuxConfig/kitty ~/.config
 # wezterm
-rm -rf ~/.config/wezterm
+mv ~/.config/wezterm ~/.config/wezterm_bak
 ln -sf ~/.linuxConfig/wezterm ~/.config
 # terminology
-rm -rf ~/.config/terminology
+mv ~/.config/terminology ~/.config/terminology_bak
 ln -sf ~/.linuxConfig/terminology ~/.config
 # konsave config
 [[ -d ~/.config/konsave ]] || mkdir -p ~/.config/konsave
 ln -sf ~/.linuxConfig/configs/konsave-conf.yaml ~/.config/konsave/conf.yaml
 # 触摸板手势
-rm -rf ~/.config/fusuma
+mv ~/.config/fusuma ~/.config/fusuma_bak
 ln -sf ~/.linuxConfig/fusuma ~/.config
 # i3
 ln -sf ~/.linuxConfig/i3 ~/.config
@@ -116,8 +126,8 @@ ln -sf ~/.linuxConfig/configs/xprofile ~/.xprofile
 # xinit
 ln -sf ~/.linuxConfig/configs/xinitrc ~/.xinitrc
 # 输入法
-rm -rf ~/.config/fcitx
-rm -rf ~/.config/fcitx5
+mv ~/.config/fcitx ~/.config/fcitx_bak
+mvn ~/.config/fcitx5 ~/.config/fcitx5_bak
 ln -sf ~/.linuxConfig/fcitxs-config/fcitx ~/.config
 ln -sf ~/.linuxConfig/fcitxs-config/fcitx5 ~/.config
 # 判断有没有touchpad
@@ -136,7 +146,7 @@ sudo cp ~/.linuxConfig/configs/kde_setting.conf /etc/sddm.conf.d/kde_settings.co
 [[ -d ~/.config/obs-studio ]] || mkdir ~/.config/obs-studio
 [[ -d ~/Videos/obs ]] || mkdir -p ~/Videos/obs
 # keymap
-rm -rf ~/.config/input-remapper
+mv ~/.config/input-remapper ~/.config/input-remapper_bak
 ln -sf ~/.linuxConfig/input-remapper ~/.config
 [[ -d ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/ ]] || mkdir ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/
 ln -sf ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/capslock+.json

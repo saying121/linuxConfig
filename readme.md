@@ -1,15 +1,13 @@
 ![桌面图像](./pictures/2023-03-17_22-42.png)
 
 <!--toc:start-->
-
 - [个人应用配置](#个人应用配置)
   - [先运行](#先运行)
-  - [如果要使用本配置，执行下面代码，包含 ranger 的插件](#如果要使用本配置执行下面代码包含-ranger-的插件)
+  - [如果要使用本配置，执行下面代码，包含 `ranger` 的插件](#如果要使用本配置执行下面代码包含-ranger-的插件)
     - [也可以执行](#也可以执行)
   - [Clone 完成后](#clone-完成后)
-  - [切换配置](#切换配置)
   - [Grub 主题](#grub-主题)
-  - [Nvidia，自行选择是否安装。](#nvidia自行选择是否安装)
+  - [Nvidia，自行选择是否安装，最好看 archwiki 。](#nvidia自行选择是否安装最好看-archwiki)
 - [License](#license)
 <!--toc:end-->
 
@@ -21,11 +19,11 @@
 ## 先运行
 
 ```bash
-# 后跟 clash订阅链接，来连接github
+# 后跟 clash 订阅链接，来连接 github
 $ ~/.linuxConfig/scripts/configClash.sh
 ```
 
-## 如果要使用本配置，执行下面代码，包含 ranger 的插件
+## 如果要使用本配置，执行下面代码，包含 `ranger` 的插件
 
 ```bash
 $ git clone --recursive https://github.com/saying121/.linuxConfig.git ~/.linuxConfig
