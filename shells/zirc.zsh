@@ -1,10 +1,12 @@
-# typeset -A ZI
-# ZI[BIN_DIR]="${HOME}/.zi/bin"
-# source "${ZI[BIN_DIR]}/zi.zsh"
-source ~/.zi/bin/zi.zsh
-
 # 自定义
 source ~/.linuxConfig/shells/zshrc
+
+typeset -A ZI
+ZI[BIN_DIR]="${HOME}/.zi/bin"
+source "${ZI[BIN_DIR]}/zi.zsh"
+
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
 
 # 自定义的 zsh lib directories
 zi ice wait lucid; source ~/.linuxConfig/shells/directories.zsh
@@ -14,8 +16,6 @@ ZSH_CACHE_DIR=~/.zi/cache
 
 export NVM_DIR="$HOME/.nvm"
 export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
-
-zi snippet OMZP::last-working-dir
 
 zi ice wait lucid; zi light skywind3000/z.lua.git
 eval "$(lua ~/.zi/plugins/skywind3000---z.lua.git/z.lua  --init zsh once enhanced)"
@@ -62,11 +62,12 @@ zi ice wait lucid; zi light z-shell/F-Sy-H
 zi light zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
-zinit ice depth=1
-zinit light jeffreytse/zsh-vi-mode
+zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
 export PYTHONPATH=~/.local/lib/python3.10/site-packages
 
 # zmodload zsh/zpty
 
 alias lazyvim="NVIM_APPNAME=LazyVim nvim"
+
+zi snippet OMZP::last-working-dir

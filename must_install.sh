@@ -122,7 +122,7 @@ sudo $pacMan pulseaudio-bluetooth bluez bluez-utils pulsemixer \
 sudo $pacMan acpilight
 sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
 
-# i3
+# i3,锁屏
 sudo $pacMan betterlockscreen dex
 sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
 $aurPkg i3-wm i3status i3status-rust autotiling feh xidlehook
