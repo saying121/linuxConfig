@@ -12,6 +12,15 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
     },
+    init = function()
+        vim.api.nvim_create_autocmd({ "BufWinEnter Cargo.toml" }, {
+            pattern = { "Cargo.toml" },
+            group = vim.api.nvim_create_augroup("CreatesReload", { clear = true }),
+            callback = function()
+                require("crates").reload()
+            end,
+        })
+    end,
     config = function()
         local cmp = require("cmp")
         cmp.setup.filetype("toml", {
@@ -20,9 +29,9 @@ return {
                 { name = "nvim_lsp" },
                 { name = "luasnip" },
                 { name = "path" },
-                { name = "rg", keyword_length = 4 },
             }, {
                 { name = "buffer" },
+                { name = "rg",      keyword_length = 4 },
             }, {
                 { name = "spell" },
             }),
@@ -49,14 +58,6 @@ return {
         -- keymap("n", "<leader>cR", crates.open_repository, opts)
         -- keymap("n", "<leader>cD", crates.open_documentation, opts)
         -- keymap("n", "<leader>cC", crates.open_crates_io, opts)
-
-        vim.api.nvim_create_autocmd({ "BufWinEnter Cargo.toml" }, {
-            pattern = { "Cargo.toml" },
-            group = vim.api.nvim_create_augroup("CreatesReload", { clear = true }),
-            callback = function()
-                crates.reload()
-            end,
-        })
 
         crates.setup({
             smart_insert = true,

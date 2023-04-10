@@ -1,8 +1,12 @@
 #!/bin/bash
 
-echo "会取代现有配置，输入no跳过
-此部分非必须
-yes/no"
+echo "
+**************************************************
+**** 会取代现有配置，输入no跳过               ****
+**** 非全新安装，建议跳过，会尝试取代现有配置 ****
+**** yes/no                                   ****
+**************************************************
+"
 
 read -r answer
 if [[ ! $answer = yes ]]; then
@@ -25,8 +29,6 @@ export EDITOR='nvim'
 export ECORE_IMF_MODULE="xim"
 export XMODIFIERS="@im=none"
 
-export PATH=/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application:$PATH
-
 export PATH=~/go/bin:$PATH
 export GOPATH=~/go
 export PATH=/usr/lib/w3m:$PATH
@@ -42,95 +44,96 @@ fi
 [[ -d ~/.config ]] || mkdir ~/.config
 [[ -d ~/.config/systemd/user ]] || mkdir -p ~/.config/systemd/user
 # dex 设置自启动应用
-cp -f ~/.linuxConfig/custom-services/autostart.service ~/.config/systemd/user
-cp -f ~/.linuxConfig/custom-services/autostart.target ~/.config/systemd/user
+cp ~/.linuxConfig/custom-services/autostart.service ~/.config/systemd/user
+cp ~/.linuxConfig/custom-services/autostart.target ~/.config/systemd/user
 sudo systemctl --user daemon-reload
 sudo systemctl --user enable autostart.service
 
 # gitui
 mv ~/.config/gitui ~/.config/gitui_bak
-ln -sf ~/.linuxConfig/gitui ~/.config
+ln -s ~/.linuxConfig/gitui ~/.config
 # qt5ct
 mv ~/.config/qt5ct ~/.config/qt5ct_bak
-ln -sf ~/.linuxConfig/qt5ct ~/.config
+ln -s ~/.linuxConfig/qt5ct ~/.config
 # clang-format
-ln -sf ~/.linuxConfig/formatters/clang-format ~/.clang-format
-ln -sf ~/.linuxConfig/formatters/prettierrc.json  ~/.prettierrc.json
+ln -s ~/.linuxConfig/formatters/clang-format ~/.clang-format
+mv ~/.prettierrc.json ~.prettierrc.bak
+ln -s ~/.linuxConfig/formatters/prettierrc.json  ~/.prettierrc.json
 # stylua
-ln -sf ~/.linuxConfig/formatters/stylua ~/.config
+ln -s ~/.linuxConfig/formatters/stylua ~/.config
 # w3m
 [[ -d ~/.w3m ]] || mkdir ~/.w3m
-ln -sf ~/.linuxConfig/configs/w3m-config ~/.w3m/config
+ln -s ~/.linuxConfig/configs/w3m-config ~/.w3m/config
 # pip
 mv ~/.pip ~/.pip_bak
-ln -sf ~/.linuxConfig/.pip ~/
+ln -s ~/.linuxConfig/.pip ~/
 # nvim
 mv ~/.config/nvim ~/.config/nvim_bak
-ln -sf ~/.linuxConfig/nvim ~/.config
+ln -s ~/.linuxConfig/nvim ~/.config
 [[ -d ~/.local/share/rime-ls-nvim ]] || mkdir ~/.local/share/rime-ls-nvim
-ln -sf ~/.linuxConfig/configs/rime-ls-user.yaml ~/.local/share/rime-ls-nvim/user.yaml
+ln -s ~/.linuxConfig/configs/rime-ls-user.yaml ~/.local/share/rime-ls-nvim/user.yaml
 [[ -d ~/.vim ]] || mkdir ~/.vim
-ln -sf ~/.linuxConfig/nvim/tasks.ini ~/.vim/tasks.ini
+ln -s ~/.linuxConfig/nvim/tasks.ini ~/.vim/tasks.ini
 # vim
-ln -sf ~/.linuxConfig/nvim/viml/init.vim ~/.vimrc
+ln -s ~/.linuxConfig/nvim/viml/init.vim ~/.vimrc
 # coc
-ln -sf ~/.linuxConfig/nvim/coc-config/coc-settings.json ~/.vim/coc-settings.json
+ln -s ~/.linuxConfig/nvim/coc-config/coc-settings.json ~/.vim/coc-settings.json
 
 # # zshrc
-# ln -sf ~/.linuxConfig/shells/.zshrc ~/.zshrc
+# ln -s ~/.linuxConfig/shells/.zshrc ~/.zshrc
 # bashrc
-ln -sf ~/.linuxConfig/shells/bashrc ~/.bashrc
+ln -s ~/.linuxConfig/shells/bashrc ~/.bashrc
 [[ -d ~/.local/shells ]] || mkdir ~/.local/shells
 # ranger
 mv ~/.config/ranger ~/.config/ranger_bak
-ln -sf ~/.linuxConfig/ranger ~/.config
+ln -s ~/.linuxConfig/ranger ~/.config
 # lf
 mv ~/.config/lf ~/.config/lf_bak
-ln -sf ~/.linuxConfig/lf ~/.config
+ln -s ~/.linuxConfig/lf ~/.config
 # tldr
-ln -sf ~/.linuxConfig/configs/tldrrc ~/.tldrrc
+ln -s ~/.linuxConfig/configs/tldrrc ~/.tldrrc
 # npm
-ln -sf ~/.linuxConfig/configs/npmrc ~/.npmrc
+ln -s ~/.linuxConfig/configs/npmrc ~/.npmrc
 # music
 [[ -d ~/.go-musicfox ]] || mkdir ~/.go-musicfox
-ln -sf ~/.linuxConfig/configs/go-musicfox.ini ~/.go-musicfox/go-musicfox.ini
+ln -s ~/.linuxConfig/configs/go-musicfox.ini ~/.go-musicfox/go-musicfox.ini
 # leetcode-cli
 [[ -d ~/.leetcode ]] || mkdir ~/.leetcode
-ln -sf ~/.linuxConfig/configs/leetcode.toml ~/.leetcode/leetcode.toml
+ln -s ~/.linuxConfig/configs/leetcode.toml ~/.leetcode/leetcode.toml
 
 # flameshot
 [[ -d ~/.config/flameshot ]] || mkdir -p ~/.config/flameshot
-ln -sf ~/.linuxConfig/configs/flameshot.ini ~/.config/flameshot/flameshot.ini
+ln -s ~/.linuxConfig/configs/flameshot.ini ~/.config/flameshot/flameshot.ini
 # kitty
 mv ~/.config/kitty ~/.config/kitty_bak
-ln -sf ~/.linuxConfig/kitty ~/.config
+ln -s ~/.linuxConfig/kitty ~/.config
 # wezterm
 mv ~/.config/wezterm ~/.config/wezterm_bak
-ln -sf ~/.linuxConfig/wezterm ~/.config
+ln -s ~/.linuxConfig/wezterm ~/.config
 # terminology
 mv ~/.config/terminology ~/.config/terminology_bak
-ln -sf ~/.linuxConfig/terminology ~/.config
+ln -s ~/.linuxConfig/terminology ~/.config
 # konsave config
 [[ -d ~/.config/konsave ]] || mkdir -p ~/.config/konsave
-ln -sf ~/.linuxConfig/configs/konsave-conf.yaml ~/.config/konsave/conf.yaml
+ln -s ~/.linuxConfig/configs/konsave-conf.yaml ~/.config/konsave/conf.yaml
 # 触摸板手势
 mv ~/.config/fusuma ~/.config/fusuma_bak
-ln -sf ~/.linuxConfig/fusuma ~/.config
+ln -s ~/.linuxConfig/fusuma ~/.config
 # i3
-ln -sf ~/.linuxConfig/i3 ~/.config
-ln -sf ~/.linuxConfig/i3/i3status-rust ~/.config
-ln -sf ~/.linuxConfig/wallpaperengine/betterlockscreen ~/.config
+ln -s ~/.linuxConfig/i3 ~/.config
+ln -s ~/.linuxConfig/i3/i3status-rust ~/.config
+ln -s ~/.linuxConfig/wallpaperengine/betterlockscreen ~/.config
 sudo cp -f ~/.linuxConfig/custom-services/betterlockscreen@.service /usr/lib/systemd/system/
 # 语言
-ln -sf ~/.linuxConfig/configs/xprofile ~/.xprofile
+ln -s ~/.linuxConfig/configs/xprofile ~/.xprofile
 # xinit
-ln -sf ~/.linuxConfig/configs/xinitrc ~/.xinitrc
+ln -s ~/.linuxConfig/configs/xinitrc ~/.xinitrc
 # 输入法
 mv ~/.config/fcitx ~/.config/fcitx_bak
 mvn ~/.config/fcitx5 ~/.config/fcitx5_bak
-ln -sf ~/.linuxConfig/fcitxs-config/fcitx ~/.config
-ln -sf ~/.linuxConfig/fcitxs-config/fcitx5 ~/.config
-# 判断有没有touchpad
+ln -s ~/.linuxConfig/fcitxs-config/fcitx ~/.config
+ln -s ~/.linuxConfig/fcitxs-config/fcitx5 ~/.config
+# 判断有没有 touchpad
 if [[ $(xinput list | grep "[tT]ouchpad" -c) != 0 ]]; then
     # 配置触摸板
     if [[ ! -d /etc/X11/xorg.conf.d ]]; then
@@ -147,8 +150,8 @@ sudo cp ~/.linuxConfig/configs/kde_setting.conf /etc/sddm.conf.d/kde_settings.co
 [[ -d ~/Videos/obs ]] || mkdir -p ~/Videos/obs
 # keymap
 mv ~/.config/input-remapper ~/.config/input-remapper_bak
-ln -sf ~/.linuxConfig/input-remapper ~/.config
+ln -s ~/.linuxConfig/input-remapper ~/.config
 [[ -d ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/ ]] || mkdir ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/
-ln -sf ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/capslock+.json
+ln -s ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/capslock+.json
 [[ -d ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ / ]] || mkdir ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /
-ln -sf ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /capslock+.json
+ln -s ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /capslock+.json

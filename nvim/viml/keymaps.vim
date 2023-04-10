@@ -1,5 +1,6 @@
 scriptencoding utf-8
 let mapleader=';'
+" let maplocalleader=';'
 
 nnoremap * *N
 vnoremap * *N

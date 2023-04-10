@@ -1,6 +1,5 @@
 return {
     "glepnir/dashboard-nvim",
-    -- event = "VimEnter",
     cond = function()
         -- 判断命令行启动有几个参数，第一个是nvim,第二个一般是文件名
         if vim.fn.exists("neovide") ~= 0 then
@@ -21,7 +20,7 @@ return {
         local function get_random_file_path(dir_name)
             local dir_path = vim.fn.stdpath("config") .. "/dashboard/" .. dir_name
             local file_name = vim.fn.readdir(dir_path)
-            -- local file_name = { 'skull.cat' } -- 测试某个
+            -- local file_name = { 'gura3.cat' } -- 测试某个
             return dir_path .. "/" .. file_name[get_rand(file_name)]
         end
 

@@ -4,9 +4,6 @@ export ALL_PROXY=http://127.0.0.1:7890
 export HTTPS_PROXY=http://127.0.0.1:7890
 export HTTP_PROXY=http://127.0.0.1:7890
 
-# link config
-~/.linuxConfig/linkConfig.sh
-
 get_package_manager() {
     if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
         echo "pacman -S --needed --noconfirm"
@@ -20,7 +17,6 @@ aurPkg='yay -S --needed --noconfirm'
 
 ~/.linuxConfig/must_install.sh
 
-ln -sf ~/.linuxConfig/configs/cargo-config.toml ~/.cargo/config.toml
 cargo install leetcode-cli
 
 # Music

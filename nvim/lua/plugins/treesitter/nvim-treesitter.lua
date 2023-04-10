@@ -1,12 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
-    -- cond = function()
-    --     if vim.bo.filetype == "dashboard" then
-    --         return false
-    --     end
-    --     return true
-    -- end,
     build = ":TSUpdate",
     dependencies = {
         require("public.merge").get_dependencies_table("treesitter"),
@@ -76,6 +70,7 @@ return {
             },
         })
 
+        -- 移到 init 会有非预期行为
         vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
             pattern = { "*" },
             group = vim.api.nvim_create_augroup("TS_FOLD_WORKAROUND", { clear = true }),

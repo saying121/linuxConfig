@@ -8,8 +8,9 @@ pacMan='pacman -S --needed --noconfirm'
 aurPkg='yay -S --needed --noconfirm'
 
 sudo $pacMan ranger fzf python3 python-pip nvm npm lolcat ripgrep fd lldb translate-shell \
-    rustup lua-language-server jdk17-openjdk go \
-    neovim vale-git luarocks shfmt shellcheck
+    rustup jdk17-openjdk go \
+    neovim vale-git luarocks shfmt shellcheck \
+    zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-ps
 
 sudo $pacMan python3 python-pip
 pip3 install black isort pynvim pipenv tldr pylsp-rope debugpy vim-vint neovim
@@ -22,6 +23,7 @@ rustup component add rust-analyzer clippy rustfmt --toolchain nightly
 rustup component add rust-analyzer clippy rustfmt --toolchain beta
 # 切换 crates 源
 cargo install crm
+crm best
 
 $aurPkg powershell-lts-bin powershell-editor-services
 

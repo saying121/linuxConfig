@@ -14,9 +14,9 @@ return {
                 { name = "zsh" },
                 { name = "luasnip" },
                 { name = "path" },
-                { name = "rg", keyword_length = 4 },
             }, {
                 { name = "buffer" },
+                { name = "rg", keyword_length = 4 },
             }, {
                 { name = "spell" },
             }),

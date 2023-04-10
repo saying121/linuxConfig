@@ -20,8 +20,8 @@ return {
         -- left     内置终端    在左边打开可复用内置终端。
         -- right    内置终端    在右边打开可复用内置终端。
         -- external    外部终端    启动一个新的操作系统的外置终端窗口，运行程序。
-        -- vim.g.asynctasks_term_pos = "toggleterm"
-        vim.g.asynctasks_term_pos = "bottom"
+        vim.g.asynctasks_term_pos = "toggleterm2"
+        -- vim.g.asynctasks_term_pos = "bottom"
         vim.g.asynctasks_term_rows = 20 -- 设置纵向切割时，高度为 10
         vim.g.asynctasks_term_cols = 60 -- 设置横向切割时，宽度为 80
         vim.g.asynctasks_term_reuse = 1 -- 设置tab终端可复用

@@ -36,11 +36,6 @@ return {
                 check_outdated_packages_on_open = true,
                 -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
                 border = "double",
-                icons = {
-                    package_installed = "✓",
-                    package_pending = "➜",
-                    package_uninstalled = "✗",
-                },
                 keymaps = {
                     -- Keymap to expand a package
                     toggle_package_expand = "<CR>",
@@ -55,7 +50,7 @@ return {
                     -- Keymap to check which installed packages are outdated
                     check_outdated_packages = "C",
                     -- Keymap to uninstall a package
-                    uninstall_package = "X",
+                    uninstall_package = "x",
                     -- Keymap to cancel a package installation
                     cancel_installation = "<C-c>",
                     -- Keymap to apply language filter

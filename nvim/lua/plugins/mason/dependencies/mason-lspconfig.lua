@@ -11,13 +11,13 @@ return {
                 "gopls",
                 "jdtls",
                 "jsonls",
-                -- 'lua_ls',
                 "marksman",
                 "pylsp",
-                -- "rust_analyzer",
+                "texlab",
                 "tsserver",
                 "vimls",
                 "yamlls",
+                'lua_ls',
             },
             -- Can either be:
             --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.

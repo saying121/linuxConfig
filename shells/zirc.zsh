@@ -1,6 +1,6 @@
-typeset -A ZI
-ZI[BIN_DIR]="${HOME}/.zi/bin"
-source "${ZI[BIN_DIR]}/zi.zsh"
+# typeset -A ZI
+# ZI[BIN_DIR]="${HOME}/.zi/bin"
+# source "${ZI[BIN_DIR]}/zi.zsh"
 source ~/.zi/bin/zi.zsh
 
 # 自定义
@@ -67,6 +67,6 @@ zinit light jeffreytse/zsh-vi-mode
 
 export PYTHONPATH=~/.local/lib/python3.10/site-packages
 
-zmodload zsh/zpty
+# zmodload zsh/zpty
 
 alias lazyvim="NVIM_APPNAME=LazyVim nvim"

@@ -96,9 +96,9 @@ return {
                 { name = "luasnip", trigger_characters = { "s", "n" } },
                 { name = "nvim_lsp", keyword_length = 1 },
                 { name = "path" },
-                { name = "rg", keyword_length = 4 },
             }, {
                 { name = "buffer" },
+                { name = "rg", keyword_length = 4 },
             }, {
                 { name = "spell" },
                 { name = "rime" },

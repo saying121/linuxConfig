@@ -42,7 +42,14 @@ sudo $pacMan inetutils dnsutils networkmanager fd tree \
 sudo $pacMan traceroute mtr
 
 # 调用关于clash的脚本，配置clash
-~/.linuxConfig/scripts/configClash.sh
+echo "
+
+*******************************************
+**** 填入clash链接，也可以不填直接回车 ****
+*******************************************
+"
+read -r link
+~/.linuxConfig/scripts/configClash.sh $link
 
 sudo $pacMan figlet ffmpeg \
     bc man net-tools psmisc sudo ripgrep fzf trash-cli wget \
