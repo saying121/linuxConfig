@@ -37,8 +37,21 @@ augroup File
     autocmd BufWritePost *.sh,*.py,*.lua,*.awk silent !chmod +x %
     " 读取模板
     autocmd BufNewFile *.sh silent 0r ~/.config/nvim/viml/template/shell.txt | normal G
+    autocmd BufNewFile *.zsh silent 0r ~/.config/nvim/viml/template/zsh.txt | normal G
     autocmd BufNewFile *.py silent 0r ~/.config/nvim/viml/template/python3.txt| normal G
     autocmd BufNewFile *.html silent 0r ~/.config/nvim/viml/template/html.txt| normal Gdd4G16|
     autocmd BufNewFile *.vim silent 0r ~/.config/nvim/viml/template/vim.txt| normal G
     autocmd BufNewFile *.awk silent 0r ~/.config/nvim/viml/template/awk.txt| normal G
 augroup END
+
+" augroup EventLoggin
+"   autocmd!
+"   autocmd BufNewFile * call s:Log ('BufNewFile')
+"   autocmd BufReadPre * call s:Log ('BufReadPre')
+"   autocmd BufReadPre * call s:Log ('BufReadPre')
+"   autocmd User * call s:Log ('User')
+" augroup END
+"
+" function! s:Log (eventName) abort
+"   silent execute '!echo '.a:eventName.' >>~/temp/vim.log'
+" endfunction

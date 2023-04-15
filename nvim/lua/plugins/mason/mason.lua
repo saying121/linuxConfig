@@ -2,7 +2,7 @@ return {
     "williamboman/mason.nvim",
     cmd = "Mason",
     dependencies = {
-        require("public.merge").get_dependencies_table("mason"),
+        require("public.utils").get_dependencies_table("mason"),
     },
     config = function()
         require("mason").setup({

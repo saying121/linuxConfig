@@ -2,7 +2,7 @@ return {
     pylsp = {
         plugins = {
             flake8 = {
-                enabled = true,
+                enabled = false,
             },
             autopep8 = {
                 enabled = false,
@@ -10,7 +10,6 @@ return {
             -- jedi = {
             --     auto_import_moduls = { 'numpy', 'math' },
             -- },
-            -- 不提示格式
             pycodestyle = {
                 enabled = false,
             },

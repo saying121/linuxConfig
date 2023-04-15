@@ -1,7 +1,6 @@
 return {
     "michaelb/sniprun",
     build = "./install.sh",
-    lazy = true,
     keys = {
         { "<leader>sr", mode = "v", desc = "unit test" },
     },

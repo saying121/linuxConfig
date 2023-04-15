@@ -1,6 +1,8 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 
+vim.keymap.set("n", "<F2>", ":Lazy sync<CR>", { noremap = true, silent = true })
+
 local specs = {
     { import = "plugins" },
 }
@@ -41,7 +43,7 @@ require("lazy").setup({
     },
     install = {
         missing = true, -- install missing plugins on startup. This doesn't increase startup time.
-        colorscheme = { "habamax" }, -- try to load one of these colorschemes when starting an installation during startup
+        colorscheme = { "tokyonight", "habamax" }, -- try to load one of these colorschemes when starting an installation during startup
     },
     ui = {
         size = { width = 0.8, height = 0.8 }, -- a number <1 is a percentage., >1 is a fixed size
@@ -58,22 +60,6 @@ require("lazy").setup({
         -- If you want to use a specific browser, you can define it here
         browser = nil, ---@type string?
         throttle = 20, -- how frequently should the ui process render events
-        custom_keys = {
-            -- you can define custom key maps here. To disable one of the defaults, set it to false
-
-            -- open lazygit log
-            ["<localleader>l"] = function(plugin)
-                require("lazy.util").float_term({ "lazygit", "log" }, {
-                    cwd = plugin.dir,
-                })
-            end,
-            -- open a terminal for the plugin dir
-            ["<localleader>t"] = function(plugin)
-                require("lazy.util").float_term(nil, {
-                    cwd = plugin.dir,
-                })
-            end,
-        },
     },
     diff = {
         -- diff command <d> can be one of:
@@ -101,7 +87,8 @@ require("lazy").setup({
             path = vim.fn.stdpath("cache") .. "/lazy/cache",
             -- Once one of the following events triggers, caching will be disabled.
             -- To cache all modules, set this to `{}`, but that is not recommended.
-            disable_events = { "UIEnter", "BufReadPre" },
+            disable_events = { "UIEnter", "BufReadPre", "VimEnter" },
+            -- disable_events = {},
             ttl = 3600 * 24 * 5, -- keep unused modules for up to 5 days
         },
         reset_packpath = true, -- reset the package path to improve startup time
@@ -114,7 +101,7 @@ require("lazy").setup({
                 "gzip",
                 "matchit",
                 "matchparen",
-                "netrwPlugin",
+                -- "netrwPlugin", -- 可以gx打开url，禁用了就不能了
                 "tarPlugin",
                 "tohtml",
                 "tutor",
@@ -129,6 +116,6 @@ require("lazy").setup({
         root = vim.fn.stdpath("state") .. "/lazy/readme",
         files = { "README.md", "lua/**/README.md" },
         -- only generate markdown helptags for plugins that dont have docs
-        skip_if_doc_exists = true,
+        skip_if_doc_exists = false,
     },
 })

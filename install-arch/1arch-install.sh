@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo '1.Partitioned disk
+echo '\e[1;33m
+1.Partitioned disk
 cfdisk /dev/xxx
 
 2.Formatted disk
@@ -27,7 +28,9 @@ mkdir /mnt/home
 mount /dev/forhome /mnt/home
 
 Change mirrors and link network before run the script.
-yes/no'
+yes/no
+\e[0m
+'
 
 read -r answer
 if [[ ! $answer = yes ]]; then
@@ -39,7 +42,10 @@ timedatectl set-ntp true
 pacstrap /mnt base base-devel linux linux-firmware zsh
 
 genfstab -U /mnt >/mnt/etc/fstab
-echo '----------------------------------------------------------
+echo '\e[1;33m
+----------------------------------------------------------
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 run: [cat /mnt/etc/fstab] compare to [lsblk],check for correctness
-run: arch-chroot /mnt'
+run: arch-chroot /mnt
+\e[0m
+'

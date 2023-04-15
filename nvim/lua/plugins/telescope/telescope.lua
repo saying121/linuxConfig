@@ -3,38 +3,68 @@ return {
     cmd = "Telescope",
     keys = {
         { "<leader>ff", mode = "n" },
+        { "<leader>gf", mode = "n" },
         { "<leader>fw", mode = "n" },
-        { "<leader>go", mode = "n" },
+        { "<leader>gw", mode = "n" },
+        { "<leader>fo", mode = "n" },
         { "<M-p>", mode = "n" },
     },
     version = "0.1.0",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         "nvim-lua/plenary.nvim",
-        require("public.merge").get_dependencies_table("telescope"),
+        require("public.utils").get_dependencies_table("telescope"),
     },
     config = function()
         local builtin, keymap = require("telescope.builtin"), vim.keymap.set
         local opts = { noremap = true, silent = true }
+        local util = require("public.utils")
 
         keymap("n", "<leader>ff", builtin.find_files, opts)
         keymap("n", "<leader>fw", builtin.live_grep, opts)
-        keymap("n", "<leader>go", builtin.oldfiles, opts)
-        -- keymap("n", "<M-p>", telescope.extensions.projects.projects, opts)
+        keymap("n", "<leader>fo", builtin.oldfiles, opts)
+
+        local function find_files_from_git_root()
+            local function is_git_repo()
+                vim.fn.system("git rev-parse --is-inside-work-tree")
+
+                return vim.v.shell_error == 0
+            end
+            if is_git_repo() then
+                opts = { cwd = util.get_git_root_dir(vim.fn.getcwd(), "/.git") }
+            end
+            builtin.find_files(opts)
+        end
+        keymap("n", "<leader>gf", find_files_from_git_root, opts)
+
+        local function live_grep_from_git_root()
+            local function is_git_repo()
+                vim.fn.system("git rev-parse --is-inside-work-tree")
+
+                return vim.v.shell_error == 0
+            end
+            if is_git_repo() then
+                opts = { cwd = util.get_git_root_dir(vim.fn.getcwd(), "/.git") }
+            end
+            builtin.live_grep(opts)
+        end
+        keymap("n", "<leader>gf", live_grep_from_git_root, opts)
 
         require("telescope").load_extension("noice")
 
         local telescope = require("telescope")
+        local actions = require("telescope.actions")
         telescope.setup({
             defaults = {
                 -- Default configuration for telescope goes here:
                 -- config_key = value,
                 mappings = {
-                i = {
+                    i = {
                         -- map actions.which_key to <C-h> (default: <C-/>)
                         -- actions.which_key shows the mappings for your picker,
                         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
                         ["<C-h>"] = "which_key",
+                        ["<C-u>"] = false,
                     },
                 },
                 layout_config = {
@@ -44,13 +74,17 @@ return {
             },
             pickers = {
                 -- Default configuration for builtin pickers goes here:
-                -- picker_name = {
-                --   picker_config_key = value,
-                --   ...
-                -- }
                 find_files = {
                     -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
                     find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+                    prompt_prefix = "🔍",
+                },
+                buffers = {
+                    mappings = {
+                        i = {
+                            ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
+                        },
+                    },
                 },
                 -- Now the picker_config_key will be applied every time you call this
                 -- builtin picker

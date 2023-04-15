@@ -100,8 +100,11 @@ nnoremap <M--> <C-W>-
 nnoremap <M-=> <C-W>+
 
 " Alt+t开启关闭终端,vim和nvim不太一样
-nnoremap <M-t> :terminal<CR>A
-tnoremap <M-t> exit<CR>
+" nnoremap <M-t> :terminal<CR>A
+" tnoremap <M-t> exit<CR>
 
 nnoremap <silent><BackSpace> :noh<CR>
 " nnoremap <space>s :source $MYVIMRC<CR>
+
+nnoremap <silent><leader>nc :set nonumber norelativenumber signcolumn=no<CR>
+nnoremap <silent><leader>yc :set number relativenumber signcolumn=yes:1<CR>

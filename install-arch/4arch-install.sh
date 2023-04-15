@@ -42,6 +42,7 @@ read -p '
 *******************************
 ****  Input your pc name:  ****
 *******************************
+
 ' pc_name
 
 if [[ $(grep -c "$pc_name" /etc/hosts) = 0 ]]; then

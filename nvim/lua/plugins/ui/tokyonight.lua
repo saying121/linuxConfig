@@ -1,14 +1,12 @@
 return {
     "folke/tokyonight.nvim",
-    -- priority = 1000,
-    -- event = "VeryLazy",
+    priority = 2000,
+    event = "BufWinEnter",
+    -- cond = true,
     config = function()
-        vim.cmd.colorscheme("tokyonight")
-        vim.cmd.colorscheme("plugcolors")
-
         require("tokyonight").setup({
             style = "night",
-            transparent = false,
+            transparent = true,
             terminal_colors = true,
             -- Background styles. Can be "dark", "transparent" or "normal"
             styles = {
@@ -16,5 +14,8 @@ return {
                 floats = "normal", -- style for floating windows
             },
         })
+
+        vim.cmd.colorscheme("tokyonight")
+        vim.cmd.colorscheme("plugcolors")
     end,
 }

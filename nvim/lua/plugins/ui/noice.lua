@@ -1,6 +1,7 @@
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
+    priority = 900,
     dependencies = {
         "MunifTanjim/nui.nvim",
         {
@@ -8,6 +9,7 @@ return {
             config = function()
                 require("notify").setup({
                     background_colour = "#000000",
+                    stages = "fade_in_slide_out",
                 })
             end,
         },
@@ -55,7 +57,7 @@ return {
                             { event = "notify" },
                             { error = true },
                             { warning = true },
-                            { event = "msg_show", kind = { "" } },
+                            { event = "msg_show", kind = { "popupmenu" } },
                             { event = "lsp", kind = "message" },
                         },
                     },
@@ -186,14 +188,16 @@ return {
             },
             routes = {
                 {
+                    view = "mini",
                     filter = {
                         event = "msg_show",
                         kind = "",
                         find = "written",
                     },
-                    opts = { skip = true },
+                    opts = { skip = false },
                 },
                 {
+                    view = "mini",
                     filter = {
                         event = "msg_show",
                         kind = "",
@@ -202,6 +206,7 @@ return {
                     opts = { skip = true },
                 },
                 {
+                    view = "mini",
                     filter = {
                         event = "msg_show",
                         kind = "",
@@ -210,6 +215,7 @@ return {
                     opts = { skip = true },
                 },
                 {
+                    view = "mini",
                     filter = {
                         event = "msg_show",
                         kind = "",
@@ -218,20 +224,31 @@ return {
                     opts = { skip = true },
                 },
                 {
+                    view = "mini",
                     filter = {
                         event = "msg_show",
-                        kind = "",
+                        kind = "echo",
                         find = "no targets",
                     },
-                    opts = { skip = true },
+                    opts = { skip = false },
                 },
                 {
+                    view = "mini",
                     filter = {
                         event = "msg_show",
                         kind = "",
                         find = "info",
                     },
-                    opts = { skip = true },
+                    opts = { skip = false },
+                },
+                {
+                    view = "popup",
+                    filter = {
+                        event = "msg_show",
+                        kind = { "echo", "echomsg" },
+                        find = "",
+                    },
+                    opts = { skip = false },
                 },
             }, --- @see section on routes
         })

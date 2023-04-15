@@ -2,24 +2,7 @@ return {
     "echasnovski/mini.indentscope",
     version = "*",
     event = "VeryLazy",
-    init = function()
-        vim.api.nvim_create_autocmd("FileType", {
-            pattern = {
-                "Trouble",
-                "alpha",
-                "dashboard",
-                "help",
-                "lazy",
-                "lspsagafinder",
-                "mason",
-                "neo-tree",
-                "toggleterm",
-            },
-            callback = function()
-                vim.b.miniindentscope_disable = true
-            end,
-        })
-    end,
+    priority = 900,
     config = function()
         require("mini.indentscope").setup(
             -- No need to copy this inside `setup()`. Will be used automatically.
@@ -40,8 +23,8 @@ return {
                 -- Module mappings. Use `''` (empty string) to disable one.
                 mappings = {
                     -- Textobjects
-                    object_scope = "ii",
-                    object_scope_with_border = "ai",
+                    object_scope = "",
+                    object_scope_with_border = "",
                     -- Motions (jump to respective border line; if not present - body line)
                     goto_top = "[i",
                     goto_bottom = "]i",
@@ -63,5 +46,23 @@ return {
                 symbol = "│",
             }
         )
+
+        vim.api.nvim_create_autocmd("FileType", {
+            group = vim.api.nvim_create_augroup("IndentScope", { clear = true }),
+            pattern = {
+                "Trouble",
+                "alpha",
+                "dashboard",
+                "help",
+                "lazy",
+                "lspsagafinder",
+                "mason",
+                "neo-tree",
+                "toggleterm",
+            },
+            callback = function()
+                vim.b.miniindentscope_disable = true
+            end,
+        })
     end,
 }

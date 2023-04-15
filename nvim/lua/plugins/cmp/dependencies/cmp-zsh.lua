@@ -11,14 +11,15 @@ return {
         local cmp = require("cmp")
         cmp.setup.filetype("zsh", {
             sources = cmp.config.sources({
-                { name = "zsh" },
-                { name = "luasnip" },
-                { name = "path" },
+                { name = "luasnip", priority = 1000 },
+                { name = "zsh", priority = 900 },
+                { name = "path", priority = 800 },
             }, {
-                { name = "buffer" },
-                { name = "rg", keyword_length = 4 },
+                { name = "buffer", priority = 700 },
+                { name = "rg", priority = 600 },
             }, {
-                { name = "spell" },
+                { name = "spell", priority = 500 },
+                { name = "rime", priority = 500 },
             }),
         })
         require("cmp_zsh").setup({

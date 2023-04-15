@@ -32,5 +32,5 @@ unset username
 chmod u+w /etc/sudoers
 sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
-echo "check /etc/sudoers"
-echo "Manual edit visudo command's %wheel ALL=(ALL:ALL)ALL"
+echo "\e[1;33mcheck /etc/sudoers\e[0m"
+echo "\e[1;33mManual edit visudo command's %wheel ALL=(ALL:ALL)ALL\e[0m"

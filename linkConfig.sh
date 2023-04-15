@@ -1,12 +1,14 @@
 #!/bin/bash
 
-echo "
+echo -e "\e[1;33m
+
 ******************************************************
 **** 会取代现有配置，输入no跳过                   ****
 **** 非全新安装，建议跳过，会尝试取代现有配置     ****
 **** 配置为目录会被备份，配置为文件存在就不会覆盖 ****
 **** yes/no                                       ****
 ******************************************************
+\e[0m
 "
 
 read -r answer
@@ -90,7 +92,6 @@ link_list=(
 [[ -d ~/.local/shells ]]             || mkdir ~/.local/shells
 [[ -d ~/.vim ]]                      || mkdir ~/.vim
 [[ -d ~/.w3m ]]                      || mkdir ~/.w3m
-sudo cp -f ~/.linuxConfig/custom-services/betterlockscreen@.service /usr/lib/systemd/system/
 
 
 for path in ${!link_list}; do
@@ -98,9 +99,15 @@ for path in ${!link_list}; do
     if [[ -d $path ]]; then
         be_back=$(echo $path | awk -F / '{print $NF}')
         be_back_path=${link_list[$path]}/$be_back
+
+        if [[ -d ${link_list[$path]}/$be_back"_bak" ]]; then
+            continue
+        fi
+
         mv $be_back_path ${link_list[$path]}/$be_back"_bak"
     fi
-    # 配置为文件存在就不会覆盖
+
+    # 配置为文件，存在就不会覆盖
     ln -s $path ${link_list[$path]}
 done
 

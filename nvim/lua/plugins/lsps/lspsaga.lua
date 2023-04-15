@@ -1,15 +1,18 @@
 return {
     "glepnir/lspsaga.nvim",
     -- Do make sure that your LSP plugins, like lsp-zero or lsp-config, are loaded before loading lspsaga.
-    event = "VeryLazy",
-    cond = function()
-        if vim.bo.ft == "zsh" then
-            return false
-        end
-        return true
-    end,
-    commit = "3a341e3181ff845ca20e93ce66da967400cba606",
-    -- commit = "abb0e427ffd70cb5b240f17d996b7c84cd55d001",
+    event = "LspAttach",
+    -- cond = function()
+    --     if #vim.lsp.get_active_clients() == 1 and vim.lsp.get_active_clients()[1]["name"] == "rime_ls" then
+    --         return false
+    --     end
+    --     if #vim.lsp.get_active_clients() == 0 then
+    --         return false
+    --     end
+    --     return true
+    -- end,
+    commit = "b2feb95e84776f7c9cdfb96e4c89a582c9ade0e4",
+    -- commit = "3a341e3181ff845ca20e93ce66da967400cba606",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         -- Please make sure you install markdown and markdown_inline parser
@@ -210,9 +213,10 @@ return {
                 require("crates").show_popup()
             else
                 vim.cmd([[Lspsaga hover_doc]])
+                -- vim.lsp.buf.hover()
             end
         end
-        keymap("n", "K", show_documentation, { silent = true })
+        keymap("n", "K", show_documentation, { silent = true, buffer = true })
 
         -- If you want to jump to the hover window you should use the wincmd command "<C-w>w"
         keymap("n", "zk", "<cmd>Lspsaga hover_doc ++keep<CR>")

@@ -1,10 +1,16 @@
 return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
+    priority = 500,
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
     config = function()
+        local function mode()
+            local modestr = require("noice").api.status.mode.get()
+            local str, _ = string.gsub(modestr, "%W", "")
+            return str
+        end
         require("lualine").setup({
             options = {
                 icons_enabled = true,
@@ -29,7 +35,8 @@ return {
                 lualine_a = {
                     -- "mode",
                     {
-                        require("noice").api.status.mode.get,
+                        -- require("noice").api.status.mode.get,
+                        mode,
                         cond = require("noice").api.status.mode.has,
                         color = { fg = "#000000" },
                         -- color = { fg = "ff9e64" },
@@ -139,6 +146,6 @@ return {
             },
         })
 
-        vim.opt.laststatus = 3
+        -- vim.opt.laststatus = 3
     end,
 }

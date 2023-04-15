@@ -44,7 +44,7 @@ bindsym Mod1+m move scratchpad
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
-exec_always --no-startup-id autotiling
+# exec_always --no-startup-id autotiling
 
 # 锁屏 秒为单位
 # betterlockscreen -u path/to/pictures

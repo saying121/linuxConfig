@@ -14,7 +14,7 @@ return {
         "PBSetConditionalBreakpoint",
     },
     dependencies = {
-        require("public.merge").get_dependencies_table("dap"),
+        require("public.utils").get_dependencies_table("dap"),
     },
     config = function()
         -- 对各个语言的配置

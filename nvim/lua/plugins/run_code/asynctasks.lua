@@ -3,6 +3,10 @@ return {
     dependencies = {
         "skywind3000/asyncrun.vim",
     },
+    cmd = {
+        "AsyncTask",
+        "AsyncTaskList",
+    },
     keys = {
         { "<F4>" },
         { "<F3>" },
@@ -29,6 +33,8 @@ return {
         vim.g.asynctasks_extra_config = {
             "~/.config/nvim/tasks.ini",
         }
+        vim.g.asyncrun_rootmarks = { ".git", ".svn", ".root", ".project", ".hg" }
+
         local opts, keymap = { noremap = true, silent = true }, vim.keymap.set
         keymap("n", "<F3>", ":AsyncTask file-build<CR>", opts)
         keymap("n", "<F4>", ":AsyncTask file-run<CR>", opts)

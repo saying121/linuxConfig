@@ -1,6 +1,6 @@
 return {
     "yao-weijie/cmp-rime",
-    -- cond = false,
+    cond = false,
     config = function()
         require("cmp_rime").setup({
             -- linux/mac用户只需要从软件源中安装rime

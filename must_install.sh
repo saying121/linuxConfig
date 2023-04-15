@@ -122,10 +122,18 @@ sudo $pacMan pulseaudio-bluetooth bluez bluez-utils pulsemixer \
 sudo $pacMan acpilight
 sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
 
-# i3,锁屏
-sudo $pacMan betterlockscreen dex
+# 锁屏
+sudo $pacMan betterlockscreen xidlehook dex
+sudo cp -f ~/.linuxConfig/custom-services/betterlockscreen@.service /usr/lib/systemd/system/
+# 电源时间
+xset dpms 1200 1800 2400
+# 屏保时间
+xset s 900 900
+sudo systemctl enable betterlockscreen@$USER
+
+# i3
 sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
-$aurPkg i3-wm i3status i3status-rust autotiling feh xidlehook
+$aurPkg i3-wm i3status i3status-rust autotiling feh
 makepkg -si ~/.linuxConfig/i3/picom/PKGBUILD
 # i3-gaps-kde-git
 # ~/.linuxConfig/kde/use-i3.sh
@@ -133,11 +141,6 @@ makepkg -si ~/.linuxConfig/i3/picom/PKGBUILD
 # 蓝牙前端
 sudo $pacMan blueman
 xset +dpms
-# 电源时间
-xset dpms 1200 1800 2400
-# 屏保时间
-xset s 900 900
-sudo systemctl enable betterlockscreen@$USER
 
 # 下载工具
 sudo $pacMan lux-dl

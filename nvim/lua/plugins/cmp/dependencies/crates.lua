@@ -1,44 +1,37 @@
--- 有一个 keymap 在 lspsaga 里面
 return {
     "saecki/crates.nvim",
-    -- cond = function()
-    --     if vim.fn.expand("%:t") == "Cargo.toml" then
-    --         return true
-    --     end
-    --     return false
-    -- end,
+    cond = function()
+        if vim.fn.expand("%:t") == "Cargo.toml" then
+            return true
+        end
+        return false
+    end,
     version = "v0.3.0",
-    event = "BufWinEnter Cargo.toml",
+    event = "VeryLazy",
     dependencies = {
         "nvim-lua/plenary.nvim",
+        -- 有一个 keymap 在 lspsaga 里面
+        "glepnir/lspsaga.nvim",
     },
-    init = function()
-        vim.api.nvim_create_autocmd({ "BufWinEnter Cargo.toml" }, {
-            pattern = { "Cargo.toml" },
-            group = vim.api.nvim_create_augroup("CreatesReload", { clear = true }),
-            callback = function()
-                require("crates").reload()
-            end,
-        })
-    end,
     config = function()
         local cmp = require("cmp")
         cmp.setup.filetype("toml", {
             sources = cmp.config.sources({
-                { name = "crates" },
-                { name = "nvim_lsp" },
-                { name = "luasnip" },
-                { name = "path" },
+                { name = "crates", priority = 1000 },
+                { name = "luasnip", priority = 900 },
+                { name = "nvim_lsp", priority = 800 },
+                { name = "path", priority = 700 },
             }, {
-                { name = "buffer" },
-                { name = "rg",      keyword_length = 4 },
+                { name = "buffer", priority = 600 },
+                { name = "rg", priority = 550 },
             }, {
-                { name = "spell" },
+                { name = "spell", priority = 500 },
+                { name = "rime", priority = 500 },
             }),
         })
         -- 注释掉的可以用 K 打开 document 后操作
         local crates = require("crates")
-        local opts, keymap = { silent = true }, vim.keymap.set
+        local opts, keymap = { silent = true, buffer = true }, vim.keymap.set
 
         keymap("n", "<leader>ct", crates.toggle, opts)
         keymap("n", "<leader>cr", crates.reload, opts)
@@ -50,8 +43,6 @@ return {
         keymap("n", "<leader>cu", crates.update_crate, opts)
         keymap("v", "<leader>cu", crates.update_crates, opts)
         -- keymap("n", "<leader>ca", crates.update_all_crates, opts)
-        keymap("n", "<leader>cU", crates.upgrade_crate, opts)
-        keymap("v", "<leader>cU", crates.upgrade_crates, opts)
         -- keymap("n", "<leader>cA", crates.upgrade_all_crates, opts)
 
         -- keymap("n", "<leader>cH", crates.open_homepage, opts)
@@ -109,5 +100,7 @@ return {
                 name = "Crates.nvim",
             },
         })
+
+        crates.reload()
     end,
 }

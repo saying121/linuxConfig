@@ -24,7 +24,7 @@ return {
         "vim",
         "vue",
         "yaml",
-        -- "tex",
+        "tex",
         "asciidoc",
         "lua",
         "zsh",
@@ -35,6 +35,7 @@ return {
     config = function()
         local null_ls = require("null-ls")
         local sources_table = {
+            null_ls.builtins.formatting.latexindent,
             null_ls.builtins.formatting.black,
             null_ls.builtins.formatting.isort,
             -- null_ls.builtins.formatting.sql_formatter.with({
@@ -48,7 +49,7 @@ return {
             null_ls.builtins.formatting.stylua,
             -- viml
             null_ls.builtins.diagnostics.vint,
-            null_ls.builtins.diagnostics.pylint,
+            null_ls.builtins.diagnostics.ruff,
             null_ls.builtins.diagnostics.vale,
             null_ls.builtins.diagnostics.zsh,
             null_ls.builtins.formatting.beautysh,

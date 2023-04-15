@@ -53,6 +53,7 @@ set undofile                                                   " 撤销文件
 set undodir=~/.local/share/nvim/undodir                        " 指定撤销文件目录
 
 " set scrolloff=23                                               " 在光标上下展现多少行
-set sidescrolloff=99                                           " 横向展示的列
+set sidescrolloff=30                                            " 横向展示的列
 
 set termguicolors
+set conceallevel=3

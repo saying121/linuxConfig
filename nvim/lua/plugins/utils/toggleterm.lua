@@ -1,8 +1,15 @@
 return {
     "akinsho/toggleterm.nvim",
     version = "*",
+    keys = {
+        "<M-t>",
+    },
     cmd = { "ToggleTerm" },
     config = function()
+        local keymap,opts =vim.keymap.set, { silent = true, noremap = true }
+        keymap({ "n" }, "<M-t>", ":ToggleTerm<CR>", opts)
+        keymap({ "t" }, "<M-t>", "exit<CR>", opts)
+
         require("toggleterm").setup({
             size = function(term)
                 if term.direction == "horizontal" then

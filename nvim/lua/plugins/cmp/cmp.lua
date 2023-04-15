@@ -11,7 +11,7 @@ return {
         "hrsh7th/cmp-buffer",
         "f3fora/cmp-spell",
         "lukas-reineke/cmp-rg",
-        require("public.merge").get_dependencies_table("cmp"),
+        require("public.utils").get_dependencies_table("cmp"),
     },
     config = function()
         local kind_icons = {
@@ -78,12 +78,12 @@ return {
                         buffer = "[Buf]",
                         cmdline = "[Cmd]",
                         cmp_git = "[Git]",
-                        crates  = "[Crates]",
+                        crates = "[Crates]",
                         latex_symbols = "[Latex]",
                         luasnip = "[LuaSnip]",
                         nvim_lsp = "[LSP]",
                         path = "[Path]",
-                        rg  = "[Rg]",
+                        rg = "[Rg]",
                         spell = "[Spell]",
                         vim_dadbod_completion = "[DB]",
                         zsh = "[Zsh]",
@@ -93,15 +93,17 @@ return {
             },
             -- 分级显示，上一级有补全就不会显示下一级
             sources = cmp.config.sources({
-                { name = "luasnip", trigger_characters = { "s", "n" } },
-                { name = "nvim_lsp", keyword_length = 1 },
-                { name = "path" },
+                -- 好像只有 keyword_length 起作用了, priority 需要配合 sorting
+                -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
+                { name = "luasnip", trigger_characters = { "s", "n" }, Keyword_pattern = "sn", priority = 1000 },
+                { name = "nvim_lsp", keyword_length = 1, trigger_characters = { "l" }, priority = 900 },
+                { name = "path", priority = 800 },
             }, {
-                { name = "buffer" },
-                { name = "rg", keyword_length = 4 },
+                { name = "buffer", priority = 800 },
+                { name = "rg", priority = 700 },
             }, {
-                { name = "spell" },
-                { name = "rime" },
+                { name = "spell", priority = 600 },
+                { name = "rime", priority = 600 },
             }),
             experimental = {
                 ghost_text = true,
@@ -161,6 +163,8 @@ return {
                 -- ["1"] = require("cmp_rime").mapping["1"],
             }),
             sorting = {
+                -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
+                priority_weight = 1,
                 -- rime-ls
                 comparators = {
                     -- require("cmp.config.compare").sort_text, -- 这个放第一个, 其他的随意

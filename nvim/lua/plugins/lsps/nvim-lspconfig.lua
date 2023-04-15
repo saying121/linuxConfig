@@ -17,11 +17,15 @@ local nvim_lsp = {
                         -- you can also specify the list of plugins to make available as a workspace library
                         plugins = {
                             "nvim-treesitter",
+                            -- "nvim-lspconfig",
                             "plenary.nvim",
+                            "nvim-cmp",
                             "telescope.nvim",
-                            "lazy.nvim",
-                            "rust-tools.nvim",
-                            "lspsaga.nvim",
+                            "neoscroll.nvim",
+                            -- "lazy.nvim",
+                            -- "rust-tools.nvim",
+                            -- "lspsaga.nvim",
+                            -- "noice.nvim",
                         },
                     },
                     setup_jsonls = true, -- configures jsonls to provide completion for project specific .luarc.json files
@@ -43,30 +47,6 @@ local nvim_lsp = {
     },
     config = function()
         require("lspconfig.ui.windows").default_options.border = "single"
-
-        local signs = {
-            { name = "DiagnosticSignError", text = " " },
-            { name = "DiagnosticSignWarn", text = " " },
-            { name = "DiagnosticSignHint", text = " " },
-            { name = "DiagnosticSignInfo", text = " " },
-        }
-        for _, sign in ipairs(signs) do
-            vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-        end
-        -- 边框
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-            border = "single",
-        })
-        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-            border = "single",
-        })
-        vim.diagnostic.config({
-            virtual_text = true,
-            signs = true,
-            update_in_insert = true,
-            underline = true,
-            float = { border = "single" },
-        })
 
         local LSP = require("public.lsp_attach")
 

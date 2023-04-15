@@ -2,12 +2,12 @@ return {
     "ziontee113/icon-picker.nvim",
     dependencies = {
         "stevearc/dressing.nvim",
-        -- "nvim-telescope/telescope.nvim",
+        "nvim-telescope/telescope.nvim",
     },
     keys = {
         { "<leader><leader>i", mode = { "n" } },
         { "<leader><leader>y", mode = { "n" } },
-        { "<C-i>", mode = { "i" } },
+        { "<C-p>", mode = { "i" } },
     },
     config = function()
         local opts = { noremap = true, silent = true }

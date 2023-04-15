@@ -1,6 +1,7 @@
 return {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
+    priority = 800,
     config = function()
         require("dressing").setup({
             input = {

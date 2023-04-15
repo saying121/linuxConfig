@@ -47,8 +47,13 @@ highlight SignColumn ctermbg=NONE guifg=DarkCyan ctermfg=NONE gui=italic guibg=N
 " highlight Folded ctermbg=0 ctermfg=169
 highlight GitSignsCurrentLineBlame ctermbg=NONE guifg=#2a76ac ctermfg=NONE gui=italic guibg=NONE
 
-" highlight RustInlayHints ctermbg=NONE guifg=#733ac2 ctermfg=NONE gui=bold guibg=NONE
-highlight RustInlayHints ctermbg=NONE guifg=#565f99 ctermfg=NONE gui=bold guibg=NONE
+" highlight RustInlayHints ctermbg=NONE  ctermfg=NONE gui=bold guifg=#733ac2guibg=NONE
+highlight RustInlayHints ctermbg=NONE ctermfg=NONE gui=bold guifg=#565f99 guibg=NONE
+" highlight RustInlayHints ctermbg=NONE  ctermfg=NONE gui=bold guifg=#d8d8d8guibg=#3a3a3a
+
+" highlight LspInlayHint ctermbg=NONE ctermfg=NONE gui=bold guifg=#d8d8d8 guibg=#3a3a3a
+highlight LspInlayHint ctermbg=NONE ctermfg=NONE gui=bold guifg=#565f99 guibg=NONE
+
 
 highlight DashBoardIcon gui=italic guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
 highlight DashBoardShortCut gui=italic guibg=NONE cterm=NONE guifg=darkyellow ctermfg=NONE

@@ -14,9 +14,15 @@ return {
         local cmp = require("cmp")
         cmp.setup.filetype("gitcommit", {
             sources = cmp.config.sources({
-                { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+                { name = "luasnip", priority = 1000 },
+                { name = "cmp_git", priority = 900 }, -- You can specify the `cmp_git` source if you were installed it.
+                { name = "path", priority = 850 },
             }, {
-                { name = "buffer" },
+                { name = "buffer", priority = 800 },
+                { name = "rg", priority = 700 },
+            }, {
+                { name = "spell", priority = 600 },
+                { name = "rime", priority = 600 },
             }),
         })
     end,
