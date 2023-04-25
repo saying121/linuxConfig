@@ -23,7 +23,7 @@ while :; do
     # 在每个连接的显示器上输出
     for item in $(xrandr | awk '/\<connected\>/{print $1}'); do
         # nohup linux-wallpaperengine --silent --assets-dir $assets --screen-root $item $id & 2>&1 >/tmp/wallpaper.log
-        linux-wallpaperengine --silent --assets-dir $assets --screen-root $item $id &
+        linux-wallpaperengine --no-fullscreen-pause --silent --assets-dir $assets --screen-root $item $id &
     done
     sleep $((60 * 40))
     # killall 有时杀不死

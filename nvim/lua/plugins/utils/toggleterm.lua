@@ -3,12 +3,15 @@ return {
     version = "*",
     keys = {
         "<M-t>",
+        "<M-d>",
+        "<leader>g",
+        "<M-f>",
     },
     cmd = { "ToggleTerm" },
     config = function()
-        local keymap,opts =vim.keymap.set, { silent = true, noremap = true }
+        local keymap, opts = vim.keymap.set, { silent = true, noremap = true }
         keymap({ "n" }, "<M-t>", ":ToggleTerm<CR>", opts)
-        keymap({ "t" }, "<M-t>", "exit<CR>", opts)
+        keymap({ "t" }, "<M-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 
         require("toggleterm").setup({
             size = function(term)
@@ -45,6 +48,7 @@ return {
         local function gitui_toggle()
             gitui:toggle()
         end
+        keymap("n", "<leader>g", gitui_toggle, opts)
 
         local lldb = Terminal:new({
             cmd = [[echo 'lldb 相关设置';echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope]],
@@ -60,9 +64,22 @@ return {
         local function set_lldb()
             lldb:toggle()
         end
-
-        local opts, keymap = { noremap = true, silent = true }, vim.keymap.set
-        keymap("n", "<leader>g", gitui_toggle, opts)
         keymap({ "n", "t" }, "<A-d>", set_lldb, opts)
+
+        local ranger = Terminal:new({
+            cmd = [[ranger]],
+            direction = "float",
+            float_opts = {
+                border = "double",
+                -- like `size`, width and height can be a number or function which is passed the current terminal
+                width = 150,
+                height = 40,
+                winblend = 3,
+            },
+        })
+        local function open_ranger()
+            ranger:toggle()
+        end
+        keymap({ "n", "t" }, "<A-f>", open_ranger, opts)
     end,
 }

@@ -242,10 +242,19 @@ return {
                     opts = { skip = false },
                 },
                 {
+                    view = "mini",
+                    filter = {
+                        event = "msg_show",
+                        kind = "echo",
+                        find = "Running healthchecks",
+                    },
+                    opts = { skip = false },
+                },
+                {
                     view = "popup",
                     filter = {
                         event = "msg_show",
-                        kind = { "echo", "echomsg" },
+                        kind = { "echo" },
                         find = "",
                     },
                     opts = { skip = false },

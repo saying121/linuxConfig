@@ -9,6 +9,6 @@ return {
         "DBUIFindBuffer",
     },
     dependencies = {
-        require("public.utils").get_dependencies_table("database"),
+        require("public.utils").get_dependencies_table("plugins/" .. "database" .. "/dependencies"),
     },
 }

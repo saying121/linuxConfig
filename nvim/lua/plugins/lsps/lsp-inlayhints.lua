@@ -2,10 +2,7 @@ return {
     "lvimuser/lsp-inlayhints.nvim",
     cond = function()
         local support_list = { lua = true, go = true, javascript = true, typescript = true, c = true, cpp = true }
-        if support_list[vim.bo.ft] then
-            return true
-        end
-        return false
+        return support_list[vim.bo.ft] or false
     end,
     event = "LspAttach",
     config = function()

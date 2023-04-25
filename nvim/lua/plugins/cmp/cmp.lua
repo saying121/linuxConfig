@@ -11,7 +11,7 @@ return {
         "hrsh7th/cmp-buffer",
         "f3fora/cmp-spell",
         "lukas-reineke/cmp-rg",
-        require("public.utils").get_dependencies_table("cmp"),
+        require("public.utils").get_dependencies_table("plugins/" .. "cmp" .. "/dependencies"),
     },
     config = function()
         local kind_icons = {
@@ -49,7 +49,6 @@ return {
         end
 
         local luasnip = require("luasnip")
-        require("luasnip.loaders.from_vscode").lazy_load()
 
         local cmp = require("cmp")
         local compare = require("cmp.config.compare")
@@ -95,8 +94,14 @@ return {
             sources = cmp.config.sources({
                 -- 好像只有 keyword_length 起作用了, priority 需要配合 sorting
                 -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
-                { name = "luasnip", trigger_characters = { "s", "n" }, Keyword_pattern = "sn", priority = 1000 },
-                { name = "nvim_lsp", keyword_length = 1, trigger_characters = { "l" }, priority = 900 },
+                {
+                    name = "luasnip",
+                    keyword_length = 2,
+                    -- trigger_characters = { "s", "n" },
+                    -- Keyword_pattern = "sn",
+                    priority = 1000,
+                },
+                { name = "nvim_lsp", keyword_length = 0, priority = 900 },
                 { name = "path", priority = 800 },
             }, {
                 { name = "buffer", priority = 800 },
@@ -116,6 +121,8 @@ return {
                         -- they way you will only jump inside the snippet region
                     elseif luasnip.expand_or_jumpable() then
                         luasnip.expand_or_jump()
+                        -- elseif require("neogen").jumpable() then -- 好像用 luasnip 的就行
+                        --     require("neogen").jump_next()
                     elseif has_words_before() then
                         cmp.complete()
                     else
@@ -127,6 +134,8 @@ return {
                         cmp.select_prev_item()
                     elseif luasnip.jumpable(-1) then
                         luasnip.jump(-1)
+                        -- elseif require("neogen").jumpable() then -- 好像用 luasnip 的就行
+                        --     require("neogen").jump_prev()
                     else
                         fallback()
                     end

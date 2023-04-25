@@ -1,6 +1,5 @@
 return {
     "mfussenegger/nvim-dap",
-    -- event = 'VimEnter',
     keys = {
         { "<space>b", mode = "n" },
         { "<space>B", mode = "n" },
@@ -14,7 +13,8 @@ return {
         "PBSetConditionalBreakpoint",
     },
     dependencies = {
-        require("public.utils").get_dependencies_table("dap"),
+        require("public.utils").get_dependencies_table("plugins/" .. "dap" .. "/dependencies"),
+        -- require(... .. ".nvim-dap-ui")
     },
     config = function()
         -- 对各个语言的配置
@@ -22,11 +22,11 @@ return {
         -- require("dap-conf.lldb-vscode")
         require("dap-conf.codelldb")
         -- require("dap-conf.rust-lldb")
-        -- ---------------------------------------------------
+        -----------------------------------------------------
 
         vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
         vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "", linehl = "", numhl = "" })
-        vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "", linehl = "", numhl = "" })
+        vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "", linehl = "", numhl = "" }) -- 
         vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
         vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "", linehl = "", numhl = "" })
 

@@ -1,8 +1,12 @@
 return {
     "lewis6991/gitsigns.nvim",
-    -- cmd = "Gitsigns",
+    -- cond = function()
+    --     if require("public.utils").get_git_root_dir(vim.fn.getcwd(), "/.git") ~= nil then
+    --         return true
+    --     end
+    --     return false
+    -- end,
     event = "VeryLazy",
-    -- cond = false,
     config = function()
         require("gitsigns").setup({
             signs = {

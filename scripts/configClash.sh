@@ -9,7 +9,7 @@ if [[ -n $1 && --help =~ $1 ]]; then
     #    exit 0
 fi
 clash_dir="/etc/clash"
-clash_config=/etc/clash/config.yaml
+clash_config=$clash_dir/config.yaml
 
 if [[ ! -d $clash_dir ]]; then
     sudo mkdir $clash_dir

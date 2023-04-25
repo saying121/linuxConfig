@@ -19,9 +19,6 @@ return {
                 "yamlls",
                 'lua_ls',
             },
-            -- Can either be:
-            --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
-            --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
             automatic_installation = false,
         })
     end,

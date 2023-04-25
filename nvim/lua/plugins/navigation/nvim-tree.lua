@@ -1,6 +1,5 @@
 return {
     "nvim-tree/nvim-tree.lua",
-    lazy = true,
     keys = {
         { "<leader>e" },
     },
@@ -11,8 +10,8 @@ return {
     config = function()
         vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
         -- disable netrw at the very start of your init.lua (strongly advised)
-        vim.g.loaded_netrw = 1
-        vim.g.loaded_netrwPlugin = 1
+        -- vim.g.loaded_netrw = 1
+        -- vim.g.loaded_netrwPlugin = 1
         local M = {}
 
         local api = require("nvim-tree.api")
@@ -29,9 +28,14 @@ return {
             vim.keymap.set("n", "u", api.tree.change_root_to_parent, opts("Up"))
         end
 
-        -- OR setup with some options
         require("nvim-tree").setup({
             on_attach = M.on_attach,
+            sync_root_with_cwd = true,
+            respect_buf_cwd = false,
+            update_focused_file = {
+                enable = true,
+                update_root = true,
+            },
             sort_by = "case_sensitive",
             view = {
                 adaptive_size = true,
@@ -42,7 +46,30 @@ return {
                 },
             },
             renderer = {
-                group_empty = true,
+                root_folder_label = false,
+                highlight_git = false,
+                highlight_opened_files = "none",
+                indent_markers = {
+                    enable = true,
+                },
+                icons = {
+                    show = {
+                        file = true,
+                        folder = true,
+                        folder_arrow = true,
+                        git = false,
+                    },
+                    glyphs = {
+                        folder = {
+                            default = "",
+                            open = "",
+                            symlink = "",
+                            symlink_open = "",
+                            arrow_open = "",
+                            arrow_closed = "",
+                        },
+                    },
+                },
             },
             diagnostics = {
                 enable = true,

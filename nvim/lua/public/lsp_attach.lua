@@ -1,9 +1,10 @@
--- 被注释的部分，被lspsaga.nvim和trouble.nvim取代了
+-- 被注释的部分，被 lspsaga.nvim 和 trouble.nvim 取代了
 local M = {}
 -- Use an on_attach function to only map the following keys after the language server attaches to the current buffer
 M.on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    -- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -19,21 +20,27 @@ M.on_attach = function(client, bufnr)
     keymap("n", "<space>wl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
-    keymap("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
+    -- keymap("n", "gy", vim.lsp.buf.type_definition, bufopts)
     -- keymap('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     -- keymap('n', '<M-cr>', vim.lsp.buf.code_action, bufopts)
     keymap("n", "<space>f", function()
         vim.lsp.buf.format({ async = true })
-        -- vim.cmd([[normal zR]])
     end, bufopts)
 
+    -- vim-illuminate 取代了
     local cap = client.server_capabilities
     if cap.documentHighlightProvider then
-        vim.api.nvim_create_autocmd({ "CursorHold", "CursorMoved" }, {
+        vim.api.nvim_create_autocmd({ "CursorHold" }, {
             group = vim.api.nvim_create_augroup("LspHighlight", { clear = true }),
             buffer = bufnr,
             callback = function()
                 vim.lsp.buf.document_highlight()
+            end,
+        })
+        vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+            group = vim.api.nvim_create_augroup("LspHighlight1", { clear = true }),
+            buffer = bufnr,
+            callback = function()
                 vim.lsp.buf.clear_references()
             end,
         })
@@ -44,8 +51,5 @@ M.lsp_flags = {
     -- This is the default in Nvim 0.7+
     debounce_text_changes = 150,
 }
-
--- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
-M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 return M

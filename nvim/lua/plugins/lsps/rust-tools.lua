@@ -1,6 +1,10 @@
 return {
     "simrat39/rust-tools.nvim",
-    ft = "rust",
+    event = "VeryLazy",
+    cond = function()
+        return vim.bo.ft == "rust" or false
+    end,
+    -- ft = "rust",
     dependencies = {
         "neovim/nvim-lspconfig",
         "nvim-lua/plenary.nvim",
@@ -168,8 +172,16 @@ return {
             }, -- rust-analyzer options
             -- debugging stuff
             dap = {
-                -- adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+                adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+                -- adapter = {
+                --     type = "executeable",
+                --     command = "lldb-vscode",
+                --     name = "rt_lldb",
+                -- },
             },
         })
+
+        -- VeryLazy 情况要显示启动
+        vim.cmd("LspStart")
     end,
 }

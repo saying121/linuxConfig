@@ -5,8 +5,10 @@ return {
         { "mk", mode = { "n", "x" } },
         { "mi", mode = { "n" } },
     },
-    branch = 'v2',
-    -- build = "bash ./install.sh",
+    branch = "v2",
+    build = function()
+        require("Trans").install()
+    end,
     dependencies = {
         "kkharji/sqlite.lua",
     },
@@ -15,10 +17,9 @@ return {
         vim.keymap.set({ "n", "x" }, "my", ":Translate<CR>", opts)
         vim.keymap.set({ "n", "x" }, "mk", ":TransPlay<CR>", opts)
         vim.keymap.set("n", "mi", "<Cmd>TranslateInput<CR>", opts)
-        require("Trans").setup()
+        -- require("Trans").setup()
 
         require("Trans").setup({
-            dir = os.getenv("HOME") .. "/.vim/dict",
             frontend = {
                 hover = {
                     width = 37,

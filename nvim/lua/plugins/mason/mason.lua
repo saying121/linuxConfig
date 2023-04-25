@@ -2,7 +2,7 @@ return {
     "williamboman/mason.nvim",
     cmd = "Mason",
     dependencies = {
-        require("public.utils").get_dependencies_table("mason"),
+        require("public.utils").get_dependencies_table("plugins/" .. "mason" .. "/dependencies"),
     },
     config = function()
         require("mason").setup({
@@ -33,6 +33,11 @@ return {
                 "mason.providers.registry-api",
             },
             ui = {
+                icons = {
+                    package_pending = " ",
+                    package_installed = " ",
+                    package_uninstalled = " ﮊ",
+                },
                 check_outdated_packages_on_open = true,
                 -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
                 border = "double",
@@ -42,11 +47,11 @@ return {
                     -- Keymap to install the package under the current cursor position
                     install_package = "i",
                     -- Keymap to reinstall/update the package under the current cursor position
-                    update_package = "u",
+                    update_package = "s",
                     -- Keymap to check for new version for the package under the current cursor position
                     check_package_version = "c",
                     -- Keymap to update all installed packages
-                    update_all_packages = "U",
+                    update_all_packages = "S",
                     -- Keymap to check which installed packages are outdated
                     check_outdated_packages = "C",
                     -- Keymap to uninstall a package

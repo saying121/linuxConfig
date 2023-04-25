@@ -19,6 +19,8 @@ aurPkg='yay -S --needed --noconfirm'
 
 cargo install leetcode-cli
 
+$aurPkg todotxt
+
 # Music
 $aurPkg yesplaymusic netease-cloud-music
 

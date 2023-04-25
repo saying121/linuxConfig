@@ -1,11 +1,9 @@
 return {
     "tamago324/cmp-zsh",
     cond = function()
-        if vim.bo.ft == "zsh" then
-            return true
-        end
-        return false
+        return vim.bo.ft == "zsh" or false
     end,
+    lazy = true,
     dependencies = "Shougo/deol.nvim",
     config = function()
         local cmp = require("cmp")

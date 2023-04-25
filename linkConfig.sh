@@ -58,6 +58,8 @@ link_list=(
     [$HOME/.linuxConfig/nvim/coc-config/coc-settings.json]="$HOME/.vim/coc-settings.json"
     [$HOME/.linuxConfig/configs/w3m-config]="$HOME/.w3m/config"
     [$HOME/.linuxConfig/shells/bashrc]="$HOME/.bashrc"
+    [$HOME/.linuxConfig/shells/zirc.zsh]="$HOME/.zshrc"
+    [$HOME/.linuxConfig/shells/p10k.zsh]="$HOME/.p10k.zsh"
     [$HOME/.linuxConfig/ranger]="$HOME/.config"
     [$HOME/.linuxConfig/lf]="$HOME/.config"
     [$HOME/.linuxConfig/configs/tldrrc]="$HOME/.tldrrc"
@@ -107,8 +109,12 @@ for path in ${!link_list}; do
         mv $be_back_path ${link_list[$path]}/$be_back"_bak"
     fi
 
-    # 配置为文件，存在就不会覆盖
-    ln -s $path ${link_list[$path]}
+    # 存在为软连接的配置就强制覆盖，否则尝试链接
+    if [[ -h ${link_list[$path]} ]]; then
+        ln -sf $path ${link_list[$path]}
+    else
+        ln -s $path ${link_list[$path]}
+    fi
 done
 
 [[ -d ~/.config/systemd/user ]] || mkdir -p ~/.config/systemd/user

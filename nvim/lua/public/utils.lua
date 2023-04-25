@@ -1,7 +1,11 @@
 local M = {}
 
--- start_dir: 是从哪里开始找
--- be_finded: 被找的目录名字
+--- 给一个起始目录，向父级目录寻找 目标目录 或 文件
+--- start_dir: 是从哪里开始找
+--- be_finded: 被找的目录名字，或者文件名（要带/前缀，例如‘/.git’,'/Cargo.toml'）
+---@param start_dir string
+---@param be_finded_dir string
+---@return string | nil
 function M.get_git_root_dir(start_dir, be_finded_dir)
     -- return vim.fn.fnamemodify(vim.fn.finddir(be_finded, "..;"), ":h")
 
@@ -29,32 +33,34 @@ function M.get_git_root_dir(start_dir, be_finded_dir)
     return M.get_git_root_dir(parent_dir, be_finded_dir)
 end
 
--- 合并 dependencies 目录下的表，他们必须返回一张表，这个函数会把他们放到一个大表中
--- `dir_name == telescope` 时
--- 目录结构
--- ```lua
--- ~/.config/nvim/lua/plugins/telescope/dependencies/project.lua
--- ~/.config/nvim/lua/plugins/telescope/dependencies/telescope-dap.lua
--- ```
--- 返回结果
--- ```lua
--- ......
--- {
--- project.lua -- 返回的表,
--- telescope-dap.lua -- 返回的表,
--- ......
--- }
--- ```
-function M.get_dependencies_table(dir_name)
-    local path = vim.fn.stdpath("config") .. "/lua/plugins/" .. dir_name .. "/dependencies"
+--- 合并mod_path目录下的表，他们必须返回一张表，这个函数会把他们放到一个大表中
+--- `mod_path == plugins/telescope/dependencies` 时
+--- 目录结构
+--- ```lua
+--- ~/.config/nvim/lua/plugins/telescope/dependencies/project.lua
+--- ~/.config/nvim/lua/plugins/telescope/dependencies/telescope-dap.lua
+--- ```
+--- 返回结果
+--- ```lua
+--- ......
+--- {
+--- project.lua -- 返回的表,
+--- telescope-dap.lua -- 返回的表,
+--- ......
+--- }
+--- ```
+---@param mod_path string
+---@return table
+function M.get_dependencies_table(mod_path)
+    local path = vim.fn.stdpath("config") .. "/lua/" .. mod_path
     local dependencies_list = vim.fn.readdir(path)
     local DepTable = {}
 
     for _, file_name in pairs(dependencies_list) do
         -- if string.sub(file_name, #file_name - 3) == ".lua" then
-        if vim.endswith(file_name, '.lua') then
+        if vim.endswith(file_name, ".lua") then
             local use_name = string.sub(file_name, 1, #file_name - 4)
-            table.insert(DepTable, require("plugins." .. dir_name .. ".dependencies." .. use_name))
+            table.insert(DepTable, require( mod_path .. "/" .. use_name))
         end
     end
 

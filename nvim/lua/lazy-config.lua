@@ -48,14 +48,13 @@ require("lazy").setup({
     ui = {
         size = { width = 0.8, height = 0.8 }, -- a number <1 is a percentage., >1 is a fixed size
         -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-        border = "double",
-        -- border = "rounded",
-        -- border = "shadow",
-        -- border = "single",
-        -- border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
-        -- border = { "/", "-", "\\", "|" },
-        -- border = { "", "", "", ">", "", "", "", "<" },
-        -- border ={ {"+", "MyCorner"}, {"x", "MyBorder"} },
+        border = "double", -- "rounded", "shadow", "single",
+        icons = {
+            ft = "",
+            lazy = "鈴 ",
+            loaded = "",
+            not_loaded = "",
+        },
         -- leave nil, to automatically select a browser depending on your OS.
         -- If you want to use a specific browser, you can define it here
         browser = nil, ---@type string?

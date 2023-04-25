@@ -11,8 +11,8 @@ return {
     --     end
     --     return true
     -- end,
-    commit = "b2feb95e84776f7c9cdfb96e4c89a582c9ade0e4",
-    -- commit = "3a341e3181ff845ca20e93ce66da967400cba606",
+    commit = "c85ed0b01ec2d624c79ed25dd7702cca8742c4fe",
+    -- commit = "c483c9b43fa6cb47fb8c18a8ebd4ece45bbf07f4",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         -- Please make sure you install markdown and markdown_inline parser
@@ -77,7 +77,7 @@ return {
                 show_code_action = true,
                 show_source = true,
                 jump_num_shortcut = true,
-                --1 is max
+                -- 1 is max
                 max_width = 0.7,
                 custom_fix = nil,
                 custom_msg = nil,
@@ -96,7 +96,7 @@ return {
                 exec = "<CR>",
                 mark = "x",
                 confirm = "<CR>",
-                in_select = true,
+                in_select = false,
             },
             outline = {
                 win_position = "right",
@@ -216,7 +216,7 @@ return {
                 -- vim.lsp.buf.hover()
             end
         end
-        keymap("n", "K", show_documentation, { silent = true, buffer = true })
+        keymap("n", "K", show_documentation, { silent = true })
 
         -- If you want to jump to the hover window you should use the wincmd command "<C-w>w"
         keymap("n", "zk", "<cmd>Lspsaga hover_doc ++keep<CR>")

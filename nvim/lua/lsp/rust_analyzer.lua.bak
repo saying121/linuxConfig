@@ -43,7 +43,7 @@ return {
             },
         },
         rustfmt = {
-            rangeFormatting = { enable = false },
+            rangeFormatting = { enable = true },
         },
     },
 }

@@ -1,6 +1,7 @@
 return {
     "arnamak/stay-centered.nvim",
     event = "VeryLazy",
+    -- event = "CursorMoved",
     config = function()
         -- 获取更好的鼠标滚动体验
         local buf_height = math.floor(vim.fn.winheight(0) / 2)

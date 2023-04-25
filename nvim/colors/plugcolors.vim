@@ -1,7 +1,7 @@
-highlight Normal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+" highlight Normal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 highlight NormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 highlight NormalSB guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight NormalFloat guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
+highlight NormalFloat guibg=NONE cterm=NONE "guifg=NONE ctermfg=NONE
 highlight SagaNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 highlight HoverNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 highlight FinderNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
@@ -33,7 +33,9 @@ highlight TelescopeResultsNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 highlight LazyProgressDone guibg=NONE cterm=NONE guifg=red ctermfg=NONE
 highlight LazyProp guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
+" highlight FloatBorder guibg=NONE guifg=#27a1b9
 highlight FloatBorder guibg=NONE
+
 " highlight LspFloatWinNormal guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
 " highlight LspFloatWinBorder guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
 " highlight LspInfoTip guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE

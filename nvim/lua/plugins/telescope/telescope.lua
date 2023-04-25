@@ -7,13 +7,14 @@ return {
         { "<leader>fw", mode = "n" },
         { "<leader>gw", mode = "n" },
         { "<leader>fo", mode = "n" },
+        { "<leader>bf", mode = "n" },
         { "<M-p>", mode = "n" },
     },
     version = "0.1.0",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         "nvim-lua/plenary.nvim",
-        require("public.utils").get_dependencies_table("telescope"),
+        require("public.utils").get_dependencies_table("plugins/" .. "telescope" .. "/dependencies"),
     },
     config = function()
         local builtin, keymap = require("telescope.builtin"), vim.keymap.set
@@ -23,6 +24,7 @@ return {
         keymap("n", "<leader>ff", builtin.find_files, opts)
         keymap("n", "<leader>fw", builtin.live_grep, opts)
         keymap("n", "<leader>fo", builtin.oldfiles, opts)
+        keymap("n", "<leader>bf", builtin.buffers, opts)
 
         local function find_files_from_git_root()
             local function is_git_repo()
@@ -80,14 +82,31 @@ return {
                     prompt_prefix = "🔍",
                 },
                 buffers = {
+                    prompt_prefix = "﬘ ",
                     mappings = {
                         i = {
                             ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
                         },
+                        n = {
+                            ["dd"] = actions.delete_buffer + actions.move_to_top,
+                        },
                     },
                 },
-                -- Now the picker_config_key will be applied every time you call this
-                -- builtin picker
+                keymaps = {
+                    prompt_prefix = "🎹",
+                },
+                live_grep = {
+                    prompt_prefix = " ",
+                },
+                builtin = {
+                    prompt_prefix = " ",
+                },
+                highlights = {
+                    prompt_prefix = "⚡",
+                },
+                oldfiles = {
+                    prompt_prefix = " ",
+                },
             },
             extensions = {
                 -- Your extension configuration goes here:

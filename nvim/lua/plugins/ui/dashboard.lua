@@ -5,10 +5,7 @@ return {
         if vim.fn.exists("neovide") ~= 0 and #vim.v.argv == 3 then
             return true
         end
-        if #vim.v.argv <= 2 then
-            return true
-        end
-        return false
+        return #vim.v.argv <= 2 or false
     end,
     config = function()
         local function file_exists(file)
@@ -72,17 +69,14 @@ return {
         local path_cat = get_random_file_path("the_cat")
         local all_prev = {
             {
-                -- path = get_random_file_path("the_cat"),
                 path = path_cat,
                 command = "cat | lolcat -F 0.3",
                 file_height = 24,
-                -- file_height = get_lines(path_cat),
-                -- file_width = 200,
                 file_width = get_columns(path_cat),
             },
             {
                 path = get_random_file_path("pictures"),
-                command = "chafa", -- 等可以显示图片再添加command
+                command = "chafa",
                 file_height = 24,
                 file_width = 45,
             },
@@ -144,7 +138,7 @@ return {
                         desc_hl = "DashBoardCenter",
                         key = "|",
                         key_hl = "DashBoardShortCut",
-                        action = "Lspsaga term_toggle ranger",
+                        action = [[=require'toggleterm.terminal'.Terminal:new({ cmd = 'ranger' }):toggle()]],
                     },
                     {
                         icon = "  ",

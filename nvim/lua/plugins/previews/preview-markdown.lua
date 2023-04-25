@@ -2,12 +2,21 @@ return {
     "iamcco/markdown-preview.nvim",
     -- 需要调整nodejs版本
     build = "source /usr/share/nvm/init-nvm.sh; nvm use v18; cd app && npm install",
-    ft = { "markdown" },
+    cond = function()
+        local ft = { markdown = true }
+        return ft[vim.bo.ft] or false
+    end,
+    ft = "markdown",
     config = function()
-        local opts = { noremap = true, silent = true, buffer = true }
-        -- local opts = { noremap = true, silent = true }
-        vim.keymap.set("n", "<c-p>", ":MarkdownPreviewToggle<cr>", opts)
+        vim.api.nvim_create_autocmd({ "BufWinEnter", "BufEnter" }, {
+            group = vim.api.nvim_create_augroup("MarkdownPreview", { clear = true }),
+            pattern = { "*.md", "*.markdown" },
+            callback = function()
+                local opts = { noremap = true, silent = true, buffer = true }
 
+                vim.keymap.set("n", "<C-p>", ":MarkdownPreviewToggle<cr>", opts)
+            end,
+        })
         -- set to 1, nvim will open the preview window after entering the markdown buffer
         -- default: 0
         vim.g.mkdp_auto_start = 0

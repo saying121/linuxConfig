@@ -171,7 +171,7 @@ $aurPkg microsoft-edge-stable-bin google-chrome
 $aurPkg visual-studio-code-bin intellij-idea-ultimate-edition
 
 # 截图,录屏,剪辑
-sudo $pacMan flameshot obs-studio shotcut
+sudo $pacMan spectacle obs-studio shotcut
 
 # 触摸板
 $aurPkg ruby-fusuma

@@ -1,11 +1,14 @@
-local nvim_lsp = {
+return {
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    event = "VeryLazy",
     dependencies = {
-        -- 依赖会先加载
+        "hrsh7th/cmp-nvim-lsp",
+        -- 依赖会先加载。neodev 要在 nvim-lspconfig 之前加载。
         {
             "folke/neodev.nvim",
-            ft = "lua",
+            cond = function()
+                return vim.bo.ft == "lua" or false
+            end,
             config = function()
                 require("neodev").setup({
                     library = {
@@ -16,12 +19,13 @@ local nvim_lsp = {
                         -- plugins = true, -- installed opt or start plugins in packpath
                         -- you can also specify the list of plugins to make available as a workspace library
                         plugins = {
+                            "plenary.nvim",
                             "nvim-treesitter",
                             -- "nvim-lspconfig",
-                            "plenary.nvim",
                             "nvim-cmp",
                             "telescope.nvim",
-                            "neoscroll.nvim",
+                            "LuaSnip",
+                            -- "neoscroll.nvim",
                             -- "lazy.nvim",
                             -- "rust-tools.nvim",
                             -- "lspsaga.nvim",
@@ -43,7 +47,76 @@ local nvim_lsp = {
                 })
             end,
         },
-        "hrsh7th/cmp-nvim-lsp",
+        {
+            "wlh320/rime-ls",
+            keys = { "<A-h>" },
+            config = function()
+                local R = {}
+                function R.setup_rime()
+                    -- global status
+                    vim.g.rime_enabled = false
+                    -- add rime-ls to lspconfig as a custom server
+                    require("lspconfig.configs").rime_ls = {
+                        default_config = {
+                            name = "rime_ls",
+                            cmd = { "rime_ls" },
+                            filetypes = { "*" },
+                            single_file_support = true,
+                        },
+                        settings = {},
+                        docs = {
+                            description = [[
+https://www.github.com/wlh320/rime-ls
+
+A language server for librime
+]],
+                        },
+                    }
+
+                    local rime_on_attach = function(client, _)
+                        local toggle_rime = function()
+                            client.request(
+                                "workspace/executeCommand",
+                                { command = "rime-ls.toggle-rime" },
+                                function(_, result, ctx, _)
+                                    if ctx.client_id == client.id then
+                                        vim.g.rime_enabled = result
+                                    end
+                                end
+                            )
+                        end
+                        vim.keymap.set({ "n", "i" }, "<A-h>", function()
+                            toggle_rime()
+                        end)
+                        vim.keymap.set("n", "<leader>rs", function()
+                            vim.lsp.buf.execute_command({ command = "rime-ls.sync-user-data" })
+                        end)
+                    end
+
+                    -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+                    local capabilities = vim.lsp.protocol.make_client_capabilities()
+                    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+                    require("lspconfig").rime_ls.setup({
+                        init_options = {
+                            enabled = vim.g.rime_enabled,
+                            shared_data_dir = "/usr/share/rime-data",
+                            user_data_dir = vim.fn.getenv("HOME") .. "/.local/share/rime-ls-nvim",
+                            log_dir = vim.fn.getenv("HOME") .. "/.local/share/rime-ls-nvim",
+                            max_candidates = 9,
+                            -- trigger_characters = { '::' },
+                        },
+                        on_attach = rime_on_attach,
+                        capabilities = capabilities,
+                    })
+                end
+
+                R.setup_rime()
+                -- rime-ls 不能懒加载
+                -- 为了开启rime-ls,好像也能开启lsp
+                vim.cmd("e %")
+            end,
+        },
     },
     config = function()
         require("lspconfig.ui.windows").default_options.border = "single"
@@ -55,10 +128,11 @@ local nvim_lsp = {
         local file_name_list = vim.fn.readdir(lsp_path)
 
         for _, the_file_name in pairs(file_name_list) do
-            if string.sub(the_file_name, #the_file_name - 3) == ".lua" then
+            if vim.endswith(the_file_name, ".lua") then
                 local lsp_name = string.sub(the_file_name, 1, #the_file_name - 4)
 
-                local capabilities = LSP.capabilities
+                -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+                local capabilities = require("cmp_nvim_lsp").default_capabilities()
                 if lsp_name == "clangd" then
                     capabilities.offsetEncoding = { "utf-16" }
                 end
@@ -71,7 +145,8 @@ local nvim_lsp = {
                 })
             end
         end
+
+        -- VeryLazy 情况要显示启动
+        vim.cmd("LspStart")
     end,
 }
-
-return nvim_lsp
