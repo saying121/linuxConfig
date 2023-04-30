@@ -1,9 +1,8 @@
 return {
     "lervag/vimtex",
-    ft = {
-        "tex",
-        "plaintex",
-        "bib",
+    event = {
+        "UIEnter *.tex,*.bib,*.plaintex",
+        "BufNew *.tex,*.bib,*.plaintex",
     },
     config = function()
         local opts, keymap = { silent = true, noremap = true }, vim.keymap.set

@@ -32,6 +32,7 @@ for_window [class="obs"] floating enable,move position center
 for_window [title="uTools"] floating enable,move position center
 for_window [title="ImageMagick"] floating enable,move position center
 for_window [title="Wine"] floating enable,move position center
+for_window [title="Kate"] floating enable,move position center
 # for_window [class="Graphviz"] floating enable,move position center
 
 # win键Mode4 Mod1是alt
@@ -56,8 +57,9 @@ bindsym $mod+q [class="QQ"] focus
 for_window [class="weixin"] floating enable;  # ,move container to workspace 4
 bindsym Mod1+w [class="weixin"] focus
 
-bindsym $mod+Return exec wezterm
-bindsym Mod1+Ctrl+t exec kitty
+# bindsym $mod+Return exec wezterm
+bindsym $mod+Return exec kitty
+bindsym Mod1+Ctrl+t exec wezterm
 bindsym $mod+Shift+f exec kitty ranger
 bindsym $mod+Shift+t exec kitty gotop
 

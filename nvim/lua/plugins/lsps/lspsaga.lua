@@ -11,8 +11,8 @@ return {
     --     end
     --     return true
     -- end,
-    commit = "c85ed0b01ec2d624c79ed25dd7702cca8742c4fe",
-    -- commit = "c483c9b43fa6cb47fb8c18a8ebd4ece45bbf07f4",
+    -- commit = "c85ed0b01ec2d624c79ed25dd7702cca8742c4fe",
+    commit = "388ab180bf4360ede33e7b1c77fcd8c7f94e33b2",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         -- Please make sure you install markdown and markdown_inline parser
@@ -211,9 +211,8 @@ return {
                 vim.cmd("Man " .. vim.fn.expand("<cword>"))
             elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
                 require("crates").show_popup()
-            else
+            elseif not require("ufo").peekFoldedLinesUnderCursor() then
                 vim.cmd([[Lspsaga hover_doc]])
-                -- vim.lsp.buf.hover()
             end
         end
         keymap("n", "K", show_documentation, { silent = true })

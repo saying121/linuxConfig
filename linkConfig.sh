@@ -77,7 +77,7 @@ link_list=(
     [$HOME/.linuxConfig/configs/konsave-conf.yaml]="$HOME/.config/konsave/conf.yaml"
     [$HOME/.linuxConfig/configs/xprofile]="$HOME/.xprofile"
     [$HOME/.linuxConfig/configs/xinitrc]="$HOME/.xinitrc"
-    [$HOME/.linuxConfig/input-remapper]="$HOME/.config"
+    [$HOME/.linuxConfig/input-remapper-2]="$HOME/.config"
     [$HOME/.linuxConfig/fcitxs-config/fcitx]="$HOME/.config"
     [$HOME/.linuxConfig/fcitxs-config/fcitx5]="$HOME/.config"
     # # zshrc omz的，现在使用zi框架
@@ -90,23 +90,26 @@ link_list=(
 [[ -d ~/.config/konsave ]]           || mkdir -p ~/.config/konsave
 [[ -d ~/.go-musicfox ]]              || mkdir ~/.go-musicfox
 [[ -d ~/.leetcode ]]                 || mkdir ~/.leetcode
-[[ -d ~/.local/share/rime-ls-nvim ]] || mkdir ~/.local/share/rime-ls-nvim
-[[ -d ~/.local/shells ]]             || mkdir ~/.local/shells
+[[ -d ~/.local/share/rime-ls-nvim ]] || mkdir -p ~/.local/share/rime-ls-nvim
+[[ -d ~/.local/shells ]]             || mkdir -p ~/.local/shells
 [[ -d ~/.vim ]]                      || mkdir ~/.vim
 [[ -d ~/.w3m ]]                      || mkdir ~/.w3m
+# keymap 路径带有空格就单拎出来
+path="$HOME/.config/input-remapper-2"
+if [[ -d $path ]]; then
+    mv $path $path"_bak"
+fi
 
 
-for path in ${!link_list}; do
+for path in ${!link_list[@]}; do
     # 配置为目录会被备份
-    if [[ -d $path ]]; then
-        be_back=$(echo $path | awk -F / '{print $NF}')
-        be_back_path=${link_list[$path]}/$be_back
-
-        if [[ -d ${link_list[$path]}/$be_back"_bak" ]]; then
+    be_back=$(echo $path | awk -F / '{print $NF}')
+    be_back_path=${link_list[$path]}/$be_back
+    if [[ -d $be_back_path ]]; then
+        if [[ -d $be_back_path"_bak" ]]; then
             continue
         fi
-
-        mv $be_back_path ${link_list[$path]}/$be_back"_bak"
+        mv $be_back_path $be_back_path"_bak"
     fi
 
     # 存在为软连接的配置就强制覆盖，否则尝试链接
@@ -133,12 +136,7 @@ if [[ $(xinput list | grep "[tT]ouchpad" -c) != 0 ]]; then
     sudo cp -f ~/.linuxConfig/configs/20-touchpad.conf /etc/X11/xorg.conf.d/20-touchpad.conf
 fi
 
-# keymap 路径带有空格就单拎出来
-path="$HOME/.config/input-remapper"
-if [[ -d $path ]]; then
-    mv $path $path"_bak"
-fi
-[[ -d ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/ ]] || mkdir ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/
-ln -s ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/Keyboard\ K380\ Keyboard/capslock+.json
-[[ -d ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ / ]] || mkdir ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /
-ln -s ~/.linuxConfig/input-remapper/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper/presets/SINO\ WEALTH\ Gaming\ KB\ /capslock+.json
+# [[ -d ~/.linuxConfig/input-remapper-2/presets/Keyboard\ K380\ Keyboard/ ]] || mkdir ~/.linuxConfig/input-remapper-2/presets/Keyboard\ K380\ Keyboard/
+# ln -s ~/.linuxConfig/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper-2/presets/Keyboard\ K380\ Keyboard/capslock+.json
+# [[ -d ~/.linuxConfig/input-remapper-2/presets/SINO\ WEALTH\ Gaming\ KB\ / ]] || mkdir ~/.linuxConfig/input-remapper-2/presets/SINO\ WEALTH\ Gaming\ KB\ /
+# ln -s ~/.linuxConfig/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper-2/presets/SINO\ WEALTH\ Gaming\ KB\ /capslock+.json

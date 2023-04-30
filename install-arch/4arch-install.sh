@@ -8,7 +8,7 @@ pacMan="pacman -S --needed --noconfirm"
 
 # kde桌面，终端
 sudo $pacMan xorg kitty wezterm \
-    networkmanager wget sddm
+    networkmanager wget sddm i3-wm plasma
 
 # 中文字体
 sudo $pacMan adobe-source-han-serif-cn-fonts \

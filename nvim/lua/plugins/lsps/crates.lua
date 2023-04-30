@@ -1,11 +1,17 @@
 return {
     "saecki/crates.nvim",
     cond = function()
-        return vim.bo.ft == "rust" or vim.fn.expand("%:t") == "Cargo.toml" or false
+        local ft = {
+            rust = true,
+            dashboard = true,
+        }
+        return ft[vim.bo.ft] or vim.fn.expand("%:t") == "Cargo.toml" or false
     end,
     version = "v0.3.0",
-    -- event = "BufWinEnter Cargo.toml",
-    event = "VeryLazy",
+    event = {
+        "UIEnter Cargo.toml",
+        "BufNew Cargo.toml",
+    },
     dependencies = {
         "nvim-lua/plenary.nvim",
         -- 有一个 keymap 在 lspsaga 里面
@@ -22,15 +28,15 @@ return {
                 -- 注释掉的可以用 K 打开 document 后操作
                 local opts, keymap = { noremap = true, silent = true, buffer = true }, vim.keymap.set
 
-                keymap("n", "<leader>ct", crates.toggle, opts)
-                keymap("n", "<leader>cr", crates.reload, opts)
+                keymap("n", "ct", crates.toggle, opts)
+                keymap("n", "cr", crates.reload, opts)
 
                 -- keymap("n", "<leader>cv", crates.show_versions_popup, opts)
-                keymap("n", "<leader>cf", crates.show_features_popup, opts)
-                keymap("n", "<leader>cd", crates.show_dependencies_popup, opts)
+                keymap("n", "cf", crates.show_features_popup, opts)
+                keymap("n", "cd", crates.show_dependencies_popup, opts)
 
-                keymap("n", "<leader>cu", crates.update_crate, opts)
-                keymap("v", "<leader>cu", crates.update_crates, opts)
+                keymap("n", "cu", crates.update_crate, opts)
+                keymap("v", "cu", crates.update_crates, opts)
                 -- keymap("n", "<leader>ca", crates.update_all_crates, opts)
                 -- keymap("n", "<leader>cA", crates.upgrade_all_crates, opts)
 

@@ -23,9 +23,6 @@ zi ice wait lucid; source ~/.linuxConfig/shells/directories.zsh
 # last-working-dir thefuck 要用
 ZSH_CACHE_DIR=~/.zi/cache
 
-export NVM_DIR="$HOME/.nvm"
-export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
-
 zi ice wait lucid; zi light skywind3000/z.lua.git
 eval "$(lua ~/.zi/plugins/skywind3000---z.lua.git/z.lua  --init zsh once enhanced)"
 export _ZL_ECHO=1
@@ -86,6 +83,3 @@ zi snippet OMZP::last-working-dir
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# export PATH=~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin:$PATH
-# export PATH=~/.rustup/toolchains/beta-x86_64-unknown-linux-gnu/bin:$PATH

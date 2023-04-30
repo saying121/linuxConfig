@@ -3,7 +3,7 @@ return {
     version = "*",
     keys = {
         "<M-t>",
-        "<M-d>",
+        "<A-d>",
         "<leader>g",
         "<M-f>",
     },

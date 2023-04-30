@@ -1,7 +1,11 @@
 return {
     "tamago324/cmp-zsh",
     cond = function()
-        return vim.bo.ft == "zsh" or false
+        local ft = {
+            zsh = true,
+            dashboard = true,
+        }
+        return ft[vim.bo.ft] or false
     end,
     lazy = true,
     dependencies = "Shougo/deol.nvim",

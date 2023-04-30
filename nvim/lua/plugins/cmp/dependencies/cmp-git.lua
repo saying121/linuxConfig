@@ -2,7 +2,11 @@ return {
     "petertriho/cmp-git",
     -- ft = "gitcommit",
     cond = function()
-        return vim.bo.ft == "gitcommit" or false
+        local ft = {
+            gitcommit = true,
+            dashboard = true,
+        }
+        return ft[vim.bo.ft] or false
     end,
     lazy = true,
     dependencies = {

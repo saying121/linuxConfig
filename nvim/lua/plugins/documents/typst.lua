@@ -1,6 +1,9 @@
 return {
     "SeniorMars/typst.nvim",
-    ft = "typst",
-    config = function()
-    end,
+    -- ft = "typst",
+    event = {
+        "BufNew *.typ",
+        "UIEnter *.typ",
+    },
+    config = function() end,
 }

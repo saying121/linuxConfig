@@ -12,6 +12,9 @@ return {
             -- - "skip" (doesn't modify PATH)
             ---@type '"prepend"' | '"append"' | '"skip"'
             PATH = "append",
+            -- github = {
+            --     download_url_template = "https://ay1.us/https://github.com/%s/releases/download/%s/%s",
+            -- },
             pip = {
                 -- Whether to upgrade pip to the latest version in the virtual environment before installing packages.
                 upgrade_pip = true,

@@ -57,5 +57,6 @@ installWaydroid() {
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 # installWaydroid
+$aurPkg com.qq.weixin.deepin com.qq.weixin.work.deepin-x11 linuxqq-firejail
 
 unset pacMan aurPkg

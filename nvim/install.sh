@@ -7,9 +7,9 @@ export HTTP_PROXY=http://127.0.0.1:7890
 pacMan='pacman -S --needed --noconfirm'
 aurPkg='yay -S --needed --noconfirm'
 
-sudo $pacMan ranger fzf python3 python-pip nvm npm lolcat ripgrep fd lldb translate-shell \
+sudo $pacMan ranger fzf python3 python-pip fnm npm lolcat ripgrep fd lldb translate-shell \
     rustup jdk17-openjdk go \
-    neovim vale-git luarocks shfmt shellcheck \
+    neovim vale-git luarocks shellcheck \
     zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-ps \
     typst
 
@@ -21,11 +21,17 @@ rustup install stable beta nightly
 rustup component add rust-analyzer clippy rustfmt --toolchain stable
 rustup component add rust-analyzer clippy rustfmt --toolchain nightly
 rustup component add rust-analyzer clippy rustfmt --toolchain beta
+rustup default stable
 # 切换 crates 源
 cargo install crm
 crm best
 
-$aurPkg powershell-lts-bin powershell-editor-services
+# rust 交叉编译
+# rustup target add x86_64-pc-windows-gnu
+# rustup toolchain install stable-x86_64-pc-windows-gnu
+# $pacMan mingw-w64-gcc
+
+$aurPkg powershell-lts-bin # powershell-editor-services
 
 $aurPkg libldap24 mssql-scripter
 
@@ -34,11 +40,9 @@ $aurPkg rime-ls rime-essay
 sudo $pacMan texlive-core texlive-bin
 
 # nodejs
-export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
-source /usr/share/nvm/init-nvm.sh
-nvm install v18.13.0
-nvm install v16.19.0
-nvm alias default v18.13.0
+fnm install 18
+fnm install 16
+fnm default 18
 
 sudo npm i -g neovim npm-check-updates neovim
 
@@ -62,7 +66,6 @@ if [[ $(grep -c mason /etc/profile) == 0 ]]; then
     # shellcheck disable=2016
     echo '
 export PATH=$PATH:~/.local/share/nvim/mason/bin
-export PATH=~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$PATH
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 export PATH=~/.cargo/bin:~/.local/bin:$PATH
     ' | sudo tee -a /etc/profile

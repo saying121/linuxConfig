@@ -6,6 +6,13 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     config = function()
+        local function rime_status()
+            if vim.g.rime_enabled then
+                return "ㄓ"
+            else
+                return ""
+            end
+        end
         local function mode()
             local modestr = require("noice").api.status.mode.get()
             local str, _ = string.gsub(modestr, "%W", "")
@@ -70,9 +77,9 @@ return {
                     },
                     {
                         "filename",
-                        file_status = true, -- Displays file status (readonly status, modified status)
+                        file_status = true,     -- Displays file status (readonly status, modified status)
                         newfile_status = false, -- Display new file status (new file means no write after created)
-                        path = 3, -- 0: Just the filename
+                        path = 3,               -- 0: Just the filename
                         -- 1: Relative path
                         -- 2: Absolute path
                         -- 3: Absolute path, with tilde as the home directory
@@ -80,10 +87,10 @@ return {
                         shorting_target = 40, -- Shortens path to leave 40 spaces in the window
                         -- for other components. (terrible name, any suggestions?)
                         symbols = {
-                            modified = "[+]", -- Text to show when the file is modified.
-                            readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+                            modified = "[+]",      -- Text to show when the file is modified.
+                            readonly = "[-]",      -- Text to show when the file is non-modifiable or readonly.
                             unnamed = "[No Name]", -- Text to show for unnamed buffers.
-                            newfile = "[New]", -- Text to show for newly created file before first write
+                            newfile = "[New]",     -- Text to show for newly created file before first write
                         },
                     },
                 },
@@ -98,10 +105,11 @@ return {
                     --     color = { fg = "ff9e64" },
                     -- },
                     { "%M" },
+                    { rime_status },
                     {
                         "filetype",
-                        colored = true, -- Displays filetype icon in color if set to true
-                        icon_only = false, -- Display only an icon for filetype
+                        colored = true,            -- Displays filetype icon in color if set to true
+                        icon_only = false,         -- Display only an icon for filetype
                         icon = { align = "left" }, -- Display filetype icon on the right hand side
                         -- icon =    {'X', align='right'}
                         -- Icon string ^ in table is ignored in filetype component

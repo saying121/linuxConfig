@@ -1,12 +1,15 @@
 return {
     "iamcco/markdown-preview.nvim",
     -- 需要调整nodejs版本
-    build = "source /usr/share/nvm/init-nvm.sh; nvm use v18; cd app && npm install",
+    build = "fnm use 18; cd app && npm install",
     cond = function()
         local ft = { markdown = true }
         return ft[vim.bo.ft] or false
     end,
-    ft = "markdown",
+    event = {
+        "UIEnter *.md",
+        "BufNew *.md",
+    },
     config = function()
         vim.api.nvim_create_autocmd({ "BufWinEnter", "BufEnter" }, {
             group = vim.api.nvim_create_augroup("MarkdownPreview", { clear = true }),

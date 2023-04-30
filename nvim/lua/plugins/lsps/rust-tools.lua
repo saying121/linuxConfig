@@ -1,10 +1,16 @@
 return {
     "simrat39/rust-tools.nvim",
-    event = "VeryLazy",
     cond = function()
-        return vim.bo.ft == "rust" or false
+        local ft = {
+            rust = true,
+            dashboard = true,
+        }
+        return ft[vim.bo.ft] or false
     end,
-    -- ft = "rust",
+    event = {
+        "UIEnter *.rs",
+        "BufNew *.rs",
+    },
     dependencies = {
         "neovim/nvim-lspconfig",
         "nvim-lua/plenary.nvim",

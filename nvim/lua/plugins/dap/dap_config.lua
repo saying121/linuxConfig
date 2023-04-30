@@ -14,7 +14,6 @@ return {
     },
     dependencies = {
         require("public.utils").get_dependencies_table("plugins/" .. "dap" .. "/dependencies"),
-        -- require(... .. ".nvim-dap-ui")
     },
     config = function()
         -- 对各个语言的配置

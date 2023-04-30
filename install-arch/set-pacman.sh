@@ -14,6 +14,7 @@ sudo sed -i "s/^#ParallelDownloads .*/ParallelDownloads = 40/" /etc/pacman.conf
 sudo sed -i 's/^#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
 
 sudo sed -i "s/^#\[multilib\]/\[multilib\]/" /etc/pacman.conf
+sed -i '/multilib/ {n;s/^#//;}'
 
 if [[ $(grep "\[archlinuxcn\]" -c /etc/pacman.conf) = 0 ]]; then
     # shellcheck disable=2016

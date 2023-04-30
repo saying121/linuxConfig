@@ -13,6 +13,7 @@ return {
                 "jsonls",
                 "marksman",
                 "pylsp",
+                "powershell_es",
                 "texlab",
                 "tsserver",
                 "vimls",

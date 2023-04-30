@@ -1,10 +1,21 @@
 return {
     "lvimuser/lsp-inlayhints.nvim",
     cond = function()
-        local support_list = { lua = true, go = true, javascript = true, typescript = true, c = true, cpp = true }
+        local support_list = {
+            lua = true,
+            go = true,
+            javascript = true,
+            typescript = true,
+            c = true,
+            cpp = true,
+            dashboard = true,
+        }
         return support_list[vim.bo.ft] or false
     end,
-    event = "LspAttach",
+    event = {
+        'BufNew *.lua,*.go,*.js,*.ts,*.c,*.cpp,',
+        'UIEnter *.lua,*.go,*.js,*.ts,*.c,*.cpp,',
+    },
     config = function()
         require("lsp-inlayhints").setup({
             inlay_hints = {

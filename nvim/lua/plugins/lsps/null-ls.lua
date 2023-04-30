@@ -6,6 +6,7 @@ return {
             angular = true,
             asciidoc = true,
             css = true,
+            dashboard = true,
             flow = true,
             graphql = true,
             html = true,
@@ -18,8 +19,6 @@ return {
             mysql = true,
             plsql = true,
             python = true,
-            rust = true,
-            toml = true,
             scss = true,
             sh = true,
             sql = true,
@@ -36,6 +35,7 @@ return {
     event = {
         "VeryLazy",
         "LspAttach",
+        -- 'UIEnter *.html,*.tex,*.yaml,*.zsh,*.vim,*.md,*.markdown,*.py,*.sql,*.toml'
     },
     dependencies = {
         "nvim-lua/plenary.nvim",
