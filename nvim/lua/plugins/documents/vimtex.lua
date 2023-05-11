@@ -1,9 +1,19 @@
+local ft = {
+    tex = "tex",
+    bib = "bib",
+    plaintex = "plaintex",
+}
+
+local events = {}
+
+for _, value in pairs(ft) do
+    table.insert(events, "UIEnter *." .. value)
+    table.insert(events, "BufNew *." .. value)
+end
+
 return {
     "lervag/vimtex",
-    event = {
-        "UIEnter *.tex,*.bib,*.plaintex",
-        "BufNew *.tex,*.bib,*.plaintex",
-    },
+    event = events,
     config = function()
         local opts, keymap = { silent = true, noremap = true }, vim.keymap.set
         keymap("n", "<C-p>", ":VIimtexView<CR>", opts)

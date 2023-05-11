@@ -12,7 +12,6 @@ nnoremap ,, ggVG
 vnoremap <A-j> :m '>+1<cr>gv=gv
 vnoremap <A-k> :m '<-2<cr>gv=gv
 
-nnoremap <silent><space>cc :cclose<CR>
 nnoremap ` %
 vnoremap ` %
 nnoremap <silent><leader>w :w<CR>

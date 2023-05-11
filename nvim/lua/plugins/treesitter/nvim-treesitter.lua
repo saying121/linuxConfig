@@ -69,16 +69,5 @@ return {
                 additional_vim_regex_highlighting = false,
             },
         })
-
-        -- 移到 init 会有非预期行为
-        -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
-        --     pattern = { "*" },
-        --     group = vim.api.nvim_create_augroup("TS_FOLD_WORKAROUND", { clear = true }),
-        --     callback = function()
-        --         vim.opt_local.foldmethod = "expr"
-        --         vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
-        --         vim.cmd([[normal zR]])
-        --     end,
-        -- })
     end,
 }

@@ -1,10 +1,3 @@
-<style>
-.markdown-body code {
-  font-family: Hack Nerd Font;
-  font-size: 14px;
-}
-</style>
-
 # Neovim 配置简述
 
 <!--toc:start-->
@@ -99,3 +92,34 @@
 
 -   [ dressing.nvim ](https://github.com/stevearc/dressing.nvim) 更好的选择框 ui
 -   [ mini.indentscope ](https://github.com/echasnovski/mini.indentscope) 缩进线
+## 单使用neovim配置
+```bash
+mkdir ~/.linuxConfig
+
+cd ~/.linuxConfig
+
+git init
+
+git remote add -f origin https://github.com/saying121/linuxConfig.git
+
+git config core.sparsecheckout true
+
+echo "nvim" >>.git/info/sparse-checkout
+
+git checkout main
+
+# thenvim 自己取名
+ln -s ~/.linuxConfig/nvim ~/.config/thenvim
+
+# 自行选择
+./install.sh
+
+# thenvim,nvimboot 自己取名，shellrc自己看着改
+echo 'alias nvimboot="NVIM_APPNAME=thenvim nvim"' >> ~/.zshrc
+
+# 启动
+thenvim
+
+# 升级
+git pull
+```

@@ -3,10 +3,7 @@ return {
     -- Do make sure that your LSP plugins, like lsp-zero or lsp-config, are loaded before loading lspsaga.
     event = "LspAttach",
     -- cond = function()
-    --     if #vim.lsp.get_active_clients() == 1 and vim.lsp.get_active_clients()[1]["name"] == "rime_ls" then
-    --         return false
-    --     end
-    --     if #vim.lsp.get_active_clients() == 0 then
+    --     if #vim.lsp.get_active_clients() <= 1 then
     --         return false
     --     end
     --     return true
@@ -202,16 +199,31 @@ return {
         -- Pressing the key twice will enter the hover window
         -- keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
 
-        -- 和 crates.nvim 集成
+        local function peekOrHover()
+            local winid = require("ufo").peekFoldedLinesUnderCursor()
+            -- keymap 好像没效果，虽然 keymap 成功，只能自己先 `trace`(按下按键展开折叠) 然后再编辑了
+            if winid then
+                local bufnr = vim.api.nvim_win_get_buf(winid)
+                local keys = { "a", "i", "o", "A", "I", "O", "gd", "gr" }
+                for _, k in ipairs(keys) do
+                    -- Add a prefix key to fire `trace` action,
+                    vim.keymap.set("n", k, "<CR>" .. k, { noremap = false, buffer = bufnr })
+                end
+            end
+            return winid
+        end
+
+        -- 和 crates.nvim,nvim-ufo,nvim-dap-ui 集成
         local function show_documentation()
-            local filetype = vim.bo.filetype
-            if vim.tbl_contains({ "vim", "help" }, filetype) then
+            if vim.tbl_contains({ "vim", "help" }, vim.bo.filetype) then
                 vim.cmd("h " .. vim.fn.expand("<cword>"))
-            elseif vim.tbl_contains({ "man" }, filetype) then
+            elseif vim.tbl_contains({ "man" }, vim.bo.filetype) then
                 vim.cmd("Man " .. vim.fn.expand("<cword>"))
             elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
                 require("crates").show_popup()
-            elseif not require("ufo").peekFoldedLinesUnderCursor() then
+            elseif _G.for_K == 1 then
+                require("dapui").eval()
+            elseif not peekOrHover() then
                 vim.cmd([[Lspsaga hover_doc]])
             end
         end

@@ -44,6 +44,11 @@ augroup File
     autocmd BufNewFile *.awk silent 0r ~/.config/nvim/viml/template/awk.txt| normal G
 augroup END
 
+augroup QuickfixQuite
+    autocmd!
+    autocmd FileType qf nnoremap <buffer> q :cclose<CR>
+augroup END
+
 " augroup EventLoggin
 "   autocmd!
 "   autocmd BufNewFile * call s:Log ('BufNewFile')

@@ -3,6 +3,7 @@ return {
     keys = {
         { "<leader>e" },
     },
+    -- cond = false,
     dependencies = {
         "nvim-tree/nvim-web-devicons", -- file icons
     },

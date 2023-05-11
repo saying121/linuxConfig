@@ -1,16 +1,10 @@
 return {
     "simrat39/rust-tools.nvim",
-    cond = function()
-        local ft = {
-            rust = true,
-            dashboard = true,
-        }
-        return ft[vim.bo.ft] or false
-    end,
-    event = {
-        "UIEnter *.rs",
-        "BufNew *.rs",
-    },
+    ft = "rust",
+    -- event = {
+    --     "UIEnter *.rs",
+    --     "BufNew *.rs",
+    -- },
     dependencies = {
         "neovim/nvim-lspconfig",
         "nvim-lua/plenary.nvim",
@@ -18,28 +12,13 @@ return {
         "mattn/webapi-vim",
     },
     config = function()
-        local rt = require("rust-tools")
-        local LSP = require("public.lsp_attach")
-        local keymap, opts = vim.keymap.set, { noremap = true, silent = true }
-        keymap("n", "<C-space>", ":RustHoverActions<CR>", opts)
-        keymap("n", "<leader><up>", ":RustMoveItemUp<CR>", opts)
-        keymap("n", "<leader><down>", ":RustMoveItemDown<CR>", opts)
-        keymap("n", "<leader>R", ":RustRunnables<CR>", opts)
-        keymap("n", "<C-g>", ":RustOpenCargo<CR>", opts)
-        keymap("n", "<S-CR>", ":RustExpandMacro<CR>", opts)
-        -- local function open_cargo()
-        --     vim.api.nvim_command("tabnew")
-        --     rt.open_cargo_toml.open_cargo_toml()
-        --     -- vim.api.nvim_command("tabnew" .. '| lua require("rust-tools").open_cargo_toml.open_cargo_toml()')
-        -- end
-        -- keymap("n", "<C-g>", open_cargo, opts)
-        -- rt.open_cargo_toml.open_cargo_toml()
-
         local extension_path = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/codelldb/extension/"
+        ---@diagnostic disable-next-line: unused-local
         local codelldb_path = extension_path .. "adapter/codelldb"
+        ---@diagnostic disable-next-line: unused-local
         local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
-        rt.setup({
+        require("rust-tools").setup({
             tools = {
                 -- how to execute terminal commands
                 -- options right now: termopen / quickfix
@@ -84,9 +63,9 @@ return {
                     -- the border that is used for the hover window
                     -- see vim.api.nvim_open_win()
                     -- Maximal width of the hover window. Nil means no max.
-                    max_width = nil,
+                    max_width = math.floor(vim.api.nvim_win_get_width(0) / 2),
                     -- Maximal height of the hover window. Nil means no max.
-                    max_height = nil,
+                    max_height = math.floor(vim.api.nvim_win_get_height(0) / 2),
                     -- whether the hover action window gets automatically focused
                     -- default: false
                     auto_focus = false,
@@ -106,79 +85,31 @@ return {
                     -- crates
                     -- default: true
                     full = true,
-                    -- List of backends found on: https://graphviz.org/docs/outputs/
-                    -- Is used for input validation and autocompletion
-                    -- Last updated: 2021-08-26
-                    enabled_graphviz_backends = {
-                        "bmp",
-                        "cgimage",
-                        "canon",
-                        "dot",
-                        "gv",
-                        "xdot",
-                        "xdot1.2",
-                        "xdot1.4",
-                        "eps",
-                        "exr",
-                        "fig",
-                        "gd",
-                        "gd2",
-                        "gif",
-                        "gtk",
-                        "ico",
-                        "cmap",
-                        "ismap",
-                        "imap",
-                        "cmapx",
-                        "imap_np",
-                        "cmapx_np",
-                        "jpg",
-                        "jpeg",
-                        "jpe",
-                        "jp2",
-                        "json",
-                        "json0",
-                        "dot_json",
-                        "xdot_json",
-                        "pdf",
-                        "pic",
-                        "pct",
-                        "pict",
-                        "plain",
-                        "plain-ext",
-                        "png",
-                        "pov",
-                        "ps",
-                        "ps2",
-                        "psd",
-                        "sgi",
-                        "svg",
-                        "svgz",
-                        "tga",
-                        "tiff",
-                        "tif",
-                        "tk",
-                        "vml",
-                        "vmlz",
-                        "wbmp",
-                        "webp",
-                        "xlib",
-                        "x11",
-                    },
                 },
             },
-            -- all the opts to send to nvim-lspconfig
-            -- these override the defaults set by rust-tools.nvim
-            -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
             server = {
                 -- standalone file support
                 -- setting it to false may improve startup time
                 standalone = true,
-                on_attach = LSP.on_attach,
-            }, -- rust-analyzer options
-            -- debugging stuff
+                on_attach = function(client, bufnr)
+                    require("public.lsp_attach").on_attach(client, bufnr)
+                    local keymap, opts = vim.keymap.set, { noremap = true, silent = true, buffer = bufnr }
+                    keymap("n", "<C-space>", ":RustHoverActions<CR>", opts)
+                    keymap("n", "<leader><up>", ":RustMoveItemUp<CR>", opts)
+                    keymap("n", "<leader><down>", ":RustMoveItemDown<CR>", opts)
+                    keymap("n", "<leader>R", ":RustRunnables<CR>", opts)
+                    keymap("n", "<C-g>", ":RustOpenCargo<CR>", opts)
+                    keymap("n", "<S-CR>", ":RustExpandMacro<CR>", opts)
+
+                    -- keymap("n", "<C-g>", function()
+                    --     vim.api.nvim_command("tabnew RustOpenCargo")
+                    --     rt.open_cargo_toml.open_cargo_toml()
+                    -- end, opts)
+                end,
+            },
             dap = {
-                adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+                -- adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+                adapter = require("dap").adapters.codelldb,
                 -- adapter = {
                 --     type = "executeable",
                 --     command = "lldb-vscode",
@@ -187,7 +118,7 @@ return {
             },
         })
 
-        -- VeryLazy 情况要显示启动
-        vim.cmd("LspStart")
+        -- VeryLazy 情况要显示启动，懒加载会导致 standalone 有问题
+        -- vim.cmd("LspStart")
     end,
 }

@@ -2,6 +2,7 @@ return {
     "skywind3000/asynctasks.vim",
     dependencies = {
         "skywind3000/asyncrun.vim",
+        "akinsho/toggleterm.nvim",
     },
     cmd = {
         "AsyncTask",
@@ -15,15 +16,6 @@ return {
     },
     config = function()
         vim.g.asyncrun_open = 6
-        -- quickfix    伪终端    默认值，使用 quickfix 窗口模拟终端，输出不匹配 errorformat。
-        -- vim        -            传统 vim 的 ! 命令运行任务
-        -- tab      内置终端    在一个新的 tab 上打开内置终端，运行程序。
-        -- TAB      内置终端    同 tab 但是是在左边打开，关闭后方便回到上一个 tab
-        -- top      内置终端    在上方打开可复用内部终端。
-        -- bottom    内置终端    在下方打开可复用内部终端。
-        -- left     内置终端    在左边打开可复用内置终端。
-        -- right    内置终端    在右边打开可复用内置终端。
-        -- external    外部终端    启动一个新的操作系统的外置终端窗口，运行程序。
         vim.g.asynctasks_term_pos = "toggleterm2"
         -- vim.g.asynctasks_term_pos = "bottom"
         vim.g.asynctasks_term_rows = 20 -- 设置纵向切割时，高度为 10

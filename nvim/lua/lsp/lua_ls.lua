@@ -4,32 +4,34 @@
 -- table.insert(runtime_path, "lua/?/init.lua")
 
 return {
-    Lua = {
-        completion = {
-            -- callSnippet = "Both",
-            callSnippet = "Replace",
-        },
-        runtime = {
-            version = "LuaJIT",
-            -- path = runtime_path,
-        },
-        diagnostics = {
-            globals = {
-                "vim",
+    settings = {
+        Lua = {
+            completion = {
+                -- callSnippet = "Both",
+                callSnippet = "Replace",
             },
-        },
-        workspace = {
-            checkThirdParty = false,
-            -- 让lsp可以补全部分插件参数
-            -- library = vim.api.nvim_get_runtime_file("", true),
-            -- maxPreload=2000,
-            preloadFileSize = 10000,
-        },
-        telemetry = {
-            enable = false,
-        },
-        hint = {
-            enable = true,
+            runtime = {
+                version = "LuaJIT",
+                -- path = runtime_path,
+            },
+            diagnostics = {
+                globals = {
+                    "vim",
+                },
+            },
+            workspace = {
+                checkThirdParty = false,
+                -- 让lsp可以补全部分插件参数
+                -- library = vim.api.nvim_get_runtime_file("", true),
+                -- maxPreload=2000,
+                preloadFileSize = 10000,
+            },
+            telemetry = {
+                enable = false,
+            },
+            hint = {
+                enable = true,
+            },
         },
     },
 }

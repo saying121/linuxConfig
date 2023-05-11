@@ -44,12 +44,12 @@ exec cfw &
 exec picom --experimental-backends --config ~/.config/i3/picom/picom-yaocccc.conf -b &
 
 # exec --no-startup-id copyq & # 剪切板管理器
-# exec  utools
+exec utools &
 # exec  /usr/lib/polkit-kde-authentication-agent-1
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # exec_always feh --bg-scale "path_to_wallpaper" # 设置壁纸
-# feh --bg-fill --no-fehbg --randomize ~/Pictures/wallpaper.jpg
+# feh --bg-fill --no-fehbg --randomize ~/.linuxConfig/wallpaperengine/somePictures
 exec systemctl --user start wallpaperengine.service &
 
 exec /usr/bin/i3-with-shmlog

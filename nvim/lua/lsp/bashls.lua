@@ -1,6 +1,8 @@
 return {
-    bashIde = {
-        -- shellcheckPath = "shellcheck",
-        shellcheckPath = "",
+    settings = {
+        bashIde = {
+            -- shellcheckPath = "shellcheck",
+            shellcheckPath = "",
+        },
     },
 }

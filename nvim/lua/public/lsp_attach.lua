@@ -7,27 +7,26 @@ M.on_attach = function(client, bufnr)
     -- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    local opts = { noremap = true, silent = true, buffer = bufnr }
     local keymap = vim.keymap.set
-    -- keymap('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    -- keymap('n', 'gd', vim.lsp.buf.definition, bufopts)
-    -- keymap('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    -- keymap('n', 'gr', vim.lsp.buf.references, bufopts)
-    -- keymap('n', 'K', vim.lsp.buf.hover, bufopts)
-    keymap("n", "<c-k>", vim.lsp.buf.signature_help, bufopts)
-    keymap("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-    keymap("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+    -- keymap('n', 'gD', vim.lsp.buf.declaration, opts)
+    -- keymap('n', 'gd', vim.lsp.buf.definition, opts)
+    -- keymap('n', 'gi', vim.lsp.buf.implementation, opts)
+    -- keymap('n', 'gr', vim.lsp.buf.references, opts)
+    -- keymap('n', 'K', vim.lsp.buf.hover, opts)
+    keymap("n", "<c-k>", vim.lsp.buf.signature_help, opts)
+    keymap("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
+    keymap("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
     keymap("n", "<space>wl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    -- keymap("n", "gy", vim.lsp.buf.type_definition, bufopts)
-    -- keymap('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    -- keymap('n', '<M-cr>', vim.lsp.buf.code_action, bufopts)
+    end, opts)
+    -- keymap("n", "gy", vim.lsp.buf.type_definition, opts)
+    -- keymap('n', '<space>rn', vim.lsp.buf.rename, opts)
+    -- keymap('n', '<M-cr>', vim.lsp.buf.code_action, opts)
     keymap("n", "<space>f", function()
         vim.lsp.buf.format({ async = true })
-    end, bufopts)
+    end, opts)
 
-    -- vim-illuminate 取代了
     local cap = client.server_capabilities
     if cap.documentHighlightProvider then
         vim.api.nvim_create_autocmd({ "CursorHold" }, {
@@ -46,10 +45,5 @@ M.on_attach = function(client, bufnr)
         })
     end
 end
-
-M.lsp_flags = {
-    -- This is the default in Nvim 0.7+
-    debounce_text_changes = 150,
-}
 
 return M

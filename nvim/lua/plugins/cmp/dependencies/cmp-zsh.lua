@@ -7,7 +7,6 @@ return {
         }
         return ft[vim.bo.ft] or false
     end,
-    lazy = true,
     dependencies = "Shougo/deol.nvim",
     config = function()
         local cmp = require("cmp")
@@ -18,7 +17,7 @@ return {
                 { name = "path", priority = 800 },
             }, {
                 { name = "buffer", priority = 700 },
-                { name = "rg", priority = 600 },
+                { name = "rg", keyword_length = 4, priority = 600 },
             }, {
                 { name = "spell", priority = 500 },
                 { name = "rime", priority = 500 },

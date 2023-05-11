@@ -5,7 +5,8 @@ return {
             ensure_installed = {
                 "bash",
                 "delve",
-                -- "javadbg",
+                "javadbg",
+                "java-test",
                 "python",
                 "codelldb",
             },

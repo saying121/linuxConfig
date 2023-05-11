@@ -3,9 +3,6 @@ return {
     config = function()
         local dapui, keymap = require("dapui"), vim.keymap.set
         local opts = { noremap = true, silent = true }
-        keymap("v", "<space>e", dapui.eval, opts)
-        keymap("n", "<space>e", dapui.eval, opts)
-
         keymap({ "n", "t" }, "<space>dt", dapui.toggle, opts)
 
         dapui.setup({

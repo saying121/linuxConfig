@@ -6,7 +6,7 @@ return {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
                 { name = "buffer", priority = 1000 },
-                { name = "rg", priority = 900 },
+                -- { name = "rg", priority = 900 },
             },
             {
                 { name = "spell", priority = 800 },

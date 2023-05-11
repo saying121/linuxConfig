@@ -4,6 +4,26 @@ return {
     --     return vim.bo.ft == "lua" or false
     -- end,
     config = function()
+        local import = {
+            "plenary.nvim",
+            -- "nvim-treesitter",
+            "nvim-lspconfig",
+            "cmp-nvim-lsp",
+            -- "nvim-cmp",
+            "nvim-ufo",
+            "telescope.nvim",
+            "LuaSnip",
+            -- "neoscroll.nvim",
+            -- "lazy.nvim",
+            -- "rust-tools.nvim",
+            -- "lspsaga.nvim",
+            -- "noice.nvim",
+        }
+
+        -- if vim.fn.expand("%:t") then
+        --     table.insert(import, "")
+        -- end
+
         require("neodev").setup({
             library = {
                 enabled = true, -- when not enabled, neodev will not change any settings to the LSP server
@@ -12,19 +32,7 @@ return {
                 types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
                 -- plugins = true, -- installed opt or start plugins in packpath
                 -- you can also specify the list of plugins to make available as a workspace library
-                plugins = {
-                    "plenary.nvim",
-                    -- "nvim-treesitter",
-                    -- "nvim-lspconfig",
-                    -- "nvim-cmp",
-                    "telescope.nvim",
-                    "LuaSnip",
-                    -- "neoscroll.nvim",
-                    -- "lazy.nvim",
-                    -- "rust-tools.nvim",
-                    -- "lspsaga.nvim",
-                    -- "noice.nvim",
-                },
+                plugins = import,
             },
             setup_jsonls = true, -- configures jsonls to provide completion for project specific .luarc.json files
             -- for your Neovim config directory, the config.library settings will be used as is

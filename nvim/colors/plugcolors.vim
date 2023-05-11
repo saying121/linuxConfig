@@ -1,68 +1,73 @@
-" highlight Normal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight NormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight NormalSB guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight NormalFloat guibg=NONE cterm=NONE "guifg=NONE ctermfg=NONE
-highlight SagaNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight HoverNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight FinderNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight RenameNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight TroubleNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight TerminalNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight DefinitionNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight CodeActionNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight RedrawDebugNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight ActionPreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight CallHierarchyNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight OutlinePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight MiniStatusLineModeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+" hi Normal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi NormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi NormalSB guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi NormalFloat guibg=NONE cterm=NONE "guifg=NONE ctermfg=NONE
+hi SagaNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi HoverNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi FinderNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi RenameNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi TroubleNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi TerminalNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi DefinitionNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi CodeActionNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi RedrawDebugNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi ActionPreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi CallHierarchyNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi OutlinePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi MiniStatusLineModeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
-highlight NeoTreeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight NeoTreeNormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight NvimTreeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight NvimTreeNormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight NvimTreeWinSeparator guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi NeoTreeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi NeoTreeNormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi NvimTreeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi NvimTreeNormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi NvimTreeWinSeparator guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
-" highlight Folded guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+" hi Folded guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
-highlight TelescopeBorder guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
-highlight TelescopeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight TelescopePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight TelescopePromptNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-highlight TelescopeResultsNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi TelescopeBorder guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
+hi TelescopeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi TelescopePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi TelescopePromptNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi TelescopeResultsNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
-highlight LazyProgressDone guibg=NONE cterm=NONE guifg=red ctermfg=NONE
-highlight LazyProp guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi LazyProgressDone guibg=NONE cterm=NONE guifg=red ctermfg=NONE
+hi LazyProp guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
-" highlight FloatBorder guibg=NONE guifg=#27a1b9
-highlight FloatBorder guibg=NONE
+" hi FloatBorder guibg=NONE guifg=#27a1b9
+hi FloatBorder guibg=NONE
 
-" highlight LspFloatWinNormal guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
-" highlight LspFloatWinBorder guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
-" highlight LspInfoTip guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
-highlight LspInfoBorder guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
-" highlight LspInfoList guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=DarkCyan
-" highlight LspInfoTitle guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=DarkCyan
+" hi LspFloatWinNormal guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
+" hi LspFloatWinBorder guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
+" hi LspInfoTip guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
+hi LspInfoBorder guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
+" hi LspInfoList guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=DarkCyan
+" hi LspInfoTitle guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=DarkCyan
 
-highlight Folded guibg=NONE cterm=NONE "guifg=red ctermfg=NONE
-highlight FoldColumn guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
-highlight SignColumn ctermbg=NONE guifg=DarkCyan ctermfg=NONE gui=italic guibg=NONE
-" highlight Folded ctermbg=0 ctermfg=169
-highlight GitSignsCurrentLineBlame ctermbg=NONE guifg=#2a76ac ctermfg=NONE gui=italic guibg=NONE
+hi Folded guibg=NONE cterm=NONE "guifg=red ctermfg=NONE
+hi FoldColumn guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
+hi SignColumn ctermbg=NONE guifg=DarkCyan ctermfg=NONE gui=italic guibg=NONE
+" hi Folded ctermbg=0 ctermfg=169
+hi GitSignsCurrentLineBlame ctermbg=NONE guifg=#2a76ac ctermfg=NONE gui=italic guibg=NONE
 
-" highlight RustInlayHints ctermbg=NONE  ctermfg=NONE gui=bold guifg=#733ac2guibg=NONE
-highlight RustInlayHints ctermbg=NONE ctermfg=NONE gui=bold guifg=#565f99 guibg=NONE
-" highlight RustInlayHints ctermbg=NONE  ctermfg=NONE gui=bold guifg=#d8d8d8guibg=#3a3a3a
+" hi RustInlayHints ctermbg=NONE  ctermfg=NONE gui=bold guifg=#733ac2guibg=NONE
+hi RustInlayHints ctermbg=NONE ctermfg=NONE gui=bold guifg=#565f99 guibg=NONE
+" hi RustInlayHints ctermbg=NONE  ctermfg=NONE gui=bold guifg=#d8d8d8guibg=#3a3a3a
 
-" highlight LspInlayHint ctermbg=NONE ctermfg=NONE gui=bold guifg=#d8d8d8 guibg=#3a3a3a
-highlight LspInlayHint ctermbg=NONE ctermfg=NONE gui=bold guifg=#565f99 guibg=NONE
-
-
-highlight DashBoardIcon gui=italic guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
-highlight DashBoardShortCut gui=italic guibg=NONE cterm=NONE guifg=darkyellow ctermfg=NONE
-highlight DashBoardCenter gui=bold guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
-highlight DashBoardFooter gui=italic guibg=NONE cterm=NONE guifg=darkred ctermfg=NONE
+" hi LspInlayHint ctermbg=NONE ctermfg=NONE gui=bold guifg=#d8d8d8 guibg=#3a3a3a
+hi LspInlayHint ctermbg=NONE ctermfg=NONE gui=bold guifg=#565f99 guibg=NONE
 
 
-" highlight BufferLineTab guibg=blue guifg=Blue
-" highlight BufferLineTabSeparator guibg=Blue guifg=Blue
-" highlight BufferLineTabSeparatorSelected guibg=Blue guifg=Blue
+hi DashBoardIcon gui=italic guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
+hi DashBoardShortCut gui=italic guibg=NONE cterm=NONE guifg=darkyellow ctermfg=NONE
+hi DashBoardCenter gui=bold guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
+hi DashBoardFooter gui=italic guibg=NONE cterm=NONE guifg=darkred ctermfg=NONE
+
+
+" hi BufferLineTab guibg=blue guifg=Blue
+" hi BufferLineTabSeparator guibg=Blue guifg=Blue
+" hi BufferLineTabSeparatorSelected guibg=Blue guifg=Blue
+
+
+hi LspReferenceRead guibg=#3b4261 gui=bold
+hi LspReferenceText guibg=#3b4261 gui=italic
+hi LspReferenceWrite guibg=#3b4261 gui=bold

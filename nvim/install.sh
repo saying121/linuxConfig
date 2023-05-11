@@ -8,7 +8,7 @@ pacMan='pacman -S --needed --noconfirm'
 aurPkg='yay -S --needed --noconfirm'
 
 sudo $pacMan ranger fzf python3 python-pip fnm npm lolcat ripgrep fd lldb translate-shell \
-    rustup jdk17-openjdk go \
+    rustup jdk17-openjdk go cmake \
     neovim vale-git luarocks shellcheck \
     zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-ps \
     typst
@@ -24,7 +24,7 @@ rustup component add rust-analyzer clippy rustfmt --toolchain beta
 rustup default stable
 # 切换 crates 源
 cargo install crm
-crm best
+~/.cargo/bin/crm best
 
 # rust 交叉编译
 # rustup target add x86_64-pc-windows-gnu
@@ -49,15 +49,11 @@ sudo npm i -g neovim npm-check-updates neovim
 sudo npm install --save-dev --save-exact prettier
 
 # 安装插件
-if [[ ! -d ~/.local/share/nvim/lazy/lazy.nvim ]]; then
-    git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=stable ~/.local/share/nvim/lazy/lazy.nvim
-fi
 if [[ ! -d ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim ]]; then
     git clone https://github.com/Shougo/dein.vim ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim
 fi
 
 vim -i NONE -c "call dein#install()" -c "qa"
-nvim "+Lazy! sync" +qa
 
 # 给lldb配置runInTerminal
 echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope

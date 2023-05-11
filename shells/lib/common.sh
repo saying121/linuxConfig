@@ -87,9 +87,9 @@ alias imgcat="wezterm imgcat"
 alias ueber="~/.linuxConfig/ueber.sh"
 
 alias clhconf="~/.linuxConfig/scripts/configClash.sh"
-alias clhres="sudo systemctl restart clash.service"
-alias clhstp="sudo systemctl stop clash.service"
-alias clhsts="systemctl status clash.service"
+alias clhres="sudo systemctl restart clash-meta.service"
+alias clhstp="sudo systemctl stop clash-meta.service"
+alias clhsts="systemctl status clash-meta.service"
 
 # alias rm="gio trash"
 alias rm="trash"
@@ -98,7 +98,7 @@ alias rt='trash-restore'
 
 alias tran='trans -j -d en:zh'
 
-alias upgrade='yay -Syu --noconfirm'
+alias upgrade='yay -Syu --noconfirm && yay -Fy'
 
 if [[ $(grep -c OMZP::cp ~/.zshrc) != 0 && $SHELL == '/usr/bin/zsh' ]]; then
     alias cp='cpv -hhh'
@@ -134,3 +134,6 @@ export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/
 export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
 
 eval "$(fnm env --use-on-cd)"
+# eval "$(jenv init -)"
+
+source ~/.linuxConfig/shells/lib/nmap.sh

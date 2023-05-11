@@ -26,21 +26,6 @@ return {
         vim.o.foldlevelstart = 99
         vim.o.foldenable = true
 
-        -- 写在 lspconfig 里面了
-        -- Tell the server the capability of foldingRange,
-        -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
-        -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-        -- capabilities.textDocument.foldingRange = {
-        --     dynamicRegistration = false,
-        --     lineFoldingOnly = true,
-        -- }
-        -- for _, ls in ipairs(language_servers) do
-        --     require("lspconfig")[ls].setup({
-        --         capabilities = capabilities,
-        --         -- you can add other fields for setting up lsp server in this table
-        --     })
-        -- end
-
         local handler = function(virtText, lnum, endLnum, width, truncate)
             local newVirtText = {}
             local suffix = ("    %d "):format(endLnum - lnum)
@@ -74,6 +59,31 @@ return {
         -- check out `./lua/ufo.lua` and search `setFoldVirtTextHandler` for detail.
         require("ufo").setup({
             fold_virt_text_handler = handler,
+            -- provider_selector = function(bufnr, filetype, buftype)
+            --     return { "treesitter", "indent" }
+            -- end,
+            -- close_fold_kinds = { "imports", "comment" },
+            preview = {
+                win_config = {
+                    border = "rounded",
+                    winhighlight = "Normal:Folded",
+                    winblend = 0,
+                },
+                mappings = {
+                    scrollB = "<C-b>",
+                    scrollF = "<C-f>",
+                    scrollU = "<C-u>",
+                    scrollD = "<C-d>",
+                    scrollE = "<C-e>",
+                    scrollY = "<C-y>",
+                    jumpTop = "gg",
+                    jumpBot = "G",
+                    close = "q",
+                    -- switch = "<Tab>",
+                    switch = "K",
+                    trace = "<CR>",
+                },
+            },
         })
 
         -- buffer scope handler
@@ -91,13 +101,11 @@ return {
                 for _, k in ipairs(keys) do
                     -- Add a prefix key to fire `trace` action,
                     -- if Neovim is 0.8.0 before, remap yourself
-                    vim.keymap.set("n", k, "<CR>" .. k, { noremap = false, buffer = bufnr })
+                    vim.keymap.set("n", k, "<CR>" .. k, { noremap = true, buffer = bufnr })
                 end
-            else
-                vim.lsp.buf.hover()
             end
         end
-        -- keymap("n", "ggg", peekOrHover, opts)
+        keymap("n", "yf", peekOrHover, opts)
 
         local function goPreviousClosedAndPeek()
             require("ufo").goPreviousClosedFold()
@@ -113,7 +121,15 @@ return {
 
         keymap("n", "zR", require("ufo").openAllFolds)
         keymap("n", "zM", require("ufo").closeAllFolds)
-        keymap("n", "zr", require("ufo").openFoldsExceptKinds)
-        keymap("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+        keymap("n", "zr", function()
+            require("ufo").openFoldsExceptKinds(require("ufo.config").close_fold_kinds)
+        end, opts)
+        keymap("n", "zm", function()
+            require("ufo").closeFoldsWith(1)
+        end, opts) -- closeAllFolds == closeFoldsWith(0)
+
+        if vim.bo.ft == "dashboard" then
+            vim.cmd("UfoDetach")
+        end
     end,
 }

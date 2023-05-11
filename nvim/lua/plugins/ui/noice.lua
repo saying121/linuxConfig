@@ -116,8 +116,6 @@ return {
                 },
                 hover = {
                     enabled = true,
-                    view = nil, -- when nil, use defaults from documentation
-                    opts = {}, -- merged with defaults from documentation
                 },
                 signature = {
                     enabled = true,
@@ -127,14 +125,11 @@ return {
                         luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
                         throttle = 50, -- Debounce lsp signature help request by 50ms
                     },
-                    view = nil, -- when nil, use defaults from documentation
-                    opts = {}, -- merged with defaults from documentation
                 },
                 message = {
                     -- Messages shown by lsp servers
                     enabled = true,
                     view = "notify",
-                    opts = {},
                 },
                 -- defaults for hover and signature help
                 documentation = {
@@ -189,75 +184,101 @@ return {
             routes = {
                 {
                     view = "mini",
-                    filter = {
-                        event = "msg_show",
-                        kind = "",
-                        find = "written",
+                    filter = { event = "msg_show", kind = "", find = "change" },
+                    opts = {
+                        skip = true,
                     },
-                    opts = { skip = false },
                 },
                 {
                     view = "mini",
-                    filter = {
-                        event = "msg_show",
-                        kind = "",
-                        find = "yanked",
+                    filter = { event = "msg_show", kind = "", find = "info" },
+                    opts = {
+                        skip = false,
                     },
-                    opts = { skip = true },
                 },
                 {
                     view = "mini",
-                    filter = {
-                        event = "msg_show",
-                        kind = "",
-                        find = "line",
+                    filter = { event = "msg_show", kind = "", find = "line" },
+                    opts = {
+                        skip = true,
                     },
-                    opts = { skip = true },
                 },
                 {
                     view = "mini",
-                    filter = {
-                        event = "msg_show",
-                        kind = "",
-                        find = "change",
+                    filter = { event = "msg_show", kind = "", find = "written" },
+                    opts = {
+                        skip = false,
                     },
-                    opts = { skip = true },
                 },
                 {
                     view = "mini",
-                    filter = {
-                        event = "msg_show",
-                        kind = "echo",
-                        find = "no targets",
+                    filter = { event = "msg_show", kind = "", find = "yanked" },
+                    opts = {
+                        skip = true,
                     },
-                    opts = { skip = false },
                 },
                 {
                     view = "mini",
-                    filter = {
-                        event = "msg_show",
-                        kind = "",
-                        find = "info",
+                    filter = { event = "msg_show", kind = "echo", find = "Running healthchecks" },
+                    opts = {
+                        skip = false,
                     },
-                    opts = { skip = false },
+                },
+                {
+                    -- view = "mini",
+                    filter = { event = "msg_show", kind = "echo", find = "nil" },
+                    opts = {
+                        skip = true,
+                    },
+                },
+                {
+                    -- view = "mini",
+                    filter = { event = "msg_show", kind = "echo", find = "Starting Java Language Server" },
+                    opts = {
+                        skip = true,
+                    },
+                },
+                {
+                    -- view = "mini",
+                    filter = { event = "msg_show", kind = "echo", find = "Init" },
+                    opts = {
+                        skip = true,
+                    },
                 },
                 {
                     view = "mini",
-                    filter = {
-                        event = "msg_show",
-                        kind = "echo",
-                        find = "Running healthchecks",
+                    filter = { event = "msg_show", kind = "echo", find = "Ready" },
+                    opts = {
+                        skip = true,
                     },
-                    opts = { skip = false },
                 },
                 {
-                    view = "popup",
-                    filter = {
-                        event = "msg_show",
-                        kind = { "echo" },
-                        find = "",
+                    view = "mini",
+                    filter = { event = "msg_show", kind = "echo", find = "Ok" },
+                    opts = {
+                        skip = true,
                     },
-                    opts = { skip = false },
+                },
+                {
+                    view = "mini",
+                    filter = { event = "msg_show", kind = "echo", find = "Paused" },
+                    opts = {
+                        skip = true,
+                    },
+                },
+                {
+                    view = "mini",
+                    filter = { event = "msg_show", kind = "echo", find = "no targets" },
+                    opts = {
+                        skip = false,
+                    },
+                },
+                {
+                    view = "mini",
+                    filter = { event = "msg_show", kind = { "echo" }, find = "" },
+                    opts = {
+                        skip = false,
+                    },
                 },
             }, --- @see section on routes
         })

@@ -2,16 +2,12 @@ return {
     "turbio/bracey.vim",
     -- 需要调整nodejs版本
     build = "fnm use 16; npm install --prefix server",
-    cond = function()
-        local ft = { html = true }
-        return ft[vim.bo.ft] or false
-    end,
     event = {
         "UIEnter *.html",
         "BufNew *.html",
     },
-    config = function()
-        vim.api.nvim_create_autocmd({ "BufWinEnter", "BufEnter" }, {
+    init = function()
+        vim.api.nvim_create_autocmd({ "BufNew", "BufWinEnter", "BufEnter" }, {
             group = vim.api.nvim_create_augroup("HtmlPreview", { clear = true }),
             pattern = { "*.html" },
             callback = function()

@@ -118,8 +118,9 @@ $aurPkg sddm-theme-aerial-git
 sudo $pacMan pulseaudio-bluetooth bluez bluez-utils pulsemixer \
     xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
     pulseaudio-alsa pavucontrol
-# 取代xorg-xbacklight
-sudo $pacMan acpilight
+# 取代xorg-xbacklight, 色温程序
+sudo $pacMan acpilight redshift
+# 文件位置可能不一样，调整亮度时自己再改一下
 sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
 
 # 锁屏
@@ -171,7 +172,7 @@ $aurPkg microsoft-edge-stable-bin google-chrome
 $aurPkg visual-studio-code-bin intellij-idea-ultimate-edition
 
 # 截图,录屏,剪辑
-sudo $pacMan spectacle obs-studio shotcut
+sudo $pacMan flameshot spectacle obs-studio shotcut
 
 # 触摸板
 $aurPkg ruby-fusuma

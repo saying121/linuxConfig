@@ -1,6 +1,5 @@
 return {
     "monaqa/dial.nvim",
-    lazy = true,
     keys = {
         { "<C-a>", mode = { "n", "v" } },
         { "<C-x>", mode = { "n", "v" } },
@@ -39,7 +38,7 @@ return {
             }),
             augend.constant.new({
                 elements = { "+", "-" },
-                word = false, -- 匹配一个单词
+                word = true, -- 匹配一个单词
                 cyclic = true, -- "or" is incremented into "and".
             }),
             augend.constant.new({
@@ -49,27 +48,77 @@ return {
             }),
             augend.constant.new({
                 elements = { "&&", "||" },
-                word = false,
+                word = true,
                 cyclic = true,
             }),
             augend.constant.new({
                 elements = { "++", "--" },
-                word = false,
+                word = true,
                 cyclic = true,
             }),
             augend.constant.new({
                 elements = { "!==", "===" },
-                word = false,
+                word = true,
                 cyclic = true,
             }),
             augend.constant.new({
                 elements = { "MAX", "MIN" },
-                word = false,
+                word = true,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = {
+                    "January",
+                    "Februnary",
+                    "March",
+                    "Arpil",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December",
+                },
+                word = true,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = {
+                    "first",
+                    "second",
+                    "third",
+                    "fourth",
+                    "fifth",
+                    "sixth",
+                    "seventh",
+                    "eighth",
+                    "ninth",
+                    "tenth",
+                },
+                word = true,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = {
+                    "zero",
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six",
+                    "seven",
+                    "eight",
+                    "nine",
+                },
+                word = true,
                 cyclic = true,
             }),
             augend.constant.new({
                 elements = { "max", "min" },
-                word = false,
+                word = true,
                 cyclic = true,
             }),
 

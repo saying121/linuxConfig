@@ -2,16 +2,12 @@ return {
     "iamcco/markdown-preview.nvim",
     -- 需要调整nodejs版本
     build = "fnm use 18; cd app && npm install",
-    cond = function()
-        local ft = { markdown = true }
-        return ft[vim.bo.ft] or false
-    end,
     event = {
         "UIEnter *.md",
         "BufNew *.md",
     },
-    config = function()
-        vim.api.nvim_create_autocmd({ "BufWinEnter", "BufEnter" }, {
+    init = function()
+        vim.api.nvim_create_autocmd({ "BufNew", "BufWinEnter", "BufEnter" }, {
             group = vim.api.nvim_create_augroup("MarkdownPreview", { clear = true }),
             pattern = { "*.md", "*.markdown" },
             callback = function()
@@ -20,6 +16,8 @@ return {
                 vim.keymap.set("n", "<C-p>", ":MarkdownPreviewToggle<cr>", opts)
             end,
         })
+    end,
+    config = function()
         -- set to 1, nvim will open the preview window after entering the markdown buffer
         -- default: 0
         vim.g.mkdp_auto_start = 0
@@ -57,6 +55,7 @@ return {
         -- invalid: `/path/with\\ space/xxx`
         -- default: ''
         vim.g.mkdp_browser = ""
+        -- vim.g.mkdp_browser = "surf"
         -- for WSL,目前看不加也能用edge
         -- vim.g.mkdp_path_to_edge_chrome="/mnt/c/Prog"
 

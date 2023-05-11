@@ -50,7 +50,7 @@ return {
             end
             builtin.live_grep(opts)
         end
-        keymap("n", "<leader>gf", live_grep_from_git_root, opts)
+        keymap("n", "<leader>gw", live_grep_from_git_root, opts)
 
         require("telescope").load_extension("noice")
 
@@ -80,6 +80,11 @@ return {
                     -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
                     find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
                     prompt_prefix = "🔍",
+                    mappings = {
+                        n = {
+                            ["t"] = actions.select_tab + actions.move_to_top,
+                        },
+                    },
                 },
                 buffers = {
                     prompt_prefix = "﬘ ",

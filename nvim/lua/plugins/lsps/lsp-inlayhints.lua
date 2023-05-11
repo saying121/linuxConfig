@@ -1,21 +1,22 @@
+local ft = {
+    lua = "lua",
+    go = "go",
+    javascript = "js",
+    typescript = "ts",
+    c = "c",
+    cpp = "cpp",
+}
+
+local events = {}
+
+for _, value in pairs(ft) do
+    table.insert(events, "UIEnter *." .. value)
+    table.insert(events, "BufNew *." .. value)
+end
+
 return {
     "lvimuser/lsp-inlayhints.nvim",
-    cond = function()
-        local support_list = {
-            lua = true,
-            go = true,
-            javascript = true,
-            typescript = true,
-            c = true,
-            cpp = true,
-            dashboard = true,
-        }
-        return support_list[vim.bo.ft] or false
-    end,
-    event = {
-        'BufNew *.lua,*.go,*.js,*.ts,*.c,*.cpp,',
-        'UIEnter *.lua,*.go,*.js,*.ts,*.c,*.cpp,',
-    },
+    event = events,
     config = function()
         require("lsp-inlayhints").setup({
             inlay_hints = {

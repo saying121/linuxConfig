@@ -48,7 +48,7 @@ return {
         local function gitui_toggle()
             gitui:toggle()
         end
-        keymap("n", "<leader>g", gitui_toggle, opts)
+        keymap("n", "<leader>gu", gitui_toggle, opts)
 
         local lldb = Terminal:new({
             cmd = [[echo 'lldb 相关设置';echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope]],

@@ -22,12 +22,7 @@ if [[ $(grep "\[archlinuxcn\]" -c /etc/pacman.conf) = 0 ]]; then
 [archlinuxcn]
 Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 Server = http://mirrors.163.com/archlinux-cn/$arch
-' | sudo tee -a /etc/pacman.conf
-fi
-
-if [[ $(grep -c fileencoding /etc/pacman.conf) = 0 ]]; then
-    echo '
-# vim:fileencoding=utf-8:ft=conf' | sudo tee -a /etc/pacman.conf
+    ' | sudo tee -a /etc/pacman.conf
 fi
 
 sudo pacman -Syy
@@ -35,5 +30,3 @@ sudo pacman -S --needed --noconfirm pacman-contrib
 
 sudo pacman -S --needed --noconfirm archlinuxcn-keyring archlinux-keyring
 sudo pacman -S --needed --noconfirm yay paru
-
-# vim:fileencoding=utf-8:ft=sh:foldmethod=marker

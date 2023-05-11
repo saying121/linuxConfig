@@ -7,7 +7,9 @@
     - [也可以执行](#也可以执行)
   - [Clone 完成后](#clone-完成后)
   - [Grub 主题](#grub-主题)
+  - [切换桌面环境](#切换桌面环境)
   - [Nvidia，自行选择是否安装，最好看 archwiki 。](#nvidia自行选择是否安装最好看-archwiki)
+  - [zsh](#zsh)
 - [License](#license)
 <!--toc:end-->
 
@@ -51,7 +53,14 @@ $ ~/.linuxConfig/install.sh clashlink
 ## Grub 主题
 
 `./xenlism-grub-4k-kali`从[ kde store ](https://store.kde.org/p/1440862)界面下载，自行选择是否安装。
+
 `wget` 无法从浏览器下载链接下载文件，就放进了仓库。进入`./xenlism-grub-4k-kali`运行`./grub-theme.sh`来安装。
+
+用 `archlinux-tweak-tool-git` 调整比较好
+
+## 切换桌面环境
+
+如果是窗口管理器，推荐修改 `~/.xinitrc` （最好自己复制 `~/.linuxConfig/configs/xinitrc` 一份出来） ，桌面环境推荐启动**sddm**时选择
 
 ## Nvidia，自行选择是否安装，最好看 archwiki 。
 
@@ -78,6 +87,14 @@ $ pacman -Qs nvidia
 # local/opencl-nvidia 525.85.05-1
 #     OpenCL implemention for NVIDIA
 ```
+
+## zsh
+
+如果安装 zi 框架失败就执行 `sh -c "$(curl -fsSL get.zshell.dev)"`
+
+如果有插件没有安装完成，用 `zi update`
+
+`z-shell/zsh-diff-so-fancy` 总是安装失败，建议手动 `zi light z-shell/zsh-diff-so-fancy`
 
 # License
 

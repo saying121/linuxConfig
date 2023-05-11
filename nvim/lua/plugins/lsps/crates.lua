@@ -1,12 +1,12 @@
 return {
     "saecki/crates.nvim",
-    cond = function()
-        local ft = {
-            rust = true,
-            dashboard = true,
-        }
-        return ft[vim.bo.ft] or vim.fn.expand("%:t") == "Cargo.toml" or false
-    end,
+    -- cond = function()
+    --     local ft = {
+    --         rust = true,
+    --         dashboard = true,
+    --     }
+    --     return ft[vim.bo.ft] or vim.fn.expand("%:t") == "Cargo.toml" or false
+    -- end,
     version = "v0.3.0",
     event = {
         "UIEnter Cargo.toml",
@@ -18,13 +18,12 @@ return {
         "glepnir/lspsaga.nvim",
         "jose-elias-alvarez/null-ls.nvim",
     },
-    config = function()
-        local crates = require("crates")
-
+    init = function()
         vim.api.nvim_create_autocmd({ "BufWinEnter Cargo.toml", "BufEnter Cargo.toml" }, {
-            group = vim.api.nvim_create_augroup("CreatesReload", { clear = true }),
+            group = vim.api.nvim_create_augroup("CreatesKeyMap", { clear = true }),
             pattern = { "Cargo.toml" },
             callback = function()
+                local crates = require("crates")
                 -- 注释掉的可以用 K 打开 document 后操作
                 local opts, keymap = { noremap = true, silent = true, buffer = true }, vim.keymap.set
 
@@ -46,6 +45,9 @@ return {
                 -- keymap("n", "<leader>cC", crates.open_crates_io, opts)
             end,
         })
+    end,
+    config = function()
+        local crates = require("crates")
 
         crates.setup({
             smart_insert = true,

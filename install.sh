@@ -17,7 +17,7 @@ aurPkg='yay -S --needed --noconfirm'
 
 ~/.linuxConfig/must_install.sh
 
-cargo install leetcode-cli
+# cargo install leetcode-cli
 
 $aurPkg todotxt
 

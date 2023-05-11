@@ -18,7 +18,7 @@ autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 
 # 自定义的 zsh lib directories
-zi ice wait lucid; source ~/.linuxConfig/shells/directories.zsh
+zi ice wait lucid; source ~/.linuxConfig/shells/lib/directories.zsh
 
 # last-working-dir thefuck 要用
 ZSH_CACHE_DIR=~/.zi/cache
@@ -31,19 +31,17 @@ zi ice wait lucid; zi snippet OMZP::command-not-found
 zi ice wait lucid; zi snippet OMZP::cp
 zi ice wait lucid; zi snippet OMZP::vscode
 zi ice wait lucid; zi snippet OMZP::extract
-# zi ice wait lucid; zi snippet OMZ::plugins/history-substring-search/history-substring-search.zsh
-# zi ice depth=1; zi snippet OMZP::history-substring-search
-zi ice wait lucid; zi light zsh-users/zsh-history-substring-search
+zi ice wait lucid; zi snippet OMZP::nmap
+
 
 zi ice wait lucid; zi snippet OMZP::thefuck
-zi ice wait lucid; zi snippet OMZP::nvm
 zi ice wait lucid; zi snippet OMZP::pip
 zi ice wait lucid; zi snippet OMZP::alias-finder
 
-zi ice wait lucid; zi snippet OMZ::lib/clipboard.zsh
-zi ice wait lucid; zi snippet OMZ::lib/functions.zsh
-zi ice wait lucid; zi snippet OMZ::lib/history.zsh
-zi ice wait lucid; zi snippet OMZ::lib/git.zsh
+zi ice wait lucid; zi snippet OMZL::clipboard.zsh
+zi ice wait lucid; zi snippet OMZL::functions.zsh
+zi ice wait lucid; zi snippet OMZL::history.zsh
+zi ice wait lucid; zi snippet OMZL::git.zsh
 
 zi ice wait lucid; zi snippet OMZP::git
 zi ice wait lucid; zi snippet OMZP::gitignore
@@ -51,33 +49,33 @@ zi ice wait lucid; zi light paulirish/git-open.git
 
 zi ice wait lucid; zi light lesonky/web-search.git
 
+zi ice as'null' sbin'bin/*'
+zi light z-shell/zsh-diff-so-fancy
+
 
 zi ice wait lucid; zi light Aloxaf/fzf-tab
 zi ice wait lucid; zi light Freed-Wu/fzf-tab-source
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
-# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
-# export LESSOPEN='|~/.linuxConfig/shells/lessfilter.sh %s'
-export LESSOPEN='|lesspipe.sh %s'
-
+source ~/.linuxConfig/shells/lib/fzf-tab.zsh
 
 zi ice wait lucid; zi light z-shell/F-Sy-H
+# zi ice wait lucid; zi light zsh-users/zsh-history-substring-search
+# zi ice wait lucid; zi snippet OMZL::key-bindings.zsh
+# source ~/.linuxConfig/shells/lib/key-binding.zsh
+
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
+
 zi light zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
-zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
+zi ice depth=1 lucid; zi light jeffreytse/zsh-vi-mode
 
-export PYTHONPATH=~/.local/lib/python3.10/site-packages
+export PYTHONPATH=~/.local/lib/python3.11/site-packages
 
 alias lazyvim="NVIM_APPNAME=LazyVim nvim"
 alias nvchard="NVIM_APPNAME=NvChard nvim"
 alias tvim="NVIM_APPNAME=NvimTest nvim"
+alias astronvim="NVIM_APPNAME=astronvim nvim"
 
 zi snippet OMZP::last-working-dir
 

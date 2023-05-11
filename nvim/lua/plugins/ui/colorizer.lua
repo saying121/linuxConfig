@@ -1,13 +1,7 @@
 return {
     "norcalli/nvim-colorizer.lua",
-    -- ft = {
-    --     "vim",
-    --     "html",
-    --     "css",
-    --     "javascript",
-    -- },
-    cmd={
-        'ColorizerToggle'
+    cmd = {
+        "ColorizerToggle",
     },
     config = function()
         -- DEFAULT_OPTIONS = {

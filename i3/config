@@ -65,7 +65,8 @@ bindsym $mod+Shift+t exec kitty gotop
 
 bindsym Mod1+space exec ~/.linuxConfig/rofi/launcher.sh
 bindsym Ctrl+Mod1+space exec ~/.linuxConfig/rofi/rofiasroot.sh # root身份运行rofi
-bindsym $mod+Shift+s exec spectacle -rb # 截图
+# bindsym $mod+Shift+s exec spectacle -rb # 截图
+bindsym $mod+Shift+s exec flameshot gui # 截图
 
 bindsym $mod+e exec dolphin
 

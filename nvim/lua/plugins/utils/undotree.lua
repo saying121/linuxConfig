@@ -5,38 +5,38 @@ return {
     config = function()
         vim.keymap.set("n", "<leader>ut", ":UndotreeToggle | UndotreeFocus<CR>", { silent = true, noremap = true })
 
-        -- if !exists('g:undotree_WindowLayout')
-        vim.g.undotree_WindowLayout = 1
-        -- endif
+        if not vim.fn.exists("g:undotree_WindowLayout") then
+            vim.g.undotree_WindowLayout = 1
+        end
 
         -- e.g. using 'd' instead of 'days' to save some space.
-        -- if !exists('g:undotree_ShortIndicators')
-        vim.g.undotree_ShortIndicators = 0
-        -- endif
+        if not vim.fn.exists("g:undotree_ShortIndicators") then
+            vim.g.undotree_ShortIndicators = 0
+        end
 
         -- undotree window width
-        -- if !exists('g:undotree_SplitWidth')
-        -- if g:undotree_ShortIndicators == 1
-        -- vim.g.undotree_SplitWidth = 24
-        -- else
-        vim.g.undotree_SplitWidth = 30
-        -- endif
-        -- endif
+        if not vim.fn.exists("g:undotree_SplitWidth") then
+            if vim.g.undotree_ShortIndicators == 1 then
+                vim.g.undotree_SplitWidth = 24
+            else
+                vim.g.undotree_SplitWidth = 30
+            end
+        end
 
         -- diff window height
-        -- if !exists('g:undotree_DiffpanelHeight')
-        vim.g.undotree_DiffpanelHeight = 10
-        -- endif
+        if not vim.fn.exists("g:undotree_DiffpanelHeight") then
+            vim.g.undotree_DiffpanelHeight = 10
+        end
 
         -- auto open diff window
-        -- if !exists('g:undotree_DiffAutoOpen')
-        vim.g.undotree_DiffAutoOpen = 1
-        -- endif
+        if vim.fn.exists("g:undotree_DiffAutoOpen") then
+            vim.g.undotree_DiffAutoOpen = 1
+        end
 
         -- if set, let undotree window get focus after being opened, otherwise
         -- focus will stay in current window.
-        -- if !exists('g:undotree_SetFocusWhenToggle')
-        vim.g.undotree_SetFocusWhenToggle = 0
-        -- endif
+        if not vim.fn.exists("g:undotree_SetFocusWhenToggle") then
+            vim.g.undotree_SetFocusWhenToggle = 0
+        end
     end,
 }

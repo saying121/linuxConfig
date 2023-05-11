@@ -1,42 +1,41 @@
+local ft = {
+    asciidoc = "adoc",
+    asciidoc1 = "asciidoc",
+    css = "css",
+    flow = "flow",
+    graphql = "graphql",
+    html = "html",
+    javascript = "js",
+    json = "json",
+    jsx = "jsx",
+    less = "less",
+    lua = "lua",
+    markdown = "md",
+    mysql = "mysql",
+    plsql = "plsql",
+    python = "py",
+    scss = "scss",
+    sh = "sh",
+    sql = "sql",
+    tex = "tex",
+    typescript = "ts",
+    vim = "vim",
+    vue = "vue",
+    yaml = "yaml",
+    zsh = "zsh",
+}
+
+local events = {}
+
+for _, value in pairs(ft) do
+    table.insert(events, "UIEnter *." .. value)
+    table.insert(events, "BufNew *." .. value)
+end
+
 ---@diagnostic disable: unused-local
 return {
     "jose-elias-alvarez/null-ls.nvim",
-    cond = function()
-        local ft = {
-            angular = true,
-            asciidoc = true,
-            css = true,
-            dashboard = true,
-            flow = true,
-            graphql = true,
-            html = true,
-            javascript = true,
-            json = true,
-            jsx = true,
-            less = true,
-            lua = true,
-            markdown = true,
-            mysql = true,
-            plsql = true,
-            python = true,
-            scss = true,
-            sh = true,
-            sql = true,
-            tex = true,
-            typescript = true,
-            vim = true,
-            vue = true,
-            yaml = true,
-            zsh = true,
-        }
-
-        return ft[vim.bo.ft] or false
-    end,
-    event = {
-        "VeryLazy",
-        "LspAttach",
-        -- 'UIEnter *.html,*.tex,*.yaml,*.zsh,*.vim,*.md,*.markdown,*.py,*.sql,*.toml'
-    },
+    event = events,
     dependencies = {
         "nvim-lua/plenary.nvim",
     },

@@ -9,9 +9,6 @@ unset pacMan
 sudo pkgfile -u
 pkgfile makepkg
 
-# ln -s ~/.linuxConfig/shells/zirc.zsh ~/.zshrc
-# ln -s ~/.linuxConfig/shells/p10k.zsh ~/.p10k.zsh
-
 pip install thefuck
 
 [[ -d ~/.zi/cache ]] || mkdir ~/.zi/cache

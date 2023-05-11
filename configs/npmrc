@@ -1,4 +1,4 @@
-registry=https://registry.npm.taobao.org
+registry=https://registry.npmmirror.org
 ; 开源镜像: http://npm.taobao.org/mirrors
 ; Node.js 镜像: http://npm.taobao.org/mirrors/node
 ; alinode 镜像: http://npm.taobao.org/mirrors/alinode

@@ -1,5 +1,10 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-vim.opt.rtp:prepend(lazypath)
+if not vim.loop.fs_stat(lazypath) then
+    -- stylua: ignore
+    vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
+        lazypath })
+end
+vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 vim.keymap.set("n", "<F2>", ":Lazy sync<CR>", { noremap = true, silent = true })
 
@@ -97,14 +102,9 @@ require("lazy").setup({
             paths = {}, -- add any custom paths here that you want to indluce in the rtp
             ---@type string[] list any plugins you want to disable here
             disabled_plugins = {
-                "gzip",
-                "matchit",
-                "matchparen",
-                -- "netrwPlugin", -- 可以gx打开url，禁用了就不能了
-                "tarPlugin",
-                "tohtml",
+                -- "matchit",
+                -- "tohtml",
                 "tutor",
-                "zipPlugin",
             },
         },
     },

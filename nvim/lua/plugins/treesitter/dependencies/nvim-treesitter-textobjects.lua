@@ -17,7 +17,7 @@ return {
                     set_jumps = true, -- whether to set jumps in the jumplist
                     goto_next_start = {
                         ["]f"] = "@function.outer",
-                        ["]]"] = { query = "@class.outer", desc = "Next class start" },
+                        ["]cl"] = { query = "@class.outer", desc = "Next class start" },
 
                         -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
                         ["]o"] = "@loop.*",
@@ -29,26 +29,27 @@ return {
                         -- ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
                     },
                     goto_next_end = {
-                        ["]m"] = "@function.outer",
-                        ["]["] = "@class.outer",
+                        ["]F"] = "@function.outer",
+                        ["]C"] = "@class.outer",
                     },
                     goto_previous_start = {
                         ["[f"] = "@function.outer",
-                        ["[["] = "@class.outer",
+                        -- [c,]c 映射有问题
+                        ["[cl"] = "@class.outer",
                         ["[s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
                     },
                     goto_previous_end = {
-                        ["[m"] = "@function.outer",
-                        ["[]"] = "@class.outer",
+                        ["[F"] = "@function.outer",
+                        ["[C"] = "@class.outer",
                     },
                     -- Below will go to either the start or the end, whichever is closer.
                     -- Use if you want more granular movements
                     -- Make it even more gradual by adding multiple queries and regex.
                     goto_next = {
-                        ["]c"] = "@conditional.outer",
+                        ["]]"] = "@conditional.outer",
                     },
                     goto_previous = {
-                        ["[c"] = "@conditional.outer",
+                        ["[["] = "@conditional.outer",
                     },
                 },
                 select = {

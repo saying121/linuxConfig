@@ -1,5 +1,5 @@
-# vim:fileencoding=utf-8:ft=sh
-. ~/.linuxConfig/shells/common.sh
+# vim:fileencoding=utf-8:ft=zsh
+. ~/.linuxConfig/shells/lib/common.sh
 
 # see /usr/share/doc/zsh/examples/zshrc for examples
 
@@ -46,8 +46,7 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
-# shellcheck disable=2016
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+# zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # History configurations
 HISTFILE=~/.local/shells/.zsh_history
@@ -68,7 +67,6 @@ TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
 # enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     # Take advantage of $LS_COLORS for completion as well
-    # shellcheck disable=2296
     zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
     zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 fi
