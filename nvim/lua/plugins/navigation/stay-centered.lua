@@ -2,7 +2,6 @@ return {
     "arnamak/stay-centered.nvim",
     event = {
         "VeryLazy",
-        -- 'BufLeave dashboard'
     },
     config = function()
         -- 获取更好的鼠标滚动体验，这个可以当作自带的居中，但是插件的更好

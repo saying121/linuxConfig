@@ -8,8 +8,8 @@ return {
     --     end
     --     return true
     -- end,
-    -- commit = "c85ed0b01ec2d624c79ed25dd7702cca8742c4fe",
-    commit = "388ab180bf4360ede33e7b1c77fcd8c7f94e33b2",
+    commit = "76696bed4397c3b58563c246dc1f7856ed4af023",
+    -- commit = "388ab180bf4360ede33e7b1c77fcd8c7f94e33b2",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         -- Please make sure you install markdown and markdown_inline parser
@@ -149,7 +149,7 @@ return {
         -- When you use an action in finder like "open vsplit",
         -- you can use <C-t> to jump back
         keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
-        keymap({ "n", "v" }, "<M-CR>", "<cmd>Lspsaga code_action<CR>")
+        keymap({ "n", "x" }, "<M-CR>", "<cmd>Lspsaga code_action<CR>")
         -- Rename all occurrences of the hovered word for the entire file
         keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>")
         -- Rename all occurrences of the hovered word for the selected files
@@ -221,7 +221,7 @@ return {
                 vim.cmd("Man " .. vim.fn.expand("<cword>"))
             elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
                 require("crates").show_popup()
-            elseif _G.for_K == 1 then
+            elseif _G.dapui_for_K == 1 then
                 require("dapui").eval()
             elseif not peekOrHover() then
                 vim.cmd([[Lspsaga hover_doc]])
@@ -230,7 +230,7 @@ return {
         keymap("n", "K", show_documentation, { silent = true })
 
         -- If you want to jump to the hover window you should use the wincmd command "<C-w>w"
-        keymap("n", "zk", "<cmd>Lspsaga hover_doc ++keep<CR>")
+        keymap("n", "ck", "<cmd>Lspsaga hover_doc ++keep<CR>")
         -- Call hierarchy
         keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
         keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")

@@ -6,6 +6,7 @@ return {
         "<A-d>",
         "<leader>g",
         "<M-f>",
+        "<leader>lf",
     },
     cmd = { "ToggleTerm" },
     config = function()
@@ -49,6 +50,28 @@ return {
             gitui:toggle()
         end
         keymap("n", "<leader>gu", gitui_toggle, opts)
+        local lf = Terminal:new({
+            cmd = "lf",
+            hidden = true,
+            direction = "float",
+            float_opts = {
+                border = "double",
+                -- like `size`, width and height can be a number or function which is passed the current terminal
+                -- width = function()
+                --     return vim.o.columns * 0.8
+                -- end,
+                -- height = function()
+                --     return vim.o.lines * 0.8
+                -- end,
+                width = 150,
+                height = 40,
+                winblend = 3,
+            },
+        })
+        local function lf_toggle()
+            lf:toggle()
+        end
+        keymap("n", "<leader>lf", lf_toggle, opts)
 
         local lldb = Terminal:new({
             cmd = [[echo 'lldb 相关设置';echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope]],

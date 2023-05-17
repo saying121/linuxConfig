@@ -16,8 +16,7 @@ return {
     event = events,
     dependencies = {
         "nvim-lua/plenary.nvim",
-        -- "nvim-tree/nvim-tree.lua", 会导致 nvim-tree 配置失效
-        -- require("plugins.navigation.nvim-tree"),
+        "nvim-tree/nvim-tree.lua",
     },
     config = function()
         require("lsp-file-operations").setup({

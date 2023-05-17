@@ -1,11 +1,7 @@
 return {
     "petertriho/cmp-git",
     cond = function()
-        local ft = {
-            gitcommit = true,
-            dashboard = true,
-        }
-        return ft[vim.bo.ft] or false
+        return vim.bo.ft == "gitcommit" or false
     end,
     dependencies = {
         "nvim-lua/plenary.nvim",

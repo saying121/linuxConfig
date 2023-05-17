@@ -2,7 +2,7 @@ return {
     "JuanZoran/Trans.nvim",
     keys = {
         { "my", mode = { "n", "x" } },
-        { "mk", mode = { "n", "x" } },
+        { "ms", mode = { "n", "x" } },
         { "mi", mode = { "n" } },
     },
     branch = "v2",
@@ -15,7 +15,7 @@ return {
     config = function()
         local opts = { noremap = true, silent = true }
         vim.keymap.set({ "n", "x" }, "my", ":Translate<CR>", opts)
-        vim.keymap.set({ "n", "x" }, "mk", ":TransPlay<CR>", opts)
+        vim.keymap.set({ "n", "x" }, "ms", ":TransPlay<CR>", opts)
         vim.keymap.set("n", "mi", "<Cmd>TranslateInput<CR>", opts)
         -- require("Trans").setup()
 

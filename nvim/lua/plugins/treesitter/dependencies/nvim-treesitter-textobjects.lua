@@ -17,7 +17,7 @@ return {
                     set_jumps = true, -- whether to set jumps in the jumplist
                     goto_next_start = {
                         ["]f"] = "@function.outer",
-                        ["]cl"] = { query = "@class.outer", desc = "Next class start" },
+                        ["]c"] = { query = "@class.outer", desc = "Next class start" },
 
                         -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
                         ["]o"] = "@loop.*",
@@ -34,8 +34,7 @@ return {
                     },
                     goto_previous_start = {
                         ["[f"] = "@function.outer",
-                        -- [c,]c 映射有问题
-                        ["[cl"] = "@class.outer",
+                        ["[c"] = "@class.outer",
                         ["[s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
                     },
                     goto_previous_end = {

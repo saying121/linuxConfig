@@ -7,7 +7,7 @@
   - [可选的](#可选的)
     - [设置 blackarch 源，随意](#设置-blackarch-源随意)
     - [Athena 源，不过我添加失败了](#athena-源不过我添加失败了)
-  - [安装 Athena 基于 arch 的发行版 的说明。](#安装-athena-基于-arch-的发行版-的说明)
+  - [一些衍生发行版，安装 Athena 基于 arch 的发行版 的说明。](#一些衍生发行版安装-athena-基于-arch-的发行版-的说明)
 <!--toc:end-->
 
 ---
@@ -75,7 +75,7 @@ sudo pacman-key --recv-keys A3F78B994C2171D5 --keyserver keyserver.ubuntu.com
 
 ---
 
-## 安装 Athena 基于 arch 的发行版 的说明。
+## 一些衍生发行版，安装 Athena 基于 arch 的发行版 的说明。
 
 [Athena OS](https://github.com/Athena-OS/athena-iso/releases)
 

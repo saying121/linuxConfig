@@ -1,11 +1,20 @@
 return {
     "danymat/neogen",
-    dependencies = "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "L3MON4D3/LuaSnip",
+    },
     version = "*",
     cmd = "Neogen",
-    keys = { "<C-S-a>", mode = { "n", "v" } },
+    keys = {
+        { "<C-S-f>", mode = { "n", "x" } },
+        { "<C-S-a>", mode = { "n", "x" } },
+    },
     config = function()
-        vim.keymap.set({ "n", "v" }, "<C-S-a>", "<Cmd>Neogen<CR>", { noremap = true, silent = true })
+        local keymap = vim.keymap.set
+        keymap({ "n", "x" }, "<C-S-f>", "<Cmd>Neogen file<CR>", { noremap = true, silent = true })
+        keymap({ "n", "x" }, "<C-S-a>", "<Cmd>Neogen<CR>", { noremap = true, silent = true })
+
         require("neogen").setup({
             snippet_engine = "luasnip",
             languages = {

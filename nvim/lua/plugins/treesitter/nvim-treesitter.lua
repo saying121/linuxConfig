@@ -12,7 +12,6 @@ return {
         end
 
         require("nvim-treesitter.configs").setup({
-            -- ensure_installed = installed_list,
             ensure_installed = "all",
             sync_install = false,
             auto_install = true,
@@ -20,7 +19,7 @@ return {
                 enable = true,
                 keymaps = {
                     init_selection = "<CR>",
-                    node_incremental = "<C-a>",
+                    node_incremental = "<C-i>",
                     scope_incremental = "<CR>",
                     node_decremental = "<BS>",
                 },

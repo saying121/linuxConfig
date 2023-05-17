@@ -1,4 +1,5 @@
 set info size:time
+set icons
 
 # ${{
 #     w=$(tput cols)
@@ -85,11 +86,11 @@ map r push :rename<space>
 # (also see 'man mv' for backup/overwrite options)
 # cmd trash %set -f; mv $fx ~/.trash
 # cmd trash ${{
-#     set -f 
-#     if gio trash 2>/dev/null;then 
-#         gio trash $fx 
-#     else 
-#         mkdir -p ~/.trash 
+#     set -f
+#     if gio trash 2>/dev/null;then
+#         gio trash $fx
+#     else
+#         mkdir -p ~/.trash
 #         mv -- $fx ~/.trash
 #     fi
 # }}
@@ -382,3 +383,14 @@ cmd select-dirs ${{
         sed '/^$/d' | sort | uniq -u |
         xargs -d '\n' -r -I{} lf -remote "send $id toggle {}"
 }}
+
+cmd z-jump ${{
+  ZLUA_SCRIPT="$HOME/.zi/plugins/skywind3000---z.lua.git/z.lua"  # Usually unnecessary
+  lf -remote "send ${id} cd '$($ZLUA_SCRIPT -e $@)'"
+}}
+map Z push :z-jump<space>-I<space>
+map zb push :z-jump<space>-b<space>
+map zz push :z-jump<space>
+
+# OPENER=run-mailcap
+# set previewer print

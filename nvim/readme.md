@@ -6,6 +6,7 @@
   - [推荐几个教程](#推荐几个教程)
   - [主要插件](#主要插件)
     - [ui](#ui)
+  - [单使用 neovim 配置](#单使用-neovim-配置)
 <!--toc:end-->
 
 ![dashboard picture](./pictures/dashboard.png)
@@ -64,6 +65,24 @@
 
 终端里面 **Ctrl+I** 和 **Tab** 是一样的，它们都发送 ASCII 9（水平制表符）字符，i 模式映射要小心
 
+尽量用 `xnoremap` 而不是 `vnoremap`,`:h map`
+
+```vimdoc
+         Mode  | Norm | Ins | Cmd | Vis | Sel | Opr | Term | Lang | ~
+Command        +------+-----+-----+-----+-----+-----+------+------+ ~
+[nore]map      | yes  |  -  |  -  | yes | yes | yes |  -   |  -   |
+n[nore]map     | yes  |  -  |  -  |  -  |  -  |  -  |  -   |  -   |
+[nore]map!     |  -   | yes | yes |  -  |  -  |  -  |  -   |  -   |
+i[nore]map     |  -   | yes |  -  |  -  |  -  |  -  |  -   |  -   |
+c[nore]map     |  -   |  -  | yes |  -  |  -  |  -  |  -   |  -   |
+v[nore]map     |  -   |  -  |  -  | yes | yes |  -  |  -   |  -   |
+x[nore]map     |  -   |  -  |  -  | yes |  -  |  -  |  -   |  -   |
+s[nore]map     |  -   |  -  |  -  |  -  | yes |  -  |  -   |  -   |
+o[nore]map     |  -   |  -  |  -  |  -  |  -  | yes |  -   |  -   |
+t[nore]map     |  -   |  -  |  -  |  -  |  -  |  -  | yes  |  -   |
+l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
+```
+
 ## 推荐几个教程
 
 -   [ vim 基础教程 ](https://www.imooc.com/learn/1129)
@@ -92,7 +111,9 @@
 
 -   [ dressing.nvim ](https://github.com/stevearc/dressing.nvim) 更好的选择框 ui
 -   [ mini.indentscope ](https://github.com/echasnovski/mini.indentscope) 缩进线
-## 单使用neovim配置
+
+## 单使用 neovim 配置
+
 ```bash
 mkdir ~/.linuxConfig
 

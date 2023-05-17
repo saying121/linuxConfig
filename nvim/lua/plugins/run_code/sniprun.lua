@@ -2,12 +2,12 @@ return {
     "michaelb/sniprun",
     build = "./install.sh",
     keys = {
-        { "<leader>sr", mode = "v", desc = "unit test" },
+        { "<leader>sr", mode = "x", desc = "unit test" },
     },
     config = function()
-        local opts = { noremap = true, silent = true }
-        vim.api.nvim_set_keymap("v", "<leader>sr", "<Plug>SnipRun<CR>", opts)
-        vim.api.nvim_set_keymap("n", "<space>sc", "<Plug>SnipClose<CR>", opts)
+        local keymap,opts = vim.keymap.set,{ noremap = true, silent = true }
+        keymap("x", "<leader>sr", "<Plug>SnipRun<CR>", opts)
+        keymap("n", "<space>sc", "<Plug>SnipClose<CR>", opts)
 
         require("sniprun").setup({
             repl_enable = {},

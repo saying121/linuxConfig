@@ -1,11 +1,11 @@
 return {
     "anuvyklack/windows.nvim",
     keys = {
-        { "mm", mode = { "n", "v" } },
-        { "mv", mode = { "n", "v" } },
-        { "mh", mode = { "n", "v" } },
-        { "me", mode = { "n", "v" } },
-        { "ma", mode = { "n", "v" } },
+        { "mm", mode = { "n", "x" } },
+        { "mv", mode = { "n", "x" } },
+        { "mh", mode = { "n", "x" } },
+        { "me", mode = { "n", "x" } },
+        { "ma", mode = { "n", "x" } },
     },
     dependencies = {
         "anuvyklack/middleclass",
@@ -42,10 +42,10 @@ return {
         end
 
         local opts = { noremap = true, silent = true }
-        vim.keymap.set({ "n", "v" }, "mm", cmd("WindowsMaximize"), opts)
-        vim.keymap.set({ "n", "v" }, "mv", cmd("WindowsMaximizeVertically"), opts)
-        vim.keymap.set({ "n", "v" }, "mh", cmd("WindowsMaximizeHorizontally"), opts)
-        vim.keymap.set({ "n", "v" }, "me", cmd("WindowsEqualize"), opts)
-        vim.keymap.set({ "n", "v" }, "ma", cmd("WindowsToggleAutowidth"), opts)
+        vim.keymap.set({ "n", "x" }, "mm", cmd("WindowsMaximize"), opts)
+        vim.keymap.set({ "n", "x" }, "mv", cmd("WindowsMaximizeVertically"), opts)
+        vim.keymap.set({ "n", "x" }, "mh", cmd("WindowsMaximizeHorizontally"), opts)
+        vim.keymap.set({ "n", "x" }, "me", cmd("WindowsEqualize"), opts)
+        vim.keymap.set({ "n", "x" }, "ma", cmd("WindowsToggleAutowidth"), opts)
     end,
 }
