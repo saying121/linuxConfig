@@ -40,12 +40,14 @@ return {
                     show_parameter_hints = true,
                     -- prefix for parameter hints
                     -- default: "<-"
-                    -- parameter_hints_prefix = "<-- ",
-                    parameter_hints_prefix = " — ",
+                    -- parameter_hints_prefix = "<-- "  ,,
+                    parameter_hints_prefix = "  ",
+                    -- parameter_hints_prefix = " ⟸  ",
                     -- prefix for all the other hints (type, chaining)
                     -- default: "=>"
-                    -- other_hints_prefix = "==> ",
-                    other_hints_prefix = " — ",
+                    -- other_hints_prefix = "==> " ,
+                    other_hints_prefix = "  ",
+                    -- other_hints_prefix = " ⟹  ",
                     -- whether to align to the length of the longest line in the file
                     max_len_align = false,
                     -- padding from the left if max_len_align is true
@@ -94,9 +96,9 @@ return {
                 on_attach = function(client, bufnr)
                     require("public.lsp_attach").on_attach(client, bufnr)
                     local keymap, opts = vim.keymap.set, { noremap = true, silent = true, buffer = bufnr }
-                    keymap("n", "<C-space>", ":RustHoverActions<CR>", opts)
-                    keymap("n", "<leader><up>", ":RustMoveItemUp<CR>", opts)
-                    keymap("n", "<leader><down>", ":RustMoveItemDown<CR>", opts)
+                    keymap("n", "<M-f>", ":RustHoverActions<CR>", opts)
+                    keymap("n", "mk", ":RustMoveItemUp<CR>", opts)
+                    keymap("n", "mj", ":RustMoveItemDown<CR>", opts)
                     keymap("n", "<leader>R", ":RustRunnables<CR>", opts)
                     keymap("n", "<C-g>", ":RustOpenCargo<CR>", opts)
                     keymap("n", "<S-CR>", ":RustExpandMacro<CR>", opts)

@@ -2,7 +2,7 @@ return {
     "voldikss/vim-translator",
     lazy = true,
     keys = {
-        { "<M-y>", mode = { "n", "v" }, desc = "translate" },
+        { "<M-y>", mode = { "n", "x" }, desc = "translate" },
         -- { '<M-c>', mode = { 'n', 'v' }, desc = 'translate' },
         -- { "<M-r>", mode = { "n", "v" }, desc = "translate" },
         { "<M-x>", mode = "n", desc = "translate" },
@@ -14,7 +14,7 @@ return {
         local keymap = vim.api.nvim_set_keymap
         -- Display translation in a window
         keymap("n", "<M-y>", "<Plug>TranslateW", opts)
-        keymap("v", "<M-y>", "<Plug>TranslateWV", opts)
+        keymap("x", "<M-y>", "<Plug>TranslateWV", opts)
         -- Echo translation in the cmdline
         -- vim.api.nvim_set_keymap('n', '<M-c>', '<Plug>Translate', opts)
         -- vim.api.nvim_set_keymap('v', '<M-c>', '<Plug>TranslateV', opts)

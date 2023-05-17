@@ -51,6 +51,9 @@ sudo $pacMan htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
 $aurPkg gotop cpufetch gpufetch-git hardinfo neofetch
 pip3 install nvitop gpustat
 
+# markdown browser
+pip3 install frogmouth
+
 installWaydroid() {
     sudo $pacMan waydroid linux-zen linux-zen-headers
     $aurPkg waydroid-image python-pyclip

@@ -2,7 +2,7 @@ return {
     "ThePrimeagen/refactoring.nvim",
     -- lazy = true,
     keys = {
-        { "<leader>rr", mode = { "n", "v" } },
+        { "<leader>rr", mode = { "n", "x" } },
     },
     dependencies = {
         "nvim-lua/plenary.nvim",
@@ -15,7 +15,7 @@ return {
         local keymap = vim.api.nvim_set_keymap
 
         -- prompt for a refactor to apply when the remap is triggered
-        keymap("v", "<leader>rr", ":lua require('refactoring').select_refactor()<CR>", opts)
+        keymap("x", "<leader>rr", ":lua require('refactoring').select_refactor()<CR>", opts)
 
         -- Extract block doesn't need visual mode
         -- Extract function and
@@ -26,7 +26,7 @@ return {
         require("telescope").load_extension("refactoring")
         -- remap to open the Telescope refactoring menu in visual mode
         keymap(
-            "v",
+            "x",
             "<leader>rr",
             "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
             { noremap = true }
@@ -46,7 +46,7 @@ return {
             { noremap = true }
         )
         -- Remap in visual mode will print whatever is in the visual selection
-        keymap("v", "<leader>rv", ":lua require('refactoring').debug.print_var({})<CR>", { noremap = true })
+        keymap("x", "<leader>rv", ":lua require('refactoring').debug.print_var({})<CR>", { noremap = true })
 
         -- Cleanup function: this remap should be made in normal mode
         keymap("n", "<leader>rc", ":lua require('refactoring').debug.cleanup({})<CR>", { noremap = true })

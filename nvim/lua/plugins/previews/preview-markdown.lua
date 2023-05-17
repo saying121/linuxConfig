@@ -50,9 +50,6 @@ return {
         vim.g.mkdp_open_ip = "127.0.0.1"
 
         -- specify browser to open preview page
-        -- for path with space
-        -- valid: `/path/with\ space/xxx`
-        -- invalid: `/path/with\\ space/xxx`
         -- default: ''
         vim.g.mkdp_browser = ""
         -- vim.g.mkdp_browser = "surf"

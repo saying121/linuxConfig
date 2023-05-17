@@ -1,12 +1,5 @@
 return {
     "saecki/crates.nvim",
-    -- cond = function()
-    --     local ft = {
-    --         rust = true,
-    --         dashboard = true,
-    --     }
-    --     return ft[vim.bo.ft] or vim.fn.expand("%:t") == "Cargo.toml" or false
-    -- end,
     version = "v0.3.0",
     event = {
         "UIEnter Cargo.toml",
@@ -20,7 +13,7 @@ return {
     },
     init = function()
         vim.api.nvim_create_autocmd({ "BufWinEnter Cargo.toml", "BufEnter Cargo.toml" }, {
-            group = vim.api.nvim_create_augroup("CreatesKeyMap", { clear = true }),
+            group = vim.api.nvim_create_augroup("CratesKeyMap", { clear = true }),
             pattern = { "Cargo.toml" },
             callback = function()
                 local crates = require("crates")
@@ -35,7 +28,7 @@ return {
                 keymap("n", "cd", crates.show_dependencies_popup, opts)
 
                 keymap("n", "cu", crates.update_crate, opts)
-                keymap("v", "cu", crates.update_crates, opts)
+                keymap("x", "cu", crates.update_crates, opts)
                 -- keymap("n", "<leader>ca", crates.update_all_crates, opts)
                 -- keymap("n", "<leader>cA", crates.upgrade_all_crates, opts)
 

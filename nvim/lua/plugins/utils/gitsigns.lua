@@ -1,22 +1,21 @@
 return {
     "lewis6991/gitsigns.nvim",
-    -- cond = function()
-    --     if require("public.utils").get_git_root_dir(vim.fn.getcwd(), "/.git") ~= nil then
-    --         return true
-    --     end
-    --     return false
-    -- end,
+    cond = function()
+        vim.fn.system("git rev-parse --is-inside-work-tree")
+
+        return vim.v.shell_error == 0
+    end,
     event = "VeryLazy",
     config = function()
         require("gitsigns").setup({
-            signs = {
-                add = { text = "│" },
-                change = { text = "│" },
-                delete = { text = "_" },
-                topdelete = { text = "‾" },
-                changedelete = { text = "~" },
-                untracked = { text = "┆" },
-            },
+            -- signs = {
+            --     add = { text = "" },
+            --     change = { text = "" },
+            --     delete = { text = "" },
+            --     topdelete = { text = "⫪" },
+            --     changedelete = { text = "" },
+            --     untracked = { text = "👣" },
+            -- },
             signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
             numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
             linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
@@ -59,7 +58,7 @@ return {
                 end
 
                 -- Navigation
-                map("n", "]c", function()
+                map("n", "]gd", function()
                     if vim.wo.diff then
                         return "]c"
                     end
@@ -69,7 +68,7 @@ return {
                     return "<Ignore>"
                 end, { expr = true })
 
-                map("n", "[c", function()
+                map("n", "[gd", function()
                     if vim.wo.diff then
                         return "[c"
                     end
@@ -79,9 +78,8 @@ return {
                     return "<Ignore>"
                 end, { expr = true })
 
-                -- Actions
-                map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-                map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+                map({ "n", "x" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
+                map({ "n", "x" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
                 map("n", "<leader>hS", gs.stage_buffer)
                 map("n", "<leader>hu", gs.undo_stage_hunk)
                 map("n", "<leader>hR", gs.reset_buffer)

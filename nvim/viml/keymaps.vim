@@ -3,65 +3,65 @@ let mapleader=';'
 " let maplocalleader=';'
 
 nnoremap * *N
-vnoremap * *N
+xnoremap * *N
 nnoremap # #n
-vnoremap # #n
+xnoremap # #n
 nnoremap ,, ggVG
 
 " 多行移动
-vnoremap <A-j> :m '>+1<cr>gv=gv
-vnoremap <A-k> :m '<-2<cr>gv=gv
+xnoremap <M-j> :m '>+1<cr>gv=gv
+xnoremap <M-k> :m '<-2<cr>gv=gv
 
 nnoremap ` %
-vnoremap ` %
+xnoremap ` %
 nnoremap <silent><leader>w :w<CR>
 nnoremap <silent><leader>x :x<CR>
 
 nnoremap j gj
-vnoremap j gj
+xnoremap j gj
 onoremap j gj
 
 nnoremap k gk
-vnoremap k gk
+xnoremap k gk
 onoremap k gk
 
 nnoremap <up> g<up>
-vnoremap <up> g<up>
+xnoremap <up> g<up>
 onoremap <up> g<up>
 
 nnoremap <down> g<down>
-vnoremap <down> g<down>
+xnoremap <down> g<down>
 onoremap <down> g<down>
 
 nnoremap <home> g<home>
 nnoremap <end> g<end>
 
 nnoremap $ g$
-vnoremap $ g$
+xnoremap $ g$
 onoremap $ g$
 
 nnoremap 0 g0
-vnoremap 0 g0
+xnoremap 0 g0
 onoremap 0 g0
 
 nnoremap ^ g^
-vnoremap ^ g^
+xnoremap ^ g^
 onoremap ^ g^
 
 set wrap
 
 " 大写h、l移动到行首、行尾非空白符号,visual 'g_':行尾不包括换行符(包括就用$)
 nnoremap L g$
-vnoremap L g_
+xnoremap L g_
 onoremap L g_
 
 nnoremap H g^
-vnoremap H g^
+xnoremap H g^
 onoremap H g^
 
 " 选取进行缩进后还被选中
-vnoremap < <gv
-vnoremap > >gv
+xnoremap < <gv
+xnoremap > >gv
 
 " copy paste system clipboard
 " ^= 把值加到默认值前
@@ -84,13 +84,13 @@ nnoremap <silent>]B :blast<CR>
 nnoremap <silent>[B :bfirst<CR>
 
 " 切换窗口
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+nnoremap <M-h> <C-w>h
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-l> <C-w>l
 
 " tnoremap <Esc> <C-\><C-n>
-tnoremap <c-e> <C-\><C-n>
+tnoremap <M-e> <C-\><C-n>
 
 " 调整窗口大小
 nnoremap <M-,> <C-W><

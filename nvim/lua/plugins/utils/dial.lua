@@ -1,16 +1,16 @@
 return {
     "monaqa/dial.nvim",
     keys = {
-        { "<C-a>", mode = { "n", "v" } },
-        { "<C-x>", mode = { "n", "v" } },
+        { "<C-a>", mode = { "n", "x" } },
+        { "<C-x>", mode = { "n", "x" } },
     },
     config = function()
         vim.keymap.set("n", "<C-a>", require("dial.map").inc_normal("mygroup"), { noremap = true })
         vim.keymap.set("n", "<C-x>", require("dial.map").dec_normal("mygroup"), { noremap = true })
-        vim.keymap.set("v", "<C-a>", require("dial.map").inc_visual("mygroup"), { noremap = true })
-        vim.keymap.set("v", "<C-x>", require("dial.map").dec_visual("mygroup"), { noremap = true })
-        vim.keymap.set("v", "g<C-a>", require("dial.map").inc_gvisual("mygroup"), { noremap = true })
-        vim.keymap.set("v", "g<C-x>", require("dial.map").dec_gvisual("mygroup"), { noremap = true })
+        vim.keymap.set("x", "<C-a>", require("dial.map").inc_visual("mygroup"), { noremap = true })
+        vim.keymap.set("x", "<C-x>", require("dial.map").dec_visual("mygroup"), { noremap = true })
+        vim.keymap.set("x", "g<C-a>", require("dial.map").inc_gvisual("mygroup"), { noremap = true })
+        vim.keymap.set("x", "g<C-x>", require("dial.map").dec_gvisual("mygroup"), { noremap = true })
 
         local augend = require("dial.augend")
         local mygroup = {
@@ -69,9 +69,9 @@ return {
             augend.constant.new({
                 elements = {
                     "January",
-                    "Februnary",
+                    "February",
                     "March",
-                    "Arpil",
+                    "April",
                     "May",
                     "June",
                     "July",
@@ -132,7 +132,7 @@ return {
                 mygroup,
                 augend.constant.new({
                     elements = { "==", "~=" },
-                    word = false,
+                    word = true,
                     cyclic = true,
                 })
             )
@@ -141,7 +141,7 @@ return {
                 mygroup,
                 augend.constant.new({
                     elements = { "==", "!=" },
-                    word = false,
+                    word = true,
                     cyclic = true,
                 })
             )

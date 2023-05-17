@@ -6,11 +6,13 @@ return {
     config = function()
         local import = {
             "plenary.nvim",
+            "neotest",
+            "neotest-rust",
             -- "nvim-treesitter",
-            "nvim-lspconfig",
-            "cmp-nvim-lsp",
+            -- "nvim-lspconfig",
+            -- "cmp-nvim-lsp",
             -- "nvim-cmp",
-            "nvim-ufo",
+            -- "nvim-ufo",
             "telescope.nvim",
             "LuaSnip",
             -- "neoscroll.nvim",

@@ -14,7 +14,8 @@ sudo $pacMan ranger fzf python3 python-pip fnm npm lolcat ripgrep fd lldb transl
     typst
 
 sudo $pacMan python3 python-pip
-pip3 install black isort pynvim pipenv tldr pylsp-rope debugpy vim-vint neovim neovim-remote
+pip3 install pynvim pipenv tldr pylsp-rope vim-vint neovim neovim-remote \
+    frogmouth
 
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 rustup install stable beta nightly
@@ -25,13 +26,17 @@ rustup default stable
 # 切换 crates 源
 cargo install crm
 ~/.cargo/bin/crm best
+# `cargo install-update -h`,neotest-rust  用到
+cargo install cargo-update cargo-nextest grcov
+# criterion benchmark 会用
+$pacMan gnuplot
 
 # rust 交叉编译
 # rustup target add x86_64-pc-windows-gnu
 # rustup toolchain install stable-x86_64-pc-windows-gnu
 # $pacMan mingw-w64-gcc
 
-$aurPkg powershell-lts-bin # powershell-editor-services
+$aurPkg powershell-lts-bin
 
 $aurPkg libldap24 mssql-scripter
 

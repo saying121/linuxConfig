@@ -58,35 +58,30 @@ return {
         keymap("n", "<space>dr", dap.repl.open, opts)
         keymap("n", "<space>dl", dap.run_last, opts)
 
-        ---@diagnostic disable-next-line: lowercase-global
-        for_K = 0
+        _G.dapui_for_K = 0
 
         local dapui = require("dapui")
         -- 自动开启ui
         dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open()
             vim.api.nvim_command("DapVirtualTextEnable")
-            vim.opt.laststatus = 2
-            _G.for_K = 1
+            _G.dapui_for_K = 1
         end
 
         dap.listeners.before.event_terminated["dapui_config"] = function()
             vim.api.nvim_command("DapVirtualTextEnable")
             -- dapui.close()
-            vim.opt.laststatus = 3
-            _G.for_K = 0
+            _G.dapui_for_K = 0
         end
         dap.listeners.before.event_exited["dapui_config"] = function()
             vim.api.nvim_command("DapVirtualTextEnable")
             -- dapui.close()
-            vim.opt.laststatus = 3
-            _G.for_K = 0
+            _G.dapui_for_K = 0
         end
         dap.listeners.before.disconnect["dapui_config"] = function()
             vim.api.nvim_command("DapVirtualTextEnable")
             -- dapui.close()
-            vim.opt.laststatus = 3
-            _G.for_K = 0
+            _G.dapui_for_K = 0
         end
 
         -- dap.defaults.fallback.terminal_win_cmd = 'set splitright | 10vsplit new' -- this will be override by dapui

@@ -1,15 +1,10 @@
 return {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    keys = {
-        { ":", mode = { "n", "v", "t" } },
-        { "/", mode = { "n", "v", "t" } },
-        { "?", mode = { "n", "v", "t" } },
-    },
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-buffer",
         "f3fora/cmp-spell",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
         "lukas-reineke/cmp-rg",
         require("public.utils").get_dependencies_table("plugins/" .. "cmp" .. "/dependencies"),
     },
@@ -93,6 +88,7 @@ return {
             -- 分级显示，上一级有补全就不会显示下一级
             sources = cmp.config.sources({
                 -- 好像只有 keyword_length 起作用了, priority 需要配合 sorting
+                -- 搞不明白具体怎么搞的，排序乱七八糟的，大概就注释那样
                 -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
                 {
                     name = "luasnip",

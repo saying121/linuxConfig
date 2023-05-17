@@ -4,20 +4,7 @@ return {
     dependencies = {
         "kevinhwang91/promise-async",
         "neovim/nvim-lspconfig",
-        {
-            "luukvbaal/statuscol.nvim",
-            config = function()
-                local builtin = require("statuscol.builtin")
-                require("statuscol").setup({
-                    relculright = true,
-                    segments = {
-                        { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-                        { text = { "%s" }, click = "v:lua.ScSa" },
-                        { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
-                    },
-                })
-            end,
-        },
+        "luukvbaal/statuscol.nvim",
     },
     config = function()
         vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
@@ -79,7 +66,6 @@ return {
                     jumpTop = "gg",
                     jumpBot = "G",
                     close = "q",
-                    -- switch = "<Tab>",
                     switch = "K",
                     trace = "<CR>",
                 },
@@ -93,20 +79,6 @@ return {
 
         local keymap, opts = vim.keymap.set, { silent = true, noremap = true }
 
-        local function peekOrHover()
-            local winid = require("ufo").peekFoldedLinesUnderCursor()
-            if winid then
-                local bufnr = vim.api.nvim_win_get_buf(winid)
-                local keys = { "a", "i", "o", "A", "I", "O", "gd", "gr" }
-                for _, k in ipairs(keys) do
-                    -- Add a prefix key to fire `trace` action,
-                    -- if Neovim is 0.8.0 before, remap yourself
-                    vim.keymap.set("n", k, "<CR>" .. k, { noremap = true, buffer = bufnr })
-                end
-            end
-        end
-        keymap("n", "yf", peekOrHover, opts)
-
         local function goPreviousClosedAndPeek()
             require("ufo").goPreviousClosedFold()
             require("ufo").peekFoldedLinesUnderCursor()
@@ -119,13 +91,13 @@ return {
         end
         keymap("n", "]z", goNextClosedAndPeek, opts)
 
-        keymap("n", "zR", require("ufo").openAllFolds)
-        keymap("n", "zM", require("ufo").closeAllFolds)
+        keymap("n", "zR", require("ufo").openAllFolds, opts)
+        keymap("n", "zM", require("ufo").closeAllFolds, opts)
         keymap("n", "zr", function()
             require("ufo").openFoldsExceptKinds(require("ufo.config").close_fold_kinds)
         end, opts)
         keymap("n", "zm", function()
-            require("ufo").closeFoldsWith(1)
+            require("ufo").closeFoldsWith(2)
         end, opts) -- closeAllFolds == closeFoldsWith(0)
 
         if vim.bo.ft == "dashboard" then

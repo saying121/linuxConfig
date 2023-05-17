@@ -108,4 +108,10 @@ for <> in <> {
             { delimiters = "<>" }
         )
     ),
+    postfix({
+        trig = ".some",
+        priority = 30000,
+    }, {
+        l("Some(" .. l.POSTFIX_MATCH .. ")"),
+    }),
 }

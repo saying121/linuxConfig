@@ -2,7 +2,6 @@ return {
     "rebelot/kanagawa.nvim",
     cond = false,
     config = function()
-        -- Default options:
         require("kanagawa").setup({
             compile = false, -- enable compiling the colorscheme
             undercurl = true, -- enable undercurls
