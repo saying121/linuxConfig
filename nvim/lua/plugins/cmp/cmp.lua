@@ -6,37 +6,10 @@ return {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "lukas-reineke/cmp-rg",
+        "onsails/lspkind.nvim",
         require("public.utils").get_dependencies_table("plugins/" .. "cmp" .. "/dependencies"),
     },
     config = function()
-        local kind_icons = {
-            Text = "",
-            Method = "m",
-            Function = "",
-            Constructor = "",
-            Field = "",
-            Variable = "",
-            Class = "",
-            Interface = "",
-            Module = "",
-            Property = "",
-            Unit = "",
-            Value = "",
-            Enum = "",
-            Keyword = "",
-            Snippet = "",
-            Color = "",
-            File = "",
-            Reference = "",
-            Folder = "",
-            EnumMember = "",
-            Constant = "",
-            Struct = "",
-            Event = "",
-            Operator = "",
-            TypeParameter = "",
-        }
-
         local has_words_before = function()
             unpack = unpack or table.unpack
             local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -44,9 +17,24 @@ return {
         end
 
         local luasnip = require("luasnip")
+        local cmp, compare = require("cmp"), require("cmp.config.compare")
 
-        local cmp = require("cmp")
-        local compare = require("cmp.config.compare")
+        local lspkind = require("lspkind")
+        local source_mapping = {
+            buffer = "[Buf]",
+            cmdline = "[Cmd]",
+            cmp_git = "[Git]",
+            cmp_tabnine = "[TN]",
+            crates = "[Crates]",
+            latex_symbols = "[Latex]",
+            luasnip = "[LuaSnip]",
+            nvim_lsp = "[LSP]",
+            path = "[Path]",
+            rg = "[Rg]",
+            spell = "[Spell]",
+            vim_dadbod_completion = "[DB]",
+            zsh = "[Zsh]",
+        }
 
         cmp.setup({
             matching = {
@@ -57,7 +45,7 @@ return {
             },
             snippet = {
                 expand = function(args)
-                    require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+                    luasnip.lsp_expand(args.body)
                 end,
             },
             window = {
@@ -67,32 +55,31 @@ return {
             formatting = {
                 fields = { "kind", "abbr", "menu" },
                 format = function(entry, vim_item)
-                    vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
-                    vim_item.menu = ({
-                        buffer = "[Buf]",
-                        cmdline = "[Cmd]",
-                        cmp_git = "[Git]",
-                        crates = "[Crates]",
-                        latex_symbols = "[Latex]",
-                        luasnip = "[LuaSnip]",
-                        nvim_lsp = "[LSP]",
-                        path = "[Path]",
-                        rg = "[Rg]",
-                        spell = "[Spell]",
-                        vim_dadbod_completion = "[DB]",
-                        zsh = "[Zsh]",
-                    })[entry.source.name]
+                    vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol_text" }) -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+                    vim_item.menu = source_mapping[entry.source.name]
+                    if entry.source.name == "cmp_tabnine" then
+                        local detail = (entry.completion_item.labelDetails or {}).detail
+                        vim_item.kind = ""
+                        if detail and detail:find(".*%%.*") then
+                            vim_item.kind = vim_item.kind .. " " .. detail
+                        end
+
+                        if (entry.completion_item.data or {}).multiline then
+                            vim_item.kind = vim_item.kind .. " " .. "[ML]"
+                        end
+                    end
+                    local maxwidth = 50
+                    vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
                     return vim_item
                 end,
             },
             -- 分级显示，上一级有补全就不会显示下一级
             sources = cmp.config.sources({
                 -- 好像只有 keyword_length 起作用了, priority 需要配合 sorting
-                -- 搞不明白具体怎么搞的，排序乱七八糟的，大概就注释那样
                 -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
                 {
                     name = "luasnip",
-                    keyword_length = 2,
+                    -- keyword_length = 2,
                     -- trigger_characters = { "s", "n" },
                     -- Keyword_pattern = "sn",
                     priority = 1000,
@@ -101,8 +88,9 @@ return {
                 { name = "path", priority = 800 },
             }, {
                 { name = "buffer", priority = 800 },
-                { name = "rg", priority = 700 },
+                { name = "rg", keyword_length = 3, priority = 700 },
             }, {
+                { name = "cmp_tabnine", priority = 850 },
                 { name = "spell", priority = 600 },
                 { name = "rime", priority = 600 },
             }),
@@ -173,16 +161,32 @@ return {
                 -- rime-ls
                 comparators = {
                     -- require("cmp.config.compare").sort_text, -- 这个放第一个, 其他的随意
+                    compare.exact,
+                    compare.recently_used,
+                    compare.score,
                     compare.sort_test,
                     compare.offset,
-                    compare.exact,
-                    compare.score,
-                    compare.recently_used,
                     compare.kind,
                     compare.length,
                     compare.order,
+                    require("cmp_tabnine.compare"),
                 },
             },
+        })
+
+        cmp.setup.filetype("toml", {
+            sources = cmp.config.sources({
+                { name = "luasnip", priority = 1000 },
+                { name = "nvim_lsp", keyword_length = 0, priority = 900 },
+                { name = "cmp_tabnine", priority = 850 },
+                { name = "path", priority = 830 },
+            }, {
+                { name = "buffer", priority = 800 },
+                { name = "rg", keyword_length = 4, priority = 700 },
+            }, {
+                { name = "spell", priority = 600 },
+                { name = "rime", priority = 600 },
+            }),
         })
 
         vim.opt.spell = true

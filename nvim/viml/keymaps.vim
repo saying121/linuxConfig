@@ -4,16 +4,17 @@ let mapleader=';'
 
 nnoremap * *N
 xnoremap * *N
-nnoremap # #n
-xnoremap # #n
+nnoremap # #N
+xnoremap # #N
+
 nnoremap ,, ggVG
 
 " 多行移动
 xnoremap <M-j> :m '>+1<cr>gv=gv
 xnoremap <M-k> :m '<-2<cr>gv=gv
 
-nnoremap ` %
-xnoremap ` %
+" nnoremap ` %
+" xnoremap ` %
 nnoremap <silent><leader>w :w<CR>
 nnoremap <silent><leader>x :x<CR>
 
@@ -107,3 +108,8 @@ nnoremap <silent><BackSpace> :noh<CR>
 
 nnoremap <silent><leader>nc :set nonumber norelativenumber signcolumn=no<CR>
 nnoremap <silent><leader>yc :set number relativenumber signcolumn=yes:1<CR>
+
+augroup FTMap
+    autocmd!
+    autocmd FileType qf nnoremap <buffer> q :cclose<CR>
+augroup END

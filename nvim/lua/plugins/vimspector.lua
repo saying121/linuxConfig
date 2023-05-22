@@ -22,6 +22,28 @@ return {
         kemap("n", "<F8>", "<Plug>VimspectorStepOut<cr>", opts)
 
         kemap("n", "<F11>", "<Plug>VimspectorStop<cr>", opts)
+        --         \ {  "test_debugpy_config": {
+        --         \   "adapter": "test_debugpy",
+        --         \   "filetypes": [ "python" ],
+        --         \   "configuration": {
+        --         \     "request": "launch",
+        --         \     "type": "python",
+        --         \     "cwd": "${fileDirname}",
+        --         \     "args": [],
+        --         \     "program": "${file}",
+        --         \     "stopOnEntry": v:false,
+        --         \     "console": "integratedTerminal",
+        --         \     "integer": 123,
+        --         \   },
+        --         \   "breakpoints": {
+        --         \     "exception": {
+        --         \       "raised": "N",
+        --         \       "uncaught": "",
+        --         \       "userUnhandled": ""
+        --         \     }
+        --         \   }
+        --         \ } }
+        vim.g.vimspector_configurations = {}
 
         -- vim.g.vimspector_enable_mappings = "HUMAN"
         -- vim.g.vimspector_install_gadgets = { "debugpy", "vscode-cpptools", "CodeLLDB" }

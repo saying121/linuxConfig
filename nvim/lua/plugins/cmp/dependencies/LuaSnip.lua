@@ -20,6 +20,7 @@ return {
         })
 
         require("luasnip.loaders.from_vscode").lazy_load({
+            exclude = { "rust" },
             -- override_priority = 900,
             -- default_priority = 900,
         })

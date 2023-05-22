@@ -99,8 +99,6 @@ return {
                     enabled = true,
                     -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
                     -- See the section on formatting for more details on how to customize.
-                    format = "lsp_progress",
-                    format_done = "lsp_progress_done",
                     throttle = 1000 / 30, -- frequency to update lsp progress message
                     view = "mini",
                 },
@@ -179,106 +177,7 @@ return {
                     },
                 },
             },
-            routes = {
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = "", find = "change" },
-                    opts = {
-                        skip = true,
-                    },
-                },
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = "", find = "info" },
-                    opts = {
-                        skip = false,
-                    },
-                },
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = "", find = "line" },
-                    opts = {
-                        skip = true,
-                    },
-                },
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = "", find = "written" },
-                    opts = {
-                        skip = false,
-                    },
-                },
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = "", find = "yanked" },
-                    opts = {
-                        skip = true,
-                    },
-                },
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = "echo", find = "Running healthchecks" },
-                    opts = {
-                        skip = false,
-                    },
-                },
-                {
-                    -- view = "mini",
-                    filter = { event = "msg_show", kind = "echo", find = "nil" },
-                    opts = {
-                        skip = true,
-                    },
-                },
-                {
-                    -- view = "mini",
-                    filter = { event = "msg_show", kind = "echo", find = "Starting Java Language Server" },
-                    opts = {
-                        skip = true,
-                    },
-                },
-                {
-                    -- view = "mini",
-                    filter = { event = "msg_show", kind = "echo", find = "Init" },
-                    opts = {
-                        skip = true,
-                    },
-                },
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = "echo", find = "Ready" },
-                    opts = {
-                        skip = true,
-                    },
-                },
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = "echo", find = "Ok" },
-                    opts = {
-                        skip = true,
-                    },
-                },
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = "echo", find = "Paused" },
-                    opts = {
-                        skip = true,
-                    },
-                },
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = "echo", find = "no targets" },
-                    opts = {
-                        skip = false,
-                    },
-                },
-                {
-                    view = "mini",
-                    filter = { event = "msg_show", kind = { "echo" }, find = "" },
-                    opts = {
-                        skip = false,
-                    },
-                },
-            }, --- @see section on routes
+            routes = require("plugins.ui.noice_routes.routes"), --- @see section on routes
         })
     end,
 }

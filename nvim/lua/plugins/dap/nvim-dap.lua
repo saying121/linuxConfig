@@ -7,7 +7,6 @@ return {
         { "<leader>sc", mode = "n" },
         { "<leader>cl", mode = "n" },
     },
-    -- cond = false,
     cmd = {
         "PBToggleBreakpoint",
         "PBClearAllBreakpoints",

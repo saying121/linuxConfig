@@ -12,6 +12,7 @@ return {
             -- 不生效的文件类型
             skip_filetypes = {
                 "dashboard",
+                "alpha",
                 "lspsagafinder",
                 "sagacodeaction",
             },

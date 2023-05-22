@@ -20,6 +20,7 @@ return {
 
                 let g:Db_ui_buffer_name_generator = function('s:buffer_name_generator')
                 ]])
+
         vim.g.db_ui_icons = {
             expanded = {
                 db = "▾ ",

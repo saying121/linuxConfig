@@ -139,6 +139,8 @@ makepkg -si ~/.linuxConfig/i3/picom/PKGBUILD
 # i3-gaps-kde-git
 # ~/.linuxConfig/kde/use-i3.sh
 
+$pacMan sway mako swaybg swaylock swayidle waybar
+
 # 蓝牙前端
 sudo $pacMan blueman
 xset +dpms

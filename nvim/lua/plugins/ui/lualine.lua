@@ -29,7 +29,7 @@ return {
                 -- section_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
                 disabled_filetypes = {
-                    statusline = { "dashboard" },
+                    statusline = { "dashboard", "alpha" },
                     winbar = {},
                 },
                 ignore_focus = {},
@@ -78,6 +78,12 @@ return {
                     },
                 },
                 lualine_x = {
+                    { "%M" },
+                    {
+                        require("noice").api.status.command.get,
+                        cond = require("noice").api.status.command.has,
+                        -- color = { fg = "ff9e64" },
+                    },
                     -- {
                     --     require("noice").api.status.message.get_hl,
                     --     cond = require("noice").api.status.message.has,
@@ -87,7 +93,6 @@ return {
                     --     cond = require("noice").api.status.search.has,
                     --     color = { fg = "ff9e64" },
                     -- },
-                    { "%M" },
                     { rime_status },
                     {
                         "filetype",

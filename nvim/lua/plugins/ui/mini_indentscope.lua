@@ -3,6 +3,25 @@ return {
     version = "*",
     event = "VeryLazy",
     priority = 900,
+    init = function()
+        vim.api.nvim_create_autocmd("FileType", {
+            group = vim.api.nvim_create_augroup("IndentScope", { clear = true }),
+            pattern = {
+                "Trouble",
+                "alpha",
+                "dashboard",
+                "help",
+                "lazy",
+                "lspsagafinder",
+                "mason",
+                "neo-tree",
+                "toggleterm",
+            },
+            callback = function()
+                vim.b.miniindentscope_disable = true
+            end,
+        })
+    end,
     config = function()
         require("mini.indentscope").setup(
             -- No need to copy this inside `setup()`. Will be used automatically.
@@ -46,23 +65,5 @@ return {
                 symbol = "│",
             }
         )
-
-        vim.api.nvim_create_autocmd("FileType", {
-            group = vim.api.nvim_create_augroup("IndentScope", { clear = true }),
-            pattern = {
-                "Trouble",
-                "alpha",
-                "dashboard",
-                "help",
-                "lazy",
-                "lspsagafinder",
-                "mason",
-                "neo-tree",
-                "toggleterm",
-            },
-            callback = function()
-                vim.b.miniindentscope_disable = true
-            end,
-        })
     end,
 }

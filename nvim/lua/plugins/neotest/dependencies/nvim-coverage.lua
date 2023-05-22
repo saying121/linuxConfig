@@ -1,5 +1,6 @@
 return {
     "andythigpen/nvim-coverage",
+    build = "cargo install grcov",
     config = function()
         require("coverage").setup({
             signs = {
