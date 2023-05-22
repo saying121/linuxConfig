@@ -35,12 +35,12 @@ return {
         },
         fmt(
             [[
-struct Solution;
+            struct Solution;
 
-fn main() {
-    println!("{:?}", Solution::<>)
-}
-]],
+            fn main() {
+                println!("{:?}", Solution::<>);
+            }
+            ]],
             {
                 i(1, "function"),
             },
@@ -57,6 +57,17 @@ fn main() {
             i(2, ""),
         }, { delimiters = "<>" })
     ),
+    s("prvar", {
+        t([[println!("]]),
+        i(1, "variable"),
+        t({ ": {" }),
+        i(2, ":?"),
+        t({ [[}", ]] }),
+        d(3, function(args)
+            return sn(nil, { i(1, args[1]) })
+        end, { 1 }),
+        t(");"),
+    }),
     s(
         {
             trig = "eprintln",
@@ -69,37 +80,15 @@ fn main() {
     ),
     s(
         {
-            trig = "letmut",
-            priority = 30000,
-            dscr = "创建可变变量",
-        },
-        fmt([[let mut <> = <>;]], {
-            i(1, "var"),
-            i(2, ""),
-        }, { delimiters = "<>" })
-    ),
-    s(
-        {
-            trig = "letv",
-            priority = 30000,
-            dscr = "创建不可变变量",
-        },
-        fmt([[let <> = <>;]], {
-            i(1, "var"),
-            i(2, ""),
-        }, { delimiters = "<>" })
-    ),
-    s(
-        {
             trig = "fori",
             priority = 30000,
         },
         fmt(
             [[
-for <> in <> {
-    <>
-}
-        ]],
+            for <> in <> {
+                <>
+            }
+            ]],
             {
                 i(1, "var"),
                 i(2, ""),
@@ -108,10 +97,4 @@ for <> in <> {
             { delimiters = "<>" }
         )
     ),
-    postfix({
-        trig = ".some",
-        priority = 30000,
-    }, {
-        l("Some(" .. l.POSTFIX_MATCH .. ")"),
-    }),
 }

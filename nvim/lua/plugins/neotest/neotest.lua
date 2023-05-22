@@ -1,17 +1,20 @@
 return {
     "nvim-neotest/neotest",
-    -- keys = {
-    --     { "<leader>tf", mode = { "n" } },
-    --     { "<leader>tr", mode = { "n" } },
-    --     { "<leader>tg", mode = { "n" } },
-    --     { "<leader>to", mode = { "n" } },
-    -- },
+    keys = {
+        { "<leader>tf", mode = { "n" } },
+        { "<leader>tr", mode = { "n" } },
+        { "<leader>tg", mode = { "n" } },
+        { "<leader>to", mode = { "n" } },
+    },
     dependencies = {
         require("public.utils").get_dependencies_table("plugins/" .. "neotest" .. "/dependencies"),
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
         "antoinemadec/FixCursorHold.nvim",
-        "rouge8/neotest-rust", -- need `cargo install cargo-nextest`
+        {
+            "rouge8/neotest-rust",
+            build = "cargo install cargo-nextest",
+        },
         "nvim-neotest/neotest-python",
     },
     config = function()

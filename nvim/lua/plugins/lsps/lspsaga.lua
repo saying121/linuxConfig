@@ -2,12 +2,6 @@ return {
     "glepnir/lspsaga.nvim",
     -- Do make sure that your LSP plugins, like lsp-zero or lsp-config, are loaded before loading lspsaga.
     event = "LspAttach",
-    -- cond = function()
-    --     if #vim.lsp.get_active_clients() <= 1 then
-    --         return false
-    --     end
-    --     return true
-    -- end,
     commit = "76696bed4397c3b58563c246dc1f7856ed4af023",
     -- commit = "388ab180bf4360ede33e7b1c77fcd8c7f94e33b2",
     dependencies = {
@@ -194,7 +188,7 @@ return {
             require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
         end)
 
-        keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+        keymap("n", "<leader>ol", "<cmd>Lspsaga outline<CR>")
         -- To disable it just use ":Lspsaga hover_doc ++quiet"
         -- Pressing the key twice will enter the hover window
         -- keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")

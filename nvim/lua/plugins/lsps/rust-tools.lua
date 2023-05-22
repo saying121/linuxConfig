@@ -108,6 +108,7 @@ return {
                     --     rt.open_cargo_toml.open_cargo_toml()
                     -- end, opts)
                 end,
+                settings = require("plugins.lsps.rust-tools.settings"),
             },
             dap = {
                 -- adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),

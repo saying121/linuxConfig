@@ -5,7 +5,7 @@ return {
         "<M-t>",
         "<A-d>",
         "<leader>g",
-        "<M-f>",
+        "<leader>or",
         "<leader>lf",
     },
     cmd = { "ToggleTerm" },
@@ -50,6 +50,7 @@ return {
             gitui:toggle()
         end
         keymap("n", "<leader>gu", gitui_toggle, opts)
+
         local lf = Terminal:new({
             cmd = "lf",
             hidden = true,
@@ -103,6 +104,6 @@ return {
         local function open_ranger()
             ranger:toggle()
         end
-        keymap({ "n", "t" }, "<A-f>", open_ranger, opts)
+        keymap({ "n", "t" }, "<leader>or", open_ranger, opts)
     end,
 }

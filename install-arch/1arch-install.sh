@@ -34,7 +34,7 @@ yes/no
 
 read -r answer
 if [[ ! $answer = yes ]]; then
-	exit 0
+    exit 0
 fi
 
 timedatectl set-ntp true
@@ -42,6 +42,7 @@ timedatectl set-ntp true
 pacstrap /mnt base base-devel linux linux-firmware zsh
 
 genfstab -U /mnt >/mnt/etc/fstab
+
 echo '\e[1;33m
 ----------------------------------------------------------
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

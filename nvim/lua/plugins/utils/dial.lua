@@ -42,6 +42,11 @@ return {
                 cyclic = true, -- "or" is incremented into "and".
             }),
             augend.constant.new({
+                elements = { "+=", "-=" },
+                word = true, -- 匹配一个单词
+                cyclic = true, -- "or" is incremented into "and".
+            }),
+            augend.constant.new({
                 elements = { "<", ">" },
                 word = true, -- 匹配一个单词
                 cyclic = true, -- "or" is incremented into "and".

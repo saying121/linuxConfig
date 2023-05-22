@@ -3,7 +3,7 @@ return {
     version = "v0.3.0",
     event = {
         "UIEnter Cargo.toml",
-        "BufNew Cargo.toml",
+        "BufNewFile Cargo.toml",
     },
     dependencies = {
         "nvim-lua/plenary.nvim",

@@ -100,7 +100,7 @@ return {
             require("ufo").closeFoldsWith(2)
         end, opts) -- closeAllFolds == closeFoldsWith(0)
 
-        if vim.bo.ft == "dashboard" then
+        if vim.bo.ft == "dashboard" or vim.bo.ft == "alpha" then
             vim.cmd("UfoDetach")
         end
     end,

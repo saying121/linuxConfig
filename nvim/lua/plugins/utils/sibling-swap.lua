@@ -35,8 +35,8 @@ return {
             keymaps = {
                 ["<C-.>"] = "swap_with_right",
                 ["<C-,>"] = "swap_with_left",
-                ["<space>."] = "swap_with_right_with_opp",
-                ["<space>,"] = "swap_with_left_with_opp",
+                ["<C-S-.>"] = "swap_with_right_with_opp",
+                ["<C-S-,>"] = "swap_with_left_with_opp",
             },
             ignore_injected_langs = false,
         })

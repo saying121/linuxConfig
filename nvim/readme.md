@@ -18,7 +18,7 @@
 -   `./colors` :配置 neovim 透明,用`colorscheme`使用，例如在配置[ tokyonight ](https://github.com/folke/tokyonight.nvim)后加载,使得背景透明。
 -   `./dashboard` :是[ dashboard.nvim ](https://github.com/glepnir/dashboard-nvim)的`preview file`。
 -   `./ftplugin` :neovim 会根据文件类型加载其中文件, `文件类型` + `.lua/vim` 后缀,会先加载 `.vim` ，后加载 `.lua` 。
--   `./lua/dap-conf` :是对各个语言`Debug Adapter`的配置。在 _debug_ **Rust** 时如果没有 `--release` 编译调试会有问题
+-   `./lua/dap-conf` :是对各个语言`Debug Adapter`的配置。
 -   `./lua/lsp` :是对各个`lsp`的`setting`部分的配置,返回一个`setting`部分的`table`,nvim-lspconfig 会加载其中`.lua`后缀的文件。
 -   `./lua/plugins` :是对各个插件的配置。
 -   `./plugin` :nvim 会自动加载其中`.vim/lua`文件。
@@ -63,7 +63,7 @@
 
 ## 一些小细节
 
-终端里面 **Ctrl+I** 和 **Tab** 是一样的，它们都发送 ASCII 9（水平制表符）字符，i 模式映射要小心
+终端里面 **Ctrl+I** 和 **Tab** 是一样的，它们都发送 ASCII 9（水平制表符）字符，**Insert** 模式映射要小心
 
 尽量用 `xnoremap` 而不是 `vnoremap`,`:h map`
 

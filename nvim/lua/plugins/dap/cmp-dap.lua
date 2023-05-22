@@ -1,5 +1,19 @@
+local ft = {
+    "dap-repl",
+    "dapui_watches",
+    "dapui_hover",
+}
+
+local events = {}
+
+for _, value in pairs(ft) do
+    table.insert(events, "UIEnter *." .. value)
+    table.insert(events, "BufNew *." .. value)
+end
+
 return {
     "rcarriga/cmp-dap",
+    event = events,
     config = function()
         require("cmp").setup({
             enabled = function()

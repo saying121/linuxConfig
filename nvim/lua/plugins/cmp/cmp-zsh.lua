@@ -1,12 +1,9 @@
 return {
     "tamago324/cmp-zsh",
-    cond = function()
-        local ft = {
-            zsh = true,
-            dashboard = true,
-        }
-        return ft[vim.bo.ft] or false
-    end,
+    event = {
+        "UIEnter *.zsh",
+        "BufNew *.zsh",
+    },
     dependencies = "Shougo/deol.nvim",
     config = function()
         local cmp = require("cmp")
@@ -19,6 +16,7 @@ return {
                 { name = "buffer", priority = 700 },
                 { name = "rg", keyword_length = 4, priority = 600 },
             }, {
+                { name = "cmp_tabnine", priority = 850 },
                 { name = "spell", priority = 500 },
                 { name = "rime", priority = 500 },
             }),

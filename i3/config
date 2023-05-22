@@ -12,8 +12,6 @@ default_border pixel 4
 hide_edge_borders smart
 # none|vertical|horizontal|both|smart
 for_window [class="^.*"] border pixel 5
-# 窗口边框设置n像素
-new_window 1pixel # 去除标题栏
 gaps inner 3
 # 窗口之间缝隙
 gaps outer 0
