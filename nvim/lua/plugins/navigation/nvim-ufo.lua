@@ -96,9 +96,15 @@ return {
         keymap("n", "zr", function()
             require("ufo").openFoldsExceptKinds(require("ufo.config").close_fold_kinds)
         end, opts)
+
         keymap("n", "zm", function()
-            require("ufo").closeFoldsWith(2)
+            require("ufo").closeFoldsWith(1)
         end, opts) -- closeAllFolds == closeFoldsWith(0)
+        for i = 2, 10, 1 do
+            keymap("n", i .. "zm", function()
+                require("ufo").closeFoldsWith(i)
+            end, opts) -- closeAllFolds == closeFoldsWith(0)
+        end
 
         if vim.bo.ft == "dashboard" or vim.bo.ft == "alpha" then
             vim.cmd("UfoDetach")

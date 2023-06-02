@@ -19,7 +19,6 @@ return {
         local luasnip = require("luasnip")
         local cmp, compare = require("cmp"), require("cmp.config.compare")
 
-        local lspkind = require("lspkind")
         local source_mapping = {
             buffer = "[Buf]",
             cmdline = "[Cmd]",
@@ -36,12 +35,33 @@ return {
             zsh = "[Zsh]",
         }
 
+        local sources = cmp.config.sources({
+            -- 好像只有 keyword_length 起作用了, priority 需要配合 sorting
+            -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
+            {
+                name = "luasnip",
+                -- keyword_length = 2,
+                -- trigger_characters = { "s", "n" },
+                -- Keyword_pattern = "sn",
+                priority = 1000,
+            },
+            { name = "nvim_lsp", keyword_length = 0, priority = 900 },
+            { name = "path", priority = 800 },
+        }, {
+            { name = "buffer", priority = 800 },
+            { name = "rg", keyword_length = 3, priority = 700 },
+        }, {
+            { name = "cmp_tabnine", priority = 850 },
+            { name = "spell", priority = 600 },
+            { name = "rime", priority = 600 },
+        })
+
         cmp.setup({
             matching = {
                 disallow_fuzzy_matching = false,
                 disallow_partial_fuzzy_matching = false,
                 disallow_partial_matching = false,
-                disallow_prefix_unmatching = true,
+                disallow_prefix_unmatching = false,
             },
             snippet = {
                 expand = function(args)
@@ -55,7 +75,7 @@ return {
             formatting = {
                 fields = { "kind", "abbr", "menu" },
                 format = function(entry, vim_item)
-                    vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol_text" }) -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+                    vim_item.kind = require("lspkind").symbolic(vim_item.kind, { mode = "symbol_text" }) -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
                     vim_item.menu = source_mapping[entry.source.name]
                     if entry.source.name == "cmp_tabnine" then
                         local detail = (entry.completion_item.labelDetails or {}).detail
@@ -74,26 +94,7 @@ return {
                 end,
             },
             -- 分级显示，上一级有补全就不会显示下一级
-            sources = cmp.config.sources({
-                -- 好像只有 keyword_length 起作用了, priority 需要配合 sorting
-                -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
-                {
-                    name = "luasnip",
-                    -- keyword_length = 2,
-                    -- trigger_characters = { "s", "n" },
-                    -- Keyword_pattern = "sn",
-                    priority = 1000,
-                },
-                { name = "nvim_lsp", keyword_length = 0, priority = 900 },
-                { name = "path", priority = 800 },
-            }, {
-                { name = "buffer", priority = 800 },
-                { name = "rg", keyword_length = 3, priority = 700 },
-            }, {
-                { name = "cmp_tabnine", priority = 850 },
-                { name = "spell", priority = 600 },
-                { name = "rime", priority = 600 },
-            }),
+            sources = sources,
             experimental = {
                 ghost_text = true,
             },
@@ -127,7 +128,7 @@ return {
                 ["<C-b>"] = cmp.mapping.scroll_docs(-1),
                 ["<C-f>"] = cmp.mapping.scroll_docs(1),
                 -- ['<C-Space>'] = cmp.mapping.complete(),
-                ["<C-e>"] = cmp.mapping.abort(),
+                ["<M-e>"] = cmp.mapping.abort(),
                 ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
                 ["<Space>"] = cmp.mapping(function(fallback)
                     local entry = cmp.get_selected_entry()
@@ -161,13 +162,13 @@ return {
                 -- rime-ls
                 comparators = {
                     -- require("cmp.config.compare").sort_text, -- 这个放第一个, 其他的随意
-                    compare.exact,
-                    compare.recently_used,
-                    compare.score,
+                    compare.recently_used, -- 最近用过的靠前
+                    compare.exact, -- 精准匹配
+                    compare.score, -- 得分高靠前
+                    compare.length, -- 短的靠前
                     compare.sort_test,
                     compare.offset,
                     compare.kind,
-                    compare.length,
                     compare.order,
                     require("cmp_tabnine.compare"),
                 },

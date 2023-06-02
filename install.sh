@@ -52,7 +52,7 @@ $aurPkg gotop cpufetch gpufetch-git hardinfo neofetch
 pip3 install nvitop gpustat
 
 # markdown browser
-pip3 install frogmouth
+pip3 install frogmouth carbonyl
 
 installWaydroid() {
     sudo $pacMan waydroid linux-zen linux-zen-headers

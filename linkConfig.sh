@@ -80,6 +80,7 @@ link_list=(
     [$HOME/.linuxConfig/input-remapper-2]="$HOME/.config"
     [$HOME/.linuxConfig/fcitxs-config/fcitx]="$HOME/.config"
     [$HOME/.linuxConfig/fcitxs-config/fcitx5]="$HOME/.config"
+    [$HOME/.linuxConfig/lf/ctpv]="$HOME/.config"
     # # zshrc omz的，现在使用zi框架
     # [$HOME/.linuxConfig/shells/.zshrc]="$HOME/.zshrc"
 )

@@ -32,5 +32,7 @@ if [[ ! -f ~/.config/systemd/user/wallpaper.service ]]; then
     # systemctl --user enable wallpaperengine.service
 fi
 
+ln -sf ~/.linuxConfig/wallpaperengine/rewall.sh ~/.local/bin/rewall
+
 # cd ~/.local/share/wallpaperengine
 # git pull

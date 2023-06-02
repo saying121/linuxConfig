@@ -1,14 +1,11 @@
 {
-    "Lua.diagnostics.globals": [
-        "vim",
-        "require"
-    ],
     "workspace.library": [
         "/home/saying/.local/share/nvim/lazy/neodev.nvim/types/stable",
         "/usr/share/nvim/runtime/lua",
         "/home/saying/.local/share/nvim/lazy/LuaSnip/lua",
         "/home/saying/.local/share/nvim/lazy/plenary.nvim/lua",
         "/home/saying/.linuxConfig/nvim/lua",
-        "/tmp/lua-language-server.zIfv/meta/19cf2ff6"
+        "/tmp/lua-language-server.FkKu/meta/67b5408c",
+        "/tmp/lua-language-server.E1zn/meta/59a3d863"
     ]
 }

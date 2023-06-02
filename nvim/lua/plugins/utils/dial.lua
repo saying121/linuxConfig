@@ -130,27 +130,32 @@ return {
             augend.hexcolor.new({
                 case = "lower",
             }),
+            augend.constant.new({
+                elements = { "==", "!=" },
+                word = true,
+                cyclic = true,
+            }),
         }
 
-        if vim.bo.ft == "lua" then
-            table.insert(
-                mygroup,
-                augend.constant.new({
-                    elements = { "==", "~=" },
-                    word = true,
-                    cyclic = true,
-                })
-            )
-        else
-            table.insert(
-                mygroup,
-                augend.constant.new({
-                    elements = { "==", "!=" },
-                    word = true,
-                    cyclic = true,
-                })
-            )
-        end
+        -- if vim.bo.ft == "lua" then
+        --     table.insert(
+        --         mygroup,
+        --         augend.constant.new({
+        --             elements = { "==", "~=" },
+        --             word = true,
+        --             cyclic = true,
+        --         })
+        --     )
+        -- else
+        --     table.insert(
+        --         mygroup,
+        --         augend.constant.new({
+        --             elements = { "==", "!=" },
+        --             word = true,
+        --             cyclic = true,
+        --         })
+        --     )
+        -- end
 
         require("dial.config").augends:register_group({
             -- default augends used when no group name is specified

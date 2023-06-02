@@ -15,6 +15,14 @@ return {
         },
     },
     config = function()
+        vim.api.nvim_create_autocmd({ "FileType notify" }, {
+            group = vim.api.nvim_create_augroup("NotifyMap", { clear = true }),
+            -- pattern = { "Cargo.toml" },
+            callback = function()
+                local opts1 = { silent = true, noremap = true, buffer = true }
+                vim.keymap.set("n", "q", ":x<CR>", opts1)
+            end,
+        })
         require("noice").setup({
             cmdline = {
                 enabled = true, -- enables the Noice cmdline UI
