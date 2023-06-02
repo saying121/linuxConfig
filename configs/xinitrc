@@ -50,7 +50,7 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # exec_always feh --bg-scale "path_to_wallpaper" # 设置壁纸
 # feh --bg-fill --no-fehbg --randomize ~/.linuxConfig/wallpaperengine/somePictures
-exec systemctl --user start wallpaperengine.service &
+# exec systemctl --user start wallpaperengine.service &
 
 exec /usr/bin/i3-with-shmlog
 # exec /usr/bin/startplasma-x11

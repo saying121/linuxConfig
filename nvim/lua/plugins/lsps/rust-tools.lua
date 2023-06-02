@@ -18,7 +18,9 @@ return {
         ---@diagnostic disable-next-line: unused-local
         local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
-        require("rust-tools").setup({
+        local rt = require("rust-tools")
+
+        rt.setup({
             tools = {
                 -- how to execute terminal commands
                 -- options right now: termopen / quickfix
@@ -96,12 +98,16 @@ return {
                 on_attach = function(client, bufnr)
                     require("public.lsp_attach").on_attach(client, bufnr)
                     local keymap, opts = vim.keymap.set, { noremap = true, silent = true, buffer = bufnr }
-                    keymap("n", "<M-f>", ":RustHoverActions<CR>", opts)
+
+                    keymap("n", "<M-f>", function()
+                        rt.hover_actions.hover_actions()
+                        rt.hover_actions.hover_actions()
+                    end, opts)
                     keymap("n", "mk", ":RustMoveItemUp<CR>", opts)
                     keymap("n", "mj", ":RustMoveItemDown<CR>", opts)
-                    keymap("n", "<leader>R", ":RustRunnables<CR>", opts)
-                    keymap("n", "<C-g>", ":RustOpenCargo<CR>", opts)
-                    keymap("n", "<S-CR>", ":RustExpandMacro<CR>", opts)
+                    keymap("n", "<leader>R", rt.runnables.runnables, opts)
+                    keymap("n", "<C-g>", rt.open_cargo_toml.open_cargo_toml, opts)
+                    keymap("n", "<S-CR>", rt.expand_macro.expand_macro, opts)
 
                     -- keymap("n", "<C-g>", function()
                     --     vim.api.nvim_command("tabnew RustOpenCargo")

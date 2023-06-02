@@ -1,5 +1,8 @@
 return {
     "norcalli/nvim-colorizer.lua",
+    keys = {
+        "<M-c>",
+    },
     cmd = {
         "ColorizerToggle",
     },
@@ -16,6 +19,8 @@ return {
         --     -- Available modes: foreground, background
         --     mode = "background", -- Set the display mode.foreground
         -- }
+        local keymap = vim.keymap.set
+        keymap("n", "<M-c>", ":ColorizerToggle<CR>", { noremap = true, silent = true })
         require("colorizer").setup({
             css = { rgb_fn = true },
             "javascript",

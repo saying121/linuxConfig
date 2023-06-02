@@ -81,7 +81,7 @@ bindsym Mod1+q exec pavucontrol
 for_window [class="Blueman-manager"] floating enable;
 bindsym $mod+b exec blueman-manager
 
-focus_follows_mouse no # 鼠标点击才改变焦点
+# focus_follows_mouse no # 鼠标点击才改变焦点
 
 # 屏幕亮度
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
@@ -274,7 +274,7 @@ bar {
 
     binding_mode_indicator yes
 
-    i3bar_command i3bar --transparency
+    # i3bar_command i3bar --transparency
     colors {
         # background #666666
         background #32333585

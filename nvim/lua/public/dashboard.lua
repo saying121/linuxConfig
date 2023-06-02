@@ -28,7 +28,7 @@ end
 
 --- 获取文件行数
 ---@param file string
----@return number
+---@return integer
 function M.get_lines(file)
     local lines = M.lines_from(file)
     local num_lines = #lines -- 表的长度就是行数
@@ -37,7 +37,7 @@ end
 
 --- 获取文件最大列数
 ---@param file string
----@return number
+---@return integer
 function M.get_columns(file)
     local lines = M.lines_from(file)
 
@@ -55,7 +55,7 @@ end
 
 --- 在表的长度里面随机取值
 ---@param the_list table
----@return number
+---@return integer
 function M.get_rand(the_list)
     -- return math.random(1, #the_list)
     return vim.fn.rand() % #the_list + 1

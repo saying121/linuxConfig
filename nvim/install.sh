@@ -11,7 +11,7 @@ sudo $pacMan ranger fzf python3 python-pip fnm npm lolcat ripgrep fd lldb transl
     rustup jdk17-openjdk go cmake \
     neovim vale-git luarocks shellcheck \
     zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-ps \
-    typst
+    typst deno
 
 sudo $pacMan python3 python-pip
 pip3 install pynvim pipenv tldr pylsp-rope vim-vint neovim neovim-remote \

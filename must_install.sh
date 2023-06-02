@@ -203,8 +203,9 @@ sudo $pacMan polkit polkit-qt5 polkit-gnome # polkit-kde-agent
 # pdf
 sudo $pacMan python-pymupdf python-fonttools python-pillow bibtool termpdf.py-git
 
-# aur才有的软件
-$aurPkg xnviewmp fontpreview
+# 图片浏览器，字体，录制gif
+$aurPkg xnviewmp fontpreview gifine
+
 # wps
 $aurPkg wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn ttf-ms-fonts # wps-office
 # copyq networkmanager-dmenu-bluetoothfix-git networkmanager-dmenu-git archlinux-tweak-tool-git
