@@ -47,6 +47,8 @@ zi ice wait lucid; zi snippet OMZP::git
 zi ice wait lucid; zi snippet OMZP::gitignore
 zi ice wait lucid; zi light paulirish/git-open.git
 
+source ~/.zi/plugins/tj---git-extras/etc/git-extras-completion.zsh
+
 zi ice wait lucid; zi light lesonky/web-search.git
 
 zi ice as'null' sbin'bin/*'
@@ -81,3 +83,4 @@ zi snippet OMZP::last-working-dir
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi

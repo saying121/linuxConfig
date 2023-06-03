@@ -29,7 +29,7 @@ cargo install crm
 # `cargo install-update -h`,neotest-rust  用到
 cargo install cargo-update cargo-nextest grcov
 # criterion benchmark 会用
-$pacMan gnuplot
+sudo $pacMan gnuplot
 
 # rust 交叉编译
 # rustup target add x86_64-pc-windows-gnu
@@ -38,7 +38,7 @@ $pacMan gnuplot
 
 $aurPkg powershell-lts-bin
 
-$aurPkg libldap24 mssql-scripter
+# $aurPkg libldap24 mssql-scripter
 
 $aurPkg rime-ls rime-essay
 
@@ -49,9 +49,9 @@ fnm install 18
 fnm install 16
 fnm default 18
 
-sudo npm i -g neovim npm-check-updates neovim
-
-sudo npm install --save-dev --save-exact prettier
+# sudo npm i -g neovim npm-check-updates neovim
+#
+# sudo npm install --save-dev --save-exact prettier
 
 # 安装插件
 if [[ ! -d ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim ]]; then

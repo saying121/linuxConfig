@@ -125,7 +125,7 @@ sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
 
 # 锁屏
 sudo $pacMan betterlockscreen xidlehook dex
-sudo cp -f ~/.linuxConfig/custom-services/betterlockscreen@.service /usr/lib/systemd/system/
+# sudo cp -f ~/.linuxConfig/custom-services/betterlockscreen@.service /usr/lib/systemd/system/
 # 电源时间
 xset dpms 1200 1800 2400
 # 屏保时间
