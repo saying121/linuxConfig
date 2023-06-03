@@ -1,0 +1,133 @@
+{
+    "layer": "top",
+    "height": 5,
+    "modules-left": [
+        "cpu",
+        "temperature",
+        "memory",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "hyprland/submap",
+        "wlr/workspaces",
+        "clock"
+    ],
+    "modules-right": [
+        "backlight",
+        "pulseaudio",
+        "network",
+        "battery",
+        "custom/power",
+        "tray"
+    ],
+    "pulseaudio": {
+        "tooltip": false,
+        "scroll-step": 5,
+        "format": "{icon} {volume}%",
+        "format-muted": "{icon} {volume}%",
+        "on-click": "pavucontrol",
+        "format-icons": {
+            "default": [
+                " \uf026 ",
+                " \uf027 ",
+                " \uf028 "
+            ]
+        }
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}\u00b0C \uf2c7",
+        "format": "{temperatureC}\u00b0C \uf2c9"
+    },
+    "hyprland/window": {
+        "format": "<b>{}</b>",
+        "max-length": 40,
+        "separate-outputs": true
+    },
+    "hyprland/submap": {
+        "format": "\uf49e {}",
+        "max-length": 8,
+        "tooltip": false
+    },
+    "tray": {
+        "icon-size": 15,
+        "spacing": 10
+    },
+    "wlr/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "format-icons": {
+            "1": "\uf120",
+            "2": "\uf0ac",
+            "3": "\uf07b",
+            "4": "\uf086",
+            "5": "\uf03e",
+            "6": "\uf144",
+            "7": "\uf2b6",
+            "8": " \uf03a ",
+            "9": " \uf06d ",
+            "10": " \uf17a ",
+            "11": " \ufb0f ",
+            "12": " \uf044 ",
+            "13": " \uf17a ",
+            "urgent": "\uf06a",
+            "active": "\ufcb9",
+            "default": "\uf111"
+        },
+        "sort-by-number": true
+    },
+    "network": {
+        "interval": 2,
+        "format": " \uf1eb {ifname}",
+        "format-wifi": "\uf1eb ({signalStrength}%  {bandwidthUpOctets}  {bandwidthDownOctets})",
+        "tooltip-format": "{ifname} via {gwaddr} \uf796",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) \uf1eb",
+        "tooltip-format-ethernet": "{ifname} \uf0c1",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
+    "backlight": {
+        "tooltip": false,
+        "format": "\uf0eb {}%",
+        "interval": 1,
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 40,
+            "critical": 20
+        },
+        "format": "{icon}  {capacity}% ",
+        "format-charging": "\uf1e6 {capacity}% ",
+        "format-plugged": "\uf1e6 {capacity}% ",
+        "format-alt": "{time} {icon} ",
+        "format-icons": [
+            " \uf244",
+            " \uf243",
+            " \uf242",
+            " \uf241",
+            " \uf240"
+        ]
+    },
+    "clock": {
+        "format": "<b>{:%H:%M}</b>",
+        "tooltip-format": "<big>{:%Y-%m-%d %A %Z}</big>",
+        "on-double-click": "gnome-clocks",
+        "on-click-right": "kitty --hold lunar-date `date +'%Y %m'`"
+    },
+    "cpu": {
+        "interval": 15,
+        "format": " \uf2db {}% ",
+        "max-length": 10,
+        "on-click": "kitty gotop"
+    },
+    "memory": {
+        "interval": 30,
+        "format": " \uf0c9 {}% ",
+        "max-length": 10
+    }
+}

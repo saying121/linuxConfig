@@ -38,6 +38,18 @@ export PATH=/usr/lib/w3m:$PATH
 export XDG_DATA_HOME=~/.local/share
 export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
+
+# 外观
+export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+# 游戏
+export SDL_VIDEODRIVER=wayland
+
+# java程序黑屏
+export _JAVA_AWT_WM_NONEREPARENTING=1
+# gtk 优先wayland
+export GDK_BACKEND="wayland,x11"
     ' | sudo tee -a /etc/profile
 
     source /etc/profile
@@ -45,42 +57,46 @@ fi
 
 declare -A link_list
 link_list=(
-    [$HOME/.linuxConfig/gitui]="$HOME/.config"
-    [$HOME/.linuxConfig/qt5ct]="$HOME/.config"
+    [$HOME/.linuxConfig/.pip]="$HOME/"
+    [$HOME/.linuxConfig/X11/Xresources]="$HOME/.Xresources"
+    [$HOME/.linuxConfig/X11/xinitrc]="$HOME/.xinitrc"
+    [$HOME/.linuxConfig/X11/xprofile]="$HOME/.xprofile"
+    [$HOME/.linuxConfig/configs/flameshot.ini]="$HOME/.config/flameshot/flameshot.ini"
+    [$HOME/.linuxConfig/configs/go-musicfox.ini]="$HOME/.go-musicfox/go-musicfox.ini"
+    [$HOME/.linuxConfig/configs/konsave-conf.yaml]="$HOME/.config/konsave/conf.yaml"
+    [$HOME/.linuxConfig/configs/leetcode.toml]="$HOME/.leetcode/leetcode.toml"
+    [$HOME/.linuxConfig/configs/npmrc]="$HOME/.npmrc"
+    [$HOME/.linuxConfig/configs/rime-ls-user.yaml]="$HOME/.local/share/rime-ls-nvim/user.yaml"
+    [$HOME/.linuxConfig/configs/tldrrc]="$HOME/.tldrrc"
+    [$HOME/.linuxConfig/configs/w3m-config]="$HOME/.w3m/config"
+    [$HOME/.linuxConfig/fcitxs-config/fcitx5]="$HOME/.config"
+    [$HOME/.linuxConfig/fcitxs-config/fcitx]="$HOME/.config"
     [$HOME/.linuxConfig/formatters/clang-format]="$HOME/.clang-format"
     [$HOME/.linuxConfig/formatters/prettierrc.json]="$HOME/.prettierrc.json"
     [$HOME/.linuxConfig/formatters/stylua]="$HOME/.config"
-    [$HOME/.linuxConfig/.pip]="$HOME/"
-    [$HOME/.linuxConfig/nvim]="$HOME/.config"
-    [$HOME/.linuxConfig/configs/rime-ls-user.yaml]="$HOME/.local/share/rime-ls-nvim/user.yaml"
+    [$HOME/.linuxConfig/fusuma]="$HOME/.config"
+    [$HOME/.linuxConfig/gitui]="$HOME/.config"
+    [$HOME/.linuxConfig/i3/i3status-rust]="$HOME/.config"
+    [$HOME/.linuxConfig/i3]="$HOME/.config"
+    [$HOME/.linuxConfig/input-remapper-2]="$HOME/.config"
+    [$HOME/.linuxConfig/kitty]="$HOME/.config"
+    [$HOME/.linuxConfig/lf/ctpv]="$HOME/.config"
+    [$HOME/.linuxConfig/lf]="$HOME/.config"
+    [$HOME/.linuxConfig/nvim/coc-config/coc-settings.json]="$HOME/.vim/coc-settings.json"
     [$HOME/.linuxConfig/nvim/tasks.ini]="$HOME/.vim/tasks.ini"
     [$HOME/.linuxConfig/nvim/viml/init.vim]="$HOME/.vimrc"
-    [$HOME/.linuxConfig/nvim/coc-config/coc-settings.json]="$HOME/.vim/coc-settings.json"
-    [$HOME/.linuxConfig/configs/w3m-config]="$HOME/.w3m/config"
-    [$HOME/.linuxConfig/shells/bashrc]="$HOME/.bashrc"
-    [$HOME/.linuxConfig/shells/zirc.zsh]="$HOME/.zshrc"
-    [$HOME/.linuxConfig/shells/lib/p10k.zsh]="$HOME/.p10k.zsh"
+    [$HOME/.linuxConfig/nvim]="$HOME/.config"
+    [$HOME/.linuxConfig/qt5ct]="$HOME/.config"
     [$HOME/.linuxConfig/ranger]="$HOME/.config"
-    [$HOME/.linuxConfig/lf]="$HOME/.config"
-    [$HOME/.linuxConfig/configs/tldrrc]="$HOME/.tldrrc"
-    [$HOME/.linuxConfig/configs/npmrc]="$HOME/.npmrc"
-    [$HOME/.linuxConfig/configs/go-musicfox.ini]="$HOME/.go-musicfox/go-musicfox.ini"
-    [$HOME/.linuxConfig/configs/leetcode.toml]="$HOME/.leetcode/leetcode.toml"
-    [$HOME/.linuxConfig/configs/flameshot.ini]="$HOME/.config/flameshot/flameshot.ini"
-    [$HOME/.linuxConfig/kitty]="$HOME/.config"
-    [$HOME/.linuxConfig/wezterm]="$HOME/.config"
+    [$HOME/.linuxConfig/shells/bashrc]="$HOME/.bashrc"
+    [$HOME/.linuxConfig/shells/lib/p10k.zsh]="$HOME/.p10k.zsh"
+    [$HOME/.linuxConfig/shells/zirc.zsh]="$HOME/.zshrc"
     [$HOME/.linuxConfig/terminology]="$HOME/.config"
-    [$HOME/.linuxConfig/fusuma]="$HOME/.config"
-    [$HOME/.linuxConfig/i3]="$HOME/.config"
-    [$HOME/.linuxConfig/i3/i3status-rust]="$HOME/.config"
     [$HOME/.linuxConfig/wallpaperengine/betterlockscreen]="$HOME/.config"
-    [$HOME/.linuxConfig/configs/konsave-conf.yaml]="$HOME/.config/konsave/conf.yaml"
-    [$HOME/.linuxConfig/configs/xprofile]="$HOME/.xprofile"
-    [$HOME/.linuxConfig/configs/xinitrc]="$HOME/.xinitrc"
-    [$HOME/.linuxConfig/input-remapper-2]="$HOME/.config"
-    [$HOME/.linuxConfig/fcitxs-config/fcitx]="$HOME/.config"
-    [$HOME/.linuxConfig/fcitxs-config/fcitx5]="$HOME/.config"
-    [$HOME/.linuxConfig/lf/ctpv]="$HOME/.config"
+    [$HOME/.linuxConfig/wayland/hypr]="$HOME/.config"
+    [$HOME/.linuxConfig/wayland/waybar]="$HOME/.config"
+    [$HOME/.linuxConfig/wayland/swaylock]="$HOME/.config"
+    [$HOME/.linuxConfig/wezterm]="$HOME/.config"
     # # zshrc omz的，现在使用zi框架
     # [$HOME/.linuxConfig/shells/.zshrc]="$HOME/.zshrc"
 )
@@ -134,7 +150,7 @@ if [[ $(xinput list | grep "[tT]ouchpad" -c) != 0 ]]; then
     if [[ ! -d /etc/X11/xorg.conf.d ]]; then
         sudo mkdir -p /etc/X11/xorg.conf.d
     fi
-    sudo cp -f ~/.linuxConfig/configs/20-touchpad.conf /etc/X11/xorg.conf.d/20-touchpad.conf
+    sudo cp -f ~/.linuxConfig/X11/20-touchpad.conf /etc/X11/xorg.conf.d/20-touchpad.conf
 fi
 
 # [[ -d ~/.linuxConfig/input-remapper-2/presets/Keyboard\ K380\ Keyboard/ ]] || mkdir ~/.linuxConfig/input-remapper-2/presets/Keyboard\ K380\ Keyboard/

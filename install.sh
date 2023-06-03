@@ -28,7 +28,8 @@ $aurPkg yesplaymusic netease-cloud-music
 $aurPkg sddm-theme-aerial-git sddm-theme-catppuccin-git \
     sddm-theme-astronaut sddm-elegant-theme-git sddm-catppuccin-git \
     sddm-theme-corners-git simplicity-sddm-theme-git sddm-sugar-dark \
-    sddm-nordic-theme-git
+    sddm-nordic-theme-git \
+    sddm-theme-deepin-git  sddm-theme-tokyo-night
 sudo $pacMan plasma packagekit-qt5 packagekit appstream-qt appstream
 
 # 动态壁纸
@@ -48,8 +49,8 @@ sudo $pacMan wine
 
 # 各种查看系统信息的软件
 sudo $pacMan htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
-$aurPkg gotop cpufetch gpufetch-git hardinfo neofetch
-pip3 install nvitop gpustat
+$aurPkg gotop cpufetch hardinfo neofetch # `gpufetch-git
+# pip3 install nvitop gpustat
 
 # markdown browser
 pip3 install frogmouth carbonyl

@@ -1,0 +1,148 @@
+@import "frappe.css";
+
+* {
+    /* reference the color by using @color-name */
+    color: @text;
+    border: none;
+    font-family: "Hack Nerd Font";
+    font-size: 14px;
+    min-height: 10px;
+    border-radius: 15px;
+}
+
+#cpu {
+    margin: 1px;
+    padding-left: 5px;
+    padding-right: 0px;
+    border-radius: 15px 0px 0px 15px;
+    transition: none;
+    color: @text;
+    background: @crust;
+    /* background: @blue; */
+}
+
+#temperature {
+    margin: 1px;
+    padding-left: 0px;
+    padding-right: 5px;
+    border-radius: 0px 0px 0px 0px;
+    background: @crust;
+    /* background: @blue; */
+}
+
+#memory {
+    margin: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 0px 15px 15px 0px;
+    transition: none;
+    /* color: white; */
+    background: @crust;
+    /* background: @blue; */
+}
+
+#clock {
+    margin: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: none;
+    font-size: 17;
+    font-family: Hack Nerd Font;
+    background: @mantle;
+}
+
+#waybar {
+    /* background: rgba(20, 20, 20, 20); */
+    background-color: shade(@base, 0.5);
+    min-height: 10px;
+    border-radius: 0px;
+    /*     border: 2px solid alpha(@crust, 0.3); */
+}
+
+#window {
+    margin: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: none;
+    color: white;
+    /* background: @overlay1; */
+    background: @mantle;
+    font-family: "Hack Nerd Font", "Noto Sans CJK SC";
+}
+
+#workspaces {
+    color: #eeeeee;
+    background: rgba(50, 50, 50, 80);
+    margin: 1px;
+    font-family: "Liberation Mono";
+}
+#workspaces button {
+    margin: 1px;
+    color: white;
+    background: rgba(50, 50, 50, 80);
+}
+#workspaces button:hover {
+    color: black;
+    background: rgba(200, 200, 200, 80);
+    background: @surface1;
+}
+#workspaces button.focused {
+    color: @blue;
+    background: @blue;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#network,
+#network.disable,
+#network.disconnected
+    #network.linked
+    #network.ethernet
+    #network.wifi
+    #pulseaudio,
+#battery,
+#backlight {
+    margin: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: none;
+    background: transparent;
+}
+
+#network:hover,
+#pulseaudio:hover,
+#battery:hover,
+#backlight:hover {
+    background: rgba(50, 50, 50, 80);
+}
+
+#battery.charging,
+#battery.plugged {
+    color: white;
+}
+
+#battery.critical:not(.charging) {
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* @keyframes blink { */
+/*     to { */
+/*         background-color: #bf616a; */
+/*         color: #b5e8e0; */
+/*     } */
+/* } */
+
+#tray {
+    margin: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: none;
+    /* background: @overlay2; */
+    background: rgba(60, 60, 60, 80);
+}
