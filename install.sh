@@ -30,25 +30,25 @@ $aurPkg sddm-theme-aerial-git sddm-theme-catppuccin-git \
     sddm-theme-corners-git simplicity-sddm-theme-git sddm-sugar-dark \
     sddm-nordic-theme-git \
     sddm-theme-deepin-git  sddm-theme-tokyo-night
-sudo $pacMan plasma packagekit-qt5 packagekit appstream-qt appstream
+sudo "$pacMan" plasma packagekit-qt5 packagekit appstream-qt appstream
 
 # 动态壁纸
 # sudo $pacMan extra-cmake-modules plasma-framework gst-libav \
     #     base-devel mpv python-websockets qt5-declarative qt5-websockets qt5-webchannel \
     #     vulkan-headers cmake glfw-x11 vulkan-devel vulkan-radeon
 # $aurPkg renderdoc plasma5-wallpapers-wallpaper-engine
-sudo $pacMan gifsicle ffmpeg
+sudo "$pacMan" gifsicle ffmpeg
 $aurPkg linux-wallpaperengine-git # komorebi
 
 # installVirtualBox
-sudo $pacMan virtualbox virtualbox-host-dkms
+sudo "$pacMan" virtualbox virtualbox-host-dkms
 sudo gpasswd -a "$USER" vboxusers
 newgrp vboxusers
 
-sudo $pacMan wine
+sudo "$pacMan" wine pkgstats
 
 # 各种查看系统信息的软件
-sudo $pacMan htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
+sudo "$pacMan" htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
 $aurPkg gotop cpufetch hardinfo neofetch # `gpufetch-git
 # pip3 install nvitop gpustat
 
@@ -56,11 +56,12 @@ $aurPkg gotop cpufetch hardinfo neofetch # `gpufetch-git
 pip3 install frogmouth carbonyl
 
 installWaydroid() {
-    sudo $pacMan waydroid linux-zen linux-zen-headers
+    sudo "$pacMan" waydroid linux-zen linux-zen-headers
     $aurPkg waydroid-image python-pyclip
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 # installWaydroid
-$aurPkg com.qq.weixin.deepin com.qq.weixin.work.deepin-x11 linuxqq-firejail
+
+$aurPkg com.qq.weixin.deepin com.qq.weixin.work.deepin linuxqq-firejail
 
 unset pacMan aurPkg

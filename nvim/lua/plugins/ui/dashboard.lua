@@ -33,7 +33,7 @@ return {
             local all_prev = {
                 {
                     path = path_cat,
-                    command = "cat | lolcat -F 0.3",
+                    command = "cat | lolcat",
                     file_height = 24,
                     file_width = dash_func.get_columns(path_cat),
                 },
@@ -179,7 +179,7 @@ return {
             local path_cat = dash_func.get_random_file_path("alpha")
             local lolcat_header = {
                 type = "terminal",
-                command = "cat " .. path_cat .. " | lolcat -F 0.3",
+                command = "cat " .. path_cat .. " | lolcat",
                 width = dash_func.get_columns(path_cat),
                 height = dash_func.get_lines(path_cat),
                 opts = {
@@ -194,7 +194,7 @@ return {
             }
 
             -- Obtain Date Info
-            local date = io.popen('echo "$(date +%a) $(date +%d) $(date +%b)" | tr -d "\n"')
+            local date = io.popen('echo "$(date +%a) $(date +%b) $(date +%d)" | tr -d "\n"')
             ---@diagnostic disable-next-line: need-check-nil
             local date_info = "󰨲 Today is " .. date:read("*a")
             ---@diagnostic disable-next-line: need-check-nil

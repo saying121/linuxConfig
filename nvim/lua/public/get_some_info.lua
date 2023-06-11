@@ -84,4 +84,37 @@ function M.linux_distro()
     return uname.sysname
 end
 
+--- 获取文件格式
+---@return string
+function M.fileformat()
+    local fft = vim.bo.fileformat
+
+    local distro = {
+        arch = "",
+        kali = "",
+        ubuntu = "",
+        suse = "",
+        manjaro = "",
+        pop = "",
+    }
+
+    if fft == "unix" then
+        local your_distro = M.get_distro_name()
+
+        if distro[your_distro] ~= nil then
+            return "FF:" .. distro[your_distro]
+        else
+            return "FF:" .. "Linux"
+        end
+    end
+
+    if fft == "dos" then
+        return "FF:"
+    elseif fft == "mac" then
+        return "FF:"
+    end
+
+    return fft
+end
+
 return M

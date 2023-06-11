@@ -1,5 +1,6 @@
 ignore-empty-password
-font=Fira Sans Compressed
+font=Hack Nerd Font
+font=WenQuanYi Zen Hei
 
 clock
 timestr=%R
@@ -7,15 +8,12 @@ datestr=%a, %e of %B
 
 screenshots
 
-fade-in=0.2
+fade-in=2
 
-#position=10:10
-
-#effect-blur=1x1
+#effect-blur=2x2
 #effect-greyscale
 #effect-scale=0.3
 
-#  --indicator-thickness 7 \
 indicator
 indicator-radius=100
 indicator-thickness=7
@@ -26,10 +24,10 @@ indicator-y-position=870
 
 key-hl-color=228833
 
-#  --separator-color ffaffb \
+#separator-color=ffaffb
 separator-color=00000000
 
-inside-color=00000099
+inside-color=00000089
 inside-clear-color=ffd20400
 inside-caps-lock-color=009ddc00
 inside-ver-color=d9d8d800
@@ -41,7 +39,7 @@ ring-caps-lock-color=231f20D9
 ring-ver-color=231f20D9
 ring-wrong-color=231f20D9
 
-#  --line-color f185ff \
+#line-color=f185ff
 line-color=00000000
 line-clear-color=ffd2000
 line-caps-lock-color=009ddc00
@@ -51,6 +49,8 @@ line-wrong-color=ee2e2400
 text-clear-color=ffd20400
 text-ver-color=d9d8d800
 text-wrong-color=ee2e2400
+#text-color=9ACD32
+text-color=ADFF2F
 
 bs-hl-color=ee2e24FF
 #caps-lock-key-hl-color=ffd204FF

@@ -57,7 +57,7 @@ return {
             -- viml
             null_ls.builtins.diagnostics.vint,
             null_ls.builtins.diagnostics.ruff,
-            null_ls.builtins.diagnostics.vale,
+            -- null_ls.builtins.diagnostics.vale,
             null_ls.builtins.diagnostics.zsh,
             null_ls.builtins.formatting.beautysh,
             null_ls.builtins.diagnostics.sqlfluff.with({

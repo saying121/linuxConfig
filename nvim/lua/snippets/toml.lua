@@ -88,6 +88,8 @@ local crates = {
     "tui", -- tui
     "unicode-segmentation",
     "url",
+    "x11rb",
+    "wayland-client",
     "walkdir", -- 遍历目录
 }
 

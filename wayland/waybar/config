@@ -2,6 +2,7 @@
     "layer": "top",
     "height": 5,
     "modules-left": [
+        "bluetooth",
         "cpu",
         "temperature",
         "memory",
@@ -13,19 +14,35 @@
         "clock"
     ],
     "modules-right": [
+        "network",
         "backlight",
         "pulseaudio",
-        "network",
-        "battery",
+        "upower",
         "custom/power",
         "tray"
     ],
+    "bluetooth": {
+        "format": "\uf294 {status}",
+        "format-connected": "\uf294 {device_alias}",
+        "format-connected-battery": "\uf294 {device_alias} {device_battery_percentage}%",
+        "format-device-preference": [
+            "Keyboard K380",
+            "X7"
+        ],
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click-right": "[[ $(ps -ef | grep -c blueman-manage[r]) -gt 0 ]] && killall blueman-manager || blueman-manager"
+    },
     "pulseaudio": {
-        "tooltip": false,
+        "tooltip": true,
         "scroll-step": 5,
-        "format": "{icon} {volume}%",
-        "format-muted": "{icon} {volume}%",
-        "on-click": "pavucontrol",
+        "format-bluetooth": "{icon}\uf294 {volume}%",
+        "format": "{icon}{volume}%",
+        "format-muted": "\uf466  {volume}%",
+        "on-click-right": "[[ $(ps -ef | grep -c pavucontro[l]) -gt 0 ]] && killall pavucontrol || pavucontrol",
+        "on-click": "[[ $(pactl list sinks | grep -c '\u5426') = 1 ]] && pactl set-sink-mute 0 1 || pactl set-sink-mute 0 0",
         "format-icons": {
             "default": [
                 " \uf026 ",
@@ -36,8 +53,8 @@
     },
     "temperature": {
         "critical-threshold": 80,
-        "format-critical": "{temperatureC}\u00b0C \uf2c7",
-        "format": "{temperatureC}\u00b0C \uf2c9"
+        "format-critical": "\uf2c7 {temperatureC}\u00b0C",
+        "format": "\uf2c9 {temperatureC}\u00b0C"
     },
     "hyprland/window": {
         "format": "<b>{}</b>",
@@ -47,7 +64,7 @@
     "hyprland/submap": {
         "format": "\uf49e {}",
         "max-length": 8,
-        "tooltip": false
+        "tooltip": true
     },
     "tray": {
         "icon-size": 15,
@@ -80,20 +97,29 @@
     },
     "network": {
         "interval": 2,
-        "format": " \uf1eb {ifname}",
-        "format-wifi": "\uf1eb ({signalStrength}%  {bandwidthUpOctets}  {bandwidthDownOctets})",
+        "format": "\uf1eb ({signalStrength}% \uf093 {bandwidthUpOctets} \uf019 {bandwidthDownOctets})",
+        "format-wifi": "\uf1eb ({signalStrength}% \uf093 {bandwidthUpOctets} \uf019 {bandwidthDownOctets})",
         "tooltip-format": "{ifname} via {gwaddr} \uf796",
         "tooltip-format-wifi": "{essid} ({signalStrength}%) \uf1eb",
         "tooltip-format-ethernet": "{ifname} \uf0c1",
         "tooltip-format-disconnected": "Disconnected",
-        "max-length": 50
+        "max-length": 50,
+        "on-click-right": "[[ $(ps -ef | grep -c nm-connection-edito[r]) -gt 0 ]] && killall nm-connection-editor || nm-connection-editor"
     },
     "backlight": {
-        "tooltip": false,
+        "tooltip": true,
         "format": "\uf0eb {}%",
         "interval": 1,
         "on-scroll-up": "brightnessctl set 5%+",
         "on-scroll-down": "brightnessctl set 5%-"
+    },
+    "upower": {
+        "format": "{percentage}",
+        "format-alt": "{percentage} {time}",
+        "icon-size": 13,
+        "hide-if-empty": true,
+        "tooltip": true,
+        "tooltip-spacing": 20
     },
     "battery": {
         "states": {
@@ -117,17 +143,64 @@
         "format": "<b>{:%H:%M}</b>",
         "tooltip-format": "<big>{:%Y-%m-%d %A %Z}</big>",
         "on-double-click": "gnome-clocks",
-        "on-click-right": "kitty --hold lunar-date `date +'%Y %m'`"
+        "on-click-right": "[[ $(ps -ef | grep -c gnome-calenda[r]) -gt 0 ]] && killall gnome-calendar || gnome-calendar"
     },
     "cpu": {
         "interval": 15,
         "format": " \uf2db {}% ",
         "max-length": 10,
-        "on-click": "kitty gotop"
+        "on-click-right": "[[ $(ps -ef | grep -c plasma-systemmonito[r]) -gt 0 ]] && killall plasma-systemmonitor || plasma-systemmonitor"
     },
     "memory": {
         "interval": 30,
-        "format": " \uf0c9 {}% ",
-        "max-length": 10
+        "format": "\uf0c9 {percentage}% {used:0.1f}G/{total:0.1f}G ",
+        "tooltip-format": "\uf0c9 {percentage}% {used:0.1f}G/{total:0.1f}G {swapPercentage}% {swapUsed}G/{swapAvail}G ",
+        "max-length": 26
+    },
+    "mpris": {
+        "format": "DEFAULT: {player_icon} {dynamic}",
+        "format-paused": "DEFAULT: {status_icon} <i>{dynamic}</i>",
+        "player-icons": {
+            "default": "\u25b6",
+            "mpv": "\ud83c\udfb5"
+        },
+        "status-icons": {
+            "paused": "\u23f8"
+        }
+    },
+    "sndio": {
+        "format": "{raw_value} \ud83c\udf9c",
+        "scroll-step": 3
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 14,
+        "icon-theme": "Numix-Circle",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "ignore-list": [
+            "Alacritty"
+        ],
+        "app_ids-mapping": {
+            "firefoxdeveloperedition": "firefox-developer-edition"
+        }
+    },
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-muted": "\uf026",
+        "on-click": "helvum",
+        "format-icons": [
+            "\uf026",
+            "\uf027",
+            "\uf028"
+        ]
+    },
+    "user": {
+        "format": "{user} (up {work_d} days \u2191)",
+        "interval": 60,
+        "height": 30,
+        "width": 30,
+        "icon": true
     }
 }

@@ -21,7 +21,29 @@ return {
     hide_tab_bar_if_only_one_tab = true,
     default_cursor_style = "SteadyBar", -- Acceptable values are SteadyBlock, BlinkingBlock, SteadyUnderline, BlinkingUnderline, SteadyBar, and BlinkingBar.
     -- colors = { tab_bar = tabbar },
+    enable_wayland = true,
+    leader = { key = "3", mods = "CTRL" },
     keys = {
+        {
+            key = "h",
+            mods = "CTRL|SHIFT|ALT",
+            action = act.AdjustPaneSize({ "Left", 5 }),
+        },
+        {
+            key = "j",
+            mods = "CTRL|SHIFT|ALT",
+            action = act.AdjustPaneSize({ "Down", 5 }),
+        },
+        {
+            key = "k",
+            mods = "CTRL|SHIFT|ALT",
+            action = act.AdjustPaneSize({ "Up", 5 }),
+        },
+        {
+            key = "l",
+            mods = "CTRL|SHIFT|ALT",
+            action = act.AdjustPaneSize({ "Right", 5 }),
+        },
         {
             key = "k",
             mods = "SHIFT|CTRL",
@@ -69,8 +91,26 @@ return {
         },
         {
             key = "LeftArrow",
-            mods = "CTRL",
+            mods = "ALT",
             action = act.ActivateWindowRelative(-1),
+        },
+        -- activate pane selection mode with the default alphabet (labels are "a", "s", "d", "f" and so on)
+        { key = "2", mods = "CTRL", action = act.PaneSelect },
+        -- activate pane selection mode with numeric labels
+        {
+            key = "1",
+            mods = "CTRL",
+            action = act.PaneSelect({
+                alphabet = "1234567890",
+            }),
+        },
+        -- show the pane selection mode, but have it swap the active and selected panes
+        {
+            key = "0",
+            mods = "CTRL",
+            action = act.PaneSelect({
+                mode = "SwapWithActive",
+            }),
         },
     },
 }

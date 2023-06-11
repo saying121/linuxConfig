@@ -1,135 +1,212 @@
-@import "frappe.css";
+/* @import "frappe.css"; */
+/* @import "macchiato.css"; */
+@import "mocha.css";
 
 * {
     /* reference the color by using @color-name */
-    color: @text;
+    /* background: @base; */
+    background: rgba(1, 1, 1, 0.3);
+    border-radius: 15px;
     border: none;
+    color: @text;
     font-family: "Hack Nerd Font";
     font-size: 14px;
-    min-height: 10px;
-    border-radius: 15px;
+    min-height: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #cpu {
-    margin: 1px;
+    background: @crust;
+    border-radius: 15px 0px 0px 15px;
+    color: @text;
+    margin: 3px 0px 3px 0px;
     padding-left: 5px;
     padding-right: 0px;
-    border-radius: 15px 0px 0px 15px;
     transition: none;
-    color: @text;
-    background: @crust;
-    /* background: @blue; */
 }
 
 #temperature {
-    margin: 1px;
+    background: @crust;
+    border-radius: 0px 0px 0px 0px;
+    margin: 3px 0px 3px 0px;
     padding-left: 0px;
     padding-right: 5px;
-    border-radius: 0px 0px 0px 0px;
-    background: @crust;
-    /* background: @blue; */
 }
 
 #memory {
-    margin: 1px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 0px 15px 15px 0px;
-    transition: none;
     /* color: white; */
     background: @crust;
-    /* background: @blue; */
-}
-
-#clock {
-    margin: 1px;
+    border-radius: 0px 15px 15px 0px;
+    margin: 3px 0px 3px 0px;
     padding-left: 5px;
     padding-right: 5px;
     transition: none;
-    font-size: 17;
-    font-family: Hack Nerd Font;
-    background: @mantle;
 }
 
-#waybar {
-    /* background: rgba(20, 20, 20, 20); */
-    background-color: shade(@base, 0.5);
-    min-height: 10px;
-    border-radius: 0px;
-    /*     border: 2px solid alpha(@crust, 0.3); */
+#submap {
+    border-radius: 15px;
+    background: @blue;
+    color: black;
 }
 
 #window {
-    margin: 1px;
+    background: @mantle;
+    border-radius: 15px;
+    color: @subtext0;
+    font-family: "Hack Nerd Font", "Noto Sans CJK SC";
+    margin: 2px;
     padding-left: 5px;
     padding-right: 5px;
     transition: none;
-    color: white;
-    /* background: @overlay1; */
-    background: @mantle;
-    font-family: "Hack Nerd Font", "Noto Sans CJK SC";
 }
-
-#workspaces {
-    color: #eeeeee;
-    background: rgba(50, 50, 50, 80);
-    margin: 1px;
-    font-family: "Liberation Mono";
-}
-#workspaces button {
-    margin: 1px;
-    color: white;
-    background: rgba(50, 50, 50, 80);
-}
-#workspaces button:hover {
-    color: black;
-    background: rgba(200, 200, 200, 80);
-    background: @surface1;
-}
-#workspaces button.focused {
-    color: @blue;
-    background: @blue;
+window#waybar {
+    background-color: transparent;
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: 0.5s;
 }
 
 window#waybar.hidden {
     opacity: 0.2;
 }
 
-#network,
-#network.disable,
-#network.disconnected
-    #network.linked
-    #network.ethernet
-    #network.wifi
-    #pulseaudio,
-#battery,
-#backlight {
+#workspaces {
+    background: rgba(50, 50, 50, 100);
+    background: @mantle;
+    border-radius: 15px;
+    color: #eeeeee;
     margin: 1px;
     padding-left: 5px;
     padding-right: 5px;
-    transition: none;
+}
+#workspaces button {
+    /* background: rgba(50, 50, 50, 80); */
     background: transparent;
+    color: rgba(50, 50, 50, 100);
+    color: black;
+    margin: 1px;
+}
+#workspaces button:hover {
+    background: @surface1;
+    color: black;
+}
+#workspaces button.focused {
+    background: @blue;
+    color: @blue;
 }
 
+#clock {
+    background: @mantle;
+    border-radius: 15px;
+    font-size: 17;
+    margin: 2px;
+    padding-left: 15px;
+    padding-right: 15px;
+    transition: none;
+}
+
+#network {
+    border-radius: 15px;
+    background-color: @crust;
+    color: @text;
+    margin: 3px 0px 3px 0px;
+}
+#network.disconnected {
+    background-color: @surface0;
+    color: red;
+}
+#network.disable,
+#network.linked #network.ethernet #network.wifi,
 #network:hover,
-#pulseaudio:hover,
-#battery:hover,
+#backlight {
+    background: @mantle;
+    border-radius: 15px 0px 0px 15px;
+    color: @subtext1;
+    margin: 3px 0px 3px 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: none;
+}
 #backlight:hover {
     background: rgba(50, 50, 50, 80);
+    color: @text;
+    margin: 3px 0px 3px 0px;
 }
 
+#pulseaudio {
+    background: @mantle;
+    border-radius: 0px 0px 0px 0px;
+    color: @subtext1;
+    margin: 3px 0px 3px 0px;
+}
+#pulseaudio:hover,
+#battery {
+    background: @mantle;
+    border-radius: 0px 15px 15px 0px;
+    color: @subtext1;
+    margin: 3px 0px 3px 0px;
+}
+#battery:hover,
 #battery.charging,
 #battery.plugged {
     color: white;
 }
-
 #battery.critical:not(.charging) {
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
     animation-direction: alternate;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-name: blink;
+    animation-timing-function: linear;
 }
+
+#upower.charging {
+    background: @mantle;
+    border-radius: 0px 15px 15px 0px;
+    color: @subtext1;
+    margin: 3px 0px 3px 0px;
+}
+#upower.discharging {
+    background: @mantle;
+    border-radius: 0px 15px 15px 0px;
+    color: @subtext1;
+    margin: 3px 0px 3px 0px;
+}
+#upower {
+    background: @mantle;
+    border-radius: 0px 15px 15px 0px;
+    color: @subtext1;
+    margin: 3px 0px 3px 0px;
+}
+
+#bluetooth #bluetooth.off {
+    background: transparent;
+    border-radius: 15px;
+    color: @subtext1;
+    margin: 3px 0px 3px 0px;
+}
+
+#bluetooth.on {
+    background: @mantle;
+    border-radius: 15px;
+    color: @subtext1;
+    margin: 3px 0px 3px 0px;
+}
+#bluetooth.connected {
+    background: @mantle;
+    border-radius: 15px;
+    color: @subtext1;
+    margin: 3px 0px 3px 0px;
+}
+#bluetooth.disabled {
+    background: transparent;
+    border-radius: 15px;
+    color: @subtext1;
+    margin: 3px 0px 3px 0px;
+}
+#bluetooth.discoverable
+#bluetooth.discovering
+#bluetooth.pairabler.unknown-status
 
 /* @keyframes blink { */
 /*     to { */
@@ -139,10 +216,26 @@ window#waybar.hidden {
 /* } */
 
 #tray {
-    margin: 1px;
+    /* background: @surface0; */
+    /* color: rgba(60, 60, 60, 40); */
+    /* background-color: rgba(60, 60, 60, 100); */
+    background-color: black;
+    border-radius: 15px;
+    color: @overlay2;
+    margin: 2px;
     padding-left: 5px;
     padding-right: 5px;
     transition: none;
-    /* background: @overlay2; */
-    background: rgba(60, 60, 60, 80);
 }
+/* #tray menu { */
+/*     border-radius: 15px; */
+/* } */
+/* #tray > .passive { */
+/*     border-radius: 15px; */
+/* } */
+/* #tray > .active { */
+/*     border-radius: 15px; */
+/* } */
+/* #tray > .needs-attention { */
+/*     border-radius: 15px; */
+/* } */

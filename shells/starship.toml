@@ -1,0 +1,13 @@
+# 根据 schema 提供自动补全
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# 在提示符之间插入空行
+add_newline = true
+
+# 将提示符中的 '❯' 替换为 '➜'
+[character] # 此模块名称为 'character'
+success_symbol = '[➜](bold green)' # 将 'success_symbol' 片段设置成颜色为 'bold green' 的 '➜'
+
+# 禁用 'package' 组件，将其隐藏
+[package]
+disabled = true

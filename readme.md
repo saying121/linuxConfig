@@ -10,6 +10,7 @@
   - [切换桌面环境](#切换桌面环境)
   - [Nvidia，自行选择是否安装，最好看 archwiki 。](#nvidia自行选择是否安装最好看-archwiki)
   - [zsh](#zsh)
+  - [rtl8811/21 等网卡](#rtl881121-等网卡)
 - [License](#license)
 <!--toc:end-->
 
@@ -67,7 +68,7 @@ $ ~/.linuxConfig/install.sh clashlink
 ```bash
 # 安装后运行mkinitcpio
 # nvidia/nvidia-open-dkms ,二选一
-$ pacman -Qs nvidia
+pacman -Qs nvidia
 # local/cuda 11.8.0-1
 #     NVIDIA's GPU programming toolkit
 # local/cudnn 8.6.0.163-1
@@ -88,6 +89,12 @@ $ pacman -Qs nvidia
 #     OpenCL implemention for NVIDIA
 ```
 
+wayland 直接
+
+```bash
+yay -S nouveau-fw xf86-video-nouveau
+```
+
 ## zsh
 
 如果安装 zi 框架失败就执行 `sh -c "$(curl -fsSL get.zshell.dev)"`
@@ -95,6 +102,14 @@ $ pacman -Qs nvidia
 如果有插件没有安装完成，用 `zi update`
 
 `z-shell/zsh-diff-so-fancy` 总是安装失败，建议手动 `zi light z-shell/zsh-diff-so-fancy`
+
+## rtl8811/21 等网卡
+
+```bash
+yay -S rtl8821cu-morrownr-dkms-git
+# lsusb 出现 cdrom/CDROM 就执行
+# eject /dev/cdrom
+```
 
 # License
 

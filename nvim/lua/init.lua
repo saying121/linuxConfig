@@ -22,6 +22,10 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
     border = "single",
 })
 
+vim.lsp.handlers["experimental/serverStatus"] = function(_, result)
+    print("Received serverStatus notification:", vim.inspect(result))
+end
+
 vim.diagnostic.config({
     virtual_text = true,
     signs = true,
@@ -31,19 +35,19 @@ vim.diagnostic.config({
 })
 
 vim.filetype.add({
-    -- extension = {
-    --     foo = "fooscript",
-    --     bar = function(path, bufnr)
-    --         if some_condition() then
-    --             return "barscript",
-    --                 function(bufnr)
-    --                     -- Set a buffer variable
-    --                     vim.b[bufnr].barscript_version = 2
-    --                 end
-    --         end
-    --         return "bar"
-    --     end,
-    -- },
+    extension = {
+        foo = "fooscript",
+        bar = function(path, bufnr)
+            -- if some_condition() then
+            --     return "barscript",
+            --         function(bufnr)
+            --             -- Set a buffer variable
+            --             vim.b[bufnr].barscript_version = 2
+            --         end
+            -- end
+            return "bar"
+        end,
+    },
     filename = {
         [".foorc"] = "toml",
         [".log"] = "lot",
@@ -51,20 +55,22 @@ vim.filetype.add({
         [".typ"] = "typst",
         ["LICENSE"] = "license",
         ["license"] = "license",
+        ["~/.linuxConfig/wayland/waybar/config"] = "json",
+        ["~/.config/waybar/config"] = "json",
         ["/etc/foo/config"] = "toml",
     },
-    -- pattern = {
-    --     [".*/etc/foo/.*"] = "fooscript",
-    --     -- Using an optional priority
-    --     [".*/etc/foo/.*%.conf"] = { "dosini", { priority = 10 } },
-    --     -- A pattern containing an environment variable
-    --     ["${XDG_CONFIG_HOME}/foo/git"] = "git",
-    --     ["README.(a+)$"] = function(path, bufnr, ext)
-    --         if ext == "md" then
-    --             return "markdown"
-    --         elseif ext == "rst" then
-    --             return "rst"
-    --         end
-    --     end,
-    -- },
+    pattern = {
+        [".*/etc/foo/.*"] = "fooscript",
+        -- Using an optional priority
+        [".*/etc/foo/.*%.conf"] = { "dosini", { priority = 10 } },
+        -- A pattern containing an environment variable
+        ["${XDG_CONFIG_HOME}/foo/git"] = "git",
+        ["README.(a+)$"] = function(path, bufnr, ext)
+            if ext == "md" then
+                return "markdown"
+            elseif ext == "rst" then
+                return "rst"
+            end
+        end,
+    },
 })

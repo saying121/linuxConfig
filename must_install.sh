@@ -19,7 +19,7 @@ aurPkg='yay -S --needed --noconfirm'
 
 # 必装
 sudo pacman -Syu --noconfirm
-sudo $pacMan archlinuxcn-keyring archlinux-keyring
+sudo "$pacMan" archlinuxcn-keyring archlinux-keyring
 # if [[ $? != 0 ]]; then
 #     if ! sudo pacman -S --needed --noconfirm archlinuxcn-keyring; then
 #         sudo rm -rf /etc/pacman.d/gnupg
@@ -30,16 +30,16 @@ sudo $pacMan archlinuxcn-keyring archlinux-keyring
 # fi
 
 sudo pacman -Syyu --noconfirm
-sudo $pacMan yay paru
+sudo "$pacMan" yay paru
 yay -Syyu --noconfirm
 
-sudo $pacMan kitty terminology wezterm
+sudo "$pacMan" kitty terminology wezterm ttf-nerd-fonts-symbols-mono
 
 # 开发工具
-sudo $pacMan inetutils dnsutils networkmanager fd tree \
+sudo "$pacMan" inetutils dnsutils networkmanager fd tree \
     clash
 # 路由跟踪
-sudo $pacMan traceroute mtr
+sudo "$pacMan" traceroute mtr
 
 # 调用关于clash的脚本，配置clash
 echo "
@@ -49,12 +49,17 @@ echo "
 *******************************************
 "
 read -r link
-~/.linuxConfig/scripts/configClash.sh $link
+~/.linuxConfig/scripts/configClash.sh "$link"
 
-sudo $pacMan figlet ffmpeg \
+sudo "$pacMan" figlet ffmpeg \
     bc man net-tools psmisc sudo ripgrep fzf trash-cli wget \
     vim bash exa bat \
-    neovim lolcat git lazygit composer eslint cronie sqlite
+    neovim lolcat git lazygit composer eslint cronie sqlite \
+    engrampa
+
+# 图像查看
+sudo "$pacMan" gwenview nomacs opencv-samples vtk glew qt6-base hdf5 opencl-icd-loader java-runtime
+sudo $pacMan adios2 cgns ffmpeg fmt gdal gl2ps glew gnuplot graphviz hdf5 java-runtime=11 jsoncpp libarchive libharu liblas lz4 mariadb-libs netcdf openimagedenoise openmpi openvdb openvr openxr ospray pdal postgresql-libs proj python python-matplotlib python-mpi4py qt5-declarative sqlite tk unixodbc verdict
 
 # neovim,vim plugins
 ~/.linuxConfig/nvim/install.sh
@@ -63,74 +68,72 @@ sudo $pacMan figlet ffmpeg \
 ~/.linuxConfig/shells/install_zi.sh
 
 # ranger
-sudo $pacMan ranger
-sudo $pacMan libcaca w3m imagemagick librsvg ffmpegthumbnailer highlight p7zip atool \
-    libarchive unrar unzip poppler calibre epub-thumbnailer-git transmission-cli \
+sudo "$pacMan" ranger
+sudo "$aurPkg" libcaca w3m imagemagick librsvg ffmpegthumbnailer highlight p7zip atool \
+    libarchive unrar unzip poppler calibre transmission-cli \
     perl-image-exiftool mediainfo odt2txt jq jupyter-nbconvert fontforge djvulibre \
     openscad drawio-desktop-bin
-
+$aurPkg epub-thumbnailer-git
 cd ~/.linuxConfig && git submodule update --init --recursive || echo ''
 
 # 安装lf文件浏览器
-sudo $pacMan lf
-sudo $pacMan perl-image-exiftool mdcat libreoffice-fresh highlight git-delta atool bat chafa colordiff coreutils fontforge gnupg poppler source-highlight transmission-cli jq pandoc mupdf-tools ffmpegthumbnailer xournalpp openscad ueberzug
+sudo "$pacMan" lf
+sudo "$pacMan" perl-image-exiftool mdcat libreoffice-fresh highlight git-delta atool bat chafa colordiff coreutils fontforge gnupg poppler source-highlight transmission-cli jq pandoc mupdf-tools ffmpegthumbnailer xournalpp openscad ueberzug
 $aurPkg ctpv-git epub2txt-git
 
 # sudo pacman -Syu --noconfirm
-sudo $pacMan foliate festival festival-english \
+sudo "$pacMan" foliate festival festival-english \
     openssh ntfs-3g exfat-utils viu \
     pandoc xdg-utils youtube-dl numlockx rsync arch-install-scripts \
     gimagereader-qt tesseract-data-eng tesseract-data-chi_sim \
-    alsa qbittorrent steam mpv
+    qbittorrent steam mpv
 
 # 缺失的驱动
 $aurPkg ast-firmware upd72020x-fw aic94xx-firmware wd719x-firmware
-sudo $pacMan linux-firmware-qlogic
+sudo "$pacMan" linux-firmware-qlogic
 
 # 防火墙
-sudo $pacMan firewalld
+sudo "$pacMan" firewalld
 sudo systemctl enable firewalld
 
 # 翻译
-sudo $pacMan translate-shell ldr-translate-qt goldendict
+sudo "$pacMan" translate-shell ldr-translate-qt goldendict
 
-sudo $pacMan pacman-contrib
+sudo "$pacMan" pacman-contrib
 
 # installWireshark cmd:tshark
-sudo $pacMan wireshark-qt wireshark-cli termshark kismet wifite
+sudo "$pacMan" wireshark-qt wireshark-cli termshark kismet wifite
 
 # 文件管理器
-sudo $pacMan dolphin konsole qt5ct kvantum
+sudo "$pacMan" dolphin konsole qt5ct kvantum
 
 # 输入法相关 中文输入法,支持vim+寄存器的clip
-sudo $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
+sudo "$pacMan" fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
     fcitx5-pinyin-zhwiki vim-fcitx xclip fcitx5-table-other catppuccin-fcitx5-git
 
 # Music
 $aurPkg go-musicfox-git
 
 # sddm主题的依赖
-sudo $pacMan gst-libav phonon-qt5-gstreamer gst-plugins-good qt5-quickcontrols qt5-graphicaleffects qt5-multimedia
+sudo "$pacMan" gst-libav phonon-qt5-gstreamer gst-plugins-good qt5-quickcontrols qt5-graphicaleffects qt5-multimedia
 $aurPkg sddm sddm-conf-git xinit-xsession
 $aurPkg sddm-theme-aerial-git
 
 # x11,蓝牙耳机自动切换，pavucontrol:音量控制
-sudo $pacMan pulseaudio-bluetooth bluez bluez-utils pulsemixer \
+sudo "$pacMan" pulseaudio-bluetooth bluez bluez-utils pulsemixer \
     xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
     pulseaudio-alsa pavucontrol
 # 取代xorg-xbacklight, 色温程序
-sudo $pacMan acpilight redshift
-# 文件位置可能不一样，调整亮度时自己再改一下
-sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
+sudo "$pacMan" redshift
 
 # 锁屏
-sudo $pacMan betterlockscreen xidlehook dex
+sudo "$pacMan" betterlockscreen xidlehook dex
 # sudo cp -f ~/.linuxConfig/custom-services/betterlockscreen@.service /usr/lib/systemd/system/
 # 电源时间
 xset dpms 1200 1800 2400
 # 屏保时间
 xset s 900 900
-sudo systemctl enable betterlockscreen@$USER
+sudo systemctl enable betterlockscreen@"$USER"
 
 # i3
 sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
@@ -142,18 +145,18 @@ makepkg -si ~/.linuxConfig/i3/picom/PKGBUILD
 $pacMan sway mako swaybg swaylock swayidle waybar
 
 # 蓝牙前端
-sudo $pacMan blueman
+sudo "$pacMan" blueman
 xset +dpms
 
 # 下载工具
-sudo $pacMan lux-dl
+sudo "$pacMan" lux-dl
 
 # polybar
-sudo $pacMan polybar
+sudo "$pacMan" polybar
 ~/.linuxConfig/i3/polybar/install-polybar-theme.sh
 
 # installGimp
-sudo $pacMan gimp gvfs gutenprint
+sudo "$pacMan" gimp gvfs gutenprint
 
 # input-remapper
 $aurPkg input-remapper-git
@@ -164,7 +167,7 @@ input-remapper-control --command start --device "AT Translated Set 2 keyboard" -
 input-remapper-control --command start --device "SINO WEALTH Gaming KB " --preset "capslock+"
 
 # 各种查看系统信息的软件
-sudo $pacMan htop atop iotop iftop glances sysstat plasma-systemmonitor
+sudo "$pacMan" htop atop iotop iftop glances sysstat plasma-systemmonitor
 $aurPkg gotop cpufetch hardinfo neofetch
 
 # 浏览器
@@ -174,7 +177,7 @@ $aurPkg microsoft-edge-stable-bin google-chrome
 $aurPkg visual-studio-code-bin intellij-idea-ultimate-edition
 
 # 截图,录屏,剪辑
-sudo $pacMan flameshot spectacle obs-studio shotcut
+sudo "$pacMan" flameshot spectacle obs-studio wlrobs-hg shotcut
 
 # 触摸板
 $aurPkg ruby-fusuma
@@ -182,32 +185,33 @@ sudo gpasswd -a "$USER" input
 newgrp input
 
 # 热点
-sudo $pacMan linux-wifi-hotspot bash-completion haveged
+sudo "$pacMan" linux-wifi-hotspot bash-completion haveged
 
 # 中文字体
-sudo $pacMan adobe-source-han-serif-cn-fonts \
+sudo "$pacMan" adobe-source-han-serif-cn-fonts \
     adobe-source-han-sans-cn-fonts \
     wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
     noto-fonts-extra ttf-hack-nerd ttf-sil-padauk
 fc-cache -fv
 
 # rofi
-sudo $pacMan rofi
+sudo "$pacMan" rofi
 ~/.linuxConfig/rofi/install-rofi-theme.sh
 
 python -m pip install konsave
 
 # gnome 显示效果好一点
-sudo $pacMan polkit polkit-qt5 polkit-gnome # polkit-kde-agent
+sudo "$pacMan" polkit polkit-qt5 polkit-gnome # polkit-kde-agent
 
 # pdf
-sudo $pacMan python-pymupdf python-fonttools python-pillow bibtool termpdf.py-git
+sudo "$pacMan" python-pymupdf python-fonttools python-pillow bibtool termpdf.py-git
 
 # 图片浏览器，字体，录制gif
-$aurPkg xnviewmp fontpreview gifine
+$aurPkg xnviewmp
+$aurPkg fontpreview gifine
 
 # wps
-$aurPkg wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn ttf-ms-fonts # wps-office
+$aurPkg wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn ttf-ms-fonts libtiff5 wps-office-fonts # wps-office
 # copyq networkmanager-dmenu-bluetoothfix-git networkmanager-dmenu-git archlinux-tweak-tool-git
 
 # 开启服务
