@@ -30,9 +30,9 @@ let g:neovide_cursor_vfx_particle_lifetime = 1.2
 let g:neovide_cursor_vfx_particle_density = 10.0
 let g:neovide_cursor_vfx_particle_speed = 10.0
 
-if len(v:argv) ==# 4
-    augroup Scratchpad
-        autocmd!
-        autocmd VimLeave * !i3 scratchpad show floating toggle
-    augroup END
-endif
+" if len(v:argv) ==# 4
+"     augroup Scratchpad
+"         autocmd!
+"         autocmd VimLeave * !i3 scratchpad show floating toggle
+"     augroup END
+" endif

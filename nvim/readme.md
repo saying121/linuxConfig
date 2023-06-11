@@ -7,6 +7,7 @@
   - [主要插件](#主要插件)
     - [ui](#ui)
   - [单使用 neovim 配置](#单使用-neovim-配置)
+  - [一些已知问题](#一些已知问题)
 <!--toc:end-->
 
 ![dashboard picture](./pictures/dashboard.png)
@@ -144,3 +145,13 @@ thenvim
 # 升级
 git pull
 ```
+
+## 一些已知问题
+
+alpha.nvim 使用 `chafa` 显示图片在 wezterm 不能用， kitty 可以。
+
+dap 调试不能设置 codelldb 不跳进反汇编，只有通过 vscode 才可以设置。
+
+vimspector 有些调试器不能用
+
+`./viml/autocmds.vim` 有一段打开二进制文件的自动命令，有可能导致一些文本文件打不开，自行注释。或者在 `./lua/init.lua` 中添加文件类型。

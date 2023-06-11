@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo '\e[1;33m
+printf '\e[1;33m
 1.Partitioned disk
 cfdisk /dev/xxx
 
@@ -43,7 +43,7 @@ pacstrap /mnt base base-devel linux linux-firmware zsh
 
 genfstab -U /mnt >/mnt/etc/fstab
 
-echo '\e[1;33m
+printf '\e[1;33m
 ----------------------------------------------------------
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 run: [cat /mnt/etc/fstab] compare to [lsblk],check for correctness

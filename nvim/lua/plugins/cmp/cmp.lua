@@ -127,8 +127,6 @@ return {
                 end, { "i", "s" }),
                 ["<C-b>"] = cmp.mapping.scroll_docs(-1),
                 ["<C-f>"] = cmp.mapping.scroll_docs(1),
-                -- ['<C-Space>'] = cmp.mapping.complete(),
-                ["<M-e>"] = cmp.mapping.abort(),
                 ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
                 ["<Space>"] = cmp.mapping(function(fallback)
                     local entry = cmp.get_selected_entry()
@@ -141,6 +139,8 @@ return {
                         fallback()
                     end
                 end, { "i", "s" }),
+                ['<C-Space>'] = cmp.mapping.complete(),
+                ["<M-e>"] = cmp.mapping.abort(),
                 -- ["<C-Space>"] = require("cmp_rime").mapping.toggle_menu,
                 -- ["<Space>"] = require("cmp_rime").mapping.space_commit,
                 -- ["<CR>"] = require("cmp_rime").mappings.confirm,

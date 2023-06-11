@@ -4,13 +4,13 @@ pacMan="pacman -S --needed --noconfirm"
 
 # 引导和微码
 if [[ $(lscpu | grep -c AMD) != 0 ]]; then
-    sudo $pacMan amd-ucode
+    sudo "$pacMan" amd-ucode
 elif [[ $(lscpu | grep -c Intel) != 0 ]]; then
-    sudo $pacMan intel-ucode
+    sudo "$pacMan" intel-ucode
 fi
-sudo $pacMan grub efibootmgr os-prober
+sudo "$pacMan" grub efibootmgr os-prober
 
-unset $pacMan
+unset "$pacMan"
 
 # 安装grub引导
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch

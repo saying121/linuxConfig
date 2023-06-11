@@ -2,8 +2,8 @@ return {
     "glepnir/lspsaga.nvim",
     -- Do make sure that your LSP plugins, like lsp-zero or lsp-config, are loaded before loading lspsaga.
     event = "LspAttach",
-    -- commit = "c4e6259dda346babc71970bd00e03e211b44614d",
-    commit = "c475ace5b8882631b351ef7c3e8078ca9ebbb751",
+    commit = "4f075452c466df263e69ae142f6659dcf9324bf6",
+    -- commit = "c475ace5b8882631b351ef7c3e8078ca9ebbb751",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         -- Please make sure you install markdown and markdown_inline parser

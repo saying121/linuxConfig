@@ -84,8 +84,10 @@ bindsym $mod+b exec blueman-manager
 focus_follows_mouse no # 鼠标点击才改变焦点
 
 # 屏幕亮度
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+# bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+# bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 # 声音
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%

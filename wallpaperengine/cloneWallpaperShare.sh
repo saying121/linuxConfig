@@ -4,7 +4,7 @@ rm -rf ~/.local/share/wallpaperengine
 
 mkdir ~/.local/share/wallpaperengine
 
-cd ~/.local/share/wallpaperengine
+cd ~/.local/share/wallpaperengine || exit
 
 git init
 

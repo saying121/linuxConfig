@@ -14,7 +14,7 @@ sudo sed -i "s/^#ParallelDownloads .*/ParallelDownloads = 40/" /etc/pacman.conf
 sudo sed -i 's/^#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
 
 sudo sed -i "s/^#\[multilib\]/\[multilib\]/" /etc/pacman.conf
-sed -i '/multilib/ {n;s/^#//;}'
+sed -i '/multilib/ {n;s/^#//;}' /etc/pacman.conf
 
 if [[ $(grep "\[archlinuxcn\]" -c /etc/pacman.conf) = 0 ]]; then
     # shellcheck disable=2016
@@ -25,19 +25,22 @@ Server = http://mirrors.163.com/archlinux-cn/$arch
 ' | sudo tee -a /etc/pacman.conf
 fi
 
-read -p '
+# read -p '
+#
+# *******************************************
+# **** set-chaotic-aur-mirrors? yes/no : ****
+# *******************************************
+# ' ans
+#
+# if [[ $ans == yes ]]; then
+#     ./set-chaotic-aur-mirrors.sh
+# else
+#     sudo pacman -Syy --noconfirm
+#     sudo pacman -Fyy --noconfirm
+# fi
 
-*******************************************
-**** set-chaotic-aur-mirrors? yes/no : ****
-*******************************************
-' ans
-
-if [[ $ans == yes ]]; then
-    ./set-chaotic-aur-mirrors.sh
-else
-    sudo pacman -Syy --noconfirm
-    sudo pacman -Fyy --noconfirm
-fi
+sudo pacman -Syy --noconfirm
+sudo pacman -Fyy --noconfirm
 
 sudo pacman -S --needed --noconfirm pacman-contrib
 sudo pacman -S --needed --noconfirm archlinuxcn-keyring archlinux-keyring

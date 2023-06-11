@@ -108,10 +108,11 @@ return {
                         icon = " :",
                     },
                     "encoding",
-                    "fileformat",
+                    -- "fileformat",
                 },
                 lualine_y = {
-                    require("public.get_some_info").linux_distro,
+                    -- require("public.get_some_info").linux_distro,
+                    require("public.get_some_info").fileformat,
                 },
                 lualine_z = {
                     "location",

@@ -25,13 +25,10 @@ export HTTPS_PROXY=http://127.0.0.1:7890
 export HTTP_PROXY=http://127.0.0.1:7890
 export NO_PROXY=baidu.com,qq.com
 
-export EDITOR='nvim'
-
-# input method
-export ECORE_IMF_MODULE="xim"
-export XMODIFIERS="@im=none"
+export EDITOR=nvim
 
 export PATH=~/go/bin:$PATH
+export PATH=~/.cargo/bin:~/.local/bin:$PATH
 export GOPATH=~/go
 export PATH=/usr/lib/w3m:$PATH
 
@@ -39,17 +36,19 @@ export XDG_DATA_HOME=~/.local/share
 export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
 
-# 外观
-export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_QPA_PLATFORM="wayland;xcb"
+export QT_QPA_PLATFORMTHEME=qt5ct # 外观
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-# 游戏
-export SDL_VIDEODRIVER=wayland
 
 # java程序黑屏
 export _JAVA_AWT_WM_NONEREPARENTING=1
+
+# 游戏
+export SDL_VIDEODRIVER=wayland
 # gtk 优先wayland
 export GDK_BACKEND="wayland,x11"
+
     ' | sudo tee -a /etc/profile
 
     source /etc/profile
@@ -89,13 +88,15 @@ link_list=(
     [$HOME/.linuxConfig/qt5ct]="$HOME/.config"
     [$HOME/.linuxConfig/ranger]="$HOME/.config"
     [$HOME/.linuxConfig/shells/bashrc]="$HOME/.bashrc"
-    [$HOME/.linuxConfig/shells/lib/p10k.zsh]="$HOME/.p10k.zsh"
+    [$HOME/.linuxConfig/shells/starship.toml]="$HOME/.config/starship.toml"
+    # [$HOME/.linuxConfig/shells/lib/p10k.zsh]="$HOME/.p10k.zsh"
     [$HOME/.linuxConfig/shells/zirc.zsh]="$HOME/.zshrc"
     [$HOME/.linuxConfig/terminology]="$HOME/.config"
     [$HOME/.linuxConfig/wallpaperengine/betterlockscreen]="$HOME/.config"
     [$HOME/.linuxConfig/wayland/hypr]="$HOME/.config"
     [$HOME/.linuxConfig/wayland/waybar]="$HOME/.config"
     [$HOME/.linuxConfig/wayland/swaylock]="$HOME/.config"
+    [$HOME/.linuxConfig/wayland/pam_environment]="$HOME/.pam_environment"
     [$HOME/.linuxConfig/wezterm]="$HOME/.config"
     # # zshrc omz的，现在使用zi框架
     # [$HOME/.linuxConfig/shells/.zshrc]="$HOME/.zshrc"
@@ -111,38 +112,38 @@ link_list=(
 [[ -d ~/.local/shells ]]             || mkdir -p ~/.local/shells
 [[ -d ~/.vim ]]                      || mkdir ~/.vim
 [[ -d ~/.w3m ]]                      || mkdir ~/.w3m
+
 # keymap 路径带有空格就单拎出来
 path="$HOME/.config/input-remapper-2"
-if [[ -d $path ]]; then
-    mv $path $path"_bak"
+if [[ -d $path && ! -h $path ]]; then
+    mv "$path" "$path""_bak"
 fi
 
 
-for path in ${!link_list[@]}; do
+for path in "${!link_list[@]}"; do
     # 配置为目录会被备份
-    be_back=$(echo $path | awk -F / '{print $NF}')
+    be_back=$(echo "$path" | awk -F / '{print $NF}')
     be_back_path=${link_list[$path]}/$be_back
-    if [[ -d $be_back_path ]]; then
+
+    if [[ -d $be_back_path && ! -h $be_back_path ]]; then
         if [[ -d $be_back_path"_bak" ]]; then
             continue
         fi
-        mv $be_back_path $be_back_path"_bak"
+        mv "$be_back_path" "$be_back_path""_bak"
+    else
+        ln -sf "$path" "${link_list[$path]}"
+        continue
     fi
 
     # 存在为软连接的配置就强制覆盖，否则尝试链接
     if [[ -h ${link_list[$path]} ]]; then
-        ln -sf $path ${link_list[$path]}
+        ln -sf "$path" "${link_list[$path]}"
     else
-        ln -s $path ${link_list[$path]}
+        ln -s "$path" "${link_list[$path]}"
     fi
 done
 
 [[ -d ~/.config/systemd/user ]] || mkdir -p ~/.config/systemd/user
-# dex 设置自启动应用
-cp ~/.linuxConfig/custom-services/autostart.service ~/.config/systemd/user
-cp ~/.linuxConfig/custom-services/autostart.target ~/.config/systemd/user
-sudo systemctl --user daemon-reload
-sudo systemctl --user enable autostart.service
 
 # 判断有没有 touchpad
 if [[ $(xinput list | grep "[tT]ouchpad" -c) != 0 ]]; then
@@ -152,8 +153,3 @@ if [[ $(xinput list | grep "[tT]ouchpad" -c) != 0 ]]; then
     fi
     sudo cp -f ~/.linuxConfig/X11/20-touchpad.conf /etc/X11/xorg.conf.d/20-touchpad.conf
 fi
-
-# [[ -d ~/.linuxConfig/input-remapper-2/presets/Keyboard\ K380\ Keyboard/ ]] || mkdir ~/.linuxConfig/input-remapper-2/presets/Keyboard\ K380\ Keyboard/
-# ln -s ~/.linuxConfig/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper-2/presets/Keyboard\ K380\ Keyboard/capslock+.json
-# [[ -d ~/.linuxConfig/input-remapper-2/presets/SINO\ WEALTH\ Gaming\ KB\ / ]] || mkdir ~/.linuxConfig/input-remapper-2/presets/SINO\ WEALTH\ Gaming\ KB\ /
-# ln -s ~/.linuxConfig/input-remapper-2/presets/AT\ Translated\ Set\ 2\ keyboard/capslock+.json ~/.linuxConfig/input-remapper-2/presets/SINO\ WEALTH\ Gaming\ KB\ /capslock+.json

@@ -32,10 +32,10 @@ fi
 # alias l='ls -CF'
 
 cat() {
-    if [[ $1 =~ '\.md' ]]; then
-        mdcat $1
+    if [[ $1 =~ \.md ]]; then
+        mdcat "$@"
     else
-        bat $1
+        bat "$@"
     fi
 }
 
@@ -98,7 +98,7 @@ alias rt='trash-restore'
 
 alias tran='trans -j -d en:zh'
 
-alias upgrade='yay -Syu --noconfirm && yay -Fy'
+alias upgrade='yay -Syu --noconfirm && yay -Fy && sudo pkgfile -u'
 
 if [[ $(grep -c OMZP::cp ~/.zshrc) != 0 && $SHELL == '/usr/bin/zsh' ]]; then
     alias cp='cpv -hhh'
@@ -117,7 +117,7 @@ alias r='ranger'
 
 # lf
 LFCD="$HOME/.config/lf/lfcd.sh"
-source $LFCD
+source "$LFCD"
 
 # export DISPLAY=:0
 
