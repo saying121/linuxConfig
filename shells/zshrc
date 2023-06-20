@@ -1,10 +1,8 @@
 # vim:fileencoding=utf-8:ft=zsh
 . ~/.linuxConfig/shells/lib/common.sh
 
-# see /usr/share/doc/zsh/examples/zshrc for examples
-
 setopt autocd              # change directory just by typing its name
-#setopt correct            # auto correct mistakes
+setopt correct             # auto correct mistakes
 setopt interactivecomments # allow comments in interactive mode
 setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
 setopt nonomatch           # hide error message if there is no match for the pattern
@@ -17,19 +15,19 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 # hide EOL sign ('%')
 PROMPT_EOL_MARK=""
 
-# configure key keybindings
-bindkey -e                                        # emacs key bindings
-bindkey ' ' magic-space                           # do history expansion on space
-bindkey '^U' backward-kill-line                   # ctrl + U
-bindkey '^[[3;5~' kill-word                       # ctrl + Supr
-bindkey '^[[3~' delete-char                       # delete
-bindkey '^[[1;5C' forward-word                    # ctrl + ->
-bindkey '^[[1;5D' backward-word                   # ctrl + <-
-bindkey '^[[5~' beginning-of-buffer-or-history    # page up
-bindkey '^[[6~' end-of-buffer-or-history          # page down
-bindkey '^[[H' beginning-of-line                  # home
-bindkey '^[[F' end-of-line                        # end
-bindkey '^[[Z' undo                               # shift + tab undo last action
+# # configure key keybindings
+# bindkey -e                                        # emacs key bindings
+# bindkey ' ' magic-space                           # do history expansion on space
+# bindkey '^U' backward-kill-line                   # ctrl + U
+# bindkey '^[[3;5~' kill-word                       # ctrl + Supr
+# bindkey '^[[3~' delete-char                       # delete
+# bindkey '^[[1;5C' forward-word                    # ctrl + ->
+# bindkey '^[[1;5D' backward-word                   # ctrl + <-
+# bindkey '^[[5~' beginning-of-buffer-or-history    # page up
+# bindkey '^[[6~' end-of-buffer-or-history          # page down
+# bindkey '^[[H' beginning-of-line                  # home
+# bindkey '^[[F' end-of-line                        # end
+# bindkey '^[[Z' undo                               # shift + tab undo last action
 
 # enable completion features
 autoload -Uz compinit
@@ -37,16 +35,23 @@ compinit -d ~/.cache/zcompdump
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete
-zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
-# zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+zstyle ':completion:*' format 'Completing %d'
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format "[%d]"
+# disable sort when completing `git checkout`
+# zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:complete:*:options' sort false
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 # History configurations
 HISTFILE=~/.local/shells/.zsh_history
@@ -63,10 +68,3 @@ alias history="history 0"
 
 # configure `time` format
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
-
-# enable color support of ls, less and man, and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    # Take advantage of $LS_COLORS for completion as well
-    zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-    zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-fi

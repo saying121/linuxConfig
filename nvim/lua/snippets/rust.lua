@@ -135,7 +135,7 @@ return {
             trig = "eprintln",
             priority = 30000,
         },
-        fmta([[println!("<>"<>);]], {
+        fmta([[eprintln!("<>"<>);]], {
             i(1, ""),
             i(2, ""),
         })

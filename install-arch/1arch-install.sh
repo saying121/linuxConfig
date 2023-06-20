@@ -39,7 +39,7 @@ fi
 
 timedatectl set-ntp true
 # 基础
-pacstrap /mnt base base-devel linux linux-firmware zsh
+pacstrap /mnt base base-devel linux-zen linux-firmware zsh linux-firmware-qlogic
 
 genfstab -U /mnt >/mnt/etc/fstab
 

@@ -8,15 +8,17 @@ return {
             perf_record = false,
         })
         local opts = { noremap = true, silent = true }
-        local keymap = vim.api.nvim_set_keymap
+        local keymap = vim.keymap.set
+        local persistent = require("persistent-breakpoints.api")
         -- Save breakpoints to file automatically.
-        keymap("n", "<leader>tb", "<cmd>lua require('persistent-breakpoints.api').toggle_breakpoint()<cr>", opts)
-        keymap(
-            "n",
-            "<leader>sc",
-            "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>",
-            opts
-        )
-        keymap("n", "<leader>cl", "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>", opts)
+        keymap("n", "<leader>tb", function()
+            persistent.toggle_breakpoint()
+        end, opts)
+        keymap("n", "<leader>sc", function()
+            persistent.set_conditional_breakpoint()
+        end, opts)
+        keymap("n", "<leader>cl", function()
+            persistent.clear_all_breakpoints()
+        end, opts)
     end,
 }

@@ -2,7 +2,7 @@
 
 which_term() {
     term=$(perl -lpe 's/\0/ /g' \
-        /proc/$(xdotool getwindowpid $(xdotool getactivewindow))/cmdline)
+        /proc/"$(xdotool getwindowpid "$(xdotool getactivewindow)")"/cmdline)
 
     ## Enable extended globbing patterns
     # shopt -s extglob
@@ -28,10 +28,10 @@ which_term() {
     # echo "$term  $version"
     echo "$term"
 }
-echo $(perl -lpe 's/\0/ /g' /proc/$(xdotool getwindowpid $(xdotool getactivewindow))/cmdline)
+echo "$(perl -lpe 's/\0/ /g' /proc/"$(xdotool getwindowpid "$(xdotool getactivewindow)")"/cmdline)"
 # ps -aux | grep `ps -p $$ -o ppid=` | awk 'NR==1{print $NF}'
 
 shellname=$(ps -p $$ -o comm=)
-termname=$(ps -p $(ps -p $$ -o ppid=) -o comm=)
+termname=$(ps -p "$(ps -p $$ -o ppid=)" -o comm=)
 echo "The shell name is $shellname"
 echo "The terminal name is $termname"

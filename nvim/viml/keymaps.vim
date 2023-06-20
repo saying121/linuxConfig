@@ -73,11 +73,6 @@ set clipboard^=unnamed          " *寄存器
 set clipboard^=unnamedplus          " +寄存器
 nnoremap Y y$
 
-" 创建tab
-nnoremap <silent><leader>tn :tabnew<CR>
-nnoremap <silent><leader>tc :tabclose<CR>
-nnoremap <silent><leader>to :tabonly<CR>
-
 " 切换buffer
 nnoremap <silent>]b :bn<CR>
 nnoremap <silent>[b :bp<CR>

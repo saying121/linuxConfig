@@ -56,7 +56,7 @@ if [[ $(grep -c "$pc_name" /etc/hosts) = 0 ]]; then
 127.0.1.1   $pc_name" | sudo tee -a /etc/hosts
 fi
 
-if [[ ! -e /etc/hostname  ]]; then
+if [[ ! -e /etc/hostname ]]; then
     touch /etc/hostname
 fi
 if [[ $(grep -c "$pc_name" /etc/hostname) = 0 ]]; then

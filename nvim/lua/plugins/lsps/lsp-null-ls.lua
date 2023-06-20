@@ -59,7 +59,13 @@ return {
             null_ls.builtins.diagnostics.ruff,
             -- null_ls.builtins.diagnostics.vale,
             null_ls.builtins.diagnostics.zsh,
-            null_ls.builtins.formatting.beautysh,
+            -- null_ls.builtins.diagnostics.shellcheck,
+            null_ls.builtins.formatting.beautysh.with({
+                filetypes = { "zsh", "ksh", "csh" },
+            }),
+            null_ls.builtins.formatting.shfmt.with({
+                filetypes = { "sh", "bash" },
+            }),
             null_ls.builtins.diagnostics.sqlfluff.with({
                 extra_args = { "--dialect", "mysql" }, -- change to your dialect
                 filetypes = { "sql", "mysql" },

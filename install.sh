@@ -21,24 +21,32 @@ aurPkg='yay -S --needed --noconfirm'
 
 $aurPkg todotxt
 
+# 计算ip的工具
+$pacMan ipcalc
+
+$pacMan sshfs python-nautilus kdeconnect
+
 # Music
 $aurPkg yesplaymusic netease-cloud-music
 
-# sddm theme
-$aurPkg sddm-theme-aerial-git sddm-theme-catppuccin-git \
-    sddm-theme-astronaut sddm-elegant-theme-git sddm-catppuccin-git \
-    sddm-theme-corners-git simplicity-sddm-theme-git sddm-sugar-dark \
-    sddm-nordic-theme-git \
-    sddm-theme-deepin-git  sddm-theme-tokyo-night
+# theme
+$pacMan adwaita-qt5 adwaita-qt6
+# sddm theme,分多次安装，有的会安装失败
+$aurPkg sddm-theme-tokyo-night
+$aurPkg sddm-theme-aerial-git
+$aurPkg sddm-theme-astronaut
+$aurPkg sddm-theme-corners-git
+$aurPkg sddm-nordic-theme-git
 sudo "$pacMan" plasma packagekit-qt5 packagekit appstream-qt appstream
 
 # 动态壁纸
 # sudo $pacMan extra-cmake-modules plasma-framework gst-libav \
-    #     base-devel mpv python-websockets qt5-declarative qt5-websockets qt5-webchannel \
-    #     vulkan-headers cmake glfw-x11 vulkan-devel vulkan-radeon
+#     base-devel mpv python-websockets qt5-declarative qt5-websockets qt5-webchannel \
+#     vulkan-headers cmake glfw-x11 vulkan-devel vulkan-radeon
 # $aurPkg renderdoc plasma5-wallpapers-wallpaper-engine
 sudo "$pacMan" gifsicle ffmpeg
 $aurPkg linux-wallpaperengine-git # komorebi
+# linux-wallpaperengine-wayland-git
 
 # installVirtualBox
 sudo "$pacMan" virtualbox virtualbox-host-dkms
@@ -63,5 +71,10 @@ installWaydroid() {
 # installWaydroid
 
 $aurPkg com.qq.weixin.deepin com.qq.weixin.work.deepin linuxqq-firejail
+
+# $pacMan mariadb
+# sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+# sudo systemctl enable mariadb.service
+# sudo systemctl start mariadb.service
 
 unset pacMan aurPkg

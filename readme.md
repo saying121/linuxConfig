@@ -24,9 +24,11 @@
 ## 先运行
 
 ```bash
-# 后跟 clash 订阅链接，来连接 github
+# 后跟 clash 订阅链接，而且链接要加双引号，不然有可能下载失败
 $ ~/.linuxConfig/scripts/configClash.sh
 ```
+
+http://yacd.metacubex.one 可以管理 clash, http://127.0.0.1:19090, 端口为配置文件里面 external-controller 的端口
 
 ## 如果要使用本配置，执行下面代码，包含 `ranger` 的插件
 

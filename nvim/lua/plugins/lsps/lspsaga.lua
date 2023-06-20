@@ -121,6 +121,11 @@ return {
                 enable = true,
                 frequency = 7,
             },
+            hover = {
+                max_width = 0.6,
+                open_link = "gx",
+                -- open_browser = "!chrome",
+            },
             ui = {
                 -- This option only works in Neovim 0.9
                 title = true,
@@ -230,6 +235,6 @@ return {
         keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
         keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
-        keymap({ "n", "t" }, "<A-a>", "<cmd>Lspsaga term_toggle<CR>")
+        keymap({ "n", "t" }, "<M-a>", "<cmd>Lspsaga term_toggle<CR>")
     end,
 }

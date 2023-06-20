@@ -33,7 +33,7 @@ return {
             local all_prev = {
                 {
                     path = path_cat,
-                    command = "cat | lolcat",
+                    command = "cat | lolcat -f 0.2",
                     file_height = 24,
                     file_width = dash_func.get_columns(path_cat),
                 },
@@ -179,7 +179,7 @@ return {
             local path_cat = dash_func.get_random_file_path("alpha")
             local lolcat_header = {
                 type = "terminal",
-                command = "cat " .. path_cat .. " | lolcat",
+                command = "cat " .. path_cat .. " | lolcat -f 0.2",
                 width = dash_func.get_columns(path_cat),
                 height = dash_func.get_lines(path_cat),
                 opts = {

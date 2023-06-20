@@ -20,6 +20,12 @@ return {
             return str
         end
 
+        -- local function lsp_status()
+        --     vim.lsp.handlers["experimental/serverStatus"] = function(_, result)
+        --         print("Received serverStatus notification:", vim.inspect(result))
+        --     end
+        -- end
+
         require("lualine").setup({
             options = {
                 icons_enabled = true,
@@ -78,6 +84,7 @@ return {
                     },
                 },
                 lualine_x = {
+                    -- lsp_status,
                     { "%M" },
                     {
                         require("noice").api.status.command.get,
@@ -87,11 +94,6 @@ return {
                     -- {
                     --     require("noice").api.status.message.get_hl,
                     --     cond = require("noice").api.status.message.has,
-                    -- },
-                    -- {
-                    --     require("noice").api.status.search.get,
-                    --     cond = require("noice").api.status.search.has,
-                    --     color = { fg = "ff9e64" },
                     -- },
                     { rime_status },
                     {
@@ -143,7 +145,5 @@ return {
                 "aerial",
             },
         })
-
-        -- vim.opt.laststatus = 3
     end,
 }

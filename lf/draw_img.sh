@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#!/bin/bash
 
 clear_screen() {
     printf '\e[%sH\e[9999C\e[1J%b\e[1;%sr' \
@@ -20,7 +19,7 @@ read -r w3m _ < <(type -p w3mimgdisplay "${w3m_paths[@]}")
 read -r LINES COLUMNS < <(stty size)
 
 # Get terminal window size in pixels and set it to WIDTH and HEIGHT.
-export $(xdotool getactivewindow getwindowgeometry --shell)
+export "$(xdotool getactivewindow getwindowgeometry --shell)"
 
 # Get the image size in pixels.
 read -r img_width img_height < <("$w3m" <<< "5;${CACHE:-$1}")
@@ -36,12 +35,12 @@ read -r img_width img_height < <("$w3m" <<< "5;${CACHE:-$1}")
 }
 
 # Variable needed for centering image.
-HALF_HEIGHT=$(expr $HEIGHT / 2)
-HALF_WIDTH=$(expr $WIDTH / 2)
-HALF_IMG_HEIGHT=$(expr $img_height / 2)
-HALF_IMG_WIDTH=$(expr $img_width / 2)
-X_POS=$(expr $HALF_WIDTH - $HALF_IMG_WIDTH)
-Y_POS=$(expr $HALF_HEIGHT - $HALF_IMG_HEIGHT)
+HALF_HEIGHT=$(expr "$HEIGHT" / 2)
+HALF_WIDTH=$(expr "$WIDTH" / 2)
+HALF_IMG_HEIGHT=$(expr "$img_height" / 2)
+HALF_IMG_WIDTH=$(expr "$img_width" / 2)
+X_POS=$(expr "$HALF_WIDTH" - "$HALF_IMG_WIDTH")
+Y_POS=$(expr "$HALF_HEIGHT" - "$HALF_IMG_HEIGHT")
 
 clear_screen
 # Hide the cursor.
@@ -49,8 +48,8 @@ printf '\e[?25l'
 
 # Display the image.
 printf '0;1;%s;%s;%s;%s;;;;;%s\n3;\n4\n' \
-    ${X_POS:-0} \
-    ${Y_POS:-0} \
+    "${X_POS:-0}" \
+    "${Y_POS:-0}" \
     "$img_width" \
     "$img_height" \
     "${CACHE:-$1}" | "$w3m" &>/dev/null

@@ -12,6 +12,7 @@ echo -e "\e[1;33m
 read -r answer
 
 if [[ $answer = 1 ]]; then
+    [[ -d ~/Downloads ]] || mkdir ~/Downloads
     curl -o ~/Downloads/BlackArch.sh -O https://blackarch.org/strap.sh
 
     chmod +x ~/Downloads/BlackArch.sh
@@ -27,6 +28,6 @@ elif [[ $answer = 2 ]]; then
     Server = https://mirrors.ustc.edu.cn/blackarch/$repo/os/$arch
     Server = http://mirrors.aliyun.com/blackarch/$repo/os/$arch
     Server = https://mirrors.aliyun.com/blackarch/$repo/os/$arch
-    ' | rankmirrors -n all - | \
+    ' | rankmirrors -n all - |
         sudo tee /etc/pacman.d/blackarch-mirrorlist
 fi

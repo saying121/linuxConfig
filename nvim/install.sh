@@ -22,9 +22,9 @@ pip3 install pynvim pipenv tldr pylsp-rope vim-vint neovim neovim-remote \
 sudo "$pacMan" rustup
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 rustup install stable beta nightly
-rustup component add rust-analyzer clippy rustfmt --toolchain stable
-rustup component add rust-analyzer clippy rustfmt --toolchain nightly
-rustup component add rust-analyzer clippy rustfmt --toolchain beta
+rustup component add rust-analyzer clippy rustfmt llvm-tools-preview --toolchain stable
+rustup component add rust-analyzer clippy rustfmt llvm-tools-preview --toolchain nightly
+rustup component add rust-analyzer clippy rustfmt llvm-tools-preview --toolchain beta
 rustup default stable
 # 切换 crates 源
 cargo install crm
