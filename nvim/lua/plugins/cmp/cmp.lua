@@ -140,7 +140,7 @@ return {
                     end
                 end, { "i", "s" }),
                 ['<C-Space>'] = cmp.mapping.complete(),
-                ["<M-e>"] = cmp.mapping.abort(),
+                ["<M-u>"] = cmp.mapping.abort(),
                 -- ["<C-Space>"] = require("cmp_rime").mapping.toggle_menu,
                 -- ["<Space>"] = require("cmp_rime").mapping.space_commit,
                 -- ["<CR>"] = require("cmp_rime").mappings.confirm,

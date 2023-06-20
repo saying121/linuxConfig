@@ -24,11 +24,15 @@ return {
                 keymap("n", "cr", crates.reload, opts)
 
                 -- keymap("n", "<leader>cv", crates.show_versions_popup, opts)
-                keymap("n", "cf", crates.show_features_popup, opts)
+                keymap("n", "cf", function()
+                    crates.show_features_popup()
+                    crates.show_features_popup()
+                end, opts)
                 keymap("n", "cd", crates.show_dependencies_popup, opts)
 
                 keymap("n", "cu", crates.update_crate, opts)
                 keymap("x", "cu", crates.update_crates, opts)
+
                 -- keymap("n", "<leader>ca", crates.update_all_crates, opts)
                 -- keymap("n", "<leader>cA", crates.upgrade_all_crates, opts)
 

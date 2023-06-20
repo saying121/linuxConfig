@@ -24,13 +24,6 @@ if [ -x /usr/bin/dircolors ]; then
     export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
 fi
 
-# some more ls aliases
-# alias ll='ls -l'
-# alias la='ls -A'
-# alias lal='ls -al'
-# alias lla='ls -al'
-# alias l='ls -CF'
-
 cat() {
     if [[ $1 =~ \.md ]]; then
         mdcat "$@"
@@ -66,15 +59,23 @@ if [[ $(uname -a | grep -c WSL) != 0 ]]; then
     . ~/.linuxConfig/scripts/proxy.sh set
 fi
 
-# 自己的alias
-alias ls='exa -F --icons'
-alias ld='exa -FD --icons'
-alias ll='exa -FlHhig --time-style long-iso --icons --git'
-alias la='exa -F --all'
-alias lal='ll -a'
-alias lla='ll -a'
-alias tree='exa -F -T --icons'
-alias ltree='tree -l'
+if [[ $(command -v exa) ]]; then
+    # 自己的alias
+    alias ls='exa -F --icons'
+    alias ld='exa -FD --icons'
+    alias ll='exa -FlHhig --time-style long-iso --icons --git'
+    alias la='exa -F --all'
+    alias lal='ll -a'
+    alias lla='ll -a'
+    alias tree='exa -F -T --icons'
+    alias ltree='tree -l'
+else
+    alias ll='ls -l'
+    alias la='ls -A'
+    alias lal='ls -al'
+    alias lla='ls -al'
+    alias l='ls -CF'
+fi
 
 alias nvid='i3 move scratchpad && neovide'
 alias show='i3 scratchpad show'
@@ -84,14 +85,13 @@ alias rewall='systemctl --user restart wallpaperengine.service'
 alias icat="kitty +kitten icat"
 # ImageMagick must be installed for icat to work.
 alias imgcat="wezterm imgcat"
-alias ueber="~/.linuxConfig/ueber.sh"
+alias ueber="~/.linuxConfig/scripts/ueber.sh"
 
 alias clhconf="~/.linuxConfig/scripts/configClash.sh"
 alias clhres="sudo systemctl restart clash-meta.service"
 alias clhstp="sudo systemctl stop clash-meta.service"
 alias clhsts="systemctl status clash-meta.service"
 
-# alias rm="gio trash"
 alias rm="trash"
 alias tl='trash-list'
 alias rt='trash-restore'
@@ -118,8 +118,6 @@ alias r='ranger'
 # lf
 LFCD="$HOME/.config/lf/lfcd.sh"
 source "$LFCD"
-
-# export DISPLAY=:0
 
 # config tldr
 export TLDR_COLOR_NAME="cyan"

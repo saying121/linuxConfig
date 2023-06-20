@@ -75,6 +75,11 @@ return {
             action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
         },
         {
+            key = "d",
+            mods = "ALT|CTRL",
+            action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+        },
+        {
             key = "{",
             mods = "SHIFT|CTRL",
             action = act.MoveTabRelative(-1),
@@ -95,8 +100,9 @@ return {
             action = act.ActivateWindowRelative(-1),
         },
         -- activate pane selection mode with the default alphabet (labels are "a", "s", "d", "f" and so on)
+        -- 选择pane 字母
         { key = "2", mods = "CTRL", action = act.PaneSelect },
-        -- activate pane selection mode with numeric labels
+        -- 选择pane 数字
         {
             key = "1",
             mods = "CTRL",
@@ -104,13 +110,10 @@ return {
                 alphabet = "1234567890",
             }),
         },
-        -- show the pane selection mode, but have it swap the active and selected panes
         {
-            key = "0",
-            mods = "CTRL",
-            action = act.PaneSelect({
-                mode = "SwapWithActive",
-            }),
+            key = "w",
+            mods = "CTRL|SHIFT",
+            action = wezterm.action.CloseCurrentPane({ confirm = true }),
         },
     },
 }

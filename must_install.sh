@@ -55,11 +55,11 @@ sudo "$pacMan" figlet ffmpeg \
     bc man net-tools psmisc sudo ripgrep fzf trash-cli wget \
     vim bash exa bat \
     neovim lolcat git lazygit composer eslint cronie sqlite \
-    engrampa
+    engrampa pkgfile
 
 # 图像查看
 sudo "$pacMan" gwenview nomacs opencv-samples vtk glew qt6-base hdf5 opencl-icd-loader java-runtime
-sudo $pacMan adios2 cgns ffmpeg fmt gdal gl2ps glew gnuplot graphviz hdf5 java-runtime=11 jsoncpp libarchive libharu liblas lz4 mariadb-libs netcdf openimagedenoise openmpi openvdb openvr openxr ospray pdal postgresql-libs proj python python-matplotlib python-mpi4py qt5-declarative sqlite tk unixodbc verdict
+sudo "$pacMan" adios2 cgns ffmpeg fmt gdal gl2ps glew gnuplot graphviz hdf5 java-runtime=11 jsoncpp libarchive libharu liblas lz4 mariadb-libs netcdf openimagedenoise openmpi openvdb openvr openxr ospray pdal postgresql-libs proj python python-matplotlib python-mpi4py qt5-declarative sqlite tk unixodbc verdict
 
 # neovim,vim plugins
 ~/.linuxConfig/nvim/install.sh
@@ -128,7 +128,6 @@ sudo "$pacMan" redshift
 
 # 锁屏
 sudo "$pacMan" betterlockscreen xidlehook dex
-# sudo cp -f ~/.linuxConfig/custom-services/betterlockscreen@.service /usr/lib/systemd/system/
 # 电源时间
 xset dpms 1200 1800 2400
 # 屏保时间
@@ -139,8 +138,6 @@ sudo systemctl enable betterlockscreen@"$USER"
 sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
 $aurPkg i3-wm i3status i3status-rust autotiling feh
 makepkg -si ~/.linuxConfig/i3/picom/PKGBUILD
-# i3-gaps-kde-git
-# ~/.linuxConfig/kde/use-i3.sh
 
 $pacMan sway mako swaybg swaylock swayidle waybar
 
@@ -168,7 +165,7 @@ input-remapper-control --command start --device "SINO WEALTH Gaming KB " --prese
 
 # 各种查看系统信息的软件
 sudo "$pacMan" htop atop iotop iftop glances sysstat plasma-systemmonitor
-$aurPkg gotop cpufetch hardinfo neofetch
+$aurPkg gotop cpufetch hardinfo fastfetch onefetch ufetch-git bitfetch-git macchina fetchfetch rufetch
 
 # 浏览器
 $aurPkg microsoft-edge-stable-bin google-chrome
@@ -206,8 +203,7 @@ sudo "$pacMan" polkit polkit-qt5 polkit-gnome # polkit-kde-agent
 # pdf
 sudo "$pacMan" python-pymupdf python-fonttools python-pillow bibtool termpdf.py-git
 
-# 图片浏览器，字体，录制gif
-$aurPkg xnviewmp
+# 字体，录制gif
 $aurPkg fontpreview gifine
 
 # wps

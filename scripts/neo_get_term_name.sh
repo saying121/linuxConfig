@@ -1,6 +1,6 @@
 #!/bin/bash
 
 source /bin/neofetch
-echo $term
-echo $os
-echo $distro
+echo "$term"
+echo "$os"
+echo "$distro"

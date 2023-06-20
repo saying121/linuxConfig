@@ -9,5 +9,5 @@ theme='style-7'
 thepath=$dir/$theme.rasi
 
 # pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY \
-pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
-    rofi -show drun -theme $thepath
+pkexec env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" \
+    rofi -show drun -theme "$thepath"

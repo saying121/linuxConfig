@@ -22,9 +22,9 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
     border = "single",
 })
 
-vim.lsp.handlers["experimental/serverStatus"] = function(_, result)
-    print("Received serverStatus notification:", vim.inspect(result))
-end
+-- vim.lsp.handlers["experimental/serverStatus"] = function(_, result)
+--     print("Received serverStatus notification:", vim.inspect(result))
+-- end
 
 vim.diagnostic.config({
     virtual_text = true,
@@ -60,7 +60,10 @@ vim.filetype.add({
         ["/etc/foo/config"] = "toml",
     },
     pattern = {
+        ["(?i)LICENSE"] = "license",
         [".*/etc/foo/.*"] = "fooscript",
+        ["~/.config/hypr/*.conf"] = "conf",
+        ["/proc/bus/input/.*"] = "txt",
         -- Using an optional priority
         [".*/etc/foo/.*%.conf"] = { "dosini", { priority = 10 } },
         -- A pattern containing an environment variable

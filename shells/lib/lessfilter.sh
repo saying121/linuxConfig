@@ -4,6 +4,7 @@ mime=$(file -Lbs --mime-type "$1")
 category=${mime%%/*}
 kind=${mime##*/}
 ext=${1##*.}
+
 if [ "$kind" = octet-stream ]; then
     if [[ $1 == *events.out.tfevents.* ]]; then
         python <<EOF

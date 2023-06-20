@@ -67,7 +67,7 @@ end
 function M.get_random_file_path(dir_name)
     local dir_path = vim.fn.stdpath("config") .. "/dashboard/" .. dir_name
     local file_name = vim.fn.readdir(dir_path)
-    -- local file_name = { 'dragon.cat' } -- 测试某个
+    -- local file_name = { 'vim.cat' } -- 测试某个
     return dir_path .. "/" .. file_name[M.get_rand(file_name)]
 end
 

@@ -15,4 +15,4 @@ theme='style-4'
 ## Run
 rofi \
     -dmenu \
-    -theme ${dir}/${theme}.rasi
+    -theme "${dir}"/${theme}.rasi

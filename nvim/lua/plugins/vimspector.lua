@@ -22,28 +22,15 @@ return {
         kemap("n", "<F8>", "<Plug>VimspectorStepOut<cr>", opts)
 
         kemap("n", "<F11>", "<Plug>VimspectorStop<cr>", opts)
-        --         \ {  "test_debugpy_config": {
-        --         \   "adapter": "test_debugpy",
-        --         \   "filetypes": [ "python" ],
-        --         \   "configuration": {
-        --         \     "request": "launch",
-        --         \     "type": "python",
-        --         \     "cwd": "${fileDirname}",
-        --         \     "args": [],
-        --         \     "program": "${file}",
-        --         \     "stopOnEntry": v:false,
-        --         \     "console": "integratedTerminal",
-        --         \     "integer": 123,
-        --         \   },
-        --         \   "breakpoints": {
-        --         \     "exception": {
-        --         \       "raised": "N",
-        --         \       "uncaught": "",
-        --         \       "userUnhandled": ""
-        --         \     }
-        --         \   }
-        --         \ } }
-        vim.g.vimspector_configurations = {}
+
+        local conf = {}
+        local cf_dir = os.getenv("HOME") .. "/.config/nvim/lua/vimspector-config/"
+        for _, val in ipairs(vim.fn.readdir(cf_dir)) do
+            local a = vim.fn.join(vim.fn.readfile(cf_dir .. val))
+            local tb = vim.json.decode(a)
+            table.insert(conf, tb)
+        end
+        vim.g.vimspector_configurations = conf
 
         -- vim.g.vimspector_enable_mappings = "HUMAN"
         -- vim.g.vimspector_install_gadgets = { "debugpy", "vscode-cpptools", "CodeLLDB" }

@@ -12,7 +12,7 @@ pacMan=$(get_package_manager)
 aurPkg='yay -S --needed --noconfirm'
 
 # 通知,bar,剪贴板
-sudo "$pacMan" hyprland \
+sudo "$pacMan" hyprland-nvidia \
     waybar-hyprland-git otf-font-awesome \
     cliphist wl-clipboard \
     swaylock-effects swayidle \

@@ -6,6 +6,7 @@ return {
     config = function()
         local import = {
             "plenary.nvim",
+            -- "crates.nvim",
             -- "alpha-nvim",
             -- "lspkind.nvim",
             -- "neotest",

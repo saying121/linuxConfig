@@ -281,7 +281,7 @@
             }
         ],
         "target_uinput": "keyboard",
-        "output_symbol": "key(end).key(Return)",
+        "output_symbol": "key(end).modify(Shift_L,key(Return))",
         "mapping_type": "key_macro"
     },
     {

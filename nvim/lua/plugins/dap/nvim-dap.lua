@@ -1,8 +1,9 @@
 return {
     "mfussenegger/nvim-dap",
+    cond = true,
     keys = {
-        { "<space>b", mode = "n" },
-        { "<space>B", mode = "n" },
+        { "<space>b",   mode = "n" },
+        { "<space>B",   mode = "n" },
         { "<leader>tb", mode = "n" },
         { "<leader>sc", mode = "n" },
         { "<leader>cl", mode = "n" },
@@ -33,27 +34,21 @@ return {
         local keymap, opts = vim.keymap.set, { noremap = true, silent = true }
 
         keymap("n", "<space>b", dap.toggle_breakpoint, opts)
-        keymap(
-            "n",
-            "<space>B",
-            "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-            opts
-        )
+        keymap("n", "<space>B", function()
+            dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+        end, opts)
 
         keymap({ "n", "i", "t" }, "<F5>", dap.continue, opts)
-        keymap({ "n", "i", "t" }, "<F6>", dap.step_into, opts)
-        keymap({ "n", "i", "t" }, "<F7>", dap.step_over, opts)
+        keymap({ "n", "i", "t" }, "<F6>", dap.step_over, opts)
+        keymap({ "n", "i", "t" }, "<F7>", dap.step_into, opts)
         keymap({ "n", "i", "t" }, "<F8>", dap.step_out, opts)
         keymap({ "n", "i", "t" }, "<F9>", dap.step_back, opts)
         keymap({ "n", "i", "t" }, "<F10>", dap.run_last, opts)
         keymap({ "n", "i", "t" }, "<F11>", dap.terminate, opts)
 
-        keymap(
-            "n",
-            "<space>lp",
-            "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
-            opts
-        )
+        keymap("n", "<space>lp", function()
+            dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+        end, opts)
         keymap("n", "<space>dr", dap.repl.open, opts)
         keymap("n", "<space>dl", dap.run_last, opts)
 

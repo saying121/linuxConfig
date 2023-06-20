@@ -1,6 +1,6 @@
 return {
     "michaelb/sniprun",
-    build = "./install.sh",
+    build = "sh install.sh",
     keys = {
         { "<leader>sr", mode = "x", desc = "unit test" },
     },
