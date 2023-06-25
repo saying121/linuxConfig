@@ -1007,5 +1007,22 @@
         "target_uinput": "keyboard",
         "output_symbol": "Super_R",
         "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 57,
+                "origin_hash": "748e31550c24fc009038438dc4fce338"
+            },
+            {
+                "type": 1,
+                "code": 50,
+                "origin_hash": "748e31550c24fc009038438dc4fce338"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "Shift_L+slash",
+        "mapping_type": "key_macro"
     }
 ]

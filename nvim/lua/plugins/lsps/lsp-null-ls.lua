@@ -48,28 +48,27 @@ return {
             -- null_ls.builtins.formatting.sql_formatter.with({
             --     filetypes = { "sql", "mysql" },
             -- }),
-            null_ls.builtins.formatting.sqlformat.with({
-                filetypes = { "sql", "mysql" },
-            }),
+            -- null_ls.builtins.formatting.sqlformat.with({
+            --     filetypes = { "sql", "mysql" },
+            -- }),
             null_ls.builtins.formatting.json_tool,
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.formatting.stylua,
             -- viml
             null_ls.builtins.diagnostics.vint,
-            null_ls.builtins.diagnostics.ruff,
             -- null_ls.builtins.diagnostics.vale,
             null_ls.builtins.diagnostics.zsh,
-            -- null_ls.builtins.diagnostics.shellcheck,
             null_ls.builtins.formatting.beautysh.with({
                 filetypes = { "zsh", "ksh", "csh" },
             }),
             null_ls.builtins.formatting.shfmt.with({
                 filetypes = { "sh", "bash" },
             }),
-            null_ls.builtins.diagnostics.sqlfluff.with({
-                extra_args = { "--dialect", "mysql" }, -- change to your dialect
-                filetypes = { "sql", "mysql" },
-            }),
+            null_ls.builtins.diagnostics.sqlfluff,
+            -- null_ls.builtins.diagnostics.sqlfluff.with({
+            --     extra_args = { "--dialect", "mysql" }, -- change to your dialect
+            --     filetypes = { "sql", "mysql" },
+            -- }),
             -- js
             null_ls.builtins.diagnostics.eslint,
         }

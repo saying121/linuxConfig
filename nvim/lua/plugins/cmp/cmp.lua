@@ -45,7 +45,7 @@ return {
                 -- Keyword_pattern = "sn",
                 priority = 1000,
             },
-            { name = "nvim_lsp", keyword_length = 0, priority = 900 },
+            { name = "nvim_lsp", priority = 1000 },
             { name = "path", priority = 800 },
         }, {
             { name = "buffer", priority = 800 },
@@ -139,7 +139,7 @@ return {
                         fallback()
                     end
                 end, { "i", "s" }),
-                ['<C-Space>'] = cmp.mapping.complete(),
+                ["<C-Space>"] = cmp.mapping.complete(),
                 ["<M-u>"] = cmp.mapping.abort(),
                 -- ["<C-Space>"] = require("cmp_rime").mapping.toggle_menu,
                 -- ["<Space>"] = require("cmp_rime").mapping.space_commit,
@@ -162,14 +162,14 @@ return {
                 -- rime-ls
                 comparators = {
                     -- require("cmp.config.compare").sort_text, -- 这个放第一个, 其他的随意
-                    compare.recently_used, -- 最近用过的靠前
                     compare.exact, -- 精准匹配
+                    compare.recently_used, -- 最近用过的靠前
+                    compare.kind,
                     compare.score, -- 得分高靠前
+                    compare.order,
+                    compare.offset,
                     compare.length, -- 短的靠前
                     compare.sort_test,
-                    compare.offset,
-                    compare.kind,
-                    compare.order,
                     require("cmp_tabnine.compare"),
                 },
             },

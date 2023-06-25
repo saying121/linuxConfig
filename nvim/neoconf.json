@@ -18,62 +18,6 @@
         },
         "bashls": {
             "bashIde.shellcheckPath": "shellcheck"
-        },
-        "rust_analyzer": {
-            "rust-analyzer.cargo.buildScripts.invocationStrategy": "per_workspace",
-            "rust-analyzer.completion.snippets.custom": {
-                "Arc::new": {
-                    "body": "Arc::new(${receiver})",
-                    "description": "Put the expression into an `Arc`",
-                    "postfix": "arc",
-                    "requires": "std::sync::Arc",
-                    "scope": "expr"
-                },
-                "Box::pin": {
-                    "body": "Box::pin(${receiver})",
-                    "description": "Put the expression into a pinned `Box`",
-                    "postfix": "pinbox",
-                    "requires": "std::boxed::Box",
-                    "scope": "expr"
-                },
-                "Err": {
-                    "body": "Err(${receiver})",
-                    "description": "Wrap the expression in a `Result::Err`",
-                    "postfix": "err",
-                    "scope": "expr"
-                },
-                "Ok": {
-                    "body": "Ok(${receiver})",
-                    "description": "Wrap the expression in a `Result::Ok`",
-                    "postfix": "ok",
-                    "scope": "expr"
-                },
-                "Rc::new": {
-                    "body": "Rc::new(${receiver})",
-                    "description": "Put the expression into an `Rc`",
-                    "postfix": "rc",
-                    "requires": "std::rc::Rc",
-                    "scope": "expr"
-                },
-                "Some": {
-                    "body": "Some(${receiver})",
-                    "description": "Wrap the expression in an `Option::Some`",
-                    "postfix": "some",
-                    "scope": "expr"
-                },
-                "thread spawn": {
-                    "prefix": ["spawn", "tspawn"],
-                    "body": ["thread::spawn(move || {", "\t$1", "});$0"],
-                    "description": "Insert a thread::spawn call",
-                    "requires": "std::thread",
-                    "scope": "expr"
-                }
-            },
-            "rust-analyzer.joinLines.removeTrailingComma": true,
-            "rust-analyzer.assist": {
-                "emitMUstUse": false,
-                "expressionFillDefault": "todo"
-            }
         }
     }
 }

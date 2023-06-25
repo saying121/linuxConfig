@@ -27,7 +27,31 @@ M.on_attach = function(client, bufnr)
         vim.lsp.buf.format({ async = true })
     end, opts)
 
+    -- print(vim.inspect(client))
     local cap = client.server_capabilities
+    -- 取消下面的注释使用 :messages 可以查看 lsp 支持的功能
+    -- print(vim.inspect(cap))
+
+    -- inlay hints相关
+    if cap.inlayHintProvider.resolveProvider then
+        if vim.fn.has("nvim-0.10.0") == 1 then
+            vim.lsp.buf.inlay_hint(0, true)
+
+            vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+                group = vim.api.nvim_create_augroup("EnableInlayHint", { clear = true }),
+                callback = function()
+                    vim.lsp.buf.inlay_hint(0, true)
+                end,
+            })
+            vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+                group = vim.api.nvim_create_augroup("DisableInlayHint", { clear = true }),
+                callback = function()
+                    vim.lsp.buf.inlay_hint(0, false)
+                end,
+            })
+        end
+    end
+    -- 高亮相同变量或者函数
     if cap.documentHighlightProvider then
         vim.api.nvim_create_autocmd({ "CursorHold" }, {
             group = vim.api.nvim_create_augroup("LspHighlight", { clear = true }),

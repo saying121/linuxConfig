@@ -20,16 +20,16 @@ fi
 if [[ $(grep -c PROXY /etc/profile) == 0 ]]; then
     # shellcheck disable=2016
     echo '
-export ALL_PROXY=http://127.0.0.1:7890 export HTTPS_PROXY=http://127.0.0.1:7890
+export ALL_PROXY=http://127.0.0.1:7890
+export HTTPS_PROXY=http://127.0.0.1:7890
 export HTTP_PROXY=http://127.0.0.1:7890
 export NO_PROXY=baidu.com,qq.com
 
 export EDITOR=nvim
 
-export PATH=~/go/bin:$PATH
-export PATH=~/.cargo/bin:~/.local/bin:$PATH
+export PATH=$PATH:~/.cargo/bin:~/.local/bin:~/go/bin
 export GOPATH=~/go
-export PATH=/usr/lib/w3m:$PATH
+export PATH=$PATH:/usr/lib/w3m
 
 export XDG_DATA_HOME=~/.local/share
 export XDG_CONFIG_HOME=~/.config
@@ -37,7 +37,7 @@ export XDG_CACHE_HOME=~/.cache
 
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export QT_QPA_PLATFORM="wayland;xcb"
-export QT_QPA_PLATFORMTHEME=qt5ct # 外观用qt5ct设置
+export QT_QPA_PLATFORMTHEME=qt5ct # 外观用 qt5ct 设置
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
 # java程序黑屏
@@ -63,6 +63,7 @@ link_list=(
     ["$HOME/.linuxConfig/configs/go-musicfox.ini"]="$HOME/.go-musicfox/go-musicfox.ini"
     ["$HOME/.linuxConfig/configs/konsave-conf.yaml"]="$HOME/.config/konsave/conf.yaml"
     ["$HOME/.linuxConfig/configs/leetcode.toml"]="$HOME/.leetcode/leetcode.toml"
+    ["$HOME/.linuxConfig/configs/lessfilter.sh"]="$HOME/.lessfilter"
     ["$HOME/.linuxConfig/configs/npmrc"]="$HOME/.npmrc"
     ["$HOME/.linuxConfig/configs/rime-ls-user.yaml"]="$HOME/.local/share/rime-ls-nvim/user.yaml"
     ["$HOME/.linuxConfig/configs/tldrrc"]="$HOME/.tldrrc"
@@ -71,6 +72,7 @@ link_list=(
     ["$HOME/.linuxConfig/fcitxs-config/fcitx5"]="$HOME/.config"
     ["$HOME/.linuxConfig/formatters/clang-format"]="$HOME/.clang-format"
     ["$HOME/.linuxConfig/formatters/prettierrc.json"]="$HOME/.prettierrc.json"
+    ["$HOME/.linuxConfig/formatters/rustfmt"]="$HOME/.config"
     ["$HOME/.linuxConfig/formatters/stylua"]="$HOME/.config"
     ["$HOME/.linuxConfig/fusuma"]="$HOME/.config"
     ["$HOME/.linuxConfig/gitui"]="$HOME/.config"
@@ -87,7 +89,6 @@ link_list=(
     ["$HOME/.linuxConfig/qt5ct"]="$HOME/.config"
     ["$HOME/.linuxConfig/ranger"]="$HOME/.config"
     ["$HOME/.linuxConfig/shells/bashrc"]="$HOME/.bashrc"
-    ["$HOME/.linuxConfig/shells/lib/lessfilter.sh"]="$HOME/.lessfilter"
     ["$HOME/.linuxConfig/shells/lib/p10k.zsh"]="$HOME/.p10k.zsh"
     ["$HOME/.linuxConfig/shells/starship.toml"]="$HOME/.config/starship.toml"
     ["$HOME/.linuxConfig/shells/zirc.zsh"]="$HOME/.zshrc"
@@ -121,11 +122,14 @@ for path in "${!link_list[@]}"; do
     be_back=$(echo "$path" | awk -F / '{print $NF}')
     be_back_path=${link_list[$path]}/$be_back
 
+    # 如果有要备份的目录，而且不是软连接
     if [[ -d $be_back_path && ! -L $be_back_path ]]; then
+        # 如果已经备份
         if [[ -d $be_back_path"_bak" ]]; then
             continue
         fi
         mv "$be_back_path" "$be_back_path""_bak"
+    # 目录为软连接，或者没有目录
     else
         ln -sf "$path" "${link_list[$path]}"
         continue
@@ -139,7 +143,8 @@ for path in "${!link_list[@]}"; do
     fi
 done
 
-sudo sed -i 's/^#HibernateDelaySec=.*/HibernateDelaySec=3600/' /etc/systemd/sleep.conf
+# 两小时后休眠
+sudo sed -i.bak 's/^#HibernateDelaySec=.*/HibernateDelaySec=7200/' /etc/systemd/sleep.conf
 
 [[ -d ~/.config/systemd/user ]] || mkdir -p ~/.config/systemd/user
 

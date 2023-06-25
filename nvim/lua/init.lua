@@ -22,6 +22,12 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
     border = "single",
 })
 
+_G.inlay_hints = true
+if vim.fn.has("nvim-0.10.0") == 1 then
+    vim.opt.smoothscroll = true
+    _G.inlay_hints = false
+end
+
 -- vim.lsp.handlers["experimental/serverStatus"] = function(_, result)
 --     print("Received serverStatus notification:", vim.inspect(result))
 -- end

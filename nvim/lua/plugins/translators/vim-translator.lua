@@ -1,6 +1,12 @@
 return {
     "voldikss/vim-translator",
     lazy = true,
+    cmd = {
+        "TranslateR",
+        "TranslateW",
+        "TranslateWV",
+        "TranslateX",
+    },
     keys = {
         { "<M-y>", mode = { "n", "x" }, desc = "translate" },
         -- { '<M-c>', mode = { 'n', 'v' }, desc = 'translate' },
@@ -11,7 +17,7 @@ return {
         -- Available: 'bing', 'google', 'haici', 'iciba'(expired), 'sdcv', 'trans', 'youdao'
         vim.g.translator_default_engines = { "google", "haici" }
         local opts = { noremap = true, silent = true }
-        local keymap = vim.api.nvim_set_keymap
+        local keymap = vim.keymap.set
         -- Display translation in a window
         keymap("n", "<M-y>", "<Plug>TranslateW", opts)
         keymap("x", "<M-y>", "<Plug>TranslateWV", opts)

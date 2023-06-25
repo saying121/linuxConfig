@@ -5,7 +5,7 @@ return {
 
         vim.g.db_ui_tmp_query_location = "~/sql"
         vim.g.db_ui_show_database_icon = 1
-        vim.g.db_ui_execute_on_save = 1
+        vim.g.db_ui_execute_on_save = 0
         vim.cmd([[
                 function s:buffer_name_generator(table)
                     if empty(a:table.label)

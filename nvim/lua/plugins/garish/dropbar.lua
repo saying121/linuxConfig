@@ -1,7 +1,7 @@
 return {
     "Bekaboo/dropbar.nvim",
     cond = function()
-        return vim.version().minor >= 10
+        return vim.fn.has("nvim-0.10.0") == 1
     end,
     dependencies = {
         "nvim-tree/nvim-web-devicons",

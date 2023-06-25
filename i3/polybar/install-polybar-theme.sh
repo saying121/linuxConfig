@@ -18,10 +18,10 @@ fi
 # sudo systemctl enable mpd
 # sudo systemctl start mpd
 
-# sed -i "s#^;;password = mysecretpassword#password = mysecretpassword#" ~/.config/polybar/hack/modules.ini
+# sed -i.bak "s#^;;password = mysecretpassword#password = mysecretpassword#" ~/.config/polybar/hack/modules.ini
 
-# sed -i "s#^;*host = 127.0.0.1#host = 127.0.0.1#" ~/.config/polybar/hack/modules.ini
-# sed -i "s#^;*port = 6600#port = 7000#" ~/.config/polybar/hack/modules.ini
+# sed -i.bak "s#^;*host = 127.0.0.1#host = 127.0.0.1#" ~/.config/polybar/hack/modules.ini
+# sed -i.bak "s#^;*port = 6600#port = 7000#" ~/.config/polybar/hack/modules.ini
 
 # rm ~/.config/polybar/hack/modules.ini
 cat ~/.linuxConfig/i3/polybar/hack-modules.ini >~/.config/polybar/hack/modules.ini
