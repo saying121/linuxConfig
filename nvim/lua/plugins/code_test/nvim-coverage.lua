@@ -1,6 +1,10 @@
 return {
     "andythigpen/nvim-coverage",
     build = "cargo install grcov",
+    cmd = {
+        "Coverage",
+        "CoverageSummary",
+    },
     config = function()
         local util = require("public.utils")
         local git_root = util.get_git_root_dir(vim.fn.getcwd(), "/.git")

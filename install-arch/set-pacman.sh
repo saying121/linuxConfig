@@ -9,12 +9,12 @@ sudo systemctl stop reflector.service
 sudo systemctl disable reflector.service
 
 # 配置pacman.conf
-sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
-sudo sed -i "s/^#ParallelDownloads .*/ParallelDownloads = 40/" /etc/pacman.conf
-sudo sed -i 's/^#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
+sudo sed -i.bak 's/^#Color/Color/' /etc/pacman.conf
+sudo sed -i.bak "s/^#ParallelDownloads .*/ParallelDownloads = 40/" /etc/pacman.conf
+sudo sed -i.bak 's/^#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
 
-sudo sed -i "s/^#\[multilib\]/\[multilib\]/" /etc/pacman.conf
-sed -i '/multilib/ {n;s/^#//;}' /etc/pacman.conf
+sudo sed -i.bak "s/^#\[multilib\]/\[multilib\]/" /etc/pacman.conf
+sudo sed -i.bak '/multilib/ {n;s/^#//;}' /etc/pacman.conf
 
 if [[ $(grep "\[archlinuxcn\]" -c /etc/pacman.conf) = 0 ]]; then
     # shellcheck disable=2016
@@ -24,20 +24,6 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 Server = http://mirrors.163.com/archlinux-cn/$arch
 ' | sudo tee -a /etc/pacman.conf
 fi
-
-# read -p '
-#
-# *******************************************
-# **** set-chaotic-aur-mirrors? yes/no : ****
-# *******************************************
-# ' ans
-#
-# if [[ $ans == yes ]]; then
-#     ./set-chaotic-aur-mirrors.sh
-# else
-#     sudo pacman -Syy --noconfirm
-#     sudo pacman -Fyy --noconfirm
-# fi
 
 sudo pacman -Syy --noconfirm
 sudo pacman -Fyy --noconfirm

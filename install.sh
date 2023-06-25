@@ -58,10 +58,9 @@ sudo "$pacMan" wine pkgstats
 # 各种查看系统信息的软件
 sudo "$pacMan" htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
 $aurPkg gotop cpufetch hardinfo neofetch # `gpufetch-git
-# pip3 install nvitop gpustat
 
 # markdown browser
-pip3 install frogmouth carbonyl
+$aurPkg frogmouth carbonyl
 
 installWaydroid() {
     sudo "$pacMan" waydroid linux-zen linux-zen-headers
@@ -71,6 +70,8 @@ installWaydroid() {
 # installWaydroid
 
 $aurPkg com.qq.weixin.deepin com.qq.weixin.work.deepin linuxqq-firejail
+
+$pacMan dust procs tealdeer
 
 # $pacMan mariadb
 # sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql

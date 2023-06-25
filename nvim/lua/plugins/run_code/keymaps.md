@@ -1,12 +1,12 @@
 asynctasks.lua
 
-| keys  |      作用      | mode |
-| :---: | :------------: | :--: |
-| <F4>  |    file run    |  n   |
-| <F3>  |   file build   |  n   |
-| <F2>  | file build run |  n   |
-| <A-b> | project build  |  n   |
-| <A-r> |  project run   |  n   |
+| keys  |         作用          | mode |
+| :---: | :-------------------: | :--: |
+| <F4>  |     run 单个文件      |  n   |
+| <F3>  |    build 单个文件     |  n   |
+| <F2>  | build && run 单个文件 |  n   |
+| <A-b> |    build 整个项目     |  n   |
+| <A-r> |     run 整个项目      |  n   |
 
 ---
 

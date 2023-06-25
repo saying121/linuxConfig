@@ -16,13 +16,13 @@ exec systemctl --user start wallpaperengine.service
 服务中的执行路径可以自己修改
 
 ```bash
-    sed -i "s#ExecStart=.*/.linuxConfig/wallpaperengine/wallpaper.sh#ExecStart=$HOME/.linuxConfig/wallpaperengine/wallpaper.sh#" ~/.config/systemd/user/wallpaperengine.service
+    sed -i.bak "s#ExecStart=.*/.linuxConfig/wallpaperengine/wallpaper.sh#ExecStart=$HOME/.linuxConfig/wallpaperengine/wallpaper.sh#" ~/.config/systemd/user/wallpaperengine.service
 ```
 
 可以改为
 
 ```bash
-    sed -i "s#ExecStart=.*/path/to/wallpaper.sh#ExecStart=$HOME/path/to/wallpaper.sh#" ~/.config/systemd/user/wallpaperengine.service
+    sed -i.bak "s#ExecStart=.*/path/to/wallpaper.sh#ExecStart=$HOME/path/to/wallpaper.sh#" ~/.config/systemd/user/wallpaperengine.service
 ```
 
 有些不适宜的壁纸就不要订阅了，不知道怎么排除某些壁纸，真要看也不至于用这个。

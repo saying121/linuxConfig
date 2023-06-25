@@ -42,7 +42,7 @@ rust-tools.lua
 
 |   keys    |      作用       | mode |
 | :-------: | :-------------: | :--: |
-|   <M-f>   |   专用 hover    |  n   |
+|   <M-f>   | rust 专用 hover |  n   |
 |    mk     |  向上移动 item  |  n   |
 |    mj     |  向下移动 item  |  n   |
 | <leader>R | 查看可 run 项目 |  n   |

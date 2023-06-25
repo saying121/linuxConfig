@@ -399,9 +399,39 @@ local custom = vim.tbl_deep_extend("force", postfix, prefix, friendly, tui)
 return {
     ["rust-analyzer"] = {
         completion = {
-            snippets = {
-                custom = custom,
-            },
+            autoinport = { enable = true },
+            autoself = { enable = true },
+            postfix = { enable = true },
+            privateEditable = { enable = false },
+            snippets = { custom = custom },
         },
+        imports = {
+            granularity = { enforce = true, group = "crate", enable = true },
+            group = { enable = true },
+            merge = { glob = false },
+            prefer = { no = { std = false } },
+            prefix = "plain", -- crate,self
+        },
+        inlayHints = {
+            bindingModeHints = { enable = true },
+            chainingHints = { enable = true },
+            closingBraceHints = { enable = true, minLines = 25 },
+            closureCaptureHints = { enable = false },
+            closureReturnTypeHints = { enable = "always" }, -- never
+            closureStyle = "impl_fn",
+            discriminantHints = { enable = "always" },
+            expressionAdjustmentHints = {
+                enable = "always",
+                hideOutsideUnsafe = false,
+                mode = "prefix", --[[ postfix ]]
+            },
+            lifetimeElisionHints = { enable = "always", useParameterNames = false },
+            maxLength = 25,
+            parameterHints = { enable = true },
+            reborrowHints = { enable = "never" },
+            renderColons = true,
+            typeHints = { enable = true, hideClosureInitialization = false, hideNamedConstructor = false },
+        },
+        rustfmt = { rangeFormatting = { enable = true } },
     },
 }

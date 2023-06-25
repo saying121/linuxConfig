@@ -15,9 +15,7 @@ sudo "$pacMan" ranger fzf ripgrep fd lldb translate-shell \
 
 $aurPkg rust-lolcat-git
 
-sudo "$pacMan" python3 python-pip
-pip3 install pynvim pipenv tldr pylsp-rope vim-vint neovim neovim-remote \
-    frogmouth
+sudo "$pacMan" python3 python-pip python-pynvim python-pipenv python-pylsp-rope neovim-remote frogmouth python-neovim
 
 sudo "$pacMan" rustup
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static

@@ -1,6 +1,6 @@
 local ft = {
     lua = "lua",
-    go = "go",
+    -- go = "go",
     javascript = "js",
     typescript = "ts",
     c = "c",
@@ -17,6 +17,9 @@ end
 return {
     "lvimuser/lsp-inlayhints.nvim",
     event = events,
+    cond = function()
+        return _G.inlay_hints
+    end,
     config = function()
         require("lsp-inlayhints").setup({
             inlay_hints = {

@@ -174,7 +174,7 @@ $aurPkg microsoft-edge-stable-bin google-chrome
 $aurPkg visual-studio-code-bin intellij-idea-ultimate-edition
 
 # 截图,录屏,剪辑
-sudo "$pacMan" flameshot spectacle obs-studio wlrobs-hg shotcut
+sudo "$pacMan" flameshot spectacle obs-studio wlrobs-hg shotcut v4l2loopback-dkms
 
 # 触摸板
 $aurPkg ruby-fusuma
@@ -195,7 +195,7 @@ fc-cache -fv
 sudo "$pacMan" rofi
 ~/.linuxConfig/rofi/install-rofi-theme.sh
 
-python -m pip install konsave
+$aurPkg konsave
 
 # gnome 显示效果好一点
 sudo "$pacMan" polkit polkit-qt5 polkit-gnome # polkit-kde-agent

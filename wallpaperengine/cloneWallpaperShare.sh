@@ -26,7 +26,7 @@ fi
 if [[ ! -f ~/.config/systemd/user/wallpaper.service ]]; then
     cp -f ~/.linuxConfig/custom-services/wallpaperengine.service ~/.config/systemd/user/wallpaperengine.service
     # 脚本的绝对路径
-    sed -i "s#ExecStart=.*/.linuxConfig/wallpaperengine/wallpaper.sh#ExecStart=$HOME/.linuxConfig/wallpaperengine/wallpaper.sh#" ~/.config/systemd/user/wallpaperengine.service
+    sed -i.bak "s#ExecStart=.*/.linuxConfig/wallpaperengine/wallpaper.sh#ExecStart=$HOME/.linuxConfig/wallpaperengine/wallpaper.sh#" ~/.config/systemd/user/wallpaperengine.service
     systemctl --user daemon-reload
     # 好像只能通过其他方式自启动
     # systemctl --user enable wallpaperengine.service

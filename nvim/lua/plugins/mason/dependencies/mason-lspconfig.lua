@@ -18,7 +18,8 @@ return {
                 "tsserver",
                 "vimls",
                 "yamlls",
-                'lua_ls',
+                "lua_ls",
+                "ruff-lsp",
             },
             automatic_installation = false,
         })
