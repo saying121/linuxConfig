@@ -43,23 +43,6 @@ return {
                     if ok and stats and stats.size > max_filesize then
                         return true
                     end
-
-                    local line_count = vim.api.nvim_buf_line_count(0)
-                    if line_count > 1500 then
-                        return true
-                    end
-
-                    local max_column = 0
-                    for i = 1, line_count do
-                        local line = vim.api.nvim_buf_get_lines(0, i - 1, i, true)[1]
-                        local columns = vim.api.nvim_strwidth(line)
-                        if columns > max_column then
-                            max_column = columns
-                        end
-                    end
-                    if max_column > 1500 then
-                        return true
-                    end
                 end,
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                 -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

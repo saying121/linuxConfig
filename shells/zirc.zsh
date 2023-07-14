@@ -126,6 +126,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 alias lazyvim="NVIM_APPNAME=LazyVim nvim"
 alias nvchard="NVIM_APPNAME=NvChard nvim"
 alias tvim="NVIM_APPNAME=NvimTest nvim"
+alias spacevim="NVIM_APPNAME=spacevim nvim"
 alias astronvim="NVIM_APPNAME=astronvim nvim"
 
 zi snippet OMZP::last-working-dir
@@ -137,6 +138,3 @@ ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_V
 
 # alias nvimser="nvim --headless --listen localhost:7777"
 # alias nvide="env -u WAYLAND_DISPLAY neovide --multigrid --server=localhost:7777"
-
-export RUSTFLAGS="-Cinstrument-coverage"
-export LLVM_PROFILE_FILE="%p-%m.profraw"

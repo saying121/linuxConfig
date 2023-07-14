@@ -1,5 +1,6 @@
 # set forcekittyanim
-set forcekitty
-#
 # set autochafa
 # set forcechafa
+# remove chafa
+set forcekitty
+set chafasixel

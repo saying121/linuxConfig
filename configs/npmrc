@@ -1,4 +1,4 @@
-registry=https://mirrors.huaweicloud.com/repository/npm
+registry=http://mirrors.cloud.tencent.com/npm
 ; 开源镜像: http://npm.taobao.org/mirrors
 ; Node.js 镜像: http://npm.taobao.org/mirrors/node
 ; alinode 镜像: http://npm.taobao.org/mirrors/alinode

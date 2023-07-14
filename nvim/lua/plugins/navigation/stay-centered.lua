@@ -13,8 +13,10 @@ return {
             skip_filetypes = {
                 "dashboard",
                 "alpha",
-                "lspsagafinder",
-                "sagacodeaction",
+                "sagafinder",
+                "saga_codeaction",
+                "toggleterm",
+                "markdown",
             },
         })
     end,

@@ -26,7 +26,34 @@ local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
+local ext_opts = {
+    -- these ext_opts are applied when the node is active (e.g. it has been
+    -- jumped into, and not out yet).
+    active =     -- this is the table actually passed to `nvim_buf_set_extmark`.
+{
+        -- highlight the text inside the node red.
+        hl_group = "Error",
+    },
+    -- these ext_opts are applied when the node is not active, but
+    -- the snippet still is.
+    passive = {
+        -- add virtual text on the line of the node, behind all text.
+        virt_text = { { "virtual text!!", "WarningMsg" } },
+    },
+    -- and these are applied when both the node and the snippet are inactive.
+    snippet_passive = {},
+}
+
 return {
+    s("ext_opt", {
+        i(1, "text1", {
+            node_ext_opts = ext_opts,
+        }),
+        t({ "", "" }),
+        i(2, "text2", {
+            node_ext_opts = ext_opts,
+        }),
+    }),
     -- s("trigger1", {
     --     i(1, "First"),
     --     t("::"),
@@ -55,9 +82,9 @@ return {
     --         return "[" .. parent.snippet.env.POSTFIX_MATCH .. "]"
     --     end, {}),
     -- }),
-    postfix(".brl", {
-        l("[" .. l.POSTFIX_MATCH .. "]"),
-    }),
+    -- postfix(".brl", {
+    --     l("[" .. l.POSTFIX_MATCH .. "]"),
+    -- }),
     -- postfix({ trig = ".brd" }, {
     --     d(1, function(_, parent)
     --         return sn(nil, { t("[" .. parent.env.POSTFIX_MATCH .. "]") })

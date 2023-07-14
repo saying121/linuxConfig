@@ -1,4 +1,4 @@
-![桌面图像](./pictures/2023-03-17_22-42.png)
+![桌面图像](./pictures/wayland.png)
 
 <!--toc:start-->
 - [个人应用配置](#个人应用配置)

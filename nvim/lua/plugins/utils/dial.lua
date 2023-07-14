@@ -131,7 +131,7 @@ return {
                 case = "lower",
             }),
             augend.constant.new({
-                elements = { "==", "!=" },
+                elements = { "!=", "==" },
                 word = true,
                 cyclic = true,
             }),

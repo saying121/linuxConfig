@@ -1,3 +1,3 @@
 #!/bin/bash
 
-time cargo build
+"$HOME/.config/nvim/tasks/make_color.sh" cargo build

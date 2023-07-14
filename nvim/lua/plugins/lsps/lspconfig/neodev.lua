@@ -6,6 +6,8 @@ return {
     config = function()
         local import = {
             "plenary.nvim",
+            "dyninput.nvim",
+            "conjure",
             -- "crates.nvim",
             -- "alpha-nvim",
             -- "lspkind.nvim",

@@ -1,10 +1,7 @@
 return {
     "simrat39/rust-tools.nvim",
+    -- cond = false,
     ft = "rust",
-    -- event = {
-    --     "UIEnter *.rs",
-    --     "BufNew *.rs",
-    -- },
     dependencies = {
         "neovim/nvim-lspconfig",
         "nvim-lua/plenary.nvim",
@@ -12,7 +9,7 @@ return {
         "mattn/webapi-vim",
     },
     config = function()
-        local extension_path = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/codelldb/extension/"
+        local extension_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/codelldb/extension/"
         ---@diagnostic disable-next-line: unused-local
         local codelldb_path = extension_path .. "adapter/codelldb"
         ---@diagnostic disable-next-line: unused-local
@@ -34,7 +31,7 @@ return {
                 inlay_hints = {
                     -- automatically set inlay hints (type hints)
                     -- default: true
-                    auto = _G.inlay_hints,
+                    auto = not _G.inlay_hints,
                     -- Only show inlay hints for the current line
                     only_current_line = false,
                     -- whether to show parameter hints with the inlay hints or not
@@ -108,11 +105,6 @@ return {
                     keymap("n", "<leader>R", rt.runnables.runnables, opts)
                     keymap("n", "<C-g>", rt.open_cargo_toml.open_cargo_toml, opts)
                     keymap("n", "<S-CR>", rt.expand_macro.expand_macro, opts)
-
-                    -- keymap("n", "<C-g>", function()
-                    --     vim.api.nvim_command("tabnew RustOpenCargo")
-                    --     rt.open_cargo_toml.open_cargo_toml()
-                    -- end, opts)
                 end,
                 settings = require("plugins.lsps.rust-tools.settings"),
             },
@@ -126,8 +118,5 @@ return {
                 -- },
             },
         })
-
-        -- VeryLazy 情况要显示启动，懒加载会导致 standalone 有问题
-        -- vim.cmd("LspStart")
     end,
 }

@@ -3,12 +3,15 @@ scriptencoding utf-8
 colorscheme elflord
 
 " plugins
-" source ~/.config/nvim/vim-config/vim-plug.vim
-source ~/.config/nvim/vim-config/dein.vim
-source ~/.config/nvim/vim-config/vim-lsp/init.vim
+source ~/.config/nvim/vim-config/vim-plug.vim
+" source ~/.config/nvim/vim-config/dein.vim
+
+" source ~/.config/nvim/vim-config/vim-lsp/init.vim
 source ~/.config/nvim/vim-config/nerdtree.vim
+source ~/.config/nvim/coc-config/init.vim
 
 source ~/.config/nvim/vim-config/kyotonight.vim
+source ~/.config/nvim/vim-config/wilder.vim
 syntax on
 
 set undofile

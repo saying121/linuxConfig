@@ -60,9 +60,10 @@ bindsym $mod+q [class="QQ"] focus
 for_window [class="weixin"] floating enable;  # ,move container to workspace 4
 bindsym Mod1+w [class="weixin"] focus
 
-# bindsym $mod+Return exec wezterm
 bindsym $mod+Return exec kitty
 bindsym Mod1+Ctrl+t exec wezterm
+# bindsym $mod+Return exec wezterm
+# bindsym Mod1+Ctrl+t exec kitty
 bindsym $mod+Shift+f exec kitty ranger
 bindsym $mod+Shift+t exec kitty gotop
 

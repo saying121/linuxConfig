@@ -45,13 +45,13 @@ local postfix = {
         scope = "expr",
     },
     prln = {
-        body = 'println!("{${1::?}}", ${receiver});$0',
+        body = 'println!("{${1::#?}}", ${receiver});$0',
         description = "Wrap the expression in an `println!`",
         postfix = "prln",
         scope = "expr",
     },
     prvar = {
-        body = 'println!(r##"${receiver} ${2:->} {${1::?}}"##, ${receiver});$0',
+        body = 'println!(r##"(| ${receiver} |) ${2:->} {${1::#?}}"##, ${receiver});$0',
         description = "Wrap the expression in an `println!`",
         postfix = "prvar",
         scope = "expr",
@@ -59,6 +59,24 @@ local postfix = {
 }
 
 local prefix = {
+    async = {
+        prefix = { "async", },
+        body = {
+            "async $0",
+        },
+        description = "Insert a async call",
+        scope = "expr",
+    },
+    unsafe = {
+        prefix = { "unsafe", },
+        body = {
+            "unsafe {",
+            "\t$1",
+            "}$0",
+        },
+        description = "Insert a unsafe call",
+        scope = "expr",
+    },
     thread_spawn = {
         prefix = { "spawn", "tspawn" },
         body = {
@@ -68,6 +86,26 @@ local prefix = {
         },
         description = "Insert a thread::spawn call",
         requires = "std::thread",
+        scope = "expr",
+    },
+    thread_sleep = {
+        prefix = { "sleep", "tsleep" },
+        body = {
+            "thread::sleep($1);$0",
+        },
+        description = "Insert a thread::sleep",
+        requires = "std::thread",
+        scope = "expr",
+    },
+    tokio_spawn = {
+        prefix = { "tkspawn", },
+        body = {
+            "tokio::spawn(async move {",
+            "\t$1",
+            "});$0",
+        },
+        description = "Insert a tokio::spawn call",
+        requires = "tokio",
         scope = "expr",
     },
     letm = {
@@ -415,8 +453,8 @@ return {
         inlayHints = {
             bindingModeHints = { enable = true },
             chainingHints = { enable = true },
-            closingBraceHints = { enable = true, minLines = 25 },
-            closureCaptureHints = { enable = false },
+            closingBraceHints = { enable = true, minLines = 40 },
+            closureCaptureHints = { enable = true },
             closureReturnTypeHints = { enable = "always" }, -- never
             closureStyle = "impl_fn",
             discriminantHints = { enable = "always" },
@@ -428,7 +466,6 @@ return {
             lifetimeElisionHints = { enable = "always", useParameterNames = false },
             maxLength = 25,
             parameterHints = { enable = true },
-            reborrowHints = { enable = "never" },
             renderColons = true,
             typeHints = { enable = true, hideClosureInitialization = false, hideNamedConstructor = false },
         },

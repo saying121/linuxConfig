@@ -24,7 +24,7 @@ return {
         kemap("n", "<F11>", "<Plug>VimspectorStop<cr>", opts)
 
         local conf = {}
-        local cf_dir = os.getenv("HOME") .. "/.config/nvim/lua/vimspector-config/"
+        local cf_dir = vim.env.HOME .. "/.config/nvim/lua/vimspector-config/"
         for _, val in ipairs(vim.fn.readdir(cf_dir)) do
             local a = vim.fn.join(vim.fn.readfile(cf_dir .. val))
             local tb = vim.json.decode(a)

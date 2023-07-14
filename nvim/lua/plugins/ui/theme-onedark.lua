@@ -3,6 +3,6 @@ return {
     cond = false,
     config = function()
         vim.cmd.colorscheme("onedark")
-        vim.cmd.colorscheme("plugcolors")
+        vim.cmd.colorscheme("mycolors")
     end,
 }

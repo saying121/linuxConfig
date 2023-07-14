@@ -30,9 +30,9 @@ return {
             -- Builtin providers are:
             --   - mason.providers.registry-api (default) - uses the https://api.mason-registry.dev API
             --   - mason.providers.client                 - uses only client-side tooling to resolve metadata
-            providers = {
-                "mason.providers.registry-api",
-            },
+            -- providers = {
+            --     "mason.providers.registry-api",
+            -- },
             ui = {
                 icons = {
                     package_pending = " ",

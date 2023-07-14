@@ -18,8 +18,8 @@ return {
     init_options = {
         enabled = vim.g.rime_enabled,
         shared_data_dir = "/usr/share/rime-data",
-        user_data_dir = vim.fn.getenv("HOME") .. "/.local/share/rime-ls-nvim",
-        log_dir = vim.fn.getenv("HOME") .. "/.local/share/rime-ls-nvim",
+        user_data_dir = vim.env.HOME .. "/.local/share/rime-ls-nvim",
+        log_dir = vim.env.HOME .. "/.local/share/rime-ls-nvim",
         max_candidates = 9,
         -- trigger_characters = { '::' },
     },

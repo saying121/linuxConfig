@@ -33,6 +33,8 @@ if [[ ! -f ~/.config/systemd/user/wallpaper.service ]]; then
 fi
 
 ln -sf ~/.linuxConfig/wallpaperengine/rewall.sh ~/.local/bin/rewall
+# shellcheck disable=SC2016
+echo '链接 `rewall` 命令到 `~/.local/bin/rewall`'
 
 # cd ~/.local/share/wallpaperengine
 # git pull

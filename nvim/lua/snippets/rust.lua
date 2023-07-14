@@ -43,6 +43,25 @@ return {
     ),
     s(
         {
+            trig = "tokio_main",
+            dscr = "#[tokio::main]",
+        },
+        fmta(
+            [[
+            #[tokio::main]
+            async fn main() {
+                <>
+            }
+            ]],
+            { i(1, [[unimplemented!();]]) }
+        )
+    ),
+    s({
+        trig = "tokio_add_head",
+        dscr = "add #[tokio::main]",
+    }, fmta("#[tokio::main]", {})),
+    s(
+        {
             trig = "static",
             dscr = "static …: … = …;",
         },
@@ -59,16 +78,15 @@ return {
         },
         fmta(
             [[
-            fn []([]: []) -> [] {
+            fn []([]) -> [] {
                 []
             }
             ]],
             {
                 i(1, "name"),
-                i(2, "arg"),
-                i(3, "Type"),
-                i(4, "RetType"),
-                i(5, "unimplemented!()"),
+                i(2, ""),
+                i(3, "RetType"),
+                i(4, "unimplemented!()"),
             },
             { delimiters = "[]" }
         )
@@ -84,7 +102,7 @@ return {
             struct Solution;
 
             fn main() {
-                println!("{:?}", Solution::<>);
+                println!("{:#?}", Solution::<>);
             }
             ]],
             {
@@ -93,43 +111,18 @@ return {
         )
     ),
     s("prvar", {
-        t([[println!(r##"]]),
+        t([[println!(r##"(| ]]),
         d(4, function(args)
             return sn(nil, { i(1, args[1]) })
         end, { 1 }),
-        i(3, " ->"),
+        t({ " |) " }),
+        i(3, "->"),
         t({ " {" }),
-        i(2, ":?"),
+        i(2, ":#?"),
         t({ [[}"##, ]] }),
         i(1, "variable"),
         t(");"),
     }),
-    -- postfix({ trig = ".prvar" }, {
-    --     d(1, function(_, parent)
-    --         return sn(nil, {
-    --             t([[println!("]]),
-    --             d(3, function()
-    --                 return sn(nil, { i(1, parent.env.POSTFIX_MATCH) })
-    --             end, { 1 }),
-    --             t({ ": {" }),
-    --             i(2, ":?"),
-    --             t({ [[}", ]] }),
-    --             i(1, parent.env.POSTFIX_MATCH),
-    --             t(");"),
-    --         })
-    --     end),
-    -- }),
-    -- s("prvar", {
-    --     t([[println!(r##"]]),
-    --     d(3, function(args)
-    --         return sn(nil, { i(1, args[1]) })
-    --     end, { 1 }),
-    --     t({ " -> {" }),
-    --     i(2, ":?"),
-    --     t({ [[}"##, ]] }),
-    --     i(1, "variable"),
-    --     t(");"),
-    -- }),
     s(
         {
             trig = "eprintln",
@@ -153,10 +146,6 @@ return {
         trig = "cfg",
         dscr = "#[cfg(…)]",
     }, fmt("#[cfg({})]", { i(1, "") })),
-    s({
-        trig = "cfg!",
-        dscr = "cfg!(…)",
-    }, fmt("cfg!({})", { i(1, "") })),
     s(
         {
             trig = "cfg_attr",

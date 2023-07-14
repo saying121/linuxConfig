@@ -25,7 +25,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 cat() {
-    if [[ $1 =~ \.md ]]; then
+    if [[ $1 =~ .*.md ]]; then
         mdcat "$@"
     else
         bat "$@"
@@ -55,12 +55,11 @@ unset releaseDic
 # wsl
 if [[ $(uname -a | grep -c WSL) != 0 ]]; then
     alias proxy="source ~/.linuxConfig/scripts/proxy.sh"
-    # shellcheck disable=1090
+    # shellcheck disable=SC1090
     . ~/.linuxConfig/scripts/proxy.sh set
 fi
 
 if [[ $(command -v exa) ]]; then
-    # 自己的alias
     alias ls='exa -F --icons'
     alias ld='exa -FD --icons'
     alias ll='exa -FlHhig --time-style long-iso --icons --git'
@@ -77,10 +76,11 @@ else
     alias l='ls -CF'
 fi
 
-alias nvid='i3 move scratchpad && neovide'
-alias show='i3 scratchpad show'
+# alias nvid='i3 move scratchpad && neovide'
+# alias show='i3 scratchpad show'
 
-alias rewall='systemctl --user restart wallpaperengine.service'
+# alias rewall='systemctl --user restart wallpaperengine.service'
+alias rewall="~/.linuxConfig/wallpaperengine/rewall.sh"
 
 alias icat="kitty +kitten icat"
 # ImageMagick must be installed for icat to work.
@@ -117,9 +117,22 @@ alias r='ranger'
 
 # lf
 LFCD="$HOME/.config/lf/lfcd.sh"
+# shellcheck disable=SC1090
 source "$LFCD"
 
 eval "$(fnm env --use-on-cd)"
 # eval "$(jenv init -)"
 
+# shellcheck disable=SC1090
 source ~/.linuxConfig/shells/lib/nmap.sh
+
+# rust 开启测试覆盖率
+enable_cover() {
+    export RUSTFLAGS="-Cinstrument-coverage"
+    export LLVM_PROFILE_FILE="%p-%m.profraw"
+}
+
+disable_cover() {
+    unset RUSTFLAGS
+    unset LLVM_PROFILE_FILE
+}

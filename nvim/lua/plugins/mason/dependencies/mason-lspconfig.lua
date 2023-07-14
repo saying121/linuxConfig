@@ -19,7 +19,7 @@ return {
                 "vimls",
                 "yamlls",
                 "lua_ls",
-                "ruff-lsp",
+                "ruff_lsp",
             },
             automatic_installation = false,
         })

@@ -77,7 +77,7 @@ $aurPkg epub-thumbnailer-git
 cd ~/.linuxConfig && git submodule update --init --recursive || echo ''
 
 # 安装lf文件浏览器
-sudo "$pacMan" lf
+sudo "$aurPkg" lf-sixel-git
 sudo "$pacMan" perl-image-exiftool mdcat libreoffice-fresh highlight git-delta atool bat chafa colordiff coreutils fontforge gnupg poppler source-highlight transmission-cli jq pandoc mupdf-tools ffmpegthumbnailer xournalpp openscad ueberzug
 $aurPkg ctpv-git epub2txt-git
 
@@ -175,6 +175,8 @@ $aurPkg visual-studio-code-bin intellij-idea-ultimate-edition
 
 # 截图,录屏,剪辑
 sudo "$pacMan" flameshot spectacle obs-studio wlrobs-hg shotcut v4l2loopback-dkms
+sudo gpasswd -a "$USER" video
+
 
 # 触摸板
 $aurPkg ruby-fusuma
@@ -210,11 +212,12 @@ $aurPkg fontpreview gifine
 $aurPkg wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn ttf-ms-fonts libtiff5 wps-office-fonts # wps-office
 # copyq networkmanager-dmenu-bluetoothfix-git networkmanager-dmenu-git archlinux-tweak-tool-git
 
+# 读电子书
+$pacMan koodo-reader-bin
+
 # 开启服务
 startServer() {
     sudo systemctl enable bluetooth sshd NetworkManager sddm
     sudo systemctl start bluetooth sshd NetworkManager
 }
 startServer
-
-unset pacMan

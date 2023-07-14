@@ -1,16 +1,10 @@
 ---@diagnostic disable: unused-local
 local ok, _ = pcall(require, "lazy-config")
 
--- lsp 图标，边框等等
-local signs = {
-    { name = "DiagnosticSignError", text = " " },
-    { name = "DiagnosticSignWarn", text = " " },
-    { name = "DiagnosticSignHint", text = " " },
-    { name = "DiagnosticSignInfo", text = " " },
-}
-
-for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+_G.inlay_hints = false
+if vim.fn.has("nvim-0.10.0") == 1 then
+    vim.opt.smoothscroll = true
+    _G.inlay_hints = true
 end
 
 -- 边框
@@ -22,23 +16,13 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
     border = "single",
 })
 
-_G.inlay_hints = true
-if vim.fn.has("nvim-0.10.0") == 1 then
-    vim.opt.smoothscroll = true
-    _G.inlay_hints = false
-end
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.foldcolumn = "1" -- '0' is not bad
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 
--- vim.lsp.handlers["experimental/serverStatus"] = function(_, result)
---     print("Received serverStatus notification:", vim.inspect(result))
--- end
-
-vim.diagnostic.config({
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-    underline = true,
-    float = { border = "single" },
-})
+vim.g.maplocalleader = ","
 
 vim.filetype.add({
     extension = {
@@ -68,7 +52,8 @@ vim.filetype.add({
     pattern = {
         ["(?i)LICENSE"] = "license",
         [".*/etc/foo/.*"] = "fooscript",
-        ["~/.config/hypr/*.conf"] = "conf",
+        [".*.conf"] = "conf",
+        -- ["~/.config/hypr/*.conf"] = "conf",
         ["/proc/bus/input/.*"] = "txt",
         -- Using an optional priority
         [".*/etc/foo/.*%.conf"] = { "dosini", { priority = 10 } },

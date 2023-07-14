@@ -66,11 +66,12 @@ return {
                 -- end,
                 width = 150,
                 height = 40,
-                winblend = 3,
+                -- winblend = 3,
             },
         })
         local function lf_toggle()
             lf:toggle()
+            -- require("toggleterm.terminal").Terminal:new({ cmd = "lf" }):toggle()
         end
         keymap("n", "<leader>lf", lf_toggle, opts)
 
@@ -82,7 +83,7 @@ return {
                 -- like `size`, width and height can be a number or function which is passed the current terminal
                 width = 70,
                 height = 5,
-                winblend = 3,
+                -- winblend = 3,
             },
         })
         local function set_lldb()
@@ -98,7 +99,7 @@ return {
                 -- like `size`, width and height can be a number or function which is passed the current terminal
                 width = 150,
                 height = 40,
-                winblend = 3,
+                -- winblend = 3,
             },
         })
         local function open_ranger()

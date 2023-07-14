@@ -1,3 +1,3 @@
 #!/bin/bash
 
-time cargo run --release
+"$HOME/.config/nvim/tasks/make_color.sh" cargo run --release

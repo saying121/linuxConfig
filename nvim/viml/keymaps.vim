@@ -49,8 +49,6 @@ nnoremap ^ g^
 xnoremap ^ g^
 onoremap ^ g^
 
-set wrap
-
 " 大写h、l移动到行首、行尾非空白符号,visual 'g_':行尾不包括换行符(包括就用$)
 nnoremap L g$
 xnoremap L g_
@@ -72,6 +70,7 @@ xnoremap > >gv
 set clipboard^=unnamed          " *寄存器
 set clipboard^=unnamedplus          " +寄存器
 nnoremap Y y$
+xnoremap p P
 
 " 切换buffer
 nnoremap <silent>]b :bn<CR>

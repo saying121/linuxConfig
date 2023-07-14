@@ -1,5 +1,6 @@
 return {
     "chipsenkbeil/distant.nvim",
+    cond = true,
     version = "v0.2",
     cmd = {
         "DistantInstall",

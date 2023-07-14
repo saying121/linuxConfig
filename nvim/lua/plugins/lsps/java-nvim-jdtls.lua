@@ -5,7 +5,7 @@ return {
         "BufNew *.java",
     },
     config = function()
-        local home = os.getenv("HOME")
+        local home = vim.env.HOME
 
         if vim.fn.has("mac") == 1 then
             WORKSPACE_PATH = home .. "/.config/jdtls_workspace/"
@@ -67,7 +67,7 @@ return {
                 -- 💀
                 "-jar",
                 vim.fn.glob(install_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
-                -- os.getenv('HOME').."/path/to/jdtls_install_location/plugins/org.eclipse.equinox.launcher_VERSION_NUMBER.jar",
+                -- vim.env.HOME.."/path/to/jdtls_install_location/plugins/org.eclipse.equinox.launcher_VERSION_NUMBER.jar",
                 -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
                 -- Must point to the                                                     Change this to
                 -- eclipse.jdt.ls installation                                           the actual version

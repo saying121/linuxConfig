@@ -9,12 +9,12 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 local specs = {
     { import = "plugins" },
 }
+-- table.insert(specs, { import = "plugins." .. 'lsps' })
 
 local path = vim.fn.stdpath("config") .. "/lua/plugins"
 
 -- 导入plugins文件夹下面的文件夹，里面的文件
 for _, file_name in pairs(vim.fn.readdir(path)) do
-    -- if string.sub(file_name, #file_name - 3) ~= ".lua" then
     if not vim.endswith(file_name, ".lua") then
         table.insert(specs, { import = "plugins." .. file_name })
     end
@@ -70,7 +70,7 @@ require("lazy").setup({
         -- * git: will run git diff and open a buffer with filetype git
         -- * terminal_git: will open a pseudo terminal with git diff
         -- * diffview.nvim: will open Diffview to show the diff
-        cmd = "git",
+        cmd = "diffview.nvim",
     },
     checker = {
         enabled = false, -- automatically check for plugin updates

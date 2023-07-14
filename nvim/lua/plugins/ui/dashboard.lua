@@ -100,7 +100,7 @@ return {
                             desc_hl = "DashBoardCenter",
                             key = "|",
                             key_hl = "DashBoardShortCut",
-                            action = [[=require'toggleterm.terminal'.Terminal:new({ cmd = 'ranger' }):toggle()]],
+                            action = [[=require'toggleterm.terminal'.Terminal:new({ cmd = 'lf' }):toggle()]],
                         },
                         {
                             icon = "  ",

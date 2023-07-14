@@ -2,7 +2,7 @@ return {
     "folke/tokyonight.nvim",
     priority = 2000,
     event = "BufWinEnter",
-    -- cond = true,
+    -- cond = false,
     config = function()
         require("tokyonight").setup({
             style = "night",
@@ -16,6 +16,6 @@ return {
         })
 
         vim.cmd.colorscheme("tokyonight")
-        vim.cmd.colorscheme("plugcolors")
+        vim.cmd.colorscheme("mycolors")
     end,
 }

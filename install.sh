@@ -40,13 +40,11 @@ $aurPkg sddm-nordic-theme-git
 sudo "$pacMan" plasma packagekit-qt5 packagekit appstream-qt appstream
 
 # 动态壁纸
-# sudo $pacMan extra-cmake-modules plasma-framework gst-libav \
-#     base-devel mpv python-websockets qt5-declarative qt5-websockets qt5-webchannel \
-#     vulkan-headers cmake glfw-x11 vulkan-devel vulkan-radeon
 # $aurPkg renderdoc plasma5-wallpapers-wallpaper-engine
 sudo "$pacMan" gifsicle ffmpeg
-$aurPkg linux-wallpaperengine-git # komorebi
-# linux-wallpaperengine-wayland-git
+$aurPkg linux-wallpaperengine-wayland-git
+# linux-wallpaperengine-git
+# komorebi
 
 # installVirtualBox
 sudo "$pacMan" virtualbox virtualbox-host-dkms
@@ -78,4 +76,4 @@ $pacMan dust procs tealdeer
 # sudo systemctl enable mariadb.service
 # sudo systemctl start mariadb.service
 
-unset pacMan aurPkg
+# $pacMan orca festival espeak-ng

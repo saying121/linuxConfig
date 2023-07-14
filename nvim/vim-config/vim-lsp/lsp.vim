@@ -17,6 +17,9 @@ function! s:on_lsp_buffer_enabled() abort
     nnoremap <buffer> <expr><c-f> lsp#scroll(+1)
     nnoremap <buffer> <expr><c-d> lsp#scroll(-1)
 
+    nnoremap <buffer> cd :LspCodeAction<CR>
+    nnoremap <buffer> <M-CR> :LspCodeAction<CR>
+
     let g:lsp_format_sync_timeout = 1000
     augroup vim_lsp
         autocmd!

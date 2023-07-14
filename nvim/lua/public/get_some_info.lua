@@ -50,7 +50,7 @@ end
 
 -- 获取发行版系统信息和图标
 function M.linux_distro()
-    if os.getenv("TERMUX_VERSION") ~= nil then
+    if vim.env.TERMUX_VERSION ~= nil then
         return "OS:"
     end
 

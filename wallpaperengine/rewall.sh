@@ -1,3 +1,6 @@
 #!/bin/bash
 
-systemctl --user restart wallpaperengine.service
+# systemctl --user restart wallpaperengine.service
+
+killall wallpaper.sh
+nohup ~/.linuxConfig/wallpaperengine/wallpaper.sh >> /dev/null 2>&1 &

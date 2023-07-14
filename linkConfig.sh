@@ -60,7 +60,7 @@ link_list=(
     ["$HOME/.linuxConfig/X11/xinitrc"]="$HOME/.xinitrc"
     ["$HOME/.linuxConfig/X11/xprofile"]="$HOME/.xprofile"
     ["$HOME/.linuxConfig/configs/flameshot.ini"]="$HOME/.config/flameshot/flameshot.ini"
-    ["$HOME/.linuxConfig/configs/go-musicfox.ini"]="$HOME/.go-musicfox/go-musicfox.ini"
+    ["$HOME/.linuxConfig/configs/go-musicfox.ini"]="$HOME/.config/go-musicfox/go-musicfox.ini"
     ["$HOME/.linuxConfig/configs/konsave-conf.yaml"]="$HOME/.config/konsave/conf.yaml"
     ["$HOME/.linuxConfig/configs/leetcode.toml"]="$HOME/.leetcode/leetcode.toml"
     ["$HOME/.linuxConfig/configs/lessfilter.sh"]="$HOME/.lessfilter"
@@ -74,7 +74,6 @@ link_list=(
     ["$HOME/.linuxConfig/formatters/prettierrc.json"]="$HOME/.prettierrc.json"
     ["$HOME/.linuxConfig/formatters/rustfmt"]="$HOME/.config"
     ["$HOME/.linuxConfig/formatters/stylua"]="$HOME/.config"
-    ["$HOME/.linuxConfig/fusuma"]="$HOME/.config"
     ["$HOME/.linuxConfig/gitui"]="$HOME/.config"
     ["$HOME/.linuxConfig/i3"]="$HOME/.config"
     ["$HOME/.linuxConfig/i3/i3status-rust"]="$HOME/.config"
@@ -104,7 +103,7 @@ link_list=(
 [[ -d ~/.config ]] || mkdir ~/.config
 [[ -d ~/.config/flameshot ]] || mkdir -p ~/.config/flameshot
 [[ -d ~/.config/konsave ]] || mkdir -p ~/.config/konsave
-[[ -d ~/.go-musicfox ]] || mkdir ~/.go-musicfox
+[[ -d ~/.config/go-musicfox ]] || mkdir ~/.config/go-musicfox
 [[ -d ~/.leetcode ]] || mkdir ~/.leetcode
 [[ -d ~/.local/share/rime-ls-nvim ]] || mkdir -p ~/.local/share/rime-ls-nvim
 [[ -d ~/.local/shells ]] || mkdir -p ~/.local/shells

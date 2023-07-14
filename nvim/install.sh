@@ -25,7 +25,7 @@ rustup component add rust-analyzer clippy rustfmt llvm-tools-preview --toolchain
 rustup component add rust-analyzer clippy rustfmt llvm-tools-preview --toolchain beta
 rustup default stable
 # 切换 crates 源
-cargo install crm
+cargo install crm tokio-console
 ~/.cargo/bin/crm best
 # `cargo install-update -h`,neotest-rust  用到
 cargo install cargo-update cargo-nextest grcov
@@ -56,11 +56,11 @@ sudo npm i -g neovim npm-check-updates
 # sudo npm install --save-dev --save-exact prettier
 
 # 安装插件
-if [[ ! -d ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim ]]; then
-    git clone https://github.com/Shougo/dein.vim ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim
-fi
-
-vim -i NONE -c "call dein#install()" -c "qa"
+# if [[ ! -d ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim ]]; then
+#     git clone https://github.com/Shougo/dein.vim ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim
+# fi
+# vim -i NONE -c "call dein#install()" -c "qa"
+# vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
 
 # 给lldb配置runInTerminal
 echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope

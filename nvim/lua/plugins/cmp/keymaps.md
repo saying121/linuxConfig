@@ -10,3 +10,11 @@ cmp.lua
 |  <Space>  |                                         确认 rime-ls 的补全                                         | i,s  |
 | <C-Space> |                                              触发补全                                               | i,s  |
 |   <M-u>   |                                              停止补全                                               | i,s  |
+
+---
+
+./dependencies/LuaSnip.lua
+
+| keys  |                 作用                 | mode |
+| :---: | :----------------------------------: | :--: |
+| <C-s> | 存在 choice 节点时，选择要插入的文本 | i,s  |

@@ -18,7 +18,7 @@ dap.configurations.python = { -- launch exe
         --     return require("user.dap.dap-util").str2argtable(input)
         -- end,
         pythonPath = function()
-            local venv_path = os.getenv("VIRTUAL_ENV")
+            local venv_path = vim.env.VIRTUAL_ENV
             if venv_path then
                 return venv_path .. "/bin/python"
             end

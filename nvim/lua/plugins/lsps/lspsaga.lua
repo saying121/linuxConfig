@@ -2,174 +2,80 @@ return {
     "glepnir/lspsaga.nvim",
     -- Do make sure that your LSP plugins, like lsp-zero or lsp-config, are loaded before loading lspsaga.
     event = "LspAttach",
-    commit = "4f075452c466df263e69ae142f6659dcf9324bf6",
-    -- commit = "c475ace5b8882631b351ef7c3e8078ca9ebbb751",
+    -- commit = "4f075452c466df263e69ae142f6659dcf9324bf6",
+    -- commit = "8a05cb18092d49075cf533aaf17d312e2ad61d77",
     dependencies = {
-        "nvim-tree/nvim-web-devicons",
         -- Please make sure you install markdown and markdown_inline parser
         "nvim-treesitter/nvim-treesitter",
     },
     config = function()
-        require("lspsaga").setup({
-            symbol_in_winbar = {
-                enable = false,
-                separator = " ",
-                ignore_patterns = { "toggleterm" },
-                hide_keyword = true,
-                show_file = true,
-                folder_level = 2,
-                respect_root = false,
-                color_mode = true,
-            },
-            finder = {
-                -- percentage
-                max_height = 0.5,
-                min_width = 30,
-                force_max_height = false,
-                keys = {
-                    jump_to = "p",
-                    edit = { "o", "<CR>" },
-                    vsplit = "v",
-                    split = "s",
-                    tabe = "t",
-                    tabnew = "r",
-                    quit = { "q", "<ESC>" },
-                    close_in_preview = "<ESC>",
-                },
-            },
-            definition = {
-                edit = "<C-c>o",
-                vsplit = "<C-c>v",
-                split = "<C-c>i",
-                tabe = "<C-c>t",
-                quit = "q",
-            },
-            code_action = {
-                num_shortcut = true,
-                show_server_name = true,
-                extend_gitsigns = false,
-                keys = {
-                    -- string | table type
-                    quit = { "q", "<ESC>" },
-                    exec = "<CR>",
-                },
-            },
-            lightbulb = {
-                enable = true,
-                enable_in_insert = true,
-                sign = true,
-                sign_priority = 40,
-                virtual_text = false,
-            },
-            diagnostic = {
-                on_insert = true,
-                on_insert_follow = false,
-                insert_winblend = 0,
-                show_virt_line = true,
-                show_code_action = true,
-                show_source = true,
-                jump_num_shortcut = true,
-                -- 1 is max
-                max_width = 0.7,
-                custom_fix = nil,
-                custom_msg = nil,
-                text_hl_follow = false,
-                border_follow = true,
-                keys = {
-                    exec_action = "o",
-                    quit = "q",
-                    go_action = "g",
-                    expand_or_jump = "<CR>",
-                    quit_in_show = { "q", "<ESC>" },
-                },
-            },
-            rename = {
-                quit = "<C-c>",
-                exec = "<CR>",
-                mark = "x",
-                confirm = "<CR>",
-                in_select = false,
-            },
-            outline = {
-                win_position = "right",
-                win_with = "",
-                win_width = 30,
-                show_detail = true,
-                auto_preview = true,
-                auto_refresh = true,
-                auto_close = true,
-                custom_sort = nil,
-                keys = {
-                    jump = "o",
-                    expand_collapse = "u",
-                    quit = "q",
-                },
-            },
-            callhierarchy = {
-                show_detail = false,
-                keys = {
-                    edit = "e",
-                    vsplit = "v",
-                    split = "s",
-                    tabe = "t",
-                    jump = "o",
-                    quit = "q",
-                    expand_collapse = "u",
-                },
-            },
-            beacon = {
-                enable = true,
-                frequency = 7,
-            },
-            hover = {
-                max_width = 0.6,
-                open_link = "gx",
-                -- open_browser = "!chrome",
-            },
-            ui = {
-                -- This option only works in Neovim 0.9
-                title = true,
-                -- Border type can be single, double, rounded, solid, shadow.
-                border = "single",
-                winblend = 0,
-                expand = "",
-                collapse = "",
-                code_action = "💡",
-                incoming = " ",
-                outgoing = " ",
-                hover = " ",
-                kind = {},
-            },
-        })
-        -- vim.wo.winbar /
-        -- vim.wo.stl = require("lspsaga.symbolwinbar"):get_winbar()
         local keymap = vim.keymap.set
-        -- LSP finder - Find the symbol's definition
-        -- If there is no definition, it will instead be hidden
-        -- When you use an action in finder like "open vsplit",
-        -- you can use <C-t> to jump back
-        keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
+
+        local callhierarchy = {
+            layout = "float",
+            keys = {
+                edit = "e",
+                vsplit = "v",
+                split = "s",
+                tabe = "t",
+                quit = "q",
+                shuttle = "[w", -- shuttle bettween the layout left and right
+                toggle_or_req = "u", -- toggle or do request.
+                close = "<C-c>k", -- close layout
+            },
+        }
+        keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
+        keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+
+        local code_action = {
+            num_shortcut = true,
+            show_server_name = true,
+            extend_gitsigns = false,
+            keys = {
+                -- string | table type
+                quit = "q",
+                exec = "<CR>",
+            },
+        }
         keymap({ "n", "x" }, "<M-CR>", "<cmd>Lspsaga code_action<CR>")
-        -- Rename all occurrences of the hovered word for the entire file
-        keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>")
-        -- Rename all occurrences of the hovered word for the selected files
-        keymap("n", "<space>Rn", "<cmd>Lspsaga rename ++project<CR>")
-        -- You can edit the file containing the definition in the floating window
-        -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
-        -- It also supports tagstack
-        -- Use <C-t> to jump back
-        keymap("n", "gD", ":Lspsaga peek_definition<CR>")
-        -- Go to definition
+
+        local definition = {
+            edit = "<C-c>o",
+            vsplit = "<C-c>v",
+            split = "<C-c>i",
+            tabe = "<C-c>t",
+            quit = "q",
+            close = "<C-c>k",
+        }
         keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
-        -- Peek type definition
-        -- You can edit the file containing the type definition in the floating window
-        -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
-        -- It also supports tagstack
-        -- Use <C-t> to jump back
+        keymap("n", "gD", "<cmd>Lspsaga peek_definition<CR>")
+        keymap("n", "gy", "<cmd>Lspsaga goto_type_definition<CR>")
         keymap("n", "gY", "<cmd>Lspsaga peek_type_definition<CR>")
 
-        -- Go to type definition
-        keymap("n", "gy", "<cmd>Lspsaga goto_type_definition<CR>")
+        local enable = true
+        local diagnostic = {
+            show_code_action = true,
+            jump_num_shortcut = true,
+            max_width = 0.7,
+            max_height = 0.6,
+            text_hl_follow = true,
+            border_follow = true,
+            extend_relatedInformation = false,
+            show_layout = "float",
+            show_normal_height = 10,
+            max_show_width = 0.9,
+            max_show_height = 0.6,
+            diagnostic_only_current = enable,
+            keys = {
+                exec_action = "o",
+                quit = "q",
+                expand_or_jump = "<CR>",
+                quit_in_show = { "q", "<ESC>" },
+            },
+        }
+        vim.diagnostic.config({
+            virtual_text = not enable,
+        })
         -- Show line diagnostics
         -- You can pass argument ++unfocus to
         -- unfocus the show_line_diagnostics floating window
@@ -194,11 +100,31 @@ return {
             require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
         end)
 
-        keymap("n", "<leader>ol", "<cmd>Lspsaga outline<CR>")
-        -- To disable it just use ":Lspsaga hover_doc ++quiet"
-        -- Pressing the key twice will enter the hover window
-        -- keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+        local finder = {
+            max_height = 0.5,
+            left_width = 0.3,
+            default = "def+ref+imp",
+            layout = "float",
+            keys = {
+                shuttle = "[w",
+                toggle_or_open = "o", -- toggle expand or open
+                vsplit = "s", -- open in vsplit
+                split = "i", -- open in split
+                tabe = "t", -- open in tabe
+                tabnew = "r", -- open in new tab
+                quit = "q", -- quit the finder, only works in layout left window
+                close = "<C-c>k", -- close finder
+            },
+        }
+        -- you can use <C-t> to jump back
+        keymap("n", "gh", "<cmd>Lspsaga finder<CR>")
 
+        local hover = {
+            max_width = 0.6,
+            max_height = 0.4,
+            open_link = "gx",
+            -- open_cmd = "!chrome",
+        }
         local function peekOrHover()
             local winid = require("ufo").peekFoldedLinesUnderCursor()
             -- keymap 好像没效果，虽然 keymap 成功，只能自己先 `trace`(按下按键展开折叠) 然后再编辑了
@@ -212,7 +138,6 @@ return {
             end
             return winid
         end
-
         -- 和 crates.nvim,nvim-ufo,nvim-dap-ui 集成
         local function show_documentation()
             if vim.tbl_contains({ "vim", "help" }, vim.bo.filetype) then
@@ -227,13 +152,70 @@ return {
                 vim.cmd([[Lspsaga hover_doc]])
             end
         end
-        keymap("n", "K", show_documentation, { silent = true })
-
         -- If you want to jump to the hover window you should use the wincmd command "<C-w>w"
+        keymap("n", "K", show_documentation, { silent = true })
         keymap("n", "ck", "<cmd>Lspsaga hover_doc ++keep<CR>")
-        -- Call hierarchy
-        keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-        keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+
+        local outline = {
+            win_position = "right", -- window position
+            win_width = 30, -- window width
+            auto_preview = true, -- auto preview when cursor moved in outline window
+            detail = true, -- show detail
+            auto_close = true, -- auto close itself when outline window is last window
+            close_after_jump = false, -- close after jump
+            keys = {
+                toggle_or_jump = "o",
+                quit = "q",
+                jump = "e",
+            },
+        }
+        keymap("n", "<leader>ol", "<cmd>Lspsaga outline<CR>")
+
+        local rename = {
+            in_select = false,
+            auto_save = false,
+            project_max_width = 0.5,
+            project_max_height = 0.5,
+            keys = {
+                quit = "<C-c>",
+                exec = "<CR>",
+                select = "x",
+            },
+        }
+        -- Rename all occurrences of the hovered word for the entire file
+        keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>")
+        -- Rename all occurrences of the hovered word for the selected files
+        keymap("n", "<space>Rn", "<cmd>Lspsaga rename ++project<CR>")
+
+        require("lspsaga").setup({
+            symbol_in_winbar = {
+                enable = false,
+                hide_keyword = true,
+                show_file = true,
+                folder_level = 2,
+            },
+            callhierarchy = callhierarchy,
+            code_action = code_action,
+            definition = definition,
+            diagnostic = diagnostic,
+            finder = finder,
+            hover = hover,
+            implement = {
+                enable = true,
+                sign = true,
+                virtual_text = true,
+                priority = 30,
+            },
+            lightbulb = {
+                enable = true,
+                sign = true,
+                virtual_text = false,
+                debounce = 10,
+                sign_priority = 40,
+            },
+            outline = outline,
+            rename = rename,
+        })
 
         keymap({ "n", "t" }, "<M-a>", "<cmd>Lspsaga term_toggle<CR>")
     end,

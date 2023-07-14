@@ -33,6 +33,7 @@ return {
             spell = "[Spell]",
             vim_dadbod_completion = "[DB]",
             zsh = "[Zsh]",
+            conjure = "[Cje]",
         }
 
         local sources = cmp.config.sources({
@@ -47,6 +48,7 @@ return {
             },
             { name = "nvim_lsp", priority = 1000 },
             { name = "path", priority = 800 },
+            { name = "conjure", priority = 1100 },
         }, {
             { name = "buffer", priority = 800 },
             { name = "rg", keyword_length = 3, priority = 700 },

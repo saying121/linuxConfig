@@ -18,7 +18,7 @@ return {
     "lvimuser/lsp-inlayhints.nvim",
     event = events,
     cond = function()
-        return _G.inlay_hints
+        return not _G.inlay_hints
     end,
     config = function()
         require("lsp-inlayhints").setup({

@@ -19,10 +19,10 @@ call dein#add('tpope/vim-surround',{
             \ 'on_map' : {'n' : ['ys','yS','ds','cs'], 'v' : ['S']}
             \ })
 
-call dein#add('prabirshrestha/vim-lsp')
 call dein#add('antoinemadec/FixCursorHold.nvim')
-call dein#add('mattn/vim-lsp-settings')
 
+call dein#add('prabirshrestha/vim-lsp')
+call dein#add('mattn/vim-lsp-settings')
 call dein#add('prabirshrestha/asyncomplete.vim')
 call dein#add('prabirshrestha/asyncomplete-lsp.vim')
 

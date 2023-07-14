@@ -7,13 +7,13 @@ return {
         { "<leader>to", mode = { "n" } },
     },
     dependencies = {
-        require("public.utils").get_dependencies_table("plugins/" .. "neotest" .. "/dependencies"),
+        -- require("public.utils").get_dependencies_table("plugins/" .. "neotest" .. "/dependencies"),
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
         "antoinemadec/FixCursorHold.nvim",
         {
             "rouge8/neotest-rust",
-            build = "cargo install cargo-nextest",
+            build = [[ [ "$(command -v cargo-nextest)" ] || cargo install cargo-nextest ]],
         },
         "nvim-neotest/neotest-python",
     },

@@ -1,6 +1,7 @@
 return {
     "ThePrimeagen/refactoring.nvim",
     -- lazy = true,
+    cond = true,
     keys = {
         { "<leader>rr", mode = { "n", "x" } },
     },

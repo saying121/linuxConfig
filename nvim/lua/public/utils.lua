@@ -57,7 +57,6 @@ function M.get_dependencies_table(mod_path)
     local DepTable = {}
 
     for _, file_name in pairs(dependencies_list) do
-        -- if string.sub(file_name, #file_name - 3) == ".lua" then
         if vim.endswith(file_name, ".lua") then
             local use_name = string.sub(file_name, 1, #file_name - 4)
             table.insert(DepTable, require( mod_path .. "/" .. use_name))

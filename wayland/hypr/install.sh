@@ -19,7 +19,7 @@ sudo "$pacMan" hyprland-nvidia \
     qt5-wayland qt6-wayland \
     gnome-calendar \
     xdg-desktop-portal-hyprland-git xdg-desktop-portal \
-    brightnessctl
+    brightnessctl wl-gammarelay-rs
 
 sudo "$pacMan" pipewire wireplumber slurp grim hyprland-interactive-screenshot
 

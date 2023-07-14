@@ -1,5 +1,6 @@
 return {
     "LintaoAmons/scratch.nvim",
+    cond = true,
     keys = {
         { "<M-C-n>", mode = "n" },
     },
