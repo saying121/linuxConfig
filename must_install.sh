@@ -58,7 +58,8 @@ sudo "$pacMan" figlet ffmpeg \
     engrampa pkgfile
 
 # 图像查看
-sudo "$pacMan" gwenview nomacs opencv-samples vtk glew qt6-base hdf5 opencl-icd-loader java-runtime
+sudo "$pacMan" gwenview nomacs \
+    opencv-samples vtk glew qt6-base hdf5 opencl-icd-loader java-runtime
 sudo "$pacMan" adios2 cgns ffmpeg fmt gdal gl2ps glew gnuplot graphviz hdf5 java-runtime=11 jsoncpp libarchive libharu liblas lz4 mariadb-libs netcdf openimagedenoise openmpi openvdb openvr openxr ospray pdal postgresql-libs proj python python-matplotlib python-mpi4py qt5-declarative sqlite tk unixodbc verdict
 
 # neovim,vim plugins
@@ -123,8 +124,7 @@ $aurPkg sddm-theme-aerial-git
 sudo "$pacMan" pulseaudio-bluetooth bluez bluez-utils pulsemixer \
     xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
     pulseaudio-alsa pavucontrol
-# 取代xorg-xbacklight, 色温程序
-sudo "$pacMan" redshift
+sudo "$pacMan" redshift-wayland-git
 
 # 锁屏
 sudo "$pacMan" betterlockscreen xidlehook dex
@@ -135,11 +135,10 @@ xset s 900 900
 sudo systemctl enable betterlockscreen@"$USER"
 
 # i3
-sudo chmod 666 /sys/class/backlight/amdgpu_bl0/brightness
 $aurPkg i3-wm i3status i3status-rust autotiling feh
-makepkg -si ~/.linuxConfig/i3/picom/PKGBUILD
+# makepkg -si ~/.linuxConfig/i3/picom/PKGBUILD
 
-$pacMan sway mako swaybg swaylock swayidle waybar
+$pacMan sway mako swaybg
 
 # 蓝牙前端
 sudo "$pacMan" blueman
@@ -152,7 +151,7 @@ sudo "$pacMan" lux-dl
 sudo "$pacMan" polybar
 ~/.linuxConfig/i3/polybar/install-polybar-theme.sh
 
-# installGimp
+# install Gimp
 sudo "$pacMan" gimp gvfs gutenprint
 
 # input-remapper
@@ -176,12 +175,6 @@ $aurPkg visual-studio-code-bin intellij-idea-ultimate-edition
 # 截图,录屏,剪辑
 sudo "$pacMan" flameshot spectacle obs-studio wlrobs-hg shotcut v4l2loopback-dkms
 sudo gpasswd -a "$USER" video
-
-
-# 触摸板
-$aurPkg ruby-fusuma
-sudo gpasswd -a "$USER" input
-newgrp input
 
 # 热点
 sudo "$pacMan" linux-wifi-hotspot bash-completion haveged
@@ -216,8 +209,5 @@ $aurPkg wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn ttf-ms-fonts libtiff5 w
 $pacMan koodo-reader-bin
 
 # 开启服务
-startServer() {
-    sudo systemctl enable bluetooth sshd NetworkManager sddm
-    sudo systemctl start bluetooth sshd NetworkManager
-}
-startServer
+sudo systemctl enable bluetooth sshd NetworkManager sddm
+sudo systemctl start bluetooth sshd NetworkManager

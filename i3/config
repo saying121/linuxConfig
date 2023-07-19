@@ -53,7 +53,7 @@ exec --no-startup-id dex --autostart --environment i3
 # 锁屏 秒为单位
 # betterlockscreen -u path/to/pictures
 exec --no-startup-id xidlehook --detect-sleep --not-when-fullscreen --timer 900 "betterlockscreen -l dim" ""
-bindsym Mod4+semicolon exec betterlockscreen -l dim --off 600
+bindsym Mod4+Shift+semicolon exec betterlockscreen -l dim --off 600
 
 for_window [class="QQ"] floating enable;  # ,move container to workspace 4
 bindsym $mod+q [class="QQ"] focus

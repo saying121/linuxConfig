@@ -4,16 +4,9 @@ local ft = {
     scala = "scala",
 }
 
-local events = {}
-
-for _, value in pairs(ft) do
-    table.insert(events, "UIEnter *." .. value)
-    table.insert(events, "BufNew *." .. value)
-end
-
 return {
     "antosha417/nvim-lsp-file-operations",
-    event = events,
+    event = require("public.utils").boot_event(ft),
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-tree.lua",

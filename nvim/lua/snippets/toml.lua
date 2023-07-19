@@ -27,12 +27,12 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
 local crates = {
-    ["mimalloc "] = "面向性能和安全的嵌入式分配器",
-    ["juniper"] = "graphql 服务器库",
-    ["GraphQL"] = "在终端中添加颜色的最简单方法",
-    ["colored"] = "在终端中添加颜色的最简单方法",
+    ["cookie"] = "http cookie 解析和 cookie jar 管理。支持签名和私有（加密、验证）jar。",
+    ["inline-python "] = "直接在 **Rust** 代码中内联 **Python** 代码",
+    ["mimalloc"] = "面向性能和安全的嵌入式分配器",
+    ["GraphQL"] = "rust lang 的 graphql 参考实现。",
     ["keyring"] = "用于管理密码/凭据的跨平台库",
-    ["actix"] = "Rust 的 Actor 框架",
+    ["actix"] = "**Rust** 的 Actor 框架",
     ["atoi"] = "直接从安全代码中的 `[u8]` 切片解析整数",
     ["bitflags"] = "一个类型安全的位掩码标志生成器，对 **C** 风格标志集很有用。它可用于围绕 **C** api 创建符合人体工程学的包装器",
     ["byteorder"] = "这个 crate 提供了以大端或小端顺序编码和解码数字的便捷方法",
@@ -46,17 +46,20 @@ local crates = {
     ["percent-encoding"] = "百分比编码和解码",
     ["plotters"] = "一个 **Rust** 绘图库，专注于 wasm 和本机应用程序的数据绘图",
     ["regex"] = "**Rust** 正则表达式的实现",
-    ["same_file"] = "一个简单的crate，用于确定两个文件路径是否指向同一个文件。",
-    ["thirtyfour"] = "thirfyfour 是一个用于 **Rust** 的 selenium / web 驱动程序库，用于自动化网站 ui 测试。它支持完整的 w3c 网络驱动规范。",
     ["thread_local"] = "每个线程对象本地存储",
     ["tower"] = "tower 是一个模块化和可重用组件库，用于构建强大的客户端和服务器。",
-    ["tracing"] = "**Rust** 的应用程序级跟踪。 log",
     ["unicode-segmentation"] = "这个板条箱根据 Unicode 标准附件 #29 规则提供字素簇、单词和句子边界。",
+}
+local log = {
+    ["env_logger"] = "通过环境变量配置的 `log` 的日志记录实现。",
+    ["log"] = "**RUST** 的轻量级日志记录外观",
+    ["tracing"] = "**Rust** 的应用程序级跟踪。 log",
 }
 local file = {
     ["dirs"] = "一个小型低级库，通过利用 Linux 上的 xdg 基本/用户目录规范（已知的文件夹 api）定义的机制，为 linux、windows、macos 和 redox 上的配置、缓存和其他数据提供特定于平台的标准目录位置在 Windows 上，以及在 Macos 上的标准目录指南。",
     ["glob"] = "支持根据 unix shell 样式模式匹配文件路径",
     ["memmap"] = "用于内存映射文件 io 的跨平台 **Rust** api",
+    ["same_file"] = "一个简单的crate，用于确定两个文件路径是否指向同一个文件。",
     ["tar"] = "tar 文件读取器和写入器的 **Rust** 实现",
     ["walkdir"] = "递归地遍历一个目录。",
 }
@@ -84,7 +87,11 @@ local math = {
     ["rand"] = "该包提供了随机源",
     ["rand_distr"] = "从随机数分布中抽样",
 }
-local web_framework = {
+local web = {
+    ["surf"] = "Surf the web - HTTP 客户端框架",
+    ["graphql_client "] = "类型化 graphql 请求和响应",
+    ["juniper"] = "graphql 服务器库",
+    ["thirtyfour"] = "thirfyfour 是一个用于 **Rust** 的 selenium / web 驱动程序库，用于自动化网站 ui 测试。它支持完整的 w3c 网络驱动规范。",
     ["actix-web"] = "actix web 是一个强大、实用、速度极快的 **Rust** 网络框架",
     ["axum"] = "专注于人体工程学和模块化的网络框架",
     ["rocket"] = "专注于可用性、安全性、可扩展性和速度的 Web 框架。",
@@ -144,6 +151,8 @@ local error = {
     ["thiserror"] = "推导（错误）",
 }
 local terminal = {
+    ["prettytable-rs"] = "用于在终端中打印格式漂亮的表格的库",
+    ["colored"] = "在终端中添加颜色的最简单方法",
     ["ansi_term"] = "ansi 终端颜色和样式库（粗体、下划线）",
     ["clap"] = "一个简单易用、高效且功能齐全的命令行参数解析器",
     ["crossterm"] = "用于操作终端的跨平台终端库。",
@@ -168,12 +177,13 @@ local all = vim.tbl_deep_extend(
     file,
     gui,
     img,
+    log,
     math,
     net,
     performance,
     serde,
     terminal,
-    web_framework
+    web
 )
 
 local snippets = {

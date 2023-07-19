@@ -1,7 +1,7 @@
 return {
     "altermo/npairs-integrate-upair",
     dependencies = {
-        "altermo/ultimate-autopair.nvim",
+        "altermo/ultimate-autopair.nvim", -- 在 bash,zsh 的 if 判断括号里面很有用
         "windwp/nvim-autopairs",
     },
     config = function()

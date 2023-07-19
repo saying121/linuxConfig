@@ -24,9 +24,14 @@ if [ -x /usr/bin/dircolors ]; then
     export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
 fi
 
+alias kcat="kitty +kitten icat"
 cat() {
+    mime=$(file -Lbs --mime-type "$1")
+    category=${mime%%/*}
     if [[ $1 =~ .*.md ]]; then
         mdcat "$@"
+    elif [[ "$category" = image ]]; then
+        kcat "$@"
     else
         bat "$@"
     fi
@@ -82,7 +87,6 @@ fi
 # alias rewall='systemctl --user restart wallpaperengine.service'
 alias rewall="~/.linuxConfig/wallpaperengine/rewall.sh"
 
-alias icat="kitty +kitten icat"
 # ImageMagick must be installed for icat to work.
 alias imgcat="wezterm imgcat"
 alias ueber="~/.linuxConfig/scripts/ueber.sh"

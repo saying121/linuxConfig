@@ -1,7 +1,7 @@
 return {
     "stevearc/aerial.nvim",
     keys = {
-        { "<space>z", mode = "n", desc = "floaterm" },
+        { "<space>z", mode = "n", desc = "" },
     },
     config = function()
         local opts = { noremap = true, silent = true }

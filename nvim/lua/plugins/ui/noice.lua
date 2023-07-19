@@ -10,7 +10,7 @@ return {
                 require("notify").setup({
                     background_colour = "#000000",
                     stages = "fade_in_slide_out",
-                    max_width = 80,
+                    max_width = 40,
                     max_height = 20,
                 })
             end,

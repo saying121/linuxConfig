@@ -60,7 +60,7 @@ local postfix = {
 
 local prefix = {
     async = {
-        prefix = { "async", },
+        prefix = { "async" },
         body = {
             "async $0",
         },
@@ -68,7 +68,7 @@ local prefix = {
         scope = "expr",
     },
     unsafe = {
-        prefix = { "unsafe", },
+        prefix = { "unsafe" },
         body = {
             "unsafe {",
             "\t$1",
@@ -98,7 +98,7 @@ local prefix = {
         scope = "expr",
     },
     tokio_spawn = {
-        prefix = { "tkspawn", },
+        prefix = { "tkspawn" },
         body = {
             "tokio::spawn(async move {",
             "\t$1",
@@ -432,43 +432,4 @@ local friendly = {
     },
 }
 
-local custom = vim.tbl_deep_extend("force", postfix, prefix, friendly, tui)
-
-return {
-    ["rust-analyzer"] = {
-        completion = {
-            autoinport = { enable = true },
-            autoself = { enable = true },
-            postfix = { enable = true },
-            privateEditable = { enable = false },
-            snippets = { custom = custom },
-        },
-        imports = {
-            granularity = { enforce = true, group = "crate", enable = true },
-            group = { enable = true },
-            merge = { glob = false },
-            prefer = { no = { std = false } },
-            prefix = "plain", -- crate,self
-        },
-        inlayHints = {
-            bindingModeHints = { enable = true },
-            chainingHints = { enable = true },
-            closingBraceHints = { enable = true, minLines = 40 },
-            closureCaptureHints = { enable = true },
-            closureReturnTypeHints = { enable = "always" }, -- never
-            closureStyle = "impl_fn",
-            discriminantHints = { enable = "always" },
-            expressionAdjustmentHints = {
-                enable = "always",
-                hideOutsideUnsafe = false,
-                mode = "prefix", --[[ postfix ]]
-            },
-            lifetimeElisionHints = { enable = "always", useParameterNames = false },
-            maxLength = 25,
-            parameterHints = { enable = true },
-            renderColons = true,
-            typeHints = { enable = true, hideClosureInitialization = false, hideNamedConstructor = false },
-        },
-        rustfmt = { rangeFormatting = { enable = true } },
-    },
-}
+return vim.tbl_deep_extend("force", postfix, prefix, friendly, tui)

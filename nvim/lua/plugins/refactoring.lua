@@ -4,19 +4,24 @@ return {
     cond = true,
     keys = {
         { "<leader>rr", mode = { "n", "x" } },
+        { "<leader>rp", mode = { "n" } },
+        { "<leader>rv", mode = { "n", "x" } },
+        { "<leader>rc", mode = { "n" } },
     },
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
         "nvim-telescope/telescope.nvim",
+        "stevearc/dressing.nvim",
     },
     config = function()
-        ---@diagnostic disable-next-line: unused-local
         local opts = { noremap = true, silent = true, expr = false }
-        local keymap = vim.api.nvim_set_keymap
+        local keymap = vim.keymap.set
 
         -- prompt for a refactor to apply when the remap is triggered
-        keymap("x", "<leader>rr", ":lua require('refactoring').select_refactor()<CR>", opts)
+        keymap("x", "<leader>rr", function()
+            require("refactoring").select_refactor()
+        end, opts)
 
         -- Extract block doesn't need visual mode
         -- Extract function and
@@ -35,22 +40,25 @@ return {
 
         -- You can also use below = true here to to change the position of the printf
         -- statement (or set two remaps for either one). This remap must be made in normal mode.
-        keymap("n", "<leader>rp", ":lua require('refactoring').debug.printf({below = false})<CR>", { noremap = true })
+        keymap("n", "<leader>rp", function()
+            require("refactoring").debug.printf({ below = false })
+        end, { noremap = true })
 
-        -- Print var
+        ------ Print var
 
         -- Remap in normal mode and passing { normal = true } will automatically find the variable under the cursor and print it
-        keymap(
-            "n",
-            "<leader>rv",
-            ":lua require('refactoring').debug.print_var({ normal = true })<CR>",
-            { noremap = true }
-        )
+        keymap("n", "<leader>rv", function()
+            require("refactoring").debug.print_var({ normal = true })
+        end, { noremap = true })
         -- Remap in visual mode will print whatever is in the visual selection
-        keymap("x", "<leader>rv", ":lua require('refactoring').debug.print_var({})<CR>", { noremap = true })
+        keymap("x", "<leader>rv", function()
+            require("refactoring").debug.print_var({})
+        end, { noremap = true })
 
         -- Cleanup function: this remap should be made in normal mode
-        keymap("n", "<leader>rc", ":lua require('refactoring').debug.cleanup({})<CR>", { noremap = true })
+        keymap("n", "<leader>rc", function()
+            require("refactoring").debug.cleanup({})
+        end, { noremap = true })
 
         require("refactoring").setup({
             prompt_func_return_type = {

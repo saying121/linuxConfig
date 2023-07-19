@@ -22,7 +22,7 @@ if [[ $XDG_SESSION_TYPE == wayland ]]; then
 else
     screens=$(xrandr | awk '/\<connected\>/{print $1}')
 fi
-while :; do
+while true; do
     # 获取随机壁纸 id/路径
     the_rand=$((RANDOM % ${#my_array[@]}))
     if [[ -z $1 ]]; then

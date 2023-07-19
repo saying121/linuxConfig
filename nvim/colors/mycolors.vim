@@ -49,11 +49,6 @@ hi SignColumn ctermbg=NONE guifg=DarkCyan ctermfg=NONE gui=italic guibg=NONE
 " hi Folded ctermbg=0 ctermfg=169
 hi GitSignsCurrentLineBlame ctermbg=NONE guifg=#2a76ac ctermfg=NONE gui=italic guibg=NONE
 
-" hi RustInlayHints ctermbg=NONE  ctermfg=NONE gui=bold guifg=#733ac2guibg=NONE
-" hi RustInlayHints ctermbg=NONE ctermfg=NONE guifg=#565f99 guibg=NONE
-hi RustInlayHints ctermbg=NONE ctermfg=NONE guifg=#565f99 guibg=#212121
-" hi RustInlayHints ctermbg=NONE  ctermfg=NONE gui=bold guifg=#d8d8d8 guibg=#3a3a3a
-
 hi LspInlayHint ctermbg=NONE ctermfg=NONE guifg=#565f99 guibg=#212121
 " hi LspInlayHint ctermbg=NONE ctermfg=NONE guifg=#565f99 guibg=NONE
 " hi LspInlayHint ctermbg=NONE ctermfg=NONE gui=bold guifg=#565f99 guibg=NONE

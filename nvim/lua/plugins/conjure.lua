@@ -11,12 +11,6 @@ local ft = {
     julia = "jl",
 }
 
-local events = {}
-
-for _, value in pairs(ft) do
-    table.insert(events, "UIEnter *." .. value)
-    table.insert(events, "BufNew *." .. value)
-end
 return {
     "Olical/conjure",
     build = "cargo install evcxr_repl",
@@ -25,10 +19,7 @@ return {
         "PaterJason/cmp-conjure",
     },
     cond = true,
-    event = events,
-    -- keys = {
-    --     { ",E", mode = "v" },
-    -- },
+    event = require("public.utils").boot_event(ft),
     cmd = {
         "ConjureEval",
         "ConjureEvalVisual",

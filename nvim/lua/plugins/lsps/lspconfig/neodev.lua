@@ -7,7 +7,9 @@ return {
         local import = {
             "plenary.nvim",
             "dyninput.nvim",
-            "conjure",
+            -- "refactoring.nvim",
+            -- "conjure",
+            -- "guard.nvim",
             -- "crates.nvim",
             -- "alpha-nvim",
             -- "lspkind.nvim",

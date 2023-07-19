@@ -59,11 +59,33 @@ function M.get_dependencies_table(mod_path)
     for _, file_name in pairs(dependencies_list) do
         if vim.endswith(file_name, ".lua") then
             local use_name = string.sub(file_name, 1, #file_name - 4)
-            table.insert(DepTable, require( mod_path .. "/" .. use_name))
+            table.insert(DepTable, require(mod_path .. "/" .. use_name))
         end
     end
 
     return DepTable
+end
+
+--- 设置不影响启动时间的启动事件
+--- `ft`:table 要满足 val 为文件后缀名.key为文件类型或其他标识符
+---@param ft table
+---@return table
+function M.boot_event(ft)
+    local events = {}
+    for _, value in pairs(ft) do
+        table.insert(events, "UIEnter *." .. value)
+        table.insert(events, "BufNew *." .. value)
+    end
+    return events
+end
+
+function M.for_keymap_pattern(ft)
+    local pattern = {}
+    for _, value in pairs(ft) do
+        table.insert(pattern, "*." .. value)
+        table.insert(pattern, "*." .. value)
+    end
+    return pattern
 end
 
 return M

@@ -6,8 +6,6 @@
   - [如果要使用本配置，执行下面代码，包含 `ranger` 的插件](#如果要使用本配置执行下面代码包含-ranger-的插件)
     - [也可以执行](#也可以执行)
   - [Clone 完成后](#clone-完成后)
-  - [Grub 主题](#grub-主题)
-  - [切换桌面环境](#切换桌面环境)
   - [Nvidia，自行选择是否安装，最好看 archwiki 。](#nvidia自行选择是否安装最好看-archwiki)
   - [zsh](#zsh)
   - [rtl8811/21 等网卡](#rtl881121-等网卡)
@@ -53,18 +51,6 @@ $ git submodule update --init --recursive
 $ ~/.linuxConfig/install.sh clashlink
 ```
 
-## Grub 主题
-
-`./xenlism-grub-4k-kali`从[ kde store ](https://store.kde.org/p/1440862)界面下载，自行选择是否安装。
-
-`wget` 无法从浏览器下载链接下载文件，就放进了仓库。进入`./xenlism-grub-4k-kali`运行`./grub-theme.sh`来安装。
-
-用 `archlinux-tweak-tool-git` 调整比较好
-
-## 切换桌面环境
-
-如果是窗口管理器，推荐修改 `~/.xinitrc` （最好自己复制 `~/.linuxConfig/configs/xinitrc` 一份出来） ，桌面环境推荐启动**sddm**时选择
-
 ## Nvidia，自行选择是否安装，最好看 archwiki 。
 
 ```bash
@@ -91,7 +77,7 @@ pacman -Qs nvidia
 #     OpenCL implemention for NVIDIA
 ```
 
-wayland 直接
+wayland 直接(也可安装nvidia)
 
 ```bash
 yay -S nouveau-fw xf86-video-nouveau

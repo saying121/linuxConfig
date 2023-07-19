@@ -13,30 +13,32 @@ M.on_attach = function(client, bufnr)
         vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
     end
 
-    -- vim.diagnostic.config({
-    --     virtual_text = {
-    --         severity = false,
-    --         -- severity = {
-    --         --     max = vim.diagnostic.severity.ERROR,
-    --         --     min = vim.diagnostic.severity.WARN,
-    --         -- },
-    --         prefix = "", -- 前缀
-    --         format = function(diagnostic)
-    --             for MS, sign in pairs(signs) do
-    --                 vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    --                 if diagnostic.severity == vim.diagnostic.severity[MS] then
-    --                     return signs[MS].text .. ": " .. diagnostic.message
-    --                 end
-    --             end
-    --             return diagnostic.message
-    --         end,
-    --     },
-    --     float = { border = "single" },
-    --     severity_sort = true, -- 根据严重程度排序
-    --     signs = true,
-    --     underline = true,
-    --     update_in_insert = true,
-    -- })
+    ---@diagnostic disable-next-line: unused-local
+    local virtual_text = {
+        severity = false,
+        -- severity = {
+        --     max = vim.diagnostic.severity.ERROR,
+        --     min = vim.diagnostic.severity.WARN,
+        -- },
+        prefix = "", -- 前缀
+        format = function(diagnostic)
+            for MS, sign in pairs(signs) do
+                vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+                if diagnostic.severity == vim.diagnostic.severity[MS] then
+                    return signs[MS].text .. ": " .. diagnostic.message
+                end
+            end
+            return diagnostic.message
+        end,
+    }
+    vim.diagnostic.config({
+        -- virtual_text = virtual_text,
+        float = { border = "single" },
+        severity_sort = true, -- 根据严重程度排序
+        signs = true,
+        underline = true,
+        update_in_insert = true,
+    })
 
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -55,6 +57,11 @@ M.on_attach = function(client, bufnr)
             vim.diagnostic.enable()
         end
     end, opts)
+
+    -- keymap("n", "<space>e", vim.diagnostic.open_float)
+    -- keymap("n", "[d", vim.diagnostic.goto_prev)
+    -- keymap("n", "]d", vim.diagnostic.goto_next)
+    -- keymap("n", "<space>q", vim.diagnostic.setloclist)
     -- keymap('n', 'gD', vim.lsp.buf.declaration, opts)
     -- keymap('n', 'gd', vim.lsp.buf.definition, opts)
     -- keymap('n', 'gi', vim.lsp.buf.implementation, opts)
@@ -69,9 +76,6 @@ M.on_attach = function(client, bufnr)
     -- keymap("n", "gy", vim.lsp.buf.type_definition, opts)
     -- keymap('n', '<space>rn', vim.lsp.buf.rename, opts)
     -- keymap('n', '<M-cr>', vim.lsp.buf.code_action, opts)
-    keymap("n", "<space>f", function()
-        vim.lsp.buf.format({ async = true })
-    end, opts)
 
     -- print(vim.inspect(client))
     local cap = client.server_capabilities
@@ -83,6 +87,17 @@ M.on_attach = function(client, bufnr)
         if vim.fn.has("nvim-0.10.0") == 1 then
             vim.lsp.inlay_hint(0, true)
         end
+    end
+
+    if cap.documentFormattingProvider then
+        keymap("n", "<space>f", function()
+            vim.lsp.buf.format({ async = true })
+        end, opts)
+    end
+    if cap.documentRangeFormattingProvider then
+        keymap("x", "<space>f", function()
+            vim.lsp.buf.format({ async = true })
+        end, opts)
     end
     -- 高亮相同变量或者函数
     if cap.documentHighlightProvider then

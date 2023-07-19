@@ -20,7 +20,7 @@ return {
         rt.setup({
             tools = {
                 -- how to execute terminal commands
-                -- options right now: termopen / quickfix
+                -- options right now: termopen / quickfix / toggleterm / vimux
                 executor = require("rust-tools.executors").toggleterm,
                 -- callback to execute once rust-analyzer is done initializing the workspace
                 -- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
@@ -57,7 +57,7 @@ return {
                     right_align_padding = 7,
                     -- The color of the hints
                     -- highlight = "Comment",
-                    highlight = "RustInlayHints",
+                    highlight = "LspInlayHint",
                 },
                 -- options same as lsp hover / vim.lsp.util.open_floating_preview()
                 hover_actions = {
@@ -106,7 +106,8 @@ return {
                     keymap("n", "<C-g>", rt.open_cargo_toml.open_cargo_toml, opts)
                     keymap("n", "<S-CR>", rt.expand_macro.expand_macro, opts)
                 end,
-                settings = require("plugins.lsps.rust-tools.settings"),
+                settings = require("plugins.lsps.rust.settings"),
+                -- settings = require("lsp.rust_analyzer").settings
             },
             dap = {
                 -- adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),

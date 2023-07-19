@@ -12,7 +12,7 @@ return {
         "jose-elias-alvarez/null-ls.nvim",
     },
     init = function()
-        vim.api.nvim_create_autocmd({ "BufWinEnter Cargo.toml", "BufEnter Cargo.toml" }, {
+        vim.api.nvim_create_autocmd({ "BufEnter Cargo.toml" }, {
             group = vim.api.nvim_create_augroup("CratesKeyMap", { clear = true }),
             pattern = { "Cargo.toml" },
             callback = function()

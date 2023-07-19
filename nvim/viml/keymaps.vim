@@ -93,6 +93,10 @@ nnoremap <M-.> <C-W>>
 nnoremap <M--> <C-W>-
 nnoremap <M-=> <C-W>+
 
+" 前后跳
+nnoremap <M-o> <C-o>
+nnoremap <M-i> <C-i>
+
 " Alt+t开启关闭终端,vim和nvim不太一样
 " nnoremap <M-t> :terminal<CR>A
 " tnoremap <M-t> exit<CR>
