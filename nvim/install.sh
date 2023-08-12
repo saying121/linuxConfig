@@ -7,11 +7,11 @@ export HTTP_PROXY=http://127.0.0.1:7890
 pacMan='pacman -S --needed --noconfirm'
 aurPkg='yay -S --needed --noconfirm'
 
-sudo "$pacMan" ranger fzf ripgrep fd lldb translate-shell \
+sudo "$pacMan" lf fzf ripgrep fd lldb translate-shell \
     jdk17-openjdk go cmake \
     neovim luarocks shellcheck \
     zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-ps \
-    typst deno
+    typst deno tesseract
 
 $aurPkg rust-lolcat-git
 

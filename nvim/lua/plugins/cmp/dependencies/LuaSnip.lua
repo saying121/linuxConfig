@@ -15,14 +15,10 @@ return {
 
         require("luasnip.loaders.from_lua").lazy_load({
             paths = "~/.config/nvim/lua/snippets",
-            -- override_priority = 10000,
-            -- default_priority = 10000,
         })
 
         require("luasnip.loaders.from_vscode").lazy_load({
-            exclude = { "rust" },
-            -- override_priority = 900,
-            -- default_priority = 900,
+            exclude = { "rust", "gitcommit" },
         })
     end,
 }

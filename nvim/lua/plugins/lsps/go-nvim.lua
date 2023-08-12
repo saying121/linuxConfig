@@ -1,6 +1,5 @@
 return {
     "ray-x/go.nvim",
-    -- event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
     -- build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
     build = function()
@@ -77,7 +76,7 @@ return {
                 -- padding from the right if right_align is true
                 right_align_padding = 6,
                 -- The color of the hints
-                highlight = "Comment",
+                highlight = "LspInlayHint",
             },
             gopls_cmd = nil, -- if you need to specify gopls path and cmd, e.g {"/home/user/lsp/gopls", "-logfile","/var/log/gopls.log" }
             gopls_remote_auto = true, -- add -remote=auto to gopls
@@ -97,7 +96,7 @@ return {
             textobjects = true, -- enable default text jobects through treesittter-text-objects
             test_runner = "go", -- one of {`go`, `richgo`, `dlv`, `ginkgo`, `gotestsum`}
             verbose_tests = true, -- set to add verbose flag to tests deprecated, see '-v' option
-            run_in_floaterm = false, -- set to true to run in float window. :GoTermClose closes the floatterm
+            run_in_floaterm = true, -- set to true to run in float window. :GoTermClose closes the floatterm
             -- float term recommend if you use richgo/ginkgo with terminal color
 
             floaterm = { -- position
@@ -124,13 +123,13 @@ return {
             iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the begining of if err statement
         })
 
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            group = vim.api.nvim_create_augroup("GoFormat", {}),
-            pattern = "*.go",
-            callback = function()
-                require("go.format").goimport()
-            end,
-        })
+        -- vim.api.nvim_create_autocmd("BufWritePre", {
+        --     group = vim.api.nvim_create_augroup("GoFormat", {}),
+        --     pattern = "*.go",
+        --     callback = function()
+        --         require("go.format").goimport()
+        --     end,
+        -- })
 
         vim.api.nvim_create_autocmd("BufWritePre", {
             group = vim.api.nvim_create_augroup("GoImport", {}),

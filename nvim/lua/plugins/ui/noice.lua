@@ -10,7 +10,7 @@ return {
                 require("notify").setup({
                     background_colour = "#000000",
                     stages = "fade_in_slide_out",
-                    max_width = 40,
+                    max_width = 60,
                     max_height = 20,
                 })
             end,
@@ -19,7 +19,7 @@ return {
     config = function()
         vim.api.nvim_create_autocmd({ "FileType notify" }, {
             group = vim.api.nvim_create_augroup("NotifyMap", { clear = true }),
-            -- pattern = { "Cargo.toml" },
+            pattern = { "notify" },
             callback = function()
                 local opts1 = { silent = true, noremap = true, buffer = true }
                 vim.keymap.set("n", "q", ":x<CR>", opts1)

@@ -45,7 +45,5 @@ fi
 
 # sudo setcap cap_net_bind_service,cap_net_admin=+ep /usr/bin/clash-meta
 
-unset clash_dir clash_config
-
 # sudo systemctl enable clash-meta
 # sudo systemctl start clash-meta

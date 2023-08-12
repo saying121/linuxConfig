@@ -25,13 +25,13 @@ unset "$pacMan"
 # fcitx5的设置
 if [[ $(grep -c fcitx /etc/environment) = 0 ]]; then
     echo '
-GTK_IM_MODULE=fcitx
-QT_IM_MODULE=fcitx
-XMODIFIERS="@im=fcitx"
-SDL_IM_MODULE=fcitx
+GTK_IM_MODULE=fcitx5
+QT_IM_MODULE=fcitx5
+XMODIFIERS="@im=fcitx5"
+SDL_IM_MODULE=fcitx5
 GLFW_IM_MODULE=ibus
-XIM_PROGRAM="fcitx"
-XIM="fcitx"
+XIM_PROGRAM="fcitx5"
+XIM="fcitx5"
 XIM_ARGS="-d"
 ECORE_IMF_MODULE="xim"
 ' | sudo tee -a /etc/environment

@@ -16,7 +16,6 @@ return {
                 { name = "buffer", priority = 700 },
                 { name = "rg", keyword_length = 4, priority = 600 },
             }, {
-                { name = "cmp_tabnine", priority = 850 },
                 { name = "spell", priority = 500 },
                 { name = "rime", priority = 500 },
             }),

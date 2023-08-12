@@ -1,12 +1,15 @@
 return {
     "folke/neodev.nvim",
-    -- cond = function()
-    --     return vim.bo.ft == "lua" or false
-    -- end,
+    cond = function()
+        if string.find(vim.api.nvim_buf_get_name(0), "/nvim/") then
+            return true
+        end
+        return false
+    end,
     config = function()
         local import = {
             "plenary.nvim",
-            "dyninput.nvim",
+            -- "dyninput.nvim",
             -- "refactoring.nvim",
             -- "conjure",
             -- "guard.nvim",
@@ -20,8 +23,8 @@ return {
             -- "cmp-nvim-lsp",
             -- "nvim-cmp",
             -- "nvim-ufo",
-            -- "telescope.nvim",
-            "LuaSnip",
+            "telescope.nvim",
+            -- "LuaSnip",
             -- "neoscroll.nvim",
             -- "lazy.nvim",
             -- "rust-tools.nvim",

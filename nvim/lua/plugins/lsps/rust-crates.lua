@@ -9,7 +9,6 @@ return {
         "nvim-lua/plenary.nvim",
         -- 有一个 keymap 在 lspsaga 里面
         "glepnir/lspsaga.nvim",
-        "jose-elias-alvarez/null-ls.nvim",
     },
     init = function()
         vim.api.nvim_create_autocmd({ "BufEnter Cargo.toml" }, {

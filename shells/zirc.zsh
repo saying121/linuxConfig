@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # 自定义
 source ~/.linuxConfig/shells/zshrc
 
@@ -17,7 +10,7 @@ ZSH_CACHE_DIR=~/.zi/cache
 
 #############################################
 # ui
-zi ice depth=1; zi light romkatv/powerlevel10k
+# zi ice depth=1; zi light romkatv/powerlevel10k
 
 # 自定义的 zsh lib directories
 zi ice wait lucid; source ~/.linuxConfig/shells/lib/directories.zsh
@@ -131,10 +124,12 @@ alias astronvim="NVIM_APPNAME=astronvim nvim"
 
 zi snippet OMZP::last-working-dir
 
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
-# eval "$(starship init zsh)"
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# alias nvimser="nvim --headless --listen localhost:7777"
-# alias nvide="env -u WAYLAND_DISPLAY neovide --multigrid --server=localhost:7777"
+eval "$(starship init zsh)"
+
+___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi

@@ -56,6 +56,24 @@ local postfix = {
         postfix = "prvar",
         scope = "expr",
     },
+    dbg_d = {
+        body = {
+            "#[cfg(debug_assertions)]",
+            "dbg!(${receiver});$0",
+        },
+        description = "Wrap the expression in an `println!`",
+        postfix = "dbg_d",
+        scope = "expr",
+    },
+    dbgr_d = {
+        body = {
+            "#[cfg(debug_assertions)]",
+            "dbg!(&${receiver});$0",
+        },
+        description = "Wrap the expression in an `println!`",
+        postfix = "dbgr_d",
+        scope = "expr",
+    },
 }
 
 local prefix = {
@@ -261,12 +279,12 @@ local friendly = {
     --     prefix = "fn",
     -- },
     format = {
-        body = { 'format!("${1}")' },
+        body = { 'format!("${1}"${2})' },
         description = "format!(…)",
         prefix = "format",
     },
     format_args = {
-        body = { 'format_args!("${1}")' },
+        body = { 'format_args!("${1}"${2})' },
         description = "format_args!(…)",
         prefix = "format_args",
     },
@@ -366,7 +384,7 @@ local friendly = {
         prefix = "option_env",
     },
     panic = {
-        body = { 'panic!("${1}");' },
+        body = { 'panic!("${1}"${2});' },
         description = "panic!(…);",
         prefix = "panic",
     },

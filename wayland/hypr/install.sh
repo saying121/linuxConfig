@@ -24,4 +24,4 @@ sudo "$pacMan" hyprland-nvidia \
 sudo "$pacMan" pipewire wireplumber slurp grim hyprland-interactive-screenshot
 
 # xrandr-wlr-randr,xprop-wdisplays
-$aurPkg linux-wallpaperengine-wayland-git wlr-randr
+$aurPkg linux-wallpaperengine-wayland-git wlr-randr wl-color-picker wl-delicolour-picker-git

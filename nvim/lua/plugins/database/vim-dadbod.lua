@@ -11,6 +11,6 @@ return {
         "DBUIFindBuffer",
     },
     dependencies = {
-        require("public.utils").get_dependencies_table("plugins/" .. "database" .. "/dependencies"),
+        require("public.utils").req_lua_files_return_table("plugins/" .. "database" .. "/dependencies"),
     },
 }

@@ -1,6 +1,5 @@
 return {
     "folke/tokyonight.nvim",
-    priority = 2000,
     event = "BufWinEnter",
     -- cond = false,
     config = function()

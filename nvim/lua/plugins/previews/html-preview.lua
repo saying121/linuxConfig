@@ -6,7 +6,7 @@ return {
         "UIEnter *.html",
         "BufNew *.html",
     },
-    init = function()
+    config = function()
         vim.api.nvim_create_autocmd({ "BufNew", "BufWinEnter", "BufEnter" }, {
             group = vim.api.nvim_create_augroup("HtmlPreview", { clear = true }),
             pattern = { "*.html" },

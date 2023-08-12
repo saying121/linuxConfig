@@ -18,7 +18,6 @@ return {
             sources = cmp.config.sources({
                 { name = "cmdline", priority = 1000 },
                 { name = "path", priority = 900 },
-                { name = "cmp_tabnine", priority = 850 },
             }, {
                 { name = "buffer", priority = 800 },
                 { name = "rg", keyword_length = 4, priority = 700 },

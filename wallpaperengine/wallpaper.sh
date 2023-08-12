@@ -36,6 +36,7 @@ while true; do
     #     kill -9 "$wpid"
     # done
     killall linux-wallpaperengine
+    sleep 0.2
 
     # 在每个连接的显示器上输出
     for item in $screens; do

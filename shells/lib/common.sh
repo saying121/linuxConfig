@@ -131,12 +131,22 @@ eval "$(fnm env --use-on-cd)"
 source ~/.linuxConfig/shells/lib/nmap.sh
 
 # rust 开启测试覆盖率
-enable_cover() {
-    export RUSTFLAGS="-Cinstrument-coverage"
-    export LLVM_PROFILE_FILE="%p-%m.profraw"
+cover_rust() {
+    if [[ "$1" == "set" ]]; then
+        export RUSTFLAGS="-Cinstrument-coverage"
+        export LLVM_PROFILE_FILE="%p-%m.profraw"
+    fi
+    if [[ "$1" == "unset" ]]; then
+        unset RUSTFLAGS
+        unset LLVM_PROFILE_FILE
+    fi
 }
 
-disable_cover() {
-    unset RUSTFLAGS
-    unset LLVM_PROFILE_FILE
+debug_rust() {
+    if [[ "$1" == "set" ]]; then
+        export RUST_LOG=DEBUG
+    fi
+    if [[ "$1" == "unset" ]]; then
+        unset RUST_LOG
+    fi
 }

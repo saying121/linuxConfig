@@ -8,7 +8,7 @@ return {
                 vim.g.asyncrun_open = 6
                 vim.g.asyncrun_save = 2 -- 会被 tasks.ini save 覆盖
                 vim.g.asyncrun_bell = 0
-                vim.g.asyncrun_rootmarks = { ".git", ".svn", ".root", ".project", ".hg", "Cargo.toml" }
+                vim.g.asyncrun_rootmarks = { ".git", ".svn", ".root", ".project", ".hg", "Cargo.toml", "go.mod" }
             end,
         },
     },

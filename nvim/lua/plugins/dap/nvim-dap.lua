@@ -14,7 +14,7 @@ return {
         "PBSetConditionalBreakpoint",
     },
     dependencies = {
-        require("public.utils").get_dependencies_table("plugins/" .. "dap" .. "/dependencies"),
+        require("public.utils").req_lua_files_return_table("plugins/" .. "dap" .. "/dependencies"),
     },
     config = function()
         -- 对各个语言的配置

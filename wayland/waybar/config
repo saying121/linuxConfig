@@ -2,6 +2,7 @@
     "layer": "top",
     "height": 5,
     "modules-left": [
+        "custom/background",
         "bluetooth",
         "cpu",
         "temperature",
@@ -220,5 +221,9 @@
         "exec": "wl-gammarelay-rs watch {g}",
         "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateGamma d +0.02",
         "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateGamma d -0.02"
+    },
+    "custom/background": {
+        "format": " ",
+        "on-click-right": "~/.linuxConfig/wallpaperengine/rewall.sh"
     }
 }

@@ -1,13 +1,94 @@
 # 根据 schema 提供自动补全
 "$schema" = 'https://starship.rs/config-schema.json'
+# Use custom format
+# │[┌───────────────────>](bold green)
+format = '''
+[┌─](bold green)$username$sudo$os$hostname$all$line_break[└─](bold green)$character
+'''
+# right_format = "$os"
 
 # 在提示符之间插入空行
 add_newline = true
 
 # 将提示符中的 '❯' 替换为 '➜'
 [character] # 此模块名称为 'character'
-success_symbol = '[➜](bold green)' # 将 'success_symbol' 片段设置成颜色为 'bold green' 的 '➜'
+# success_symbol = '[➜](bold green)' # 将 'success_symbol' 片段设置成颜色为 'bold green' 的 '➜'
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "cyan bold"
+truncation_length = 5
+truncate_to_repo = true
+
+[hostname]
+format = "[$ssh_symbol$hostname]($style) ∈ "
+disabled = false
+ssh_only = false
+ssh_symbol = "🌐 "
+style = "blue bold"
+
+[os]
+format = " [$symbol]($style)"
+style = "bold white"
+disabled = false
+# This is the default symbols table.
+[os.symbols]
+Alpaquita = "🔔 "
+Alpine = "🏔️ "
+Amazon = "🙂 "
+Android = "🤖 "
+Arch = "  "
+Artix = "🎗️ "
+CentOS = "💠 "
+DragonFly = "🐉 "
+Emscripten = "🔗 "
+EndeavourOS = "🚀 "
+Fedora = "🎩 "
+FreeBSD = "😈 "
+Garuda = "🦅 "
+Gentoo = "🗜️ "
+HardenedBSD = "🛡️ "
+Illumos = "🐦 "
+Linux = " "
+Mabox = "📦 "
+Macos = " "
+Manjaro = "🥭 "
+Mariner = "🌊 "
+MidnightBSD = "🌘 "
+Mint = "🌿 "
+NetBSD = "🚩 "
+NixOS = "❄️ "
+OpenBSD = "🐡 "
+OpenCloudOS = "☁️ "
+openEuler = "🦉 "
+openSUSE = "🦎 "
+OracleLinux = "🦴 "
+Pop = "🍭 "
+Raspbian = "🍓 "
+Redhat = "🎩 "
+RedHatEnterprise = "🎩 "
+Redox = "🧪 "
+Solus = "⛵ "
+SUSE = "🦎 "
+Ubuntu = " "
+Unknown = "❓ "
+Windows = " "
 
 # 禁用 'package' 组件，将其隐藏
 [package]
+disabled = false
+
+[sudo]
+format = "[$symbol]($style)"
+disabled = false
+symbol = "💀 "
+
+[shell]
+disabled = false
+
+[username]
+format = " [$user]($style)"
+style_root = "red bold"
+style_user = "yellow bold"
+show_always = true
 disabled = true

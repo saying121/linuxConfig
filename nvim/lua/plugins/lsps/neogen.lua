@@ -7,12 +7,12 @@ return {
     version = "*",
     cmd = "Neogen",
     keys = {
-        { "<C-S-f>", mode = { "n", "x" } },
+        { "<C-S-e>", mode = { "n", "x" } },
         { "<C-S-a>", mode = { "n", "x" } },
     },
     config = function()
         local keymap = vim.keymap.set
-        keymap({ "n", "x" }, "<C-S-f>", "<Cmd>Neogen file<CR>", { noremap = true, silent = true })
+        keymap({ "n", "x" }, "<C-S-e>", "<Cmd>Neogen file<CR>", { noremap = true, silent = true })
         keymap({ "n", "x" }, "<C-S-a>", "<Cmd>Neogen<CR>", { noremap = true, silent = true })
 
         require("neogen").setup({

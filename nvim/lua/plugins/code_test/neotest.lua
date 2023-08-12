@@ -7,7 +7,6 @@ return {
         { "<leader>to", mode = { "n" } },
     },
     dependencies = {
-        -- require("public.utils").get_dependencies_table("plugins/" .. "neotest" .. "/dependencies"),
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
         "antoinemadec/FixCursorHold.nvim",

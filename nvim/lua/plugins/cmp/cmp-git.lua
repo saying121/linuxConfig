@@ -14,7 +14,6 @@ return {
                 { name = "luasnip", priority = 1000 },
                 { name = "nvim_lsp", keyword_length = 0, priority = 900 },
                 { name = "cmp_git", priority = 900 }, -- You can specify the `cmp_git` source if you were installed it.
-                { name = "cmp_tabnine", priority = 850 },
                 { name = "path", priority = 830 },
             }, {
                 { name = "buffer", priority = 800 },

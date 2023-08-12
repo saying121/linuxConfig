@@ -31,7 +31,7 @@ return {
                 inlay_hints = {
                     -- automatically set inlay hints (type hints)
                     -- default: true
-                    auto = not _G.inlay_hints,
+                    auto = vim.fn.has("nvim-0.10.0") ~= 1,
                     -- Only show inlay hints for the current line
                     only_current_line = false,
                     -- whether to show parameter hints with the inlay hints or not

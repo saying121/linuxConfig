@@ -1,7 +1,6 @@
 return {
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-    -- keys = require('plugins.telescopes.telescope_keys'),
     config = function()
         -- You dont need to set any of these options. These are the default ones. Only the loading is important
         require("telescope").setup({

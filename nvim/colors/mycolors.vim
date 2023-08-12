@@ -1,5 +1,5 @@
 hi Normal guibg=NONE " cterm=NONE guifg=NONE ctermfg=NONE
-hi NormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+" hi NormalNC guibg=#292E42 cterm=NONE guifg=NONE ctermfg=NONE
 hi NormalSB guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi NormalFloat guibg=NONE cterm=NONE "guifg=NONE ctermfg=NONE
 hi SagaNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
@@ -15,6 +15,12 @@ hi ActionPreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi CallHierarchyNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi OutlinePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi MiniStatusLineModeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+
+hi TabLine guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+hi TabLineFill guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+
+hi StatusLineNC guibg=NONE cterm=NONE
+hi StatusLine guibg=NONE cterm=NONE
 
 hi NeoTreeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi NeoTreeNormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE

@@ -10,11 +10,11 @@ return {
         { "<leader>bf", mode = "n" },
         { "<M-p>", mode = "n" },
     },
-    version = "0.1.0",
+    version = "0.1.2",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         "nvim-lua/plenary.nvim",
-        require("public.utils").get_dependencies_table("plugins/" .. "telescope" .. "/dependencies"),
+        require("public.utils").req_lua_files_return_table("plugins/" .. "telescope" .. "/dependencies"),
     },
     config = function()
         local builtin, keymap = require("telescope.builtin"), vim.keymap.set
@@ -66,7 +66,10 @@ return {
                         -- actions.which_key shows the mappings for your picker,
                         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
                         ["<C-h>"] = "which_key",
-                        ["<C-u>"] = false,
+                    },
+                    n = {
+                        ["<C-h>"] = "which_key",
+                        ["t"] = "select_tab",
                     },
                 },
                 layout_config = {
@@ -93,7 +96,8 @@ return {
                             ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
                         },
                         n = {
-                            ["dd"] = actions.delete_buffer + actions.move_to_top,
+                            -- ["dd"] = actions.delete_buffer + actions.move_to_top,
+                            ["dd"] = "delete_buffer",
                         },
                     },
                 },

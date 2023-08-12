@@ -124,6 +124,30 @@ return {
         t(");"),
     }),
     s(
+        "dbg",
+        fmta(
+            [[
+        #[cfg(debug_assertions)]
+        dbg!(<>);
+        ]],
+            {
+                i(1, "variable"),
+            }
+        )
+    ),
+    s(
+        "dbgr",
+        fmta(
+            [[
+        #[cfg(debug_assertions)]
+        dbg!(&<>);
+        ]],
+            {
+                i(1, "variable"),
+            }
+        )
+    ),
+    s(
         {
             trig = "eprintln",
             priority = 30000,
@@ -182,7 +206,6 @@ return {
         },
         fmta(
             [[
-            #[derive(Debug)]
             enum <> {
                 <>,
                 <>,

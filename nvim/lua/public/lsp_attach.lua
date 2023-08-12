@@ -1,45 +1,45 @@
+-- lsp 图标，边框等等
+local signs = {
+    ERROR = { name = "DiagnosticSignError", text = " " }, --
+    WARN = { name = "DiagnosticSignWarn", text = " " }, --
+    HINT = { name = "DiagnosticSignHint", text = " " },
+    INFO = { name = "DiagnosticSignInfo", text = " " },
+}
+for _, sign in pairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
+---@diagnostic disable-next-line: unused-local
+local virtual_text = {
+    severity = false,
+    -- severity = {
+    --     max = vim.diagnostic.severity.ERROR,
+    --     min = vim.diagnostic.severity.WARN,
+    -- },
+    prefix = "", -- 前缀
+    format = function(diagnostic)
+        for MS, sign in pairs(signs) do
+            vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+            if diagnostic.severity == vim.diagnostic.severity[MS] then
+                return signs[MS].text .. ": " .. diagnostic.message
+            end
+        end
+        return diagnostic.message
+    end,
+}
+
+vim.diagnostic.config({
+    -- virtual_text = virtual_text,
+    float = { border = "single" },
+    severity_sort = true, -- 根据严重程度排序
+    signs = true,
+    underline = true,
+    update_in_insert = true,
+})
+
 -- 被注释的部分，被 lspsaga.nvim 和 trouble.nvim 取代了
 local M = {}
 -- Use an on_attach function to only map the following keys after the language server attaches to the current buffer
 M.on_attach = function(client, bufnr)
-    -- lsp 图标，边框等等
-    local signs = {
-        ERROR = { name = "DiagnosticSignError", text = " " }, --
-        WARN = { name = "DiagnosticSignWarn", text = " " }, --
-        HINT = { name = "DiagnosticSignHint", text = " " },
-        INFO = { name = "DiagnosticSignInfo", text = " " },
-    }
-    for _, sign in pairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
-
-    ---@diagnostic disable-next-line: unused-local
-    local virtual_text = {
-        severity = false,
-        -- severity = {
-        --     max = vim.diagnostic.severity.ERROR,
-        --     min = vim.diagnostic.severity.WARN,
-        -- },
-        prefix = "", -- 前缀
-        format = function(diagnostic)
-            for MS, sign in pairs(signs) do
-                vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-                if diagnostic.severity == vim.diagnostic.severity[MS] then
-                    return signs[MS].text .. ": " .. diagnostic.message
-                end
-            end
-            return diagnostic.message
-        end,
-    }
-    vim.diagnostic.config({
-        -- virtual_text = virtual_text,
-        float = { border = "single" },
-        severity_sort = true, -- 根据严重程度排序
-        signs = true,
-        underline = true,
-        update_in_insert = true,
-    })
-
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     -- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
@@ -82,14 +82,16 @@ M.on_attach = function(client, bufnr)
     -- 取消下面的注释使用 :messages 可以查看 lsp 支持的功能
     -- print(vim.inspect(cap))
 
-    -- inlay hints相关
-    if cap.inlayHintProvider.resolveProvider then
+    if cap.inlayHintProvider ~= nil then
         if vim.fn.has("nvim-0.10.0") == 1 then
-            vim.lsp.inlay_hint(0, true)
+            local ok, err = pcall(vim.lsp.inlay_hint, 0, true)
+            if not ok then
+                print(err)
+            end
         end
     end
 
-    if cap.documentFormattingProvider then
+    if cap.documentFormattingProvider and vim.bo.ft ~= "lua" then
         keymap("n", "<space>f", function()
             vim.lsp.buf.format({ async = true })
         end, opts)

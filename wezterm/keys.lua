@@ -94,4 +94,5 @@ local keys = {
         action = wezterm.action.CloseCurrentPane({ confirm = true }),
     },
 }
+
 return keys

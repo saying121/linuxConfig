@@ -14,11 +14,10 @@ local ft = {
 return {
     "Olical/conjure",
     build = "cargo install evcxr_repl",
+    cond = false,
     dependencies = {
         "nvim-treesitter/nvim-treesitter",
-        "PaterJason/cmp-conjure",
     },
-    cond = true,
     event = require("public.utils").boot_event(ft),
     cmd = {
         "ConjureEval",

@@ -9,7 +9,6 @@ return {
             sources = cmp.config.sources({
                 { name = "vim-dadbod-completion" },
                 { name = "luasnip" },
-                { name = "cmp_tabnine" },
                 { name = "path" },
             }, {
                 { name = "buffer" },

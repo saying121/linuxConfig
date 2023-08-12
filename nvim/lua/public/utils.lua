@@ -51,19 +51,19 @@ end
 --- ```
 ---@param mod_path string
 ---@return table
-function M.get_dependencies_table(mod_path)
+function M.req_lua_files_return_table(mod_path)
     local path = vim.fn.stdpath("config") .. "/lua/" .. mod_path
-    local dependencies_list = vim.fn.readdir(path)
-    local DepTable = {}
+    local file_list = vim.fn.readdir(path)
+    local Table = {}
 
-    for _, file_name in pairs(dependencies_list) do
+    for _, file_name in pairs(file_list) do
         if vim.endswith(file_name, ".lua") then
             local use_name = string.sub(file_name, 1, #file_name - 4)
-            table.insert(DepTable, require(mod_path .. "/" .. use_name))
+            table.insert(Table, require(mod_path .. "/" .. use_name))
         end
     end
 
-    return DepTable
+    return Table
 end
 
 --- 设置不影响启动时间的启动事件
@@ -75,6 +75,7 @@ function M.boot_event(ft)
     for _, value in pairs(ft) do
         table.insert(events, "UIEnter *." .. value)
         table.insert(events, "BufNew *." .. value)
+        table.insert(events, "LspAttach *." .. value)
     end
     return events
 end

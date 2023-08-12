@@ -3,7 +3,7 @@ return {
     event = "VeryLazy",
     build = ":TSUpdate",
     dependencies = {
-        require("public.utils").get_dependencies_table("plugins/" .. "treesitter" .. "/dependencies"),
+        require("public.utils").req_lua_files_return_table("plugins/" .. "treesitter" .. "/dependencies"),
     },
     config = function()
         -- 如果没有可用高亮就用默认的

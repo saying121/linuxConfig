@@ -3,9 +3,12 @@ return {
     config = function()
         vim.keymap.set("n", "<leader>d", "<cmd>DBUIToggle<cr>", { noremap = true, silent = true })
 
+        vim.g.db_ui_save_location = "~/.local/share/db_ui"
+
         vim.g.db_ui_tmp_query_location = "~/sql"
         vim.g.db_ui_show_database_icon = 1
-        vim.g.db_ui_execute_on_save = 1
+        vim.g.db_ui_execute_on_save = 0
+
         vim.cmd([[
                 function s:buffer_name_generator(table)
                     if empty(a:table.label)
@@ -24,7 +27,7 @@ return {
                 saved_queries = "▾ ",
                 schemas = "▾ ",
                 schema = "▾ פּ",
-                tables = "▾ 藺",
+                tables = "▾ 藺", -- ﴶ
                 table = "▾ ",
             },
             collapsed = {
@@ -33,12 +36,12 @@ return {
                 saved_queries = "▸ ",
                 schemas = "▸ ",
                 schema = "▸ פּ",
-                tables = "▸ 藺",
+                tables = "▸ 藺", -- ﴶ
                 table = "▸ ",
             },
             saved_query = "",
             new_query = "璘",
-            tables = "離",
+            tables = "離", -- ﴶ
             buffers = "﬘",
             add_connection = "",
             connection_ok = "✓",

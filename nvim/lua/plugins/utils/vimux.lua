@@ -1,5 +1,5 @@
 return {
     "preservim/vimux",
-    cond = true,
+    cond = false,
     event = "VeryLazy",
 }

@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-doc-name
 return {
     "Bekaboo/dropbar.nvim",
     cond = function()

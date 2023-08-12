@@ -2,7 +2,7 @@ return {
     "williamboman/mason.nvim",
     cmd = "Mason",
     dependencies = {
-        require("public.utils").get_dependencies_table("plugins/" .. "mason" .. "/dependencies"),
+        require("public.utils").req_lua_files_return_table("plugins/" .. "mason" .. "/dependencies"),
     },
     config = function()
         require("mason").setup({
@@ -24,7 +24,7 @@ return {
             -- Controls to which degree logs are written to the log file. It's useful to set this to vim.log.levels.DEBUG when
             -- debugging issues with package installations.
             log_level = vim.log.levels.INFO,
-            max_concurrent_installers = 4,
+            max_concurrent_installers = 8,
             -- The provider implementations to use for resolving package metadata (latest version, available versions, etc.).
             -- Accepts multiple entries, where later entries will be used as fallback should prior providers fail.
             -- Builtin providers are:

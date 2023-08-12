@@ -1,6 +1,6 @@
 scriptencoding utf-8
 
-set guifont=hack\ nerd\ font:h9.0:w1
+set guifont=hack\ nerd\ font:h14.0:w1
 " set guifont=hack\ nerd\ font,1x1
 set guifontwide=1
 " g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.

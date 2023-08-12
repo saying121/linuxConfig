@@ -19,7 +19,7 @@ aurPkg='yay -S --needed --noconfirm'
 
 # cargo install leetcode-cli
 
-$aurPkg todotxt
+$aurPkg todotxt snapper
 
 # 计算ip的工具
 $pacMan ipcalc
@@ -27,7 +27,7 @@ $pacMan ipcalc
 $pacMan sshfs python-nautilus kdeconnect
 
 # Music
-$aurPkg yesplaymusic netease-cloud-music
+$aurPkg music-you-appimage
 
 # theme
 $pacMan adwaita-qt5 adwaita-qt6
@@ -42,8 +42,7 @@ sudo "$pacMan" plasma packagekit-qt5 packagekit appstream-qt appstream
 # 动态壁纸
 # $aurPkg renderdoc plasma5-wallpapers-wallpaper-engine
 sudo "$pacMan" gifsicle ffmpeg
-$aurPkg linux-wallpaperengine-wayland-git
-# linux-wallpaperengine-git
+$aurPkg linux-wallpaperengine-git
 # komorebi
 
 # installVirtualBox
@@ -55,7 +54,8 @@ sudo "$pacMan" wine pkgstats
 
 # 各种查看系统信息的软件
 sudo "$pacMan" htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
-$aurPkg gotop cpufetch hardinfo neofetch # `gpufetch-git
+# btm 启动 bottom
+$aurPkg bottom cpufetch hardinfo # `gpufetch-git
 
 # markdown browser
 $aurPkg frogmouth carbonyl
@@ -70,6 +70,13 @@ installWaydroid() {
 $aurPkg com.qq.weixin.deepin com.qq.weixin.work.deepin linuxqq-firejail
 
 $pacMan dust procs tealdeer
+
+# postgres, mysql, sqlite, mysql, redis
+$pacMan pgcli mycli litecli mssql-cli iredis
+# aws,Postgres meta commands.
+pip install --break-system-packages athenacli pgspecial
+# 3D
+# $pacMan blender
 
 # $pacMan mariadb
 # sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql

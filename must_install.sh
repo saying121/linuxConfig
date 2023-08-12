@@ -67,6 +67,10 @@ sudo "$pacMan" adios2 cgns ffmpeg fmt gdal gl2ps glew gnuplot graphviz hdf5 java
 
 # zsh
 ~/.linuxConfig/shells/install_zi.sh
+$pacMan rustup starship
+export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+rustup install stable
+cargo install os_info_cli
 
 # ranger
 sudo "$pacMan" ranger
@@ -120,8 +124,8 @@ sudo "$pacMan" gst-libav phonon-qt5-gstreamer gst-plugins-good qt5-quickcontrols
 $aurPkg sddm sddm-conf-git xinit-xsession
 $aurPkg sddm-theme-aerial-git
 
-# x11,蓝牙耳机自动切换，pavucontrol:音量控制
-sudo "$pacMan" pulseaudio-bluetooth bluez bluez-utils pulsemixer \
+# x11,蓝牙耳机自动切换，pavucontrol:音量控制,安装 pipewire-pulse包. 它将代替 pulseaudio包 和 pulseaudio-bluetooth包
+sudo "$pacMan" pipewire-pulse bluez bluez-utils pulsemixer \
     xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
     pulseaudio-alsa pavucontrol
 sudo "$pacMan" redshift-wayland-git
@@ -164,7 +168,7 @@ input-remapper-control --command start --device "SINO WEALTH Gaming KB " --prese
 
 # 各种查看系统信息的软件
 sudo "$pacMan" htop atop iotop iftop glances sysstat plasma-systemmonitor
-$aurPkg gotop cpufetch hardinfo fastfetch onefetch ufetch-git bitfetch-git macchina fetchfetch rufetch
+$aurPkg gotop cpufetch hardinfo fastfetch onefetch fetchfetch
 
 # 浏览器
 $aurPkg microsoft-edge-stable-bin google-chrome
@@ -202,7 +206,7 @@ sudo "$pacMan" python-pymupdf python-fonttools python-pillow bibtool termpdf.py-
 $aurPkg fontpreview gifine
 
 # wps
-$aurPkg wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn ttf-ms-fonts libtiff5 wps-office-fonts # wps-office
+$aurPkg wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn ttf-ms-fonts libtiff5 wps-office-fonts ttf-ms-win11-auto-zh_cn # wps-office
 # copyq networkmanager-dmenu-bluetoothfix-git networkmanager-dmenu-git archlinux-tweak-tool-git
 
 # 读电子书

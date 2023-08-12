@@ -5,10 +5,8 @@ return {
             ensure_installed = {
                 "black",
                 "stylua",
-                "isort",
                 "prettier",
                 "shfmt",
-                "vint",
                 "beautysh",
                 "latexindent",
                 "golines",

@@ -8,24 +8,36 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 local specs = {
     { import = "plugins" },
+    { import = "plugins.cmp" },
+    { import = "plugins.code_test" },
+    { import = "plugins.dap" },
+    { import = "plugins.database" },
+    { import = "plugins.documents" },
+    { import = "plugins.garish" },
+    { import = "plugins.lsps" },
+    { import = "plugins.mason" },
+    { import = "plugins.navigation" },
+    { import = "plugins.previews" },
+    { import = "plugins.telescope" },
+    { import = "plugins.translators" },
+    { import = "plugins.treesitter" },
+    { import = "plugins.ui" },
+    { import = "plugins.utils" },
 }
--- table.insert(specs, { import = "plugins." .. 'lsps' })
-
-local path = vim.fn.stdpath("config") .. "/lua/plugins"
-
--- 导入plugins文件夹下面的文件夹，里面的文件
-for _, file_name in pairs(vim.fn.readdir(path)) do
-    if not vim.endswith(file_name, ".lua") then
-        table.insert(specs, { import = "plugins." .. file_name })
-    end
-end
+-- local path = vim.fn.stdpath("config") .. "/lua/plugins"
+-- -- 导入plugins文件夹下面的文件夹，里面的文件
+-- for _, file_name in pairs(vim.fn.readdir(path)) do
+--     if not vim.endswith(file_name, ".lua") then
+--         table.insert(specs, { import = "plugins." .. file_name })
+--     end
+-- end
 
 require("lazy").setup({
     spec = specs,
     root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
     defaults = {
-        lazy = false, -- should plugins be lazy-loaded?
-        version = nil, -- version = "*", -- enable this to try installing the latest stable versions of plugins
+        lazy = false,                         -- should plugins be lazy-loaded?
+        version = nil,                        -- version = "*", -- enable this to try installing the latest stable versions of plugins
     },
     -- leave nil when passing the spec as the first argument to setup()
     -- spec = nil, ---@type LazySpec
@@ -35,7 +47,7 @@ require("lazy").setup({
         -- defaults for the `Lazy log` command
         -- log = { "-10" }, -- show the last 10 commits
         log = { "--since=3 days ago" }, -- show commits from the last 3 days
-        timeout = 120, -- kill processes that take more than 2 minutes
+        timeout = 120,                  -- kill processes that take more than 2 minutes
         url_format = "https://github.com/%s.git",
     },
     dev = {
@@ -45,13 +57,13 @@ require("lazy").setup({
         patterns = {}, -- For example {"folke"}
     },
     install = {
-        missing = true, -- install missing plugins on startup. This doesn't increase startup time.
+        missing = true,                            -- install missing plugins on startup. This doesn't increase startup time.
         colorscheme = { "tokyonight", "habamax" }, -- try to load one of these colorschemes when starting an installation during startup
     },
     ui = {
         size = { width = 0.8, height = 0.8 }, -- a number <1 is a percentage., >1 is a fixed size
         -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-        border = "double", -- "rounded", "shadow", "single",
+        border = "double",                    -- "rounded", "shadow", "single",
         icons = {
             ft = "",
             lazy = "鈴 ",
@@ -73,15 +85,15 @@ require("lazy").setup({
         cmd = "diffview.nvim",
     },
     checker = {
-        enabled = false, -- automatically check for plugin updates
+        enabled = false,           -- automatically check for plugin updates
         concurrency = nil, ---@type number? set to 1 to check for updates very slowly
-        notify = false, -- get a notification when new updates are found
+        notify = false,            -- get a notification when new updates are found
         -- frequency = 3600, -- check for updates every hour
         frequency = 3600 * 24 * 7, -- check for updates every week
     },
     change_detection = {
         enabled = false, -- automatically check for config file changes and reload the ui
-        notify = false, -- get a notification when changes are found
+        notify = false,  -- get a notification when changes are found
     },
     performance = {
         cache = {
@@ -92,11 +104,11 @@ require("lazy").setup({
             disable_events = { "UIEnter", "BufReadPre", "BufWinEnter" },
             ttl = 3600 * 24 * 5, -- keep unused modules for up to 5 days
         },
-        reset_packpath = true, -- reset the package path to improve startup time
+        reset_packpath = true,   -- reset the package path to improve startup time
         rtp = {
-            reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
+            reset = true,        -- reset the runtime path to $VIMRUNTIME and your config directory
             ---@type string[]
-            paths = {}, -- add any custom paths here that you want to indluce in the rtp
+            paths = {},          -- add any custom paths here that you want to indluce in the rtp
             ---@type string[] list any plugins you want to disable here
             disabled_plugins = {
                 -- "matchit",

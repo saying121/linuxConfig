@@ -18,11 +18,16 @@ local prettier_ft = {
 local other_ft = {
     c = "c",
     python = "py",
+    py = "python",
     lua = "lua",
     bash = "sh",
     sh = "bash",
     zsh = "zsh",
     tex = "tex",
+    rust = "rs",
+    sql = "sql",
+    latex = "tex",
+    fennel = "fnl",
 }
 
 local ft = vim.tbl_deep_extend("force", {}, prettier_ft, other_ft)
@@ -32,30 +37,38 @@ local events = my_ut.boot_event(ft)
 return {
     "nvimdev/guard.nvim",
     event = events,
-    config = function()
+    cmd = "GuardFmt",
+    init = function()
         vim.api.nvim_create_autocmd(events, {
             group = vim.api.nvim_create_augroup("GuardKeyMap", { clear = true }),
             pattern = my_ut.for_keymap_pattern(ft),
             callback = function()
                 local opts, keymap = { noremap = true, silent = true, buffer = 0 }, vim.keymap.set
-                keymap({ "n", "v" }, "<space>f", "<cmd>GuardFmt<CR>", opts)
+                keymap({ "n", "x" }, "<space>f", function()
+                    vim.cmd("GuardFmt")
+                end, opts)
             end,
         })
-
+    end,
+    config = function()
         local filetype = require("guard.filetype")
 
         filetype("c"):fmt("clang-format"):lint("clang-tidy")
-        filetype("tex"):fmt({ cmd = "latexindent", args = { "-" } })
-        filetype("bash"):fmt({ cmd = "shfmt", args = { "-filename", "$FILENAME" } })
-        filetype("sh"):fmt({ cmd = "shfmt", args = { "-filename", "$FILENAME" } })
-        -- filetype("zsh"):fmt({ cmd = "beautysh", args = { "$FILENAME" } })--:lint({ cmd = "zsh", args = { "-n", "$FILENAME" } })
-        -- filetype("zsh"):lint({ cmd = "zsh", args = { "-n", "$FILENAME" } })
-        filetype("python"):fmt("black")
-        -- filetype("rust"):fmt("rustfmt")
+        filetype("sh, bash"):fmt({ cmd = "shfmt", args = { "-i", "4", "-filename", "$FILENAME" } })
+        filetype("zsh"):fmt({ cmd = "beautysh", args = { "--indent-size", "4", "-s", "paronly", "$FILENAME" } })
+        filetype("python"):fmt("isort"):append("black")
+        filetype("rust"):fmt("rustfmt")
+        filetype("sql, mysql"):fmt("sql-formatter")
+        filetype("tex, bib, plaintex"):fmt("latexindent")
+        filetype("fennel"):fmt("fnl")
 
         filetype("lua"):fmt({
             cmd = "stylua",
             args = { "--search-parent-directories", "-" },
+            stdin = true,
+        })
+        filetype("asm"):fmt({
+            cmd = "asmfmt",
             stdin = true,
         })
 

@@ -1,34 +1,34 @@
 nvim-dap.lua
 
-|    key    |         作用          | mode  |
-| :-------: | :-------------------: | :---: |
-| <space>b  | dap.toggle_breakpoint |   n   |
-| <space>B  |  dap.set_breakpoint   |   n   |
-|   <F5>    |    `dap.continue`     | n,i,t |
-|   <F6>    |    `dap.step_over`    | n,i,t |
-|   <F7>    |    `dap.step_into`    | n,i,t |
-|   <F8>    |    `dap.step_out`     | n,i,t |
-|   <F9>    |    `dap.step_back`    | n,i,t |
-|   <F10>   |    `dap.run_last`     | n,i,t |
-|   <F11>   |    `dap.terminate`    | n,i,t |
-| <space>dr |    `dap.repl.open`    |   n   |
-| <space>dl |    `dap.run_last`     |   n   |
-| <space>lp | `dap.set_breakpoint`  |   n   |
+|          key           |          作用           | mode  |
+| :--------------------: | :---------------------: | :---: |
+| <kbd>\<space\>b</kbd>  | `dap.toggle_breakpoint` |   n   |
+| <kbd>\<space\>B</kbd>  |  `dap.set_breakpoint`   |   n   |
+|   <kbd>\<F5\></kbd>    |     `dap.continue`      | n,i,t |
+|   <kbd>\<F6\></kbd>    |     `dap.step_over`     | n,i,t |
+|   <kbd>\<F7\></kbd>    |     `dap.step_into`     | n,i,t |
+|   <kbd>\<F8\></kbd>    |     `dap.step_out`      | n,i,t |
+|   <kbd>\<F9\></kbd>    |     `dap.step_back`     | n,i,t |
+|   <kbd>\<F10\></kbd>   |     `dap.run_last`      | n,i,t |
+|   <kbd>\<F11\></kbd>   |     `dap.terminate`     | n,i,t |
+| <kbd>\<space\>dr</kbd> |     `dap.repl.open`     |   n   |
+| <kbd>\<space\>dl</kbd> |     `dap.run_last`      |   n   |
+| <kbd>\<space\>lp</kbd> |  `dap.set_breakpoint`   |   n   |
 
 ---
 
 nvim-dap-ui.lua
 
-|    key    |     作用     | mode |
-| :-------: | :----------: | :--: |
-| <space>dt | dapui.toggle | n,t  |
+|          key           |     作用     | mode |
+| :--------------------: | :----------: | :--: |
+| <kbd>\<space\>dt</kbd> | `dapui.toggle` | n,t  |
 
 ---
 
 persistent-breakpoints.lua
 
-|    key     |                  作用                   | mode |
-| :--------: | :-------------------------------------: | :--: |
-| <leader>tb |     persistent.toggle_breakpoint()      |  n   |
-| <leader>sc | persistent.set_conditional_breakpoint() |  n   |
-| <leader>cl |   persistent.clear_all_breakpoints()    |  n   |
+|           key           |                   作用                    | mode |
+| :---------------------: | :---------------------------------------: | :--: |
+| <kbd>\<leader\>tb</kbd> |     `persistent.toggle_breakpoint()`      |  n   |
+| <kbd>\<leader\>sc</kbd> | `persistent.set_conditional_breakpoint()` |  n   |
+| <kbd>\<leader\>cl</kbd> |   `persistent.clear_all_breakpoints()`    |  n   |

@@ -1,10 +1,13 @@
+---@diagnostic disable: undefined-doc-name, assign-type-mismatch
 return {
     "folke/flash.nvim",
-    cond = false,
-    event = "VeryLazy",
     keys = {
+        { "f" },
+        { "F" },
+        { "t" },
+        { "T" },
         {
-            "s",
+            "gs",
             mode = { "n", "x", "o" },
             function()
                 require("flash").jump()
@@ -12,7 +15,7 @@ return {
             desc = "Flash",
         },
         {
-            "S",
+            "gS",
             mode = { "n", "o", "x" },
             function()
                 require("flash").treesitter()
@@ -151,20 +154,6 @@ return {
                 return { { opts.match.label, opts.hl_group } }
             end,
         },
-        highlight = {
-            -- show a backdrop with hl FlashBackdrop
-            backdrop = true,
-            -- Highlight the search matches
-            matches = true,
-            -- extmark priority
-            priority = 5000,
-            groups = {
-                match = "FlashMatch",
-                current = "FlashCurrent",
-                backdrop = "FlashBackdrop",
-                label = "FlashLabel",
-            },
-        },
         -- action to perform when picking a label.
         -- defaults to the jumping logic depending on the mode.
         ---@type fun(match:Flash.Match, state:Flash.State)|nil
@@ -267,25 +256,11 @@ return {
                 remote_op = { restore = true, motion = true },
             },
         },
-        -- options for the floating window that shows the prompt,
-        -- for regular jumps
-        prompt = {
-            enabled = true,
-            prefix = { { "⚡", "FlashPromptIcon" } },
-            win_config = {
-                relative = "editor",
-                width = 1, -- when <=1 it's a percentage of the editor width
-                height = 1,
-                row = -1, -- when negative it's an offset from the bottom
-                col = 0, -- when negative it's an offset from the right
-                zindex = 1000,
-            },
-        },
         -- options for remote operator pending mode
         remote_op = {
             -- restore window views and cursor position
             -- after doing a remote operation
-            restore = false,
+            restore = true,
             -- For `jump.pos = "range"`, this setting is ignored.
             -- `true`: always enter a new motion when doing a remote operation
             -- `false`: use the window's cursor position and jump target

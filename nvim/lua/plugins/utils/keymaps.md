@@ -1,19 +1,19 @@
 icon-picker.lua
 
-|       keys        |   作用   | mode |
-| :---------------: | :------: | :--: |
-| <leader><leader>i | 插入字符 |  n   |
-| <leader><leader>y | 复制字符 |  n   |
-|      <C-S-i>      | 插入字符 |  i   |
+|               keys               |   作用   | mode |
+| :------------------------------: | :------: | :--: |
+| <kbd>\<leader\>\<leader\>i</kbd> | 插入字符 |  n   |
+| <kbd>\<leader\>\<leader\>y</kbd> | 复制字符 |  n   |
+|       <kbd>\<C-S-i\></kbd>       | 插入字符 |  i   |
 
 ---
 
 asynctasks.lua
 
-|    keys    |         作用          | mode |
-| :--------: | :-------------------: | :--: |
-|    <F4>    |     run 单个文件      |  n   |
-|    <F3>    |    build 单个文件     |  n   |
-| Shift+<F4> | build && run 单个文件 |  n   |
-|   <A-b>    |    build 整个项目     |  n   |
-|   <A-r>    |     run 整个项目      |  n   |
+|          keys           |         作用          | mode |
+| :---------------------: | :-------------------: | :--: |
+|    <kbd>\<F4\></kbd>    |     run 单个文件      |  n   |
+|    <kbd>\<F3\></kbd>    |    build 单个文件     |  n   |
+| <kbd>Shift+\<F4\></kbd> | build && run 单个文件 |  n   |
+|   <kbd>\<A-b\></kbd>    |    build 整个项目     |  n   |
+|   <kbd>\<A-r\></kbd>    |     run 整个项目      |  n   |

@@ -6,8 +6,7 @@ return {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "lukas-reineke/cmp-rg",
-        "onsails/lspkind.nvim",
-        require("public.utils").get_dependencies_table("plugins/" .. "cmp" .. "/dependencies"),
+        require("public.utils").req_lua_files_return_table("plugins/" .. "cmp" .. "/dependencies"),
     },
     config = function()
         local has_words_before = function()
@@ -23,8 +22,6 @@ return {
             buffer = "[Buf]",
             cmdline = "[Cmd]",
             cmp_git = "[Git]",
-            cmp_tabnine = "[TN]",
-            crates = "[Crates]",
             latex_symbols = "[Latex]",
             luasnip = "[LuaSnip]",
             nvim_lsp = "[LSP]",
@@ -33,7 +30,6 @@ return {
             spell = "[Spell]",
             vim_dadbod_completion = "[DB]",
             zsh = "[Zsh]",
-            conjure = "[Cje]",
         }
 
         local sources = cmp.config.sources({
@@ -48,12 +44,10 @@ return {
             },
             { name = "nvim_lsp", priority = 1000 },
             { name = "path", priority = 800 },
-            { name = "conjure", priority = 1100 },
         }, {
             { name = "buffer", priority = 800 },
             { name = "rg", keyword_length = 3, priority = 700 },
         }, {
-            { name = "cmp_tabnine", priority = 850 },
             { name = "spell", priority = 600 },
             { name = "rime", priority = 600 },
         })
@@ -77,21 +71,9 @@ return {
             formatting = {
                 fields = { "kind", "abbr", "menu" },
                 format = function(entry, vim_item)
-                    vim_item.kind = require("lspkind").symbolic(vim_item.kind, { mode = "symbol_text" }) -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+                    vim_item.kind = require("lspkind").symbolic(vim_item.kind, { mode = "symbol" }) -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
                     vim_item.menu = source_mapping[entry.source.name]
-                    if entry.source.name == "cmp_tabnine" then
-                        local detail = (entry.completion_item.labelDetails or {}).detail
-                        vim_item.kind = ""
-                        if detail and detail:find(".*%%.*") then
-                            vim_item.kind = vim_item.kind .. " " .. detail
-                        end
-
-                        if (entry.completion_item.data or {}).multiline then
-                            vim_item.kind = vim_item.kind .. " " .. "[ML]"
-                        end
-                    end
-                    local maxwidth = 50
-                    vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+                    vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
                     return vim_item
                 end,
             },
@@ -172,7 +154,6 @@ return {
                     compare.offset,
                     compare.length, -- 短的靠前
                     compare.sort_test,
-                    require("cmp_tabnine.compare"),
                 },
             },
         })
@@ -181,7 +162,6 @@ return {
             sources = cmp.config.sources({
                 { name = "luasnip", priority = 1000 },
                 { name = "nvim_lsp", keyword_length = 0, priority = 900 },
-                { name = "cmp_tabnine", priority = 850 },
                 { name = "path", priority = 830 },
             }, {
                 { name = "buffer", priority = 800 },

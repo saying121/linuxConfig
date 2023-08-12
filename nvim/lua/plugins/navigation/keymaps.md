@@ -2,19 +2,7 @@ aerial.lua
 
 |   keys   |   作用   | mode |
 | :------: | :------: | :--: |
-| <space>z | 显示大纲 |  n   |
-
----
-
-leap-flit.lua
-
-| keys  |    作用     |  mode   |
-| :---: | :---------: | :-----: |
-| <M-o> |  向下查找   | x, o, n |
-| <M-O> |  向上查找   | x, o, n |
-|  gm   | 跨窗口查找  | x, o, n |
-|   x   | 配合 d,c 等 |  x, o   |
-|   x   | 配合 d,c 等 |  x, o   |
+| <kbd>\<space\>z</kbd> | 显示大纲 |  n   |
 
 ---
 
@@ -22,7 +10,7 @@ nvim-tree.lua
 
 |   keys    |    作用    | mode |
 | :-------: | :--------: | :--: |
-| <leader>e | 开启文件树 |  n   |
+| <kbd>\<leader\>e</kbd> | 开启文件树 |  n   |
 
 ---
 
@@ -30,8 +18,8 @@ windows.lua
 
 | keys |            作用             | mode |
 | :--: | :-------------------------: | :--: |
-|  mm  |     WindowsMaximizeopts     | n, x |
-|  mv  |  WindowsMaximizeVertically  | n, x |
-|  mh  | WindowsMaximizeHorizontally | n, x |
-|  me  |       WindowsEqualize       | n, x |
-|  ma  |   WindowsToggleAutowidth    | n, x |
+|  <kbd>mm</kbd>  |     WindowsMaximizeopts     | n, x |
+|  <kbd>mv</kbd>  |  WindowsMaximizeVertically  | n, x |
+|  <kbd>mh</kbd>  | WindowsMaximizeHorizontally | n, x |
+|  <kbd>me</kbd>  |       WindowsEqualize       | n, x |
+|  <kbd>ma</kbd>  |   WindowsToggleAutowidth    | n, x |
