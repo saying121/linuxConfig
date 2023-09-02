@@ -16,6 +16,15 @@ hi CallHierarchyNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi OutlinePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi MiniStatusLineModeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
+" hi Comment Comment       xxx cterm=italic gui=italic guifg=#565f89
+" hi Comment guibg=NONE cterm=italic guifg=#73DACA ctermfg=NONE
+" hi Comment guibg=NONE cterm=italic guifg=#73dae3 ctermfg=NONE
+hi Comment guibg=NONE cterm=italic guifg=#75715E ctermfg=NONE
+
+" hi DiagnosticUnnecessary guibg=NONE cterm=NONE guifg=#414868 ctermfg=NONE
+hi DiagnosticUnnecessary guibg=NONE cterm=NONE guifg=#516888 ctermfg=NONE
+" hi DiagnosticUnnecessary guibg=NONE cterm=NONE guifg=#75715E ctermfg=NONE
+
 hi TabLine guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi TabLineFill guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 

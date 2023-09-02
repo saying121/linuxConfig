@@ -71,6 +71,7 @@ $pacMan rustup starship
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 rustup install stable
 cargo install os_info_cli
+$aurPkg aur/ueberzugpp
 
 # ranger
 sudo "$pacMan" ranger

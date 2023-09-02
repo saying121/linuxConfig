@@ -20,9 +20,9 @@ sudo "$pacMan" python3 python-pip python-pynvim python-pipenv python-pylsp-rope 
 sudo "$pacMan" rustup
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 rustup install stable beta nightly
-rustup component add rust-analyzer clippy rustfmt llvm-tools-preview --toolchain stable
-rustup component add rust-analyzer clippy rustfmt llvm-tools-preview --toolchain nightly
-rustup component add rust-analyzer clippy rustfmt llvm-tools-preview --toolchain beta
+rustup component add rust-analysis rust-analyzer clippy rustfmt llvm-tools-preview --toolchain stable
+rustup component add rust-analysis rust-analyzer clippy rustfmt llvm-tools-preview --toolchain nightly
+rustup component add rust-analysis rust-analyzer clippy rustfmt llvm-tools-preview --toolchain beta
 rustup default stable
 # 切换 crates 源
 cargo install crm tokio-console
@@ -33,9 +33,19 @@ cargo install cargo-update cargo-nextest grcov
 sudo "$pacMan" gnuplot
 
 # rust 交叉编译
-# rustup target add x86_64-pc-windows-gnu
-# rustup toolchain install stable-x86_64-pc-windows-gnu
-# $pacMan mingw-w64-gcc
+rustup target add x86_64-pc-windows-gnu aarch64-apple-darwin x86_64-apple-darwin
+rustup toolchain install stable-x86_64-pc-windows-gnu stable-aarch64-apple-darwin stable-x86_64-apple-darwin --force-non-host
+$aurPkg mingw-w64-gcc osxcross-git
+cargo install cargo-zigbuild
+
+if [[ $(grep -c PROXY /etc/profile) == 0 ]]; then
+    # shellcheck disable=2016
+    echo '
+export PATH=$PATH:/usr/local/osx-ndk-x86/bin
+    ' | sudo tee -a /etc/profile
+
+    source /etc/profile
+fi
 
 $aurPkg powershell-lts-bin
 

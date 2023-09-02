@@ -103,7 +103,7 @@ return {
         local finder = {
             max_height = 0.5,
             left_width = 0.3,
-            default = "def+ref+imp",
+            default = "def+ref",
             layout = "float",
             keys = {
                 shuttle = "[w",
@@ -118,6 +118,8 @@ return {
         }
         -- you can use <C-t> to jump back
         keymap("n", "gh", "<cmd>Lspsaga finder<CR>")
+        keymap("n", "gi", "<cmd>Lspsaga finder imp<CR>")
+        keymap("n", "gH", "<cmd>Lspsaga finder def+ref+imp<CR>")
 
         local hover = {
             max_width = 0.6,

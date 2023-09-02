@@ -8,7 +8,7 @@ export LESSOPEN='|lesspipe.sh %s'
 
 zstyle ':fzf-tab:*' fzf-command fzf
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:complete:*:*' fzf-flags --height=50%
+zstyle ':fzf-tab:complete:*:*' fzf-flags --height=70%
 
 zstyle ':fzf-tab:complete:pacman:*' fzf-preview "pacman -Qi $word | bat --color=always -plyaml || pacman -Si $word | bat --color=always -plyaml"
 zstyle ':fzf-tab:complete:yay:*' fzf-preview "yay -Qi $word | bat --color=always -plyaml || yay -Si $word | bat --color=always -plyaml"

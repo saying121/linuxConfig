@@ -1,7 +1,7 @@
 local M = {}
 
 -- 获取 lsp 名字
--- null-ls 和 rime_ls 优先级靠后
+-- rime_ls 优先级靠后
 function M.lsp_clients()
     local msg = "No Active Lsp"
     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
@@ -9,28 +9,20 @@ function M.lsp_clients()
     if next(clients) == nil then
         return msg
     end
-    for _, client in ipairs(clients) do
-        local filetypes = client.config.filetypes
-        if
-            filetypes
-            and vim.fn.index(filetypes, buf_ft) ~= -1
-            and client.name ~= "null-ls"
-            and client.name ~= "rime_ls"
-        then
-            return client.name
-        end
-    end
+
     for _, client in ipairs(clients) do
         local filetypes = client.config.filetypes
         if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and client.name ~= "rime_ls" then
             return client.name
         end
     end
+
     for _, client in ipairs(clients) do
         if client ~= nil then
             return client.name
         end
     end
+
     return msg
 end
 

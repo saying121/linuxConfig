@@ -21,11 +21,11 @@ return {
                 scrolloff = nil, -- scrolloff value within navbuddy window
                 sections = {
                     left = {
-                        size = "20%",
+                        size = "10%",
                         border = nil, -- You can set border style for each section individually as well.
                     },
                     mid = {
-                        size = "40%",
+                        size = "30%",
                         border = nil,
                     },
                     right = {

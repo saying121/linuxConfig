@@ -13,6 +13,7 @@ return {
 
         require("nvim-treesitter.configs").setup({
             ensure_installed = "all",
+            ignore_install = { "comment" },
             sync_install = false,
             auto_install = true,
             incremental_selection = {

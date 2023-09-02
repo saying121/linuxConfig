@@ -25,6 +25,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 alias kcat="kitty +kitten icat"
+alias fimg=~/.linuxConfig/scripts/fzf_ueberzug.sh
+
 cat() {
     mime=$(file -Lbs --mime-type "$1")
     category=${mime%%/*}
@@ -89,7 +91,6 @@ alias rewall="~/.linuxConfig/wallpaperengine/rewall.sh"
 
 # ImageMagick must be installed for icat to work.
 alias imgcat="wezterm imgcat"
-alias ueber="~/.linuxConfig/scripts/ueber.sh"
 
 alias clhconf="~/.linuxConfig/scripts/configClash.sh"
 alias clhres="sudo systemctl restart clash-meta.service"
@@ -97,8 +98,6 @@ alias clhstp="sudo systemctl stop clash-meta.service"
 alias clhsts="systemctl status clash-meta.service"
 
 alias rm="trash"
-alias tl='trash-list'
-alias rt='trash-restore'
 
 alias tran='trans -j -d en:zh'
 

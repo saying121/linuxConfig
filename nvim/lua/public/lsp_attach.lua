@@ -101,23 +101,6 @@ M.on_attach = function(client, bufnr)
             vim.lsp.buf.format({ async = true })
         end, opts)
     end
-    -- 高亮相同变量或者函数
-    if cap.documentHighlightProvider then
-        vim.api.nvim_create_autocmd({ "CursorHold" }, {
-            group = vim.api.nvim_create_augroup("LspHighlight", { clear = true }),
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.document_highlight()
-            end,
-        })
-        vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-            group = vim.api.nvim_create_augroup("LspHighlight1", { clear = true }),
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.clear_references()
-            end,
-        })
-    end
 end
 
 return M

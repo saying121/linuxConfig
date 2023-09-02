@@ -30,27 +30,20 @@ local other_ft = {
     fennel = "fnl",
 }
 
-local ft = vim.tbl_deep_extend("force", {}, prettier_ft, other_ft)
-local my_ut = require("public.utils")
-local events = my_ut.boot_event(ft)
+-- local ft = vim.tbl_deep_extend("force", {}, prettier_ft, other_ft)
+-- local my_ut = require("public.utils")
+-- local events = my_ut.boot_event(ft)
 
 return {
     "nvimdev/guard.nvim",
-    event = events,
+    event = "VeryLazy",
     cmd = "GuardFmt",
-    init = function()
-        vim.api.nvim_create_autocmd(events, {
-            group = vim.api.nvim_create_augroup("GuardKeyMap", { clear = true }),
-            pattern = my_ut.for_keymap_pattern(ft),
-            callback = function()
-                local opts, keymap = { noremap = true, silent = true, buffer = 0 }, vim.keymap.set
-                keymap({ "n", "x" }, "<space>f", function()
-                    vim.cmd("GuardFmt")
-                end, opts)
-            end,
-        })
-    end,
     config = function()
+        local opts, keymap = { noremap = true, silent = true, buffer = 0 }, vim.keymap.set
+        keymap({ "n", "x" }, "<C-M-l>", function()
+            vim.cmd("GuardFmt")
+        end, opts)
+
         local filetype = require("guard.filetype")
 
         filetype("c"):fmt("clang-format"):lint("clang-tidy")

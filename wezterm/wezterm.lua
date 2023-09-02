@@ -11,7 +11,7 @@ end
 return {
     default_prog = get_sehll(),
     font = wezterm.font("Hack Nerd Font"),
-    font_size = 13,
+    font_size = 14,
     window_background_opacity = 0.81,
     window_padding = { top = 0, bottom = 0, left = 0, right = 0 },
     text_background_opacity = 1,

@@ -83,9 +83,9 @@ elif [ "$kind" = rfc822 ]; then
     # https://github.com/wofr06/lesspipe/pull/106
 elif [ "$category" = image ]; then
     if [ "$(command -v chafa)" ]; then
-        chafa -f symbols -s 90x90 "$1"
-        # kitty +kitten icat --clear --place 200x40@0x0 --transfer-mode file "$1"
-        # command -v ueberzug 2&>/dev/null && bash ~/.linuxConfig/shells/lib/img_preview.sh "$1"
+        # ~/.linuxConfig/shells/test.sh "$1"
+
+        chafa -f symbols -s 70x60 "$1"
     fi
     if [ "$(command -v exiftool)" ]; then
         exiftool "$1" | bat --color=always -plyaml

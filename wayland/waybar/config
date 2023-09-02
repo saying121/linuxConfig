@@ -2,7 +2,6 @@
     "layer": "top",
     "height": 5,
     "modules-left": [
-        "custom/background",
         "bluetooth",
         "cpu",
         "temperature",

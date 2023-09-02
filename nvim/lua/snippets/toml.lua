@@ -27,6 +27,11 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
 local crates = {
+    ["tensorflow"] = "张量流的 Rust 语言绑定。",
+    ["dbus"] = "绑定到 d-bus，这是 Linux 上常用的用于进程间通信的总线。",
+    ["pretty_assertions"] = "使用直接替换覆盖 `assert eq!` 和 `assert ne!`，添加丰富多彩的差异。",
+    ["device_query"] = "一个基本库，用于在没有窗口的情况下按需查询键盘和鼠标状态。",
+    ["tendril"] = "用于零拷贝解析的紧凑缓冲区/字符串类型",
     ["open"] = "使用系统上配置的程序打开路径或 url",
     ["opener"] = "使用系统默认程序打开文件或链接。",
     ["itertools"] = "额外的迭代器适配器、迭代器方法、自由函数和宏。",
@@ -34,7 +39,7 @@ local crates = {
     ["beef"] = "更紧凑的牛",
     ["defer-drop"] = "推迟将大型类型删除到后台线程",
     ["derive_builder"] = "派生 **Rust** 结构的构建器实现",
-    ["rayon"] = "**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争1。它根据运行时的工作负载自动调整并行度2。",
+    ["rayon"] = "(非常的好用)**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争1。它根据运行时的工作负载自动调整并行度2。",
     ["semver"] = "用于Cargo语义版本控制风格的解析器和评估器",
     ["get-cookie"] = "从本地浏览器的 cookie 存储中获取 cookie",
     ["captcha"] = "用于生成验证码的库。",
@@ -42,12 +47,10 @@ local crates = {
     ["inline-python"] = "直接在 **Rust** 代码中内联 **Python** 代码",
     ["mimalloc"] = "面向性能和安全的嵌入式分配器",
     ["GraphQL"] = "rust lang 的 graphql 参考实现。",
-    ["keyring"] = "用于管理密码/凭据的跨平台库",
     ["atoi"] = "直接从安全代码中的 `[u8]` 切片解析整数",
     ["bitflags"] = "一个类型安全的位掩码标志生成器，对 **C** 风格标志集很有用。它可用于围绕 **C** api 创建符合人体工程学的包装器",
     ["byteorder"] = "这个 crate 提供了以大端或小端顺序编码和解码数字的便捷方法",
     ["cc"] = "**cargo** 构建脚本的构建时依赖项，以协助调用本机 **C** 编译器将本机 **C** 代码编译成静态存档，以便链接到 **Rust** 代码。",
-    ["chrono"] = "**Rust** 的日期和时间库",
     ["flate2"] = "deflate 压缩和解压缩公开为 read/buf 读/写流。支持 miniz oxide 和多个 zlib 实现。支持 zlib、gzip 和原始 deflate 流。",
     ["lazy_static"] = "一个宏，用于在 **Rust** 中声明延迟计算的静态变量。（该库已经废弃，在 **Rust** 1.70.0 版本开始，用 `use std::{cell::OnceCell, sync::OnceLock};` 取代）",
     ["num_cpus"] = "获取机器上的 cpu 数量。",
@@ -57,6 +60,10 @@ local crates = {
     ["regex"] = "**Rust** 正则表达式的实现",
     ["thread_local"] = "每个线程对象本地存储",
     ["tower"] = "tower 是一个模块化和可重用组件库，用于构建强大的客户端和服务器。",
+}
+local date_time = {
+    ["chrono"] = "**Rust** 的日期和时间库",
+    ["time"] = "日期和时间库。与标准库完全互操作。大部分与#![无标准]兼容。",
 }
 local str_parser = {
     ["base64"] = "将 base64 编码和解码为字节或 utf8",
@@ -94,6 +101,7 @@ local log = {
 }
 local file = {
     ["tempfile"] = "用于管理临时文件和目录的库。",
+    ["tempdir"] = "用于管理临时目录并在删除时删除所有内容的库。",
     ["dirs"] = "一个小型低级库，通过利用 Linux 上的 xdg 基本/用户目录规范（已知的文件夹 api）定义的机制，为 linux、windows、macos 和 redox 上的配置、缓存和其他数据提供特定于平台的标准目录位置在 Windows 上，以及在 Macos 上的标准目录指南。",
     ["glob"] = "支持根据 unix shell 样式模式匹配文件路径",
     ["memmap"] = "用于内存映射文件 io 的跨平台 **Rust** api",
@@ -136,14 +144,18 @@ local channel = {
     ["flume"] = "一个极快的多生产者渠道(mpmc)",
 }
 local net = {
+    ["secret-service"] = "与秘密服务 API 接口的库",
+    ["rustls"] = "rustls 是一个用 **Rust** 编写的现代 tls 库。",
+    ["keyring"] = "用于管理密码/凭据的跨平台库",
     ["openssl"] = "OpenSSL bindings",
     ["bytes"] = "处理字节的类型和特征",
-    ["http"] = "一组用于表示 http 请求和响应的类型。",
-    ["hyper"] = "快速正确的 **Rust** http 实现",
+    ["http"] = "一组用于表示 **HTTP** 请求和响应的类型。",
+    ["hyper"] = "快速正确的 **Rust** **HTTP** 实现",
     ["ipgeolocate"] = "解析 ip 位置等信息",
-    ["reqwest"] = "更高级别的 http 客户端库",
+    ["reqwest"] = "更高级别的 **HTTP** 客户端库",
     ["robotstxt"] = "google 的 robots.txt 解析器和匹配器 C++ 库的本机 Rust 端口。",
     ["scraper"] = "**HTML** 解析 并使用 CSS 选择器查询",
+    ["html5ever"] = "高性能浏览器级 **HTML5** 解析器",
     ["select"] = "一个从 **HTML** 文档中提取有用数据的库，适用于网络抓取。",
     ["socks5"] = "WIP",
     ["url"] = "**Rust** 的 **URL** 库，基于 WHATWG url 标准",
@@ -153,18 +165,18 @@ local async = {
     ["actix"] = "**Rust** 的 Actor 框架",
     ["async-trait"] = "异步特征方法的类型擦除",
     ["async-std"] = "**Rust** 标准库的异步版本",
-    ["futures"] = "零分配、可组合和类似迭代器接口的 futures 和 streams 实现",
+    ["futures"] = "零分配、可组合和类似迭代器接口的 `futures` 和 `streams` 实现",
     ["mio"] = "轻量级非阻塞 I/O。",
     ["pin-utils"] = "用于固定的实用程序",
     ["tokio"] = "一个事件驱动的、非阻塞的 I/O 平台，用于编写异步 I/O 支持的应用程序",
-    ["tokio-graceful-shutdown"] = "对基于 tokio 的服务执行正常关闭的实用程序。",
+    ["tokio-graceful-shutdown"] = "对基于 `tokio` 的服务执行正常关闭的实用程序。",
     ["tokio-stream"] = "使用 `stream` 和 `tokio` 的实用程序。",
-    ["tokio-test"] = "基于 tokio 和 future 的代码的测试实用程序",
+    ["tokio-test"] = "基于 `tokio` 和 `future` 的代码的测试实用程序",
 }
 local database = {
     ["metrics"] = "对数据库连接性能测试",
     ["mysql"] = "用 **Rust** 实现的 mysql 客户端库",
-    ["mysql_async"] = "基于 tokio 的异步 mysql 客户端库。",
+    ["mysql_async"] = "基于 `tokio` 的异步 mysql 客户端库。",
     ["postgres"] = "一个本地的、同步的 postgresql 客户端",
     ["redis_rs"] = "简单的redis客户端库",
     ["rusqlite"] = "符合人体工程学的 sqlite 包装器",
@@ -191,6 +203,8 @@ local serde = {
     ["serde_json"] = "一种 json 序列化文件格式",
     ["serde_yaml"] = "serde 的 yaml 数据格式",
     ["toml"] = "toml 格式文件和流的本机 **Rust** 编码器和解码器。为 toml 数据提供标准序列化/反序列化特征的实现，以促进反序列化和序列化 **Rust** 结构。",
+    ["ini"] = "一个建立在 configparser 之上的简单宏，用于加载和解析 ini 文件。您可以使用它来编写最终用户可以轻松定制的 Rust 程序。",
+    ["serde_ini"] = "windows ini 文件 {de,}序列化",
 }
 local error = {
     ["anyhow"] = "灵活的具体错误类型建立在 std::error::error 之上",
@@ -206,13 +220,21 @@ local terminal = {
     ["clap_complete"] = "为您的 clap::command 生成 shell 完成脚本",
     ["crossterm"] = "用于操作终端的跨平台终端库。",
     ["cursive"] = "一个专注于易用性的 tui（文本用户界面）库。",
-    ["tui"] = "用于构建丰富的终端用户界面或仪表板的库(不积极维护)",
     ["ratatui"] = "用于构建丰富的终端用户界面或仪表板的库(fork from tui)",
     ["ansi-to-tui"] = "一个将 ansi 颜色编码文本转换为ratatouille库中的ratatouille::text::text类型的库",
     ["tuirealm"] = "一个用于构建 tui 界面的 tui-rs 框架，受到 React 和 Elm 的启发。",
     ["throbber-widgets-tui"] = "这是一个显示 throbber 的 tui-rs 小部件。",
     ["tui-image"] = "tui-rs 的图像查看器小部件",
     ["tui-textarea"] = "tui-textarea 是 tui-rs 的一个简单但功能强大的文本编辑器小部件。多行文本编辑器可以轻松地作为 tui 应用程序的一部分。",
+    ["tui-term"] = "ratatui 的伪终端小部件",
+    ["tui-input"] = "支持多个后端的 tui 输入库",
+    ["tui-tree-widget"] = "tui-rs 的树小部件",
+    ["tui-logger"] = "tui crate 智能小部件的 logger",
+    ["color-to-tui"] = [[解析颜色并将其转换为 `ratatui::style::colors`
+    * #C3F111 -> Color::Rgb(195,241,17)
+    * #CFB -> Color::Rgb(204,255,187)
+    * 142 -> Color::Indexed(142)
+    ]],
 }
 local display = {
     ["prettytable-rs"] = "用于在终端中打印格式漂亮的表格的库",
@@ -261,7 +283,8 @@ local all = vim.tbl_deep_extend(
     quic,
     fuzzy_find,
     str_parser,
-    display
+    display,
+    date_time
 )
 local snippets = {
     s(
