@@ -1,6 +1,8 @@
 ---@diagnostic disable: unused-local
 local ok, _ = pcall(require, "lazy-config")
 
+vim.g.vimsyn_embed = 'lPr'
+
 if vim.fn.has("nvim-0.10.0") == 1 then
     vim.opt.smoothscroll = true
 end

@@ -12,7 +12,7 @@ return {
         vim.cmd([[
                 function s:buffer_name_generator(table)
                     if empty(a:table.label)
-                      return strftime('%Y-%m-%d')
+                        return strftime('%Y-%m-%d')
                     endif
                     return a:table.label.'-'.strftime('%Y-%m-%d').'.sql'
                 endfunction
