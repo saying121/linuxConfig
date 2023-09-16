@@ -10,7 +10,7 @@
     ],
     "modules-center": [
         "hyprland/submap",
-        "wlr/workspaces",
+        "hyprland/workspaces",
         "clock"
     ],
     "modules-right": [
@@ -70,7 +70,7 @@
         "icon-size": 15,
         "spacing": 10
     },
-    "wlr/workspaces": {
+    "hyprland/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
         "on-scroll-up": "hyprctl dispatch workspace e+1",

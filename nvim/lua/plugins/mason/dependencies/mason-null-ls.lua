@@ -1,5 +1,6 @@
 return {
     "jayp0521/mason-null-ls.nvim",
+    cond = false,
     config = function()
         require("mason-null-ls").setup({
             ensure_installed = {

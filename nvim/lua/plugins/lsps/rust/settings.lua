@@ -24,7 +24,8 @@ return {
         checkOnSave = true,
         check = {
             allTargets = true,
-            command = "check", -- 用于 cargo check 的命令。
+            -- command = "check", -- 用于 cargo check 的命令。
+            command = "clippy", -- 用于 cargo check 的命令。
             extraArgs = {}, -- cargo check 的额外参数。
             extraEnv = {}, -- 运行 cargo check 时将设置的额外环境变量。扩展 rust-analyzer.cargo.extraEnv 。
             features = nil, -- 要激活的功能列表。默认为 rust-analyzer.cargo.features 。设置为 "all" ，将 --all-features 传递给Cargo。

@@ -75,6 +75,7 @@ $pacMan dust procs tealdeer
 $pacMan pgcli mycli litecli mssql-cli iredis
 # aws,Postgres meta commands.
 pip install --break-system-packages athenacli pgspecial
+$pacMan vhs tokei
 # 3D
 # $pacMan blender
 

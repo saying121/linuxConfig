@@ -36,7 +36,10 @@ local other_ft = {
 
 return {
     "nvimdev/guard.nvim",
-    event = "VeryLazy",
+    event = "BufEnter",
+    dependencies = {
+        "nvimdev/guard-collection",
+    },
     cmd = "GuardFmt",
     config = function()
         local opts, keymap = { noremap = true, silent = true, buffer = 0 }, vim.keymap.set
@@ -53,7 +56,7 @@ return {
         filetype("rust"):fmt("rustfmt")
         filetype("sql, mysql"):fmt("sql-formatter")
         filetype("tex, bib, plaintex"):fmt("latexindent")
-        filetype("fennel"):fmt("fnl")
+        -- filetype("fennel"):fmt("fnl")
 
         filetype("lua"):fmt({
             cmd = "stylua",

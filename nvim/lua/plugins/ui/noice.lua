@@ -25,6 +25,10 @@ return {
                 vim.keymap.set("n", "q", ":x<CR>", opts1)
             end,
         })
+        vim.keymap.set("n", "<leader>nd", function()
+            require("notify").dismiss()
+        end)
+
         require("noice").setup({
             cmdline = {
                 enabled = true, -- enables the Noice cmdline UI

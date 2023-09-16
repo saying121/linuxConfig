@@ -26,6 +26,7 @@ fi
 
 alias kcat="kitty +kitten icat"
 alias fimg=~/.linuxConfig/scripts/fzf_ueberzug.sh
+alias yz=yazi
 
 cat() {
     mime=$(file -Lbs --mime-type "$1")

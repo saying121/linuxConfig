@@ -91,25 +91,6 @@ return {
             { delimiters = "[]" }
         )
     ),
-    s(
-        {
-            trig = "lcode",
-            priority = 20,
-            dscr = "让力扣可以编译运行",
-        },
-        fmta(
-            [[
-            struct Solution;
-
-            fn main() {
-                println!("{:#?}", Solution::<>);
-            }
-            ]],
-            {
-                i(1, "function"),
-            }
-        )
-    ),
     s("prvar", {
         t([[println!(r##"(| ]]),
         d(4, function(args)

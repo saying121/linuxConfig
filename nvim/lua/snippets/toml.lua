@@ -27,6 +27,8 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
 local crates = {
+    ["strum"] = "用于处理枚举和字符串的有用宏",
+    ["ilhook"] = "提供在 x86 和 x86_64 架构中内联挂钩二进制代码的方法的库",
     ["tensorflow"] = "张量流的 Rust 语言绑定。",
     ["dbus"] = "绑定到 d-bus，这是 Linux 上常用的用于进程间通信的总线。",
     ["pretty_assertions"] = "使用直接替换覆盖 `assert eq!` 和 `assert ne!`，添加丰富多彩的差异。",
@@ -39,7 +41,7 @@ local crates = {
     ["beef"] = "更紧凑的牛",
     ["defer-drop"] = "推迟将大型类型删除到后台线程",
     ["derive_builder"] = "派生 **Rust** 结构的构建器实现",
-    ["rayon"] = "(非常的好用)**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争1。它根据运行时的工作负载自动调整并行度2。",
+    ["rayon"] = "(非常的好用)**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争。它根据运行时的工作负载自动调整并行度。",
     ["semver"] = "用于Cargo语义版本控制风格的解析器和评估器",
     ["get-cookie"] = "从本地浏览器的 cookie 存储中获取 cookie",
     ["captcha"] = "用于生成验证码的库。",
@@ -170,6 +172,7 @@ local async = {
     ["pin-utils"] = "用于固定的实用程序",
     ["tokio"] = "一个事件驱动的、非阻塞的 I/O 平台，用于编写异步 I/O 支持的应用程序",
     ["tokio-graceful-shutdown"] = "对基于 `tokio` 的服务执行正常关闭的实用程序。",
+    ["tokio-graceful"] = "用于正常关闭 tokio 应用程序的 util",
     ["tokio-stream"] = "使用 `stream` 和 `tokio` 的实用程序。",
     ["tokio-test"] = "基于 `tokio` 和 `future` 的代码的测试实用程序",
 }
@@ -213,6 +216,7 @@ local error = {
     ["miette"] = "花哨的诊断报告库和协议，适合我们这些不是编译器黑客的凡人。",
 }
 local terminal = {
+    ["kdam"] = "Rust 的控制台进度条库。 （受到 tqdm 和 rich.progress 的启发）",
     ["inquire"] = "inquire 是一个用于在终端上构建交互式提示的库",
     ["colored"] = "在终端中添加颜色的最简单方法",
     ["ansi_term"] = "ansi 终端颜色和样式库（粗体、下划线）",
