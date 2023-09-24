@@ -1,8 +1,10 @@
 return {
     "altermo/ultimate-autopair.nvim",
+    branch = "v0.6",
     config = function()
         require("ultimate-autopair").setup({
-            config_type = "default",
+            profile = "default",
+            --what profile to use
             map = true,
             --whether to allow any insert map
             cmap = true, --cmap stands for cmd-line map
@@ -11,6 +13,8 @@ return {
             --whether to allow pair insert map
             pair_cmap = true,
             --whether to allow pair cmd-line map
+            multiline = true,
+            --enable/disable multiline
             bs = { -- *ultimate-autopair-map-backspace-config*
                 enable = true,
                 map = "<bs>", --string or table
@@ -24,6 +28,8 @@ return {
                 --  ( |foo  ) > bs > ( |foo )
                 indent_ignore = false,
                 --(\n\t|\n) > bs > (|)
+                single_delete = false,
+                -- <!--|--> > bs > <!-|
                 conf = {},
                 --contains extension config
                 multi = false,
@@ -34,8 +40,11 @@ return {
                 map = "<cr>", --string or table
                 autoclose = false,
                 --(| > cr > (\n|\n)
-                --addsemi={}, --list of filetypes
-                conf = {},
+                conf = {
+                    cond = function(fn)
+                        return not fn.in_lisp()
+                    end,
+                },
                 --contains extension config
                 multi = false,
                 --use multiple configs (|ultimate-autopair-map-multi-config|)
@@ -53,7 +62,7 @@ return {
             },
             space2 = { -- *ultimate-autopair-map-space2-config*
                 enable = false,
-                match = [[\a]],
+                match = [[\k]],
                 --what character activate
                 conf = {},
                 --contains extension config
@@ -79,8 +88,12 @@ return {
                 do_nothing_if_fail = true,
                 --add a module so that if fastwarp fails
                 --then an `e` will not be inserted
-                filter_string = false,
-                --whether to use builting filter string
+                no_filter_nodes = { "string", "raw_string" },
+                --which nodes to skip for tsnode filtering
+                faster = false,
+                --only enables jump over pair, goto end/next line
+                --useful for the situation of:
+                --{|}M.foo('bar') > {M.foo('bar')|}
                 conf = {},
                 --contains extension config
                 multi = false,
@@ -94,15 +107,32 @@ return {
                 --contains extension config
                 multi = false,
                 --use multiple configs (|ultimate-autopair-map-multi-config|)
+                do_nothing_if_fail = true,
+                --add a module so that if close fails
+                --then a `)` will not be inserted
+            },
+            tabout = { -- *ultimate-autopair-map-tabout-config*
+                enable = true,
+                map = "<A-tab>", --string or table
+                cmap = "<A-tab>", --string or table
+                conf = {},
+                --contains extension config
+                multi = false,
+                --use multiple configs (|ultimate-autopair-map-multi-config|)
+                hopout = false,
+                -- (|) > tabout > ()|
+                do_nothing_if_fail = true,
+                --add a module so that if close fails
+                --then a `\t` will not be inserted
             },
             extensions = { -- *ultimate-autopair-extensions-default-config*
-                cmdtype = { types = { "/", "?", "@" }, p = 100 },
-                filetype = { p = 90, nft = { "TelescopePrompt" } },
-                escape = { filter = true, p = 90 },
-                utf8 = { p = 70, map = nil },
-                string = { p = 60 },
-                rules = { p = 40, rules = nil, filter = false },
-                alpha = { p = 30, filter = false },
+                cmdtype = { skip = { "/", "?", "@", "-" }, p = 100 },
+                filetype = { p = 90, nft = { "TelescopePrompt" }, tree = true },
+                escape = { filter = true, p = 80 },
+                utf8 = { p = 70 },
+                tsnode = { p = 60, separate = { "comment", "string", "raw_string" } },
+                cond = { p = 40, filter = true },
+                alpha = { p = 30, filter = false, all = false },
                 suround = { p = 20 },
                 fly = {
                     other_char = { " " },
@@ -115,33 +145,27 @@ return {
                 },
             },
             internal_pairs = { -- *ultimate-autopair-pairs-default-pairs*
-                { "[", "]", fly = true, dosuround = true, newline = true, space = true, fastwarp = true },
-                { "(", ")", fly = true, dosuround = true, newline = true, space = true, fastwarp = true },
-                { "{", "}", fly = true, dosuround = true, newline = true, space = true, fastwarp = true },
-                {
-                    '"',
-                    '"',
-                    suround = true,
-                    rules = { { "when", { "filetype", "vim" }, { "not", { "regex", "^%s*$" } } } },
-                    string = true,
-                },
+                { "[", "]", fly = true, dosuround = true, newline = true, space = true },
+                { "(", ")", fly = true, dosuround = true, newline = true, space = true },
+                { "{", "}", fly = true, dosuround = true, newline = true, space = true },
+                { '"', '"', suround = true, multiline = false, alpha = { "txt" } },
                 {
                     "'",
                     "'",
                     suround = true,
-                    rules = { { "when", { "option", "lisp" }, { "instring" } } },
+                    cond = function(fn)
+                        return not fn.in_lisp() or fn.in_string()
+                    end,
                     alpha = true,
-                    nft = { "tex" },
-                    string = true,
+                    nft = { "tex", "latex" },
+                    multiline = false,
                 },
-                { "`", "`", nft = { "tex" } },
-                { "``", "''", ft = { "tex" } },
+                { "`", "`", nft = { "tex", "latex" }, multiline = false },
+                { "``", "''", ft = { "tex", "latex" } },
                 { "```", "```", newline = true, ft = { "markdown" } },
                 { "<!--", "-->", ft = { "markdown", "html" } },
                 { '"""', '"""', newline = true, ft = { "python" } },
                 { "'''", "'''", newline = true, ft = { "python" } },
-                { "string", type = "tsnode", string = true },
-                { "raw_string", type = "tsnode", string = true },
             },
             config_internal_pairs = { -- *ultimate-autopair-pairs-configure-default-pairs*
                 --configure internal pairs

@@ -1,5 +1,5 @@
 {
-    "version": "2.0.0",
+    "version": "2.0.1",
     "autoload": {
         "Keyboard K380 Keyboard": "capslock+",
         "AT Translated Set 2 keyboard": "capslock+",

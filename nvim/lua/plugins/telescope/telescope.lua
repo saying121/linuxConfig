@@ -89,6 +89,9 @@ return {
                         },
                     },
                 },
+                -- live_grep = {
+                --     find_command = {},
+                -- },
                 buffers = {
                     prompt_prefix = "﬘ ",
                     mappings = {

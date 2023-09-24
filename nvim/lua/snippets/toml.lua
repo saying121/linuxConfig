@@ -83,6 +83,7 @@ local encoding = {
 local fuzzy_find = {
     ["fuzzy-matcher"] = "模糊匹配库",
     ["simsearch"] = "一个简单而轻量级的模糊搜索引擎，在内存中工作，搜索相似的字符串（这里是双关语）。",
+    ["nucleo-matcher"] = "即插即用高性能模糊匹配器",
 }
 local render_text = {
     ["syntect"] = "使用 Sublime Text 语法实现高质量语法突出显示和代码智能的库",
@@ -290,6 +291,8 @@ local all = vim.tbl_deep_extend(
     display,
     date_time
 )
+-- [package.metadata.wasm-pack.profile.release]
+-- wasm-opt = ['-Os']
 local snippets = {
     s(
         {
@@ -302,6 +305,9 @@ local snippets = {
 [profile.release]
 opt-level = 3
 lto = true
+strip = true
+codegen-units = 1
+panic = "abort"
 
         ]],
             {}

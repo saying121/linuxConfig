@@ -133,3 +133,5 @@ zi snippet OMZP::last-working-dir
 eval "$(starship init zsh)"
 
 ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
+
+export CLIPPY_CONF_DIR=~/.config/rustfmt/

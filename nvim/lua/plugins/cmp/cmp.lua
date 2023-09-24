@@ -73,6 +73,8 @@ return {
                 format = function(entry, vim_item)
                     vim_item.kind = require("lspkind").symbolic(vim_item.kind, { mode = "symbol" }) -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
                     vim_item.menu = source_mapping[entry.source.name]
+                    -- print(vim.inspect(entry:get_completion_item()))
+                    -- vim_item.menu = entry:get_completion_item().detail
                     vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
                     return vim_item
                 end,

@@ -1,0 +1,21 @@
+avoid-breaking-exported-api = false
+allow-dbg-in-tests = true
+
+# 不允许的宏的列表，以完全限定的路径编写。
+disallowed-macros = []
+# 不允许的方法列表，以完全限定路径形式编写。
+disallowed-methods = []
+# 不允许的类型的列表，写为完全限定的路径。
+disallowed-types = []
+# 小数的小数部分是否应该包含分隔符。
+unreadable-literal-lint-fractions = true
+# 启用详细模式。如果有多个大写字符相邻，则触发
+upper-case-acronyms-aggressive = false
+# lint是否应该考虑匹配，以及是否应该对常见类型进行筛选。
+matches-for-let-else = "WellKnownTypes" #  (crate::manual_let_else::MatchLintBehaviour)
+
+# 不允许的名字
+# disallowed-names = ["toto", "tata", "titi"]
+# disallowed-names = ["foo", "baz", "quux"]
+
+# arithmetic-side-effects-allowed = ["SomeType", "AnotherType"]

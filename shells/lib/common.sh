@@ -67,14 +67,14 @@ if [[ $(uname -a | grep -c WSL) != 0 ]]; then
     . ~/.linuxConfig/scripts/proxy.sh set
 fi
 
-if [[ $(command -v exa) ]]; then
-    alias ls='exa -F --icons'
-    alias ld='exa -FD --icons'
-    alias ll='exa -FlHhig --time-style long-iso --icons --git'
-    alias la='exa -F --all'
+if [[ $(command -v eza) ]]; then
+    alias ls='eza -F --icons'
+    alias ld='eza -FD --icons'
+    alias ll='eza -FlHhig --time-style long-iso --icons --git'
+    alias la='eza -F --all'
     alias lal='ll -a'
     alias lla='ll -a'
-    alias tree='exa -F -T --icons'
+    alias tree='eza -F -T --icons'
     alias ltree='tree -l'
 else
     alias ll='ls -l'

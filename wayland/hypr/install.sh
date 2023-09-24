@@ -13,7 +13,7 @@ aurPkg='yay -S --needed --noconfirm'
 
 # 通知,bar,剪贴板
 sudo "$pacMan" hyprland-nvidia \
-    waybar-hyprland-git otf-font-awesome \
+    waybar otf-font-awesome \
     cliphist wl-clipboard \
     swaylock-effects swayidle \
     qt5-wayland qt6-wayland \

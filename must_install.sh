@@ -53,7 +53,7 @@ read -r link
 
 sudo "$pacMan" figlet ffmpeg \
     bc man net-tools psmisc sudo ripgrep fzf trash-cli wget \
-    vim bash exa bat \
+    vim bash eza bat \
     neovim lolcat git lazygit composer eslint cronie sqlite \
     engrampa pkgfile
 
@@ -188,7 +188,8 @@ sudo "$pacMan" linux-wifi-hotspot bash-completion haveged
 sudo "$pacMan" adobe-source-han-serif-cn-fonts \
     adobe-source-han-sans-cn-fonts \
     wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
-    noto-fonts-extra ttf-hack-nerd ttf-sil-padauk
+    noto-fonts-extra ttf-hack-nerd ttf-sil-padauk \
+    nerd-fonts-complete
 fc-cache -fv
 
 # rofi

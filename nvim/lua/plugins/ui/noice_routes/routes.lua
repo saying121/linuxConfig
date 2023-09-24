@@ -1,6 +1,13 @@
 return {
     {
         view = "mini",
+        filter = { event = "msg_show", kind = "error", find = "supported" },
+        opts = {
+            skip = true,
+        },
+    },
+    {
+        view = "mini",
         filter = { event = "msg_show", kind = "", find = "change" },
         opts = {
             skip = true,

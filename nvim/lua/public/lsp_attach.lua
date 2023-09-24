@@ -29,6 +29,11 @@ local virtual_text = {
 
 vim.diagnostic.config({
     -- virtual_text = virtual_text,
+    -- virtual_text = {
+    --     spacing = 4,
+    --     source = "if_many",
+    --     prefix = "●",
+    -- },
     float = { border = "single" },
     severity_sort = true, -- 根据严重程度排序
     signs = true,

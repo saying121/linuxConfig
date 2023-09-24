@@ -27,7 +27,7 @@ return {
             -- "LuaSnip",
             -- "neoscroll.nvim",
             -- "lazy.nvim",
-            -- "rust-tools.nvim",
+            "rust-tools.nvim",
             -- "lspsaga.nvim",
             -- "noice.nvim",
         }

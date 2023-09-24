@@ -1,7 +1,7 @@
 ---@diagnostic disable: unused-local
 local ok, _ = pcall(require, "lazy-config")
 
-vim.g.vimsyn_embed = 'lPr'
+vim.g.vimsyn_embed = "lPr"
 
 if vim.fn.has("nvim-0.10.0") == 1 then
     vim.opt.smoothscroll = true
@@ -100,6 +100,7 @@ vim.api.nvim_create_autocmd({ "LspAttach" }, {
     end,
 })
 
+-- vim.keymap.set("n", "<leader>hl", hi)
 vim.keymap.set("n", "<leader>hl", function()
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
         group = vim.api.nvim_create_augroup("LspHighlight", { clear = true }),

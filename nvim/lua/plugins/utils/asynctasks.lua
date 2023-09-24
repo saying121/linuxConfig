@@ -22,6 +22,7 @@ return {
         { "<F16>" },
         { "<A-b>" },
         { "<A-r>" },
+        { "<leader>C" },
     },
     config = function()
         vim.g.asynctasks_term_pos = "toggleterm2"
@@ -39,6 +40,7 @@ return {
         keymap("n", "<F3>", ":AsyncTask file-build<CR>", opts)
         keymap("n", "<F4>", ":AsyncTask file-run<CR>", opts)
         keymap("n", "<F16>", ":AsyncTask file-build-run<CR>", opts)
+        keymap("n", "<leader>C", ":AsyncTask file-check<CR>", opts)
 
         keymap("n", "<A-b>", ":AsyncTask project-build<CR>", opts)
         keymap("n", "<A-r>", ":AsyncTask project-run<CR>", opts)

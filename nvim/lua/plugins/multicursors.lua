@@ -14,7 +14,7 @@ return {
             desc = "Create a selection for selcted text or word under the cursor",
         },
     },
-     opts = function()
+    opts = function()
         local N = require("multicursors.normal_mode")
         local I = require("multicursors.insert_mode")
         return {

@@ -63,6 +63,7 @@ link_list=(
     ["$HOME/.linuxConfig/configs/go-musicfox.ini"]="$HOME/.config/go-musicfox/go-musicfox.ini"
     ["$HOME/.linuxConfig/configs/konsave-conf.yaml"]="$HOME/.config/konsave/conf.yaml"
     ["$HOME/.linuxConfig/configs/lessfilter.sh"]="$HOME/.lessfilter"
+    ["$HOME/.linuxConfig/configs/microsoft-edge-stable-flags.conf"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/npmrc"]="$HOME/.npmrc"
     ["$HOME/.linuxConfig/configs/rime-ls-user.yaml"]="$HOME/.local/share/rime-ls-nvim/user.yaml"
     ["$HOME/.linuxConfig/configs/tldrrc"]="$HOME/.tldrrc"
