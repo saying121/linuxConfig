@@ -17,7 +17,7 @@ return {
         },
     },
     config = function()
-        vim.api.nvim_create_autocmd({ "FileType notify" }, {
+        vim.api.nvim_create_autocmd({ "FileType" }, {
             group = vim.api.nvim_create_augroup("NotifyMap", { clear = true }),
             pattern = { "notify" },
             callback = function()

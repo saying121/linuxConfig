@@ -1,6 +1,7 @@
 return {
     "SmiteshP/nvim-navbuddy",
     event = "LspAttach",
+    cmd = "Navbuddy",
     dependencies = {
         "neovim/nvim-lspconfig",
         "SmiteshP/nvim-navic",

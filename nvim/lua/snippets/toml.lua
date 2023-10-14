@@ -27,6 +27,8 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
 local crates = {
+    ["shared_memory"] = "一个用户友好的包，允许您在进程之间共享内存",
+    ["contest-algorithms"] = "编程竞赛的常用算法和数据结构",
     ["strum"] = "用于处理枚举和字符串的有用宏",
     ["ilhook"] = "提供在 x86 和 x86_64 架构中内联挂钩二进制代码的方法的库",
     ["tensorflow"] = "张量流的 Rust 语言绑定。",
@@ -37,31 +39,28 @@ local crates = {
     ["open"] = "使用系统上配置的程序打开路径或 url",
     ["opener"] = "使用系统默认程序打开文件或链接。",
     ["itertools"] = "额外的迭代器适配器、迭代器方法、自由函数和宏。",
-    ["atty"] = "一个简单的查询 atty 的接口,你是还是不是 tty？",
     ["beef"] = "更紧凑的牛",
     ["defer-drop"] = "推迟将大型类型删除到后台线程",
     ["derive_builder"] = "派生 **Rust** 结构的构建器实现",
-    ["rayon"] = "(非常的好用)**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争。它根据运行时的工作负载自动调整并行度。",
     ["semver"] = "用于Cargo语义版本控制风格的解析器和评估器",
     ["get-cookie"] = "从本地浏览器的 cookie 存储中获取 cookie",
     ["captcha"] = "用于生成验证码的库。",
     ["cookie"] = "http cookie 解析和 cookie jar 管理。支持签名和私有（加密、验证）jar。",
-    ["inline-python"] = "直接在 **Rust** 代码中内联 **Python** 代码",
-    ["mimalloc"] = "面向性能和安全的嵌入式分配器",
     ["GraphQL"] = "rust lang 的 graphql 参考实现。",
     ["atoi"] = "直接从安全代码中的 `[u8]` 切片解析整数",
     ["bitflags"] = "一个类型安全的位掩码标志生成器，对 **C** 风格标志集很有用。它可用于围绕 **C** api 创建符合人体工程学的包装器",
     ["byteorder"] = "这个 crate 提供了以大端或小端顺序编码和解码数字的便捷方法",
-    ["cc"] = "**cargo** 构建脚本的构建时依赖项，以协助调用本机 **C** 编译器将本机 **C** 代码编译成静态存档，以便链接到 **Rust** 代码。",
     ["flate2"] = "deflate 压缩和解压缩公开为 read/buf 读/写流。支持 miniz oxide 和多个 zlib 实现。支持 zlib、gzip 和原始 deflate 流。",
     ["lazy_static"] = "一个宏，用于在 **Rust** 中声明延迟计算的静态变量。（该库已经废弃，在 **Rust** 1.70.0 版本开始，用 `use std::{cell::OnceCell, sync::OnceLock};` 取代）",
     ["num_cpus"] = "获取机器上的 cpu 数量。",
     ["opentelementry"] = "*open telemetry* 提供一组 api、库、代理和收集器服务来从您的应用程序捕获分布式跟踪和指标。您可以使用 prometheus、jaeger 和其他可观察性工具来分析它们。",
-    ["parking_lot"] = "标准同步原语的更紧凑和高效的实现",
-    ["plotters"] = "一个 **Rust** 绘图库，专注于 wasm 和本机应用程序的数据绘图",
     ["regex"] = "**Rust** 正则表达式的实现",
     ["thread_local"] = "每个线程对象本地存储",
     ["tower"] = "tower 是一个模块化和可重用组件库，用于构建强大的客户端和服务器。",
+}
+local perf = {
+    ["mimalloc"] = "面向性能和安全的嵌入式分配器",
+    ["tikv-jemallocator"] = "由 jemalloc 支持的 Rust 分配器",
 }
 local date_time = {
     ["chrono"] = "**Rust** 的日期和时间库",
@@ -113,10 +112,11 @@ local file = {
     ["walkdir"] = "递归地遍历一个目录。",
 }
 local img = {
+    ["plotters"] = "一个 **Rust** 绘图库，专注于 wasm 和本机应用程序的数据绘图",
     ["image"] = "用 **Rust** 编写的成像库。为最常见的图像格式提供基本的过滤器和解码器。",
     ["opencv"] = "opencv 的 **Rust** 绑定",
 }
-local performance = {
+local benchmark = {
     ["criterion"] = "criterion.rs 通过快速准确地检测和测量性能改进或回归（即使是很小的改进）来帮助您编写快速代码。您可以自信地进行优化，了解每次更改如何影响代码的性能。",
     ["flame"] = "专为 **Rust** 打造的火焰图分析工具，可以告诉你程序在哪些代码上花费的时间过多，非常适合用于代码性能瓶颈的分析",
 }
@@ -141,11 +141,6 @@ local web = {
     ["rocket"] = "专注于可用性、安全性、可扩展性和速度的 Web 框架。",
     ["salvo"] = "salvo 是一个强大而简单的 **Rust** Web 服务器框架。",
 }
-local channel = {
-    ["async-channel"] = "异步多生产者多消费者通道(mpmc)",
-    ["crossbeam"] = "并发编程的工具(mpmc)",
-    ["flume"] = "一个极快的多生产者渠道(mpmc)",
-}
 local net = {
     ["secret-service"] = "与秘密服务 API 接口的库",
     ["rustls"] = "rustls 是一个用 **Rust** 编写的现代 tls 库。",
@@ -158,11 +153,23 @@ local net = {
     ["reqwest"] = "更高级别的 **HTTP** 客户端库",
     ["robotstxt"] = "google 的 robots.txt 解析器和匹配器 C++ 库的本机 Rust 端口。",
     ["scraper"] = "**HTML** 解析 并使用 CSS 选择器查询",
+    ["soup"] = "受到 python 库 beautiful soup 的启发，这是 html5ever 之上的一层，添加了不同的 api 用于查询和操作 html",
     ["html5ever"] = "高性能浏览器级 **HTML5** 解析器",
     ["select"] = "一个从 **HTML** 文档中提取有用数据的库，适用于网络抓取。",
     ["socks5"] = "WIP",
     ["url"] = "**Rust** 的 **URL** 库，基于 WHATWG url 标准",
     ["warp"] = "以极快的速度提供网络服务",
+}
+local sync = {
+    ["rayon"] = "(非常的好用)**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争。它根据运行时的工作负载自动调整并行度。",
+    ["raw_sync"] = "操作系统同步原语的轻量级包装器",
+    ["parking_lot"] = "标准同步原语的更紧凑和高效的实现",
+    ["spin"] = "基于自旋的同步原语",
+}
+local channel = {
+    ["async-channel"] = "异步多生产者多消费者通道(mpmc)",
+    ["crossbeam"] = "并发编程的工具(mpmc)",
+    ["flume"] = "一个极快的多生产者渠道(mpmc)",
 }
 local async = {
     ["actix"] = "**Rust** 的 Actor 框架",
@@ -209,6 +216,7 @@ local serde = {
     ["toml"] = "toml 格式文件和流的本机 **Rust** 编码器和解码器。为 toml 数据提供标准序列化/反序列化特征的实现，以促进反序列化和序列化 **Rust** 结构。",
     ["ini"] = "一个建立在 configparser 之上的简单宏，用于加载和解析 ini 文件。您可以使用它来编写最终用户可以轻松定制的 Rust 程序。",
     ["serde_ini"] = "windows ini 文件 {de,}序列化",
+    ["bincode"] = "用于将结构转换为字节的二进制序列化/反序列化策略，反之亦然！",
 }
 local error = {
     ["anyhow"] = "灵活的具体错误类型建立在 std::error::error 之上",
@@ -217,6 +225,8 @@ local error = {
     ["miette"] = "花哨的诊断报告库和协议，适合我们这些不是编译器黑客的凡人。",
 }
 local terminal = {
+    ["atty"] = "一个简单的查询 atty 的接口,你是还是不是 tty？",
+    ["indicatif"] = "Rust 的进度条和 cli 报告库",
     ["kdam"] = "Rust 的控制台进度条库。 （受到 tqdm 和 rich.progress 的启发）",
     ["inquire"] = "inquire 是一个用于在终端上构建交互式提示的库",
     ["colored"] = "在终端中添加颜色的最简单方法",
@@ -263,9 +273,31 @@ local websocket = {
     ["tokio-tungstenite"] = "tokio 绑定 tungstenite，轻量级的基于流的 Web 套接字实现",
     ["tungstenite"] = "基于流的轻量级 Web 套接字实现",
 }
+local macro = {
+    ["macro_railroad"] = "一个为 Rust 宏生成语法图的库",
+    ["quote"] = "准引用宏引用！(...)",
+    ["syn"] = "基于流的轻量级 Web 套接字实现",
+}
+local bindings = {
+    ["inline-python"] = "直接在 **Rust** 代码中内联 **Python** 代码",
+    ["pyo3"] = "绑定到 python 解释器",
+    ["rlua"] = "与 lua 5.x 的高级绑定",
+    ["mlua"] = [[与 lua 5.4/5.3/5.2/5.1（包括 luajit）和 roblox luau 的高级绑定
+        ，具有 async/await 功能，并支持在 Rust 中编写本机 lua 模块。]],
+    ["factorio-mlua"] = [[与Lua 5.4/5.3/5.2/5.1（包括LuaJIT）和Roblox-Luau的高级绑定，
+        具有 async/await 功能，并支持在Rust中编写本地Lua模块。添加Factorio Lua支持的 fork。]],
+}
+local libs = {
+    ["libloading"] = "围绕平台动态库加载原语的绑定，大大提高了内存安全性。",
+    ["libloader"] = "一个基于 libloading 的易于使用的 rust dll 加载器",
+    ["dlib"] = "用于处理手动加载可选系统库的辅助宏。",
+    ["abi_stable"] = "用于进行 rust-to-rust ffi，编写在程序启动时加载的库。",
+    ["cc"] = "**cargo** 构建脚本的构建时依赖项，以协助调用本机 **C** 编译器将本机 **C** 代码编译成静态存档，以便链接到 **Rust** 代码。",
+}
 
 local all = vim.tbl_deep_extend(
     "force",
+    sync,
     async,
     channel,
     crates,
@@ -278,7 +310,7 @@ local all = vim.tbl_deep_extend(
     log,
     math,
     net,
-    performance,
+    benchmark,
     serde,
     terminal,
     web,
@@ -289,7 +321,12 @@ local all = vim.tbl_deep_extend(
     fuzzy_find,
     str_parser,
     display,
-    date_time
+    date_time,
+    perf,
+    macro,
+    bindings,
+    websocket,
+    libs
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']

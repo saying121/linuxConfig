@@ -15,7 +15,7 @@ done
 
 assets=~/.local/share/Steam/steamapps/common/wallpaper_engine/assets
 
-cd ~/.local/share/wallpaperengine/share/ || exit
+# cd ~/.local/share/wallpaperengine/share/ || exit
 
 if [[ $XDG_SESSION_TYPE == wayland ]]; then
     screens=$(wlr-randr | awk '/^[[:alpha:]]/{print $1}')

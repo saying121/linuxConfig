@@ -24,8 +24,14 @@ return {
             os.execute("mkdir -p " .. dir)
         end
         vim.cmd([[
-            let g:silicon['output'] = '~/Pictures/code_snap/silicon-{time:%Y-%m-%d-%H%M%S}.png'
+            " let g:silicon['output'] = '~/Pictures/code_snap/silicon-{time:%Y-%m-%d-%H%M%S}.png'
+            let g:silicon['output'] = 'silicon-{time:%Y-%m-%d-%H%M%S}.png'
         ]])
-        -- vim.g.silicon["output"] = "~/Pictures/silicon-{time:%Y-%m-%d-%H%M%S}.png"
+        -- local path = vim.api.nvim_eval("g:silicon['output']")
+
+        -- vim.api.nvim_create_user_command("SiliconC", function()
+        --     vim.cmd("Silicon")
+        --     os.execute("wl-copy < " .. path)
+        -- end, { nargs = 0 })
     end,
 }

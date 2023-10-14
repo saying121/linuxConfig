@@ -11,11 +11,13 @@ end
 ---@diagnostic disable-next-line: unused-local
 local virtual_text = {
     severity = false,
+    spacing = 4,
     -- severity = {
     --     max = vim.diagnostic.severity.ERROR,
     --     min = vim.diagnostic.severity.WARN,
     -- },
-    prefix = "", -- 前缀
+    prefix = "", -- ●
+    source = "if_many", --- boolean
     format = function(diagnostic)
         for MS, sign in pairs(signs) do
             vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
@@ -28,12 +30,8 @@ local virtual_text = {
 }
 
 vim.diagnostic.config({
-    -- virtual_text = virtual_text,
-    -- virtual_text = {
-    --     spacing = 4,
-    --     source = "if_many",
-    --     prefix = "●",
-    -- },
+    -- virtual_text = false,
+    virtual_text = virtual_text,
     float = { border = "single" },
     severity_sort = true, -- 根据严重程度排序
     signs = true,
@@ -96,9 +94,13 @@ M.on_attach = function(client, bufnr)
         end
     end
 
-    if cap.documentFormattingProvider and vim.bo.ft ~= "lua" then
+    if cap.documentFormattingProvider then
         keymap("n", "<space>f", function()
             vim.lsp.buf.format({ async = true })
+        end, opts)
+    else
+        keymap({ "n", "x" }, "<space>f", function()
+            vim.cmd("GuardFmt")
         end, opts)
     end
     if cap.documentRangeFormattingProvider then

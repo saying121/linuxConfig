@@ -17,6 +17,8 @@ return {
                 "saga_codeaction",
                 "toggleterm",
                 "markdown",
+                'TelescopePrompt',
+                'dropbar_menu'
             },
         })
     end,

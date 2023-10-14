@@ -5,7 +5,7 @@ return {
         { "mu", mode = { "n", "x" } },
         { "<space>T", mode = { "n" } },
     },
-    cmds = { "TransToZH" },
+    cmd = { "TransToZH" },
     config = function()
         vim.keymap.set({ "n", "x" }, "mu", "<cmd>TransToZH<CR>", { silent = true })
         vim.keymap.set("n", "<space>T", "<cmd>TransToEN<CR>")

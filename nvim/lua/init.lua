@@ -1,5 +1,6 @@
 ---@diagnostic disable: unused-local
 local ok, _ = pcall(require, "lazy-config")
+require("autocmd")
 
 vim.g.vimsyn_embed = "lPr"
 
@@ -69,51 +70,3 @@ vim.filetype.add({
     },
 })
 
-local function hi()
-    for _, value in ipairs(vim.lsp.get_active_clients()) do
-        if value.server_capabilities.documentHighlightProvider then
-            for key, _ in pairs(value.attached_buffers) do
-                vim.api.nvim_create_autocmd({ "CursorHold" }, {
-                    group = vim.api.nvim_create_augroup("LspHighlight", { clear = true }),
-                    buffer = key,
-                    callback = function()
-                        vim.lsp.buf.document_highlight()
-                    end,
-                })
-                vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-                    group = vim.api.nvim_create_augroup("LspHighlight1", { clear = true }),
-                    buffer = key,
-                    callback = function()
-                        vim.lsp.buf.clear_references()
-                    end,
-                })
-            end
-        end
-    end
-end
-
-vim.api.nvim_create_autocmd({ "LspAttach" }, {
-    group = vim.api.nvim_create_augroup("LspHi", { clear = true }),
-    -- buffer = key,
-    callback = function()
-        hi()
-    end,
-})
-
--- vim.keymap.set("n", "<leader>hl", hi)
-vim.keymap.set("n", "<leader>hl", function()
-    vim.api.nvim_create_autocmd({ "CursorHold" }, {
-        group = vim.api.nvim_create_augroup("LspHighlight", { clear = true }),
-        buffer = 0,
-        callback = function()
-            vim.lsp.buf.document_highlight()
-        end,
-    })
-    vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-        group = vim.api.nvim_create_augroup("LspHighlight1", { clear = true }),
-        buffer = 0,
-        callback = function()
-            vim.lsp.buf.clear_references()
-        end,
-    })
-end)

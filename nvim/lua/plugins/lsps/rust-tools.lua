@@ -10,9 +10,7 @@ return {
     },
     config = function()
         local extension_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/codelldb/extension/"
-        ---@diagnostic disable-next-line: unused-local
         local codelldb_path = extension_path .. "adapter/codelldb"
-        ---@diagnostic disable-next-line: unused-local
         local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
         local rt = require("rust-tools")
@@ -91,7 +89,7 @@ return {
             server = {
                 -- standalone file support
                 -- setting it to false may improve startup time
-                standalone = true,
+                standalone = false,
                 on_attach = function(client, bufnr)
                     require("public.lsp_attach").on_attach(client, bufnr)
                     local keymap, opts = vim.keymap.set, { noremap = true, silent = true, buffer = bufnr }
@@ -100,14 +98,13 @@ return {
                         rt.hover_actions.hover_actions()
                         rt.hover_actions.hover_actions()
                     end, opts)
-                    keymap("n", "mk", ":RustMoveItemUp<CR>", opts)
-                    keymap("n", "mj", ":RustMoveItemDown<CR>", opts)
+                    keymap("n", "mk", "<cmd>RustMoveItemUp<CR>", opts)
+                    keymap("n", "mj", "<cmd>RustMoveItemDown<CR>", opts)
                     keymap("n", "<leader>R", rt.runnables.runnables, opts)
                     keymap("n", "<C-g>", rt.open_cargo_toml.open_cargo_toml, opts)
                     keymap("n", "<S-CR>", rt.expand_macro.expand_macro, opts)
                 end,
                 settings = require("plugins.lsps.rust.settings"),
-                -- settings = require("lsp.rust_analyzer").settings
             },
             dap = {
                 adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),

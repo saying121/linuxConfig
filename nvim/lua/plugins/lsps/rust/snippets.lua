@@ -336,11 +336,11 @@ local friendly = {
     --     description = "loop { … }",
     --     prefix = "loop",
     -- },
-    macro_rules = {
-        body = { "macro_rules! ${1:name} {", "    (${2}) => (${3})", "}" },
-        description = "macro_rules! … { … }",
-        prefix = "macro_rules",
-    },
+    -- macro_rules = {
+    --     body = { "macro_rules! ${1:name} {", "    (${2}) => (${3})", "}" },
+    --     description = "macro_rules! … { … }",
+    --     prefix = "macro_rules",
+    -- },
     macro_use = {
         body = { "#[macro_use(${1})]" },
         description = "#[macro_use(…)]",

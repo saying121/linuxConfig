@@ -83,3 +83,5 @@ hi DashBoardFooter gui=italic guibg=NONE cterm=NONE guifg=darkred ctermfg=NONE
 hi LspReferenceRead guibg=#3b4261 gui=bold
 hi LspReferenceText guibg=#3b4261 gui=italic
 hi LspReferenceWrite guibg=#3b4261 gui=bold
+
+hi DropBarMenuNormalFloat guibg=#1a1b26 cterm=NONE guifg=#c0caf5 "ctermfg=NONE

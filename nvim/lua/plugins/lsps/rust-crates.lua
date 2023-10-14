@@ -11,7 +11,7 @@ return {
         "glepnir/lspsaga.nvim",
     },
     init = function()
-        vim.api.nvim_create_autocmd({ "BufEnter Cargo.toml" }, {
+        vim.api.nvim_create_autocmd({ "BufEnter" }, {
             group = vim.api.nvim_create_augroup("CratesKeyMap", { clear = true }),
             pattern = { "Cargo.toml" },
             callback = function()
@@ -23,10 +23,7 @@ return {
                 keymap("n", "cr", crates.reload, opts)
 
                 -- keymap("n", "<leader>cv", crates.show_versions_popup, opts)
-                keymap("n", "cf", function()
-                    crates.show_features_popup()
-                    crates.show_features_popup()
-                end, opts)
+                keymap("n", "cf", crates.show_features_popup, opts)
                 keymap("n", "cd", crates.show_dependencies_popup, opts)
 
                 keymap("n", "cu", crates.update_crate, opts)
@@ -57,7 +54,7 @@ return {
             notification_title = "Crates",
             disable_invalid_feature_diagnostic = false,
             popup = {
-                autofocus = false,
+                autofocus = true,
                 copy_register = "+",
                 style = "minimal", -- :h nvim_open_win()
                 border = "single",

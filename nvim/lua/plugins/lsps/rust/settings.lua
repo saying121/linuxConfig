@@ -11,7 +11,9 @@ return {
                 invocationStrategy = "per_workspace",
                 useRustcWrapper = true,
                 cfgs = {}, -- List of cfg options to enable with the given values.
-                extraArgs = {}, -- 传递给每个 cargo 调用的额外参数。
+                extraArgs = {
+                    -- "--offline"
+                }, -- 传递给每个 cargo 调用的额外参数。
                 extraEnv = {}, -- 在工作区内运行 cargo、rustc 或其他命令时将设置的额外环境变量。用于设置 RUSTFLAGS。
                 features = {}, -- 要激活的功能列表。将其设置为 "all" 以将 --all-features 传递给cargo。
                 noDefaultFeatures = false, -- 是否将 --no-default-features 传递给cargo
@@ -26,7 +28,7 @@ return {
             allTargets = true,
             -- command = "check", -- 用于 cargo check 的命令。
             command = "clippy", -- 用于 cargo check 的命令。
-            extraArgs = require("plugins.lsps.rust.extra_allow"), -- cargo check 的额外参数。
+            extraArgs = vim.tbl_deep_extend("force", { "--no-deps" }, require("plugins.lsps.rust.extra_allow")), -- cargo check 的额外参数。
             -- extraArgs = { "--no-deps" },
             -- extraArgs = {"--no-deps",'--', "-W","clippy::manual_string_new" }, -- cargo check 的额外参数。
             extraEnv = {}, -- 运行 cargo check 时将设置的额外环境变量。扩展 rust-analyzer.cargo.extraEnv 。
@@ -50,7 +52,7 @@ return {
             num = 0, -- How many worker threads to handle priming caches. The default 0 means to pick automatically.
         },
         completion = {
-            autoinport = { enable = true },
+            autoimport = { enable = true },
             autoself = { enable = true },
             callable = { snippets = "fill_arguments" }, -- 完成函数时是否添加括号和参数片段。
             limit = nil, -- 要返回的最大完成次数。如果 None ，则极限为无穷大。
@@ -63,8 +65,13 @@ return {
             disabled = {}, -- 要禁用的锈蚀分析仪诊断列表。
             experimental = { enable = false }, -- 是否显示可能比平时有更多假阳性的实验性锈蚀分析仪诊断。
             remapprefix = {}, -- 解析诊断文件路径时要替换的前缀的映射。这应该是传递给 rustc 的内容作为 --remap-path-prefix 的反向映射。
-            warningsAsHint = {}, -- 应以提示严重性显示的警告列表。
-            warningsAsInfo = {}, -- 应与信息严重性一起显示的警告列表。
+            warningsAsHint = {
+                "missing_const_for_fn",
+            }, -- 应以提示严重性显示的警告列表。
+            warningsAsInfo = {
+                "missing_const_for_fn",
+                -- "unused_variables",
+            }, -- 应与信息严重性一起显示的警告列表。
             files = {
                 excludeDirs = {}, -- 锈蚀分析器将忽略这些目录。它们是相对于工作区根目录的，不支持glob。您可能还需要将文件夹添加到代码的 files.watcherExclude 中。
                 watcher = "client", -- 控制文件监视实现。
@@ -88,6 +95,12 @@ return {
             },
         },
         hover = {
+            memoryLayout = {
+                enable = true,
+                alignment = "hexadecimal",
+                niches = false,
+                offset = "hexadecimal",
+            },
             actions = {
                 enable = true, -- 是否在Rust文件中显示悬停操作。
             },
@@ -119,13 +132,14 @@ return {
         },
         numThreads = nil, -- 主循环中有多少工作线程。默认的 null 表示自动拾取。
         runnables = {
+            command = nil,
             extraArgs = {}, -- 要传递给cargo的可运行程序（如测试或二进制文件）的其他参数。例如，它可能是 --release 。
         },
         imports = {
             granularity = { enforce = true, group = "crate", enable = true },
             group = { enable = true },
-            merge = { glob = false },
-            prefer = { no = { std = false } },
+            merge = { glob = true },
+            prefer = { no = { std = true } },
             prefix = "plain", -- crate,self
         },
         inlayHints = {
@@ -139,7 +153,8 @@ return {
             expressionAdjustmentHints = {
                 enable = "always",
                 hideOutsideUnsafe = false,
-                mode = "prefix", --[[ postfix ]]
+                -- mode = "prefix", --[[ postfix ]]
+                mode = "postfix ",
             },
             lifetimeElisionHints = { enable = "always", useParameterNames = false },
             maxLength = 25,
@@ -185,6 +200,12 @@ return {
                     -- 并且不要求在初始搜索中返回所有结果。其他客户要求提前获得所有结果，可能需要更高的限额。
                 },
             },
+        },
+        procMacro = {
+            enable = true,
+            attributes = { enable = true },
+            ignore = {},
+            server = nil,
         },
     },
 }

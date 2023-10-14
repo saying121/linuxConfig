@@ -36,6 +36,10 @@ styles/
 /.vscode
 .idea
 node_modules/
+silicon-*
+build_rust/
+build_c_cpp/
+build_go/
 ]]
 
 return {
@@ -60,5 +64,13 @@ debug/
 <>
 
 ]] .. mis, { i(1, [[Cargo.lock]]) }, {})
+    ),
+    s(
+        {
+            trig = "mis",
+            priority = 30000,
+            dscr = describe,
+        },
+        fmta( mis, {}, {})
     ),
 }

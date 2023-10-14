@@ -1,12 +1,8 @@
 ---@diagnostic disable: undefined-doc-name
 return {
     "Bekaboo/dropbar.nvim",
-    cond = function()
-        return vim.fn.has("nvim-0.10.0") == 1
-    end,
-    dependencies = {
-        "nvim-tree/nvim-web-devicons",
-    },
+    cond = vim.fn.has("nvim-0.10.0") == 1,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
         ---@class dropbar_configs_t
         local opts = {
@@ -87,38 +83,6 @@ return {
                     },
                 },
                 ---@type table<string, string|function|table<string, string|function>>
-                keymaps = {
-                    ["<LeftMouse>"] = function()
-                        local api = require("dropbar.api")
-                        local menu = api.get_current_dropbar_menu()
-                        if not menu then
-                            return
-                        end
-                        local mouse = vim.fn.getmousepos()
-                        if mouse.winid ~= menu.win then
-                            local parent_menu = api.get_dropbar_menu(mouse.winid)
-                            if parent_menu and parent_menu.sub_menu then
-                                parent_menu.sub_menu:close()
-                            end
-                            if vim.api.nvim_win_is_valid(mouse.winid) then
-                                vim.api.nvim_set_current_win(mouse.winid)
-                            end
-                            return
-                        end
-                        menu:click_at({ mouse.line, mouse.column }, nil, 1, "l")
-                    end,
-                    ["<CR>"] = function()
-                        local menu = require("dropbar.api").get_current_dropbar_menu()
-                        if not menu then
-                            return
-                        end
-                        local cursor = vim.api.nvim_win_get_cursor(menu.win)
-                        local component = menu.entries[cursor[1]]:first_clickable(cursor[2])
-                        if component then
-                            menu:click_on(component, nil, 1, "l")
-                        end
-                    end,
-                },
                 ---@alias dropbar_menu_win_config_opts_t any|fun(menu: dropbar_menu_t):any
                 ---@type table<string, dropbar_menu_win_config_opts_t>
                 ---@see vim.api.nvim_open_win
@@ -175,65 +139,6 @@ return {
                     filter = function(_)
                         return true
                     end,
-                },
-                treesitter = {
-                    -- Lua pattern used to extract a short name from the node text
-                    -- Be aware that the match result must not be nil!
-                    name_pattern = string.rep("[#~%w%._%->!]*", 4, "%s*"),
-                    -- The order matters! The first match is used as the type
-                    -- of the treesitter symbol and used to show the icon
-                    -- Types listed below must have corresponding icons
-                    -- in the `icons.kinds.symbols` table for the icon to be shown
-                    valid_types = {
-                        "array",
-                        "boolean",
-                        "break_statement",
-                        "call",
-                        "case_statement",
-                        "class",
-                        "constant",
-                        "constructor",
-                        "continue_statement",
-                        "delete",
-                        "do_statement",
-                        "enum",
-                        "enum_member",
-                        "event",
-                        "for_statement",
-                        "function",
-                        "if_statement",
-                        "interface",
-                        "keyword",
-                        "list",
-                        "macro",
-                        "method",
-                        "module",
-                        "namespace",
-                        "null",
-                        "number",
-                        "operator",
-                        "package",
-                        "property",
-                        "reference",
-                        "repeat",
-                        "scope",
-                        "specifier",
-                        "string",
-                        "struct",
-                        "switch_statement",
-                        "type",
-                        "type_parameter",
-                        "unit",
-                        "value",
-                        "variable",
-                        "while_statement",
-                        "declaration",
-                        "field",
-                        "identifier",
-                        "object",
-                        "statement",
-                        "text",
-                    },
                 },
                 lsp = {
                     request = {

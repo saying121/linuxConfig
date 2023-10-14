@@ -1,6 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
-    -- event = { "VeryLazy" },
+    event = { "BufReadPre" },
     dependencies = {
         -- 依赖会先加载。neodev 要在 nvim-lspconfig 之前加载。
         "hrsh7th/cmp-nvim-lsp",

@@ -247,21 +247,21 @@ return {
             alpha.setup(dashboard.opts)
 
             -- 用 dashboard.opts 改后就不能用这个了
-            vim.api.nvim_create_autocmd("User", {
-                pattern = "AlphaReady",
-                callback = function()
-                    -- local stats = require("lazy").stats()
-                    local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                    dashboard.section.footer.val = version
-                        .. "⚡ Neovim loaded "
-                        .. stats.count
-                        .. " plugins in "
-                        .. ms
-                        .. "ms"
-                    -- vim.cmd("AlphaRedraw")
-                    alpha.redraw()
-                end,
-            })
+            -- vim.api.nvim_create_autocmd("User", {
+            --     pattern = "AlphaReady",
+            --     callback = function()
+            --         -- local stats = require("lazy").stats()
+            --         local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+            --         dashboard.section.footer.val = version
+            --             .. "⚡ Neovim loaded "
+            --             .. stats.count
+            --             .. " plugins in "
+            --             .. ms
+            --             .. "ms"
+            --         -- vim.cmd("AlphaRedraw")
+            --         alpha.redraw()
+            --     end,
+            -- })
         end,
     },
 }

@@ -60,6 +60,10 @@ return {
         trig = "tokio_add_head",
         dscr = "add #[tokio::main]",
     }, fmta("#[tokio::main]", {})),
+    s({
+        trig = "alloc_add",
+        dscr = "add extern crate alloc;",
+    }, fmta("extern crate alloc;", {})),
     s(
         {
             trig = "static",

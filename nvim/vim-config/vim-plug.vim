@@ -28,5 +28,7 @@ Plug 'gelguy/wilder.nvim'
 " To use Python remote plugin features in Vim, can be skipped
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
+
+Plug 'rust-lang/rust.vim'
 call plug#end()
 

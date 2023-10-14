@@ -52,7 +52,9 @@ return {
         keymap("n", "gy", "<cmd>Lspsaga goto_type_definition<CR>")
         keymap("n", "gY", "<cmd>Lspsaga peek_type_definition<CR>")
 
-        local enable = true
+        vim.diagnostic.config({
+            virtual_text = false,
+        })
         local diagnostic = {
             show_code_action = true,
             jump_num_shortcut = true,
@@ -65,7 +67,7 @@ return {
             show_normal_height = 10,
             max_show_width = 0.9,
             max_show_height = 0.6,
-            diagnostic_only_current = enable,
+            diagnostic_only_current = true,
             keys = {
                 exec_action = "o",
                 quit = "q",
@@ -73,9 +75,6 @@ return {
                 quit_in_show = { "q", "<ESC>" },
             },
         }
-        vim.diagnostic.config({
-            virtual_text = not enable,
-        })
         -- Show line diagnostics
         -- You can pass argument ++unfocus to
         -- unfocus the show_line_diagnostics floating window
@@ -204,7 +203,7 @@ return {
             hover = hover,
             implement = {
                 enable = true,
-                sign = true,
+                sign = false,
                 virtual_text = true,
                 priority = 30,
             },

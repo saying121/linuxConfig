@@ -20,7 +20,7 @@ local really_root = utils.get_git_root_dir(vim.fn.getcwd(), "/Cargo.toml")
 -- 打开Cargo.toml文件
 vim.keymap.set("n", "<c-p>", function()
     if really_root == nil then
-        print("Don't exists Cargo.toml")
+        vim.notify("Don't exists Cargo.toml", vim.log.levels.INFO,{})
     else
         vim.api.nvim_command("tabnew " .. really_root .. "/Cargo.toml")
     end

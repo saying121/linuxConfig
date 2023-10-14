@@ -150,3 +150,5 @@ debug_rust() {
         unset RUST_LOG
     fi
 }
+
+export MAKEFLAGS='-j'

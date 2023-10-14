@@ -82,6 +82,9 @@ return {
                 map("n", "<leader>hD", function()
                     gs.diffthis("~")
                 end)
+                map("n", "<leader>bl", function()
+                    require("gitsigns").blame_line()
+                end)
                 map("n", "<leader>td", gs.toggle_deleted)
 
                 -- Text object

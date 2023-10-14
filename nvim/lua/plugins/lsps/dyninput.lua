@@ -32,9 +32,9 @@ return {
                     { "::", rs.double_colon },
                     { ": ", rs.single_colon },
                 },
-                ["="] = { " => ", rs.fat_arrow },
+                ["="] = { "=>", rs.fat_arrow },
                 ["-"] = {
-                    { " -> ", rs.thin_arrow },
+                    { "->", rs.thin_arrow },
                     { "_", ms.snake_case },
                 },
                 ["\\"] = { "|!| {}", rs.closure_fn },

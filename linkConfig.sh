@@ -88,7 +88,6 @@ link_list=(
     ["$HOME/.linuxConfig/qt5ct"]="$HOME/.config"
     ["$HOME/.linuxConfig/ranger"]="$HOME/.config"
     ["$HOME/.linuxConfig/shells/bashrc"]="$HOME/.bashrc"
-    ["$HOME/.linuxConfig/shells/lib/p10k.zsh"]="$HOME/.p10k.zsh"
     ["$HOME/.linuxConfig/shells/starship.toml"]="$HOME/.config/starship.toml"
     ["$HOME/.linuxConfig/shells/zirc.zsh"]="$HOME/.zshrc"
     ["$HOME/.linuxConfig/terminology"]="$HOME/.config"
@@ -99,7 +98,7 @@ link_list=(
     ["$HOME/.linuxConfig/wezterm"]="$HOME/.config"
 )
 
-# 和创建必要的目录
+# 创建必要的目录
 [[ -d ~/.config ]] || mkdir ~/.config
 [[ -d ~/.config/flameshot ]] || mkdir -p ~/.config/flameshot
 [[ -d ~/.config/konsave ]] || mkdir -p ~/.config/konsave

@@ -15,19 +15,47 @@ local prettier_ft = {
     vue = "vue",
     yaml = "yaml",
 }
-local other_ft = {
-    c = "c",
-    python = "py",
-    py = "python",
-    lua = "lua",
-    bash = "sh",
-    sh = "bash",
-    zsh = "zsh",
-    tex = "tex",
-    rust = "rs",
-    sql = "sql",
-    latex = "tex",
-    fennel = "fnl",
+-- local other_ft = {
+--     c = "c",
+--     python = "py",
+--     py = "python",
+--     lua = "lua",
+--     bash = "sh",
+--     sh = "bash",
+--     zsh = "zsh",
+--     tex = "tex",
+--     rust = "rs",
+--     sql = "sql",
+--     latex = "tex",
+--     fennel = "fnl",
+-- }
+local ft = {
+    "css",
+    "scss",
+    "flow",
+    "graphql",
+    "html",
+    "javascript",
+    "json",
+    "jsx",
+    "less",
+    "markdown",
+    "typescript",
+    "vue",
+    "yaml",
+
+    -- "c",
+    "py",
+    "python",
+    "lua",
+    "sh",
+    -- "bash",
+    "zsh",
+    "tex",
+    -- "rs",
+    "sql",
+    "mysql",
+    -- "fennel",
 }
 
 -- local ft = vim.tbl_deep_extend("force", {}, prettier_ft, other_ft)
@@ -36,16 +64,15 @@ local other_ft = {
 
 return {
     "nvimdev/guard.nvim",
-    event = "BufEnter",
-    dependencies = {
-        "nvimdev/guard-collection",
-    },
+    dependencies = { "nvimdev/guard-collection" },
+    -- ft = ft,
+    keys = { { "<C-M-l>", mode = "n" }, },
     cmd = "GuardFmt",
     config = function()
-        local opts, keymap = { noremap = true, silent = true, buffer = 0 }, vim.keymap.set
+        local keymap = vim.keymap.set
         keymap({ "n", "x" }, "<C-M-l>", function()
             vim.cmd("GuardFmt")
-        end, opts)
+        end, {})
 
         local filetype = require("guard.filetype")
 
@@ -53,10 +80,10 @@ return {
         filetype("sh, bash"):fmt({ cmd = "shfmt", args = { "-i", "4", "-filename", "$FILENAME" } })
         filetype("zsh"):fmt({ cmd = "beautysh", args = { "--indent-size", "4", "-s", "paronly", "$FILENAME" } })
         filetype("python"):fmt("isort"):append("black")
-        filetype("rust"):fmt("rustfmt")
         filetype("sql, mysql"):fmt("sql-formatter")
         filetype("tex, bib, plaintex"):fmt("latexindent")
-        -- filetype("fennel"):fmt("fnl")
+        -- filetype("fennel"):fmt("fnlfmt")
+        -- filetype("rust"):fmt("rustfmt")
 
         filetype("lua"):fmt({
             cmd = "stylua",

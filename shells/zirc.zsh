@@ -9,9 +9,6 @@ source "${ZI[BIN_DIR]}/zi.zsh"
 ZSH_CACHE_DIR=~/.zi/cache
 
 #############################################
-# ui
-# zi ice depth=1; zi light romkatv/powerlevel10k
-
 # 自定义的 zsh lib directories
 zi ice wait lucid; source ~/.linuxConfig/shells/lib/directories.zsh
 
@@ -124,14 +121,7 @@ alias astronvim="NVIM_APPNAME=astronvim nvim"
 
 zi snippet OMZP::last-working-dir
 
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 eval "$(starship init zsh)"
 
-___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
 
 export CLIPPY_CONF_DIR=~/.config/rustfmt/
