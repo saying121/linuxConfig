@@ -18,14 +18,6 @@ return {
         keymap({ "n", "x" }, "ms", ":TransPlay<CR>", opts)
         keymap("n", "mi", "<Cmd>TranslateInput<CR>", opts)
 
-        vim.api.nvim_create_autocmd({ "FileType Trans" }, {
-            group = vim.api.nvim_create_augroup("TransMap", { clear = true }),
-            -- pattern = { "Cargo.toml" },
-            callback = function()
-                local opts1 = { silent = true, noremap = true, buffer = true }
-                keymap("n", "q", ":x<CR>", opts1)
-            end,
-        })
         -- require("Trans").setup()
 
         require("Trans").setup({

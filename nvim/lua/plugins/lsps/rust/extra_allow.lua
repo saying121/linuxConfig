@@ -343,8 +343,8 @@ return {
     "clippy::redundant_feature_names",
     "-W",
     "clippy::redundant_pub_crate",
-    "-W",
-    "clippy::redundant_type_annotations",
+    -- "-W",
+    -- "clippy::redundant_type_annotations",
 
     -- "-W",
     -- "clippy::unwrap_used",
@@ -395,8 +395,8 @@ return {
 
     -- "-W",
     -- "clippy::multiple_unsafe_ops_per_block",
-    "-W",
-    "clippy::undocumented_unsafe_blocks",
+    -- "-W",
+    -- "clippy::undocumented_unsafe_blocks",
     "-W",
     "clippy::unsafe_derive_deserialize",
 

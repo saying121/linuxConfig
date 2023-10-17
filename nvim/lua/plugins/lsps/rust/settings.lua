@@ -139,7 +139,7 @@ return {
             granularity = { enforce = true, group = "crate", enable = true },
             group = { enable = true },
             merge = { glob = true },
-            prefer = { no = { std = true } },
+            prefer = { no = { std = false } },
             prefix = "plain", -- crate,self
         },
         inlayHints = {

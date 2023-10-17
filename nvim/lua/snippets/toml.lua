@@ -27,6 +27,7 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
 local crates = {
+    ["sscanf"] = "基于正则表达式的 sscanf（格式反转！()）宏",
     ["shared_memory"] = "一个用户友好的包，允许您在进程之间共享内存",
     ["contest-algorithms"] = "编程竞赛的常用算法和数据结构",
     ["strum"] = "用于处理枚举和字符串的有用宏",
@@ -264,6 +265,7 @@ local gui = {
 local grpc = {
     ["tonic"] = "基于 http/2 的 grpc 实现侧重于高性能、互操作性和灵活性。",
     ["grpcio"] = "grpc的 **Rust** 语言实现，基于grpc c核心库。",
+    ["tarpc"] = "一个 rust 的 rpc 框架，重点是易用性。",
 }
 local quic = {
     ["quiche"] = "quic 传输协议和 http/3 的美味实现",

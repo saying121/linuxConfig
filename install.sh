@@ -27,7 +27,7 @@ $pacMan ipcalc
 $pacMan sshfs python-nautilus kdeconnect
 
 # Music
-$aurPkg music-you-appimage
+$aurPkg music-you-bin
 
 # theme
 $pacMan adwaita-qt5 adwaita-qt6

@@ -50,7 +50,7 @@ return {
             autoupdate = true,
             loading_indicator = true,
             date_format = "%Y-%m-%d",
-            thousands_separator = ",",
+            thousands_separator = "_",
             notification_title = "Crates",
             disable_invalid_feature_diagnostic = false,
             popup = {
