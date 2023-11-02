@@ -234,24 +234,6 @@ return {
                 highlight = { backdrop = true },
                 jump = { register = false },
             },
-            -- options used for treesitter selections
-            -- `require("flash").treesitter()`
-            treesitter = {
-                labels = "abcdefghijklmnopqrstuvwxyz",
-                jump = { pos = "range" },
-                search = { incremental = false },
-                label = { before = true, after = true, style = "inline" },
-                highlight = {
-                    backdrop = false,
-                    matches = false,
-                },
-            },
-            treesitter_search = {
-                jump = { pos = "range" },
-                search = { multi_window = true, wrap = true, incremental = false },
-                remote_op = { restore = true },
-                label = { before = true, after = true, style = "inline" },
-            },
             -- options used for remote flash
             remote = {
                 remote_op = { restore = true, motion = true },

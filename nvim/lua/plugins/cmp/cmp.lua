@@ -1,6 +1,7 @@
 return {
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
+    cond = true,
     dependencies = {
         "f3fora/cmp-spell",
         "hrsh7th/cmp-buffer",
@@ -21,7 +22,7 @@ return {
         local source_mapping = {
             buffer = "[Buf]",
             cmdline = "[Cmd]",
-            cmp_git = "[Git]",
+            git = "[Git]",
             latex_symbols = "[Latex]",
             luasnip = "[LuaSnip]",
             nvim_lsp = "[LSP]",

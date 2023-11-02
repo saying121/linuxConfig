@@ -1,8 +1,6 @@
 return {
     "arnamak/stay-centered.nvim",
-    event = {
-        "VeryLazy",
-    },
+    event = { "VeryLazy" },
     config = function()
         -- 获取更好的鼠标滚动体验，这个可以当作自带的居中，但是插件的更好
         local buf_height = math.floor(vim.fn.winheight(0) / 2)
@@ -17,8 +15,8 @@ return {
                 "saga_codeaction",
                 "toggleterm",
                 "markdown",
-                'TelescopePrompt',
-                'dropbar_menu'
+                "TelescopePrompt",
+                "dropbar_menu",
             },
         })
     end,

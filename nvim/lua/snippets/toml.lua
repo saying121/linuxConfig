@@ -1,32 +1,11 @@
----@diagnostic disable: unused-local
 local ls = require("luasnip")
 local s = ls.snippet
-local sn = ls.snippet_node
-local isn = ls.indent_snippet_node
-local t = ls.text_node
 local i = ls.insert_node
-local f = ls.function_node
-local c = ls.choice_node
-local d = ls.dynamic_node
-local r = ls.restore_node
-local events = require("luasnip.util.events")
-local ai = require("luasnip.nodes.absolute_indexer")
-local extras = require("luasnip.extras")
-local l = extras.lambda
-local rep = extras.rep
-local p = extras.partial
-local m = extras.match
-local n = extras.nonempty
-local dl = extras.dynamic_lambda
 local fmt = require("luasnip.extras.fmt").fmt
-local fmta = require("luasnip.extras.fmt").fmta
-local conds = require("luasnip.extras.expand_conditions")
-local postfix = require("luasnip.extras.postfix").postfix
-local types = require("luasnip.util.types")
-local parse = require("luasnip.util.parser").parse_snippet
-local ms = ls.multi_snippet
 
 local crates = {
+    ["owning_ref"] = "一个用于创建携带其所有者的参考资料的库。",
+    ["libc"] = "原始 FFI 绑定到 libc 等平台库。",
     ["sscanf"] = "基于正则表达式的 sscanf（格式反转！()）宏",
     ["shared_memory"] = "一个用户友好的包，允许您在进程之间共享内存",
     ["contest-algorithms"] = "编程竞赛的常用算法和数据结构",
@@ -39,7 +18,6 @@ local crates = {
     ["tendril"] = "用于零拷贝解析的紧凑缓冲区/字符串类型",
     ["open"] = "使用系统上配置的程序打开路径或 url",
     ["opener"] = "使用系统默认程序打开文件或链接。",
-    ["itertools"] = "额外的迭代器适配器、迭代器方法、自由函数和宏。",
     ["beef"] = "更紧凑的牛",
     ["defer-drop"] = "推迟将大型类型删除到后台线程",
     ["derive_builder"] = "派生 **Rust** 结构的构建器实现",
@@ -59,9 +37,30 @@ local crates = {
     ["thread_local"] = "每个线程对象本地存储",
     ["tower"] = "tower 是一个模块化和可重用组件库，用于构建强大的客户端和服务器。",
 }
+local iterators = {
+    ["rev_lines"] = "rust 迭代器用于逐行读取文件并反向读取缓冲区",
+    ["itertools"] = "额外的迭代器适配器、迭代器方法、自由函数和宏。",
+}
+local algorithms = {
+    ["raft"] = "raft算法的Rust语言实现。",
+    ["bio"] = [[Rust 的生物信息学库。该库提供了许多算法和数据结构的实现，
+        这些算法和数据结构对生物信息学以及其他领域都很有用。]],
+    ["rustgym"] = "rustgym 解决方案",
+    ["rust-algorithms"] = "一个 Rust 算法库",
+}
+local secret = {
+    ["crypto"] = "所有 rust 加密特征的外观板条箱（例如“aead”、“cipher”、“digest”）",
+    ["openssl"] = "OpenSSL bindings",
+}
 local perf = {
     ["mimalloc"] = "面向性能和安全的嵌入式分配器",
     ["tikv-jemallocator"] = "由 jemalloc 支持的 Rust 分配器",
+}
+local arena = {
+    ["bumpalo"] = "Rust 的快速 arena 分配舞台。",
+    ["typed-arena"] = "arena，一种快速但有限的分配器类型",
+    ["id-arena"] = "一个简单的、基于 id 的 arena。",
+    ["generational-arena"] = "一个安全的 arena 分配器，通过使用分代索引支持删除，而不会遇到 ABA 问题。",
 }
 local date_time = {
     ["chrono"] = "**Rust** 的日期和时间库",
@@ -84,6 +83,7 @@ local fuzzy_find = {
     ["fuzzy-matcher"] = "模糊匹配库",
     ["simsearch"] = "一个简单而轻量级的模糊搜索引擎，在内存中工作，搜索相似的字符串（这里是双关语）。",
     ["nucleo-matcher"] = "即插即用高性能模糊匹配器",
+    ["nucleo"] = "即插即用高性能模糊匹配器",
 }
 local render_text = {
     ["syntect"] = "使用 Sublime Text 语法实现高质量语法突出显示和代码智能的库",
@@ -134,7 +134,7 @@ local math = {
 }
 local web = {
     ["surf"] = "Surf the web - HTTP 客户端框架",
-    ["graphql_client "] = "类型化 graphql 请求和响应",
+    ["graphql_client"] = "类型化 graphql 请求和响应",
     ["juniper"] = "graphql 服务器库",
     ["thirtyfour"] = "thirfyfour 是一个用于 **Rust** 的 selenium / web 驱动程序库，用于自动化网站 ui 测试。它支持完整的 w3c 网络驱动规范。",
     ["actix-web"] = "actix web 是一个强大、实用、速度极快的 **Rust** 网络框架",
@@ -146,7 +146,6 @@ local net = {
     ["secret-service"] = "与秘密服务 API 接口的库",
     ["rustls"] = "rustls 是一个用 **Rust** 编写的现代 tls 库。",
     ["keyring"] = "用于管理密码/凭据的跨平台库",
-    ["openssl"] = "OpenSSL bindings",
     ["bytes"] = "处理字节的类型和特征",
     ["http"] = "一组用于表示 **HTTP** 请求和响应的类型。",
     ["hyper"] = "快速正确的 **Rust** **HTTP** 实现",
@@ -173,6 +172,7 @@ local channel = {
     ["flume"] = "一个极快的多生产者渠道(mpmc)",
 }
 local async = {
+    ["pollster"] = "阻塞同步线程直到 future 完成",
     ["actix"] = "**Rust** 的 Actor 框架",
     ["async-trait"] = "异步特征方法的类型擦除",
     ["async-std"] = "**Rust** 标准库的异步版本",
@@ -184,6 +184,7 @@ local async = {
     ["tokio-graceful"] = "用于正常关闭 tokio 应用程序的 util",
     ["tokio-stream"] = "使用 `stream` 和 `tokio` 的实用程序。",
     ["tokio-test"] = "基于 `tokio` 和 `future` 的代码的测试实用程序",
+    ["tokio-serde"] = [[使用 tokio 通过网络发送和接收 serde 可编码类型。该库用作序列化格式特定库的构建块。]],
 }
 local database = {
     ["metrics"] = "对数据库连接性能测试",
@@ -213,6 +214,13 @@ local serde = {
     ["jsonpath"] = "Rust 的 jsonpath",
     ["serde"] = "一个通用的序列化/反序列化框架",
     ["serde_json"] = "一种 json 序列化文件格式",
+    ["rkyv"] = "Rust 的零拷贝反序列化框架",
+    ["rmp_serde"] = "rmp 的 serde 绑定",
+    ["ser-raw"] = [[简单快速的序列化器
+                    文档数据:
+                    serde_json: 226.99 µs
+                    rkyv:        44.98 µs
+                    ser_raw:     14.35 µs]],
     ["serde_yaml"] = "serde 的 yaml 数据格式",
     ["toml"] = "toml 格式文件和流的本机 **Rust** 编码器和解码器。为 toml 数据提供标准序列化/反序列化特征的实现，以促进反序列化和序列化 **Rust** 结构。",
     ["ini"] = "一个建立在 configparser 之上的简单宏，用于加载和解析 ini 文件。您可以使用它来编写最终用户可以轻松定制的 Rust 程序。",
@@ -328,7 +336,10 @@ local all = vim.tbl_deep_extend(
     macro,
     bindings,
     websocket,
-    libs
+    libs,
+    algorithms,
+    secret,
+    arena
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']

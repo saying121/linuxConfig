@@ -1,6 +1,6 @@
 return {
     "jayp0521/mason-null-ls.nvim",
-    cond = false,
+    cond = true,
     config = function()
         require("mason-null-ls").setup({
             ensure_installed = {
@@ -11,6 +11,7 @@ return {
                 "beautysh",
                 "latexindent",
                 "golines",
+                "sqlfluff",
             },
             automatic_installation = true,
             automatic_setup = false,

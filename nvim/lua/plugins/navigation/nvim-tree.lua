@@ -10,7 +10,7 @@ return {
             "antosha417/nvim-lsp-file-operations",
             dependencies = {
                 "nvim-lua/plenary.nvim",
-                "nvim-tree/nvim-tree.lua",
+                -- "nvim-tree/nvim-tree.lua",
             },
             config = function()
                 require("lsp-file-operations").setup({
@@ -80,7 +80,7 @@ return {
                 },
             },
             diagnostics = {
-                enable = true,
+                enable = false,
                 show_on_dirs = true,
                 debounce_delay = 50,
             },

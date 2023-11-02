@@ -56,6 +56,9 @@ return {
 
         local telescope = require("telescope")
         local actions = require("telescope.actions")
+
+        local trouble = require("trouble.providers.telescope")
+
         telescope.setup({
             defaults = {
                 -- Default configuration for telescope goes here:
@@ -66,10 +69,12 @@ return {
                         -- actions.which_key shows the mappings for your picker,
                         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
                         ["<C-h>"] = "which_key",
+                        ["<c-t>"] = trouble.open_with_trouble,
                     },
                     n = {
                         ["<C-h>"] = "which_key",
                         ["t"] = "select_tab",
+                        ["<c-t>"] = trouble.open_with_trouble,
                     },
                 },
                 layout_config = {

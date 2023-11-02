@@ -2,8 +2,12 @@ return {
     settings = {
         Lua = {
             completion = {
-                -- callSnippet = "Both",
+                enable = true,
                 callSnippet = "Replace",
+                displayContext = 0,
+                -- keywordSnippet = "Replace",
+                postfix = "?",
+                -- showWord = "Disable", -- "Fallback",
             },
             runtime = {
                 version = "LuaJIT",
@@ -14,15 +18,19 @@ return {
                     "vim",
                 },
             },
+            format = { enable = false },
+            hint = {
+                arrayIndex = "Auto",
+                await = true,
+                setType = true,
+            },
+            semantic = { keyword = false, variable = true },
             workspace = {
                 checkThirdParty = false,
                 preloadFileSize = 10000,
             },
             telemetry = {
                 enable = false,
-            },
-            hint = {
-                enable = true,
             },
         },
     },

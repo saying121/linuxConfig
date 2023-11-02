@@ -93,16 +93,18 @@ alias rewall="~/.linuxConfig/wallpaperengine/rewall.sh"
 # ImageMagick must be installed for icat to work.
 alias imgcat="wezterm imgcat"
 
+alias my_gpgme="sudo rm -R /var/lib/pacman/sync"
+
 alias clhconf="~/.linuxConfig/scripts/configClash.sh"
-alias clhres="sudo systemctl restart clash-meta.service"
-alias clhstp="sudo systemctl stop clash-meta.service"
-alias clhsts="systemctl status clash-meta.service"
+alias clhres="sudo systemctl restart clash-meta@$USER.service"
+alias clhstp="sudo systemctl stop clash-meta@$USER.service"
+alias clhsts="systemctl status clash-meta@$USER.service"
 
 alias rm="trash"
 
 alias tran='trans -j -d en:zh'
 
-alias upgrade='yay -Syu --noconfirm && yay -Fy && sudo pkgfile -u'
+alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy && sudo pkgfile -u'
 
 if [[ $(grep -c OMZP::cp ~/.zshrc) != 0 && $SHELL == '/usr/bin/zsh' ]]; then
     alias cp='cpv -hhh'
@@ -152,3 +154,5 @@ debug_rust() {
 }
 
 export MAKEFLAGS='-j'
+
+export RUSTC_WRAPPER=sccache

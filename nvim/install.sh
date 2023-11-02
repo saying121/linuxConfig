@@ -4,33 +4,35 @@ export ALL_PROXY=http://127.0.0.1:7890
 export HTTPS_PROXY=http://127.0.0.1:7890
 export HTTP_PROXY=http://127.0.0.1:7890
 
-pacMan='pacman -S --needed --noconfirm'
+pacMan='sudo pacman -S --needed --noconfirm'
 aurPkg='yay -S --needed --noconfirm'
 
-sudo "$pacMan" lf fzf ripgrep fd lldb translate-shell \
+$pacMan fzf ripgrep fd lldb translate-shell \
     jdk17-openjdk go cmake \
     neovim luarocks shellcheck \
     zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-ps \
-    typst deno tesseract
+    typst deno tesseract actionlint
 
 $aurPkg rust-lolcat-git
+$aurPkg lf
 
-sudo "$pacMan" python3 python-pip python-pynvim python-pipenv python-pylsp-rope neovim-remote frogmouth python-neovim
+$pacMan python3 python-pip python-pynvim python-pipenv python-pylsp-rope neovim-remote frogmouth python-neovim
 
-sudo "$pacMan" rustup
+$pacMan rustup
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 rustup install stable beta nightly
-rustup component add rust-analysis rust-analyzer clippy rustfmt llvm-tools-preview --toolchain stable
-rustup component add rust-analysis rust-analyzer clippy rustfmt llvm-tools-preview --toolchain nightly
-rustup component add rust-analysis rust-analyzer clippy rustfmt llvm-tools-preview --toolchain beta
+rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain stable
+rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain nightly
+rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain beta
 rustup default stable
 # 切换 crates 源
-cargo install crm tokio-console
-~/.cargo/bin/crm best
+cargo install crm
+~/.cargo/bin/crm use rsproxy
+cargo install sccache
 # `cargo install-update -h`,neotest-rust  用到
-cargo install cargo-update cargo-nextest grcov
+cargo install cargo-update cargo-nextest grcov cargo-cache tokio-console
 # criterion benchmark 会用
-sudo "$pacMan" gnuplot
+$pacMan gnuplot
 
 # rust 交叉编译
 rustup target add x86_64-pc-windows-gnu aarch64-apple-darwin x86_64-apple-darwin
@@ -47,16 +49,17 @@ export PATH=$PATH:/usr/local/osx-ndk-x86/bin
     source /etc/profile
 fi
 
-$aurPkg powershell-lts-bin
+# $aurPkg powershell-lts-bin
 
 # $aurPkg libldap24 mssql-scripter
 
 $aurPkg rime-ls rime-essay
 
-sudo "$pacMan" texlive-core texlive-bin
+$pacMan texlive-core texlive-bin
 
 # nodejs
-sudo "$pacMan" fnm npm
+$pacMan fnm npm
+export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/
 fnm install 18
 fnm install 16
 fnm default 18
@@ -80,9 +83,9 @@ if [[ $(grep -c mason /etc/profile) == 0 ]]; then
     echo '
 export PATH=$PATH:~/.local/share/nvim/mason/bin
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+
+export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/
     ' | sudo tee -a /etc/profile
 
     source /etc/profile
 fi
-
-unset pacMan aurPkg

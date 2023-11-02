@@ -1,7 +1,7 @@
 return {
     "ray-x/go.nvim",
+    cond = false,
     ft = { "go", "gomod" },
-    -- build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
     build = function()
         require("go.install").undate_all_sync()
     end,
@@ -41,14 +41,6 @@ return {
             -- end
             -- to setup a table of codelens
             diagnostic = false,
-            -- diagnostic = { -- set diagnostic to false to disable vim.diagnostic setup
-            --     hdlr = false, -- hook lsp diag handler and send diag to quickfix
-            --     underline = true,
-            --     -- virtual text setup
-            --     virtual_text = { space = 0, prefix = "" },
-            --     signs = true,
-            --     update_in_insert = false,
-            -- },
             lsp_document_formatting = true,
             -- set to true: use gopls to format
             -- false if you want to use other formatter tool(e.g. efm, nulls)
@@ -100,7 +92,7 @@ return {
             textobjects = true, -- enable default text jobects through treesittter-text-objects
             test_runner = "go", -- one of {`go`, `richgo`, `dlv`, `ginkgo`, `gotestsum`}
             verbose_tests = true, -- set to add verbose flag to tests deprecated, see '-v' option
-            run_in_floaterm = false, -- set to true to run in float window. :GoTermClose closes the floatterm
+            run_in_floaterm = true, -- set to true to run in float window. :GoTermClose closes the floatterm
             -- float term recommend if you use richgo/ginkgo with terminal color
 
             floaterm = { -- position

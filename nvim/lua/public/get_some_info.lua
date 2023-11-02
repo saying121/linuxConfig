@@ -4,26 +4,28 @@ local M = {}
 -- rime_ls 优先级靠后
 function M.lsp_clients()
     local msg = "No Active Lsp"
+    local lsps = ""
     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-    local clients = vim.lsp.get_active_clients()
+    local clients = vim.lsp.get_clients()
     if next(clients) == nil then
         return msg
     end
 
     for _, client in ipairs(clients) do
         local filetypes = client.config.filetypes
-        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and client.name ~= "rime_ls" then
-            return client.name
+        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+            if lsps ~= "" then
+                lsps = lsps .. ", " .. client.name
+            else
+                lsps = client.name
+            end
         end
     end
 
-    for _, client in ipairs(clients) do
-        if client ~= nil then
-            return client.name
-        end
+    if lsps == "" then
+        return msg
     end
-
-    return msg
+    return lsps
 end
 
 -- 获取发行版名字

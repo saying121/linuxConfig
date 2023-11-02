@@ -2,8 +2,8 @@
 --
 LspInfos = {}
 function LspInfos.get_lsp_name()
-    for i = 1, #vim.lsp.get_active_clients(), 1 do
-        print(vim.lsp.get_active_clients()[i]["name"])
+    for i = 1, #vim.lsp.get_clients(), 1 do
+        print(vim.lsp.get_clients()[i]["name"])
     end
     -- return vim.lsp.get_active_clients()[1]['name']
 end

@@ -1,12 +1,20 @@
 local M = {}
 
+function M.mirror()
+    if vim.env.HTTPS_PROXY == nil then
+        return "https://ghproxy.com/"
+    else
+        return ""
+    end
+end
+
 --- 给一个起始目录，向父级目录寻找 目标目录 或 文件
 --- start_dir: 是从哪里开始找
 --- be_finded: 被找的目录名字，或者文件名（要带/前缀，例如‘/.git’,'/Cargo.toml'）
 ---@param start_dir string
----@param be_finded_dir string
+---@param be_finded string
 ---@return string | nil
-function M.get_git_root_dir(start_dir, be_finded_dir)
+function M.get_git_root_dir(start_dir, be_finded)
     -- return vim.fn.fnamemodify(vim.fn.finddir(be_finded, "..;"), ":h")
 
     -- 使用vim.loop.fs_stat检查目录是否存在
@@ -16,7 +24,7 @@ function M.get_git_root_dir(start_dir, be_finded_dir)
         return nil
     end
     -- 如果存在，拼接.git目录的路径
-    local git_dir = start_dir .. be_finded_dir
+    local git_dir = start_dir .. be_finded
     -- 使用vim.loop.fs_stat检查.git目录是否存在
     local git_stat = vim.loop.fs_stat(git_dir)
     -- 如果存在，返回当前目录
@@ -30,7 +38,8 @@ function M.get_git_root_dir(start_dir, be_finded_dir)
         return nil
     end
     -- 否则，递归调用函数，传入上一级目录作为参数
-    return M.get_git_root_dir(parent_dir, be_finded_dir)
+    ---@diagnostic disable-next-line: param-type-mismatch
+    return M.get_git_root_dir(parent_dir, be_finded)
 end
 
 --- 合并mod_path目录下的表，他们必须返回一张表，这个函数会把他们放到一个大表中

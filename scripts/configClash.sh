@@ -1,5 +1,19 @@
 #!/bin/bash
 
+if [[ ! -f /etc/pacman.d/hooks/clash-meta.hook ]]; then
+    echo '
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Path
+Target = usr/bin/clash-meta
+
+[Action]
+When = PostTransaction
+Exec = /usr/bin/setcap 'cap_net_admin,cap_net_bind_service=+ep' /usr/bin/clash-meta
+    ' | sudo tee /etc/pacman.d/hooks/clash-meta.hook
+fi
+
 if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
     if [[ ! $(command -v clash) ]]; then
         sudo pacman -S --needed --noconfirm clash
@@ -44,6 +58,8 @@ if [[ -f $clash_config ]]; then
 fi
 
 # sudo setcap cap_net_bind_service,cap_net_admin=+ep /usr/bin/clash-meta
+
+sudo systemctl enable --now clash-meta@"$USER".service
 
 # sudo systemctl enable clash-meta
 # sudo systemctl start clash-meta

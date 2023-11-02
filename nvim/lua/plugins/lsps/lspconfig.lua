@@ -48,6 +48,7 @@ return {
                             },
                         },
                     }
+                    -- , require("epo").register_cap()
                 )
 
                 if lsp_name == "clangd" then

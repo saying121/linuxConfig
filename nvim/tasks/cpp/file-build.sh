@@ -9,4 +9,4 @@ VIM_FILENOEXT=$3
 # g++
 compiler=clang++
 
-"$HOME/.config/nvim/tasks/make_color.sh" $compiler -O2 "$VIM_FILEPATH" -o "$VIM_FILEDIR/build_c_cpp/$VIM_FILENOEXT"
+"$HOME"/.config/nvim/tasks/make_color.sh $compiler -O2 "$VIM_FILEPATH" -o "$VIM_FILEDIR"/build_c_cpp/"$VIM_FILENOEXT"

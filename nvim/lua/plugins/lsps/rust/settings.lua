@@ -57,7 +57,7 @@ return {
             callable = { snippets = "fill_arguments" }, -- 完成函数时是否添加括号和参数片段。
             limit = nil, -- 要返回的最大完成次数。如果 None ，则极限为无穷大。
             postfix = { enable = true }, -- Whether to show postfix snippets like dbg, if, not, etc.
-            privateEditable = { enable = false },
+            privateEditable = { enable = true },
             snippets = { custom = require("plugins.lsps.rust.snippets") },
         },
         diagnostics = {
@@ -157,7 +157,7 @@ return {
                 mode = "postfix ",
             },
             lifetimeElisionHints = { enable = "always", useParameterNames = false },
-            maxLength = 25,
+            maxLength = 15,
             parameterHints = { enable = true },
             renderColons = true,
             typeHints = { enable = true, hideClosureInitialization = false, hideNamedConstructor = false },

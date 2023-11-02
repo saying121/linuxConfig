@@ -35,7 +35,7 @@ vim.diagnostic.config({
     float = { border = "single" },
     severity_sort = true, -- 根据严重程度排序
     signs = true,
-    underline = true,
+    underline = false,
     update_in_insert = true,
 })
 
@@ -96,11 +96,12 @@ M.on_attach = function(client, bufnr)
 
     if cap.documentFormattingProvider then
         keymap("n", "<space>f", function()
-            vim.lsp.buf.format({ async = true })
-        end, opts)
-    else
-        keymap({ "n", "x" }, "<space>f", function()
-            vim.cmd("GuardFmt")
+            vim.lsp.buf.format({
+                async = true,
+                filter = function(client1)
+                    return client1.name ~= "lua-ls"
+                end,
+            })
         end, opts)
     end
     if cap.documentRangeFormattingProvider then

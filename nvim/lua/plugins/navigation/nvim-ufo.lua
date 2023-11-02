@@ -106,8 +106,18 @@ return {
             end, opts) -- closeAllFolds == closeFoldsWith(0)
         end
 
-        if vim.bo.ft == "dashboard" or vim.bo.ft == "alpha" then
+        local ft = {
+            "dashboard",
+            "alpha",
+            "dbui",
+        }
+
+        vim.api.nvim_create_autocmd({ "BufEnter" }, {
+            group = vim.api.nvim_create_augroup("UfoDetachs", { clear = true }),
+            pattern = ft,
+            callback = function()
             vim.cmd("UfoDetach")
-        end
+            end,
+        })
     end,
 }

@@ -16,7 +16,7 @@ gaps inner 3
 # 窗口之间缝隙
 gaps outer 0
 
-workspace_auto_back_and_forth yes
+# workspace_auto_back_and_forth yes
 
 # do not focus preview window on open
 no_focus [title="^Peek preview$"]
@@ -37,6 +37,8 @@ for_window [title="ImageMagick"] floating enable,move position center
 for_window [title="Wine"] floating enable,move position center
 for_window [title="Kate"] floating enable,move position center
 # for_window [class="Graphviz"] floating enable,move position center
+for_window [class="腾讯会议"] floating enable;
+for_window [title="EmojiFloatWnd"] floating enable;
 
 # win键Mode4 Mod1是alt
 set $mod Mod4
@@ -60,10 +62,10 @@ bindsym $mod+q [class="QQ"] focus
 for_window [class="weixin"] floating enable;  # ,move container to workspace 4
 bindsym Mod1+w [class="weixin"] focus
 
-bindsym $mod+Return exec kitty
-bindsym Mod1+Ctrl+t exec wezterm
-# bindsym $mod+Return exec wezterm
-# bindsym Mod1+Ctrl+t exec kitty
+# bindsym $mod+Return exec kitty
+# bindsym Mod1+Ctrl+t exec wezterm
+bindsym $mod+Return exec wezterm
+bindsym Mod1+Ctrl+t exec kitty
 bindsym $mod+Shift+f exec kitty ranger
 bindsym $mod+Shift+t exec kitty gotop
 
@@ -76,11 +78,11 @@ bindsym $mod+e exec dolphin
 
 # 音量控制
 for_window [class="Pavucontrol"] floating enable;
-bindsym Mod1+q exec pavucontrol
+bindsym Mod1+q exec pkill pavucontrol || pavucontrol
 
 # 蓝牙
 for_window [class="Blueman-manager"] floating enable;
-bindsym $mod+b exec blueman-manager
+bindsym $mod+b exec pkill blueman-manager || blueman-manager
 
 focus_follows_mouse no # 鼠标点击才改变焦点
 
@@ -265,7 +267,7 @@ bar {
     output eDP-1
     # output HDMI-1
     # tray_output eDP-1
-    font pango:Hack Nerd Font 10.5
+    font pango:Hack Nerd Font 11.5
     mode dock
     hidden_state hide
     modifier mod4

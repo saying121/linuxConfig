@@ -6,14 +6,12 @@ if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
 fi
 # install rofi theme
 theme() {
-    git clone --depth=1 https://github.com/adi1090x/rofi.git
-    if [[ -d ./rofi ]]; then
-        cd rofi || return
-        chmod +x setup.sh
-        ./setup.sh
-        cd ..
-        rm -rf rofi
-    fi
+    git clone --depth=1 https://github.com/adi1090x/rofi.git rofi-theme
+    cd rofi-theme || return
+    chmod +x setup.sh
+    ./setup.sh
+    cd ..
+    rm -rf rofi-theme
 }
 if [[ ! -d ~/.config/rofi/scripts ]]; then
     theme

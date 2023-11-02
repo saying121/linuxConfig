@@ -41,6 +41,7 @@ return {
     end,
     config = function()
         local crates = require("crates")
+        local null_ls = require("null-ls")
 
         crates.setup({
             smart_insert = true,

@@ -1,10 +1,8 @@
 return {
     "voldikss/vim-translator",
-    lazy = true,
     cmd = {
         "TranslateR",
         "TranslateW",
-        "TranslateWV",
         "TranslateX",
     },
     keys = {
@@ -16,18 +14,31 @@ return {
     config = function()
         -- Available: 'bing', 'google', 'haici', 'iciba'(expired), 'sdcv', 'trans', 'youdao'
         vim.g.translator_default_engines = { "google", "haici" }
+        vim.g.translator_history_enable = true
+        -- vim.g.translator_window_type = "preview"
+
         local opts = { noremap = true, silent = true }
         local keymap = vim.keymap.set
         -- Display translation in a window
-        keymap("n", "<M-y>", "<Plug>TranslateW", opts)
-        keymap("x", "<M-y>", "<Plug>TranslateWV", opts)
+        keymap({ "n", "x" }, "<M-y>", ":TranslateW<cr>", opts)
+        keymap({ "n", "x" }, "<C-y>", function()
+            vim.cmd([[
+            let g:translator_window_type = "preview"
+            TranslateW
+            ]])
+        end, opts)
         -- Echo translation in the cmdline
-        -- vim.api.nvim_set_keymap('n', '<M-c>', '<Plug>Translate', opts)
-        -- vim.api.nvim_set_keymap('v', '<M-c>', '<Plug>TranslateV', opts)
         -- Replace the text with translation
         -- keymap("n", "<M-r>", "<Plug>TranslateR", opts)
         -- keymap("v", "<M-r>", "<Plug>TranslateRV", opts)
         -- Translate the text in clipboard
         keymap("n", "<M-x>", "<Plug>TranslateX", opts)
+
+        vim.cmd([[
+        nnoremap <silent><expr> <M-f> translator#window#float#has_scroll() ?
+                            \ translator#window#float#scroll(1) : "\<M-f>"
+        nnoremap <silent><expr> <M-b> translator#window#float#has_scroll() ?
+                            \ translator#window#float#scroll(0) : "\<M-b>"
+                ]])
     end,
 }

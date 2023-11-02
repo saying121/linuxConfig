@@ -66,7 +66,7 @@ zi ice wait lucid; zi snippet OMZP::git
 zi ice wait lucid
 zi load voronkovich/gitignore.plugin.zsh
 zi ice wait lucid; zi light paulirish/git-open.git
-source ~/.zi/plugins/tj---git-extras/etc/git-extras-completion.zsh
+# source ~/.zi/plugins/tj---git-extras/etc/git-extras-completion.zsh
 
 ############################################################
 # omz
@@ -113,11 +113,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
 # export PYTHONPATH=~/.local/lib/python3.11/site-packages
 
-alias lazyvim="NVIM_APPNAME=LazyVim nvim"
-alias nvchard="NVIM_APPNAME=NvChard nvim"
 alias tvim="NVIM_APPNAME=NvimTest nvim"
-alias spacevim="NVIM_APPNAME=spacevim nvim"
-alias astronvim="NVIM_APPNAME=astronvim nvim"
 
 zi snippet OMZP::last-working-dir
 

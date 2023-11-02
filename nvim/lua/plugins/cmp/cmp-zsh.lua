@@ -1,5 +1,6 @@
 return {
     "tamago324/cmp-zsh",
+    cond = true,
     event = {
         "UIEnter *.zsh",
         "BufNew *.zsh",

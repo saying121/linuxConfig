@@ -1,5 +1,6 @@
 return {
     "rcarriga/cmp-dap",
+    cond = true,
     keys = { "<F5>" },
     config = function()
         require("cmp").setup({

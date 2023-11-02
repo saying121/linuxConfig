@@ -121,7 +121,7 @@ return {
         keymap("n", "gH", "<cmd>Lspsaga finder def+ref+imp<CR>")
 
         local hover = {
-            max_width = 0.6,
+            max_width = 0.8,
             max_height = 0.4,
             open_link = "gx",
             -- open_cmd = "!chrome",
@@ -141,7 +141,7 @@ return {
         end
         -- 和 crates.nvim,nvim-ufo,nvim-dap-ui 集成
         local function show_documentation()
-            if vim.tbl_contains({ "vim", "help" }, vim.bo.filetype) then
+            if vim.tbl_contains({ --[[ "vim", ]] "help" }, vim.bo.filetype) then
                 vim.cmd("h " .. vim.fn.expand("<cword>"))
             elseif vim.tbl_contains({ "man" }, vim.bo.filetype) then
                 vim.cmd("Man " .. vim.fn.expand("<cword>"))
@@ -150,7 +150,8 @@ return {
             elseif _G.dapui_for_K == 1 then
                 require("dapui").eval()
             elseif not peekOrHover() then
-                vim.cmd([[Lspsaga hover_doc]])
+                -- vim.cmd([[Lspsaga hover_doc]])
+                vim.lsp.buf.hover()
             end
         end
         -- If you want to jump to the hover window you should use the wincmd command "<C-w>w"

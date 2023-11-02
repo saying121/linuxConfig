@@ -4,9 +4,12 @@ export ALL_PROXY=http://127.0.0.1:7890
 export HTTPS_PROXY=http://127.0.0.1:7890
 export HTTP_PROXY=http://127.0.0.1:7890
 
+git config --global https.proxy 'http://127.0.0.1:7890'
+git config --global http.proxy 'http://127.0.0.1:7890'
+
 get_package_manager() {
     if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
-        echo "pacman -S --needed --noconfirm"
+        echo "sudo pacman -S --needed --noconfirm"
     else
         echo 'Can not use.'
         exit 0
@@ -17,9 +20,7 @@ aurPkg='yay -S --needed --noconfirm'
 
 ~/.linuxConfig/must_install.sh
 
-# cargo install leetcode-cli
-
-$aurPkg todotxt snapper
+$aurPkg todotxt snapper bluetuith-bin
 
 # 计算ip的工具
 $pacMan ipcalc
@@ -37,31 +38,31 @@ $aurPkg sddm-theme-aerial-git
 $aurPkg sddm-theme-astronaut
 $aurPkg sddm-theme-corners-git
 $aurPkg sddm-nordic-theme-git
-sudo "$pacMan" plasma packagekit-qt5 packagekit appstream-qt appstream
+$pacMan plasma packagekit-qt5 packagekit appstream-qt appstream
 
 # 动态壁纸
 # $aurPkg renderdoc plasma5-wallpapers-wallpaper-engine
-sudo "$pacMan" gifsicle ffmpeg
+$pacMan gifsicle ffmpeg
 $aurPkg linux-wallpaperengine-git
 # komorebi
 
 # installVirtualBox
-sudo "$pacMan" virtualbox virtualbox-host-dkms
+$pacMan virtualbox virtualbox-host-dkms
 sudo gpasswd -a "$USER" vboxusers
 newgrp vboxusers
 
-sudo "$pacMan" wine pkgstats
+$pacMan wine pkgstats
 
 # 各种查看系统信息的软件
-sudo "$pacMan" htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
+$pacMan htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
 # btm 启动 bottom
-$aurPkg bottom cpufetch hardinfo # `gpufetch-git
+$aurPkg bottom cpufetch hardinfo-git # `gpufetch-git
 
 # markdown browser
 $aurPkg frogmouth carbonyl
 
 installWaydroid() {
-    sudo "$pacMan" waydroid linux-zen linux-zen-headers
+    $pacMan waydroid linux-zen linux-zen-headers
     $aurPkg waydroid-image python-pyclip
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
@@ -76,6 +77,10 @@ $pacMan pgcli mycli litecli mssql-cli iredis
 # aws,Postgres meta commands.
 pip install --break-system-packages athenacli pgspecial
 $pacMan vhs tokei
+
+$pacMan auto-cpufreq
+sudo systemctl enable --now auto-cpufreq.service
+
 # 3D
 # $pacMan blender
 

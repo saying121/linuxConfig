@@ -8,7 +8,8 @@ let g:coc_global_extensions = [
             \ 'coc-pyright',
             \ 'coc-explorer',
             \ 'coc-css',
-            \ 'coc-json'
+            \ 'coc-json',
+            \ 'coc-rust-analyzer'
             \ ]
 set hidden
 nmap <M-CR> <Plug>(coc-codeaction)

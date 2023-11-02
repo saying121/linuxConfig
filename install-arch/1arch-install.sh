@@ -6,26 +6,50 @@ cfdisk /dev/xxx
 
 2.Formatted disk
 (1)efi
-mkfs.vfat /dev/xxx
+mkfs.vfat /dev/for_efi
 
 (2)root and home
-mkfs.btrfs /dev/xxx
+mkfs.btrfs /dev/my_btrfs
 
 (3)swap
 mkswap /dev/for_swap
 swapon /dev/for_swap
 
-3.Mount disk
-(1)root
-mount /dev/for_root /mnt
+3.
+mount /dev/my_btrfs /mnt
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@home
+btrfs subvolume create /mnt/@log
+btrfs subvolume create /mnt/@pkg
+umount /dev/my_btrfs
 
-(2)efi
+---
+
+(1)root
+mount /dev/my_btrfs /mnt -o subvol=@,noatime,discard=async,compress=zstd
+
+(2)home
+mkdir /mnt/home
+mount /dev/my_btrfs /mnt -o subvol=@home,noatime,discard=async,compress=zstd
+
+mkdir -p /mnt/var/log
+mount /dev/my_btrfs /mnt -o subvol=@log,noatime,discard=async,compress=zstd
+
+mkdir -p /mnt/var/cache/pacman/pkg
+mount /dev/my_btrfs /mnt -o subvol=@pkg,noatime,discard=async,compress=zstd
+
+chattr +C /mnt/var/log
+chattr +C /mnt/var/cache/pacman/pkg
+
+(3)efi
 mkdir /mnt/boot
 mount /dev/for_efi /mnt/boot
 
-(3)home
-mkdir /mnt/home
-mount /dev/forhome /mnt/home
+4.End
+edit /etc/mkinitcpio.conf
+MODULES=() -> MODULES=(btrfs)
+
+mkinitcpio -P
 
 Change mirrors and link network before run the script.
 yes/no
@@ -39,7 +63,7 @@ fi
 
 timedatectl set-ntp true
 # 基础
-pacstrap /mnt base base-devel linux-zen linux-firmware zsh linux-firmware-qlogic
+pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware zsh linux-firmware-qlogic
 
 genfstab -U /mnt >/mnt/etc/fstab
 

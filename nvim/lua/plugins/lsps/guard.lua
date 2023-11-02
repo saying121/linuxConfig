@@ -66,21 +66,24 @@ return {
     "nvimdev/guard.nvim",
     dependencies = { "nvimdev/guard-collection" },
     -- ft = ft,
-    keys = { { "<C-M-l>", mode = "n" }, },
+    keys = { { "<space>f", mode = "n" } },
     cmd = "GuardFmt",
     config = function()
         local keymap = vim.keymap.set
-        keymap({ "n", "x" }, "<C-M-l>", function()
+        keymap({ "n", "x" }, "<space>f", function()
             vim.cmd("GuardFmt")
-        end, {})
+        end)
 
         local filetype = require("guard.filetype")
 
-        filetype("c"):fmt("clang-format"):lint("clang-tidy")
+        -- filetype("c"):fmt("clang-format"):lint("clang-tidy")
         filetype("sh, bash"):fmt({ cmd = "shfmt", args = { "-i", "4", "-filename", "$FILENAME" } })
         filetype("zsh"):fmt({ cmd = "beautysh", args = { "--indent-size", "4", "-s", "paronly", "$FILENAME" } })
         filetype("python"):fmt("isort"):append("black")
-        filetype("sql, mysql"):fmt("sql-formatter")
+
+        filetype("sql, mysql"):fmt("sqlfluff"):lint("sqlfluff")
+        -- :append("sqlfluff_fix"):lint("sqlfluff")
+
         filetype("tex, bib, plaintex"):fmt("latexindent")
         -- filetype("fennel"):fmt("fnlfmt")
         -- filetype("rust"):fmt("rustfmt")
@@ -88,6 +91,10 @@ return {
         filetype("lua"):fmt({
             cmd = "stylua",
             args = { "--search-parent-directories", "-" },
+            stdin = true,
+        })
+        filetype("typst"):fmt({
+            cmd = "typstfmt",
             stdin = true,
         })
         filetype("asm"):fmt({
@@ -105,6 +112,7 @@ return {
         require("guard").setup({
             -- the only option for the setup function
             fmt_on_save = false,
+            lsp_as_default_formatter = true,
         })
     end,
 }

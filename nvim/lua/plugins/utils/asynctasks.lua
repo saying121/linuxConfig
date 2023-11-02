@@ -32,6 +32,8 @@ return {
         vim.g.asynctasks_term_cols = 60 -- 设置横向切割时，宽度为 80
         vim.g.asynctasks_term_reuse = 1 -- 设置tab终端可复用
         vim.g.asynctasks_term_focus = 1 -- 1聚焦终端，0不聚焦
+        -- local utils=require("public.utils")
+        -- local file=get_git_root_dir(vim.fn.getcwd(), "/tasks.ini")
         vim.g.asynctasks_extra_config = {
             "~/.config/nvim/tasks.ini",
         }

@@ -26,6 +26,43 @@ return {
         --     end
         -- end
 
+        local function dbui_statusline()
+            return vim.g.loaded_dbui
+                    and vim.fn["db_ui#statusline"]({
+                        prefix = "DB: ",
+                        separator = " -> ",
+                        show = { "db_name", "schema", "table" },
+                    })
+                or ""
+        end
+
+        local function dbui_query()
+            vim.fn["db_ui#query"]({})
+        end
+
+        local function dbui_connections()
+            local list = vim.fn["db_ui#connections_list"]()
+            local conn = ""
+            -- v:
+            -- {
+            --      is_connected = 0, -- 0 or 1
+            --      name = "bakeries_db",
+            --      source = "file",
+            --      url = "mysql://user:1234567@127.0.0.1:3306/bakeries_db"
+            -- }
+            for _, v in ipairs(list) do
+                if v.is_connected then
+                    if conn == "" then
+                        conn = v.name
+                    else
+                        conn = conn .. "," .. v.name
+                    end
+                end
+            end
+
+            return conn
+        end
+
         require("lualine").setup({
             options = {
                 icons_enabled = true,
@@ -51,24 +88,35 @@ return {
                 lualine_a = {
                     -- "mode",
                     {
-                        -- require("noice").api.status.mode.get,
                         mode,
                         cond = require("noice").api.status.mode.has,
                         color = { fg = "#000000" },
                         -- color = { fg = "ff9e64" },
                     },
                 },
-                lualine_b = { "branch", "diagnostics" },
+                lualine_b = {
+                    "branch",
+                    "diagnostics",
+                    {
+                        dbui_statusline,
+                        icon = "",
+                        color = { bg = "#0d1d47" },
+                    },
+                    -- dbui_query,
+                    -- dbui_connections,
+                },
                 lualine_c = {
                     {
                         "filesize",
-                        color = { bg = "#0a1d47" },
+                        color = { bg = "#0a2447" },
+                        icon = "",
+                        -- color = { bg = "#0a1d47" },
                     },
                     {
                         "filename",
-                        file_status = true,     -- Displays file status (readonly status, modified status)
+                        file_status = true, -- Displays file status (readonly status, modified status)
                         newfile_status = false, -- Display new file status (new file means no write after created)
-                        path = 3,               -- 0: Just the filename
+                        path = 3, -- 0: Just the filename
                         -- 1: Relative path
                         -- 2: Absolute path
                         -- 3: Absolute path, with tilde as the home directory
@@ -76,10 +124,10 @@ return {
                         shorting_target = 40, -- Shortens path to leave 40 spaces in the window
                         -- for other components. (terrible name, any suggestions?)
                         symbols = {
-                            modified = "[+]",      -- Text to show when the file is modified.
-                            readonly = "[-]",      -- Text to show when the file is non-modifiable or readonly.
+                            modified = "[+]", -- Text to show when the file is modified.
+                            readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
                             unnamed = "[No Name]", -- Text to show for unnamed buffers.
-                            newfile = "[New]",     -- Text to show for newly created file before first write
+                            newfile = "[New]", -- Text to show for newly created file before first write
                         },
                     },
                 },
@@ -98,8 +146,8 @@ return {
                     { rime_status },
                     {
                         "filetype",
-                        colored = true,            -- Displays filetype icon in color if set to true
-                        icon_only = false,         -- Display only an icon for filetype
+                        colored = true, -- Displays filetype icon in color if set to true
+                        icon_only = false, -- Display only an icon for filetype
                         icon = { align = "left" }, -- Display filetype icon on the right hand side
                         -- icon =    {'X', align='right'}
                         -- Icon string ^ in table is ignored in filetype component
@@ -116,11 +164,7 @@ return {
                     -- require("public.get_some_info").linux_distro,
                     require("public.get_some_info").fileformat,
                 },
-                lualine_z = {
-                    "location",
-                    "%L",
-                    -- "progress",
-                },
+                lualine_z = { "location", "%L" },
             },
             inactive_sections = {
                 lualine_a = {},
@@ -143,6 +187,7 @@ return {
                 "nvim-dap-ui",
                 "man",
                 "aerial",
+                -- "mason",
             },
         })
     end,

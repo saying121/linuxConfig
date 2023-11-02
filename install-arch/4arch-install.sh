@@ -4,28 +4,26 @@ export ALL_PROXY=http://127.0.0.1:7890
 export HTTPS_PROXY=http://127.0.0.1:7890
 export HTTP_PROXY=http://127.0.0.1:7890
 
-pacMan="pacman -S --needed --noconfirm"
+pacMan="sudo pacman -S --needed --noconfirm"
 
 # kde桌面，终端
-sudo "$pacMan" xorg kitty wezterm \
+$pacMan xorg kitty wezterm \
     networkmanager wget sddm i3-wm plasma
 
 # 中文字体
-sudo "$pacMan" adobe-source-han-serif-cn-fonts \
+$pacMan adobe-source-han-serif-cn-fonts \
     adobe-source-han-sans-cn-fonts \
     wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
     noto-fonts-extra ttf-hack-nerd
 
-sudo "$pacMan" fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
+$pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
     fcitx5-pinyin-zhwiki catppuccin-fcitx5-git fcitx5-table-other vim-fcitx xclip \
     vim zsh wget curl neovim dhcpcd iwd sudo git
-
-unset "$pacMan"
 
 # fcitx5的设置
 if [[ $(grep -c fcitx /etc/environment) = 0 ]]; then
     echo '
-GTK_IM_MODULE=fcitx5
+# GTK_IM_MODULE=fcitx5
 QT_IM_MODULE=fcitx5
 XMODIFIERS="@im=fcitx5"
 SDL_IM_MODULE=fcitx5
@@ -42,7 +40,7 @@ FONT=tcvn8x16
 FONT_MAP=8859-2
 ' | sudo tee -a /etc/vconsole.conf
 
-read -pr '
+read -p '
 
 *******************************
 ****  Input your pc name:  ****

@@ -1,17 +1,20 @@
 return {
     "mfussenegger/nvim-jdtls",
+    dependencies = {
+        "williamboman/mason.nvim",
+    },
     event = {
         "UIEnter *.java",
         "BufNew *.java",
     },
     config = function()
-        local home = vim.env.HOME
+        -- local home = vim.env.HOME
+        local cache = vim.fn.stdpath("cache")
 
+        WORKSPACE_PATH = cache .. "/jdtls_workspace/"
         if vim.fn.has("mac") == 1 then
-            WORKSPACE_PATH = home .. "/.config/jdtls_workspace/"
             OS = "mac"
         elseif vim.fn.has("unix") == 1 then
-            WORKSPACE_PATH = home .. "/.config/jdtls_workspace/"
             OS = "linux"
         else
             vim.notify("Unsupported system")
@@ -213,14 +216,22 @@ return {
 
                 local opts, keymap = { noremap = true, silent = true, buffer = bufnr }, vim.keymap.set
 
-                keymap("n", "<leader>di", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
-                keymap("n", "<leader>dt", "<Cmd>lua require'jdtls'.test_class()<CR>", opts)
-                keymap("n", "<leader>dn", "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", opts)
+                keymap("n", "<leader>di", require("jdtls").organize_imports, opts)
+                keymap("n", "<leader>dt", require("jdtls").test_class, opts)
+                keymap("n", "<leader>dn", require("jdtls").test_nearest_method, opts)
                 keymap("x", "<leader>de", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
-                keymap("n", "<leader>de", "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
+                keymap("n", "<leader>de", require("jdtls").extract_variable, opts)
                 keymap("x", "<leader>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
 
-                keymap("n", "<leader>cf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+                keymap("x", "<leader>cxc", [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]], opts)
+                keymap("x", "<leader>cxv", [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]], opts)
+
+                keymap("n", "gS", require("jdtls.tests").goto_subjects, opts)
+                -- keymap("n", 'gs', require("jdtls.tests").super_implementation, opts)
+
+                keymap("n", "<leader>tt", require("jdtls.dap").test_class, opts)
+                keymap("n", "<leader>tr", require("jdtls.dap").test_nearest_method, opts)
+                keymap("n", "<leader>tT", require("jdtls.dap").pick_test, opts)
             end,
         }
         -- This starts a new client & server,

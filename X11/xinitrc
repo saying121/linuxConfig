@@ -45,6 +45,7 @@ exec picom --experimental-backends --config ~/.config/i3/picom/picom-yaocccc.con
 
 # exec --no-startup-id copyq & # 剪切板管理器
 exec utools &
+exec blueman-manager &
 # exec  /usr/lib/polkit-kde-authentication-agent-1
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 

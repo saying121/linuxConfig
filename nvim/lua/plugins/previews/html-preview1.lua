@@ -4,6 +4,10 @@ return {
     event = {
         "UIEnter *.html",
         "BufNew *.html",
+        "BufEnter *.js",
+        "BufNew *.js",
+        "BufEnter *.ts",
+        "BufNew *.ts",
     },
     config = function()
         require("web-tools").setup({

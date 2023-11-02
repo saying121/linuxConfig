@@ -11,6 +11,16 @@ return {
             vim.cmd("syntax on")
         end
 
+        if vim.env.HTTPS_PROXY == nil then
+            require("nvim-treesitter.install").prefer_git = true
+            local mirror = require("public.utils").mirror()
+
+            for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) do
+                config.install_info.url =
+                    config.install_info.url:gsub("https://github.com/", mirror .. "https://github.com/")
+            end
+        end
+
         require("nvim-treesitter.configs").setup({
             ensure_installed = "all",
             ignore_install = { "comment" },
@@ -25,9 +35,7 @@ return {
                     node_decremental = "<BS>",
                 },
             },
-            indent = {
-                enable = false,
-            },
+            indent = { enable = false },
             highlight = {
                 enable = true,
                 -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to

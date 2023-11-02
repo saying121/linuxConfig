@@ -12,9 +12,11 @@ return {
             -- - "skip" (doesn't modify PATH)
             ---@type '"prepend"' | '"append"' | '"skip"'
             PATH = "append",
-            -- github = {
-            --     download_url_template = "https://ay1.us/https://github.com/%s/releases/download/%s/%s",
-            -- },
+            github = {
+                -- download_url_template = "https://ay1.us/https://github.com/%s/releases/download/%s/%s",
+                download_url_template = require("public.utils").mirror()
+                    .. "https://github.com/%s/releases/download/%s/%s",
+            },
             pip = {
                 -- Whether to upgrade pip to the latest version in the virtual environment before installing packages.
                 upgrade_pip = true,
@@ -42,6 +44,8 @@ return {
                 check_outdated_packages_on_open = true,
                 -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
                 border = "double",
+                width = 0.8,
+                height = 0.8,
                 keymaps = {
                     -- Keymap to expand a package
                     toggle_package_expand = "<CR>",

@@ -15,6 +15,15 @@ return {
 
         local rt = require("rust-tools")
 
+        local function ra()
+            local status = os.execute("systemctl is-active --quiet ra-mulitplex.service") if status == 0 then
+                return { "ra-multiplex" }
+            else
+                return { "rust-analyzer" }
+            end
+        end
+        local cmd = ra()
+
         rt.setup({
             tools = {
                 -- how to execute terminal commands
@@ -22,7 +31,11 @@ return {
                 executor = require("rust-tools.executors").toggleterm,
                 -- callback to execute once rust-analyzer is done initializing the workspace
                 -- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
-                on_initialized = nil,
+                -- on_initialized = function (health)
+                --     if health=="ok" then
+                --         vim.cmd(": e")
+                --     end
+                -- end,
                 -- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
                 reload_workspace_from_cargo_toml = true,
                 -- These apply to the default RustSetInlayHints command
@@ -89,7 +102,8 @@ return {
             server = {
                 -- standalone file support
                 -- setting it to false may improve startup time
-                standalone = false,
+                standalone = true,
+                -- cmd = { "ra-multiplex" },
                 on_attach = function(client, bufnr)
                     require("public.lsp_attach").on_attach(client, bufnr)
                     local keymap, opts = vim.keymap.set, { noremap = true, silent = true, buffer = bufnr }
@@ -101,6 +115,7 @@ return {
                     keymap("n", "mk", "<cmd>RustMoveItemUp<CR>", opts)
                     keymap("n", "mj", "<cmd>RustMoveItemDown<CR>", opts)
                     keymap("n", "<leader>R", rt.runnables.runnables, opts)
+                    keymap("n", "<leader>D", "<cmd>RustDebuggables<CR>", opts)
                     keymap("n", "<C-g>", rt.open_cargo_toml.open_cargo_toml, opts)
                     keymap("n", "<S-CR>", rt.expand_macro.expand_macro, opts)
                 end,

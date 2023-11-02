@@ -59,50 +59,52 @@ link_list=(
     ["$HOME/.linuxConfig/X11/Xresources"]="$HOME/.Xresources"
     ["$HOME/.linuxConfig/X11/xinitrc"]="$HOME/.xinitrc"
     ["$HOME/.linuxConfig/X11/xprofile"]="$HOME/.xprofile"
-    ["$HOME/.linuxConfig/configs/flameshot.ini"]="$HOME/.config/flameshot/flameshot.ini"
+    ["$HOME/.linuxConfig/configs/.sqlfluff"]="$HOME/.sqlfluff"
+    ["$HOME/.linuxConfig/configs/gtkrc-2.0"]="$HOME/.gtkrc-2.0"
+    ["$HOME/.linuxConfig/configs/dunst"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/fcitxs-config/fcitx"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/fcitxs-config/fcitx5"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/flameshot"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/gitui"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/go-musicfox.ini"]="$HOME/.config/go-musicfox/go-musicfox.ini"
-    ["$HOME/.linuxConfig/configs/konsave-conf.yaml"]="$HOME/.config/konsave/conf.yaml"
+    ["$HOME/.linuxConfig/configs/kitty"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/konsave"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/lessfilter.sh"]="$HOME/.lessfilter"
+    ["$HOME/.linuxConfig/configs/lf"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/lf/ctpv"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/microsoft-edge-stable-flags.conf"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/npmrc"]="$HOME/.npmrc"
+    ["$HOME/.linuxConfig/configs/ranger"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/rime-ls-user.yaml"]="$HOME/.local/share/rime-ls-nvim/user.yaml"
+    ["$HOME/.linuxConfig/configs/sql-language-server"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/terminology"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/tldrrc"]="$HOME/.tldrrc"
     ["$HOME/.linuxConfig/configs/w3m-config"]="$HOME/.w3m/config"
-    ["$HOME/.linuxConfig/fcitxs-config/fcitx"]="$HOME/.config"
-    ["$HOME/.linuxConfig/fcitxs-config/fcitx5"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/wezterm"]="$HOME/.config"
     ["$HOME/.linuxConfig/formatters/clang-format"]="$HOME/.clang-format"
     ["$HOME/.linuxConfig/formatters/prettierrc.json"]="$HOME/.prettierrc.json"
     ["$HOME/.linuxConfig/formatters/rustfmt"]="$HOME/.config"
     ["$HOME/.linuxConfig/formatters/stylua"]="$HOME/.config"
-    ["$HOME/.linuxConfig/gitui"]="$HOME/.config"
     ["$HOME/.linuxConfig/i3"]="$HOME/.config"
     ["$HOME/.linuxConfig/i3/i3status-rust"]="$HOME/.config"
     ["$HOME/.linuxConfig/input-remapper-2"]="$HOME/.config"
-    ["$HOME/.linuxConfig/kitty"]="$HOME/.config"
-    ["$HOME/.linuxConfig/lf"]="$HOME/.config"
-    ["$HOME/.linuxConfig/lf/ctpv"]="$HOME/.config"
     ["$HOME/.linuxConfig/nvim"]="$HOME/.config"
     ["$HOME/.linuxConfig/nvim/coc-config/coc-settings.json"]="$HOME/.vim/coc-settings.json"
     ["$HOME/.linuxConfig/nvim/tasks.ini"]="$HOME/.vim/tasks.ini"
     ["$HOME/.linuxConfig/nvim/viml/init.vim"]="$HOME/.vimrc"
     ["$HOME/.linuxConfig/qt5ct"]="$HOME/.config"
-    ["$HOME/.linuxConfig/ranger"]="$HOME/.config"
     ["$HOME/.linuxConfig/shells/bashrc"]="$HOME/.bashrc"
     ["$HOME/.linuxConfig/shells/starship.toml"]="$HOME/.config/starship.toml"
     ["$HOME/.linuxConfig/shells/zirc.zsh"]="$HOME/.zshrc"
-    ["$HOME/.linuxConfig/terminology"]="$HOME/.config"
     ["$HOME/.linuxConfig/wallpaperengine/betterlockscreen"]="$HOME/.config"
     ["$HOME/.linuxConfig/wayland/hypr"]="$HOME/.config"
     ["$HOME/.linuxConfig/wayland/swaylock"]="$HOME/.config"
     ["$HOME/.linuxConfig/wayland/waybar"]="$HOME/.config"
-    ["$HOME/.linuxConfig/wezterm"]="$HOME/.config"
 )
 
 # 创建必要的目录
-[[ -d ~/.config ]] || mkdir ~/.config
-[[ -d ~/.config/flameshot ]] || mkdir -p ~/.config/flameshot
-[[ -d ~/.config/konsave ]] || mkdir -p ~/.config/konsave
 [[ -d ~/.config/go-musicfox ]] || mkdir ~/.config/go-musicfox
+[[ -d ~/.config ]] || mkdir ~/.config
 [[ -d ~/.local/share/rime-ls-nvim ]] || mkdir -p ~/.local/share/rime-ls-nvim
 [[ -d ~/.local/shells ]] || mkdir -p ~/.local/shells
 [[ -d ~/.vim ]] || mkdir ~/.vim
@@ -150,6 +152,7 @@ if [[ $XDG_SESSION_TYPE == wayland ]]; then
 else
     the_cmd="xinput list"
 fi
+
 # 判断有没有 touchpad
 if [[ $($the_cmd | grep "[tT]ouchpad" -c) != 0 ]]; then
     # 配置触摸板

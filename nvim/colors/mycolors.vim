@@ -85,3 +85,5 @@ hi LspReferenceText guibg=#3b4261 gui=italic
 hi LspReferenceWrite guibg=#3b4261 gui=bold
 
 hi DropBarMenuNormalFloat guibg=#1a1b26 cterm=NONE guifg=#c0caf5 "ctermfg=NONE
+hi DiffAdd guibg=#283740
+hi DiffText guibg=#2A546D
