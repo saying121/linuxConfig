@@ -16,6 +16,7 @@ $pacMan fzf ripgrep fd lldb translate-shell \
 $aurPkg rust-lolcat-git
 $aurPkg lf
 
+$aurPkg codelldb-bin
 $pacMan python3 python-pip python-pynvim python-pipenv python-pylsp-rope neovim-remote frogmouth python-neovim
 
 $pacMan rustup
@@ -34,17 +35,20 @@ cargo install cargo-update cargo-nextest grcov cargo-cache tokio-console
 # criterion benchmark 会用
 $pacMan gnuplot
 
+$pacMan perf
+cargo install flamegraph
+
 # rust 交叉编译
 rustup target add x86_64-pc-windows-gnu aarch64-apple-darwin x86_64-apple-darwin
 rustup toolchain install stable-x86_64-pc-windows-gnu stable-aarch64-apple-darwin stable-x86_64-apple-darwin --force-non-host
 $aurPkg mingw-w64-gcc osxcross-git
 cargo install cargo-zigbuild
 
-if [[ $(grep -c PROXY /etc/profile) == 0 ]]; then
+if [[ $(grep -c "osx-ndk-x86" /etc/profile) == 0 ]]; then
     # shellcheck disable=2016
     echo '
 export PATH=$PATH:/usr/local/osx-ndk-x86/bin
-    ' | sudo tee -a /etc/profile
+' | sudo tee -a /etc/profile
 
     source /etc/profile
 fi

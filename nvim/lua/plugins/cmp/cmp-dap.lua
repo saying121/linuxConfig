@@ -1,7 +1,7 @@
 return {
     "rcarriga/cmp-dap",
     cond = true,
-    keys = { "<F5>" },
+    ft = "dap-repl",
     config = function()
         require("cmp").setup({
             enabled = function()
@@ -9,7 +9,7 @@ return {
             end,
         })
 
-        require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+        require("cmp").setup.filetype({ "dap-repl" }, {
             sources = {
                 { name = "dap" },
             },

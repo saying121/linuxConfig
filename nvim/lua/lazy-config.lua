@@ -20,7 +20,6 @@ local specs = {
     { import = "plugins.dap" },
     { import = "plugins.database" },
     { import = "plugins.documents" },
-    { import = "plugins.garish" },
     { import = "plugins.lsps" },
     { import = "plugins.mason" },
     { import = "plugins.navigation" },

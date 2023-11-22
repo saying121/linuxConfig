@@ -38,36 +38,36 @@ return {
             }),
             augend.constant.new({
                 elements = { "+", "-" },
-                word = true, -- 匹配一个单词
-                cyclic = true, -- "or" is incremented into "and".
-            }),
-            augend.constant.new({
-                elements = { "+=", "-=" },
-                word = true, -- 匹配一个单词
+                word = false, -- 匹配一个单词
                 cyclic = true, -- "or" is incremented into "and".
             }),
             augend.constant.new({
                 elements = { "<", ">" },
-                word = true, -- 匹配一个单词
+                word = false, -- 匹配一个单词
                 cyclic = true, -- "or" is incremented into "and".
             }),
             augend.constant.new({
                 elements = { "&&", "||" },
-                word = true,
+                word = false,
                 cyclic = true,
             }),
             augend.constant.new({
                 elements = { "++", "--" },
-                word = true,
+                word = false,
                 cyclic = true,
             }),
             augend.constant.new({
                 elements = { "!==", "===" },
-                word = true,
+                word = false,
                 cyclic = true,
             }),
             augend.constant.new({
                 elements = { "MAX", "MIN" },
+                word = true,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = { "max", "min" },
                 word = true,
                 cyclic = true,
             }),
@@ -117,22 +117,17 @@ return {
                     "seven",
                     "eight",
                     "nine",
+                    "ten",
                 },
                 word = true,
                 cyclic = true,
             }),
-            augend.constant.new({
-                elements = { "max", "min" },
-                word = true,
-                cyclic = true,
-            }),
-
             augend.hexcolor.new({
                 case = "lower",
             }),
             augend.constant.new({
                 elements = { "!=", "==" },
-                word = true,
+                word = false,
                 cyclic = true,
             }),
         }

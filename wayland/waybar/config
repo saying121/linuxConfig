@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "height": 5,
+    "height": 14,
     "modules-left": [
         "bluetooth",
         "cpu",

@@ -49,9 +49,9 @@ return {
             nt.jump.prev({ status = "failed" })
         end, opts)
 
-        vim.api.nvim_create_autocmd({ "FileType neotest-output" }, {
+        vim.api.nvim_create_autocmd({ "FileType" }, {
             group = vim.api.nvim_create_augroup("NeotestKeyMap", { clear = true }),
-            -- pattern = { "Cargo.toml" },
+            pattern = { "neotest-output" },
             callback = function()
                 local opts1 = { silent = true, noremap = true, buffer = true }
                 keymap("n", "q", ":x<CR>", opts1)

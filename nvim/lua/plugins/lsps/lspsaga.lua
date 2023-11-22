@@ -119,6 +119,7 @@ return {
         keymap("n", "gh", "<cmd>Lspsaga finder<CR>")
         keymap("n", "gi", "<cmd>Lspsaga finder imp<CR>")
         keymap("n", "gH", "<cmd>Lspsaga finder def+ref+imp<CR>")
+        keymap("n", "gF", "<cmd>Lspsaga finder def<CR>")
 
         local hover = {
             max_width = 0.8,
@@ -126,36 +127,7 @@ return {
             open_link = "gx",
             -- open_cmd = "!chrome",
         }
-        local function peekOrHover()
-            local winid = require("ufo").peekFoldedLinesUnderCursor()
-            -- keymap 好像没效果，虽然 keymap 成功，只能自己先 `trace`(按下按键展开折叠) 然后再编辑了
-            if winid then
-                local bufnr = vim.api.nvim_win_get_buf(winid)
-                local keys = { "a", "i", "o", "A", "I", "O", "gd", "gr" }
-                for _, k in ipairs(keys) do
-                    -- Add a prefix key to fire `trace` action,
-                    vim.keymap.set("n", k, "<CR>" .. k, { noremap = false, buffer = bufnr })
-                end
-            end
-            return winid
-        end
-        -- 和 crates.nvim,nvim-ufo,nvim-dap-ui 集成
-        local function show_documentation()
-            if vim.tbl_contains({ --[[ "vim", ]] "help" }, vim.bo.filetype) then
-                vim.cmd("h " .. vim.fn.expand("<cword>"))
-            elseif vim.tbl_contains({ "man" }, vim.bo.filetype) then
-                vim.cmd("Man " .. vim.fn.expand("<cword>"))
-            elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-                require("crates").show_popup()
-            elseif _G.dapui_for_K == 1 then
-                require("dapui").eval()
-            elseif not peekOrHover() then
-                -- vim.cmd([[Lspsaga hover_doc]])
-                vim.lsp.buf.hover()
-            end
-        end
         -- If you want to jump to the hover window you should use the wincmd command "<C-w>w"
-        keymap("n", "K", show_documentation, { silent = true })
         keymap("n", "ck", "<cmd>Lspsaga hover_doc ++keep<CR>")
 
         local outline = {

@@ -128,20 +128,9 @@ return {
                 end, { "i", "s" }),
                 ["<C-Space>"] = cmp.mapping.complete(),
                 ["<M-u>"] = cmp.mapping.abort(),
-                -- ["<C-Space>"] = require("cmp_rime").mapping.toggle_menu,
-                -- ["<Space>"] = require("cmp_rime").mapping.space_commit,
-                -- ["<CR>"] = require("cmp_rime").mappings.confirm,
 
                 -- ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
                 -- ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-
-                -- ["."] = require("cmp_rime").mapping.page_down,
-                -- [","] = require("cmp_rime").mapping.page_up,
-                --
-                -- [";"] = require("cmp_rime").mapping["2"],
-                -- ["'"] = require("cmp_rime").mapping["3"],
-                -- -- 数字选词也可独立设置, 可设置1-9
-                -- ["1"] = require("cmp_rime").mapping["1"],
             }),
             sorting = {
                 -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)

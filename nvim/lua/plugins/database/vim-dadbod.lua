@@ -10,7 +10,5 @@ return {
         "DBUIToggle",
         "DBUIFindBuffer",
     },
-    dependencies = {
-        require("public.utils").req_lua_files_return_table("plugins/" .. "database" .. "/dependencies"),
-    },
+    dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "database" .. "/dependencies"),
 }

@@ -23,7 +23,7 @@ $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
 # fcitx5的设置
 if [[ $(grep -c fcitx /etc/environment) = 0 ]]; then
     echo '
-# GTK_IM_MODULE=fcitx5
+GTK_IM_MODULE=fcitx5
 QT_IM_MODULE=fcitx5
 XMODIFIERS="@im=fcitx5"
 SDL_IM_MODULE=fcitx5

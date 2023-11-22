@@ -122,7 +122,7 @@ return {
                 },
             },
         },
-        linkedProjects = {}, -- 禁用项目自动发现以支持显式指定的项目集。
+        -- linkedProjects = {}, -- 禁用项目自动发现以支持显式指定的项目集。
         -- 元素必须是指向 Cargo.toml 、 rust-project.json 或#2格式的JSON对象的路径。
         lru = {
             capacity = 128, -- rust 分析器保存在内存中的语法树数。默认值为 128。

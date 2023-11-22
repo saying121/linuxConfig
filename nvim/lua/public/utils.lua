@@ -98,4 +98,13 @@ function M.for_keymap_pattern(ft)
     return pattern
 end
 
+
+function M.file_exists(path)
+    local file = io.open(path, "rb")
+    if file then
+        file:close()
+    end
+    return file ~= nil
+end
+
 return M

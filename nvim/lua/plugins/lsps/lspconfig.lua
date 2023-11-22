@@ -5,21 +5,9 @@ return {
         -- 依赖会先加载。neodev 要在 nvim-lspconfig 之前加载。
         "hrsh7th/cmp-nvim-lsp",
         require(... .. ".neodev"),
-        require(... .. ".neoconf"),
+        -- { "folke/neodev.nvim", opts = {} },
     },
     config = function()
-        vim.g.rime_enabled = false
-        require("lspconfig.configs").rime_ls = {
-            default_config = {
-                name = "rime_ls",
-                cmd = { "rime_ls" },
-                filetypes = { "*" },
-                single_file_support = true,
-            },
-        }
-
-        --//////////////////////////////////////////////////////////////////////////////////////////////////////
-
         require("lspconfig.ui.windows").default_options.border = "single"
 
         local LSP = require("public.lsp_attach")
@@ -32,7 +20,7 @@ return {
         local file_name_list = vim.fn.readdir(lsp_path)
         local lspconfig = require("lspconfig")
 
-        for _, the_file_name in pairs(file_name_list) do
+        for _, the_file_name in ipairs(file_name_list) do
             if vim.endswith(the_file_name, ".lua") then
                 local lsp_name = string.sub(the_file_name, 1, #the_file_name - 4)
 
@@ -52,9 +40,7 @@ return {
                 )
 
                 if lsp_name == "clangd" then
-                    capabilities = {
-                        offsetEncoding = { "utf-16" },
-                    }
+                    capabilities = { offsetEncoding = { "utf-16" } }
                 end
 
                 local configs = vim.tbl_deep_extend("force", {
@@ -65,8 +51,5 @@ return {
                 lspconfig[lsp_name].setup(configs)
             end
         end
-
-        -- VeryLazy 情况要显示启动，懒加载rime-ls有问题
-        -- vim.cmd("LspStart")
     end,
 }

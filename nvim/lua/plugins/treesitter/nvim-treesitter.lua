@@ -2,9 +2,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
     build = ":TSUpdate",
-    dependencies = {
-        require("public.utils").req_lua_files_return_table("plugins/" .. "treesitter" .. "/dependencies"),
-    },
+    dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "treesitter" .. "/dependencies"),
     config = function()
         -- 如果没有可用高亮就用默认的
         if require("nvim-treesitter.parsers").available_parsers()[vim.bo.filetype] == nil then
@@ -47,9 +45,12 @@ return {
                 -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
                 ---@diagnostic disable-next-line: unused-local
                 disable = function(lang, buf)
-                    local max_filesize = 100 * 1024 -- 100 KB
-                    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                    if ok and stats and stats.size > max_filesize then
+                    -- local max_filesize = 100 * 1024 -- 100 KB
+                    -- local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                    -- if ok and stats and stats.size > max_filesize then
+                    --     return true
+                    -- end
+                    if vim.o.columns > 2500 then
                         return true
                     end
                 end,

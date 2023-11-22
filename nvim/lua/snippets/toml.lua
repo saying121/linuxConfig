@@ -48,10 +48,6 @@ local algorithms = {
     ["rustgym"] = "rustgym 解决方案",
     ["rust-algorithms"] = "一个 Rust 算法库",
 }
-local secret = {
-    ["crypto"] = "所有 rust 加密特征的外观板条箱（例如“aead”、“cipher”、“digest”）",
-    ["openssl"] = "OpenSSL bindings",
-}
 local perf = {
     ["mimalloc"] = "面向性能和安全的嵌入式分配器",
     ["tikv-jemallocator"] = "由 jemalloc 支持的 Rust 分配器",
@@ -107,7 +103,7 @@ local file = {
     ["tempdir"] = "用于管理临时目录并在删除时删除所有内容的库。",
     ["dirs"] = "一个小型低级库，通过利用 Linux 上的 xdg 基本/用户目录规范（已知的文件夹 api）定义的机制，为 linux、windows、macos 和 redox 上的配置、缓存和其他数据提供特定于平台的标准目录位置在 Windows 上，以及在 Macos 上的标准目录指南。",
     ["glob"] = "支持根据 unix shell 样式模式匹配文件路径",
-    ["memmap"] = "用于内存映射文件 io 的跨平台 **Rust** api",
+    ["memmap2"] = "用于内存映射文件 io 的跨平台 **Rust** api",
     ["same_file"] = "一个简单的crate，用于确定两个文件路径是否指向同一个文件。",
     ["tar"] = "tar 文件读取器和写入器的 **Rust** 实现",
     ["walkdir"] = "递归地遍历一个目录。",
@@ -120,8 +116,10 @@ local img = {
 local benchmark = {
     ["criterion"] = "criterion.rs 通过快速准确地检测和测量性能改进或回归（即使是很小的改进）来帮助您编写快速代码。您可以自信地进行优化，了解每次更改如何影响代码的性能。",
     ["flame"] = "专为 **Rust** 打造的火焰图分析工具，可以告诉你程序在哪些代码上花费的时间过多，非常适合用于代码性能瓶颈的分析",
+    ["inferno"] = "火焰图性能分析工具套件的 Rust 端口",
 }
 local math = {
+    ["cgmath"] = "用于计算机图形学的线性代数和数学库。",
     ["approx"] = "近似浮点相等比较和断言。",
     ["ndarray"] = "用于一般元素和数字的 n 维数组。轻量级数组视图和切片；视图支持分块和拆分。",
     ["num"] = "**Rust** 的数字类型和特征的集合，包括 *bigint*、*complex*、*rational*、范围迭代器、泛型整数等等！",
@@ -142,8 +140,14 @@ local web = {
     ["rocket"] = "专注于可用性、安全性、可扩展性和速度的 Web 框架。",
     ["salvo"] = "salvo 是一个强大而简单的 **Rust** Web 服务器框架。",
 }
-local net = {
+local secret = {
+    ["crypto"] = "所有 rust 加密特征的外观板条箱（例如“aead”、“cipher”、“digest”）",
+    ["aes"] = "高级加密标准的纯 Rust 实现（又名 rijndael）",
+    ["ring"] = "使用 Rust 的安全、快速、小型加密货币。",
+    ["openssl"] = "OpenSSL bindings",
     ["secret-service"] = "与秘密服务 API 接口的库",
+}
+local net = {
     ["rustls"] = "rustls 是一个用 **Rust** 编写的现代 tls 库。",
     ["keyring"] = "用于管理密码/凭据的跨平台库",
     ["bytes"] = "处理字节的类型和特征",
@@ -161,7 +165,7 @@ local net = {
     ["warp"] = "以极快的速度提供网络服务",
 }
 local sync = {
-    ["rayon"] = "(非常的好用)**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争。它根据运行时的工作负载自动调整并行度。",
+    ["rayon"] = "**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争。它根据运行时的工作负载自动调整并行度。",
     ["raw_sync"] = "操作系统同步原语的轻量级包装器",
     ["parking_lot"] = "标准同步原语的更紧凑和高效的实现",
     ["spin"] = "基于自旋的同步原语",
@@ -172,7 +176,9 @@ local channel = {
     ["flume"] = "一个极快的多生产者渠道(mpmc)",
 }
 local async = {
+    ["async-recursion"] = "异步函数的递归",
     ["pollster"] = "阻塞同步线程直到 future 完成",
+    ["cassette"] = "一个简单的、单一未来的、非阻塞的执行器，用于构建状态机",
     ["actix"] = "**Rust** 的 Actor 框架",
     ["async-trait"] = "异步特征方法的类型擦除",
     ["async-std"] = "**Rust** 标准库的异步版本",
@@ -339,7 +345,8 @@ local all = vim.tbl_deep_extend(
     libs,
     algorithms,
     secret,
-    arena
+    arena,
+    iterators
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']

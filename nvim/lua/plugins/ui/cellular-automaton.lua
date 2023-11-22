@@ -1,8 +1,6 @@
 return {
     "eandrju/cellular-automaton.nvim",
-    keys = {
-        { "<leader>ra", mode = "n", desc = "rain" },
-    },
+    keys = { "<leader>ra", mode = "n", desc = "rain" },
     config = function()
         local opts = { noremap = true, silent = true }
         vim.api.nvim_set_keymap("n", "<leader>ra", "<cmd>CellularAutomaton make_it_rain<CR>", opts)

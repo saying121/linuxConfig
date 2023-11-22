@@ -13,22 +13,26 @@ return {
         "PBClearAllBreakpoints",
         "PBSetConditionalBreakpoint",
     },
-    dependencies = {
-        require("public.utils").req_lua_files_return_table("plugins/" .. "dap" .. "/dependencies"),
-    },
+    dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "dap" .. "/dependencies"),
     config = function()
         -- 对各个语言的配置
         require("dap-conf.python")
         -- require("dap-conf.lldb-vscode")
         require("dap-conf.codelldb")
+        require("dap-conf.gdb")
         -- require("dap-conf.lldb")
         -----------------------------------------------------
 
         vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
         vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "", linehl = "", numhl = "" })
         vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "", linehl = "", numhl = "" }) -- 
-        vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
+        -- vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
         vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "", linehl = "", numhl = "" })
+
+        -- vim.fn.sign_define("DapBreakpointCondition", { text = "🐛", texthl = "", linehl = "", numhl = "" })
+        -- vim.fn.sign_define("DapLogPoint", { text = "🇱", texthl = "", linehl = "", numhl = "" }) -- 
+        vim.fn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" })
+        -- vim.fn.sign_define("DapBreakpointRejected", { text = "⚠️", texthl = "", linehl = "", numhl = "" }) -- ✋
 
         local dap = require("dap")
         local keymap, opts = vim.keymap.set, { noremap = true, silent = true }
@@ -52,30 +56,28 @@ return {
         keymap("n", "<space>dr", dap.repl.open, opts)
         keymap("n", "<space>dl", dap.run_last, opts)
 
-        _G.dapui_for_K = 0
-
         local dapui = require("dapui")
         -- 自动开启ui
         dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open()
             vim.api.nvim_command("DapVirtualTextEnable")
-            _G.dapui_for_K = 1
+            _G.dapui_for_K = true
         end
 
         dap.listeners.before.event_terminated["dapui_config"] = function()
             vim.api.nvim_command("DapVirtualTextEnable")
             -- dapui.close()
-            _G.dapui_for_K = 0
+            _G.dapui_for_K = false
         end
         dap.listeners.before.event_exited["dapui_config"] = function()
             vim.api.nvim_command("DapVirtualTextEnable")
             -- dapui.close()
-            _G.dapui_for_K = 0
+            _G.dapui_for_K = false
         end
         dap.listeners.before.disconnect["dapui_config"] = function()
             vim.api.nvim_command("DapVirtualTextEnable")
             -- dapui.close()
-            _G.dapui_for_K = 0
+            _G.dapui_for_K = false
         end
 
         -- dap.defaults.fallback.terminal_win_cmd = 'set splitright | 10vsplit new' -- this will be override by dapui

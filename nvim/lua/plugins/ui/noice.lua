@@ -2,20 +2,7 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     priority = 900,
-    dependencies = {
-        "MunifTanjim/nui.nvim",
-        {
-            "rcarriga/nvim-notify",
-            config = function()
-                require("notify").setup({
-                    background_colour = "#000000",
-                    stages = "fade_in_slide_out",
-                    max_width = 60,
-                    max_height = 20,
-                })
-            end,
-        },
-    },
+    dependencies = { "MunifTanjim/nui.nvim" },
     config = function()
         vim.api.nvim_create_autocmd({ "FileType" }, {
             group = vim.api.nvim_create_augroup("NotifyMap", { clear = true }),
@@ -149,7 +136,7 @@ return {
                         replace = true,
                         render = "plain",
                         format = { "{message}" },
-                        win_options = { concealcursor = "n", conceallevel = 3 },
+                        win_options = { concealcursor = "n", conceallevel = 0 },
                     },
                 },
             },

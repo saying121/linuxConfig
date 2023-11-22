@@ -75,23 +75,14 @@ return {
                             key_hl = "DashBoardShortCut",
                             action = "Telescope oldfiles",
                         },
-                        -- {
-                        --     icon = "  ",
-                        --     icon_hl = "group",
-                        --     desc = "Find File                     ",
-                        --     desc_hl = "group",
-                        --     key = "|",
-                        --     key_hl = "Comment",
-                        --     action = "Telescope find_files find_command=rg,--hidden,--files",
-                        -- },
                         {
-                            icon = "  ",
+                            icon = "  ",
                             icon_hl = "DashBoardIcon",
-                            desc = "Sessions                        ",
+                            desc = "Find File                     ",
                             desc_hl = "DashBoardCenter",
                             key = "|",
                             key_hl = "DashBoardShortCut",
-                            action = "SessionManager load_session",
+                            action = "Telescope find_files find_command=rg,--hidden,--files",
                         },
                         {
                             icon = "  ",
@@ -134,9 +125,8 @@ return {
             local dashboard = require("alpha.themes.dashboard")
             local button = {
                 dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
-                -- dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
+                dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
                 dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
-                dashboard.button("s", " " .. " Session", ":SessionManager load_session<CR>"),
                 dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
                 dashboard.button("q", " " .. " Quit", ":qa<CR>"),
             }

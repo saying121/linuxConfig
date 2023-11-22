@@ -87,3 +87,18 @@ dap.configurations.cpp = {
 }
 
 dap.configurations.c = dap.configurations.cpp
+
+-- local xcodebuild = require("xcodebuild.dap")
+-- dap.configurations.swift = {
+--     {
+--         name = "iOS App Debugger",
+--         type = "codelldb",
+--         request = "attach",
+--         program = xcodebuild.get_program_path,
+--         -- alternatively, you can wait for the process manually
+--         -- pid = xcodebuild.wait_for_pid,
+--         cwd = "${workspaceFolder}",
+--         stopOnEntry = false,
+--         waitFor = true,
+--     },
+-- }

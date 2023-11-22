@@ -23,6 +23,7 @@ $pacMan hyprland-nvidia \
     # gnome-calendar \
 
 $pacMan pipewire wireplumber slurp grim imv
+$aurPkg flameshot-git
 
 # xrandr-wlr-randr,xprop-wdisplays
-$aurPkg wlr-randr wl-color-picker wl-delicolour-picker-git
+$aurPkg wlr-randr wl-color-picker wl-delicolour-picker-git hyprpicker-git

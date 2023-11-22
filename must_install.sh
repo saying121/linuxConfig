@@ -180,7 +180,7 @@ $aurPkg microsoft-edge-stable-bin google-chrome
 $aurPkg visual-studio-code-bin # intellij-idea-ultimate-edition
 
 # 截图,录屏,剪辑
-$pacMan flameshot spectacle obs-studio wlrobs-hg shotcut v4l2loopback-dkms
+$pacMan flameshot-git obs-studio wlrobs-hg shotcut v4l2loopback-dkms
 sudo gpasswd -a "$USER" video
 
 # 热点

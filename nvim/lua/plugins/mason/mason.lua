@@ -1,9 +1,7 @@
 return {
     "williamboman/mason.nvim",
     cmd = "Mason",
-    dependencies = {
-        require("public.utils").req_lua_files_return_table("plugins/" .. "mason" .. "/dependencies"),
-    },
+    dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "mason" .. "/dependencies"),
     config = function()
         require("mason").setup({
             -- Where Mason should put its bin location in your PATH. Can be one of:

@@ -113,6 +113,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
 # export PYTHONPATH=~/.local/lib/python3.11/site-packages
 
+alias lazyvim="NVIM_APPNAME=lazyvim nvim"
+alias nvchard="NVIM_APPNAME=NvChard nvim"
 alias tvim="NVIM_APPNAME=NvimTest nvim"
 
 zi snippet OMZP::last-working-dir

@@ -1,8 +1,6 @@
 return {
     "nvim-tree/nvim-tree.lua",
-    keys = {
-        { "<leader>e" },
-    },
+    keys = { "<leader>e" },
     -- cond = false,
     dependencies = {
         "nvim-tree/nvim-web-devicons", -- file icons
@@ -50,9 +48,6 @@ return {
                 update_root = true,
             },
             sort_by = "case_sensitive",
-            view = {
-                adaptive_size = true,
-            },
             renderer = {
                 root_folder_label = false,
                 highlight_git = false,

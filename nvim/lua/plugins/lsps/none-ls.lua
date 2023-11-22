@@ -52,7 +52,7 @@ return {
             null_ls.builtins.diagnostics.zsh,
             null_ls.builtins.formatting.beautysh,
             -- js
-            null_ls.builtins.diagnostics.eslint,
+            -- null_ls.builtins.diagnostics.eslint,
             null_ls.builtins.diagnostics.actionlint,
         }
 

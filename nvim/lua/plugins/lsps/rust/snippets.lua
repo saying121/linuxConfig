@@ -142,6 +142,43 @@ local prefix = {
         description = "return …;",
         scope = "expr",
     },
+    ["tracing"] = {
+        prefix = { "tracing_subscriber", "log_sub" },
+        body = {
+            "tracing_subscriber::fmt()",
+            ".with_max_level(tracing::Level::DEBUG)",
+            ".with_test_writer()",
+            ".init();",
+        },
+        requires = { "tracing_subscriber", "tracing" },
+        description = "subscriber debug",
+        scope = "expr",
+    },
+    ["tracing_appender"] = {
+        prefix = { "tracing_appender", "log_sub" },
+        body = {
+            [[let appender = rolling::never("some/path", "xxx.log");]],
+            "let (non_blocking, _guard) = tracing_appender::non_blocking(appender);",
+            "",
+            [[let env_filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info"));]],
+            "",
+            "let file_layer = fmt::layer() .with_thread_ids(true) .with_level(true) .with_ansi(false) .with_writer(non_blocking);",
+            "",
+            "let formatting_layer = fmt::layer() .pretty() .with_writer(std::io::stderr);",
+            "",
+            "Registry::default() .with(env_filter) .with(formatting_layer) .with(file_layer) .init();",
+        },
+        requires = {
+            "tracing_appender::rolling",
+            "tracing_subscriber::fmt",
+            "tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt",
+            "tracing_subscriber::util::SubscriberInitExt",
+            "tracing_subscriber::EnvFilter",
+            "tracing_subscriber::Registry",
+        },
+        description = "subscriber debug",
+        scope = "expr",
+    },
 }
 
 local ratatui = {
@@ -453,10 +490,4 @@ local friendly = {
     },
 }
 
-return vim.tbl_deep_extend(
-    "force",
-    postfix,
-    prefix,
-    friendly,
-    ratatui
-)
+return vim.tbl_deep_extend("force", postfix, prefix, friendly, ratatui)
