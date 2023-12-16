@@ -27,9 +27,6 @@ export _ZL_DATA=~/.local/zlua
 zi ice lucid wait as'completion'
 zi light zsh-users/zsh-completions
 
-zi ice lucid wait as'completion' blockf has'rg'
-zi snippet https://github.com/BurntSushi/ripgrep/blob/master/complete/_rg
-
 zi ice as"completion"
 zi snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
@@ -61,23 +58,20 @@ source ~/.linuxConfig/shells/lib/fzf-tab.zsh
 
 ############################################################
 # git
-zi ice wait lucid; zi snippet OMZL::git.zsh
 zi ice wait lucid; zi snippet OMZP::git
+
 zi ice wait lucid
 zi load voronkovich/gitignore.plugin.zsh
+
 zi ice wait lucid; zi light paulirish/git-open.git
-# source ~/.zi/plugins/tj---git-extras/etc/git-extras-completion.zsh
 
 ############################################################
 # omz
 zi ice wait lucid; zi snippet OMZP::command-not-found
-zi ice wait lucid; zi snippet OMZP::cp
-zi ice wait lucid; zi snippet OMZP::vscode
 zi ice wait lucid; zi snippet OMZP::extract
-
 zi ice wait lucid; zi snippet OMZP::thefuck
-zi ice wait lucid; zi snippet OMZP::pip
-zi ice wait lucid; zi snippet OMZP::alias-finder
+
+zi ice wait lucid; zi snippet OMZP::cp
 
 zi ice wait lucid; zi snippet OMZL::clipboard.zsh
 zi ice wait lucid; zi snippet OMZL::functions.zsh
@@ -87,9 +81,6 @@ zi ice wait lucid; zi snippet OMZL::history.zsh
 # Misc
 
 zi ice wait lucid; zi light lesonky/web-search.git
-
-zi ice as'null' sbin'bin/*'
-zi light z-shell/zsh-diff-so-fancy
 
 zi ice depth=1 lucid; zi light jeffreytse/zsh-vi-mode
 
@@ -115,7 +106,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
 alias lazyvim="NVIM_APPNAME=lazyvim nvim"
 alias nvchard="NVIM_APPNAME=NvChard nvim"
-alias tvim="NVIM_APPNAME=NvimTest nvim"
 
 zi snippet OMZP::last-working-dir
 

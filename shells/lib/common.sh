@@ -26,7 +26,16 @@ fi
 
 alias kcat="kitty +kitten icat"
 alias fimg=~/.linuxConfig/scripts/fzf_ueberzug.sh
-alias yz=yazi
+alias yz="yazi"
+function yzcd() {
+    tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+    yazi --cwd-file="$tmp"
+    cwd="$(cat -- "$tmp")"
+    if [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        cd -- "$cwd" || exit
+    fi
+    rm -f -- "$tmp"
+}
 
 cat() {
     mime=$(file -Lbs --mime-type "$1")
@@ -68,13 +77,13 @@ if [[ $(uname -a | grep -c WSL) != 0 ]]; then
 fi
 
 if [[ $(command -v eza) ]]; then
-    alias ls='eza -F --icons'
-    alias ld='eza -FD --icons'
-    alias ll='eza -FlHhig --time-style long-iso --icons --git'
+    alias ls='eza -F --icons=always'
+    alias ld='eza -FD --icons=always'
+    alias ll='eza -FlHhig --time-style long-iso --icons=always --git'
     alias la='eza -F --all'
     alias lal='ll -a'
     alias lla='ll -a'
-    alias tree='eza -F -T --icons'
+    alias tree='eza -F -T --icons=always'
     alias ltree='tree -l'
 else
     alias ll='ls -l'
@@ -106,7 +115,7 @@ alias tran='trans -j -d en:zh'
 
 alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy && sudo pkgfile -u'
 
-if [[ $(grep -c OMZP::cp ~/.zshrc) != 0 && $SHELL == '/usr/bin/zsh' ]]; then
+if [[ $(grep -c OMZP::cp ~/.zshrc) != 0 && $SHELL == *'zsh' ]]; then
     alias cp='cpv -hhh'
 fi
 
@@ -156,3 +165,4 @@ debug_rust() {
 export MAKEFLAGS='-j'
 
 export RUSTC_WRAPPER=sccache
+export PATH=$PATH:~/.linuxConfig/scripts

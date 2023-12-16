@@ -1,4 +1,5 @@
 scriptencoding utf-8
+
 let mapleader=';'
 " let maplocalleader=';'
 
@@ -15,8 +16,8 @@ xnoremap <M-k> :m '<-2<cr>gv=gv
 
 " nnoremap ` %
 " xnoremap ` %
-nnoremap <silent><leader>w :w<CR>
-nnoremap <silent><leader>x :x<CR>
+nnoremap <silent><leader>w <cmd>w<CR>
+nnoremap <silent><leader>x <cmd>x<CR>
 
 nnoremap j gj
 xnoremap j gj
@@ -72,10 +73,10 @@ nnoremap Y y$
 xnoremap p P
 
 " 切换buffer
-nnoremap <silent>]b :bn<CR>
-nnoremap <silent>[b :bp<CR>
-nnoremap <silent>]B :blast<CR>
-nnoremap <silent>[B :bfirst<CR>
+nnoremap <silent>]b <cmd>bn<CR>
+nnoremap <silent>[b <cmd>bp<CR>
+nnoremap <silent>]B <cmd>blast<CR>
+nnoremap <silent>[B <cmd>bfirst<CR>
 
 " 切换窗口
 nnoremap <M-h> <C-w>h
@@ -89,7 +90,7 @@ tnoremap <M-e> <C-\><C-n>
 " 调整窗口大小
 nnoremap <M-,> <C-W><
 nnoremap <M-.> <C-W>>
-nnoremap <M--> <C-W>-
+    nnoremap <M--> <C-W>-
 nnoremap <M-=> <C-W>+
 
 " 前后跳
@@ -97,16 +98,16 @@ nnoremap <M-o> <C-o>
 nnoremap <M-i> <C-i>
 
 " Alt+t开启关闭终端,vim和nvim不太一样
-" nnoremap <M-t> :terminal<CR>A
+" nnoremap <M-t> <cmd>terminal<CR>A
 " tnoremap <M-t> exit<CR>
 
-nnoremap <silent><BackSpace> :noh<CR>
-" nnoremap <space>s :source $MYVIMRC<CR>
+nnoremap <silent><BackSpace> <cmd>noh<CR>
+" nnoremap <space>s <cmd>source $MYVIMRC<CR>
 
-nnoremap <silent><leader>nc :set nonumber norelativenumber signcolumn=no<CR>
-nnoremap <silent><leader>yc :set number relativenumber signcolumn=yes:1<CR>
+nnoremap <silent><leader>nc <cmd>set nonumber norelativenumber signcolumn=no<CR>
+nnoremap <silent><leader>yc <cmd>set number relativenumber signcolumn=yes:1<CR>
 
 augroup FTMap
     autocmd!
-    autocmd FileType qf nnoremap <buffer> q :cclose<CR>
+    autocmd FileType qf nnoremap <buffer> q <cmd>cclose<CR>
 augroup END

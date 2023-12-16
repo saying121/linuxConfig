@@ -8,6 +8,7 @@ return {
         { "<leader>gw", mode = "n" },
         { "<leader>fo", mode = "n" },
         { "<leader>bf", mode = "n" },
+        { "ti", mode = "n" },
         { "<M-p>", mode = "n" },
     },
     version = "0.1.2",
@@ -25,6 +26,7 @@ return {
         keymap("n", "<leader>fw", builtin.live_grep, opts)
         keymap("n", "<leader>fo", builtin.oldfiles, opts)
         keymap("n", "<leader>bf", builtin.buffers, opts)
+        keymap("n", "ti", builtin.lsp_implementations, opts)
 
         local function find_files_from_git_root()
             local function is_git_repo()
@@ -52,9 +54,10 @@ return {
         end
         keymap("n", "<leader>gw", live_grep_from_git_root, opts)
 
-        require("telescope").load_extension("noice")
-
         local telescope = require("telescope")
+        telescope.load_extension("media_files")
+        telescope.load_extension("noice")
+
         local actions = require("telescope.actions")
 
         local trouble = require("trouble.providers.telescope")
@@ -126,6 +129,13 @@ return {
                 },
             },
             extensions = {
+                media_files = {
+                    -- filetypes whitelist
+                    -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+                    filetypes = { "png", "webp", "jpg", "jpeg" },
+                    -- find command (defaults to `fd`)
+                    find_cmd = "rg",
+                },
                 -- Your extension configuration goes here:
                 -- project = {
                 --     base_dirs = {

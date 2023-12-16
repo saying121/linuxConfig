@@ -23,7 +23,7 @@ return {
                 unsetTest = { "core" }, -- 取消设置指定板条箱的隐含 #[cfg(test)] 。
             },
         },
-        checkOnSave = true,
+        checkOnSave = false,
         check = {
             allTargets = true,
             -- command = "check", -- 用于 cargo check 的命令。

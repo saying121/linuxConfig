@@ -8,18 +8,13 @@ return {
         { "<leader>sc", mode = "n" },
         { "<leader>cl", mode = "n" },
     },
-    cmd = {
-        "PBToggleBreakpoint",
-        "PBClearAllBreakpoints",
-        "PBSetConditionalBreakpoint",
-    },
     dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "dap" .. "/dependencies"),
     config = function()
         -- 对各个语言的配置
         require("dap-conf.python")
         -- require("dap-conf.lldb-vscode")
         require("dap-conf.codelldb")
-        require("dap-conf.gdb")
+        -- require("dap-conf.gdb")
         -- require("dap-conf.lldb")
         -----------------------------------------------------
 
@@ -34,12 +29,15 @@ return {
         vim.fn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" })
         -- vim.fn.sign_define("DapBreakpointRejected", { text = "⚠️", texthl = "", linehl = "", numhl = "" }) -- ✋
 
-        local dap = require("dap")
+        local dap, widgets = require("dap"), require("dap.ui.widgets")
         local keymap, opts = vim.keymap.set, { noremap = true, silent = true }
 
         keymap("n", "<space>b", dap.toggle_breakpoint, opts)
         keymap("n", "<space>B", function()
             dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+        end, opts)
+        keymap("n", "<space>lp", function()
+            dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
         end, opts)
 
         keymap({ "n", "i", "t" }, "<F5>", dap.continue, opts)
@@ -49,12 +47,21 @@ return {
         keymap({ "n", "i", "t" }, "<F9>", dap.step_back, opts)
         keymap({ "n", "i", "t" }, "<F10>", dap.run_last, opts)
         keymap({ "n", "i", "t" }, "<F11>", dap.terminate, opts)
-
-        keymap("n", "<space>lp", function()
-            dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-        end, opts)
+        keymap({ "n", "i", "t" }, "<leader>rtc", dap.run_to_cursor, opts)
         keymap("n", "<space>dr", dap.repl.open, opts)
-        keymap("n", "<space>dl", dap.run_last, opts)
+
+        keymap("n", "<Leader>df", function()
+            widgets.centered_float(widgets.frames)
+        end)
+        keymap("n", "<Leader>ds", function()
+            widgets.centered_float(widgets.scopes)
+        end)
+        keymap("n", "<Leader>dx", function()
+            widgets.centered_float(widgets.threads)
+        end)
+        keymap("n", "<Leader>de", function()
+            widgets.centered_float(widgets.sessions)
+        end)
 
         local dapui = require("dapui")
         -- 自动开启ui

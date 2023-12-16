@@ -4,6 +4,15 @@ local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 
 local crates = {
+    ["better-panic"] = "非常漂亮的回溯受到 python 回溯的启发。",
+    ["bindgen"] = "自动生成 rust ffi 到 c 和 c++ 库的绑定。",
+    ["bytemuck"] = "一个用来处理成堆字节的箱子。",
+    ["owo-colors"] = "零分配的终端颜色会让人们惊叹不已",
+    ["parse-display"] = "使用通用设置实现显示和 str 的程序宏。",
+    ["smol_str"] = "使用 o(1) 克隆的小字符串优化字符串类型",
+    ["rustyline"] = "rustyline，基于 antirez 的 linenoise 的 readline 实现",
+    ["arcstr"] = "更好的引用计数字符串类型，对字符串文字和引用计数子字符串提供零成本（免分配）支持。",
+    ["indoc"] = "缩进文档文字",
     ["owning_ref"] = "一个用于创建携带其所有者的参考资料的库。",
     ["libc"] = "原始 FFI 绑定到 libc 等平台库。",
     ["sscanf"] = "基于正则表达式的 sscanf（格式反转！()）宏",
@@ -117,6 +126,7 @@ local benchmark = {
     ["criterion"] = "criterion.rs 通过快速准确地检测和测量性能改进或回归（即使是很小的改进）来帮助您编写快速代码。您可以自信地进行优化，了解每次更改如何影响代码的性能。",
     ["flame"] = "专为 **Rust** 打造的火焰图分析工具，可以告诉你程序在哪些代码上花费的时间过多，非常适合用于代码性能瓶颈的分析",
     ["inferno"] = "火焰图性能分析工具套件的 Rust 端口",
+    ["pprof"] = "用于 Rust 程序的内部性能工具。",
 }
 local math = {
     ["cgmath"] = "用于计算机图形学的线性代数和数学库。",
@@ -176,6 +186,7 @@ local channel = {
     ["flume"] = "一个极快的多生产者渠道(mpmc)",
 }
 local async = {
+    ["smol"] = "一个小而快速的异步运行时",
     ["async-recursion"] = "异步函数的递归",
     ["pollster"] = "阻塞同步线程直到 future 完成",
     ["cassette"] = "一个简单的、单一未来的、非阻塞的执行器，用于构建状态机",
@@ -190,7 +201,8 @@ local async = {
     ["tokio-graceful"] = "用于正常关闭 tokio 应用程序的 util",
     ["tokio-stream"] = "使用 `stream` 和 `tokio` 的实用程序。",
     ["tokio-test"] = "基于 `tokio` 和 `future` 的代码的测试实用程序",
-    ["tokio-serde"] = [[使用 tokio 通过网络发送和接收 serde 可编码类型。该库用作序列化格式特定库的构建块。]],
+    ["tokio-serde"] = "使用 tokio 通过网络发送和接收 serde 可编码类型。该库用作序列化格式特定库的构建块。",
+    ["signal-hook-tokio"] = "tokio 对信号挂钩的支持",
 }
 local database = {
     ["metrics"] = "对数据库连接性能测试",
@@ -240,6 +252,8 @@ local error = {
     ["miette"] = "花哨的诊断报告库和协议，适合我们这些不是编译器黑客的凡人。",
 }
 local terminal = {
+    ["keymap"] = "用于从配置解析终端输入事件的库",
+    ["terminal_size"] = "获取 Linux 或 Windows 终端的大小",
     ["atty"] = "一个简单的查询 atty 的接口,你是还是不是 tty？",
     ["indicatif"] = "Rust 的进度条和 cli 报告库",
     ["kdam"] = "Rust 的控制台进度条库。 （受到 tqdm 和 rich.progress 的启发）",
@@ -255,6 +269,7 @@ local terminal = {
     ["tuirealm"] = "一个用于构建 tui 界面的 tui-rs 框架，受到 React 和 Elm 的启发。",
     ["throbber-widgets-tui"] = "这是一个显示 throbber 的 tui-rs 小部件。",
     ["tui-image"] = "tui-rs 的图像查看器小部件",
+    ["ratatui-image"] = "ratatui 的图像小部件，支持 Sixels 和 unicode-halfblocks",
     ["tui-textarea"] = "tui-textarea 是 tui-rs 的一个简单但功能强大的文本编辑器小部件。多行文本编辑器可以轻松地作为 tui 应用程序的一部分。",
     ["tui-term"] = "ratatui 的伪终端小部件",
     ["tui-input"] = "支持多个后端的 tui 输入库",
@@ -293,6 +308,8 @@ local macro = {
     ["macro_railroad"] = "一个为 Rust 宏生成语法图的库",
     ["quote"] = "准引用宏引用！(...)",
     ["syn"] = "基于流的轻量级 Web 套接字实现",
+    ["paste"] = "满足您所有标记粘贴需求的宏",
+    ["casey "] = "ident 令牌的大小写转换宏",
 }
 local bindings = {
     ["inline-python"] = "直接在 **Rust** 代码中内联 **Python** 代码",
@@ -309,6 +326,13 @@ local libs = {
     ["dlib"] = "用于处理手动加载可选系统库的辅助宏。",
     ["abi_stable"] = "用于进行 rust-to-rust ffi，编写在程序启动时加载的库。",
     ["cc"] = "**cargo** 构建脚本的构建时依赖项，以协助调用本机 **C** 编译器将本机 **C** 代码编译成静态存档，以便链接到 **Rust** 代码。",
+}
+local neovim = {
+    ["nvim-oxi"] = "Rust 与 Neovim 的所有事物绑定",
+}
+local notify = {
+    ["notify-rust"] = "显示桌面通知（linux、bsd、mac）。纯 Rust dbus 客户端和服务器。",
+    ["notify"] = "跨平台文件系统通知库",
 }
 
 local all = vim.tbl_deep_extend(
@@ -346,11 +370,29 @@ local all = vim.tbl_deep_extend(
     algorithms,
     secret,
     arena,
-    iterators
+    iterators,
+    neovim,
+    notify
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']
 local snippets = {
+    s(
+        {
+            trig = "linux_linker",
+            priority = 30000,
+            dscr = "发布配置",
+        },
+        fmt(
+            [[
+[target.x86_64-unknown-linux-gnu]
+linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+
+        ]],
+            {}
+        )
+    ),
     s(
         {
             trig = "release",

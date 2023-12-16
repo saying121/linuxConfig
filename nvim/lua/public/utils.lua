@@ -98,13 +98,15 @@ function M.for_keymap_pattern(ft)
     return pattern
 end
 
-
-function M.file_exists(path)
-    local file = io.open(path, "rb")
-    if file then
-        file:close()
+--- 判断文件是否存在
+---@param file string
+---@return boolean
+function M.file_exists(file)
+    local f = io.open(file, "rb")
+    if f then
+        f:close()
     end
-    return file ~= nil
+    return f ~= nil
 end
 
 return M

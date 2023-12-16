@@ -11,7 +11,8 @@ return {
         -- local home = vim.env.HOME
         local cache = vim.fn.stdpath("cache")
 
-        WORKSPACE_PATH = cache .. "/jdtls_workspace/"
+        local WORKSPACE_PATH = cache .. "/jdtls_workspace/"
+        local OS
         if vim.fn.has("mac") == 1 then
             OS = "mac"
         elseif vim.fn.has("unix") == 1 then

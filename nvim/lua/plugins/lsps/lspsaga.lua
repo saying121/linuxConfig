@@ -2,8 +2,14 @@ return {
     "glepnir/lspsaga.nvim",
     -- Do make sure that your LSP plugins, like lsp-zero or lsp-config, are loaded before loading lspsaga.
     event = "LspAttach",
-    -- commit = "4f075452c466df263e69ae142f6659dcf9324bf6",
-    -- commit = "8a05cb18092d49075cf533aaf17d312e2ad61d77",
+    keys = {
+        { "<space>gg" },
+        { "[d" },
+        { "]d" },
+        { "[e" },
+        { "]e" },
+    },
+    -- commit = "",
     dependencies = {
         -- Please make sure you install markdown and markdown_inline parser
         "nvim-treesitter/nvim-treesitter",
@@ -19,13 +25,17 @@ return {
                 split = "s",
                 tabe = "t",
                 quit = "q",
-                shuttle = "[w", -- shuttle bettween the layout left and right
+                shuttle = "[", -- shuttle between the layout left and right
                 toggle_or_req = "u", -- toggle or do request.
                 close = "<C-c>k", -- close layout
             },
         }
-        keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-        keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+        keymap("n", "<Leader>ci", function()
+            vim.cmd.Lspsaga("incoming_calls")
+        end)
+        keymap("n", "<Leader>co", function()
+            vim.cmd.Lspsaga("outgoing_calls")
+        end)
 
         local code_action = {
             num_shortcut = true,
@@ -37,7 +47,9 @@ return {
                 exec = "<CR>",
             },
         }
-        keymap({ "n", "x" }, "<M-CR>", "<cmd>Lspsaga code_action<CR>")
+        keymap({ "n", "x" }, "<M-CR>", function()
+            vim.cmd.Lspsaga("code_action")
+        end)
 
         local definition = {
             edit = "<C-c>o",
@@ -47,10 +59,18 @@ return {
             quit = "q",
             close = "<C-c>k",
         }
-        keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
-        keymap("n", "gD", "<cmd>Lspsaga peek_definition<CR>")
-        keymap("n", "gy", "<cmd>Lspsaga goto_type_definition<CR>")
-        keymap("n", "gY", "<cmd>Lspsaga peek_type_definition<CR>")
+        keymap("n", "gd", function()
+            vim.cmd.Lspsaga("goto_definition")
+        end)
+        keymap("n", "gD", function()
+            vim.cmd.Lspsaga("peek_definition")
+        end)
+        keymap("n", "gy", function()
+            vim.cmd.Lspsaga("goto_type_definition")
+        end)
+        keymap("n", "gY", function()
+            vim.cmd.Lspsaga("peek_type_definition")
+        end)
 
         vim.diagnostic.config({
             virtual_text = false,
@@ -78,19 +98,20 @@ return {
         -- Show line diagnostics
         -- You can pass argument ++unfocus to
         -- unfocus the show_line_diagnostics floating window
-        if vim.bo.filetype == "markdown" then
-            local theopts = { noremap = true, silent = true }
-            keymap("n", "<space>gg", vim.diagnostic.open_float, theopts)
-        else
-            keymap("n", "<space>gg", "<cmd>Lspsaga show_line_diagnostics<CR>")
-        end
+        keymap("n", "<space>gg", function()
+            vim.cmd.Lspsaga("show_line_diagnostics")
+        end)
 
         -- keymap("n", "<space>sw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
         -- Show buffer diagnostics
         -- keymap("n", "<space>ll", "<cmd>Lspsaga show_buf_diagnostics<CR>")
         -- Diagnostic jump
-        keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
-        keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+        keymap("n", "[d", function()
+            vim.cmd.Lspsaga("diagnostic_jump_prev")
+        end)
+        keymap("n", "]d", function()
+            vim.cmd.Lspsaga("diagnostic_jump_next")
+        end)
         -- Diagnostic jump with filters such as only jumping to an error
         keymap("n", "[e", function()
             require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
@@ -100,12 +121,12 @@ return {
         end)
 
         local finder = {
-            max_height = 0.5,
+            max_height = 0.45,
             left_width = 0.3,
             default = "def+ref",
             layout = "float",
             keys = {
-                shuttle = "[w",
+                shuttle = "[",
                 toggle_or_open = "o", -- toggle expand or open
                 vsplit = "s", -- open in vsplit
                 split = "i", -- open in split
@@ -116,10 +137,18 @@ return {
             },
         }
         -- you can use <C-t> to jump back
-        keymap("n", "gh", "<cmd>Lspsaga finder<CR>")
-        keymap("n", "gi", "<cmd>Lspsaga finder imp<CR>")
-        keymap("n", "gH", "<cmd>Lspsaga finder def+ref+imp<CR>")
-        keymap("n", "gF", "<cmd>Lspsaga finder def<CR>")
+        keymap("n", "gh", function()
+            vim.cmd.Lspsaga("finder")
+        end)
+        keymap("n", "gi", function()
+            vim.cmd.Lspsaga({ "finder", "imp" })
+        end)
+        keymap("n", "gH", function()
+            vim.cmd.Lspsaga({ "finder", "def+ref+imp" })
+        end)
+        keymap("n", "gF", function()
+            vim.cmd.Lspsaga({ "finder", "def" })
+        end)
 
         local hover = {
             max_width = 0.8,
@@ -128,7 +157,9 @@ return {
             -- open_cmd = "!chrome",
         }
         -- If you want to jump to the hover window you should use the wincmd command "<C-w>w"
-        keymap("n", "ck", "<cmd>Lspsaga hover_doc ++keep<CR>")
+        keymap("n", "ck", function()
+            vim.cmd.Lspsaga({ "hover_doc ", "++keep" })
+        end)
 
         local outline = {
             win_position = "right", -- window position
@@ -143,7 +174,9 @@ return {
                 jump = "e",
             },
         }
-        keymap("n", "<leader>ol", "<cmd>Lspsaga outline<CR>")
+        keymap("n", "<leader>ol", function()
+            vim.cmd.Lspsaga({ "outline" })
+        end)
 
         local rename = {
             in_select = false,
@@ -151,15 +184,19 @@ return {
             project_max_width = 0.5,
             project_max_height = 0.5,
             keys = {
-                quit = "<C-c>",
+                quit = "q",
                 exec = "<CR>",
                 select = "x",
             },
         }
         -- Rename all occurrences of the hovered word for the entire file
-        keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>")
+        keymap("n", "<space>rn", function()
+            vim.cmd.Lspsaga("rename")
+        end)
         -- Rename all occurrences of the hovered word for the selected files
-        keymap("n", "<space>Rn", "<cmd>Lspsaga rename ++project<CR>")
+        keymap("n", "<space>Rn", function()
+            vim.cmd.Lspsaga({ "rename", "++project" })
+        end)
 
         require("lspsaga").setup({
             symbol_in_winbar = {
@@ -189,8 +226,16 @@ return {
             },
             outline = outline,
             rename = rename,
+            ui = {
+                collapse = "",
+                expand = "",
+                title = true,
+                devicon = true,
+            },
         })
 
-        keymap({ "n", "t" }, "<M-a>", "<cmd>Lspsaga term_toggle<CR>")
+        keymap({ "n", "t" }, "<M-a>", function()
+            vim.cmd.Lspsaga("term_toggle")
+        end)
     end,
 }

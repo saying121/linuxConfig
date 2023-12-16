@@ -27,14 +27,8 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
 return {
-    s(
-        {
-            trig = "shellcheck-disable",
-            dscr = "",
-        },
-        fmta(
-            [[# shellcheck disable=SC<>]],
-            { i(1, [[number]]) }
-        )
-    ),
+    s({
+        trig = "shellcheck-disable",
+        dscr = "",
+    }, fmta([[# shellcheck disable=SC<>]], { i(1, [[number]]) })),
 }

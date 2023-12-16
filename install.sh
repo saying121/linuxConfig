@@ -81,6 +81,8 @@ $pacMan vhs tokei
 $pacMan auto-cpufreq
 sudo systemctl enable --now auto-cpufreq.service
 
+$pacMan easyeffects calf lsp-plugins-lv2 zam-plugins-lv2 mda.lv2 yelp
+
 # 3D
 # $pacMan blender
 

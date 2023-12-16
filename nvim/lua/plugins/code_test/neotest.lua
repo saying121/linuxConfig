@@ -12,7 +12,7 @@ return {
         "antoinemadec/FixCursorHold.nvim",
         {
             "rouge8/neotest-rust",
-            build = [[ [ "$(command -v cargo-nextest)" ] || cargo install cargo-nextest ]],
+            build = '[[ "$(command -v cargo-nextest)" = "" ]] && cargo install cargo-nextest',
         },
         "nvim-neotest/neotest-python",
     },

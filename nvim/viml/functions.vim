@@ -143,5 +143,5 @@ function! MoveToNextTab()
 endfunc
 
 " 把tab移动到buffer里面
-nnoremap mt :call MoveToNextTab()<cr>
-nnoremap mT :call MoveToPrevTab()<cr>
+nnoremap mt <cmd>call MoveToNextTab()<cr>
+nnoremap mT <cmd>call MoveToPrevTab()<cr>

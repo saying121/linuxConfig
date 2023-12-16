@@ -6,10 +6,15 @@ local ft = {
 
 return {
     "lervag/vimtex",
+    ft = {
+        "tex",
+        "bib",
+        "plaintex",
+    },
     event = require("public.utils").boot_event(ft),
     config = function()
         local opts, keymap = { silent = true, noremap = true }, vim.keymap.set
-        keymap("n", "<C-p>", ":VIimtexView<CR>", opts)
+        keymap("n", "<C-p>", "<cmd>VimtexView<CR>", opts)
         -- Viewer options: One may configure the viewer either by specifying a built-in
         -- viewer method:
         vim.g.vimtex_view_method = "zathura"

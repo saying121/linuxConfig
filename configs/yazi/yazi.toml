@@ -1,0 +1,7 @@
+[manager]
+layout = [1, 3, 4]
+
+[preview]
+tab_size = 2
+max_width = 6600
+max_height = 6900

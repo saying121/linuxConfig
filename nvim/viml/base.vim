@@ -56,6 +56,11 @@ set undodir=~/.local/share/nvim/undodir                        " 指定撤销文
 set sidescrolloff=20                                            " 横向展示的列
 
 set termguicolors
-set conceallevel=3
+set conceallevel=2
 
 set nowrap
+
+set fillchars=eob:\ ,fold:\ ,foldopen:,foldsep:\ ,foldclose:
+set foldcolumn=1
+set foldlevel=99
+set foldlevelstart=99

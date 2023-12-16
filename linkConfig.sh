@@ -20,6 +20,10 @@ fi
 if [[ $(grep -c PROXY /etc/profile) == 0 ]]; then
     # shellcheck disable=2016
     echo '
+export XDG_DATA_HOME=~/.local/share
+export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+
 export ALL_PROXY=http://127.0.0.1:7890
 export HTTPS_PROXY=http://127.0.0.1:7890
 export HTTP_PROXY=http://127.0.0.1:7890
@@ -28,12 +32,9 @@ export NO_PROXY=baidu.com,qq.com
 export EDITOR=nvim
 
 export PATH=$PATH:~/.cargo/bin:~/.local/bin:~/go/bin
-export GOPATH=~/go
+export GOPATH=$XDG_DATA_HOME/go
+export GOBIN=$XDG_DATA_HOME/go/bin
 export PATH=$PATH:/usr/lib/w3m
-
-export XDG_DATA_HOME=~/.local/share
-export XDG_CONFIG_HOME=~/.config
-export XDG_CACHE_HOME=~/.cache
 
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export QT_QPA_PLATFORM="wayland;xcb"
@@ -59,9 +60,11 @@ link_list=(
     ["$HOME/.linuxConfig/X11/Xresources"]="$HOME/.Xresources"
     ["$HOME/.linuxConfig/X11/xinitrc"]="$HOME/.xinitrc"
     ["$HOME/.linuxConfig/X11/xprofile"]="$HOME/.xprofile"
+    ["$HOME/.linuxConfig/configs/cargo-config.toml"]="$HOME/.cargo/config"
     ["$HOME/.linuxConfig/configs/.sqlfluff"]="$HOME/.sqlfluff"
     ["$HOME/.linuxConfig/configs/gtkrc-2.0"]="$HOME/.gtkrc-2.0"
     ["$HOME/.linuxConfig/configs/dunst"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/yazi"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/fcitxs-config/fcitx"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/fcitxs-config/fcitx5"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/flameshot"]="$HOME/.config"

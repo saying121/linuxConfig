@@ -1,6 +1,6 @@
 return {
     "andythigpen/nvim-coverage",
-    build = [[ [ "$(command -v grcov)" ] || cargo install grcov ]],
+    build = '[[ "$(command -v grcov)" = "" ]] && cargo install grcov',
     cmd = {
         "Coverage",
         "CoverageSummary",

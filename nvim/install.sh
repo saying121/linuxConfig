@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export ALL_PROXY=http://127.0.0.1:7890
 export HTTPS_PROXY=http://127.0.0.1:7890
@@ -11,12 +11,18 @@ $pacMan fzf ripgrep fd lldb translate-shell \
     jdk17-openjdk go cmake \
     neovim luarocks shellcheck \
     zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-ps \
-    typst deno tesseract actionlint
+    typst deno tesseract actionlint \
+    mold lld cargo-flamegraph sccache silicon
+$pacMan ruff-lsp vim-language-server lua-language-server bash-language-server \
+    gopls yaml-language-server typescript-language-server jdtls marksman \
+    texlab typst-lsp
+$pacMan sqlfluff vint
+$pacMan prettier stylua
+$pacMan python-debugpy delve codelldb-bin
 
-$aurPkg rust-lolcat-git
+$aurPkg rust-lolcat-git inferno
 $aurPkg lf
 
-$aurPkg codelldb-bin
 $pacMan python3 python-pip python-pynvim python-pipenv python-pylsp-rope neovim-remote frogmouth python-neovim
 
 $pacMan rustup
@@ -29,7 +35,6 @@ rustup default stable
 # 切换 crates 源
 cargo install crm
 ~/.cargo/bin/crm use rsproxy
-cargo install sccache
 # `cargo install-update -h`,neotest-rust  用到
 cargo install cargo-update cargo-nextest grcov cargo-cache tokio-console
 # criterion benchmark 会用

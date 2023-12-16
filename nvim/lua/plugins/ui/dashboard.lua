@@ -1,32 +1,31 @@
 local dash_func = require("public.dashboard")
-local result = vim.fn.rand() % 2
+local split = 41
+local split1 = 26
+local total = split + split1
+local result = vim.fn.rand() % total
 -- result = 1
+result = 60
 
 --- 是否启用
----@param nb number
 ---@return boolean
-local function enable_cond(nb)
-    -- 判断命令行启动有几个参数，第一个是nvim,第二个一般是文件名
+local function enable_cond()
+    -- 判断命令行启动有几个参数
     if vim.fn.exists("neovide") ~= 0 and #vim.v.argv <= 3 then
         return true
+    else
+        return false
     end
-    return #vim.v.argv <= 2 and result == nb
 end
 
 return {
     {
         "glepnir/dashboard-nvim",
-        cond = enable_cond(0),
-        init = function()
-            vim.api.nvim_create_autocmd({ "FileType" }, {
-                group = vim.api.nvim_create_augroup("DashboardMap", { clear = true }),
-                pattern = { "dashboard" },
-                callback = function()
-                    local opts1 = { silent = true, noremap = true, buffer = true }
-                    local keymap = vim.keymap.set
-                    keymap("n", "q", ":x<CR>", opts1)
-                end,
-            })
+        cond = function()
+            local cond = result < split
+            if enable_cond() then
+                return cond
+            end
+            return #vim.v.argv <= 2 and cond
         end,
         config = function()
             local path_cat = dash_func.get_random_file_path("the_cat")
@@ -71,7 +70,7 @@ return {
                             icon_hl = "DashBoardIcon",
                             desc = "Recently opened files           ",
                             desc_hl = "DashBoardCenter",
-                            key = "|",
+                            key = "r",
                             key_hl = "DashBoardShortCut",
                             action = "Telescope oldfiles",
                         },
@@ -80,25 +79,25 @@ return {
                             icon_hl = "DashBoardIcon",
                             desc = "Find File                     ",
                             desc_hl = "DashBoardCenter",
-                            key = "|",
+                            key = "f",
                             key_hl = "DashBoardShortCut",
                             action = "Telescope find_files find_command=rg,--hidden,--files",
                         },
                         {
-                            icon = "  ",
+                            icon = "󰒲  ",
                             icon_hl = "DashBoardIcon",
-                            desc = "File Browser                    ",
+                            desc = "Lazy                            ",
                             desc_hl = "DashBoardCenter",
-                            key = "|",
+                            key = "l",
                             key_hl = "DashBoardShortCut",
-                            action = [[=require'toggleterm.terminal'.Terminal:new({ cmd = 'lf' }):toggle()]],
+                            action = "Lazy",
                         },
                         {
                             icon = "  ",
                             icon_hl = "DashBoardIcon",
                             desc = "Edit config                     ",
                             desc_hl = "DashBoardCenter",
-                            key = "|",
+                            key = "c",
                             key_hl = "DashBoardShortCut",
                             action = "e $MYVIMRC",
                         },
@@ -119,29 +118,33 @@ return {
     },
     {
         "goolord/alpha-nvim",
-        cond = enable_cond(1),
+        cond = function()
+            local cond = result >= split
+            if enable_cond() then
+                return cond
+            end
+            return #vim.v.argv <= 2 and cond
+        end,
         config = function()
             local alpha = require("alpha")
             local dashboard = require("alpha.themes.dashboard")
-            local button = {
-                dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
-                dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
-                dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
-                dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-                dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+            local buttons = {
+                dashboard.button("r", " " .. " Recent files", "<cmd>Telescope oldfiles <CR>"),
+                dashboard.button("n", " " .. " New file", "<cmd>ene <BAR> startinsert <CR>"),
+                dashboard.button("c", " " .. " Config", "<cmd>e $MYVIMRC <CR>"),
+                dashboard.button("l", "󰒲 " .. " Lazy", "<cmd>Lazy<CR>"),
+                dashboard.button("q", " " .. " Quit", "<cmd>qa<CR>"),
             }
-            dashboard.section.buttons.val = button
-            for _, button in ipairs(button) do
+            dashboard.section.buttons.val = buttons
+            for _, button in ipairs(buttons) do
                 button.opts.hl = "AlphaButtons"
                 button.opts.hl_shortcut = "AlphaShortcut"
             end
 
-            local buttons = {
+            local button = {
                 type = "group",
-                val = button,
-                opts = {
-                    spacing = 1,
-                },
+                val = buttons,
+                opts = { spacing = 1 },
             }
 
             dashboard.section.header.opts.hl = "AlphaHeader"
@@ -151,7 +154,7 @@ return {
             -- Config gif header
             require("alpha.term")
 
-            local redirect = " > /proc/" .. vim.loop.os_getpid() .. "/fd/1"
+            -- local redirect = " > /proc/" .. vim.loop.os_getpid() .. "/fd/1"
             local pic_cat = dash_func.get_random_file_path("pictures")
             local dynamic_header = {
                 type = "terminal",
@@ -214,15 +217,21 @@ return {
                     hl = "Number",
                 },
             }
+            local prev
+            if vim.fn.getenv("TERM") == "xterm-kitty" then
+                prev = all_prev[dash_func.get_rand(all_prev)]
+            else
+                prev = all_prev[1]
+            end
 
             dashboard.opts = {
                 layout = {
                     { type = "padding", val = 0 },
-                    all_prev[dash_func.get_rand(all_prev)],
+                    prev,
                     { type = "padding", val = 7 },
                     date_today,
                     { type = "padding", val = 2 },
-                    buttons,
+                    button,
                     { type = "padding", val = 1 },
                     footer,
                     -- { type = "padding", val = 1 },
@@ -235,23 +244,6 @@ return {
             }
 
             alpha.setup(dashboard.opts)
-
-            -- 用 dashboard.opts 改后就不能用这个了
-            -- vim.api.nvim_create_autocmd("User", {
-            --     pattern = "AlphaReady",
-            --     callback = function()
-            --         -- local stats = require("lazy").stats()
-            --         local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-            --         dashboard.section.footer.val = version
-            --             .. "⚡ Neovim loaded "
-            --             .. stats.count
-            --             .. " plugins in "
-            --             .. ms
-            --             .. "ms"
-            --         -- vim.cmd("AlphaRedraw")
-            --         alpha.redraw()
-            --     end,
-            -- })
         end,
     },
 }

@@ -40,6 +40,9 @@ silicon-*
 build_rust/
 build_c_cpp/
 build_go/
+flamegraph/
+flamegraph.svg
+perf.data*
 ]]
 
 return {

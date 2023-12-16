@@ -6,6 +6,27 @@ local postfix = {
         requires = "std::sync::Arc",
         scope = "expr",
     },
+    ["Arc::clone"] = {
+        body = "Arc::clone(&${receiver})",
+        description = "Put the expression into an `Arc::clone`",
+        postfix = "arc_clone",
+        requires = "std::sync::Arc",
+        scope = "expr",
+    },
+    ["Rc::new"] = {
+        body = "Rc::new(${receiver})",
+        description = "Put the expression into an `Rc`",
+        postfix = "rc",
+        requires = "std::rc::Rc",
+        scope = "expr",
+    },
+    ["Rc::clone"] = {
+        body = "Rc::clone(${receiver})",
+        description = "Put the expression into an `Rc::clone`",
+        postfix = "rc_clone",
+        requires = "std::rc::Rc",
+        scope = "expr",
+    },
     ["Box::pin"] = {
         body = "Box::pin(${receiver})",
         description = "Put the expression into a pinned `Box`",
@@ -23,13 +44,6 @@ local postfix = {
         body = "Ok(${receiver})",
         description = "Wrap the expression in a `Result::Ok`",
         postfix = "ok",
-        scope = "expr",
-    },
-    ["Rc::new"] = {
-        body = "Rc::new(${receiver})",
-        description = "Put the expression into an `Rc`",
-        postfix = "rc",
-        requires = "std::rc::Rc",
         scope = "expr",
     },
     Some = {
@@ -72,6 +86,16 @@ local postfix = {
         },
         description = "Wrap the expression in an `println!`",
         postfix = "dbgr_d",
+        scope = "expr",
+    },
+    Br = {
+        body = {
+            "{$1",
+            "    ${receiver}",
+            "$0}",
+        },
+        description = "Wrap the expression in an `println!`",
+        postfix = "Br",
         scope = "expr",
     },
 }
@@ -194,7 +218,7 @@ local ratatui = {
             [[let mut terminal = Terminal::new(backend)?;]],
             -- "}",
         },
-        description = "termianl start flow",
+        description = "terminal start flow",
         requires = {
             "std::io",
             -- "std::io::Stdout",
@@ -221,7 +245,7 @@ execute!(
             ]],
             "terminal.show_cursor()?;",
         },
-        description = "termianl end flow",
+        description = "terminal end flow",
         requires = {
             "crossterm::event::DisableMouseCapture",
             -- "crossterm::execute", -- rust-analyzer 解析不出来宏
@@ -243,6 +267,16 @@ local friendly = {
         description = "assert_eq!(…, …);",
         prefix = "assert_eq",
     },
+    debug_assert_eq = {
+        body = { "debug_assert_eq!(${1}, ${2});" },
+        description = "debug_assert_eq!(…, …)",
+        prefix = "debug_assert_eq",
+    },
+    debug_assert_ne = {
+        body = { "debug_assert_ne!(${1}, ${2});" },
+        description = "debug_assert_ne!(…, …)",
+        prefix = "debug_assert_ne",
+    },
     bench = {
         body = {
             "#[bench]",
@@ -253,60 +287,10 @@ local friendly = {
         description = "#[bench]",
         prefix = "bench",
     },
-    column = {
-        body = { "column!()" },
-        description = "column!()",
-        prefix = "column",
-    },
-    concat = {
-        body = { "concat!(${1})" },
-        description = "concat!(…)",
-        prefix = "concat",
-    },
     concat_idents = {
         body = { "concat_idents!(${1})" },
         description = "concat_idents!(…)",
         prefix = "concat_idents",
-    },
-    debug_assert = {
-        body = { "debug_assert!(${1});" },
-        description = "debug_assert!(…)",
-        prefix = "debug_assert",
-    },
-    debug_assert_eq = {
-        body = { "debug_assert_eq!(${1}, ${2});" },
-        description = "debug_assert_eq!(…, …)",
-        prefix = "debug_assert_eq",
-    },
-    env = {
-        body = { 'env!("${1}")' },
-        description = 'env!("…")',
-        prefix = "env",
-    },
-    ["extern-crate"] = {
-        body = { "extern crate ${1:name};" },
-        description = "extern crate …;",
-        prefix = "extern-crate",
-    },
-    ["extern-fn"] = {
-        body = { 'extern "C" fn ${1:name}(${2:arg}: ${3:Type}) -> ${4:RetType} {', "    ${5:// add code here}", "}" },
-        description = 'extern "C" fn …(…) { … }',
-        prefix = "extern-fn",
-    },
-    ["extern-mod"] = {
-        body = { 'extern "C" {', "    ${2:// add code here}", "}" },
-        description = 'extern "C" { … }',
-        prefix = "extern-mod",
-    },
-    feature = {
-        body = { "#![feature(${1})]" },
-        description = "#![feature(…)]",
-        prefix = "feature",
-    },
-    file = {
-        body = { "file!()" },
-        description = "file!()",
-        prefix = "file",
     },
     -- fn_r = {
     --     body = { "fn ${1:name}(${2:arg}: ${3:Type}) -> ${4:RetType} {", "    ${5:unimplemented!();}", "}" },
@@ -338,21 +322,6 @@ local friendly = {
     --     description = "if let … = … { … }",
     --     prefix = "if-let",
     -- },
-    include = {
-        body = { 'include!("${1}");' },
-        description = 'include!("…");',
-        prefix = "include",
-    },
-    include_bytes = {
-        body = { 'include_bytes!("${1}")' },
-        description = 'include_bytes!("…")',
-        prefix = "include_bytes",
-    },
-    include_str = {
-        body = { 'include_str!("${1}")' },
-        description = 'include_str!("…")',
-        prefix = "include_str",
-    },
     ["inline-fn"] = {
         body = { "#[inline]", "pub fn ${1:name}() {", "    ${2:unimplemented!();}", "}" },
         description = "inlined function",
@@ -363,16 +332,6 @@ local friendly = {
         description = "let … = …;",
         prefix = "letv",
     },
-    line = {
-        body = { "line!()" },
-        description = "line!()",
-        prefix = "line",
-    },
-    -- loop = {
-    --     body = { "loop {", "    ${2:unimplemented!();}", "}" },
-    --     description = "loop { … }",
-    --     prefix = "loop",
-    -- },
     -- macro_rules = {
     --     body = { "macro_rules! ${1:name} {", "    (${2}) => (${3})", "}" },
     --     description = "macro_rules! … { … }",
@@ -393,31 +352,6 @@ local friendly = {
         description = "match … { … }",
         prefix = "match",
     },
-    -- mod = {
-    --     body = { "mod ${1:name};" },
-    --     description = "mod …;",
-    --     prefix = "mod",
-    -- },
-    -- ["mod-block"] = {
-    --     body = { "mod ${1:name} {", "    ${2:// add code here}", "}" },
-    --     description = "mod … { … }",
-    --     prefix = "mod-block",
-    -- },
-    module_path = {
-        body = { "module_path!()" },
-        description = "module_path!()",
-        prefix = "module_path",
-    },
-    -- no_core = {
-    --     body = { "#![no_core]" },
-    --     description = "#![no_core]",
-    --     prefix = "no_core",
-    -- },
-    -- no_std = {
-    --     body = { "#![no_std]" },
-    --     description = "#![no_std]",
-    --     prefix = "no_std",
-    -- },
     option_env = {
         body = { 'option_env!("${1}")' },
         description = 'option_env!("…")',
@@ -448,11 +382,6 @@ local friendly = {
     --     description = "static …: … = …;",
     --     prefix = "static",
     -- },
-    stringify = {
-        body = { "stringify!(${1})" },
-        description = "stringify!(…)",
-        prefix = "stringify",
-    },
     thread_local = {
         body = { "thread_local!(static ${1:STATIC}: ${2:Type} = ${4:init});" },
         description = "thread_local!(static …: … = …);",
@@ -462,16 +391,6 @@ local friendly = {
         body = { "try!(${1})" },
         description = "try!(…)",
         prefix = "try",
-    },
-    unimplemented = {
-        body = { "unimplemented!()" },
-        description = "unimplemented!()",
-        prefix = "unimplemented",
-    },
-    unreachable = {
-        body = { "unreachable!(${1})" },
-        description = "unreachable!(…)",
-        prefix = "unreachable",
     },
     -- ["while-let"] = {
     --     body = { "while let ${1:Some(pat)} = ${2:expr} {", "    ${0:unimplemented!();}", "}" },

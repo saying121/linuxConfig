@@ -5,21 +5,29 @@ local keymap = vim.keymap.set
 
 _G.dapui_for_K = false
 
-local function peekOrHover()
+local function UfoHover()
     local winid = require("ufo").peekFoldedLinesUnderCursor()
     if winid then
         local bufnr = vim.api.nvim_win_get_buf(winid)
-        local keys = { "a", "i", "o", "A", "I", "O", "gd", "gr" }
+        local keys = { "a", "i", "o", "A", "I", "O", "gd", "gr", "dd" }
         for _, k in ipairs(keys) do
             -- Add a prefix key to fire `trace` action,
-            keymap("n", k, function()
-                require("ufo.lib.event"):emit("onBufRemap", bufnr, "trace")
-                vim.api.nvim_feedkeys(k, "n", true)
-            end, { noremap = false, buffer = bufnr })
+            keymap("n", k, "<CR>" .. k, { remap = true, buffer = bufnr })
         end
     end
     return winid
 end
+
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
+    group = vim.api.nvim_create_augroup("FoldHover", { clear = false }),
+    pattern = { "*" },
+    callback = function()
+        if vim.tbl_contains(vim.treesitter.get_captures_at_cursor(), "include") then
+            UfoHover()
+        end
+    end,
+})
+
 function _G.show_documentation()
     if _G.dapui_for_K then
         require("dapui").eval()
@@ -29,7 +37,7 @@ function _G.show_documentation()
         vim.cmd("Man " .. vim.fn.expand("<cword>"))
     elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
         require("crates").show_popup()
-    elseif not peekOrHover() then
+    elseif not UfoHover() then
         -- vim.cmd([[Lspsaga hover_doc]])
         vim.lsp.buf.hover()
     end
@@ -51,12 +59,6 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "single",
 })
-
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-vim.o.foldcolumn = "1" -- '0' is not bad
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
 
 vim.g.maplocalleader = ","
 

@@ -87,7 +87,7 @@ M.on_attach = function(client, bufnr)
 
     if cap.inlayHintProvider ~= nil then
         if vim.fn.has("nvim-0.10.0") == 1 then
-            local ok, err = pcall(vim.lsp.inlay_hint, 0, true)
+            local ok, err = pcall(vim.lsp.inlay_hint.enable, bufnr, true)
             if not ok then
                 print(err)
             end
@@ -98,6 +98,7 @@ M.on_attach = function(client, bufnr)
         keymap("n", "<space>f", function()
             vim.lsp.buf.format({
                 async = true,
+                bufnr = bufnr,
                 filter = function(client1)
                     return client1.name ~= "lua-ls"
                 end,

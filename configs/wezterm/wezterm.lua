@@ -10,8 +10,19 @@ end
 
 return {
     default_prog = get_sehll(),
-    font = wezterm.font("Hack Nerd Font"),
+    font = wezterm.font_with_fallback({
+        "Hack Nerd Font",
+        {
+            family = "Noto Sans Mono CJK SC",
+            -- scale = 1.1,
+            -- weight = "Bold",
+        },
+        'Noto Serif CJK TC',
+        "JetBrains Mono",
+        "WenQuanYi Zen Hei Mono",
+    }),
     font_size = 14,
+    use_cap_height_to_scale_fallback_fonts = true,
     window_background_opacity = 0.81,
     window_padding = { top = 0, bottom = 0, left = 0, right = 0 },
     text_background_opacity = 1,
@@ -21,6 +32,7 @@ return {
     default_cursor_style = "SteadyBar", -- Acceptable values are SteadyBlock, BlinkingBlock, SteadyUnderline, BlinkingUnderline, SteadyBar, and BlinkingBar.
     -- colors = { tab_bar = tabbar },
     enable_wayland = true,
+    -- color_scheme = "Dracula+",
     leader = { key = "3", mods = "CTRL" },
     keys = require("keys"),
     key_tables = require("key_tables"),

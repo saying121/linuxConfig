@@ -21,7 +21,7 @@ local specs = {
     { import = "plugins.database" },
     { import = "plugins.documents" },
     { import = "plugins.lsps" },
-    { import = "plugins.mason" },
+    { import = "plugins.edit" },
     { import = "plugins.navigation" },
     { import = "plugins.previews" },
     { import = "plugins.telescope" },
@@ -40,12 +40,12 @@ require("lazy").setup({
     },
     -- leave nil when passing the spec as the first argument to setup()
     -- spec = nil, ---@type LazySpec
-    lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json", -- lockfile generated after running update.
+    -- lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json", -- lockfile generated after running update.
     git = {
         -- defaults for the `Lazy log` command
         -- log = { "-10" }, -- show the last 10 commits
         log = { "--since=3 days ago" }, -- show commits from the last 3 days
-        timeout = 120, -- kill processes that take more than 2 minutes
+        timeout = 180, -- kill processes that take more than 2 minutes
         url_format = mirror .. "https://github.com/%s.git",
     },
     dev = {

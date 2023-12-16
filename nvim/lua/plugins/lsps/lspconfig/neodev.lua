@@ -8,6 +8,7 @@ return {
     end,
     config = function()
         local import = {
+            -- "nvim-dap",
             "plenary.nvim",
             -- "dyninput.nvim",
             -- "refactoring.nvim",
@@ -19,7 +20,7 @@ return {
             -- "neotest",
             -- "neotest-rust",
             "nvim-treesitter",
-            "nvim-lspconfig",
+            -- "nvim-lspconfig",
             -- "cmp-nvim-lsp",
             -- "nvim-cmp",
             -- "nvim-ufo",

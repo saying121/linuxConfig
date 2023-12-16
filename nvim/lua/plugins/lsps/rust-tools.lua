@@ -1,6 +1,6 @@
 return {
     "simrat39/rust-tools.nvim",
-    -- cond = false,
+    cond = false,
     ft = "rust",
     dependencies = {
         "neovim/nvim-lspconfig",
@@ -24,14 +24,14 @@ return {
         local rt = require("rust-tools")
 
         local function ra()
-            local status = os.execute("systemctl is-active --quiet ra-mulitplex.service")
+            local status = os.execute("systemctl --user --quiet is-active ra-multiplex.service")
             if status == 0 then
+                vim.fn.setenv("RA_MUX_SERVER", "/usr/lib/rustup/bin/rust-analyzer")
                 return { "ra-multiplex" }
             else
                 return { "rust-analyzer" }
             end
         end
-        local cmd = ra()
 
         rt.setup({
             tools = {
@@ -67,7 +67,7 @@ return {
                 -- standalone file support
                 -- setting it to false may improve startup time
                 standalone = true,
-                -- cmd = { "ra-multiplex" },
+                -- cmd = ra(),
                 on_attach = function(client, bufnr)
                     require("public.lsp_attach").on_attach(client, bufnr)
                     local keymap, opts = vim.keymap.set, { noremap = true, silent = true, buffer = bufnr }

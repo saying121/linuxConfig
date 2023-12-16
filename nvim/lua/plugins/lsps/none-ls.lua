@@ -1,34 +1,6 @@
-local ft = {
-    asciidoc = "adoc",
-    asciidoc1 = "asciidoc",
-    css = "css",
-    flow = "flow",
-    graphql = "graphql",
-    html = "html",
-    javascript = "js",
-    json = "json",
-    jsx = "jsx",
-    less = "less",
-    lua = "lua",
-    markdown = "md",
-    -- mysql = "mysql",
-    -- plsql = "plsql",
-    python = "py",
-    scss = "scss",
-    sh = "sh",
-    sql = "sql",
-    tex = "tex",
-    typescript = "ts",
-    vim = "vim",
-    vue = "vue",
-    yaml = "yaml",
-    yml = "yml",
-    zsh = "zsh",
-}
-
 return {
     "nvimtools/none-ls.nvim",
-    event = require("public.utils").boot_event(ft),
+    event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
     -- cond = false,
     config = function()
@@ -40,27 +12,32 @@ return {
             null_ls.builtins.formatting.sqlfluff.with({
                 filetypes = { "sql", "mysql" },
             }),
+            null_ls.builtins.formatting.typstfmt,
             null_ls.builtins.formatting.latexindent,
-            null_ls.builtins.formatting.black,
-            null_ls.builtins.formatting.isort,
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.formatting.stylua,
-            -- null_ls.builtins.formatting.shfmt,
-            -- viml
+            null_ls.builtins.formatting.stylua,
+            null_ls.builtins.formatting.shfmt.with({
+                extra_args = { "-i", "4" },
+            }),
+            null_ls.builtins.formatting.asmfmt,
+            null_ls.builtins.formatting.fnlfmt,
             null_ls.builtins.diagnostics.vint,
-            -- null_ls.builtins.diagnostics.vale,
-            null_ls.builtins.diagnostics.zsh,
-            null_ls.builtins.formatting.beautysh,
-            -- js
+            -- null_ls.builtins.diagnostics.protolint,
+            -- null_ls.builtins.formatting.protolint,
+            null_ls.builtins.formatting.beautysh.with({
+                extra_args = { "--indent-size", "4", "-s", "paronly" },
+            }),
             -- null_ls.builtins.diagnostics.eslint,
             null_ls.builtins.diagnostics.actionlint,
+            -- null_ls.builtins.diagnostics.codespell,
         }
 
         null_ls.setup({
             sources = sources_table,
             on_attach = function(server, buffnr)
                 vim.keymap.set({ "n", "x" }, "<space>f", function()
-                    vim.lsp.buf.format({ async = true, buffer = buffnr })
+                    vim.lsp.buf.format({ async = true, bufnr = buffnr })
                 end, { noremap = true, silent = true })
             end,
         })

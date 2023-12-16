@@ -29,6 +29,24 @@ local ms = ls.multi_snippet
 return {
     s(
         {
+            trig = "auto_group",
+            dscr = "",
+        },
+        fmta(
+            [[
+        vim.api.nvim_create_autocmd({ "<>" }, {
+            group = vim.api.nvim_create_augroup("<>", { clear = true }),
+            pattern = { "Cargo.toml" },
+            callback = function()
+                <>
+            end,
+        })
+            ]],
+            { i(1, "BufEnter"), i(2, ""), i(3, "") }
+        )
+    ),
+    s(
+        {
             trig = "luasnippet",
             priority = 2000,
             dscr = "片段头",

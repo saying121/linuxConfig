@@ -46,10 +46,25 @@ return {
         -- check out `./lua/ufo.lua` and search `setFoldVirtTextHandler` for detail.
         require("ufo").setup({
             fold_virt_text_handler = handler,
-            -- provider_selector = function(bufnr, filetype, buftype)
-            --     return { "treesitter", "indent" }
-            -- end,
-            -- close_fold_kinds = { "imports", "comment" },
+            provider_selector = function(bufnr, filetype, buftype)
+                local ftMap = {
+                    vim = { "indent", "treesitter" },
+                    python = { "indent", "treesitter" },
+                    git = "",
+                }
+
+                if ftMap[filetype] ~= nil then
+                    return ftMap[filetype]
+                end
+
+                return { "lsp", "indent" }
+            end,
+            close_fold_kinds = {
+                "imports",
+                -- "region",
+                -- "comment",
+            },
+            enable_get_fold_virt_text = true,
             preview = {
                 win_config = {
                     border = "rounded",
@@ -116,7 +131,7 @@ return {
             group = vim.api.nvim_create_augroup("UfoDetachs", { clear = true }),
             pattern = ft,
             callback = function()
-            vim.cmd("UfoDetach")
+                vim.cmd("UfoDetach")
             end,
         })
     end,

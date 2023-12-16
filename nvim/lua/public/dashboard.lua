@@ -1,20 +1,10 @@
 local M = {}
---- 判断文件是否存在
----@param file string
----@return boolean
-function M.file_exists(file)
-    local f = io.open(file, "rb")
-    if f then
-        f:close()
-    end
-    return f ~= nil
-end
 
 --- 从一个文件中读取所有的行，并返回一个包含所有行的表
 ---@param file string
 ---@return table
 function M.lines_from(file)
-    if not M.file_exists(file) then
+    if not require("public.utils").file_exists(file) then
         return {}
     end
 
@@ -67,7 +57,7 @@ end
 function M.get_random_file_path(dir_name)
     local dir_path = vim.fn.stdpath("config") .. "/dashboard/" .. dir_name
     local file_name = vim.fn.readdir(dir_path)
-    -- local file_name = { 'vim.cat' } -- 测试某个
+    -- local file_name = { 'girl6.cat' } -- 测试某个
     return dir_path .. "/" .. file_name[M.get_rand(file_name)]
 end
 

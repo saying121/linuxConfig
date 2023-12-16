@@ -17,6 +17,7 @@ return {
                 "markdown",
                 "TelescopePrompt",
                 "dropbar_menu",
+                "dapui_hover",
             },
         })
     end,

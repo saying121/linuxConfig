@@ -12,8 +12,12 @@ return {
     },
     config = function()
         local keymap = vim.keymap.set
-        keymap({ "n", "x" }, "<C-S-e>", "<Cmd>Neogen file<CR>", { noremap = true, silent = true })
-        keymap({ "n", "x" }, "<C-S-a>", "<Cmd>Neogen<CR>", { noremap = true, silent = true })
+        keymap({ "n", "x" }, "<C-S-e>", function()
+            vim.cmd.Neogen("file")
+        end, { noremap = true, silent = true })
+        keymap({ "n", "x" }, "<C-S-a>", function()
+            vim.cmd.Neogen()
+        end, { noremap = true, silent = true })
 
         require("neogen").setup({
             snippet_engine = "luasnip",

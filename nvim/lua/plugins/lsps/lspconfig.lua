@@ -5,7 +5,6 @@ return {
         -- 依赖会先加载。neodev 要在 nvim-lspconfig 之前加载。
         "hrsh7th/cmp-nvim-lsp",
         require(... .. ".neodev"),
-        -- { "folke/neodev.nvim", opts = {} },
     },
     config = function()
         require("lspconfig.ui.windows").default_options.border = "single"

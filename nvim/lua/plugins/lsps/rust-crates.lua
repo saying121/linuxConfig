@@ -28,14 +28,6 @@ return {
 
                 keymap("n", "cu", crates.update_crate, opts)
                 keymap("x", "cu", crates.update_crates, opts)
-
-                -- keymap("n", "<leader>ca", crates.update_all_crates, opts)
-                -- keymap("n", "<leader>cA", crates.upgrade_all_crates, opts)
-
-                -- keymap("n", "<leader>cH", crates.open_homepage, opts)
-                -- keymap("n", "<leader>cR", crates.open_repository, opts)
-                -- keymap("n", "<leader>cD", crates.open_documentation, opts)
-                -- keymap("n", "<leader>cC", crates.open_crates_io, opts)
             end,
         })
     end,

@@ -60,6 +60,72 @@ return {
         trig = "tokio_add_head",
         dscr = "add #[tokio::main]",
     }, fmta("#[tokio::main]", {})),
+    s(
+        {
+            trig = "tokio_test",
+            dscr = "add #[tokio::test]",
+        },
+        fmta("#[tokio::test(<>worker_threads = <>)]", {
+            i(1, [[flavor = "multi_thread", ]]),
+            i(2, "10"),
+        })
+    ),
+    s(
+        {
+            trig = "feature",
+            dscr = "add #![feature(…)]",
+        },
+        fmta("#![feature(<>)]", {
+            i(1, ""),
+        })
+    ),
+    s(
+        {
+            trig = "extern-crate",
+            dscr = "extern crate …;",
+        },
+        fmta("extern crate <>;", {
+            i(1, "name"),
+        })
+    ),
+    s(
+        {
+            trig = "extern-fn",
+            dscr = 'extern "C" fn …(…) { … }',
+        },
+        fmta(
+            [[
+extern "C" fn []([]: []) -> [] {
+    []
+}
+        ]],
+            {
+                i(1, "name"),
+                i(2, "arg"),
+                i(3, "Type"),
+                i(4, "RetType"),
+                i(5, "// add code here"),
+            },
+            { delimiters = "[]" }
+        )
+    ),
+    s(
+        {
+            trig = "extern-mod",
+            dscr = 'extern "C" { … }',
+        },
+        fmta(
+            [[
+extern "<>" {
+    <>
+}
+        ]],
+            {
+                i(1, "C"),
+                i(2, "// add code here"),
+            }
+        )
+    ),
     s({
         trig = "alloc_add",
         dscr = "add extern crate alloc;",
@@ -184,25 +250,25 @@ return {
         dscr = "#[derive(…)]",
         trig = "derive",
     }, fmt("#[derive({})]", { i(1, "") })),
-    s(
-        {
-            trig = "enum",
-            dscr = "enum … { … }",
-        },
-        fmta(
-            [[
-            enum <> {
-                <>,
-                <>,
-            }
-            ]],
-            {
-                i(1, "Name"),
-                i(2, "Variant1"),
-                i(3, "Variant2"),
-            }
-        )
-    ),
+    -- s(
+    --     {
+    --         trig = "enum",
+    --         dscr = "enum … { … }",
+    --     },
+    --     fmta(
+    --         [[
+    --         enum <> {
+    --             <>,
+    --             <>,
+    --         }
+    --         ]],
+    --         {
+    --             i(1, "Name"),
+    --             i(2, "Variant1"),
+    --             i(3, "Variant2"),
+    --         }
+    --     )
+    -- ),
     s(
         {
             trig = "struct",

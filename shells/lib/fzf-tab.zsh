@@ -6,21 +6,29 @@ export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_mo
 
 export LESSOPEN='|lesspipe.sh %s'
 
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
 zstyle ':fzf-tab:*' fzf-command fzf
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:complete:*:*' fzf-flags --height=70%
 
-zstyle ':fzf-tab:complete:*' fzf-preview 'alias $word'
+zstyle ':fzf-tab:complete:*' fzf-preview 'which $word'
 
-zstyle ':fzf-tab:complete:pacman:*' fzf-preview "pacman -Qi $word | bat --color=always -plyaml || pacman -Si $word | bat --color=always -plyaml"
-zstyle ':fzf-tab:complete:yay:*' fzf-preview "yay -Qi $word | bat --color=always -plyaml || yay -Si $word | bat --color=always -plyaml"
-zstyle ':fzf-tab:complete:paru:*' fzf-preview "paru -Qi $word | bat --color=always -plyaml || yay -Si $word | bat --color=always -plyaml"
+zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
 
-zstyle ':fzf-tab:complete:cargo:*' fzf-preview "cargo help $word | bat --color=always -plhelp"
-zstyle ':fzf-tab:complete:rustc:*' fzf-preview "rustc help $word | bat --color=always -plhelp"
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
 
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
+zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
+zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
+
+zstyle ':fzf-tab:complete:pacman:*' fzf-preview 'if [[ $(pacman -Qs $word) = "" ]]; then pacman -Si $word | bat --color=always -plyaml; else pacman -Qi $word | bat --color=always -plyaml; fi'
+zstyle ':fzf-tab:complete:yay:*' fzf-preview 'if [[ $(yay -Qs $word) = "" ]]; then yay -Si $word | bat --color=always -plyaml; else yay -Qi $word | bat --color=always -plyaml; fi'
+zstyle ':fzf-tab:complete:paru:*' fzf-preview 'if [[ $(paru -Qs $word) = "" ]]; then paru -Si $word | bat --color=always -plyaml; else paru -Qi $word | bat --color=always -plyaml; fi'
+
+zstyle ':fzf-tab:complete:cargo:*' fzf-preview 'cargo help $word | bat --color=always -plhelp'
+zstyle ':fzf-tab:complete:rustc:*' fzf-preview 'echo $desc | bat --color=always -plhelp'
 
 zstyle ':fzf-tab:complete:_zlua:*' query-string input
 
@@ -30,8 +38,7 @@ zstyle ':fzf-tab:*' prefix ''
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 
-# zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[ "$group" = "process ID" ] && ps --pid=$word -o cmd --no-headers -w -w'
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview 'ps --pid=$word -o cmd --no-headers -w -w'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ "$group" == *"process ID"* ]] && ps --pid=$word -o cmd --no-headers -w -w'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 
 # Take advantage of $LS_COLORS for completion as well
