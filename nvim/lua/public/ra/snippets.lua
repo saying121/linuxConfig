@@ -347,10 +347,25 @@ local friendly = {
     --     description = "fn main() { … }",
     --     prefix = "main",
     -- },
-    match = {
-        body = { "match ${1:expr} {", "    ${2:Some(expr)} => ${3:expr},", "    ${4:None} => ${5:expr},", "}" },
+    match_opt = {
+        body = {
+            "match ${1:expr} {",
+            "    Some(${2:expr}) => ${3:expr},",
+            "    ${4:None} => ${5:expr},",
+            "}",
+        },
         description = "match … { … }",
-        prefix = "match",
+        prefix = "match_option",
+    },
+    match_res = {
+        body = {
+            "match ${1:expr} {",
+            "    Ok(${2:expr}) => ${3:expr},",
+            "    Err(${4:err}) => ${5:expr},",
+            "}",
+        },
+        description = "match … { … }",
+        prefix = "match_res",
     },
     option_env = {
         body = { 'option_env!("${1}")' },

@@ -1,7 +1,6 @@
 set encoding=utf-8                                             " VIM打开文件用的内部编码
 scriptencoding utf-8
-" filetype plugin indent on
-filetype plugin on
+filetype plugin indent on
 syntax off                                                     " 语法高亮，用nvim-treesitter高亮
 set ttimeout ttimeoutlen=10                                    " 设置切换模式的延迟时间
 set history=100
@@ -16,9 +15,16 @@ set termencoding=utf-8                                         " 终端输出的
 set fileformat=unix                                            " 设定文件格式为unix
 set fileformats=unix,dos,mac                                   " 识别文件格式
 
-" set listchars=eol:,tab:>>,space:                              " 换行和tab显示方式
-set listchars=tab:>>,space:·                                   " 换行和tab显示方式
+set listchars=tab:>.                                           " tab显示方式
+set listchars+=trail:·                                         " 行末空格显示
+set listchars+=extends:⇒                                       " 一行后面还有内容时
+set listchars+=precedes:⇐                                      " 一行前面还有内容时
+" set listchars+=leadmultispace:│...
+" set listchars+=space:·
+" set listchars+=eol:
+" set listchars+=conceal:﬒
 set list
+
 set number                                                     " 显示行号
 set relativenumber                                             " 相对行号
 set hlsearch                                                   " 搜索结果高亮

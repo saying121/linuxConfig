@@ -5,11 +5,7 @@ return {
         "UIEnter Cargo.toml",
         "BufNewFile Cargo.toml",
     },
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-        -- 有一个 keymap 在 lspsaga 里面
-        "glepnir/lspsaga.nvim",
-    },
+    dependencies = { "nvim-lua/plenary.nvim" },
     init = function()
         vim.api.nvim_create_autocmd({ "BufEnter" }, {
             group = vim.api.nvim_create_augroup("CratesKeyMap", { clear = true }),

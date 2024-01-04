@@ -1,6 +1,5 @@
 return {
     "SmiteshP/nvim-navbuddy",
-    -- event = "LspAttach",
     cmd = "Navbuddy",
     keys = "<leader>lg",
     dependencies = {
@@ -47,10 +46,10 @@ return {
 
             mappings = {
                 ["0"] = actions.root(), -- Move to first panel
-
-                ["s"] = actions.toggle_preview(), -- Show preview of current node
-
-                ["t"] = actions.telescope({ -- Fuzzy finder at current level.
+                ["t"] = actions.toggle_preview(), -- Show preview of current node
+                ["z"] = actions.fold_create(), -- Create fold of current scope
+                ["Z"] = actions.fold_delete(), -- Delete fold of current scope
+                ["f"] = actions.telescope({ -- Fuzzy finder at current level.
                     layout_config = { -- All options that can be
                         height = 0.60, -- passed to telescope.nvim's
                         width = 0.60, -- default can be passed here.
@@ -59,7 +58,6 @@ return {
                     },
                     -- layout_strategy = "horizontal",
                 }),
-
                 ["g?"] = actions.help(), -- Open mappings help window
             },
         })

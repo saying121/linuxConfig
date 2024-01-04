@@ -1,8 +1,6 @@
 return {
     "mfussenegger/nvim-jdtls",
-    dependencies = {
-        "williamboman/mason.nvim",
-    },
+    dependencies = { "williamboman/mason.nvim" },
     event = {
         "UIEnter *.java",
         "BufNew *.java",
@@ -23,6 +21,7 @@ return {
         end
 
         local install_path = require("mason-registry").get_package("jdtls"):get_install_path()
+        -- local install_path = "/usr/share/java/jdtls"
         local java_test_path = require("mason-registry").get_package("java-test"):get_install_path()
         local java_debug_adapter_path = require("mason-registry").get_package("java-debug-adapter"):get_install_path()
         local bundles = {}
@@ -37,13 +36,11 @@ return {
             )
         )
 
-        -- calculate root directory
+        -- root directory
         local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
         local root_dir = require("jdtls.setup").find_root(root_markers)
 
-        -- calculate workspace dir
-        -- local util = require("public.utils")
-        -- local project_name = vim.fn.fnamemodify(util.get_git_root_dir(vim.fn.getcwd(), "/.git"), ":p:h:t")
+        -- workspace dir
         local project_name = root_dir or vim.fn.getcwd()
         local workspace_dir = WORKSPACE_PATH .. project_name
         local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
@@ -51,12 +48,9 @@ return {
 
         -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
         local config = {
-            -- The command that starts the language server
-            -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
             cmd = {
                 -- 💀
-                "java", -- or '/path/to/java17_or_newer/bin/java'
-                -- depends on if `java` is in your $PATH env variable and if it points to the right version.
+                "java",
                 "-Declipse.application=org.eclipse.jdt.ls.core.id1",
                 "-Dosgi.bundles.defaultStartLevel=4",
                 "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -68,37 +62,15 @@ return {
                 "java.base/java.util=ALL-UNNAMED",
                 "--add-opens",
                 "java.base/java.lang=ALL-UNNAMED",
-                -- 💀
                 "-jar",
                 vim.fn.glob(install_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
-                -- vim.env.HOME.."/path/to/jdtls_install_location/plugins/org.eclipse.equinox.launcher_VERSION_NUMBER.jar",
-                -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
-                -- Must point to the                                                     Change this to
-                -- eclipse.jdt.ls installation                                           the actual version
-
-                -- 💀
                 "-configuration",
                 install_path .. "/config_" .. OS,
-                -- "/path/to/jdtls_install_location/config_SYSTEM",
-                -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
-                -- Must point to the                      Change to one of `linux`, `win` or `mac`
-                -- eclipse.jdt.ls installation            Depending on your system.
-
-                -- 💀
-                -- See `data directory configuration` section in the README
                 "-data",
                 workspace_dir,
-                -- "/path/to/unique/per/project/workspace/folder",
             },
-
-            -- 💀
-            -- This is the default if not provided, you can remove it. Or adjust as needed.
-            -- One dedicated LSP server & client will be started per unique root_dir
             root_dir = root_dir,
-
-            -- Here you can configure eclipse.jdt.ls specific settings
             -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
-            -- for a list of options
             settings = {
                 java = {
                     eclipse = {
@@ -106,16 +78,20 @@ return {
                     },
                     configuration = {
                         updateBuildConfiguration = "interactive",
-                        -- runtimes = {
-                        --     {
-                        --         name = "JavaSE-17",
-                        --         path = "/home/jrakhman/.sdkman/candidates/java/17.0.4-oracle",
-                        --     },
-                        --     {
-                        --         name = "JavaSE-11",
-                        --         path = "/home/jrakhman/.sdkman/candidates/java/11.0.2-open",
-                        --     },
-                        -- },
+                        runtimes = {
+                            {
+                                name = "JavaSE-11",
+                                path = "/usr/lib/jvm/java-11-openjdk/",
+                            },
+                            {
+                                name = "JavaSE-17",
+                                path = "/usr/lib/jvm/java-17-openjdk/",
+                            },
+                            {
+                                name = "JavaSE-21",
+                                path = "/usr/lib/jvm/java-21-openjdk/",
+                            },
+                        },
                     },
                     maven = {
                         downloadSources = true,
@@ -217,12 +193,13 @@ return {
 
                 local opts, keymap = { noremap = true, silent = true, buffer = bufnr }, vim.keymap.set
 
-                keymap("n", "<leader>di", require("jdtls").organize_imports, opts)
+                -- keymap("n", "<leader>di", require("jdtls").organize_imports, opts)
                 keymap("n", "<leader>dt", require("jdtls").test_class, opts)
                 keymap("n", "<leader>dn", require("jdtls").test_nearest_method, opts)
+
                 keymap("x", "<leader>de", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
                 keymap("n", "<leader>de", require("jdtls").extract_variable, opts)
-                keymap("x", "<leader>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
+                -- keymap("x", "<leader>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
 
                 keymap("x", "<leader>cxc", [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]], opts)
                 keymap("x", "<leader>cxv", [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]], opts)

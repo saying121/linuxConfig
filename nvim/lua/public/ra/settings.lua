@@ -1,3 +1,6 @@
+local lints = require("public.ra.extra_lint")
+local snippets = require("public.ra.snippets")
+
 return {
     ["rust-analyzer"] = {
         cargo = {
@@ -28,7 +31,7 @@ return {
             allTargets = true,
             -- command = "check", -- 用于 cargo check 的命令。
             command = "clippy", -- 用于 cargo check 的命令。
-            extraArgs = vim.tbl_deep_extend("force", { "--no-deps" }, require("plugins.lsps.rust.extra_allow")), -- cargo check 的额外参数。
+            extraArgs = vim.tbl_deep_extend("force", { "--no-deps" }, lints), -- cargo check 的额外参数。
             -- extraArgs = { "--no-deps" },
             -- extraArgs = {"--no-deps",'--', "-W","clippy::manual_string_new" }, -- cargo check 的额外参数。
             extraEnv = {}, -- 运行 cargo check 时将设置的额外环境变量。扩展 rust-analyzer.cargo.extraEnv 。
@@ -58,19 +61,16 @@ return {
             limit = nil, -- 要返回的最大完成次数。如果 None ，则极限为无穷大。
             postfix = { enable = true }, -- Whether to show postfix snippets like dbg, if, not, etc.
             privateEditable = { enable = true },
-            snippets = { custom = require("plugins.lsps.rust.snippets") },
+            snippets = { custom = snippets },
         },
         diagnostics = {
             enable = true,
             disabled = {}, -- 要禁用的锈蚀分析仪诊断列表。
             experimental = { enable = false }, -- 是否显示可能比平时有更多假阳性的实验性锈蚀分析仪诊断。
             remapprefix = {}, -- 解析诊断文件路径时要替换的前缀的映射。这应该是传递给 rustc 的内容作为 --remap-path-prefix 的反向映射。
-            warningsAsHint = {
-                "missing_const_for_fn",
-            }, -- 应以提示严重性显示的警告列表。
+            warningsAsHint = {}, -- 应以提示严重性显示的警告列表。
             warningsAsInfo = {
-                "missing_const_for_fn",
-                -- "unused_variables",
+                "unused_variables",
             }, -- 应与信息严重性一起显示的警告列表。
             files = {
                 excludeDirs = {}, -- 锈蚀分析器将忽略这些目录。它们是相对于工作区根目录的，不支持glob。您可能还需要将文件夹添加到代码的 files.watcherExclude 中。
@@ -107,6 +107,10 @@ return {
         },
         lens = {
             enable = true,
+            debug = { enable = true },
+            forceCustomCommands = true,
+            implementations = { enable = true },
+            location = "location",
             references = {
                 adt = {
                     enable = false, -- 是否显示Struct、Enum和Union的 References 镜头。仅在设置了 rust-analyzer.lens.enable 时适用。
@@ -115,10 +119,10 @@ return {
                     enable = false, -- 是否显示枚举变体的 References 镜头。仅在设置了 rust-analyzer.lens.enable 时适用。
                 },
                 method = {
-                    enable = false,
+                    enable = true,
                 },
                 trait = {
-                    enable = false,
+                    enable = true,
                 },
             },
         },
@@ -156,8 +160,8 @@ return {
                 -- mode = "prefix", --[[ postfix ]]
                 mode = "postfix ",
             },
-            lifetimeElisionHints = { enable = "always", useParameterNames = false },
-            maxLength = 15,
+            lifetimeElisionHints = { enable = "always", useParameterNames = true },
+            maxLength = 20,
             parameterHints = { enable = true },
             renderColons = true,
             typeHints = { enable = true, hideClosureInitialization = false, hideNamedConstructor = false },

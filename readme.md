@@ -1,7 +1,6 @@
 ![桌面图像](./pictures/wayland.png)
 
 <!--toc:start-->
-
 - [个人应用配置](#个人应用配置)
   - [先运行](#先运行)
   - [如果要使用本配置，执行下面代码，包含 `ranger` 的插件](#如果要使用本配置执行下面代码包含-ranger-的插件)
@@ -9,7 +8,6 @@
   - [Clone 完成后](#clone-完成后)
   - [Nvidia，自行选择是否安装，最好看 archwiki 。](#nvidia自行选择是否安装最好看-archwiki)
   - [zsh](#zsh)
-  - [rtl8811/21 等网卡](#rtl881121-等网卡)
 - [License](#license)
 <!--toc:end-->
 
@@ -89,16 +87,6 @@ yay -S nouveau-fw xf86-video-nouveau
 如果安装 zi 框架失败就执行 `sh -c "$(curl -fsSL get.zshell.dev)"`
 
 如果有插件没有安装完成，用 `zi update`
-
-`z-shell/zsh-diff-so-fancy` 总是安装失败，建议手动 `zi light z-shell/zsh-diff-so-fancy`
-
-## rtl8811/21 等网卡
-
-```bash
-yay -S rtl8821cu-morrownr-dkms-git
-# lsusb 出现 cdrom/CDROM 就执行
-# eject /dev/cdrom
-```
 
 # License
 

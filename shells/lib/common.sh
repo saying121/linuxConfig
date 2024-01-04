@@ -27,7 +27,7 @@ fi
 alias kcat="kitty +kitten icat"
 alias fimg=~/.linuxConfig/scripts/fzf_ueberzug.sh
 alias yz="yazi"
-function yzcd() {
+yzcd() {
     tmp="$(mktemp -t "yazi-cwd.XXXXX")"
     yazi --cwd-file="$tmp"
     cwd="$(cat -- "$tmp")"
@@ -162,7 +162,8 @@ debug_rust() {
     fi
 }
 
-export MAKEFLAGS='-j'
+thread_num=$(nproc)
+export MAKEFLAGS="-j$thread_num"
 
 export RUSTC_WRAPPER=sccache
 export PATH=$PATH:~/.linuxConfig/scripts

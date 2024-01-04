@@ -9,9 +9,8 @@ return {
         { "<leader>fo", mode = "n" },
         { "<leader>bf", mode = "n" },
         { "ti", mode = "n" },
-        { "<M-p>", mode = "n" },
     },
-    version = "0.1.2",
+    version = "0.1.5",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         "nvim-lua/plenary.nvim",
@@ -21,12 +20,27 @@ return {
         local builtin, keymap = require("telescope.builtin"), vim.keymap.set
         local opts = { noremap = true, silent = true }
         local util = require("public.utils")
+        local function layout()
+            return require("telescope.themes").get_dropdown({
+                layout_config = {
+                    preview_cutoff = 1, -- Preview should always show (unless previewer = false)
+                    width = function(_, max_columns, _)
+                        return math.ceil(max_columns * 0.8)
+                    end,
+                    height = function(_, _, max_lines)
+                        return math.min(max_lines, 15)
+                    end,
+                },
+            })
+        end
 
         keymap("n", "<leader>ff", builtin.find_files, opts)
         keymap("n", "<leader>fw", builtin.live_grep, opts)
         keymap("n", "<leader>fo", builtin.oldfiles, opts)
         keymap("n", "<leader>bf", builtin.buffers, opts)
-        keymap("n", "ti", builtin.lsp_implementations, opts)
+        keymap("n", "ti", function()
+            builtin.lsp_implementations(layout())
+        end, opts)
 
         local function find_files_from_git_root()
             local function is_git_repo()
@@ -57,6 +71,7 @@ return {
         local telescope = require("telescope")
         telescope.load_extension("media_files")
         telescope.load_extension("noice")
+        telescope.load_extension("ast_grep")
 
         local actions = require("telescope.actions")
 
@@ -127,6 +142,14 @@ return {
                 oldfiles = {
                     prompt_prefix = " ",
                 },
+                lsp_implementations = {
+                    layout_config = {
+                        vertical = { width = 0.9 },
+                        preview_width = 0.5,
+                        -- other layout configuration here
+                    },
+                    theme = "dropdown",
+                },
             },
             extensions = {
                 media_files = {
@@ -136,22 +159,14 @@ return {
                     -- find command (defaults to `fd`)
                     find_cmd = "rg",
                 },
-                -- Your extension configuration goes here:
-                -- project = {
-                --     base_dirs = {
-                --         "~/dev/src",
-                --         { "~/dev/src2" },
-                --         { "~/dev/src3", max_depth = 4 },
-                --         { path = "~/dev/src4" },
-                --         { path = "~/dev/src5", max_depth = 2 },
-                --     },
-                --     hidden_files = true, -- default: false
-                --     theme = "dropdown",
-                --     order_by = "asc",
-                --     search_by = "title",
-                --     sync_with_nvim_tree = true, -- default false
-                -- },
-                -- please take a look at the readme of the extension you want to configure
+                ast_grep = {
+                    command = {
+                        "ast-grep",
+                        "--json=stream",
+                    }, -- must have --json=stream
+                    grep_open_files = false, -- search in opened files
+                    lang = nil, -- string value, specify language for ast-grep `nil` for default
+                },
             },
         })
     end,

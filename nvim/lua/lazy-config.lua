@@ -111,7 +111,7 @@ require("lazy").setup({
             disabled_plugins = {
                 -- "matchit",
                 -- "tohtml",
-                "tutor",
+                -- "tutor",
             },
         },
     },

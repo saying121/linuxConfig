@@ -1,80 +1,20 @@
 ---@diagnostic disable-next-line: unused-local
 local other = {
     "-W",
-    "clippy::expl_impl_clone_on_copy",
-
-    "-W",
-    "clippy::fallible_impl_from",
-
-    "-W",
-    "clippy::fn_params_excessive_bools",
-
-    "-W",
-    "clippy::fn_to_numeric_cast_any",
-
-    "-W",
-    "clippy::implied_bounds_in_impls",
-    "-W",
-    "clippy::imprecise_flops",
-    "-W",
-    "clippy::inconsistent_struct_constructor",
-
-    "-W",
     "clippy::inline_always",
     "-W",
     "clippy::inline_asm_x86_att_syntax",
     "-W",
     "clippy::inline_asm_x86_intel_syntax",
+    -- "-W",
+    -- "clippy::module_name_repetitions",
+    -- "-W",
+    -- "clippy::modulo_arithmetic",
 
-    "-W",
-    "clippy::items_after_statements",
-
-    "-W",
-    "clippy::macro_use_imports",
-    "-W",
-    "clippy::many_single_char_names",
-
-    "-W",
-    "clippy::mismatching_type_param_order",
-    "-W",
-    "clippy::multiple_inherent_impl",
-
-    "-W",
-    "clippy::mixed_read_write_in_expression",
-    "-W",
-    "clippy::module_name_repetitions",
-    "-W",
-    "clippy::modulo_arithmetic",
-    "-W",
-    "clippy::naive_bytecount",
-
-    "-W",
-    "clippy::negative_feature_names",
-    "-W",
-    "clippy::no_effect_underscore_binding",
-    "-W",
-    "clippy::no_mangle_with_rust_abi",
     "-W",
     "clippy::non_send_fields_in_send_ty",
-    "-W",
-    "clippy::nonstandard_macro_braces",
-    "-W",
-    "clippy::option_option",
-    "-W",
-    "clippy::or_fun_call",
-    "-W",
-    "clippy::partial_pub_fields",
-    "-W",
-    "clippy::path_buf_push_overwrite",
-    "-W",
-    "clippy::pattern_type_mismatch",
-
-    "-W",
-    "clippy::single_call_fn",
-    "-W",
-    "clippy::single_char_lifetime_names",
-    "-W",
-    "clippy::single_match_else",
+    -- "-W",
+    -- "clippy::partial_pub_fields",
 
     "-W",
     "clippy::exhaustive_enums",
@@ -82,32 +22,15 @@ local other = {
     "clippy::exhaustive_structs",
     -- "-W",
     -- "clippy::suspicious_operation_groupings",
-    -- "-W",
-    -- "clippy::suspicious_xor_used_as_pow",
-    "-W",
-    "clippy::too_many_lines",
     "-W",
     "clippy::trailing_empty_array",
-
-    "-W",
-    "clippy::transmute_undefined_repr",
-
-    "-W",
-    "clippy::used_underscore_binding",
-
-    "-W",
-    "clippy::wildcard_dependencies",
-    "-W",
-    "clippy::wildcard_enum_match_arm",
-    "-W",
-    "clippy::wildcard_imports",
 }
 
 return {
     "--no-deps",
+
     "--",
 
-    ---String
     "-W",
     "clippy::str_to_string",
     -- "-W",
@@ -130,9 +53,7 @@ return {
     "clippy::manual_string_new",
     "-W",
     "clippy::needless_raw_strings",
-    ---
 
-    ---map
     "-W",
     "clippy::filter_map_next",
     "-W",
@@ -143,9 +64,7 @@ return {
     "clippy::map_unwrap_or",
     "-W",
     "clippy::zero_sized_map_values",
-    ---
 
-    ---iter
     "-W",
     "clippy::maybe_infinite_iter",
     "-W",
@@ -158,7 +77,6 @@ return {
     "clippy::iter_on_single_items",
     "-W",
     "clippy::iter_with_drain",
-    ---
 
     "-W",
     "clippy::let_underscore_untyped",
@@ -167,7 +85,7 @@ return {
     -- "-W",
     -- "clippy::option_if_let_else",
     -- "-W",
-    -- "clippy::else_if_without_else", -- lint `else{}`: in end
+    -- "clippy::else_if_without_else",
     "-W",
     "clippy::equatable_if_let",
     "-W",
@@ -223,7 +141,6 @@ return {
     -- "-W",
     -- "clippy::expect_used",
 
-    ----------------------------------------
     -- "-W",
     -- "clippy::absolute_paths",
 
@@ -620,4 +537,84 @@ return {
     -- "clippy::implicit_return",
     "-W",
     "clippy::implicit_clone",
+
+    "-W",
+    "clippy::macro_use_imports",
+    "-W",
+    "clippy::many_single_char_names",
+
+    "-W",
+    "clippy::mismatching_type_param_order",
+
+    -- "-W",
+    -- "clippy::multiple_inherent_impl",
+    -- "-W",
+    -- "clippy::items_after_statements",
+    -- "-W",
+    -- "clippy::used_underscore_binding",
+
+    -- "-W",
+    -- "clippy::wildcard_dependencies",
+    -- "-W",
+    -- "clippy::wildcard_enum_match_arm",
+    -- "-W",
+    -- "clippy::wildcard_imports",
+
+    "-W",
+    "clippy::transmute_undefined_repr",
+
+    "-W",
+    "clippy::expl_impl_clone_on_copy",
+
+    "-W",
+    "clippy::fallible_impl_from",
+
+    "-W",
+    "clippy::fn_params_excessive_bools",
+
+    "-W",
+    "clippy::fn_to_numeric_cast_any",
+
+    "-W",
+    "clippy::implied_bounds_in_impls",
+    "-W",
+    "clippy::imprecise_flops",
+    "-W",
+    "clippy::inconsistent_struct_constructor",
+
+    "-W",
+    "clippy::mixed_read_write_in_expression",
+    "-W",
+    "clippy::path_buf_push_overwrite",
+    "-W",
+    "clippy::option_option",
+    "-W",
+    "clippy::or_fun_call",
+    "-W",
+    "clippy::no_mangle_with_rust_abi",
+    "-W",
+    "clippy::naive_bytecount",
+
+    -- "-W",
+    -- "clippy::pattern_type_mismatch",
+
+    -- "-W",
+    -- "clippy::suspicious_xor_used_as_pow",
+    -- "-W",
+    -- "clippy::too_many_lines",
+
+    -- "-W",
+    -- "clippy::single_call_fn",
+    -- "-W",
+    -- "clippy::single_char_lifetime_names",
+    -- "-W",
+    -- "clippy::single_match_else",
+
+    "-W",
+    "clippy::negative_feature_names",
+    "-W",
+    "clippy::no_effect_underscore_binding",
+
+    "-W",
+    "clippy::nonstandard_macro_braces",
 }

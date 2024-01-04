@@ -33,8 +33,8 @@ keymap = [
 	{ on = [ "H" ], exec = "back",    desc = "Go back to the previous directory" },
 	{ on = [ "L" ], exec = "forward", desc = "Go forward to the next directory" },
 
-	{ on = [ "<A-k>" ], exec = "peek -5", desc = "Peek up 5 units in the preview" },
-	{ on = [ "<A-j>" ], exec = "peek 5",  desc = "Peek down 5 units in the preview" },
+	{ on = [ "<A-k>" ], exec = "peek -1", desc = "Peek up 5 units in the preview" },
+	{ on = [ "<A-j>" ], exec = "peek 1",  desc = "Peek down 5 units in the preview" },
 	{ on = [ "<A-PageUp>" ],   exec = "peek -5", desc = "Peek up 5 units in the preview" },
 	{ on = [ "<A-PageDown>" ], exec = "peek 5",  desc = "Peek down 5 units in the preview" },
 

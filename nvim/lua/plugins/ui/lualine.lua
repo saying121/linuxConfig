@@ -187,6 +187,7 @@ return {
                 "nvim-dap-ui",
                 "man",
                 "aerial",
+                "oil",
                 -- "mason",
             },
         })

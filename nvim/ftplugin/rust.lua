@@ -20,10 +20,48 @@ local really_root = utils.get_git_root_dir(vim.fn.getcwd(), "/Cargo.toml")
 -- 打开Cargo.toml文件
 vim.keymap.set("n", "<c-p>", function()
     if really_root == nil then
-        vim.notify("Don't exists Cargo.toml", vim.log.levels.INFO,{})
+        vim.notify("Don't exists Cargo.toml", vim.log.levels.INFO, {})
     else
         vim.api.nvim_command("tabnew " .. really_root .. "/Cargo.toml")
     end
 end, { noremap = true, silent = true, buffer = true })
 
 vim.g.termdebugger = "rust-lldb"
+
+local function ra_settings(dir)
+    local settings = require("public.ra.settings")
+    local settings_json = vim.json.encode(settings)
+
+    local root
+
+    if string.len(dir) > 0 then
+        root = dir
+    else
+        local dir = require("public.utils").get_git_root_dir(vim.fn.getcwd(), "/.git")
+        if dir then
+            root = dir
+        else
+            root = vim.fn.getcwd()
+        end
+    end
+    local path = root .. "/rust-analyzer.json"
+    vim.notify(path, vim.log.levels.INFO)
+
+    local file = io.open(path, "w")
+
+    if file then
+        file:write(settings_json)
+
+        file:close()
+        vim.notify("generated", vim.log.levels.INFO)
+    else
+        vim.notify("failed", vim.log.levels.INFO)
+    end
+end
+
+vim.api.nvim_create_user_command("RustJsonSettings", function(opts)
+    ra_settings(opts.args)
+end, {
+    nargs = "?",
+    complete = "dir",
+})

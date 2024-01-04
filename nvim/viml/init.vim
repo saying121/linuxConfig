@@ -22,6 +22,7 @@ if !has('nvim')
     set scrolloff=23                                               " 在光标上下展现多少行
     set signcolumn=yes
 else
+    set cmdheight=0
     set signcolumn=yes:1
 
     " 打开二进制文件，已知nvim 打不开 pdf

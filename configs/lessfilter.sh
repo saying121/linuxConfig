@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 mime=$(file -Lbs --mime-type "$1")
 category=${mime%%/*}
@@ -73,7 +73,7 @@ elif [ -d "$1" ]; then
     # https://github.com/wofr06/lesspipe/pull/110
 elif [ "$kind" = pdf ]; then
     if [ "$(command -v pdftotext)" ] && [ "$(command -v sed)" ]; then
-        pdftotext -q "$1" - | sed "s/\f/$(hr ─)\n/g"
+        pdftotext -q "$1" - | sed "s/\f/$(printf "%0.s-" {1..100})\n/g"
     fi
     # https://github.com/wofr06/lesspipe/pull/115
 elif [ "$kind" = rfc822 ]; then
@@ -98,5 +98,5 @@ elif [ "$category" = text ]; then
         pygmentize "$1" | less
     fi
 else
-    exit 1
+    which "$1" 2>/dev/null
 fi

@@ -1,7 +1,14 @@
----@diagnostic disable: unused-local
-local ok, _ = pcall(require, "lazy-config")
-require("autocmd")
+local _ = pcall(require, "lazy-config")
 local keymap = vim.keymap.set
+
+vim.opt.listchars = {
+    tab = ">  ",
+    leadmultispace = "│   ",
+    nbsp = "+",
+    trail = "·",
+    extends = "⇒", -- →
+    precedes = "⇐", -- ←
+}
 
 _G.dapui_for_K = false
 
@@ -77,15 +84,15 @@ vim.filetype.add({
         end,
     },
     filename = {
-        [".foorc"] = "toml",
-        [".log"] = "lot",
+        [".log"] = "log",
         [".yuck"] = "yuck",
         [".typ"] = "typst",
         ["LICENSE"] = "license",
         ["license"] = "license",
+        ["config"] = "config",
         ["~/.linuxConfig/wayland/waybar/config"] = "json",
-        ["~/.config/waybar/config"] = "json",
-        ["/etc/foo/config"] = "toml",
+        -- ["~/.config/waybar/config"] = "json",
+        -- ["~/.linuxConfig/wayland/swaylock/config"] = "config",
     },
     pattern = {
         ["(?i)LICENSE"] = "license",

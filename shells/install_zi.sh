@@ -12,8 +12,3 @@ $pacMan rpmextract fastjar unzip unrar p7zip cabextract \
 pkgfile makepkg
 
 [[ -d ~/.zi/cache ]] || mkdir ~/.zi/cache
-
-# ln -s ~/.linuxConfig/shells/lib/lessfilter.sh ~/.lessfilter
-
-curl https://raw.githubusercontent.com/LuRsT/hr/master/hr >~/.local/bin/hr
-chmod +x ~/.local/bin/hr

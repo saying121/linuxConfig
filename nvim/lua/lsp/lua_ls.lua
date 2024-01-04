@@ -20,7 +20,8 @@ return {
             },
             format = { enable = false },
             hint = {
-                arrayIndex = "Auto",
+                enable = true,
+                arrayIndex = "Enable",
                 await = true,
                 setType = true,
             },

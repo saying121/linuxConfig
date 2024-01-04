@@ -1,4 +1,4 @@
 return {
     "h-hg/fcitx.nvim",
-    event = "VeryLazy",
+    event = { "InsertEnter", "CmDLineEnter" },
 }

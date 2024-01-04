@@ -2,7 +2,17 @@ return {
     "mrcjkb/rustaceanvim",
     -- cond = false,
     version = "^3", -- Recommended
-    ft = "rust",
+    -- ft = "rust",
+    event = {
+        "UIEnter *rs",
+        -- "BufWrite *rs",
+        "BufNew *rs",
+    },
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "mfussenegger/nvim-dap",
+        "mattn/webapi-vim",
+    },
     config = function()
         local extension_path = "/usr/lib/codelldb/"
 
@@ -83,12 +93,12 @@ return {
                     end, opts)
                     keymap("n", "<leader>R", function()
                         vim.cmd.RustLsp({
-                            "runnables" --[[ , 'last' ]] --[[ optional ]],
+                            "runnables" --[[ , 'last' ]],
                         })
                     end, opts)
                     keymap("n", "<leader>D", function()
                         vim.cmd.RustLsp({
-                            "debuggables" --[[ , 'last' ]] --[[ optional ]],
+                            "debuggables" --[[ , 'last' ]],
                         })
                     end, opts)
                     keymap("n", "<C-g>", function()
@@ -101,20 +111,20 @@ return {
                         vim.cmd.RustLsp("rebuildProcMacros")
                     end, opts)
                 end,
-                settings = require("plugins.lsps.rust.settings"),
-                -- settings = function(project_root)
-                --     local ra = require("rustaceanvim.config.server")
-                --     return ra.load_rust_analyzer_settings(project_root, {
-                --         settings_file_pattern = "rust-analyzer.json",
-                --     })
-                -- end,
-
-                default_settings = require("plugins.lsps.rust.settings"),
+                default_settings = require("public.ra.settings"),
+                settings = function(project_root)
+                    local ra = require("rustaceanvim.config.server")
+                    return ra.load_rust_analyzer_settings(project_root, {
+                        settings_file_pattern = "rust-analyzer.json",
+                    })
+                end,
             },
             -- DAP configuration
             dap = {
                 adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
             },
         }
+
+        vim.cmd.e()
     end,
 }

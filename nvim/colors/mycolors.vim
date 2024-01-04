@@ -39,11 +39,11 @@ hi NvimTreeWinSeparator guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
 " hi Folded guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
-hi TelescopeBorder guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
-hi TelescopeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-hi TelescopePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-hi TelescopePromptNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-hi TelescopeResultsNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+" hi TelescopeBorder guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
+" hi TelescopeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+" hi TelescopePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+" hi TelescopePromptNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
+" hi TelescopeResultsNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
 hi LazyProgressDone guibg=NONE cterm=NONE guifg=red ctermfg=NONE
 hi LazyProp guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
@@ -54,7 +54,7 @@ hi FloatBorder guibg=NONE
 " hi LspFloatWinNormal guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
 " hi LspFloatWinBorder guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
 " hi LspInfoTip guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
-hi LspInfoBorder guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
+" hi LspInfoBorder guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
 " hi LspInfoList guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=DarkCyan
 " hi LspInfoTitle guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=DarkCyan
 
@@ -87,3 +87,11 @@ hi LspReferenceWrite guibg=#3b4261 gui=bold
 hi DropBarMenuNormalFloat guibg=#1a1b26 cterm=NONE guifg=#c0caf5 "ctermfg=NONE
 hi DiffAdd guibg=#283740
 hi DiffText guibg=#2A546D
+
+" hi IndentNoFocus guifg=#75715e
+hi IndentLine cterm=nocombine gui=nocombine guifg=#3B4261
+hi MiniIndentscopeSymbol cterm=nocombine gui=nocombine guifg=#2ac3de
+" #65BCFF
+" hi MiniIndentscopeSymbolOff links to MiniIndentscopeSymbol
+
+hi @lsp.type.unresolvedReference cterm=NONE gui=NONE guisp=#db4b4b

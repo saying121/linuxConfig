@@ -42,7 +42,7 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
-zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' format '%d'
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format "[%d]"
 # disable sort when completing `git checkout`

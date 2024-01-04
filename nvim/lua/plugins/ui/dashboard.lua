@@ -1,16 +1,36 @@
-local dash_func = require("public.dashboard")
-local split = 41
-local split1 = 26
+local M = {}
+
+--- 在表的长度里面随机取值
+---@param the_list table
+---@return integer
+function M.get_rand(the_list)
+    -- return math.random(1, #the_list)
+    return vim.fn.rand() % #the_list + 1
+end
+
+--- 获取文件路径
+---@param dir_name string
+---@return string
+function M.get_random_file_path(dir_name)
+    local dir_path = vim.fn.stdpath("config") .. "/dashboard/" .. dir_name
+    local file_name = vim.fn.readdir(dir_path)
+    -- file_name = { 'dinosaur.cat' } -- 测试某个
+    return dir_path .. "/" .. file_name[M.get_rand(file_name)]
+end
+
+local utils = require("public.utils")
+local split = 28
+local split1 = 25
 local total = split + split1
 local result = vim.fn.rand() % total
 -- result = 1
-result = 60
+-- result = 60
 
 --- 是否启用
 ---@return boolean
 local function enable_cond()
     -- 判断命令行启动有几个参数
-    if vim.fn.exists("neovide") ~= 0 and #vim.v.argv <= 3 then
+    if vim.fn.exists("neovide") ~= 0 and vim.fn.argc() == 0 then
         return true
     else
         return false
@@ -28,23 +48,23 @@ return {
             return #vim.v.argv <= 2 and cond
         end,
         config = function()
-            local path_cat = dash_func.get_random_file_path("the_cat")
+            local path_cat = M.get_random_file_path("the_cat")
             local all_prev = {
                 {
                     path = path_cat,
                     command = "cat | lolcat ",
                     file_height = 24,
-                    file_width = dash_func.get_columns(path_cat),
+                    file_width = utils.get_columns(path_cat),
                 },
                 {
-                    path = dash_func.get_random_file_path("pictures"),
+                    path = M.get_random_file_path("pictures"),
                     command = "chafa -C on -c full --fg-only --symbols braille ",
                     file_height = 24,
                     file_width = 45,
                 },
             }
 
-            local rand = dash_func.get_rand(all_prev)
+            local rand = M.get_rand(all_prev)
             rand = 1
             local use_prev = all_prev[rand]
 
@@ -155,7 +175,7 @@ return {
             require("alpha.term")
 
             -- local redirect = " > /proc/" .. vim.loop.os_getpid() .. "/fd/1"
-            local pic_cat = dash_func.get_random_file_path("pictures")
+            local pic_cat = M.get_random_file_path("pictures")
             local dynamic_header = {
                 type = "terminal",
                 command = "chafa -C on -c full --fg-only --symbols braille " .. pic_cat,
@@ -169,12 +189,12 @@ return {
                 },
             }
 
-            local path_cat = dash_func.get_random_file_path("alpha")
+            local path_cat = M.get_random_file_path("alpha")
             local lolcat_header = {
                 type = "terminal",
                 command = "cat " .. path_cat .. " | lolcat ",
-                width = dash_func.get_columns(path_cat),
-                height = dash_func.get_lines(path_cat),
+                width = utils.get_columns(path_cat),
+                height = utils.get_lines(path_cat),
                 opts = {
                     position = "center",
                     redraw = true,
@@ -219,7 +239,7 @@ return {
             }
             local prev
             if vim.fn.getenv("TERM") == "xterm-kitty" then
-                prev = all_prev[dash_func.get_rand(all_prev)]
+                prev = all_prev[M.get_rand(all_prev)]
             else
                 prev = all_prev[1]
             end

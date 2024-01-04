@@ -4,18 +4,6 @@ return {
     priority = 900,
     dependencies = { "MunifTanjim/nui.nvim" },
     config = function()
-        vim.api.nvim_create_autocmd({ "FileType" }, {
-            group = vim.api.nvim_create_augroup("NotifyMap", { clear = true }),
-            pattern = { "notify" },
-            callback = function()
-                local opts1 = { silent = true, noremap = true, buffer = true }
-                vim.keymap.set("n", "q", ":x<CR>", opts1)
-            end,
-        })
-        vim.keymap.set("n", "<leader>nd", function()
-            require("notify").dismiss()
-        end)
-
         require("noice").setup({
             cmdline = {
                 enabled = true, -- enables the Noice cmdline UI
@@ -109,7 +97,7 @@ return {
                     -- override the lsp markdown formatter with Noice
                     ["vim.lsp.util.stylize_markdown"] = true,
                     -- override cmp documentation with Noice (needs the other options to work)
-                    ["cmp.entry.get_documentation"] = true,
+                    ["cmp.entry.get_documentation"] = false,
                 },
                 hover = {
                     enabled = true,

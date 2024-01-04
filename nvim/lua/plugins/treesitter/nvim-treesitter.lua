@@ -53,6 +53,11 @@ return {
                     if vim.o.columns > 2500 then
                         return true
                     end
+
+                    -- ra 的高亮就够好了
+                    if vim.bo.filetype == "rust" then
+                        return #vim.lsp.get_clients({ name = "rust-analyzer", bufnr = 0 }) > 0
+                    end
                 end,
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                 -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

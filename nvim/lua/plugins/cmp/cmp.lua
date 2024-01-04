@@ -164,6 +164,26 @@ return {
             }),
         })
 
+        cmp.setup.filetype("c", {
+            sorting = {
+                -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
+                priority_weight = 1,
+                -- rime-ls
+                comparators = {
+                    -- require("cmp.config.compare").sort_text, -- 这个放第一个, 其他的随意
+                    compare.exact, -- 精准匹配
+                    compare.recently_used, -- 最近用过的靠前
+                    compare.kind,
+                    require("clangd_extensions.cmp_scores"),
+                    compare.score, -- 得分高靠前
+                    compare.order,
+                    compare.offset,
+                    compare.length, -- 短的靠前
+                    compare.sort_test,
+                },
+            },
+        })
+
         vim.opt.spell = true
         vim.opt.spelllang = { "en_us" }
     end,

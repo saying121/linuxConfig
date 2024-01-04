@@ -133,7 +133,7 @@ return {
                 tabe = "t", -- open in tabe
                 tabnew = "r", -- open in new tab
                 quit = "q", -- quit the finder, only works in layout left window
-                close = "<C-c>k", -- close finder
+                close = "<C-c>", -- close finder
             },
         }
         -- you can use <C-t> to jump back
@@ -158,7 +158,7 @@ return {
         }
         -- If you want to jump to the hover window you should use the wincmd command "<C-w>w"
         keymap("n", "ck", function()
-            vim.cmd.Lspsaga({ "hover_doc ", "++keep" })
+            vim.cmd.Lspsaga({ "hover_doc", "++keep" })
         end)
 
         local outline = {

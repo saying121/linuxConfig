@@ -62,6 +62,7 @@ link_list=(
     ["$HOME/.linuxConfig/X11/xprofile"]="$HOME/.xprofile"
     ["$HOME/.linuxConfig/configs/cargo-config.toml"]="$HOME/.cargo/config"
     ["$HOME/.linuxConfig/configs/.sqlfluff"]="$HOME/.sqlfluff"
+    ["$HOME/.linuxConfig/configs/taplo.toml"]="$HOME/.taplo.toml"
     ["$HOME/.linuxConfig/configs/gtkrc-2.0"]="$HOME/.gtkrc-2.0"
     ["$HOME/.linuxConfig/configs/dunst"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/yazi"]="$HOME/.config"

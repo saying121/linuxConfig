@@ -1,3 +1,4 @@
 return {
-    settings = require("plugins.lsps.rust.settings"),
+    root_dir = require("lspconfig").util.root_pattern(".git"),
+    settings = require("public.ra.settings"),
 }

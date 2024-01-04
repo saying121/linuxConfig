@@ -2,9 +2,7 @@
 
 return {
     "tpope/vim-dadbod",
-    keys = {
-        "<leader>d",
-    },
+    keys = { "<leader>d" },
     cmd = {
         "DBUI",
         "DBUIToggle",

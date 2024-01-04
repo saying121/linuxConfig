@@ -2,9 +2,6 @@ return {
     "ray-x/go.nvim",
     cond = false,
     ft = { "go", "gomod" },
-    build = function()
-        require("go.install").undate_all_sync()
-    end,
     dependencies = { -- optional packages
         "ray-x/guihua.lua",
         "neovim/nvim-lspconfig",
@@ -75,7 +72,7 @@ return {
             },
             trouble = false, -- true: use trouble to open quickfix
             test_efm = false, -- errorfomat for quickfix, default mix mode, set to true will be efm only
-            luasnip = false, -- enable included luasnip snippets. you can also disable while add lua/snips folder to luasnip load
+            luasnip = true, -- enable included luasnip snippets. you can also disable while add lua/snips folder to luasnip load
             --  Do not enable this if you already added the path, that will duplicate the entries
             on_jobstart = function(cmd)
                 _ = cmd
@@ -91,14 +88,6 @@ return {
             end, -- callback for jobexit, output : string
             iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the beginning of if err statement
         })
-
-        -- vim.api.nvim_create_autocmd("BufWritePre", {
-        --     group = vim.api.nvim_create_augroup("GoFormat", {}),
-        --     pattern = "*.go",
-        --     callback = function()
-        --         require("go.format").goimport()
-        --     end,
-        -- })
 
         vim.api.nvim_create_autocmd("BufWritePre", {
             group = vim.api.nvim_create_augroup("GoImport", {}),

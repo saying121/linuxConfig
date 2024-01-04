@@ -15,8 +15,6 @@ end
 ---@param be_finded string
 ---@return string | nil
 function M.get_git_root_dir(start_dir, be_finded)
-    -- return vim.fn.fnamemodify(vim.fn.finddir(be_finded, "..;"), ":h")
-
     -- 使用vim.loop.fs_stat检查目录是否存在
     local stat = vim.loop.fs_stat(start_dir)
     -- 如果不存在，返回nil
@@ -40,6 +38,10 @@ function M.get_git_root_dir(start_dir, be_finded)
     -- 否则，递归调用函数，传入上一级目录作为参数
     ---@diagnostic disable-next-line: param-type-mismatch
     return M.get_git_root_dir(parent_dir, be_finded)
+end
+
+function M.find_root_cwd(be_finded)
+    return vim.fn.fnamemodify(vim.fn.finddir(be_finded, ".;"), ":h")
 end
 
 --- 合并mod_path目录下的表，他们必须返回一张表，这个函数会把他们放到一个大表中
@@ -107,6 +109,55 @@ function M.file_exists(file)
         f:close()
     end
     return f ~= nil
+end
+
+--- 从一个文件中读取所有的行，并返回一个包含所有行的表
+---@param file string
+---@return table
+function M.lines_from(file)
+    if not require("public.utils").file_exists(file) then
+        return {}
+    end
+
+    local lines = {}
+
+    for line in io.lines(file) do
+        lines[#lines + 1] = line
+    end
+    return lines
+end
+
+--- 获取文件行数
+---@param file string
+---@return integer
+function M.get_lines(file)
+    local lines = M.lines_from(file)
+    local num_lines = #lines -- 表的长度就是行数
+    return num_lines
+end
+
+--- 获取文件最大列数
+---@param file string
+---@return integer
+function M.get_columns(file)
+    local lines = M.lines_from(file)
+
+    local max_columns = 0 -- 初始化最大列数为0
+    for _, line in ipairs(lines) do -- 遍历每一行
+        local num_columns = #line -- 字符串的长度就是列数
+        if num_columns > max_columns then -- 如果当前行的列数大于最大列数，就更新最大列数
+            max_columns = num_columns
+        end
+    end
+    -- print(max_columns)
+
+    return max_columns -- 最大列数
+end
+
+function M.is_git_repo()
+    vim.fn.system("git rev-parse --is-inside-work-tree")
+
+    return vim.v.shell_error == 0
 end
 
 return M

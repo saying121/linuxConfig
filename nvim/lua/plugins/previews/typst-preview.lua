@@ -1,10 +1,9 @@
 return {
-    "niuiic/typst-preview.nvim",
-    dependencies = { "niuiic/core.nvim" },
-    event = {
-        "BufNew *.typ",
-        "UIEnter *.typ",
-    },
+    "chomosuke/typst-preview.nvim",
+    build = function()
+        require("typst-preview").update()
+    end,
+    ft = "typst",
     config = function()
         vim.api.nvim_create_autocmd({ "BufNew", "BufWinEnter", "BufEnter" }, {
             group = vim.api.nvim_create_augroup("TypstPreview", { clear = true }),
@@ -12,29 +11,20 @@ return {
             callback = function()
                 local opts = { noremap = true, silent = true, buffer = true }
 
-                vim.keymap.set("n", "<c-p>", require("typst-preview").preview, opts)
+                vim.keymap.set("n", "<c-p>", function()
+                    vim.cmd.TypstPreview()
+                end, opts)
             end,
         })
 
         require("typst-preview").setup({
-            -- file opened by pdf viewer
-            output_file = function()
-                local core = require("core")
-                return core.file.root_path() .. "/output.pdf"
+            -- Setting this true will enable printing debug information with print()
+            debug = false,
+            -- This function will be called to determine the root of the typst project
+            get_root = function(bufnr_of_typst_buffer)
+                return vim.fn.getcwd()
+                -- return vim.fn.fnamemodify(vim.fn.expand("%:p"), ":h")
             end,
-            -- how to redirect output files
-            redirect_output = function(original_file, output_file)
-                vim.cmd(string.format("silent !ln -s %s %s", original_file, output_file))
-            end,
-            -- how to preview the pdf file
-            preview = function(output_file)
-                local core = require("core")
-                core.job.spawn("microsoft-edge-stable", {
-                    output_file,
-                }, {}, function() end, function() end, function() end)
-            end,
-            -- whether to clean all pdf files on VimLeave
-            clean_temp_pdf = false,
         })
     end,
 }

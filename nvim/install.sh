@@ -15,7 +15,8 @@ $pacMan fzf ripgrep fd lldb translate-shell \
     mold lld cargo-flamegraph sccache silicon
 $pacMan ruff-lsp vim-language-server lua-language-server bash-language-server \
     gopls yaml-language-server typescript-language-server jdtls marksman \
-    texlab typst-lsp
+    texlab typst-lsp revive
+$aurPkg golines
 $pacMan sqlfluff vint
 $pacMan prettier stylua
 $pacMan python-debugpy delve codelldb-bin

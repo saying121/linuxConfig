@@ -4,8 +4,18 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     -- cond = false,
     config = function()
+        local ut = require("public.utils")
+
+        local cwd = vim.fn.getcwd()
+
+        if ut.is_git_repo() then
+            cwd = ut.find_root_cwd(".git")
+            print(cwd)
+        end
+
         local null_ls = require("null-ls")
         local sources_table = {
+            null_ls.builtins.code_actions.refactoring,
             null_ls.builtins.diagnostics.sqlfluff.with({
                 filetypes = { "sql", "mysql" },
             }),
@@ -16,12 +26,16 @@ return {
             null_ls.builtins.formatting.latexindent,
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.formatting.stylua,
-            null_ls.builtins.formatting.stylua,
             null_ls.builtins.formatting.shfmt.with({
                 extra_args = { "-i", "4" },
             }),
             null_ls.builtins.formatting.asmfmt,
             null_ls.builtins.formatting.fnlfmt,
+
+            -- null_ls.builtins.diagnostics.golangci_lint,
+            null_ls.builtins.diagnostics.revive,
+            null_ls.builtins.formatting.golines,
+
             null_ls.builtins.diagnostics.vint,
             -- null_ls.builtins.diagnostics.protolint,
             -- null_ls.builtins.formatting.protolint,
@@ -30,7 +44,9 @@ return {
             }),
             -- null_ls.builtins.diagnostics.eslint,
             null_ls.builtins.diagnostics.actionlint,
-            -- null_ls.builtins.diagnostics.codespell,
+            -- null_ls.builtins.diagnostics.codespell.with({
+            --     extra_args = { "-I", cwd .. "/codespell.txt" },
+            -- }),
         }
 
         null_ls.setup({

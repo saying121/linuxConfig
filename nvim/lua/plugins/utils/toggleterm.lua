@@ -22,6 +22,14 @@ return {
                 end
             end,
             direction = "float",
+            highlights = {
+                -- highlights which map to a highlight group name and a table of it's values
+                -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
+                FloatBorder = {
+                    guifg = "#2ac3de",
+                    -- guibg = "<VALUE-HERE>",
+                },
+            },
             -- open_mapping = [[<c-\>]],
         })
         -- local term_width = vim.o.columns

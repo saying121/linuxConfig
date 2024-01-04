@@ -1,9 +1,6 @@
 return {
     "sindrets/diffview.nvim",
-    cmd = {
-        "DiffviewOpen",
-    },
-    cond = true,
+    cmd = { "DiffviewOpen" },
     config = function()
         local actions = require("diffview.actions")
 
@@ -15,16 +12,6 @@ return {
             use_icons = true, -- Requires nvim-web-devicons
             show_help_hints = true, -- Show hints for how to open the help panel
             watch_index = true, -- Update views and index buffers when the git index changes.
-            icons = {
-                -- Only applies when use_icons is true.
-                folder_closed = "",
-                folder_open = "",
-            },
-            signs = {
-                fold_closed = "",
-                fold_open = "",
-                done = "✓",
-            },
             view = {
                 -- Configure the layout and behavior of different types of views.
                 -- Available layouts:
@@ -230,6 +217,14 @@ return {
                         "dX",
                         actions.conflict_choose_all("none"),
                         { desc = "Delete the conflict region for the whole file" },
+                    },
+                    {
+                        "n",
+                        "<leader>x",
+                        function()
+                            vim.cmd.DiffviewClose()
+                        end,
+                        { desc = "Close Diffview panel" },
                     },
                 },
                 diff1 = {

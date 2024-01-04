@@ -17,7 +17,7 @@ return {
             -- scale = 1.1,
             -- weight = "Bold",
         },
-        'Noto Serif CJK TC',
+        "Noto Serif CJK TC",
         "JetBrains Mono",
         "WenQuanYi Zen Hei Mono",
     }),
