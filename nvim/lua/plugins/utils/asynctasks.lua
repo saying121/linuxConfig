@@ -5,7 +5,7 @@ return {
         {
             "skywind3000/asyncrun.vim",
             config = function()
-                vim.g.asyncrun_open = 6
+                vim.g.asyncrun_open = 8
                 vim.g.asyncrun_save = 2 -- 会被 tasks.ini save 覆盖
                 vim.g.asyncrun_bell = 0
                 vim.g.asyncrun_rootmarks = { ".git", ".svn", ".root", ".project", ".hg", "Cargo.toml", "go.mod" }
@@ -16,18 +16,12 @@ return {
         "AsyncTask",
         "AsyncTaskList",
     },
-    keys = {
-        { "<F4>" },
-        { "<F3>" },
-        { "<F16>" },
-        { "<A-b>" },
-        { "<A-r>" },
-        { "<leader>C" },
-    },
+    keys = { { "<A-r>" } },
     config = function()
         vim.g.asynctasks_term_pos = "toggleterm2"
         -- vim.g.asynctasks_term_pos = "tmux"
         -- vim.g.asynctasks_term_pos = "bottom"
+
         vim.g.asynctasks_term_rows = 20 -- 设置纵向切割时，高度为 10
         vim.g.asynctasks_term_cols = 60 -- 设置横向切割时，宽度为 80
         vim.g.asynctasks_term_reuse = 1 -- 设置tab终端可复用
@@ -39,12 +33,19 @@ return {
         }
 
         local opts, keymap = { noremap = true, silent = true }, vim.keymap.set
-        keymap("n", "<F3>", ":AsyncTask file-build<CR>", opts)
-        keymap("n", "<F4>", ":AsyncTask file-run<CR>", opts)
-        keymap("n", "<F16>", ":AsyncTask file-build-run<CR>", opts)
-        keymap("n", "<leader>C", ":AsyncTask file-check<CR>", opts)
 
-        keymap("n", "<A-b>", ":AsyncTask project-build<CR>", opts)
-        keymap("n", "<A-r>", ":AsyncTask project-run<CR>", opts)
+        keymap("n", "<A-r>", function()
+            local rows = vim.fn["asynctasks#source"](math.floor(vim.go.columns * 0.5))
+            vim.ui.select(rows, {
+                prompt = "AsyncTask: ",
+                format_item = function(item)
+                    return item[1] .. " " .. item[2]
+                end,
+            }, function(choice)
+                if choice ~= nil then
+                    vim.cmd.AsyncTask({ choice[1] })
+                end
+            end)
+        end, opts)
     end,
 }

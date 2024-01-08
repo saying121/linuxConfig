@@ -10,7 +10,6 @@ return {
 
         if ut.is_git_repo() then
             cwd = ut.find_root_cwd(".git")
-            print(cwd)
         end
 
         local null_ls = require("null-ls")
@@ -36,6 +35,7 @@ return {
             null_ls.builtins.diagnostics.revive,
             null_ls.builtins.formatting.golines,
 
+            null_ls.builtins.diagnostics.markdownlint,
             null_ls.builtins.diagnostics.vint,
             -- null_ls.builtins.diagnostics.protolint,
             -- null_ls.builtins.formatting.protolint,

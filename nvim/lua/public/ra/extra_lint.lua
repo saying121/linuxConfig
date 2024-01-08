@@ -495,8 +495,8 @@ return {
     -- "-W",
     -- "clippy::tests_outside_test_module",
 
-    "-W",
-    "clippy::panic",
+    -- "-W",
+    -- "clippy::panic",
     "-W",
     "clippy::panic_in_result_fn",
 

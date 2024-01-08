@@ -15,13 +15,13 @@ set termencoding=utf-8                                         " 终端输出的
 set fileformat=unix                                            " 设定文件格式为unix
 set fileformats=unix,dos,mac                                   " 识别文件格式
 
-set listchars=tab:>.                                           " tab显示方式
+set listchars=tab:>·                                           " tab显示方式
 set listchars+=trail:·                                         " 行末空格显示
 set listchars+=extends:⇒                                       " 一行后面还有内容时
 set listchars+=precedes:⇐                                      " 一行前面还有内容时
-" set listchars+=leadmultispace:│...
+set listchars+=leadmultispace:│\ \ \ ,
 " set listchars+=space:·
-" set listchars+=eol:
+set listchars+=eol:
 " set listchars+=conceal:﬒
 set list
 

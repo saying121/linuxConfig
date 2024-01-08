@@ -3,6 +3,10 @@ local s = ls.snippet
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 
+local transfer = {
+    ["ocrs"] = "OCR engine",
+    ["whisper-rs"] = "whisper.cpp 的 Rust 绑定",
+}
 local crates = {
     ["hex-literal"] = "用于在编译时将十六进制字符串转换为字节数组的宏",
     ["castaway"] = "针对有限编译时专业化的安全、零成本的向下转型。",
@@ -92,11 +96,12 @@ local encoding = {
     ["ring"] = "使用 **Rust** 的安全、快速、小型加密",
     ["serpent"] = "蛇块密码",
 }
-local fuzzy_find = {
+local find_match = {
     ["fuzzy-matcher"] = "模糊匹配库",
     ["simsearch"] = "一个简单而轻量级的模糊搜索引擎，在内存中工作，搜索相似的字符串（这里是双关语）。",
     ["nucleo-matcher"] = "即插即用高性能模糊匹配器",
     ["nucleo"] = "即插即用高性能模糊匹配器",
+    ["memchr"] = "提供极其快速的（在 x86_64、aarch64 和 wasm32 上使用 simd）例程，用于 1、2 或 3 字节搜索和单个子字符串搜索。",
 }
 local render_text = {
     ["syntect"] = "使用 Sublime Text 语法实现高质量语法突出显示和代码智能的库",
@@ -470,7 +475,7 @@ local all = vim.tbl_deep_extend(
     orm,
     grpc,
     quic,
-    fuzzy_find,
+    find_match,
     str_parser,
     display,
     date_time,
@@ -487,7 +492,8 @@ local all = vim.tbl_deep_extend(
     notify,
     protocol_buffer,
     some_display,
-    parser
+    parser,
+    transfer
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']
@@ -552,6 +558,7 @@ opt-level = 3
             [[
 [workspace.lints.clippy]
 # string_slice                              = "warn"
+# panic                                     = "warn"
 unseparated_literal_suffix                = "warn"
 str_to_string                             = "warn"
 string_add_assign                         = "warn"
@@ -689,7 +696,6 @@ clone_on_ref_ptr                          = "warn"
 ptr_as_ptr                                = "warn"
 ptr_cast_constness                        = "warn"
 transmute_ptr_to_ptr                      = "warn"
-panic                                     = "warn"
 panic_in_result_fn                        = "warn"
 suboptimal_flops                          = "warn"
 should_panic_without_expect               = "warn"

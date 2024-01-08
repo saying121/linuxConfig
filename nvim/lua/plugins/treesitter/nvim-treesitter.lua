@@ -45,18 +45,15 @@ return {
                 -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
                 ---@diagnostic disable-next-line: unused-local
                 disable = function(lang, buf)
-                    -- local max_filesize = 100 * 1024 -- 100 KB
-                    -- local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                    -- if ok and stats and stats.size > max_filesize then
-                    --     return true
-                    -- end
-                    if vim.o.columns > 2500 then
+                    local max_filesize = 100 * 1024 -- 100 KB
+                    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
+                    if ok and stats and stats.size > max_filesize then
                         return true
                     end
 
                     -- ra 的高亮就够好了
-                    if vim.bo.filetype == "rust" then
-                        return #vim.lsp.get_clients({ name = "rust-analyzer", bufnr = 0 }) > 0
+                    if vim.b.filetype == "rust" then
+                        return #vim.lsp.get_clients({ name = "rust-analyzer", bufnr = buf }) > 0
                     end
                 end,
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.

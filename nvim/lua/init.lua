@@ -2,7 +2,7 @@ local _ = pcall(require, "lazy-config")
 local keymap = vim.keymap.set
 
 vim.opt.listchars = {
-    tab = ">  ",
+    tab = "> ",
     leadmultispace = "│   ",
     nbsp = "+",
     trail = "·",

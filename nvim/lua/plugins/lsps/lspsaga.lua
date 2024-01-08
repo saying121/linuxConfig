@@ -10,10 +10,6 @@ return {
         { "]e" },
     },
     -- commit = "",
-    dependencies = {
-        -- Please make sure you install markdown and markdown_inline parser
-        "nvim-treesitter/nvim-treesitter",
-    },
     config = function()
         local keymap = vim.keymap.set
 
@@ -219,8 +215,8 @@ return {
             },
             lightbulb = {
                 enable = true,
-                sign = true,
-                virtual_text = false,
+                sign = false,
+                virtual_text = true,
                 debounce = 10,
                 sign_priority = 40,
             },

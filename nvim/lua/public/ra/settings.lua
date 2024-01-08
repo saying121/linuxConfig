@@ -31,9 +31,8 @@ return {
             allTargets = true,
             -- command = "check", -- 用于 cargo check 的命令。
             command = "clippy", -- 用于 cargo check 的命令。
-            extraArgs = vim.tbl_deep_extend("force", { "--no-deps" }, lints), -- cargo check 的额外参数。
-            -- extraArgs = { "--no-deps" },
-            -- extraArgs = {"--no-deps",'--', "-W","clippy::manual_string_new" }, -- cargo check 的额外参数。
+            -- extraArgs = vim.tbl_deep_extend("force", { "--no-deps" }, lints), -- cargo check 的额外参数。
+            extraArgs = { "--no-deps" },
             extraEnv = {}, -- 运行 cargo check 时将设置的额外环境变量。扩展 rust-analyzer.cargo.extraEnv 。
             features = nil, -- 要激活的功能列表。默认为 rust-analyzer.cargo.features 。设置为 "all" ，将 --all-features 传递给Cargo。
             invocationLocation = "workspace", -- 指定运行检查的工作目录。-“workspace”：对相应工作区的根目录中的工作区进行检查。

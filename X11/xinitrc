@@ -39,6 +39,7 @@ exec dunst & # 桌面通知
 exec fcitx5 & # fcitx5 输入法
 exec nm-applet &
 exec cfw &
+exec redshift &
 
 # exec picom --config ~/.config/i3/picom/picom-ftlabs-git.conf -b
 exec picom --experimental-backends --config ~/.config/i3/picom/picom-yaocccc.conf -b &

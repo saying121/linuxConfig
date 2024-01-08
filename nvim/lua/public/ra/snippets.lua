@@ -205,57 +205,6 @@ local prefix = {
     },
 }
 
-local ratatui = {
-    t_start = {
-        prefix = { "tui_setup" },
-        body = {
-            "// setup terminal",
-            -- "fn setup_terminal() -> Result<Terminal<CrosstermBackend<Stdout>>> {",
-            [[let mut stdout = io::stdout();]],
-            [[enable_raw_mode()?;]],
-            [[execute!(stdout, EnterAlternateScreen)?;]],
-            [[let backend = CrosstermBackend::new(stdout);]],
-            [[let mut terminal = Terminal::new(backend)?;]],
-            -- "}",
-        },
-        description = "terminal start flow",
-        requires = {
-            "std::io",
-            -- "std::io::Stdout",
-            "crossterm::terminal::enable_raw_mode",
-            "crossterm::terminal::EnterAlternateScreen",
-            "crossterm::event::EnableMouseCapture",
-            -- -- "crossterm::execute", -- rust-analyzer 解析不出来宏
-            "ratatui::prelude::CrosstermBackend",
-            "ratatui::Terminal",
-        },
-        scope = "expr",
-    },
-    t_end = {
-        prefix = { "tui_restore" },
-        body = {
-            "// restore terminal",
-            "disable_raw_mode()?;",
-            [[
-execute!(
-    terminal.backend_mut(),
-    LeaveAlternateScreen,
-    DisableMouseCapture
-)?;
-            ]],
-            "terminal.show_cursor()?;",
-        },
-        description = "terminal end flow",
-        requires = {
-            "crossterm::event::DisableMouseCapture",
-            -- "crossterm::execute", -- rust-analyzer 解析不出来宏
-            "crossterm::terminal::LeaveAlternateScreen",
-            "crossterm::terminal::disable_raw_mode",
-        },
-        scope = "expr",
-    },
-}
-
 local friendly = {
     assert = {
         body = { "assert!(${1});" },
@@ -424,4 +373,4 @@ local friendly = {
     },
 }
 
-return vim.tbl_deep_extend("force", postfix, prefix, friendly, ratatui)
+return vim.tbl_deep_extend("force", postfix, prefix, friendly)

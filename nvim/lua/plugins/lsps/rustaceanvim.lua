@@ -41,18 +41,24 @@ return {
                 ---@type boolean
                 reload_workspace_from_cargo_toml = true,
                 hover_actions = {
-                    replace_builtin_hover = false,
-                    -- the border that is used for the hover window
-                    -- see vim.api.nvim_open_win()
-                    -- Maximal width of the hover window. Nil means no max.
+                    replace_builtin_hover = true,
+                },
+
+                float_win_config = {
+                    -- the border that is used for the hover window or explain_error window
+                    ---@see vim.api.nvim_open_win()
+                    ---@type string[][] | string
+                    border = "rounded",
                     max_width = math.floor(vim.api.nvim_win_get_width(0) * 0.7),
-                    -- Maximal height of the hover window. Nil means no max.
                     max_height = math.floor(vim.api.nvim_win_get_height(0) * 0.7),
-                    -- whether the hover action window gets automatically focused
-                    -- default: false
+
+                    --- whether the floating window gets automatically focused
+                    --- default: false
+                    ---@type boolean
                     auto_focus = true,
                 },
             },
+
             -- LSP configuration
             server = {
                 --- standalone file support

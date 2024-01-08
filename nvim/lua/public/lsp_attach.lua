@@ -127,7 +127,7 @@ M.on_attach = function(client, bufnr)
     end
 
     if cap.codeLensProvider ~= nil and cap.codeLensProvider.resolveProvider then
-        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+        vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
             group = vim.api.nvim_create_augroup("CodeLensRefresh", { clear = false }),
             buffer = bufnr,
             callback = function()
