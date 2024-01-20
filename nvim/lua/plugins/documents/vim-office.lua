@@ -1,6 +1,6 @@
 return {
     "konfekt/vim-office",
-    -- cond = false,
+    cond = false,
     -- cond = function()
     --     if string.find(vim.fn.expand("%:e"), value) then
     --         return true

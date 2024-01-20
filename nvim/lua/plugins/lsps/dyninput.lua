@@ -1,8 +1,5 @@
 return {
     "nvimdev/dyninput.nvim",
-    cond = function()
-        return vim.fn.has("nvim-0.10.0") == 1
-    end,
     event = "InsertEnter",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()

@@ -1,6 +1,6 @@
 local utils = require("public.utils")
 
-local really_root = utils.get_git_root_dir(vim.fn.getcwd(), "/Cargo.toml")
+local really_root = utils.get_root_dir(vim.fn.getcwd(), "/Cargo.toml")
 
 -- local function is_git_repo()
 --     vim.fn.system("git rev-parse --is-inside-work-tree")
@@ -37,7 +37,7 @@ local function ra_settings(dir)
     if string.len(dir) > 0 then
         root = dir
     else
-        local dir = require("public.utils").get_git_root_dir(vim.fn.getcwd(), "/.git")
+        local dir = utils.get_root_dir(vim.fn.getcwd(), "/.git")
         if dir then
             root = dir
         else

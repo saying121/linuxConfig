@@ -18,8 +18,6 @@ return {
         keymap({ "n", "x" }, "ms", ":TransPlay<CR>", opts)
         keymap("n", "mi", "<Cmd>TranslateInput<CR>", opts)
 
-        -- require("Trans").setup()
-
         require("Trans").setup({
             frontend = {
                 hover = {

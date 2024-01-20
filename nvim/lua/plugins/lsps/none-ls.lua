@@ -44,9 +44,10 @@ return {
             }),
             -- null_ls.builtins.diagnostics.eslint,
             null_ls.builtins.diagnostics.actionlint,
-            -- null_ls.builtins.diagnostics.codespell.with({
-            --     extra_args = { "-I", cwd .. "/codespell.txt" },
-            -- }),
+            null_ls.builtins.diagnostics.codespell.with({
+                -- extra_args = { "-I", cwd .. "/codespell.txt" },
+                filetypes = { "gitcommit", "markdown" },
+            }),
         }
 
         null_ls.setup({

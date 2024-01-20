@@ -1,4 +1,4 @@
-local lints = require("public.ra.extra_lint")
+-- local lints = require("public.ra.extra_lint")
 local snippets = require("public.ra.snippets")
 
 return {
@@ -7,24 +7,24 @@ return {
             storeload = true,
             buildScripts = {
                 enable = true,
-                invocationLocation = "workspace", -- 指定运行生成脚本的工作目录。-“workspace”：在工作区的根目录中运行工作区的构建脚本。
-                -- 这与设置为 once 的 rust-analyzer.cargo.buildScripts.invocationStrategy 不兼容。
-                -- “root”：在项目的根目录中运行构建脚本。此配置仅在设置了 rust-analyzer.cargo.buildScripts.overrideCommand 时有效。
-                overrideCommand = nil, -- cargo check --quiet --workspace --message-format=json --all-targets
-                invocationStrategy = "per_workspace",
-                useRustcWrapper = true,
-                cfgs = {}, -- List of cfg options to enable with the given values.
-                extraArgs = {
-                    -- "--offline"
-                }, -- 传递给每个 cargo 调用的额外参数。
-                extraEnv = {}, -- 在工作区内运行 cargo、rustc 或其他命令时将设置的额外环境变量。用于设置 RUSTFLAGS。
-                features = {}, -- 要激活的功能列表。将其设置为 "all" 以将 --all-features 传递给cargo。
-                noDefaultFeatures = false, -- 是否将 --no-default-features 传递给cargo
-                sysroot = "discover", -- sysroot的相对路径，或“discover”以尝试通过“rustc--print sysroot”自动找到它。
-                sysrootSrc = "", -- 系统根库源的相对路径。如果未设置，则默认为 {cargo.sysroot}/lib/rustlib/src/rust/library 。
-                target = nil, -- 编译目标覆盖(target triple).
-                unsetTest = { "core" }, -- 取消设置指定板条箱的隐含 #[cfg(test)] 。
             },
+            invocationLocation = "workspace", -- 指定运行生成脚本的工作目录。-“workspace”：在工作区的根目录中运行工作区的构建脚本。
+            -- 这与设置为 once 的 rust-analyzer.cargo.buildScripts.invocationStrategy 不兼容。
+            -- “root”：在项目的根目录中运行构建脚本。此配置仅在设置了 rust-analyzer.cargo.buildScripts.overrideCommand 时有效。
+            overrideCommand = nil, -- cargo check --quiet --workspace --message-format=json --all-targets
+            invocationStrategy = "per_workspace",
+            useRustcWrapper = true,
+            cfgs = {}, -- List of cfg options to enable with the given values.
+            extraArgs = {
+                -- "--offline"
+            }, -- 传递给每个 cargo 调用的额外参数。
+            extraEnv = {}, -- 在工作区内运行 cargo、rustc 或其他命令时将设置的额外环境变量。用于设置 RUSTFLAGS。
+            features = "all", -- 要激活的功能列表。将其设置为 "all" 以将 --all-features 传递给cargo。
+            noDefaultFeatures = false, -- 是否将 --no-default-features 传递给cargo
+            sysroot = "discover", -- sysroot的相对路径，或“discover”以尝试通过“rustc--print sysroot”自动找到它。
+            sysrootSrc = nil, -- 系统根库源的相对路径。如果未设置，则默认为 {cargo.sysroot}/lib/rustlib/src/rust/library 。
+            target = nil, -- 编译目标覆盖(target triple).
+            unsetTest = {}, -- 取消设置指定板条箱的隐含 #[cfg(test)] 。
         },
         checkOnSave = false,
         check = {
@@ -34,7 +34,7 @@ return {
             -- extraArgs = vim.tbl_deep_extend("force", { "--no-deps" }, lints), -- cargo check 的额外参数。
             extraArgs = { "--no-deps" },
             extraEnv = {}, -- 运行 cargo check 时将设置的额外环境变量。扩展 rust-analyzer.cargo.extraEnv 。
-            features = nil, -- 要激活的功能列表。默认为 rust-analyzer.cargo.features 。设置为 "all" ，将 --all-features 传递给Cargo。
+            features = "all", -- 要激活的功能列表。默认为 rust-analyzer.cargo.features 。设置为 "all" ，将 --all-features 传递给Cargo。
             invocationLocation = "workspace", -- 指定运行检查的工作目录。-“workspace”：对相应工作区的根目录中的工作区进行检查。
             -- 如果 rust-analyzer.cargo.checkOnSave.invocationStrategy 设置为 once ，则返回到“root”。-“root”：在项目的根目录中运行检查。
             -- 此配置仅在设置了 rust-analyzer.cargo.buildScripts.overrideCommand 时有效。
@@ -160,7 +160,7 @@ return {
                 mode = "postfix ",
             },
             lifetimeElisionHints = { enable = "always", useParameterNames = true },
-            maxLength = 20,
+            maxLength = 25,
             parameterHints = { enable = true },
             renderColons = true,
             typeHints = { enable = true, hideClosureInitialization = false, hideNamedConstructor = false },

@@ -1,3 +1,6 @@
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+
 local _ = pcall(require, "lazy-config")
 local keymap = vim.keymap.set
 
@@ -113,3 +116,8 @@ vim.filetype.add({
         end,
     },
 })
+
+vim.api.nvim_set_hl(0, "ActiveWindow", { bg = "#17252c" })
+vim.api.nvim_set_hl(0, "InactiveWindow", { bg = "#0D1B22" })
+
+-- vim.o.winhighlight = "Normal:Normal,NormalNC:InactiveWindow"

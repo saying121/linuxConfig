@@ -17,6 +17,8 @@ return {
                 globals = {
                     "vim",
                 },
+                ignoredFiles = "Opened",
+                ignoreDir = {},
             },
             format = { enable = false },
             hint = {
@@ -27,6 +29,7 @@ return {
             },
             semantic = { keyword = false, variable = true },
             workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
                 checkThirdParty = false,
                 preloadFileSize = 10000,
             },

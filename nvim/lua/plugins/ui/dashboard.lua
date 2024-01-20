@@ -26,56 +26,39 @@ local result = vim.fn.rand() % total
 -- result = 1
 -- result = 60
 
---- 是否启用
----@return boolean
-local function enable_cond()
-    -- 判断命令行启动有几个参数
-    if vim.fn.exists("neovide") ~= 0 and vim.fn.argc() == 0 then
-        return true
-    else
-        return false
-    end
-end
-
 return {
     {
         "glepnir/dashboard-nvim",
         cond = function()
-            local cond = result < split
-            if enable_cond() then
-                return cond
-            end
-            return #vim.v.argv <= 2 and cond
+            return vim.fn.argc() == 0 and result < split
         end,
         config = function()
             local path_cat = M.get_random_file_path("the_cat")
             local all_prev = {
                 {
-                    path = path_cat,
+                    file_path = path_cat,
                     command = "cat | lolcat ",
                     file_height = 24,
                     file_width = utils.get_columns(path_cat),
                 },
                 {
-                    path = M.get_random_file_path("pictures"),
+                    file_path = M.get_random_file_path("pictures"),
                     command = "chafa -C on -c full --fg-only --symbols braille ",
                     file_height = 24,
                     file_width = 45,
                 },
             }
 
-            local rand = M.get_rand(all_prev)
-            rand = 1
-            local use_prev = all_prev[rand]
+            local use_prev
+            if vim.fn.getenv("TERM") == "xterm-kitty" then
+                use_prev = all_prev[M.get_rand(all_prev)]
+            else
+                use_prev = all_prev[1]
+            end
 
             require("dashboard").setup({
                 theme = "doom",
-                preview = {
-                    command = use_prev["command"],
-                    file_path = use_prev["path"],
-                    file_height = use_prev["file_height"],
-                    file_width = use_prev["file_width"],
-                },
+                preview = use_prev,
                 config = {
                     -- header = '',
                     week_header = {
@@ -139,11 +122,7 @@ return {
     {
         "goolord/alpha-nvim",
         cond = function()
-            local cond = result >= split
-            if enable_cond() then
-                return cond
-            end
-            return #vim.v.argv <= 2 and cond
+            return vim.fn.argc() == 0 and result >= split
         end,
         config = function()
             local alpha = require("alpha")

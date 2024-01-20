@@ -7,7 +7,7 @@ return {
     },
     config = function()
         local util = require("public.utils")
-        local git_root = util.get_git_root_dir(vim.fn.getcwd(), "/.git")
+        local git_root = util.get_root_dir(vim.fn.getcwd(), "/.git")
 
         local coverage = require("coverage")
 

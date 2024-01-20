@@ -17,6 +17,8 @@ syntax on
 set undofile
 set undodir=~/.local/share/vim/undodir     " 指定撤销文件目录
 
+let g:lsp_inlay_hints_enable = 1
+
 "Mode Settings
 
 let &t_SI.="\e[5 q" "SI = INSERT mode

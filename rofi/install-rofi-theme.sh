@@ -1,5 +1,7 @@
 #!/bin/bash
 
+xhost si:localuser:root
+
 # 截图
 if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
     sudo pacman -S --needed --noconfirm rofi maim dunst viewnior alsa-utils

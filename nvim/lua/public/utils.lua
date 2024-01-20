@@ -14,30 +14,14 @@ end
 ---@param start_dir string
 ---@param be_finded string
 ---@return string | nil
-function M.get_git_root_dir(start_dir, be_finded)
-    -- 使用vim.loop.fs_stat检查目录是否存在
-    local stat = vim.loop.fs_stat(start_dir)
-    -- 如果不存在，返回nil
-    if not stat then
-        return nil
-    end
-    -- 如果存在，拼接.git目录的路径
-    local git_dir = start_dir .. be_finded
-    -- 使用vim.loop.fs_stat检查.git目录是否存在
-    local git_stat = vim.loop.fs_stat(git_dir)
-    -- 如果存在，返回当前目录
-    if git_stat then
-        return start_dir
-    end
-    -- 如果不存在，获取上一级目录的路径
-    local parent_dir = vim.fn.fnamemodify(start_dir, ":h")
-    -- 如果上一级目录和当前目录相同，说明已经到达根目录，返回nil
-    if parent_dir == start_dir then
-        return nil
-    end
-    -- 否则，递归调用函数，传入上一级目录作为参数
-    ---@diagnostic disable-next-line: param-type-mismatch
-    return M.get_git_root_dir(parent_dir, be_finded)
+function M.get_root_dir(start_dir, be_finded)
+    local varName = vim.fs.find(be_finded, {
+        upward = true,
+        stop = vim.uv.os_homedir(),
+        path = start_dir,
+        limit = 1,
+    })
+    return vim.fs.dirname(varName[1])
 end
 
 function M.find_root_cwd(be_finded)

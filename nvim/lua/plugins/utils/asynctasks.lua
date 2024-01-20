@@ -19,7 +19,6 @@ return {
     keys = { { "<A-r>" } },
     config = function()
         vim.g.asynctasks_term_pos = "toggleterm2"
-        -- vim.g.asynctasks_term_pos = "tmux"
         -- vim.g.asynctasks_term_pos = "bottom"
 
         vim.g.asynctasks_term_rows = 20 -- 设置纵向切割时，高度为 10

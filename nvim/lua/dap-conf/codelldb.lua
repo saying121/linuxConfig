@@ -20,7 +20,8 @@ dap.adapters.codelldb = {
 
 local util = require("public.utils")
 -- 调用函数，传入当前工作目录和要找的文件夹作为参数
-local git_root = util.get_git_root_dir(vim.fn.getcwd(), "/.git")
+local git_root = util.get_root_dir(vim.fn.getcwd(), "/.git")
+
 local content = nil
 local name
 

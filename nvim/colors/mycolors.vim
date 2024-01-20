@@ -1,5 +1,5 @@
 hi Normal guibg=NONE " cterm=NONE guifg=NONE ctermfg=NONE
-" hi NormalNC guibg=#292E42 cterm=NONE guifg=NONE ctermfg=NONE
+" hi NormalNC guibg=#151531 cterm=NONE guifg=NONE ctermfg=NONE
 hi NormalSB guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi NormalFloat guibg=NONE cterm=NONE "guifg=NONE ctermfg=NONE
 hi SagaNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE

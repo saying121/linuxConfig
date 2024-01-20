@@ -1,6 +1,6 @@
 return {
     "t-troebst/perfanno.nvim",
-    -- cond = false,
+    cond = false,
     cmd = "PerfLoadFlat",
     config = function()
         require("perfanno").setup({

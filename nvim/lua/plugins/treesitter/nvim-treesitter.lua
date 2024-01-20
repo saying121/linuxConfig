@@ -1,6 +1,7 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
+    version = "*",
     build = ":TSUpdate",
     dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "treesitter" .. "/dependencies"),
     config = function()
@@ -51,9 +52,15 @@ return {
                         return true
                     end
 
-                    -- ra 的高亮就够好了
-                    if vim.b.filetype == "rust" then
-                        return #vim.lsp.get_clients({ name = "rust-analyzer", bufnr = buf }) > 0
+                    local tb = {
+                        rust = "rust-analyzer",
+                        lua = "lua_ls",
+                        zig = "zls",
+                    }
+                    for k, value in pairs(tb) do
+                        if vim.bo.filetype == k and #vim.lsp.get_clients({ name = value, bufnr = buf }) > 0 then
+                            return true
+                        end
                     end
                 end,
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.

@@ -22,7 +22,7 @@ bindkey '^Xh' _complete_help
 
 zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
 
-zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
+zstyle ':fzf-tab:complete:git-(diff|restore):*' fzf-preview 'git diff $word | delta'
 
 zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
 

@@ -1,0 +1,1 @@
+-- vim.snippet.expand('async $0')

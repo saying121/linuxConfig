@@ -1,11 +1,10 @@
 local M = {}
 
 -- 获取 lsp 名字
--- rime_ls 优先级靠后
 function M.lsp_clients()
     local msg = "No Active Lsp"
     local lsps = ""
-    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+    local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
     local clients = vim.lsp.get_clients()
     if next(clients) == nil then
         return msg
@@ -57,7 +56,7 @@ function M.linux_distro()
         pop = "",
     }
 
-    local uname = vim.loop.os_uname()
+    local uname = vim.uv.os_uname()
     if uname.sysname == "Linux" then
         local your_distro = M.get_distro_name()
 

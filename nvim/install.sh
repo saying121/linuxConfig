@@ -15,7 +15,7 @@ $pacMan fzf ripgrep fd lldb translate-shell \
     mold lld cargo-flamegraph sccache silicon
 $pacMan ruff-lsp vim-language-server lua-language-server bash-language-server \
     gopls yaml-language-server typescript-language-server jdtls marksman \
-    texlab typst-lsp revive
+    texlab typst-lsp revive tidy
 $aurPkg golines
 $pacMan sqlfluff vint
 $pacMan prettier stylua
@@ -32,7 +32,7 @@ rustup install stable beta nightly
 rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain stable
 rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain nightly
 rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain beta
-rustup default stable
+rustup default nightly
 # 切换 crates 源
 cargo install crm
 ~/.cargo/bin/crm use rsproxy

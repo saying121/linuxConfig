@@ -49,7 +49,7 @@ return {
                 return vim.v.shell_error == 0
             end
             if is_git_repo() then
-                opts = { cwd = util.get_git_root_dir(vim.fn.getcwd(), "/.git") }
+                opts = { cwd = util.get_root_dir(vim.fn.getcwd(), "/.git") }
             end
             builtin.find_files(opts)
         end
@@ -62,16 +62,14 @@ return {
                 return vim.v.shell_error == 0
             end
             if is_git_repo() then
-                opts = { cwd = util.get_git_root_dir(vim.fn.getcwd(), "/.git") }
+                opts = { cwd = util.get_root_dir(vim.fn.getcwd(), "/.git") }
             end
             builtin.live_grep(opts)
         end
         keymap("n", "<leader>gw", live_grep_from_git_root, opts)
 
         local telescope = require("telescope")
-        telescope.load_extension("media_files")
         telescope.load_extension("noice")
-        telescope.load_extension("ast_grep")
 
         local actions = require("telescope.actions")
 
@@ -158,14 +156,6 @@ return {
                     filetypes = { "png", "webp", "jpg", "jpeg" },
                     -- find command (defaults to `fd`)
                     find_cmd = "rg",
-                },
-                ast_grep = {
-                    command = {
-                        "ast-grep",
-                        "--json=stream",
-                    }, -- must have --json=stream
-                    grep_open_files = false, -- search in opened files
-                    lang = nil, -- string value, specify language for ast-grep `nil` for default
                 },
             },
         })

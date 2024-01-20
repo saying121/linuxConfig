@@ -28,6 +28,5 @@ Plug 'gelguy/wilder.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
-Plug 'rust-lang/rust.vim'
 call plug#end()
 

@@ -276,7 +276,8 @@ extern "<>" {
         },
         fmta(
             [[
-            struct <> {
+            #[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
+            pub struct <> {
                 <>: <>,
             }
             ]],
@@ -292,7 +293,10 @@ extern "<>" {
             trig = "struct-tuple",
             dscr = "struct …(…);",
         },
-        fmt("struct {}({});", {
+        fmt([[
+        #[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
+        pub struct {}({});
+        ]], {
             i(1, "Name"),
             i(2, "Type"),
         })
@@ -300,7 +304,10 @@ extern "<>" {
     s({
         trig = "struct-unit",
         dscr = "struct …;",
-    }, fmt("struct {};", { i(1, "Name") })),
+    }, fmt([[
+    #[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
+    pub struct {};
+    ]], { i(1, "Name") })),
     s(
         {
             trig = "type",

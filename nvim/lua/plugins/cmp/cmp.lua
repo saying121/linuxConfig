@@ -5,7 +5,7 @@ return {
     dependencies = {
         "f3fora/cmp-spell",
         "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
+        "FelipeLema/cmp-async-path",
         "lukas-reineke/cmp-rg",
         require("public.utils").req_lua_files_return_table("plugins/" .. "cmp" .. "/dependencies"),
     },
@@ -26,7 +26,7 @@ return {
             latex_symbols = "[Latex]",
             luasnip = "[LuaSnip]",
             nvim_lsp = "[LSP]",
-            path = "[Path]",
+            async_path = "[Path]",
             rg = "[Rg]",
             spell = "[Spell]",
             vim_dadbod_completion = "[DB]",
@@ -44,7 +44,7 @@ return {
                 priority = 1000,
             },
             { name = "nvim_lsp", priority = 1000 },
-            { name = "path", priority = 800 },
+            { name = "async_path", priority = 800 },
         }, {
             { name = "buffer", priority = 800 },
             { name = "rg", keyword_length = 3, priority = 700 },
@@ -154,7 +154,7 @@ return {
             sources = cmp.config.sources({
                 { name = "luasnip", priority = 1000 },
                 { name = "nvim_lsp", keyword_length = 0, priority = 900 },
-                { name = "path", priority = 830 },
+                { name = "async_path", priority = 830 },
             }, {
                 { name = "buffer", priority = 800 },
                 { name = "rg", keyword_length = 4, priority = 700 },

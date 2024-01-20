@@ -82,9 +82,12 @@ elif [ "$kind" = rfc822 ]; then
     fi
     # https://github.com/wofr06/lesspipe/pull/106
 elif [ "$category" = image ]; then
-    if [ "$(command -v chafa)" ]; then
-        # ~/.linuxConfig/shells/test.sh "$1"
-
+    # --transfer-mode=memory is the fastest option but if you want fzf to be able
+    # to redraw the image on terminal resize or on 'change-preview-window',
+    # you need to use --transfer-mode=stream.
+    if [[ $KITTY_WINDOW_ID ]]; then
+        kitty icat --clear --transfer-mode=memory --stdin=no --place="$FZF_PREVIEW_COLUMNS"x"$FZF_PREVIEW_LINES"@0x0 "$1"
+    elif [ "$(command -v chafa)" ]; then
         chafa -f symbols -s 70x60 "$1"
     fi
     if [ "$(command -v exiftool)" ]; then

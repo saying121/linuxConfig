@@ -21,12 +21,6 @@ return {
         local keymap = vim.keymap.set
         -- Display translation in a window
         keymap({ "n", "x" }, "<M-y>", ":TranslateW<cr>", opts)
-        keymap({ "n", "x" }, "<C-y>", function()
-            vim.cmd([[
-            let g:translator_window_type = "preview"
-            TranslateW
-            ]])
-        end, opts)
         -- Echo translation in the cmdline
         -- Replace the text with translation
         -- keymap("n", "<M-r>", "<Plug>TranslateR", opts)

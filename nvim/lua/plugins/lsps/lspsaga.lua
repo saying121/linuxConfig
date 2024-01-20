@@ -180,7 +180,7 @@ return {
             project_max_width = 0.5,
             project_max_height = 0.5,
             keys = {
-                quit = "q",
+                quit = "`",
                 exec = "<CR>",
                 select = "x",
             },

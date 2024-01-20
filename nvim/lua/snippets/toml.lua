@@ -3,37 +3,50 @@ local s = ls.snippet
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 
+local serial = {
+    ["mio-serial"] = "mio 的串行端口实现",
+    ["serialport"] = "一个跨平台的低级串口库。",
+    ["serialport5"] = "一个跨平台的底层串口库",
+}
+
 local transfer = {
     ["ocrs"] = "OCR engine",
     ["whisper-rs"] = "whisper.cpp 的 Rust 绑定",
 }
-local crates = {
-    ["hex-literal"] = "用于在编译时将十六进制字符串转换为字节数组的宏",
-    ["castaway"] = "针对有限编译时专业化的安全、零成本的向下转型。",
-    ["xshell"] = "在 Rust 中快速编写 shell 脚本的实用程序",
-    ["rustyline"] = "rustyline，基于 antirez 的 linenoise 的 readline 实现",
-    ["indoc"] = "缩进文档文字",
-    ["owning_ref"] = "一个用于创建携带其所有者的参考资料的库。",
+local unix = {
+    ["which"] = "rust 相当于 unix 命令“which”。在跨平台中找到已安装的可执行文件。",
+    ["signal-hook-tokio"] = "tokio 对信号挂钩的支持",
+    ["signal-hook"] = "Unix 信号处理",
     ["libc"] = "原始 FFI 绑定到 libc 等平台库。",
-    ["sscanf"] = "基于正则表达式的 sscanf（格式反转！()）宏",
+    ["dbus"] = "绑定到 d-bus，这是 Linux 上常用的用于进程间通信的总线。",
+    ["linux-raw-sys"] = "为 linux 用户空间 api 生成绑定",
+}
+local os_crate = {
+    ["rustix"] = "与 POSIX/Unix/Linux/Winsock 类系统调用的安全 Rust 绑定(uring,memory map,mount,pipe,libc)",
+    ["open"] = "使用系统上配置的程序打开路径或 url",
+    ["opener"] = "使用系统默认程序打开文件或链接。",
+    ["num_cpus"] = "获取机器上的 cpu 数量。",
+}
+local machine_learning = {
+    ["tensorflow"] = "tensorflow 的 Rust 语言绑定。",
+}
+local crates = {
+    ["hashbrown"] = "谷歌 SwissTable hash map 的 Rust 端口",
+    ["castaway"] = "针对有限编译时专业化的安全、零成本的向下转型。",
+    ["rustyline"] = "rustyline，基于 antirez 的 linenoise 的 readline 实现",
+    ["owning_ref"] = "一个用于创建携带其所有者的引用的库。",
     ["shared_memory"] = "一个用户友好的包，允许您在进程之间共享内存",
     ["contest-algorithms"] = "编程竞赛的常用算法和数据结构",
     ["strum"] = "用于处理枚举和字符串的有用宏",
     ["ilhook"] = "提供在 x86 和 x86_64 架构中内联挂钩二进制代码的方法的库",
-    ["tensorflow"] = "tensorflow 的 Rust 语言绑定。",
-    ["dbus"] = "绑定到 d-bus，这是 Linux 上常用的用于进程间通信的总线。",
     ["device_query"] = "一个基本库，用于在没有窗口的情况下按需查询键盘和鼠标状态。",
     ["tendril"] = "用于零拷贝解析的紧凑缓冲区/字符串类型",
-    ["open"] = "使用系统上配置的程序打开路径或 url",
-    ["opener"] = "使用系统默认程序打开文件或链接。",
     ["defer-drop"] = "推迟将大型类型删除到后台线程",
     ["derive_builder"] = "派生 **Rust** 结构的构建器实现",
     ["semver"] = "用于Cargo语义版本控制风格的解析器和评估器",
     ["get-cookie"] = "从本地浏览器的 cookie 存储中获取 cookie",
-    ["captcha"] = "用于生成验证码的库。",
     ["cookie"] = "http cookie 解析和 cookie jar 管理。支持签名和私有（加密、验证）jar。",
     ["GraphQL"] = "rust lang 的 graphql 参考实现。",
-    ["atoi"] = "直接从安全代码中的 `[u8]` 切片解析整数",
     ["bitflags"] = "一个类型安全的位掩码标志生成器，对 **C** 风格标志集很有用。它可用于围绕 **C** api 创建符合人体工程学的包装器",
     ["byteorder"] = "这个 crate 提供了以大端或小端顺序编码和解码数字的便捷方法",
     ["flate2"] = "deflate 压缩和解压缩公开为 read/buf 读/写流。支持 miniz oxide 和多个 zlib 实现。支持 zlib、gzip 和原始 deflate 流。",
@@ -41,12 +54,22 @@ local crates = {
     （该库已经废弃
     用 `std::{cell::OnceCell, sync::OnceLock};
     std::{sync::LazyLock, cell::LazyCell}}` 取代）]],
-    ["num_cpus"] = "获取机器上的 cpu 数量。",
     ["opentelementry"] = "*open telemetry* 提供一组 api、库、代理和收集器服务来从您的应用程序捕获分布式跟踪和指标。您可以使用 prometheus、jaeger 和其他可观察性工具来分析它们。",
-    ["regex"] = "**Rust** 正则表达式的实现",
-    ["thread_local"] = "每个线程对象本地存储",
     ["tower"] = "tower 是一个模块化和可重用组件库，用于构建强大的客户端和服务器。",
     ["closure_attr"] = "用于简化闭包捕获的属性宏",
+}
+local util = {
+    ["cfg-if"] = "根据大量 #[cfg] 参数以符合人体工程学的方式定义项目的宏。其结构类似于 if-else 链，第一个匹配的分支是发出的项目。",
+    ["indoc"] = "缩进文档文字",
+    ["hex-literal"] = "用于在编译时将十六进制字符串转换为字节数组的宏",
+    ["atoi"] = "直接从安全代码中的 `[u8]` 切片解析整数",
+    ["captcha"] = "用于生成验证码的库。",
+    ["sscanf"] = "基于正则表达式的 sscanf（格式反转！()）宏",
+    ["regex"] = "**Rust** 正则表达式的实现",
+    ["grep-searcher"] = "作为库的快速面向行正则表达式搜索。",
+    ["grep-regex"] = "将 rust 的正则表达式库与“grep”板条箱一起使用。",
+    ["ignore"] = "一个快速库，用于有效地将忽略文件（例如`.gitignore`）与文件路径匹配。",
+    ["imara-diff"] = "最小的 terminfo 库。",
 }
 local parser = {
     ["nom"] = "面向字节、零拷贝、解析器组合器库",
@@ -134,6 +157,7 @@ local file = {
     ["same_file"] = "一个简单的crate，用于确定两个文件路径是否指向同一个文件。",
     ["tar"] = "tar 文件读取器和写入器的 **Rust** 实现",
     ["walkdir"] = "递归地遍历一个目录。",
+    ["dunce"] = "将 Windows 路径标准化为最兼容的格式，尽可能避免 unc",
 }
 local img = {
     ["plotters"] = "一个 **Rust** 绘图库，专注于 wasm 和本机应用程序的数据绘图",
@@ -157,6 +181,7 @@ local maths = {
     ["nalgebra"] = "具有变换和静态大小或动态大小矩阵的通用线性代数库。",
     ["sprs"] = "稀疏矩阵库",
     ["nalgebra-sparse"] = "基于nalgebra的稀疏矩阵计算。",
+    ["rug"] = "基于 gmp、mpfr 和 mpc 的任意精度整数、有理数、浮点和复数",
 }
 local web = {
     ["surf"] = "Surf the web - HTTP 客户端框架",
@@ -255,18 +280,20 @@ local net = {
     ["url"] = "**Rust** 的 **URL** 库，基于 WHATWG url 标准",
     ["warp"] = "以极快的速度提供网络服务",
 }
-local sync = {
+local threads = {
+    ["thread_local"] = "每个线程对象本地存储",
+    ["crossbeam"] = "并发编程的工具(mpmc)",
+    ["flume"] = "一个极快的多生产者渠道(mpmc)",
+    ["parking"] = "线程 parking and unparking",
     ["rayon"] = "**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争。它根据运行时的工作负载自动调整并行度。",
     ["raw_sync"] = "操作系统同步原语的轻量级包装器",
     ["parking_lot"] = "标准同步原语的更紧凑和高效的实现",
     ["spin"] = "基于自旋的同步原语",
-}
-local channel = {
-    ["async-channel"] = "异步多生产者多消费者通道(mpmc)",
-    ["crossbeam"] = "并发编程的工具(mpmc)",
-    ["flume"] = "一个极快的多生产者渠道(mpmc)",
+    ["threadpool"] = "用于在一组固定的工作线程上运行多个作业的线程池。",
 }
 local async = {
+    ["monoio"] = "基于 iouring 的每个核心运行时一个线程。",
+    ["async-channel"] = "异步多生产者多消费者通道(mpmc)",
     ["trait-variant"] = "用于处理 Rust 中的 impl 特征的实用程序",
     ["async-once-cell"] = "异步单赋值单元格和惰性值。",
     ["async-lazy"] = "第一次访问时使用异步函数初始化的值。",
@@ -278,6 +305,7 @@ local async = {
     ["async-trait"] = "异步特征方法的类型擦除",
     ["async-std"] = "**Rust** 标准库的异步版本",
     ["futures"] = "零分配、可组合和类似迭代器接口的 `futures` 和 `streams` 实现",
+    ["futures-io"] = "futures-rs 库的 `AsyncRead` 、 `AsyncWrite` 、 `AsyncSeek` 和 `AsyncBufRead` 特征。",
     ["mio"] = "轻量级非阻塞 I/O。",
     ["pin-utils"] = "用于固定的实用程序",
     ["tokio"] = "一个事件驱动的、非阻塞的 I/O 平台，用于编写异步 I/O 支持的应用程序",
@@ -286,7 +314,18 @@ local async = {
     ["tokio-stream"] = "使用 `stream` 和 `tokio` 的实用程序。",
     ["tokio-test"] = "基于 `tokio` 和 `future` 的代码的测试实用程序",
     ["tokio-serde"] = "使用 tokio 通过网络发送和接收 serde 可编码类型。该库用作序列化格式特定库的构建块。",
-    ["signal-hook-tokio"] = "tokio 对信号挂钩的支持",
+    ["tokio-uring"] = "io-uring 对 tokio 异步运行时的支持。",
+    ["io-uring"] = "Rust 的低级`io uring`用户空间接口",
+    ["async-lock"] = "异步同步原语",
+    ["pin-project-lite"] = "用声明性宏编写的 pin-project 的轻量级版本。",
+    ["async-stream"] = "使用 async & wait 表示法的异步流",
+
+    ["polling"] = "便携式接口 epoll, kqueue, event ports, and IOCP",
+    ["miow"] = "Windows 的零开销 I/O 库，专注于 iocp 和异步 I/O 抽象。",
+    ["async-io"] = "异步 I/O 和定时器",
+    ["async-net"] = "用于 TCP/UDP/Unix 通信的异步网络原语",
+    ["async-fs"] = "异步文件系统原语",
+    ["futures-lite"] = "Futures, streams, and async I/O 组合器",
 }
 local database = {
     ["metrics"] = "对数据库连接性能测试",
@@ -310,6 +349,7 @@ local orm = {
     ["sea-orm"] = "**Rust** 的异步和动态 orm",
     ["sea-orm-migration"] = "SeaORM 的迁移实用程序",
     ["sea-query"] = "用于 mysql、postgres 和 sqlite 的动态查询生成器。(sea-orm 包含了这个)",
+    ["rustis"] = "用于 Rust 的 Redis 异步驱动程序",
 }
 local serde = {
     ["csv"] = "支持 serde 的快速 csv 解析。",
@@ -384,11 +424,15 @@ local gui = {
     ["slint"] = "gui 工具包，可有效地为嵌入式设备和桌面应用程序开发流畅的图形用户界面",
     ["wayland-client"] = "绑定到 Wayland 协议的标准 c 实现，客户端",
     ["x11rb"] = "**Rust** 绑定到 X11",
+    ["iced"] = "受 Elm 启发的跨平台 GUI 库",
 }
 local grpc = {
     ["tonic"] = "基于 http/2 的 grpc 实现侧重于高性能、互操作性和灵活性。",
     ["grpcio"] = "grpc的 **Rust** 语言实现，基于grpc c核心库。",
     ["tarpc"] = "一个 rust 的 rpc 框架，重点是易用性。",
+    ["volo"] = "volo是一个高性能、可扩展性强的rust rpc框架，帮助开发者构建微服务。",
+    ["prost"] = "Rust 语言的Protocol Buffers实现。",
+    ["pilota"] = "Pilota 是纯 Rust 中的 thrift 和 protobuf 实现，具有高性能和可扩展性。",
 }
 local quic = {
     ["quiche"] = "quic 传输协议和 http/3 的美味实现",
@@ -411,6 +455,7 @@ local bindings = {
     ["bindgen"] = "自动生成 rust ffi 到 c 和 c++ 库的绑定。",
     ["inline-python"] = "直接在 **Rust** 代码中内联 **Python** 代码",
     ["pyo3"] = "绑定到 python 解释器",
+    ["xshell"] = "在 Rust 中快速编写 shell 脚本的实用程序",
     ["rlua"] = "与 lua 5.x 的高级绑定",
     ["mlua"] = [[与 lua 5.4/5.3/5.2/5.1（包括 luajit）和 roblox luau 的高级绑定
         ，具有 async/await 功能，并支持在 Rust 中编写本机 lua 模块。]],
@@ -432,9 +477,6 @@ local notify = {
     ["notify-rust"] = "显示桌面通知（linux、bsd、mac）。纯 Rust dbus 客户端和服务器。",
     ["notify"] = "跨平台文件系统通知库",
 }
-local protocol_buffer = {
-    ["prost"] = "Rust 语言的协议缓冲区实现。",
-}
 local test = {
     ["skeptic"] = "通过 Cargo 测试你的 Rust Markdown 文档",
 }
@@ -446,6 +488,7 @@ local data_struct = {
     ["smol_str"] = "使用 o(1) 克隆的小字符串优化字符串类型",
     ["bytes"] = "处理字节的类型和特征",
     ["smallvec"] = "“小向量”优化：在堆栈上存储最多少量的项目",
+    ["smallstr"] = "基于smallvec的字符串容器",
     ["tinyvec"] = "`tinyvec` 提供 100% 安全的类 vec 数据结构。",
     ["tendril"] = "用于零拷贝解析的紧凑缓冲区/字符串类型",
 }
@@ -454,9 +497,8 @@ local all = vim.tbl_deep_extend(
     "force",
     test,
     data_struct,
-    sync,
     async,
-    channel,
+    threads,
     crates,
     database,
     encoding,
@@ -490,10 +532,14 @@ local all = vim.tbl_deep_extend(
     iterators,
     neovim,
     notify,
-    protocol_buffer,
     some_display,
     parser,
-    transfer
+    transfer,
+    util,
+    unix,
+    os_crate,
+    machine_learning,
+    serial
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']

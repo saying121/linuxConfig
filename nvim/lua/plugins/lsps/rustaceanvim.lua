@@ -11,7 +11,6 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "mfussenegger/nvim-dap",
-        "mattn/webapi-vim",
     },
     config = function()
         local extension_path = "/usr/lib/codelldb/"
@@ -40,9 +39,7 @@ return {
                 --- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
                 ---@type boolean
                 reload_workspace_from_cargo_toml = true,
-                hover_actions = {
-                    replace_builtin_hover = true,
-                },
+                hover_actions = { replace_builtin_hover = false },
 
                 float_win_config = {
                     -- the border that is used for the hover window or explain_error window
@@ -82,7 +79,19 @@ return {
                     local keymap, opts = vim.keymap.set, { noremap = true, silent = true, buffer = bufnr }
 
                     keymap("n", "<M-e>", function()
-                        vim.cmd.RustLsp("explainError")
+                        local diagnostics = vim.diagnostic.get(bufnr, { severity = vim.diagnostic.severity.ERROR })
+                        local found = false
+                        for _, diagnostic in ipairs(diagnostics) do
+                            if diagnostic.source == "rustc" then
+                                found = true
+                                break
+                            end
+                        end
+                        if found then
+                            vim.cmd.RustLsp("explainError")
+                        else
+                            vim.cmd.RustLsp("renderDiagnostic")
+                        end
                     end, opts)
 
                     keymap("n", "<M-f>", function()
