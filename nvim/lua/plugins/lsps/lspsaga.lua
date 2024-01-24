@@ -1,6 +1,6 @@
 return {
     "glepnir/lspsaga.nvim",
-    -- Do make sure that your LSP plugins, like lsp-zero or lsp-config, are loaded before loading lspsaga.
+    -- Do make sure that your LSP plugins, loaded before loading lspsaga.
     event = "LspAttach",
     keys = {
         { "<space>gg" },
@@ -122,7 +122,7 @@ return {
             default = "def+ref",
             layout = "float",
             keys = {
-                shuttle = "[",
+                shuttle = "[w",
                 toggle_or_open = "o", -- toggle expand or open
                 vsplit = "s", -- open in vsplit
                 split = "i", -- open in split

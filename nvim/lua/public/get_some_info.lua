@@ -1,5 +1,13 @@
 local M = {}
 
+local handle = io.popen("rustc --version")
+local output
+if handle then
+    output = handle:read("*a")
+    handle:close()
+end
+local is_nightly = string.find(output, "nightly") ~= nil
+
 -- 获取 lsp 名字
 function M.lsp_clients()
     local msg = "No Active Lsp"
@@ -13,10 +21,16 @@ function M.lsp_clients()
     for _, client in ipairs(clients) do
         local filetypes = client.config.filetypes
         if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            if lsps ~= "" then
-                lsps = lsps .. ", " .. client.name
+            local name
+            if buf_ft == "rust" and is_nightly then
+                name = "ra-nightly"
             else
-                lsps = client.name
+                name = client.name
+            end
+            if lsps ~= "" then
+                lsps = lsps .. ", " .. name
+            else
+                lsps = name
             end
         end
     end

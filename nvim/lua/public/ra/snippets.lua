@@ -1,29 +1,36 @@
 local postfix = {
+    ["Mutex::new"] = {
+        body = "Mutex::new(${receiver})",
+        description = "Put the expression into an `Mutex`",
+        postfix = "Mutex",
+        requires = "std::sync::Mutex",
+        scope = "expr",
+    },
     ["Arc::new"] = {
         body = "Arc::new(${receiver})",
         description = "Put the expression into an `Arc`",
-        postfix = "arc",
+        postfix = "Arc",
         requires = "std::sync::Arc",
         scope = "expr",
     },
     ["Arc::clone"] = {
         body = "Arc::clone(&${receiver})",
         description = "Put the expression into an `Arc::clone`",
-        postfix = "arc_clone",
+        postfix = "Arc_clone",
         requires = "std::sync::Arc",
         scope = "expr",
     },
     ["Rc::new"] = {
         body = "Rc::new(${receiver})",
         description = "Put the expression into an `Rc`",
-        postfix = "rc",
+        postfix = "Rc",
         requires = "std::rc::Rc",
         scope = "expr",
     },
     ["Rc::clone"] = {
         body = "Rc::clone(${receiver})",
         description = "Put the expression into an `Rc::clone`",
-        postfix = "rc_clone",
+        postfix = "Rc_clone",
         requires = "std::rc::Rc",
         scope = "expr",
     },
@@ -37,19 +44,19 @@ local postfix = {
     Err = {
         body = "Err(${receiver})",
         description = "Wrap the expression in a `Result::Err`",
-        postfix = "err",
+        postfix = "Err",
         scope = "expr",
     },
     Ok = {
         body = "Ok(${receiver})",
         description = "Wrap the expression in a `Result::Ok`",
-        postfix = "ok",
+        postfix = "Ok",
         scope = "expr",
     },
     Some = {
         body = "Some(${receiver})",
         description = "Wrap the expression in an `Option::Some`",
-        postfix = "some",
+        postfix = "Some",
         scope = "expr",
     },
     eprln = {

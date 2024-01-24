@@ -63,7 +63,7 @@ l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
 
 ## 版本要求
 
-最低 0.9.0 ，[dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim)，[dyninput.nvim](https://github.com/nvimdev/dyninput.nvim) ，内置的 inlay hints 只能在 >=0.10.0 版本才能用
+最低 0.9.0 ，[dyninput.nvim](https://github.com/nvimdev/dyninput.nvim) ，内置的 inlay hints 只能在 >=0.10.0 版本才能用
 
 ### 主要插件
 
@@ -72,11 +72,10 @@ l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
 - [ lazy.nvim ](https://github.com/folke/lazy.nvim) 插件管理器
 - [ lspsaga.nvim ](https://github.com/glepnir/lspsaga.nvim) 更好的 lsp ui
 - [ mason.nvim ](https://github.com/williamboman/mason.nvim) 安装 lsp， linter， adapter， formatter 等等
-- [ neodev.nvim ](https://github.com/folke/neodev.nvim) 为 neovim 开发 lua 的插件
 - [ nvim-cmp ](https://github.com/hrsh7th/nvim-cmp) 自动补全
 - [ nvim-lspconfig ](https://github.com/neovim/nvim-lspconfig) 配置 lsp
 - [ nvim-treesitter ](https://github.com/nvim-treesitter/nvim-treesitter) 语法高亮
-- [ rust-tools.nvim ](https://github.com/simrat39/rust-tools.nvim) 专门为 rust 开发的插件
+- [ rustaceanvim ](https://github.com/mrcjkb/rustaceanvim) 专门为 rust 开发的插件
 - [ stay-centered.nvim ](https://github.com/arnamak/stay-centered.nvim) 保持光标所在行在屏幕中间，进行配置可以获得更好的鼠标滚动体验，自己去配置里面看
 - [ telescope.nvim ](https://github.com/nvim-telescope/telescope.nvim) 模糊查找插件
 - [ vim-dadbod ](https://github.com/tpope/vim-dadbod) 连接数据库插件
@@ -122,8 +121,6 @@ git pull
 
 ## 一些已知问题
 
-alpha.nvim 使用 `chafa` 显示图片在 wezterm 不能用， kitty 可以。
-
 dap 调试不能设置 codelldb 不跳进反汇编，只有通过 vscode 才可以设置。
 
-`./viml/autocmds.vim` 有一段打开二进制文件的自动命令，有可能导致一些文本文件打不开，自行注释。或者在 `./lua/init.lua` 中添加文件类型。
+`./viml/init.vim` 有一段打开二进制文件的自动命令，有可能导致一些文本文件打不开，自行注释。或者在 `./lua/init.lua` 中添加文件类型。

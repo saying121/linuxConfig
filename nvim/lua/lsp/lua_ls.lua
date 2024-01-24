@@ -14,9 +14,6 @@ return {
                 -- path = runtime_path,
             },
             diagnostics = {
-                globals = {
-                    "vim",
-                },
                 ignoredFiles = "Opened",
                 ignoreDir = {},
             },
@@ -27,7 +24,11 @@ return {
                 await = true,
                 setType = true,
             },
-            semantic = { keyword = false, variable = true },
+            semantic = {
+                annotation = true,
+                keyword = true,
+                variable = true,
+            },
             workspace = {
                 library = vim.api.nvim_get_runtime_file("", true),
                 checkThirdParty = false,

@@ -28,7 +28,7 @@ return {
         -- local utils=require("public.utils")
         -- local file=get_git_root_dir(vim.fn.getcwd(), "/tasks.ini")
         vim.g.asynctasks_extra_config = {
-            "~/.config/nvim/tasks.ini",
+            "~/.config/nvim/tasks/tasks.ini",
         }
 
         local opts, keymap = { noremap = true, silent = true }, vim.keymap.set

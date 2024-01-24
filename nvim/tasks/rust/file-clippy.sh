@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 VIM_FILENAME=$1
 VIM_FILENOEXT=$2

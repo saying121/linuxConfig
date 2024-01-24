@@ -1,8 +1,19 @@
 return {
     "nvim-tree/nvim-tree.lua",
-    cond = false,
+    -- cond = false,
     keys = { "<leader>e" },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+        "nvim-tree/nvim-web-devicons", -- file icons
+        {
+            "antosha417/nvim-lsp-file-operations",
+            dependencies = { "nvim-lua/plenary.nvim" },
+            config = function()
+                require("lsp-file-operations").setup({
+                    debug = false,
+                })
+            end,
+        },
+    },
     version = "nightly", -- optional, updated every week. (see issue #1193)
     config = function()
         vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })

@@ -1,7 +1,6 @@
 return {
     "3rd/image.nvim",
-    -- event = "VeryLazy",
-    ft = { "markdown", "norg", "typst" },
+    ft = { "markdown", "norg","image_nvim" },
     build = "luarocks --local install magick --lua-version 5.1",
     config = function()
         require("image").setup({
@@ -27,7 +26,7 @@ return {
             max_height = nil,
             max_width_window_percentage = nil,
             max_height_window_percentage = 50,
-            window_overlap_clear_enabled = false, -- toggles images when windows are overlapped
+            window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
             window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
             editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
             tmux_show_only_in_active_window = false, -- auto show/hide images in the correct Tmux window (needs visual-activity off)

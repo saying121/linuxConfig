@@ -1,16 +1,20 @@
 return {
     "nvim-neo-tree/neo-tree.nvim",
+    cond = false,
     keys = { "<leader>e" },
     branch = "v3.x",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
         "MunifTanjim/nui.nvim",
-        "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+        -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     },
     config = function()
         vim.keymap.set("n", "<leader>e", function()
             vim.cmd.Neotree("toggle")
+        end)
+        vim.keymap.set("n", "<leader>bb", function()
+            vim.cmd.Neotree("buffers")
         end)
 
         require("neo-tree").setup({
@@ -388,7 +392,7 @@ return {
                     ["<cr>"] = "open",
                     -- ["<cr>"] = { "open", config = { expand_nested_files = true } }, -- expand nested file takes precedence
                     ["<esc>"] = "cancel", -- close preview or floating neo-tree window
-                    ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
+                    ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = false } },
                     ["l"] = "focus_preview",
                     ["S"] = "open_split",
                     -- ["S"] = "split_with_window_picker",
@@ -571,7 +575,7 @@ return {
                 group_empty_dirs = false, -- when true, empty folders will be grouped together
                 search_limit = 50, -- max number of search results when using filters
                 follow_current_file = {
-                    enabled = false, -- This will find and focus the file in the active buffer every time
+                    enabled = true, -- This will find and focus the file in the active buffer every time
                     --               -- the current file is changed while the tree is open.
                     leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
                 },
@@ -598,7 +602,7 @@ return {
                     mappings = {
                         ["u"] = "navigate_up",
                         ["."] = "set_root",
-                        ["bd"] = "buffer_delete",
+                        ["d"] = "buffer_delete",
                         ["i"] = "show_file_details",
                         ["?"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
                         ["oc"] = { "order_by_created", nowait = false },

@@ -250,25 +250,27 @@ extern "<>" {
         dscr = "#[derive(…)]",
         trig = "derive",
     }, fmt("#[derive({})]", { i(1, "") })),
-    -- s(
-    --     {
-    --         trig = "enum",
-    --         dscr = "enum … { … }",
-    --     },
-    --     fmta(
-    --         [[
-    --         enum <> {
-    --             <>,
-    --             <>,
-    --         }
-    --         ]],
-    --         {
-    --             i(1, "Name"),
-    --             i(2, "Variant1"),
-    --             i(3, "Variant2"),
-    --         }
-    --     )
-    -- ),
+    s(
+        {
+            trig = "enum",
+            dscr = "enum … { … }",
+        },
+        fmta(
+            [[
+            #[derive(Clone, Copy)]
+            #[derive(Debug)]
+            #[derive(Default)]
+            #[derive(PartialEq, Eq)]
+            enum <> {
+                <>,
+            }
+            ]],
+            {
+                i(1, "Name"),
+                i(2, ""),
+            }
+        )
+    ),
     s(
         {
             trig = "struct",
@@ -276,7 +278,10 @@ extern "<>" {
         },
         fmta(
             [[
-            #[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
+            #[derive(Clone, Copy)]
+            #[derive(Debug)]
+            #[derive(Default)]
+            #[derive(PartialEq, Eq)]
             pub struct <> {
                 <>: <>,
             }
@@ -294,7 +299,10 @@ extern "<>" {
             dscr = "struct …(…);",
         },
         fmt([[
-        #[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
+        #[derive(Clone, Copy)]
+        #[derive(Debug)]
+        #[derive(Default)]
+        #[derive(PartialEq, Eq)]
         pub struct {}({});
         ]], {
             i(1, "Name"),
@@ -305,7 +313,10 @@ extern "<>" {
         trig = "struct-unit",
         dscr = "struct …;",
     }, fmt([[
-    #[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
+    #[derive(Clone, Copy)]
+    #[derive(Debug)]
+    #[derive(Default)]
+    #[derive(PartialEq, Eq)]
     pub struct {};
     ]], { i(1, "Name") })),
     s(

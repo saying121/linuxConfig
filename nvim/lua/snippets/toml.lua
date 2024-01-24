@@ -31,6 +31,9 @@ local machine_learning = {
     ["tensorflow"] = "tensorflow 的 Rust 语言绑定。",
 }
 local crates = {
+    ["uuid"] = "生成和解析 uuid 的库。",
+    ["enum_dispatch"] = "动态分派方法调用的近乎直接替代，速度高达 10 倍",
+    ["slab"] = "为统一数据类型预先分配存储",
     ["hashbrown"] = "谷歌 SwissTable hash map 的 Rust 端口",
     ["castaway"] = "针对有限编译时专业化的安全、零成本的向下转型。",
     ["rustyline"] = "rustyline，基于 antirez 的 linenoise 的 readline 实现",
@@ -40,7 +43,6 @@ local crates = {
     ["strum"] = "用于处理枚举和字符串的有用宏",
     ["ilhook"] = "提供在 x86 和 x86_64 架构中内联挂钩二进制代码的方法的库",
     ["device_query"] = "一个基本库，用于在没有窗口的情况下按需查询键盘和鼠标状态。",
-    ["tendril"] = "用于零拷贝解析的紧凑缓冲区/字符串类型",
     ["defer-drop"] = "推迟将大型类型删除到后台线程",
     ["derive_builder"] = "派生 **Rust** 结构的构建器实现",
     ["semver"] = "用于Cargo语义版本控制风格的解析器和评估器",
@@ -142,6 +144,7 @@ local log = {
     ["tracing-log"] = "提供“tracing”和“log”包之间的兼容性。",
     ["structured-logger"] = "日志箱的日志记录实现，将同步或异步的结构化值以 json、cbor 或任何其他格式记录到文件、stderr、stdout 或任何其他目标中。",
     ["console-subscriber"] = "用于收集 tokio 控制台遥测数据的“tracing-subscriber::layer”。",
+    ["minitrace"] = "用于 Rust 的高性能时间线跟踪库",
 }
 local file = {
     ["tempfile"] = "用于管理临时文件和目录的库。",
@@ -292,6 +295,8 @@ local threads = {
     ["threadpool"] = "用于在一组固定的工作线程上运行多个作业的线程池。",
 }
 local async = {
+    ["loom"] = "并发代码的排列测试",
+    ["compio"] = "完成基于异步运行时",
     ["monoio"] = "基于 iouring 的每个核心运行时一个线程。",
     ["async-channel"] = "异步多生产者多消费者通道(mpmc)",
     ["trait-variant"] = "用于处理 Rust 中的 impl 特征的实用程序",

@@ -1,5 +1,8 @@
 return {
     "ray-x/go.nvim",
+    -- event = {
+    --     "UIEnter *go",
+    -- },
     ft = { "go", "gomod" },
     dependencies = { -- optional packages
         "ray-x/guihua.lua",

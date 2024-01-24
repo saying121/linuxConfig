@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 time_with_color() {
     "$@"

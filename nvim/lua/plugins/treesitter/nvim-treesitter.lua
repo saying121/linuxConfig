@@ -44,7 +44,6 @@ return {
                 -- disable = { 'conf' },
 
                 -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-                ---@diagnostic disable-next-line: unused-local
                 disable = function(lang, buf)
                     local max_filesize = 100 * 1024 -- 100 KB
                     local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -58,7 +57,7 @@ return {
                         zig = "zls",
                     }
                     for k, value in pairs(tb) do
-                        if vim.bo.filetype == k and #vim.lsp.get_clients({ name = value, bufnr = buf }) > 0 then
+                        if lang == k and #vim.lsp.get_clients({ name = value, bufnr = buf }) > 0 then
                             return true
                         end
                     end

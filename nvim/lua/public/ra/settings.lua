@@ -109,13 +109,13 @@ return {
             debug = { enable = true },
             forceCustomCommands = true,
             implementations = { enable = true },
-            location = "location",
+            location = "above_name",
             references = {
                 adt = {
-                    enable = false, -- 是否显示Struct、Enum和Union的 References 镜头。仅在设置了 rust-analyzer.lens.enable 时适用。
+                    enable = true, -- 是否显示Struct、Enum和Union的 References 镜头。仅在设置了 rust-analyzer.lens.enable 时适用。
                 },
                 enumVariant = {
-                    enable = false, -- 是否显示枚举变体的 References 镜头。仅在设置了 rust-analyzer.lens.enable 时适用。
+                    enable = true, -- 是否显示枚举变体的 References 镜头。仅在设置了 rust-analyzer.lens.enable 时适用。
                 },
                 method = {
                     enable = true,
@@ -170,7 +170,10 @@ return {
             rangeFormatting = { enable = true },
         },
         semanticHighlighting = {
+            doc = { comment = { inject = { enable = false } } },
+            nonStandardTokens = true,
             operator = {
+                enable = true,
                 specialization = {
                     enable = true, -- 为运算符使用专门的语义标记。
                 },
@@ -190,6 +193,10 @@ return {
                 enable = true,
             },
         },
+        signatureInfo = {
+            detail = "full",
+            documentation = { enable = true },
+        },
         typing = {
             autoClosingAngleBrackets = {
                 enable = true, -- 键入泛型参数列表的左尖括号时是否插入右尖括号。
@@ -201,6 +208,7 @@ return {
                     limit = 128, -- 限制从工作空间符号搜索返回的项目数（默认为128）。
                     -- 一些客户端，如vs code，在结果筛选时发布新的搜索，
                     -- 并且不要求在初始搜索中返回所有结果。其他客户要求提前获得所有结果，可能需要更高的限额。
+                    scope = "workspace",
                 },
             },
         },

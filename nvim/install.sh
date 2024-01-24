@@ -37,7 +37,7 @@ rustup default nightly
 cargo install crm
 ~/.cargo/bin/crm use rsproxy
 # `cargo install-update -h`,neotest-rust  用到
-cargo install cargo-update cargo-nextest grcov cargo-cache tokio-console
+cargo install cargo-update cargo-nextest grcov cargo-cache tokio-console sea-orm-cli
 # criterion benchmark 会用
 $pacMan gnuplot
 

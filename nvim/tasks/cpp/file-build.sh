@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 [ -d build_c_cpp ] || mkdir build_c_cpp
 
