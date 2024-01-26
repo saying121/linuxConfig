@@ -72,7 +72,6 @@ link_list=(
     ["$HOME/.linuxConfig/configs/gitui"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/go-musicfox.ini"]="$HOME/.config/go-musicfox/go-musicfox.ini"
     ["$HOME/.linuxConfig/configs/kitty"]="$HOME/.config"
-    ["$HOME/.linuxConfig/configs/konsave"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/lessfilter.sh"]="$HOME/.lessfilter"
     ["$HOME/.linuxConfig/configs/lf"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/lf/ctpv"]="$HOME/.config"

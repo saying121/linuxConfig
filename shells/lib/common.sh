@@ -24,6 +24,7 @@ if [ -x /usr/bin/dircolors ]; then
     export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
 fi
 
+alias paru="paru --skipreivew"
 alias kcat="kitty +kitten icat"
 alias fimg=~/.linuxConfig/scripts/fzf_ueberzug.sh
 alias yz="yazi"

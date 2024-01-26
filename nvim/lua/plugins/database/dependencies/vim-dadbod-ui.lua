@@ -1,7 +1,7 @@
 return {
     "kristijanhusak/vim-dadbod-ui",
     config = function()
-        vim.keymap.set("n", "<leader>d", "<cmd>DBUIToggle<cr>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader><leader>d", "<cmd>DBUIToggle<cr>", { noremap = true, silent = true })
 
         vim.g.db_ui_save_location = "~/.local/share/db_ui"
 

@@ -28,8 +28,8 @@ local ms = ls.multi_snippet
 
 local tb = {
     feat = "新功能",
-    fix = "修复bug,产生diff并自动修复此问题。适合于一次提交直接修复问题",
-    to = "修复bug,只产生diff不自动修复此问题。适合于多次提交。最终修复问题提交时使用fix",
+    fix = "修复bug， 产生diff并自动修复此问题。适合于一次提交直接修复问题",
+    to = "修复bug，只产生diff不自动修复此问题。适合于多次提交。最终修复问题提交时使用fix",
     docs = "文档",
     style = "格式（不影响代码运行的变动）。",
     refactor = "重构（即不是新增功能，也不是修改bug的代码变动）。",

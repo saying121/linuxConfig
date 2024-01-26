@@ -69,16 +69,17 @@ l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
 
 - [ asynctasks.vim ](https://github.com/skywind3000/asynctasks.vim) 一键运行代码
 - [ crates.nvim ](https://github.com/saecki/crates.nvim) 获取 rust crate 补全信息
+- [ rustaceanvim ](https://github.com/mrcjkb/rustaceanvim) 专门为 rust 开发的插件
 - [ lazy.nvim ](https://github.com/folke/lazy.nvim) 插件管理器
 - [ lspsaga.nvim ](https://github.com/glepnir/lspsaga.nvim) 更好的 lsp ui
 - [ mason.nvim ](https://github.com/williamboman/mason.nvim) 安装 lsp， linter， adapter， formatter 等等
 - [ nvim-cmp ](https://github.com/hrsh7th/nvim-cmp) 自动补全
 - [ nvim-lspconfig ](https://github.com/neovim/nvim-lspconfig) 配置 lsp
 - [ nvim-treesitter ](https://github.com/nvim-treesitter/nvim-treesitter) 语法高亮
-- [ rustaceanvim ](https://github.com/mrcjkb/rustaceanvim) 专门为 rust 开发的插件
 - [ stay-centered.nvim ](https://github.com/arnamak/stay-centered.nvim) 保持光标所在行在屏幕中间，进行配置可以获得更好的鼠标滚动体验，自己去配置里面看
 - [ telescope.nvim ](https://github.com/nvim-telescope/telescope.nvim) 模糊查找插件
 - [ vim-dadbod ](https://github.com/tpope/vim-dadbod) 连接数据库插件
+- [ nvim-lsp-file-operations ](https://github.com/antosha417/nvim-lsp-file-operations) 根据文件名重命名模块 [ oil.nvim ](https://github.com/stevearc/oil.nvim) 也有这个功能
 
 ### ui
 

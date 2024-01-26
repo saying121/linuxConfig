@@ -1,4 +1,3 @@
--- local lints = require("public.ra.extra_lint")
 local snippets = require("public.ra.snippets")
 
 return {
@@ -7,13 +6,14 @@ return {
             storeload = true,
             buildScripts = {
                 enable = true,
+                invocationLocation = "workspace", -- 指定运行生成脚本的工作目录。-“workspace”：在工作区的根目录中运行工作区的构建脚本。
+                -- 这与设置为 once 的 rust-analyzer.cargo.buildScripts.invocationStrategy 不兼容。
+                -- “root”：在项目的根目录中运行构建脚本。此配置仅在设置了 rust-analyzer.cargo.buildScripts.overrideCommand 时有效。
+                overrideCommand = nil,
+                invocationStrategy = "per_workspace",
+                rebuildOnSave = false,
+                useRustcWrapper = true,
             },
-            invocationLocation = "workspace", -- 指定运行生成脚本的工作目录。-“workspace”：在工作区的根目录中运行工作区的构建脚本。
-            -- 这与设置为 once 的 rust-analyzer.cargo.buildScripts.invocationStrategy 不兼容。
-            -- “root”：在项目的根目录中运行构建脚本。此配置仅在设置了 rust-analyzer.cargo.buildScripts.overrideCommand 时有效。
-            overrideCommand = nil, -- cargo check --quiet --workspace --message-format=json --all-targets
-            invocationStrategy = "per_workspace",
-            useRustcWrapper = true,
             cfgs = {}, -- List of cfg options to enable with the given values.
             extraArgs = {
                 -- "--offline"
@@ -31,8 +31,7 @@ return {
             allTargets = true,
             -- command = "check", -- 用于 cargo check 的命令。
             command = "clippy", -- 用于 cargo check 的命令。
-            -- extraArgs = vim.tbl_deep_extend("force", { "--no-deps" }, lints), -- cargo check 的额外参数。
-            extraArgs = { "--no-deps" },
+            extraArgs = { "--no-deps" }, -- cargo check 的额外参数。
             extraEnv = {}, -- 运行 cargo check 时将设置的额外环境变量。扩展 rust-analyzer.cargo.extraEnv 。
             features = "all", -- 要激活的功能列表。默认为 rust-analyzer.cargo.features 。设置为 "all" ，将 --all-features 传递给Cargo。
             invocationLocation = "workspace", -- 指定运行检查的工作目录。-“workspace”：对相应工作区的根目录中的工作区进行检查。
@@ -65,7 +64,7 @@ return {
         diagnostics = {
             enable = true,
             disabled = {}, -- 要禁用的锈蚀分析仪诊断列表。
-            experimental = { enable = false }, -- 是否显示可能比平时有更多假阳性的实验性锈蚀分析仪诊断。
+            experimental = { enable = true }, -- 是否显示可能比平时有更多假阳性的实验性锈蚀分析仪诊断。
             remapprefix = {}, -- 解析诊断文件路径时要替换的前缀的映射。这应该是传递给 rustc 的内容作为 --remap-path-prefix 的反向映射。
             warningsAsHint = {}, -- 应以提示严重性显示的警告列表。
             warningsAsInfo = {
@@ -110,25 +109,17 @@ return {
             forceCustomCommands = true,
             implementations = { enable = true },
             location = "above_name",
-            references = {
-                adt = {
-                    enable = true, -- 是否显示Struct、Enum和Union的 References 镜头。仅在设置了 rust-analyzer.lens.enable 时适用。
-                },
-                enumVariant = {
-                    enable = true, -- 是否显示枚举变体的 References 镜头。仅在设置了 rust-analyzer.lens.enable 时适用。
-                },
-                method = {
-                    enable = true,
-                },
-                trait = {
-                    enable = true,
-                },
+            references = { -- Whether to show References lens
+                adt = { enable = true },
+                enumVariant = { enable = true },
+                method = { enable = true },
+                trait = { enable = true },
             },
         },
         -- linkedProjects = {}, -- 禁用项目自动发现以支持显式指定的项目集。
         -- 元素必须是指向 Cargo.toml 、 rust-project.json 或#2格式的JSON对象的路径。
         lru = {
-            capacity = 128, -- rust 分析器保存在内存中的语法树数。默认值为 128。
+            capacity = 128, -- rust-analyzer 保存在内存中的语法树数。默认值为 128。
         },
         notifications = {
             cargoTomlNotFound = true, -- 是否显示 can’t find Cargo.toml 错误消息。
@@ -139,11 +130,12 @@ return {
             extraArgs = {}, -- 要传递给cargo的可运行程序（如测试或二进制文件）的其他参数。例如，它可能是 --release 。
         },
         imports = {
-            granularity = { enforce = true, group = "crate", enable = true },
+            granularity = { enforce = true, group = "module", --[[ crate ]] enable = true },
             group = { enable = true },
             merge = { glob = true },
-            prefer = { no = { std = false } },
-            prefix = "plain", -- crate,self
+            preferNoStd = false,
+            preferPrelude = false,
+            prefix = "self", -- crate, self, plain
         },
         inlayHints = {
             bindingModeHints = { enable = true },
@@ -156,7 +148,7 @@ return {
             expressionAdjustmentHints = {
                 enable = "always",
                 hideOutsideUnsafe = false,
-                -- mode = "prefix", --[[ postfix ]]
+                -- mode = "prefix",
                 mode = "postfix ",
             },
             lifetimeElisionHints = { enable = "always", useParameterNames = true },
@@ -189,13 +181,11 @@ return {
                     },
                 },
             },
-            strings = {
-                enable = true,
-            },
+            strings = { enable = true },
         },
         signatureInfo = {
             detail = "full",
-            documentation = { enable = true },
+            documentation = { enable = false },
         },
         typing = {
             autoClosingAngleBrackets = {
