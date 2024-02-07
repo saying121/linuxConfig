@@ -1,49 +1,11 @@
-local signs = {
-    ERROR = { name = "DiagnosticSignError", text = " " }, --
-    WARN = { name = "DiagnosticSignWarn", text = " " }, --
-    HINT = { name = "DiagnosticSignHint", text = " " },--📌 
-    INFO = { name = "DiagnosticSignInfo", text = " " }, --
-}
-
-for _, sign in pairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
-
----@diagnostic disable-next-line: unused-local
-local virtual_text = {
-    severity = false,
-    spacing = 4, -- severity = {
-    --     max = vim.diagnostic.severity.ERROR,
-    --     min = vim.diagnostic.severity.WARN,
-    -- },
-    prefix = "", -- ●
-    source = "if_many", --- boolean
-    format = function(diagnostic)
-        for MS, sign in pairs(signs) do
-            vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-            if diagnostic.severity == vim.diagnostic.severity[MS] then
-                return signs[MS].text .. ": " .. diagnostic.message
-            end
-        end
-        return diagnostic.message
-    end,
-}
-
-vim.diagnostic.config({
-    -- virtual_text = false,
-    virtual_text = virtual_text,
-    float = { border = "single" },
-    severity_sort = true, -- 根据严重程度排序
-    signs = true,
-    underline = false,
-    update_in_insert = true,
-})
-
--- 被注释的部分，被 lspsaga.nvim 和 trouble.nvim 取代了
+local api, lsp = vim.api, vim.lsp
 local M = {}
 -- Use an on_attach function to only map the following keys after the language server attaches to the current buffer
+---@param client lsp.Client
+---@param bufnr integer
 M.on_attach = function(client, bufnr)
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    -- lsp.semantic_tokens.start(bufnr, client.id)
+
     local opts = { noremap = true, silent = true, buffer = bufnr }
     local keymap = vim.keymap.set
 
@@ -55,38 +17,22 @@ M.on_attach = function(client, bufnr)
         end
     end, opts)
 
-    -- keymap("n", "<space>e", vim.diagnostic.open_float)
-    -- keymap("n", "[d", vim.diagnostic.goto_prev)
-    -- keymap("n", "]d", vim.diagnostic.goto_next)
-    -- keymap("n", "<space>q", vim.diagnostic.setloclist)
-    -- keymap('n', 'gD', vim.lsp.buf.declaration, opts)
-    -- keymap('n', 'gd', vim.lsp.buf.definition, opts)
-    -- keymap('n', 'gi', vim.lsp.buf.implementation, opts)
-    -- keymap('n', 'gr', vim.lsp.buf.references, opts)
-    -- keymap('n', 'K', vim.lsp.buf.hover, opts)
-    keymap("n", "<c-k>", vim.lsp.buf.signature_help, opts)
-
-    -- keymap("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-    -- keymap("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-    -- keymap("n", "<space>wl", function()
-    --     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    -- end, opts)
-
-    -- keymap("n", "gy", vim.lsp.buf.type_definition, opts)
-    -- keymap('n', '<space>rn', vim.lsp.buf.rename, opts)
-    -- keymap('n', '<M-cr>', vim.lsp.buf.code_action, opts)
+    keymap("n", "<c-k>", lsp.buf.signature_help, opts)
 
     -- print(vim.inspect(client))
     local cap = client.server_capabilities
     -- print(vim.inspect(cap))
 
     if cap.inlayHintProvider ~= nil then
-        local _ = pcall(vim.lsp.inlay_hint.enable, bufnr, true)
+        local _ = pcall(lsp.inlay_hint.enable, bufnr, true)
+        keymap("n", "<leader>ih", function()
+            lsp.inlay_hint.enable(bufnr, not lsp.inlay_hint.is_enabled())
+        end, opts)
     end
 
     if cap.documentFormattingProvider then
         keymap("n", "<space>f", function()
-            vim.lsp.buf.format({
+            lsp.buf.format({
                 async = true,
                 bufnr = bufnr,
                 filter = function(client1)
@@ -105,37 +51,65 @@ M.on_attach = function(client, bufnr)
     end
     if cap.documentRangeFormattingProvider then
         keymap("x", "<space>f", function()
-            vim.lsp.buf.format({ async = true })
+            lsp.buf.format({ async = true })
         end, opts)
     end
 
     if cap.documentHighlightProvider then
-        vim.api.nvim_create_autocmd({ "CursorHold" }, {
-            group = vim.api.nvim_create_augroup("LspHighlightHold", { clear = false }),
+        local group_name = "LspDocumentHighlight"
+        api.nvim_create_augroup(group_name, { clear = false })
+        api.nvim_clear_autocmds({ buffer = bufnr, group = group_name })
+        api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+            group = group_name,
             buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.document_highlight()
-            end,
+            callback = lsp.buf.document_highlight,
         })
-        vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-            group = vim.api.nvim_create_augroup("LspHighlightMoved", { clear = false }),
+        api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+            group = group_name,
             buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.clear_references()
-            end,
+            callback = lsp.buf.clear_references,
         })
     end
 
     if cap.codeLensProvider ~= nil and cap.codeLensProvider.resolveProvider then
-        vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-            group = vim.api.nvim_create_augroup("CodeLensRefresh", { clear = false }),
+        local group_name = "LspCodeLensRefresh"
+        api.nvim_create_augroup(group_name, { clear = false })
+        api.nvim_clear_autocmds({ buffer = bufnr, group = group_name })
+        api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+            group = group_name,
             buffer = bufnr,
-            callback = function()
-                -- vim.lsp.codelens.refresh()
-                local _ = pcall(vim.lsp.codelens.refresh)
-            end,
+            callback = lsp.codelens.refresh,
         })
     end
+
+    -- diagnostic
+    keymap("n", "<space>e", function()
+        local _, winid = vim.diagnostic.open_float({ source = true, scope = "cursor" })
+        if winid then
+            api.nvim_set_current_win(winid)
+        end
+    end, opts)
+    api.nvim_create_autocmd("CursorHold", {
+        buffer = bufnr,
+        callback = function()
+            local d_opts = {
+                focusable = false,
+                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                border = "rounded",
+                source = "always",
+                prefix = " ",
+                scope = "cursor",
+            }
+            vim.diagnostic.open_float(d_opts)
+            -- api.nvim_win_close(win_id, force)
+        end,
+    })
 end
+
+M.capabilities = lsp.protocol.make_client_capabilities()
+M.capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+}
 
 return M

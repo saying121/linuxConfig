@@ -23,7 +23,30 @@ return {
             }),
             null_ls.builtins.formatting.typstfmt,
             null_ls.builtins.formatting.latexindent,
-            null_ls.builtins.formatting.prettier,
+            null_ls.builtins.formatting.prettier.with({
+                filetypes = {
+                    "vue",
+                    "css",
+                    "scss",
+                    "less",
+                    "html",
+                    "yaml",
+                    "markdown",
+                    "markdown.mdx",
+                    "graphql",
+                    "handlebars",
+                },
+            }),
+            null_ls.builtins.formatting.biome.with({
+                filetypes = {
+                    "javascript",
+                    "typescript",
+                    "javascriptreact",
+                    "typescriptreact",
+                    "json",
+                    "jsonc",
+                },
+            }),
             null_ls.builtins.formatting.stylua,
             null_ls.builtins.formatting.shfmt.with({
                 extra_args = { "-i", "4" },
@@ -42,6 +65,7 @@ return {
             null_ls.builtins.formatting.beautysh.with({
                 extra_args = { "--indent-size", "4", "-s", "paronly" },
             }),
+            null_ls.builtins.formatting.xmlformat,
             -- null_ls.builtins.diagnostics.eslint,
             null_ls.builtins.diagnostics.actionlint,
             null_ls.builtins.diagnostics.codespell.with({

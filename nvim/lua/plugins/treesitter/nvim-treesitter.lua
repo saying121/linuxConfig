@@ -28,10 +28,13 @@ return {
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = "<CR>",
-                    node_incremental = "<C-i>",
-                    scope_incremental = "<CR>",
+                    init_selection = "gsn",
+                    -- node_incremental = "<C-i>",
+                    node_incremental = "<CR>",
+                    -- node_decremental = "grm",
                     node_decremental = "<BS>",
+                    scope_incremental = "<Tab>",
+                    -- scope_incremental = "grc",
                 },
             },
             indent = { enable = true },

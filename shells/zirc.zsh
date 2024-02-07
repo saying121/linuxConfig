@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 # 自定义
 source ~/.linuxConfig/shells/zshrc
 
@@ -90,6 +91,9 @@ zi ice wait lucid; zi light z-shell/H-S-MW
 zi ice wait lucid; zi light zsh-users/zsh-history-substring-search
 zi ice wait lucid atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"
 zi light z-shell/F-Sy-H
+# 高亮主题
+# fast-theme ~/.linuxConfig/shells/z-shell.ini
+
 # /bin/cat -v 然后按下按键查看,C-n,C-p 不知道为啥不成功
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -113,3 +117,4 @@ eval "$(starship init zsh)"
 
 
 export CLIPPY_CONF_DIR=~/.config/rustfmt/
+# zprof

@@ -42,35 +42,36 @@ end
 -- 不显示反汇编只能在vscode设置
 -- https://github.com/mfussenegger/nvim-dap/issues/307#issuecomment-929754523
 
--- dap.configurations.rust = {
---     {
---         name = "Launch file",
---         type = "codelldb",
---         sourceLanguages = { "rust" },
---         reverseDebugging = true,
---         request = "launch",
---         -- showDisassembly = false,
---         -- cargo = {
---         --     env = { RUSTFLAGS = "-Clinker-ld.mold" },
---         --     problemMatcher = "$rustc",
---         --     filter = {
---         --         name = name,
---         --         -- kind = "lib",
---         --         kind = "bin",
---         --     },
---         -- },
---         program = function()
---             if git_root ~= nil then
---                 return vim.fn.input("Path to executable: ", git_root .. "/target/debug/", "file")
---             else
---                 return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/build_rust/", "file")
---             end
---         end,
---         cwd = "${workspaceFolder}",
---         stopOnEntry = false,
---         terminal = "integrated",
---     },
--- }
+dap.configurations.rust = {
+    {
+        name = "Launch file",
+        type = "codelldb",
+        sourceLanguages = { "rust" },
+        reverseDebugging = true,
+        request = "launch",
+        -- showDisassembly = false,
+        -- cargo = {
+        --     env = { RUSTFLAGS = "-Clinker-ld.mold" },
+        --     problemMatcher = "$rustc",
+        --     filter = {
+        --         name = name,
+        --         -- kind = "lib",
+        --         kind = "bin",
+        --     },
+        -- },
+        program = function()
+            if git_root ~= nil then
+                -- vim.ui.input({}, on_confirm)
+                return vim.fn.input("Path to executable: ", git_root .. "/target/debug/", "file")
+            else
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/build_rust/", "file")
+            end
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+        terminal = "integrated",
+    },
+}
 
 dap.configurations.cpp = {
     {

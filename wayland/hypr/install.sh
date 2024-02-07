@@ -22,8 +22,8 @@ $pacMan hyprland-nvidia \
     # mako
     # gnome-calendar \
 
-$pacMan pipewire wireplumber slurp grim imv
-$aurPkg flameshot-git
+$pacMan pipewire wireplumber slurp grim
+$aurPkg flameshot-git gojq satty-bin
 
 # xrandr-wlr-randr,xprop-wdisplays
 $aurPkg wlr-randr wl-color-picker wl-delicolour-picker-git hyprpicker-git

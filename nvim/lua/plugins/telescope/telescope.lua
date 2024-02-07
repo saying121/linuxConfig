@@ -10,7 +10,7 @@ return {
         { "<leader>bf", mode = "n" },
         { "ti", mode = "n" },
     },
-    version = "0.1.5",
+    version = "*",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         "nvim-lua/plenary.nvim",

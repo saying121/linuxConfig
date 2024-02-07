@@ -25,7 +25,6 @@ read -p '
 ' username
 useradd -m -G wheel -s /bin/zsh "$username"
 passwd "$username"
-unset username
 
 chmod u+w /etc/sudoers
 sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers

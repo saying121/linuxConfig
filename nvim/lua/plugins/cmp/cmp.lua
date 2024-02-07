@@ -10,7 +10,7 @@ return {
         require("public.utils").req_lua_files_return_table("plugins/" .. "cmp" .. "/dependencies"),
     },
     config = function()
-        local has_words_before = function()
+        local function has_words_before()
             unpack = unpack or table.unpack
             local line, col = unpack(vim.api.nvim_win_get_cursor(0))
             return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -82,9 +82,8 @@ return {
             },
             -- 分级显示，上一级有补全就不会显示下一级
             sources = sources,
-            experimental = {
-                ghost_text = true,
-            },
+            experimental = { ghost_text = true },
+            preselect = cmp.PreselectMode.Item,
             mapping = cmp.mapping.preset.insert({
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
@@ -93,10 +92,8 @@ return {
                         -- they way you will only jump inside the snippet region
                     elseif luasnip.expand_or_jumpable() then
                         luasnip.expand_or_jump()
-                        -- elseif require("neogen").jumpable() then -- 好像用 luasnip 的就行
-                        --     require("neogen").jump_next()
-                    elseif has_words_before() then
-                        cmp.complete()
+                    -- elseif has_words_before() then
+                    --     cmp.complete()
                     else
                         fallback()
                     end
@@ -106,8 +103,6 @@ return {
                         cmp.select_prev_item()
                     elseif luasnip.jumpable(-1) then
                         luasnip.jump(-1)
-                        -- elseif require("neogen").jumpable() then -- 好像用 luasnip 的就行
-                        --     require("neogen").jump_prev()
                     else
                         fallback()
                     end
@@ -137,7 +132,6 @@ return {
                 priority_weight = 1,
                 -- rime-ls
                 comparators = {
-                    -- require("cmp.config.compare").sort_text, -- 这个放第一个, 其他的随意
                     compare.exact, -- 精准匹配
                     compare.recently_used, -- 最近用过的靠前
                     compare.kind,
@@ -170,7 +164,6 @@ return {
                 priority_weight = 1,
                 -- rime-ls
                 comparators = {
-                    -- require("cmp.config.compare").sort_text, -- 这个放第一个, 其他的随意
                     compare.exact, -- 精准匹配
                     compare.recently_used, -- 最近用过的靠前
                     compare.kind,

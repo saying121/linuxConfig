@@ -1,10 +1,6 @@
 [source]
 
 [source.crates-io]
-replace-with = "rsproxy"
-
-[source.rsproxy]
-registry = "https://rsproxy.cn/crates.io-index"
 
 [registries]
 
@@ -50,3 +46,6 @@ git-fetch-with-cli = true
 [target.x86_64-unknown-linux-gnu]
 linker = "clang"
 rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+
+[unstable]
+gc = true

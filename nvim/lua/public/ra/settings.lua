@@ -41,7 +41,7 @@ return {
             -- 如果设置了 per_workspace ，则将对每个工作区执行该命令。如果设置了 once ，则该命令将执行一次。
             -- 此配置仅在设置了 rust-analyzer.cargo.buildScripts.overrideCommand 时有效。
             noDefaultFeatures = nil, -- 是否将 --no-default-features 传递给Cargo。
-            overrideCommand = nil, -- 重写铁锈分析器在保存时用于诊断的命令，而不是 cargo check 。该命令是输出json所必需的，
+            overrideCommand = nil, -- 重写rust-analyzer在保存时用于诊断的命令，而不是 cargo check 。该命令是输出json所必需的，
             -- 因此应该包括 --message-format=json 或类似的选项（如果您的客户端支持 colorDiagnosticOutput 实验功能，
             -- 则可以使用 --message-format=json-diagnostic-rendered-ansi ）。
             -- cargo check --workspace --message-format=json --all-targets
@@ -63,34 +63,26 @@ return {
         },
         diagnostics = {
             enable = true,
-            disabled = {}, -- 要禁用的锈蚀分析仪诊断列表。
-            experimental = { enable = true }, -- 是否显示可能比平时有更多假阳性的实验性锈蚀分析仪诊断。
+            disabled = {
+                "unused_variables", -- rustc 的 lint 已经有这个了
+            }, -- 要禁用的rust-analyzer诊断列表。
+            experimental = { enable = true }, -- 是否显示可能比平时有更多假阳性的实验性rust-analyzer仪诊断。
             remapprefix = {}, -- 解析诊断文件路径时要替换的前缀的映射。这应该是传递给 rustc 的内容作为 --remap-path-prefix 的反向映射。
             warningsAsHint = {}, -- 应以提示严重性显示的警告列表。
             warningsAsInfo = {
                 "unused_variables",
             }, -- 应与信息严重性一起显示的警告列表。
             files = {
-                excludeDirs = {}, -- 锈蚀分析器将忽略这些目录。它们是相对于工作区根目录的，不支持glob。您可能还需要将文件夹添加到代码的 files.watcherExclude 中。
+                excludeDirs = {}, -- rust-analyzer 将忽略这些目录。它们是相对于工作区根目录的，不支持glob。您可能还需要将文件夹添加到Code的 files.watcherExclude 中。
                 watcher = "client", -- 控制文件监视实现。
             },
         },
         highlightRelated = {
-            breakPoints = {
-                enable = true, -- 当光标位于 break 、 loop 、 while 或 for 关键字上时，启用相关引用的高亮显示。
-            },
-            closureCaptures = {
-                enable = true, -- 当光标位于闭包的 | 或move关键字上时，启用对闭包的所有捕获的高亮显示。
-            },
-            exitPoints = {
-                enable = true, -- 当光标位于 return 、 ? 、 fn 或返回类型箭头（ → ）上时，启用所有退出点的高亮显示。
-            },
-            references = {
-                enable = true, -- 当光标位于任何标识符上时，启用相关引用的高亮显示。
-            },
-            yieldPoints = {
-                enable = true, -- 当光标位于任何 async 或 await 关键字上时，启用高亮显示循环或块上下文的所有断点。
-            },
+            breakPoints = { enable = true }, -- 当光标位于 break 、 loop 、 while 或 for 关键字上时，启用相关引用的高亮显示。
+            closureCaptures = { enable = true }, -- 当光标位于闭包的 | 或move关键字上时，启用对闭包的所有捕获的高亮显示。
+            exitPoints = { enable = true }, -- 当光标位于 return 、 ? 、 fn 或返回类型箭头（ → ）上时，启用所有退出点的高亮显示。
+            references = { enable = true }, -- 当光标位于任何标识符上时，启用相关引用的高亮显示。
+            yieldPoints = { enable = true }, -- 当光标位于任何 async 或 await 关键字上时，启用高亮显示循环或块上下文的所有断点。
         },
         hover = {
             memoryLayout = {
@@ -99,9 +91,7 @@ return {
                 niches = false,
                 offset = "hexadecimal",
             },
-            actions = {
-                enable = true, -- 是否在Rust文件中显示悬停操作。
-            },
+            actions = { enable = true }, -- 是否在Rust文件中显示悬停操作。
         },
         lens = {
             enable = true,
@@ -120,17 +110,20 @@ return {
         -- 元素必须是指向 Cargo.toml 、 rust-project.json 或#2格式的JSON对象的路径。
         lru = {
             capacity = 128, -- rust-analyzer 保存在内存中的语法树数。默认值为 128。
+            query = { capacities = {} }, -- 设置指定查询的 lru 容量。
         },
-        notifications = {
-            cargoTomlNotFound = true, -- 是否显示 can’t find Cargo.toml 错误消息。
-        },
+        notifications = { cargoTomlNotFound = true }, -- 是否显示 can’t find Cargo.toml 错误消息。
         numThreads = nil, -- 主循环中有多少工作线程。默认的 null 表示自动拾取。
         runnables = {
             command = nil,
             extraArgs = {}, -- 要传递给cargo的可运行程序（如测试或二进制文件）的其他参数。例如，它可能是 --release 。
         },
         imports = {
-            granularity = { enforce = true, group = "module", --[[ crate ]] enable = true },
+            granularity = {
+                enforce = true,
+                group = "module", --[[ crate ]]
+                enable = true,
+            },
             group = { enable = true },
             merge = { glob = true },
             preferNoStd = false,
@@ -162,23 +155,17 @@ return {
             rangeFormatting = { enable = true },
         },
         semanticHighlighting = {
-            doc = { comment = { inject = { enable = false } } },
+            doc = { comment = { inject = { enable = true } } },
             nonStandardTokens = true,
             operator = {
                 enable = true,
-                specialization = {
-                    enable = true, -- 为运算符使用专门的语义标记。
-                },
+                specialization = { enable = true }, -- 为运算符使用专门的语义标记。
             },
             punctation = {
                 enable = true, -- 使用语义标记作为标点符号。
-                specialization = {
-                    enable = true, -- 对标点符号使用专门的语义标记。
-                },
+                specialization = { enable = true }, -- 对标点符号使用专门的语义标记。
                 separate = {
-                    macro = {
-                        bang = true, -- 启用后，rust分析器将为宏调用的 ! 发出一个标点符号语义标记。
-                    },
+                    macro = { bang = true }, -- 启用后，rust-analyzer将为宏调用的 ! 发出一个标点符号语义标记。
                 },
             },
             strings = { enable = true },
@@ -188,9 +175,7 @@ return {
             documentation = { enable = false },
         },
         typing = {
-            autoClosingAngleBrackets = {
-                enable = true, -- 键入泛型参数列表的左尖括号时是否插入右尖括号。
-            },
+            autoClosingAngleBrackets = { enable = true }, -- 键入泛型参数列表的左尖括号时是否插入右尖括号。
         },
         workspace = {
             symbol = {

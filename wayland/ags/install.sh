@@ -1,3 +1,3 @@
 #!/bin/bash
 
-yay -S aylurs-gtk-shell sassc
+yay -S aylurs-gtk-shell sassc greetd

@@ -27,12 +27,15 @@ return {
                 tsserver_path = nil,
                 -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
                 -- (see 💅 `styled-components` support section)
-                tsserver_plugins = {},
+                tsserver_plugins = {
+                    -- for TypeScript v4.9+
+                    "@styled/typescript-styled-plugin",
+                    -- or for older TypeScript versions
+                    -- "typescript-styled-plugin",
+                },
                 -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
                 -- memory limit in megabytes or "auto"(basically no limit)
                 tsserver_max_memory = "auto",
-                -- described below
-                tsserver_format_options = {},
                 -- locale of all tsserver messages, supported locales you can find here:
                 -- https://github.com/microsoft/TypeScript/blob/3c221fc086be52b19801f6e8d82596d04607ede6/src/compiler/utilitiesPublic.ts#L620
                 tsserver_locale = "en",
@@ -47,6 +50,11 @@ return {
                 -- be too much this option reduce count of them by removing member references from lenses
                 disable_member_code_lens = true,
                 javascript = {
+                    implementationsCodeLens = { enabled = true },
+                    referencesCodeLens = {
+                        enabled = true,
+                        showOnAllFunctions = true,
+                    },
                     inlayHints = {
                         includeInlayEnumMemberValueHints = true,
                         includeInlayFunctionLikeReturnTypeHints = true,
@@ -58,6 +66,11 @@ return {
                     },
                 },
                 typescript = {
+                    implementationsCodeLens = { enabled = true },
+                    referencesCodeLens = {
+                        enabled = true,
+                        showOnAllFunctions = true,
+                    },
                     inlayHints = {
                         includeInlayEnumMemberValueHints = true,
                         includeInlayFunctionLikeReturnTypeHints = true,
@@ -67,6 +80,34 @@ return {
                         includeInlayPropertyDeclarationTypeHints = true,
                         includeInlayVariableTypeHints = true,
                     },
+                },
+                tsserver_format_options = {
+                    autoImportFileExcludePatterns = {},
+                    quotePreference = "auto",
+                    includeCompletionsForImportStatements = true,
+                    includeCompletionsWithSnippetText = true,
+                    includeCompletionsWithInsertText = true,
+                    includeAutomaticOptionalChainCompletions = true,
+                    includeCompletionsWithObjectLiteralMethodSnippets = true,
+                    useLabelDetailsInCompletionEntries = true,
+                    allowIncompleteCompletions = true,
+                    importModuleSpecifierPreference = "shortest",
+                    importModuleSpecifierEnding = "auto",
+                    allowTextChangesInNewFiles = true,
+                    lazyConfiguredProjectsFromExternalProject = false,
+                    organizeImportsCollation = "ordinal",
+                    organizeImportsCollationLocale = "en", -- auto
+                    organizeImportsNumericCollation = false,
+                    organizeImportsAccentCollation = true,
+                    organizeImportsCaseFirst = false,
+                    providePrefixAndSuffixTextForRename = true,
+                    allowRenameOfImportPath = false,
+                    includePackageJsonAutoImports = "auto",
+                    interactiveInlayHints = true,
+                    jsxAttributeCompletionStyle = "auto",
+                    displayPartsForJSDoc = true,
+                    excludeLibrarySymbolsInNavTo = true,
+                    generateReturnInDocTemplate = true,
                 },
                 tsserver_file_preferences = {
                     includeInlayParameterNameHints = "all",

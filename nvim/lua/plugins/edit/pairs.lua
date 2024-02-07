@@ -39,7 +39,7 @@ return {
             cr = { -- *ultimate-autopair-map-newline-config*
                 enable = true,
                 map = "<cr>", --string or table
-                autoclose = false,
+                autoclose = true,
                 --(| > cr > (\n|\n)
                 conf = {
                     cond = function(fn)

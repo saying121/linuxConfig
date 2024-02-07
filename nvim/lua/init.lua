@@ -1,17 +1,12 @@
+require("opts")
+local keymap = vim.keymap.set
+
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
 
 local _ = pcall(require, "lazy-config")
-local keymap = vim.keymap.set
 
-vim.opt.listchars = {
-    tab = "> ",
-    leadmultispace = "│   ",
-    nbsp = "+",
-    trail = "·",
-    extends = "⇒", -- →
-    precedes = "⇐", -- ←
-}
+require("lsp_configs")
 
 _G.dapui_for_K = false
 
@@ -54,23 +49,6 @@ function _G.show_documentation()
 end
 
 keymap("n", "K", _G.show_documentation, { silent = true })
-
-vim.g.vimsyn_embed = "lPr"
-
-if vim.fn.has("nvim-0.10.0") == 1 then
-    vim.opt.smoothscroll = true
-end
-
--- 边框
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "single",
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "single",
-})
-
-vim.g.maplocalleader = ","
 
 vim.filetype.add({
     extension = {

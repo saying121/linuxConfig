@@ -1,8 +1,7 @@
 return {
     "mrcjkb/rustaceanvim",
     -- cond = false,
-    version = "^3", -- Recommended
-    -- ft = "rust",
+    version = "^4",
     event = {
         "UIEnter *rs",
         -- "BufWrite *rs",
@@ -13,6 +12,7 @@ return {
         "mfussenegger/nvim-dap",
     },
     config = function()
+        local executors = require("rustaceanvim.executors")
         local extension_path = "/usr/lib/codelldb/"
 
         if not require("public.utils").file_exists(extension_path) then
@@ -30,12 +30,24 @@ return {
                 --- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
                 on_initialized = function(health)
                     if health == "ok" then
+                        print("----", health)
+                        print("check")
                         vim.cmd.RustLsp("flyCheck") -- defaults to 'run'
                     end
                 end,
                 --- how to execute terminal commands
                 --- options right now: termopen / quickfix / toggleterm / vimux
-                executor = require("rustaceanvim.executors").toggleterm,
+                executor = executors.toggleterm,
+                test_executor = executors.toggleterm,
+
+                code_actions = {
+                    ui_select_fallback = false,
+                },
+
+                ---@type boolean
+                -- enable_nextest = vim.fn.executable("cargo-nextest") == 1,
+                enable_nextest = false,
+
                 --- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
                 ---@type boolean
                 reload_workspace_from_cargo_toml = true,
@@ -54,19 +66,23 @@ return {
                     ---@type boolean
                     auto_focus = true,
                 },
+                rustc = { edition = "2021" },
             },
-
             -- LSP configuration
             server = {
                 --- standalone file support
                 --- setting it to false may improve startup time
                 ---@type boolean
                 standalone = true,
+                ---@param client lsp.Client
+                ---@param bufnr integer
                 on_attach = function(client, bufnr)
+                    local group_name = "RustFlyCheck"
+                    vim.api.nvim_create_augroup(group_name, { clear = false })
+                    vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group_name })
                     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-                        group = vim.api.nvim_create_augroup("RustFlyCheck", { clear = false }),
+                        group = group_name,
                         buffer = bufnr,
-                        -- pattern = { "*.rs" },
                         callback = function()
                             vim.cmd.RustLsp("flyCheck") -- defaults to 'run'
                             -- vim.cmd.RustLsp({ "flyCheck", "run" })
@@ -107,9 +123,7 @@ return {
                         vim.cmd.RustLsp({ "moveItem", "down" })
                     end, opts)
                     keymap("n", "<leader>R", function()
-                        vim.cmd.RustLsp({
-                            "runnables" --[[ , 'last' ]],
-                        })
+                        vim.cmd.RustLsp("runnables")
                     end, opts)
                     keymap("n", "<leader>D", function()
                         vim.cmd.RustLsp({
@@ -125,8 +139,13 @@ return {
                     keymap("n", "<M-S-CR>", function()
                         vim.cmd.RustLsp("rebuildProcMacros")
                     end, opts)
+
+                    keymap("n", "J", function()
+                        vim.cmd.RustLsp("joinLines")
+                    end, opts)
                 end,
                 default_settings = require("public.ra.settings"),
+                ---@type table | (fun(project_root:string|nil):table)
                 settings = function(project_root)
                     local ra = require("rustaceanvim.config.server")
                     return ra.load_rust_analyzer_settings(project_root, {

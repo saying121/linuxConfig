@@ -1,8 +1,24 @@
 return {
     "rest-nvim/rest.nvim",
     cmd = { "RestLog" },
-    dependencies = { { "nvim-lua/plenary.nvim" } },
+    ft = "http",
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+        local keymap = vim.keymap.set
+        keymap("n", "<leader>rn", "<Plug>RestNvim")
+        keymap("n", "<leader>rp", "<Plug>RestNvimPreview")
+        keymap("n", "<leader>rl", "<Plug>RestNvimLast")
+
+        vim.api.nvim_create_user_command("RestNvim", function()
+            require("rest-nvim").run()
+        end, {})
+        vim.api.nvim_create_user_command("RestNvimPreview", function()
+            require("rest-nvim").run(true)
+        end, {})
+        vim.api.nvim_create_user_command("RestNvimLast", function()
+            require("rest-nvim").last()
+        end, {})
+
         require("rest-nvim").setup({
             -- Open request results in a horizontal split
             result_split_horizontal = false,

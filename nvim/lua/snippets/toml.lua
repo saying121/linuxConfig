@@ -2,6 +2,7 @@ local ls = require("luasnip")
 local s = ls.snippet
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
 
 local serial = {
     ["mio-serial"] = "mio 的串行端口实现",
@@ -31,6 +32,7 @@ local machine_learning = {
     ["tensorflow"] = "tensorflow 的 Rust 语言绑定。",
 }
 local crates = {
+    ["embedded-hal"] = "嵌入式系统的硬件抽象层 (hal)",
     ["uuid"] = "生成和解析 uuid 的库。",
     ["enum_dispatch"] = "动态分派方法调用的近乎直接替代，速度高达 10 倍",
     ["slab"] = "为统一数据类型预先分配存储",
@@ -605,30 +607,43 @@ opt-level = 3
             priority = 30000,
             dscr = "extra clippy lints",
         },
-        fmt(
+        fmta(
             [[
-[workspace.lints.clippy]
+[<>lints.rust]
+temporary_cstring_as_ptr = "deny"
+
+[<>lints.clippy]
 absurd_extreme_comparisons = "allow"
 
-# panic                                     = "warn"
+empty_enum_variants_with_brackets = "warn"
+match_same_arms                   = "warn"
+missing_asserts_for_indexing      = "warn"
+multiple_unsafe_ops_per_block     = "warn"
+uninhabited_references            = "warn"
+wildcard_dependencies             = "warn"
+
 # missing_errors_doc                        = "warn"
 # missing_panics_doc                        = "warn"
-unseparated_literal_suffix = "warn"
-# separated_literal_suffix                  = "warn"
-
-default_numeric_fallback = "warn"
+unnecessary_safety_doc        = "warn"
+doc_link_with_quotes          = "warn"
+doc_markdown                  = "warn"
+empty_line_after_doc_comments = "warn"
 
 string_slice          = "warn"
 str_to_string         = "warn"
+str_split_at_newline  = "warn"
 string_add_assign     = "warn"
 string_lit_as_bytes   = "warn"
 string_to_string      = "warn"
-inefficient_to_string = "warn"
 manual_string_new     = "warn"
+inefficient_to_string = "warn"
 needless_raw_strings  = "warn"
 
 filter_map_next       = "warn"
 flat_map_option       = "warn"
+option_if_let_else    = "warn"
+option_option         = "warn"
+option_as_ref_cloned  = "warn"
 map_err_ignore        = "warn"
 map_unwrap_or         = "warn"
 zero_sized_map_values = "warn"
@@ -639,45 +654,46 @@ iter_not_returning_iterator  = "warn"
 iter_on_empty_collections    = "warn"
 iter_on_single_items         = "warn"
 iter_with_drain              = "warn"
+iter_filter_is_ok            = "warn"
+iter_filter_is_some          = "warn"
+iter_without_into_iter       = "warn"
+copy_iterator                = "warn"
 
-let_underscore_untyped                    = "warn"
-useless_let_if_seq                        = "warn"
-equatable_if_let                          = "warn"
-bool_to_int_with_if                       = "warn"
-if_not_else                               = "warn"
-if_then_some_else_none                    = "warn"
-manual_assert                             = "warn"
-manual_clamp                              = "warn"
-manual_instant_elapsed                    = "warn"
-manual_let_else                           = "warn"
-manual_ok_or                              = "warn"
-decimal_literal_representation            = "warn"
-unreadable_literal                        = "warn"
-redundant_clone                           = "warn"
-redundant_else                            = "warn"
-redundant_feature_names                   = "warn"
-redundant_pub_crate                       = "warn"
-unwrap_in_result                          = "warn"
-unnecessary_safety_doc                    = "warn"
-doc_link_with_quotes                      = "warn"
-doc_markdown                              = "warn"
-empty_line_after_doc_comments             = "warn"
-alloc_instead_of_core                     = "warn"
-allow_attributes                          = "warn"
-allow_attributes_without_reason           = "warn"
-checked_conversions                       = "warn"
-as_underscore                             = "warn"
+let_underscore_untyped = "warn"
+useless_let_if_seq     = "warn"
+equatable_if_let       = "warn"
+bool_to_int_with_if    = "warn"
+if_not_else            = "warn"
+if_then_some_else_none = "warn"
+# else_if_without_else = "warn"
+
+manual_is_variant_and          = "warn"
+manual_assert                  = "warn"
+manual_clamp                   = "warn"
+manual_instant_elapsed         = "warn"
+manual_let_else                = "warn"
+manual_ok_or                   = "warn"
+decimal_literal_representation = "warn"
+unreadable_literal             = "warn"
+
+redundant_closure_for_method_calls = "warn"
+redundant_clone                    = "warn"
+redundant_else                     = "warn"
+redundant_feature_names            = "warn"
+redundant_pub_crate                = "warn"
+
+unwrap_used      = "warn"
+unwrap_in_result = "warn"
+
+alloc_instead_of_core           = "warn"
+allow_attributes                = "warn"
+allow_attributes_without_reason = "warn"
+
 branches_sharing_code                     = "warn"
 case_sensitive_file_extension_comparisons = "warn"
-clear_with_drain                          = "warn"
-collection_is_never_read                  = "warn"
-copy_iterator                             = "warn"
-create_dir                                = "warn"
-debug_assert_with_mut_call                = "warn"
-default_union_representation              = "warn"
-deref_by_slicing                          = "warn"
-derive_partial_eq_without_eq              = "warn"
-disallowed_script_idents                  = "warn"
+
+clear_with_drain         = "warn"
+collection_is_never_read = "warn"
 
 float_arithmetic    = "warn"
 float_cmp           = "warn"
@@ -685,14 +701,18 @@ float_cmp_const     = "warn"
 lossy_float_literal = "warn"
 imprecise_flops     = "warn"
 suboptimal_flops    = "warn"
+modulo_arithmetic   = "warn"
 
-explicit_deref_methods     = "warn"
-explicit_into_iter_loop    = "warn"
-explicit_iter_loop         = "warn"
-rc_buffer                  = "warn"
-rc_mutex                   = "warn"
-mutex_atomic               = "warn"
-mutex_integer              = "warn"
+explicit_deref_methods  = "warn"
+explicit_into_iter_loop = "warn"
+explicit_iter_loop      = "warn"
+
+rc_buffer = "warn"
+rc_mutex  = "warn"
+
+mutex_atomic  = "warn"
+mutex_integer = "warn"
+
 invalid_upcast_comparisons = "warn"
 linkedlist                 = "warn"
 match_on_vec_items         = "warn"
@@ -701,42 +721,52 @@ match_wild_err_arm         = "warn"
 match_bool            = "warn"
 needless_bitwise_bool = "warn"
 
-needless_collect                  = "warn"
-needless_continue                 = "warn"
-needless_for_each                 = "warn"
-needless_pass_by_value            = "warn"
-range_minus_one                   = "warn"
-range_plus_one                    = "warn"
-semicolon_if_nothing_returned     = "warn"
-semicolon_inside_block            = "warn"
-semicolon_outside_block           = "warn"
-stable_sort_primitive             = "warn"
+needless_pass_by_ref_mut = "warn"
+needless_collect         = "warn"
+needless_continue        = "warn"
+needless_for_each        = "warn"
+needless_pass_by_value   = "warn"
+
+range_minus_one = "warn"
+range_plus_one  = "warn"
+
+semicolon_if_nothing_returned = "warn"
+semicolon_inside_block        = "warn"
+semicolon_outside_block       = "warn"
+
 unnecessary_box_returns           = "warn"
 unnecessary_join                  = "warn"
 unnecessary_safety_comment        = "warn"
 unnecessary_self_imports          = "warn"
 unnecessary_struct_initialization = "warn"
 unnecessary_wraps                 = "warn"
-cloned_instead_of_copied          = "warn"
-unused_async                      = "warn"
-unused_peekable                   = "warn"
-unused_rounding                   = "warn"
-unused_self                       = "warn"
-use_self                          = "warn"
-verbose_file_reads                = "warn"
-verbose_bit_mask                  = "warn"
-unneeded_field_pattern            = "warn"
-unnested_or_patterns              = "warn"
-type_repetition_in_bounds         = "warn"
-unchecked_duration_subtraction    = "warn"
-unicode_not_nfc                   = "warn"
-missing_const_for_fn              = "warn"
-mut_mut                           = "warn"
-filetype_is_file                  = "warn"
-readonly_write_lock               = "warn"
-try_err                           = "warn"
-same_functions_in_if_condition    = "warn"
-same_name_method                  = "warn"
+
+stable_sort_primitive    = "warn"
+cloned_instead_of_copied = "warn"
+
+unused_async    = "warn"
+unused_peekable = "warn"
+unused_rounding = "warn"
+unused_self     = "warn"
+
+use_self = "warn"
+
+create_dir         = "warn"
+verbose_file_reads = "warn"
+verbose_bit_mask   = "warn"
+
+unneeded_field_pattern         = "warn"
+unnested_or_patterns           = "warn"
+type_repetition_in_bounds      = "warn"
+unchecked_duration_subtraction = "warn"
+unicode_not_nfc                = "warn"
+missing_const_for_fn           = "warn"
+mut_mut                        = "warn"
+filetype_is_file               = "warn"
+readonly_write_lock            = "warn"
+try_err                        = "warn"
+same_functions_in_if_condition = "warn"
+same_name_method               = "warn"
 
 large_digit_groups          = "warn"
 large_futures               = "warn"
@@ -745,76 +775,97 @@ large_stack_arrays          = "warn"
 large_stack_frames          = "warn"
 large_types_passed_by_value = "warn"
 
-index_refutable_slice       = "warn"
 mem_forget                  = "warn"
 empty_drop                  = "warn"
 empty_line_after_outer_attr = "warn"
 empty_structs_with_brackets = "warn"
 empty_enum                  = "warn"
 enum_glob_use               = "warn"
-error_impl_error            = "warn"
-exit                        = "warn"
-ignored_unit_patterns       = "warn"
+
+error_impl_error      = "warn"
+exit                  = "warn"
+ignored_unit_patterns = "warn"
+clone_on_ref_ptr      = "warn"
+
 trait_duplication_in_bounds = "warn"
 default_trait_access        = "warn"
 impl_trait_in_params        = "warn"
-trivial_regex               = "warn"
-trivially_copy_pass_by_ref  = "warn"
-borrow_as_ptr               = "warn"
-clone_on_ref_ptr            = "warn"
 
-modulo_arithmetic = "warn"
+trivial_regex              = "warn"
+trivially_copy_pass_by_ref = "warn"
 
-cast_ptr_alignment       = "warn"
+# as_conversions           = "warn"
+checked_conversions      = "warn"
+as_underscore            = "warn"
+borrow_as_ptr            = "warn"
 as_ptr_cast_mut          = "warn"
-ptr_as_ptr               = "warn"
-as_conversions           = "warn"
 cast_lossless            = "warn"
 cast_possible_truncation = "warn"
 cast_possible_wrap       = "warn"
 cast_precision_loss      = "warn"
-ptr_cast_constness       = "warn"
+cast_ptr_alignment       = "warn"
 cast_sign_loss           = "warn"
+ptr_as_ptr               = "warn"
+ptr_cast_constness       = "warn"
+tuple_array_conversions  = "warn"
+fn_to_numeric_cast_any   = "warn"
 
-transmute_ptr_to_ptr            = "warn"
-panic_in_result_fn              = "warn"
-should_panic_without_expect     = "warn"
-significant_drop_tightening     = "warn"
-pub_without_shorthand           = "warn"
-ref_binding_to_reference        = "warn"
-ref_option_ref                  = "warn"
-ref_patterns                    = "warn"
+transmute_ptr_to_ptr     = "warn"
+transmute_undefined_repr = "warn"
+
+# panic                       = "warn"
+panic_in_result_fn          = "warn"
+should_panic_without_expect = "warn"
+significant_drop_tightening = "warn"
+pub_without_shorthand       = "warn"
+
+ref_binding_to_reference = "warn"
+ref_option_ref           = "warn"
+ref_patterns             = "warn"
+
 rest_pat_in_fully_bound_structs = "warn"
-implicit_hasher                 = "warn"
-implicit_clone                  = "warn"
-macro_use_imports               = "warn"
-many_single_char_names          = "warn"
-mismatching_type_param_order    = "warn"
-transmute_undefined_repr        = "warn"
-expl_impl_clone_on_copy         = "warn"
-fallible_impl_from              = "warn"
-fn_to_numeric_cast_any          = "warn"
-implied_bounds_in_impls         = "warn"
-inconsistent_struct_constructor = "warn"
-mixed_read_write_in_expression  = "warn"
-path_buf_push_overwrite         = "warn"
-option_option                   = "warn"
-or_fun_call                     = "warn"
-no_mangle_with_rust_abi         = "warn"
-naive_bytecount                 = "warn"
-negative_feature_names          = "warn"
-no_effect_underscore_binding    = "warn"
-nonstandard_macro_braces        = "warn"
+
+implicit_hasher = "warn"
+implicit_clone  = "warn"
+
+macro_use_imports        = "warn"
+nonstandard_macro_braces = "warn"
 
 fn_params_excessive_bools = "warn"
 # struct_excessive_bools = "warn"
 
+unseparated_literal_suffix = "warn"
+default_numeric_fallback   = "warn"
+
+debug_assert_with_mut_call   = "warn"
+default_union_representation = "warn"
+deref_by_slicing             = "warn"
+derive_partial_eq_without_eq = "warn"
+disallowed_script_idents     = "warn"
+
+index_refutable_slice = "warn"
+
+or_fun_call = "warn"
+
+path_buf_push_overwrite = "warn"
+
+no_mangle_with_rust_abi = "warn"
+
+many_single_char_names          = "warn"
+mismatching_type_param_order    = "warn"
+expl_impl_clone_on_copy         = "warn"
+fallible_impl_from              = "warn"
+implied_bounds_in_impls         = "warn"
+inconsistent_struct_constructor = "warn"
+mixed_read_write_in_expression  = "warn"
+naive_bytecount                 = "warn"
+negative_feature_names          = "warn"
+no_effect_underscore_binding    = "warn"
+
 # exhaustive_enums   = "warn"
 # exhaustive_structs = "warn"
-
-# else_if_without_else = "warn"
         ]],
-            {}
+            { i(1, "workspace."), i(2, "workspace.") }
         )
     ),
 }

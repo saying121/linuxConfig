@@ -34,7 +34,7 @@ zstyle ':fzf-tab:complete:yay:*' fzf-preview 'bat --color=always -plyaml <(yay -
 zstyle ':fzf-tab:complete:paru:*' fzf-preview 'bat --color=always -plyaml <(paru -Qi $word 2>/dev/null || paru -Si $word)'
 
 zstyle ':fzf-tab:complete:cargo:*' fzf-preview 'cargo help $word | bat --color=always -plhelp'
-zstyle ':fzf-tab:complete:cargo-run:options' fzf-flags --preview-window=down:0:wrap
+zstyle ':fzf-tab:complete:cargo-(run|rustc):options' fzf-flags --preview-window=down:0:wrap
 zstyle ':fzf-tab:complete:(rustc|rg):*' fzf-preview 'echo $desc | bat --color=always -plhelp'
 zstyle ':fzf-tab:complete:(rustc|rg):options' fzf-flags --preview-window=down:3:wrap
 # zstyle ':fzf-tab:complete:(rustc|rg):directories' fzf-flags --height=70%

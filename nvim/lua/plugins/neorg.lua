@@ -1,12 +1,11 @@
 return {
     "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",
-    cond = function()
-        return vim.endswith(vim.fn.argv(0), ".norg")
-    end,
-    -- tag = "*",
+    ft = "norg",
+    version = "*",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+        vim.wo.conceallevel = 2
         require("neorg").setup({
             load = {
                 ["core.defaults"] = {}, -- Loads default behaviour

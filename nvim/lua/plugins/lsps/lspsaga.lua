@@ -68,9 +68,9 @@ return {
             vim.cmd.Lspsaga("peek_type_definition")
         end)
 
-        vim.diagnostic.config({
-            virtual_text = false,
-        })
+        -- vim.diagnostic.config({
+        --     virtual_text = false,
+        -- })
         local diagnostic = {
             show_code_action = true,
             jump_num_shortcut = true,
@@ -78,7 +78,7 @@ return {
             max_height = 0.6,
             text_hl_follow = true,
             border_follow = true,
-            extend_relatedInformation = false,
+            extend_relatedInformation = true,
             show_layout = "float",
             show_normal_height = 10,
             max_show_width = 0.9,

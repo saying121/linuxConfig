@@ -2,7 +2,7 @@ return {
     "echasnovski/mini.indentscope",
     -- cond = false,
     version = "*",
-    event = "UIEnter",
+    event = "VeryLazy",
     init = function()
         vim.api.nvim_create_autocmd("FileType", {
             group = vim.api.nvim_create_augroup("IndentScope", { clear = true }),

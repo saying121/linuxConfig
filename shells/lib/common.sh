@@ -24,7 +24,7 @@ if [ -x /usr/bin/dircolors ]; then
     export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
 fi
 
-alias paru="paru --skipreivew"
+# alias paru="paru --skipreivew"
 alias kcat="kitty +kitten icat"
 alias fimg=~/.linuxConfig/scripts/fzf_ueberzug.sh
 alias yz="yazi"
@@ -80,7 +80,7 @@ fi
 if [[ $(command -v eza) ]]; then
     alias ls='eza -F --icons=always'
     alias ld='eza -FD --icons=always'
-    alias ll='eza -FlHhig --time-style long-iso --icons=always --git'
+    alias ll='eza -F -lHhig --time-style long-iso --icons=always --git'
     alias la='eza -F --all'
     alias lal='ll -a'
     alias lla='ll -a'
@@ -168,3 +168,5 @@ export MAKEFLAGS="-j$thread_num"
 
 export RUSTC_WRAPPER=sccache
 export PATH=$PATH:~/.linuxConfig/scripts
+
+source ~/.linuxConfig/shells/lib/rust.sh
