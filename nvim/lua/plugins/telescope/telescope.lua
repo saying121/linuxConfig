@@ -9,6 +9,7 @@ return {
         { "<leader>fo", mode = "n" },
         { "<leader>bf", mode = "n" },
         { "ti", mode = "n" },
+        { "gr", mode = "n" },
     },
     version = "*",
     dependencies = {
@@ -40,6 +41,9 @@ return {
         keymap("n", "<leader>bf", builtin.buffers, opts)
         keymap("n", "ti", function()
             builtin.lsp_implementations(layout())
+        end, opts)
+        keymap("n", "gr", function()
+            builtin.lsp_references(layout())
         end, opts)
 
         local function find_files_from_git_root()

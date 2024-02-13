@@ -9,7 +9,7 @@ return {
         { "[e" },
         { "]e" },
     },
-    -- commit = "",
+    commit = "3112b7aba57653199ad20198f477d94781bb2310",
     config = function()
         local keymap = vim.keymap.set
 
@@ -215,8 +215,8 @@ return {
             },
             lightbulb = {
                 enable = true,
-                sign = false,
-                virtual_text = true,
+                sign = true,
+                virtual_text = false,
                 debounce = 10,
                 sign_priority = 40,
             },

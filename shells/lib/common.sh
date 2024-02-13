@@ -114,11 +114,13 @@ alias rm="trash"
 
 alias tran='trans -j -d en:zh'
 
-alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy && sudo pkgfile -u'
+# alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy && sudo pkgfile -u'
+alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy'
 
-if [[ $(grep -c OMZP::cp ~/.zshrc) != 0 && $SHELL == *'zsh' ]]; then
-    alias cp='cpv -hhh'
-fi
+
+cpv() {
+    rsync -pogbr -hhh --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --progress "$@"
+}
 
 # avoid open nested ranger instances
 ranger() {

@@ -1,3 +1,8 @@
+---@class Symbol
+---@field definition? integer|nil
+---@field implementation? integer|nil
+---@field references? integer|nil
+
 local function h(name)
     return vim.api.nvim_get_hl(0, { name = name })
 end
@@ -9,6 +14,8 @@ vim.api.nvim_set_hl(0, "SymbolUsageRef", { fg = h("Function").fg, bg = h("Cursor
 vim.api.nvim_set_hl(0, "SymbolUsageDef", { fg = h("Type").fg, bg = h("CursorLine").bg, italic = true })
 vim.api.nvim_set_hl(0, "SymbolUsageImpl", { fg = h("@keyword").fg, bg = h("CursorLine").bg, italic = true })
 
+---@param symbol Symbol
+---@return table
 local function text_format(symbol)
     local res = {}
 
@@ -34,7 +41,7 @@ local function text_format(symbol)
         table.insert(res, round_end)
     end
 
-    if symbol.implementation then
+    if symbol.implementation and symbol.implementation > 0 then
         if #res > 0 then
             table.insert(res, { " ", "NonText" })
         end

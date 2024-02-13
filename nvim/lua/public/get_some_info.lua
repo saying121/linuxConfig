@@ -1,6 +1,6 @@
 local M = {}
 
-local handle = io.popen("rustc --version")
+local handle = io.popen("rust-analyzer --version")
 local output
 if handle then
     output = handle:read("*a")

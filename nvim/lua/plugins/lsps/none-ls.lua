@@ -60,8 +60,8 @@ return {
 
             null_ls.builtins.diagnostics.markdownlint,
             null_ls.builtins.diagnostics.vint,
-            -- null_ls.builtins.diagnostics.protolint,
-            -- null_ls.builtins.formatting.protolint,
+            null_ls.builtins.diagnostics.protolint,
+            null_ls.builtins.formatting.protolint,
             null_ls.builtins.formatting.beautysh.with({
                 extra_args = { "--indent-size", "4", "-s", "paronly" },
             }),

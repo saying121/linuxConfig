@@ -4,7 +4,8 @@ local keymap = vim.keymap.set
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
 
-local _ = pcall(require, "lazy-config")
+--local _ = pcall(require, "lazy-config")
+require'lazy-config'
 
 require("lsp_configs")
 
@@ -53,6 +54,7 @@ keymap("n", "K", _G.show_documentation, { silent = true })
 vim.filetype.add({
     extension = {
         foo = "fooscript",
+        mir = "rust",
         bar = function(path, bufnr)
             -- if some_condition() then
             --     return "barscript",
@@ -72,7 +74,7 @@ vim.filetype.add({
         ["license"] = "license",
         ["config"] = "config",
         ["~/.linuxConfig/wayland/waybar/config"] = "json",
-        -- ["~/.config/waybar/config"] = "json",
+        ["~/.config/waybar/config"] = "json",
         -- ["~/.linuxConfig/wayland/swaylock/config"] = "config",
     },
     pattern = {

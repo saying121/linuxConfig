@@ -8,4 +8,3 @@ telescope.lua
 | <kbd>\<leader\>gw</kbd> | 从当前仓库根目录找字符串 |  n   |
 | <kbd>\<leader\>fo</kbd> |      最近使用的文件      |  n   |
 | <kbd>\<leader\>bf</kbd> |       列出 buffer        |  n   |
-|   <kbd>\<M-p\></kbd>    |         查看项目         |

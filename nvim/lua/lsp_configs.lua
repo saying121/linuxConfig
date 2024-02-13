@@ -1,4 +1,4 @@
-local methods = vim.lsp.protocol.Methods
+-- local methods = vim.lsp.protocol.Methods
 local severity = vim.diagnostic.severity
 
 local signs = {
@@ -21,6 +21,7 @@ local virtual_text = {
     --     max = vim.diagnostic.severity.ERROR,
     --     min = vim.diagnostic.severity.WARN,
     -- },
+
     ---@param diagnostic vim.Diagnostic
     ---@param i integer
     ---@param total integer
@@ -33,6 +34,7 @@ local virtual_text = {
         end
     end,
     -- source = "if_many", --- boolean
+
     ---@param diagnostic vim.Diagnostic
     ---@return string
     format = function(diagnostic)
@@ -48,7 +50,7 @@ vim.diagnostic.config({
     virtual_text = false,
     -- virtual_text = virtual_text,
     float = { border = "single" },
-    severity_sort = true, -- 根据严重程度排序
+    severity_sort = true,
     signs = {
         priority = 10,
         text = signs,
@@ -61,10 +63,9 @@ vim.diagnostic.config({
 })
 
 -- 边框
-vim.lsp.handlers[methods.textDocument_hover] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "single",
-})
-
-vim.lsp.handlers[methods.textDocument_signatureHelp] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "single",
-})
+-- vim.lsp.handlers[methods.textDocument_hover] = vim.lsp.with(vim.lsp.handlers.hover, {
+--     border = "single",
+-- })
+-- vim.lsp.handlers[methods.textDocument_signatureHelp] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+--     border = "single",
+-- })

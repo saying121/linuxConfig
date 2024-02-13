@@ -25,7 +25,7 @@ return {
             end,
         },
     },
-    version = "nightly", -- optional, updated every week. (see issue #1193)
+    version = "*", -- optional, updated every week. (see issue #1193)
     config = function()
         vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
         -- disable netrw at the very start of your init.lua (strongly advised)

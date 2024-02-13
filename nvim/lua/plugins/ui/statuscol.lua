@@ -17,11 +17,13 @@ return {
             segments = {
                 { text = { builtin.foldfunc }, click = "v:lua.ScFa" }, -- fold
                 {
+                    -- text = { "%s" },
                     sign = {
-                        namespace = { "diagnostic*" },
+                        namespace = { ".*" },
+                        -- namespace = { "diagnostic*" },
                         -- name = { "Diagnostic" },
                         maxwidth = 2,
-                        colwidth = 1,
+                        colwidth = 2,
                     },
                     click = "v:lua.ScLa",
                 },

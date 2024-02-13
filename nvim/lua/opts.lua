@@ -10,6 +10,9 @@ vim.opt.listchars = {
 vim.g.vimsyn_embed = "lPr"
 vim.g.maplocalleader = ","
 
+vim.opt.spell = true
+vim.opt.spelllang = { "en_us" }
+
 if vim.fn.has("nvim-0.10.0") == 1 then
     vim.opt.smoothscroll = true
 end

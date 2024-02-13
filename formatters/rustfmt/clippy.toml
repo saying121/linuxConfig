@@ -1,21 +1,63 @@
-avoid-breaking-exported-api = false
-allow-dbg-in-tests = true
-
-# 不允许的宏的列表，以完全限定的路径编写。
-disallowed-macros = []
-# 不允许的方法列表，以完全限定路径形式编写。
-disallowed-methods = []
-# 不允许的类型的列表，写为完全限定的路径。
-disallowed-types = []
-# 小数的小数部分是否应该包含分隔符。
-unreadable-literal-lint-fractions = true
-# 启用详细模式。如果有多个大写字符相邻，则触发
-upper-case-acronyms-aggressive = false
-# lint是否应该考虑匹配，以及是否应该对常见类型进行筛选。
-matches-for-let-else = "WellKnownTypes" #  (crate::manual_let_else::MatchLintBehaviour)
-
-# 不允许的名字
-# disallowed-names = ["toto", "tata", "titi"]
-# disallowed-names = ["foo", "baz", "quux"]
-
 # arithmetic-side-effects-allowed = ["SomeType", "AnotherType"]
+# arithmetic-side-effects-allowed-binary   = [["SomeType", "f32"], ["AnotherType", "*"]]
+avoid-breaking-exported-api              = false
+cognitive-complexity-threshold           = 25    # 函数可以具有的最大认知复杂度
+excessive-nesting-threshold              = 0     # 块可以驻留的最大嵌套数量
+semicolon-inside-block-ignore-singleline = false # 是否仅在多行时进行 lint 处理。
+semicolon-outside-block-ignore-multiline = false # 是否仅在单行时进行 lint 处理。
+too-many-arguments-threshold             = 7     # 函数或方法可以拥有的最大参数数量
+type-complexity-threshold                = 250   # 类型可以具有的最大复杂度
+single-char-binding-names-threshold      = 4     # 范围可能具有的单字符绑定的最大数量
+too-large-for-stack                      = 200   # 将被检查的对象的最大大小（以字节为单位）。较大的对象可以放在堆上
+enum-variant-name-threshold              = 3     # 要触发的有关变体名称的 lints 的枚举变体的最小数量
+struct-field-name-threshold              = 3     # The minimum number of struct fields for the lints about field names to trigger
+enum-variant-size-threshold              = 200   # The maximum size of an enum's variant to avoid box suggestion
+verbose-bit-mask-threshold               = 1     # The maximum allowed size of a bit mask before suggesting to use 'trailing_zeros'
+literal-representation-threshold         = 16384 # The lower bound for linting decimal literals
+# trivial-copy-size-limit                  = 0     # The maximum size (in bytes) to consider a Copy type for passing by value instead of by reference. By default there is no limit
+pass-by-value-size-limit              = 256                                 # The minimum size (in bytes) to consider a type for passing by reference instead of by value.
+too-many-lines-threshold              = 100                                 # The maximum number of lines a function or method can have
+array-size-threshold                  = 512000                              # The maximum allowed size for arrays on the stack
+stack-size-threshold                  = 512000                              # The maximum allowed stack size for functions in bytes
+vec-box-size-threshold                = 4096                                # The size of the boxed type in bytes, where boxing in a Vec is allowed
+max-trait-bounds                      = 3                                   # The maximum number of bounds a trait can have to be linted
+max-struct-bools                      = 3                                   # The maximum number of bool fields a struct can have
+max-fn-params-bools                   = 3                                   # The maximum number of bool parameters a function can have
+warn-on-all-wildcard-imports          = false                               # Whether to allow certain wildcard imports (prelude, super in tests).
+disallowed-macros                     = []                                  # 不允许的宏的列表，以完全限定的路径编写。
+disallowed-methods                    = []                                  # 不允许的方法列表，以完全限定路径形式编写。
+disallowed-names                      = []                                  # 不允许的名字
+disallowed-types                      = []                                  # 不允许的类型的列表，写为完全限定的路径。
+unreadable-literal-lint-fractions     = true                                # 小数的小数部分是否应该包含分隔符。
+upper-case-acronyms-aggressive        = false                               # 启用详细模式。如果有多个大写字符相邻，则触发
+matches-for-let-else                  = "WellKnownTypes"                    # lint是否应该考虑匹配，以及是否应该对常见类型进行筛选。
+cargo-ignore-publish                  = false                               # For internal testing only, ignores the current publish settings in the Cargo manifest.
+standard-macro-braces                 = []                                  # Enforce the named macros always use the braces specified.
+enforced-import-renames               = []                                  # The list of imports to always rename, a fully qualified path followed by the rename.
+allowed-scripts                       = ["Latin"]                           # The list of unicode scripts allowed to be used in the scope.
+enable-raw-pointer-heuristic-for-send = true                                # Whether to apply the raw pointer heuristic to determine if a type is Send.
+max-suggested-slice-pattern-length    = 3                                   # When Clippy suggests using a slice pattern, this is the maximum number of elements allowed in the slice pattern that is suggested. If more elements are necessary, the lint is suppressed. For example, [_, _, _, e, ..] is a slice pattern with 4 elements.
+await-holding-invalid-types           = []
+max-include-file-size                 = 1000000                             # The maximum size of a file included via include_bytes!() or include_str!(), in bytes
+allow-expect-in-tests                 = true                                # Whether expect should be allowed in test functions or #[cfg(test)]
+allow-unwrap-in-tests                 = true                                # Whether unwrap should be allowed in test functions or #[cfg(test)]
+allow-dbg-in-tests                    = true                                # Whether dbg! should be allowed in test functions or #[cfg(test)]
+allow-print-in-tests                  = false                               # Whether print macros (ex. println!) should be allowed in test functions or #[cfg(test)]
+large-error-threshold                 = 128                                 # The maximum size of the Err-variant in a Result returned from a function
+ignore-interior-mutability            = ["bytes::Bytes"]                    # A list of paths to types that should be treated like Arc, i.e.
+allow-mixed-uninlined-format-args     = true                                # Whether to allow mixed uninlined format args, e.g. format!("{} {}", a, foo.bar)
+suppress-restriction-lint-in-const    = false                               # Whether to suppress a restriction lint in constant code.
+missing-docs-in-crate-items           = false                               # Whether to only check for missing documentation in items visible within the current crate. For example, pub(crate) items.
+future-size-threshold                 = 16384                               # The maximum byte size a Future can have, before it triggers the clippy::large_futures lint
+unnecessary-box-size                  = 128                                 # The byte size a T in Box<T> can have, below which it triggers the clippy::unnecessary_box lint
+allow-private-module-inception        = false                               # Whether to allow module inception if it's not public.
+allowed-idents-below-min-chars        = ["j", "z", "i", "y", "n", "x", "w"]
+min-ident-chars-threshold             = 1                                   # Minimum chars an ident can have, anything below or equal to this will be linted.
+accept-comment-above-statement        = true                                # Whether to accept a safety comment to be placed above the statement containing the unsafe block
+accept-comment-above-attributes       = true                                # Whether to accept a safety comment to be placed above the attributes for the unsafe block
+allow-one-hash-in-raw-strings         = false                               # Whether to allow r#""# when r"" can be used
+absolute-paths-max-segments           = 2                                   # The maximum number of segments a path can have before being linted, anything above this will be linted.
+absolute-paths-allowed-crates         = []                                  # Which crates to allow absolute paths from
+allowed-dotfiles                      = []                                  # Additional dotfiles (files or directories starting with a dot) to allow
+enforce-iter-loop-reborrow            = true
+check-private-items                   = false

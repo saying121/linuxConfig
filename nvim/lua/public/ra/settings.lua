@@ -64,14 +64,19 @@ return {
         diagnostics = {
             enable = true,
             disabled = {
-                "unused_variables", -- rustc 的 lint 已经有这个了
+                -- rustc 的 lint 已经有这些了
+                "unused_variables",
+                "unused_mut", -- rustc 更准确
+
+                -- clippy 的 lint 已经有这些了
+                "needless_return",
             }, -- 要禁用的rust-analyzer诊断列表。
             experimental = { enable = true }, -- 是否显示可能比平时有更多假阳性的实验性rust-analyzer仪诊断。
             remapprefix = {}, -- 解析诊断文件路径时要替换的前缀的映射。这应该是传递给 rustc 的内容作为 --remap-path-prefix 的反向映射。
             warningsAsHint = {}, -- 应以提示严重性显示的警告列表。
             warningsAsInfo = {
                 "unused_variables",
-            }, -- 应与信息严重性一起显示的警告列表。
+            },
             files = {
                 excludeDirs = {}, -- rust-analyzer 将忽略这些目录。它们是相对于工作区根目录的，不支持glob。您可能还需要将文件夹添加到Code的 files.watcherExclude 中。
                 watcher = "client", -- 控制文件监视实现。

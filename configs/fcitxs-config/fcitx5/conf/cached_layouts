@@ -2853,11 +2853,6 @@ Description="键盘 - 希腊语 - 希腊语（简易）"
 Language=el
 Label="gr (simple)"
 
-[keyboard-gr-extended]
-Description="键盘 - 希腊语 - 希腊语（扩展）"
-Language=el
-Label="gr (extended)"
-
 [keyboard-gr-nodeadkeys]
 Description="键盘 - 希腊语 - 希腊语（无死键）"
 Language=el
@@ -3278,11 +3273,6 @@ Description="键盘 - 匈牙利语 - 匈牙利语（QWERTY，102 键，点，无
 Language=hu
 Label="hu (102_qwerty_dot_nodead)"
 
-[keyboard-hu-oldhun]
-Description="键盘 - 匈牙利语 - 旧匈牙利语"
-Language=hu
-Label=oldhun
-
 [keyboard-hu-oldhunlig]
 Description="键盘 - 匈牙利语 - 旧匈牙利语（含连字）"
 Language=hu
@@ -3597,11 +3587,6 @@ Label="it (us)"
 Description="键盘 - 意大利语 - 意大利语（IBM 142）"
 Language=it
 Label="it (ibm)"
-
-[keyboard-it-intl]
-Description="键盘 - 意大利语 - 意大利语（国际，带死键）"
-Language=it
-Label="it (intl)"
 
 [keyboard-it-fur]
 Description="键盘 - 意大利语 - 弗留利语（意大利）"

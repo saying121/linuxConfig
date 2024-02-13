@@ -1,108 +1,139 @@
+local styles = {
+    mis = { "", "#?,?,2e,2E,p" },
+    accuracy = { "accuracy", ".accuracy,+.accuracy,.1$" },
+    base = { "base", "#b,#o,#x,#X,x" },
+    align = { "align", "5,05,<5,>5,^5" },
+}
+local postfix_prln = {}
+local prln = {}
+
+local k
+for _, value in pairs(styles) do
+    k = "prln!" .. value[1]
+    prln[k] = {
+        prefix = k,
+        body = 'println!("{:${1|' .. value[2] .. '|}}", $2);$0',
+        description = "Insert an `println!`",
+        scope = "expr",
+    }
+end
+
+for _, value in pairs(styles) do
+    k = "prvar_" .. value[1]
+    postfix_prln[k] = {
+        postfix = k,
+        body = 'println!(r##"(| ${receiver} |) ${2:->} {:${1|' .. value[2] .. '|}}"##, ${receiver});$0',
+        description = "Wrap the expression in a `println!`",
+        scope = "expr",
+    }
+end
+
+local e_key, body
+for _, value in pairs(styles) do
+    k = "prln_" .. value[1]
+    body = 'println!("{:${1|' .. value[2] .. '|}}", ${receiver});$0'
+    postfix_prln[k] = {
+        postfix = k,
+        body = body,
+        description = "Wrap the expression in a `println!`",
+        scope = "expr",
+    }
+    e_key = "e" .. k
+    postfix_prln[e_key] = {
+        postfix = e_key,
+        body = "e" .. body,
+        description = "Wrap the expression in a `eprintln!`",
+        scope = "expr",
+    }
+end
+
 local postfix = {
     ["Mutex::new"] = {
-        body = "Mutex::new(${receiver})",
-        description = "Put the expression into an `Mutex`",
         postfix = "Mutex",
+        body = "Mutex::new(${receiver})",
+        description = "Put the expression into a `Mutex`",
         requires = "std::sync::Mutex",
         scope = "expr",
     },
     ["Arc::new"] = {
+        postfix = "Arc",
         body = "Arc::new(${receiver})",
         description = "Put the expression into an `Arc`",
-        postfix = "Arc",
         requires = "std::sync::Arc",
         scope = "expr",
     },
     ["Arc::clone"] = {
+        postfix = "Arc_clone",
         body = "Arc::clone(&${receiver})",
         description = "Put the expression into an `Arc::clone`",
-        postfix = "Arc_clone",
         requires = "std::sync::Arc",
         scope = "expr",
     },
     ["Rc::new"] = {
-        body = "Rc::new(${receiver})",
-        description = "Put the expression into an `Rc`",
         postfix = "Rc",
+        body = "Rc::new(${receiver})",
+        description = "Put the expression into a `Rc`",
         requires = "std::rc::Rc",
         scope = "expr",
     },
     ["Rc::clone"] = {
-        body = "Rc::clone(${receiver})",
-        description = "Put the expression into an `Rc::clone`",
         postfix = "Rc_clone",
+        body = "Rc::clone(${receiver})",
+        description = "Put the expression into a `Rc::clone`",
         requires = "std::rc::Rc",
         scope = "expr",
     },
     ["Box::pin"] = {
+        postfix = "pinbox",
         body = "Box::pin(${receiver})",
         description = "Put the expression into a pinned `Box`",
-        postfix = "pinbox",
         requires = "std::boxed::Box",
         scope = "expr",
     },
     Err = {
+        postfix = "Err",
         body = "Err(${receiver})",
         description = "Wrap the expression in a `Result::Err`",
-        postfix = "Err",
         scope = "expr",
     },
     Ok = {
+        postfix = "Ok",
         body = "Ok(${receiver})",
         description = "Wrap the expression in a `Result::Ok`",
-        postfix = "Ok",
         scope = "expr",
     },
     Some = {
+        postfix = "Some",
         body = "Some(${receiver})",
         description = "Wrap the expression in an `Option::Some`",
-        postfix = "Some",
-        scope = "expr",
-    },
-    eprln = {
-        body = 'eprintln!("{$1}", ${receiver});$0',
-        description = "Wrap the expression in an `eprintln!`",
-        postfix = "eprln",
-        scope = "expr",
-    },
-    prln = {
-        body = 'println!("{${1::#?}}", ${receiver});$0',
-        description = "Wrap the expression in an `println!`",
-        postfix = "prln",
-        scope = "expr",
-    },
-    prvar = {
-        body = 'println!(r##"(| ${receiver} |) ${2:->} {${1::#?}}"##, ${receiver});$0',
-        description = "Wrap the expression in an `println!`",
-        postfix = "prvar",
         scope = "expr",
     },
     dbg_d = {
+        postfix = "dbg_d",
         body = {
             "#[cfg(debug_assertions)]",
             "dbg!(${receiver});$0",
         },
-        description = "Wrap the expression in an `println!`",
-        postfix = "dbg_d",
+        description = "Wrap the expression in an debug `dbg!`",
         scope = "expr",
     },
     dbgr_d = {
+        postfix = "dbgr_d",
         body = {
             "#[cfg(debug_assertions)]",
             "dbg!(&${receiver});$0",
         },
-        description = "Wrap the expression in an `println!`",
-        postfix = "dbgr_d",
+        description = "Wrap the expression in a ref `dbg!`",
         scope = "expr",
     },
     Br = {
+        postfix = "Br",
         body = {
             "{$1",
             "    ${receiver}",
             "$0}",
         },
-        description = "Wrap the expression in an `println!`",
-        postfix = "Br",
+        description = "Wrap the expression in a `{\n}`",
         scope = "expr",
     },
 }
@@ -248,16 +279,6 @@ local friendly = {
         description = "concat_idents!(…)",
         prefix = "concat_idents",
     },
-    -- fn_r = {
-    --     body = { "fn ${1:name}(${2:arg}: ${3:Type}) -> ${4:RetType} {", "    ${5:unimplemented!();}", "}" },
-    --     description = "fn …(…) { … }",
-    --     prefix = "fnr",
-    -- },
-    -- fn = {
-    --     body = { "fn ${1:name}(${2:arg}: ${3:Type}) {", "    ${5:unimplemented!();}", "}" },
-    --     description = "fn …(…) { … }",
-    --     prefix = "fn",
-    -- },
     format = {
         body = { 'format!("${1}"${2})' },
         description = "format!(…)",
@@ -268,31 +289,21 @@ local friendly = {
         description = "format_args!(…)",
         prefix = "format_args",
     },
-    -- if = {
-    --   body = { "if ${1:condition} {", "    ${2:unimplemented!();}", "}" },
-    --   description = "if … { … }",
-    --   prefix = "if"
-    -- },
-    -- ["if-let"] = {
-    --     body = { "if let ${1:Some(pat)} = ${2:expr} {", "    ${0:unimplemented!();}", "}" },
-    --     description = "if let … = … { … }",
-    --     prefix = "if-let",
-    -- },
     ["inline-fn"] = {
         body = { "#[inline]", "pub fn ${1:name}() {", "    ${2:unimplemented!();}", "}" },
         description = "inlined function",
         prefix = "inline-fn",
     },
     let = {
-        body = { "let ${1:pat} = ${2:expr};" },
+        body = { "let ${1:var} = ${2:expr};" },
         description = "let … = …;",
         prefix = "letv",
     },
-    -- macro_rules = {
-    --     body = { "macro_rules! ${1:name} {", "    (${2}) => (${3})", "}" },
-    --     description = "macro_rules! … { … }",
-    --     prefix = "macro_rules",
-    -- },
+    macro_rules = {
+        body = { "macro_rules! ${1:name} {", "    (${2}) => (${3})", "}" },
+        description = "macro_rules! … { … }",
+        prefix = "macro_rules",
+    },
     macro_use = {
         body = { "#[macro_use(${1})]" },
         description = "#[macro_use(…)]",
@@ -363,11 +374,6 @@ local friendly = {
         description = "try!(…)",
         prefix = "try",
     },
-    -- ["while-let"] = {
-    --     body = { "while let ${1:Some(pat)} = ${2:expr} {", "    ${0:unimplemented!();}", "}" },
-    --     description = "while let … = … { … }",
-    --     prefix = "while-let",
-    -- },
     write = {
         body = { 'write!(${1}, "${2}")' },
         description = "write!(…)",
@@ -380,4 +386,4 @@ local friendly = {
     },
 }
 
-return vim.tbl_deep_extend("force", postfix, prefix, friendly)
+return vim.tbl_deep_extend("force", postfix, prln, postfix_prln, prefix, friendly)

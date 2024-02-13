@@ -8,6 +8,7 @@ $pacMan pkgfile python3 \
 $pacMan rpmextract fastjar unzip unrar p7zip cabextract \
     cdrtools html2text ghostscript djvulibre odt2txt antiword catdoc \
     pandoc libreoffice-fresh unrtf mediainfo imagemagick
+yay -S find-the-command
 # sudo pkgfile -u
 pkgfile makepkg
 

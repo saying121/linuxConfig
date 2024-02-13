@@ -1,3 +1,5 @@
+# 个人应用配置
+
 ![桌面图像](./pictures/wayland.png)
 
 <!--toc:start-->
@@ -6,12 +8,10 @@
   - [如果要使用本配置，执行下面代码，包含 `ranger` 的插件](#如果要使用本配置执行下面代码包含-ranger-的插件)
     - [也可以执行](#也可以执行)
   - [Clone 完成后](#clone-完成后)
-  - [Nvidia，自行选择是否安装，最好看 archwiki 。](#nvidia自行选择是否安装最好看-archwiki)
+  - [Nvidia，自行选择是否安装，最好看 archwiki](#nvidia自行选择是否安装最好看-archwiki)
   - [zsh](#zsh)
 - [License](#license)
 <!--toc:end-->
-
-# 个人应用配置
 
 除去 arch 安装脚本部分。
 高度个性化，谨慎使用。
@@ -25,12 +25,13 @@
 $ ~/.linuxConfig/scripts/configClash.sh
 ```
 
-http://yacd.metacubex.one 可以管理 clash, http://127.0.0.1:19090, 端口为配置文件里面 external-controller 的端口
+[yacd](http://yacd.metacubex.one) 可以管理 clash,
+端口为配置文件里面 [external-controller](http://127.0.0.1:19090)  的端口
 
 ## 如果要使用本配置，执行下面代码，包含 `ranger` 的插件
 
 ```bash
-$ git clone --recursive https://github.com/saying121/.linuxConfig.git ~/.linuxConfig
+git clone --recursive https://github.com/saying121/.linuxConfig.git ~/.linuxConfig
 ```
 
 ### 也可以执行
@@ -50,7 +51,7 @@ $ git submodule update --init --recursive
 $ ~/.linuxConfig/install.sh clashlink
 ```
 
-## Nvidia，自行选择是否安装，最好看 archwiki 。
+## Nvidia，自行选择是否安装，最好看 archwiki
 
 ```bash
 # 安装后运行mkinitcpio
@@ -88,6 +89,6 @@ yay -S nouveau-fw xf86-video-nouveau
 
 如果有插件没有安装完成，用 `zi update`
 
-# License
+## License
 
 [MIT](./LICENSE)

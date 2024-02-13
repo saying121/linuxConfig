@@ -61,18 +61,15 @@ source ~/.linuxConfig/shells/lib/fzf-tab.zsh
 # git
 zi ice wait lucid; zi snippet OMZP::git
 
-zi ice wait lucid
-zi load voronkovich/gitignore.plugin.zsh
-
 zi ice wait lucid; zi light paulirish/git-open.git
 
 ############################################################
 # omz
-zi ice wait lucid; zi snippet OMZP::command-not-found
+# zi ice wait lucid; zi snippet OMZP::command-not-found
+source /usr/share/doc/find-the-command/ftc.zsh
+
 zi ice wait lucid; zi snippet OMZP::extract
 zi ice wait lucid; zi snippet OMZP::thefuck
-
-zi ice wait lucid; zi snippet OMZP::cp
 
 zi ice wait lucid; zi snippet OMZL::clipboard.zsh
 zi ice wait lucid; zi snippet OMZL::functions.zsh
@@ -117,4 +114,5 @@ eval "$(starship init zsh)"
 
 
 export CLIPPY_CONF_DIR=~/.config/rustfmt/
+# export PATH=~/.local/share/bob/nvim-bin:$PATH
 # zprof

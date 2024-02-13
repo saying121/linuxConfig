@@ -29,8 +29,8 @@ $pacMan python3 python-pip python-pynvim python-pipenv python-pylsp-rope neovim-
 $pacMan rustup
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 rustup install stable beta nightly
-rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview miri --toolchain stable
-rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview miri --toolchain nightly
+rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain stable
+rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain nightly
 rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview miri --toolchain beta
 rustup default nightly
 # 切换 crates 源

@@ -56,11 +56,11 @@ return {
 
                     local tb = {
                         rust = "rust-analyzer",
-                        lua = "lua_ls",
                         zig = "zls",
                     }
                     for k, value in pairs(tb) do
                         if lang == k and #vim.lsp.get_clients({ name = value, bufnr = buf }) > 0 then
+                        -- if lang == k then
                             return true
                         end
                     end

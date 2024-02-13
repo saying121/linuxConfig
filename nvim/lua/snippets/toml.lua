@@ -5,6 +5,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 
 local serial = {
+    ["tokio-serial"] = "tokio 的串行端口实现",
     ["mio-serial"] = "mio 的串行端口实现",
     ["serialport"] = "一个跨平台的低级串口库。",
     ["serialport5"] = "一个跨平台的底层串口库",
@@ -284,6 +285,7 @@ local net = {
     ["socks5"] = "WIP",
     ["url"] = "**Rust** 的 **URL** 库，基于 WHATWG url 标准",
     ["warp"] = "以极快的速度提供网络服务",
+    ["to-socket-addrs"] = "一个小的套接字地址替换，用于指定没有端口的地址",
 }
 local threads = {
     ["thread_local"] = "每个线程对象本地存储",
@@ -319,6 +321,7 @@ local async = {
     ["tokio-graceful-shutdown"] = "对基于 `tokio` 的服务执行正常关闭的实用程序。",
     ["tokio-graceful"] = "用于正常关闭 tokio 应用程序的 util",
     ["tokio-stream"] = "使用 `stream` 和 `tokio` 的实用程序。",
+    ["tokio-util"] = "用于与 tokio 一起使用的其他实用程序。",
     ["tokio-test"] = "基于 `tokio` 和 `future` 的代码的测试实用程序",
     ["tokio-serde"] = "使用 tokio 通过网络发送和接收 serde 可编码类型。该库用作序列化格式特定库的构建块。",
     ["tokio-uring"] = "io-uring 对 tokio 异步运行时的支持。",
@@ -435,6 +438,8 @@ local gui = {
 }
 local grpc = {
     ["tonic"] = "基于 http/2 的 grpc 实现侧重于高性能、互操作性和灵活性。",
+    ["tonic-build"] = "`tonic` grpc 实现的 codegen 模块。",
+
     ["grpcio"] = "grpc的 **Rust** 语言实现，基于grpc c核心库。",
     ["tarpc"] = "一个 rust 的 rpc 框架，重点是易用性。",
     ["volo"] = "volo是一个高性能、可扩展性强的rust rpc框架，帮助开发者构建微服务。",
@@ -835,7 +840,7 @@ fn_params_excessive_bools = "warn"
 # struct_excessive_bools = "warn"
 
 unseparated_literal_suffix = "warn"
-default_numeric_fallback   = "warn"
+# default_numeric_fallback   = "warn"
 
 debug_assert_with_mut_call   = "warn"
 default_union_representation = "warn"

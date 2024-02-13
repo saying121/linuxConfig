@@ -14,6 +14,7 @@ return {
                 -- path = runtime_path,
             },
             diagnostics = {
+                globals = { "vim" },
                 ignoredFiles = "Opened",
                 ignoreDir = {},
             },

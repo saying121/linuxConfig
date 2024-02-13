@@ -26,7 +26,61 @@ local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
+local map_to_specifier_node = function(index, e)
+    return sn(index, i(1, "{} "))
+end
+
+local default_snip = function(types)
+    local nodes = {}
+    for index, e in ipairs(types) do
+        table.insert(nodes, map_to_specifier_node(index, e))
+    end
+    local snip = sn(nil, nodes)
+    snip.old_state = { types = types } -- NOTE: important for resume states
+    return snip
+end
+
+local test = fmt(
+    [[
+println!("{}", {});
+]],
+    {
+        d(2, function(args, _, old_state)
+            old_state = old_state or { types = {} }
+            local str = args[1][1]
+            local last_char = str:sub(#str, #str)
+            if last_char == "," or last_char == " " then
+                return default_snip(old_state.types)
+            end
+
+            local position = vim.api.nvim_win_get_cursor(0)
+            local row = position[1] - 1
+            local character = position[2] - 1
+            local cur_line_text = vim.api.nvim_get_current_line()
+            local pattern = [[println!%(".*", ]] -- NOTE: add more language support
+            local nodes = {}
+            local tmp = 1
+            local st, ed = string.find(str, "[^ ,]+", tmp)
+            local types = {}
+            local cnt = 1
+            while st do
+                local type = "{}"
+                table.insert(types, type)
+                table.insert(nodes, map_to_specifier_node(cnt, type))
+                cnt = cnt + 1
+                st, ed = string.find(str, "[^ ,]+", ed + 1) -- NOTE: skip ',' and ' '
+            end
+            local snip = sn(nil, nodes)
+            snip.old_state = { types = types }
+            return snip
+        end, { 1 }),
+        i(1, ""),
+    }
+)
+
 return {
+    s("kpp", test),
+    s(":turbofish", { t({ "::<" }), i(0), t({ ">" }) }),
     s(
         {
             trig = "main",
@@ -298,27 +352,36 @@ extern "<>" {
             trig = "struct-tuple",
             dscr = "struct …(…);",
         },
-        fmt([[
+        fmt(
+            [[
         #[derive(Clone, Copy)]
         #[derive(Debug)]
         #[derive(Default)]
         #[derive(PartialEq, Eq)]
         pub struct {}({});
-        ]], {
-            i(1, "Name"),
-            i(2, "Type"),
-        })
+        ]],
+            {
+                i(1, "Name"),
+                i(2, "Type"),
+            }
+        )
     ),
-    s({
-        trig = "struct-unit",
-        dscr = "struct …;",
-    }, fmt([[
+    s(
+        {
+            trig = "struct-unit",
+            dscr = "struct …;",
+        },
+        fmt(
+            [[
     #[derive(Clone, Copy)]
     #[derive(Debug)]
     #[derive(Default)]
     #[derive(PartialEq, Eq)]
     pub struct {};
-    ]], { i(1, "Name") })),
+    ]],
+            { i(1, "Name") }
+        )
+    ),
     s(
         {
             trig = "type",
@@ -406,26 +469,23 @@ extern "<>" {
             i(1, ""),
         })
     ),
-    -- s(
-    --     {
-    --         trig = "tmod",
-    --         dscr = "#[cfg(test) mod tests{…}]",
-    --     },
-    --     fmta(
-    --         [[
-    -- #[cfg(test)]
-    -- mod tests {
-    --     use super::*;
-    --
-    --     #[test]
-    --     fn <>() {
-    --
-    --     }
-    -- }
-    -- ]],
-    --         {
-    --             i(1, "test_name"),
-    --         }
-    --     )
-    -- ),
+    s(
+        {
+            trig = "macro_rules",
+            dscr = "macro_rules! … { … }",
+        },
+        fmt(
+            [[
+            macro_rules! [] {
+                ([]) => ([])
+            }
+            ]],
+            {
+                i(1, "name"),
+                i(2, ""),
+                i(3, ""),
+            },
+            { delimiters = "[]" }
+        )
+    ),
 }

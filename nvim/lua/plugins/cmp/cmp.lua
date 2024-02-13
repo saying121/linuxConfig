@@ -33,16 +33,9 @@ return {
             zsh = "[Zsh]",
         }
 
+        -- 分级显示，上一级有补全就不会显示下一级
         local sources = cmp.config.sources({
-            -- 好像只有 keyword_length 起作用了, priority 需要配合 sorting
-            -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
-            {
-                name = "luasnip",
-                -- keyword_length = 2,
-                -- trigger_characters = { "s", "n" },
-                -- Keyword_pattern = "sn",
-                priority = 1000,
-            },
+            { name = "luasnip", priority = 1000 },
             { name = "nvim_lsp", priority = 1000 },
             { name = "async_path", priority = 800 },
         }, {
@@ -50,7 +43,6 @@ return {
             { name = "rg", keyword_length = 3, priority = 700 },
         }, {
             { name = "spell", priority = 600 },
-            { name = "rime", priority = 600 },
         })
 
         cmp.setup({
@@ -80,7 +72,6 @@ return {
                     return vim_item
                 end,
             },
-            -- 分级显示，上一级有补全就不会显示下一级
             sources = sources,
             experimental = { ghost_text = true },
             preselect = cmp.PreselectMode.Item,
@@ -88,9 +79,8 @@ return {
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
-                        -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-                        -- they way you will only jump inside the snippet region
-                    elseif luasnip.expand_or_jumpable() then
+                    -- elseif luasnip.expand_or_jumpable() then
+                    elseif luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
                     -- elseif has_words_before() then
                     --     cmp.complete()
@@ -110,27 +100,12 @@ return {
                 ["<C-b>"] = cmp.mapping.scroll_docs(-1),
                 ["<C-f>"] = cmp.mapping.scroll_docs(1),
                 ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-                ["<Space>"] = cmp.mapping(function(fallback)
-                    local entry = cmp.get_selected_entry()
-                    if entry and entry.source.name == "nvim_lsp" and entry.source.source.client.name == "rime_ls" then
-                        cmp.confirm({
-                            behavior = cmp.ConfirmBehavior.Replace,
-                            select = true,
-                        })
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
                 ["<C-Space>"] = cmp.mapping.complete(),
                 ["<M-u>"] = cmp.mapping.abort(),
-
-                -- ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-                -- ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
             }),
             sorting = {
                 -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
                 priority_weight = 1,
-                -- rime-ls
                 comparators = {
                     compare.exact, -- 精准匹配
                     compare.recently_used, -- 最近用过的靠前
@@ -154,7 +129,6 @@ return {
                 { name = "rg", keyword_length = 4, priority = 700 },
             }, {
                 { name = "spell", priority = 600 },
-                { name = "rime", priority = 600 },
             }),
         })
 
@@ -162,7 +136,6 @@ return {
             sorting = {
                 -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
                 priority_weight = 1,
-                -- rime-ls
                 comparators = {
                     compare.exact, -- 精准匹配
                     compare.recently_used, -- 最近用过的靠前
@@ -176,8 +149,5 @@ return {
                 },
             },
         })
-
-        vim.opt.spell = true
-        vim.opt.spelllang = { "en_us" }
     end,
 }

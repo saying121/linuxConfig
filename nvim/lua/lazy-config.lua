@@ -52,8 +52,8 @@ require("lazy").setup({
         -- directory where you store your local plugin projects
         path = vim.env.HOME .. "/nvim_projects/",
         ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
-        patterns = { --[[ "rustaceanvim" ]]
-            "lsp_lines.nvim",
+        patterns = {
+            -- "rustaceanvim",
         }, -- For example {"folke"}
     },
     install = {
