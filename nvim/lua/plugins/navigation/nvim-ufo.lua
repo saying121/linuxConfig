@@ -7,6 +7,9 @@ return {
         "luukvbaal/statuscol.nvim",
     },
     config = function()
+        --- global handler
+        --- `handler` is the 2nd parameter of `setFoldVirtTextHandler`,
+        --- check out `./lua/ufo.lua` and search `setFoldVirtTextHandler` for detail.
         local handler = function(virtText, lnum, endLnum, width, truncate)
             local newVirtText = {}
             local suffix = ("    %d "):format(endLnum - lnum)
@@ -35,10 +38,7 @@ return {
             return newVirtText
         end
 
-        -- global handler
-        -- `handler` is the 2nd parameter of `setFoldVirtTextHandler`,
-        -- check out `./lua/ufo.lua` and search `setFoldVirtTextHandler` for detail.
-        require("ufo").setup({
+        local cf = {
             fold_virt_text_handler = handler,
             provider_selector = function(bufnr, filetype, buftype)
                 local ftMap = {
@@ -79,6 +79,14 @@ return {
                     trace = "<CR>",
                 },
             },
+        }
+        require("ufo").setup(cf)
+        vim.api.nvim_create_autocmd({ "BufEnter","InsertLeave" }, {
+            group = vim.api.nvim_create_augroup("Fold", { clear = false }),
+            -- pattern = {},
+            callback = function()
+                require('ufo').openFoldsExceptKinds()
+            end,
         })
 
         -- buffer scope handler

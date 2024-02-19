@@ -6,8 +6,12 @@ local M = {}
 M.on_attach = function(client, bufnr)
     -- lsp.semantic_tokens.start(bufnr, client.id)
 
-    local opts = { noremap = true, silent = true, buffer = bufnr }
-    local keymap = vim.keymap.set
+    ---@param mode string|table
+    ---@param lhs string
+    ---@param rhs string|function
+    local function keymap(mode, lhs, rhs)
+        vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, buffer = bufnr })
+    end
 
     keymap("n", "<leader>v", function()
         if vim.diagnostic.is_disabled() then
@@ -15,9 +19,9 @@ M.on_attach = function(client, bufnr)
         else
             vim.diagnostic.disable()
         end
-    end, opts)
+    end)
 
-    keymap("n", "<c-k>", lsp.buf.signature_help, opts)
+    keymap("n", "<c-k>", lsp.buf.signature_help)
 
     -- print(vim.inspect(client))
     local cap = client.server_capabilities
@@ -27,7 +31,7 @@ M.on_attach = function(client, bufnr)
         local _ = pcall(lsp.inlay_hint.enable, bufnr, true)
         keymap("n", "<leader>ih", function()
             lsp.inlay_hint.enable(bufnr, not lsp.inlay_hint.is_enabled())
-        end, opts)
+        end)
     end
 
     if cap.documentFormattingProvider then
@@ -47,12 +51,12 @@ M.on_attach = function(client, bufnr)
                     end
                 end,
             })
-        end, opts)
+        end)
     end
     if cap.documentRangeFormattingProvider then
         keymap("x", "<space>f", function()
             lsp.buf.format({ async = true })
-        end, opts)
+        end)
     end
 
     if cap.documentHighlightProvider then
@@ -88,7 +92,7 @@ M.on_attach = function(client, bufnr)
         if winid then
             api.nvim_set_current_win(winid)
         end
-    end, opts)
+    end)
     api.nvim_create_autocmd("CursorHold", {
         buffer = bufnr,
         callback = function()

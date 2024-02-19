@@ -4,6 +4,7 @@
 
 - [Neovim 配置简述](#neovim-配置简述)
   - [一些小细节](#一些小细节)
+    - [关于 Cargo.toml](#关于-cargotoml)
   - [推荐几个教程](#推荐几个教程)
   - [版本要求](#版本要求)
     - [主要插件](#主要插件)
@@ -51,6 +52,14 @@ o[nore]map     |  -   |  -  |  -  |  -  |  -  | yes |  -   |  -   |
 t[nore]map     |  -   |  -  |  -  |  -  |  -  |  -  | yes  |  -   |
 l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
 ```
+
+### 关于 Cargo.toml
+
+- 把 `Cargo.toml` 改成 `rtoml` 文件类型
+- treesitter里面把 `toml` 高亮应用于 `rtoml`
+- 设置 `taplo` 在 `rtoml` 文件类型启动
+
+就能只给`Cargo.toml`添加一些 snippet 。
 
 ## 推荐几个教程
 

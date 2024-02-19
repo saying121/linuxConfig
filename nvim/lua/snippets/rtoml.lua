@@ -33,6 +33,8 @@ local machine_learning = {
     ["tensorflow"] = "tensorflow 的 Rust 语言绑定。",
 }
 local crates = {
+    ["const_format"] = "编译时字符串格式化",
+    ["nix"] = "Rust 友好地绑定到 *nix api",
     ["embedded-hal"] = "嵌入式系统的硬件抽象层 (hal)",
     ["uuid"] = "生成和解析 uuid 的库。",
     ["enum_dispatch"] = "动态分派方法调用的近乎直接替代，速度高达 10 倍",
@@ -271,6 +273,9 @@ local ciphers = {
     ["secret-service"] = "与秘密服务 API 接口的库",
 }
 local net = {
+    ["socket2"] = "用于处理具有最大可能配置量的网络套接字的实用程序。",
+    ["tun-tap"] = "tun/tap 接口包装器",
+    ["etherparse"] = "用于解析和编写一堆基于数据包的协议的库 (EthernetII, IPv4, IPv6, UDP, TCP ...).",
     ["rustls"] = "rustls 是一个用 **Rust** 编写的现代 tls 库。",
     ["keyring"] = "用于管理密码/凭据的跨平台库",
     ["http"] = "一组用于表示 **HTTP** 请求和响应的类型。",
@@ -556,22 +561,6 @@ local all = vim.tbl_deep_extend(
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']
 local snippets = {
-    s(
-        {
-            trig = "linux_linker",
-            priority = 30000,
-            dscr = "发布配置",
-        },
-        fmt(
-            [[
-[target.x86_64-unknown-linux-gnu]
-linker = "clang"
-rustflags = ["-C", "link-arg=-fuse-ld=mold"]
-
-        ]],
-            {}
-        )
-    ),
     s(
         {
             trig = "release",

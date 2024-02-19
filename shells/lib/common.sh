@@ -170,5 +170,3 @@ export MAKEFLAGS="-j$thread_num"
 
 export RUSTC_WRAPPER=sccache
 export PATH=$PATH:~/.linuxConfig/scripts
-
-source ~/.linuxConfig/shells/lib/rust.sh

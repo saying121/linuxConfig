@@ -2,6 +2,9 @@ return {
     settings = {
         pylsp = {
             plugins = {
+                jedi_completion = {
+                    include_params = true,
+                },
                 flake8 = {
                     enabled = false,
                 },

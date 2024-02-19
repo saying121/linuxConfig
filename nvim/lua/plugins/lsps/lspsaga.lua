@@ -215,8 +215,8 @@ return {
             },
             lightbulb = {
                 enable = true,
-                sign = true,
-                virtual_text = false,
+                sign = false,
+                virtual_text = true,
                 debounce = 10,
                 sign_priority = 40,
             },

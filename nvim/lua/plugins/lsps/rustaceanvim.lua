@@ -1,3 +1,9 @@
+---@class RustAnalyzerInitializedStatus
+---@field health lsp_server_health_status
+---@field quiescent boolean inactive?
+
+---@alias lsp_server_health_status 'ok' | 'warning' | 'error'
+
 return {
     "mrcjkb/rustaceanvim",
     -- cond = false,
@@ -10,6 +16,19 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "mfussenegger/nvim-dap",
+        {
+            "vxpm/ferris.nvim",
+            opts = {
+                -- If true, will automatically create commands for each LSP method
+                create_commands = true, -- bool
+                -- Handler for URL's (used for opening documentation)
+                url_handler = "xdg-open", -- string | function(string)
+            },
+            -- ft = "rust",
+            config = function(_, opt)
+                require("ferris").setup(opt)
+            end,
+        },
     },
     config = function()
         local executors = require("rustaceanvim.executors")
@@ -22,33 +41,30 @@ return {
         local codelldb_path = extension_path .. "adapter/codelldb"
         local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
-        local cfg = require("rustaceanvim.config")
         vim.g.rustaceanvim = {
-            -- Plugin configuration
             tools = {
                 --- callback to execute once rust-analyzer is done initializing the workspace
-                --- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
+                ---@param health RustAnalyzerInitializedStatus
                 on_initialized = function(health)
-                    if health == "ok" then
-                        print("----", health)
-                        print("check")
-                        vim.cmd.RustLsp("flyCheck") -- defaults to 'run'
+                    if health.health == "ok" then
+                        vim.lsp.codelens.refresh()
+                        vim.cmd.RustLsp("flyCheck")
+                    elseif health.health == "warning" then
+                        vim.notify("ra health" .. health.health, vim.log.levels.WARN)
+                    elseif health.health == "error" then
+                        vim.notify("ra health" .. health.health, vim.log.levels.ERROR)
                     end
                 end,
-                --- how to execute terminal commands
+
                 --- options right now: termopen / quickfix / toggleterm / vimux
                 executor = executors.toggleterm,
                 test_executor = executors.toggleterm,
 
-                code_actions = {
-                    ui_select_fallback = false,
-                },
+                code_actions = { ui_select_fallback = false },
 
                 ---@type boolean
                 -- enable_nextest = vim.fn.executable("cargo-nextest") == 1,
-                enable_nextest = false,
 
-                --- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
                 ---@type boolean
                 reload_workspace_from_cargo_toml = true,
                 hover_actions = { replace_builtin_hover = false },
@@ -70,8 +86,6 @@ return {
             },
             -- LSP configuration
             server = {
-                --- standalone file support
-                --- setting it to false may improve startup time
                 ---@type boolean
                 standalone = true,
                 ---@param client lsp.Client
@@ -92,7 +106,16 @@ return {
                     })
 
                     require("public.lsp_attach").on_attach(client, bufnr)
-                    local keymap, opts = vim.keymap.set, { noremap = true, silent = true, buffer = bufnr }
+
+                    ---@param mode string|table
+                    ---@param lhs string
+                    ---@param rhs string|function
+                    local function keymap(mode, lhs, rhs)
+                        vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, buffer = bufnr })
+                    end
+
+                    keymap("n", "<leader>ml", require("ferris.methods.view_memory_layout"))
+                    keymap("n", "<leader>vi", require("ferris.methods.view_item_tree"))
 
                     keymap("n", "<M-e>", function()
                         local diagnostics = vim.diagnostic.get(bufnr, { severity = vim.diagnostic.severity.ERROR })
@@ -108,43 +131,43 @@ return {
                         else
                             vim.cmd.RustLsp("renderDiagnostic")
                         end
-                    end, opts)
+                    end)
 
                     keymap("n", "<M-f>", function()
                         vim.cmd.RustLsp({ "hover", "actions" })
-                    end, opts)
+                    end)
                     keymap("x", "<M-f>", function()
                         vim.cmd.RustLsp({ "hover", "range" })
-                    end, opts)
+                    end)
                     keymap("n", "mk", function()
                         vim.cmd.RustLsp({ "moveItem", "up" })
-                    end, opts)
+                    end)
                     keymap("n", "mj", function()
                         vim.cmd.RustLsp({ "moveItem", "down" })
-                    end, opts)
+                    end)
                     keymap("n", "<leader>R", function()
                         vim.cmd.RustLsp("runnables")
-                    end, opts)
+                    end)
                     keymap("n", "<leader>D", function()
                         vim.cmd.RustLsp({
                             "debuggables" --[[ , 'last' ]],
                         })
-                    end, opts)
+                    end)
                     keymap("n", "<C-g>", function()
                         vim.cmd.RustLsp("openCargo")
-                    end, opts)
+                    end)
                     keymap("n", "<S-CR>", function()
                         vim.cmd.RustLsp("expandMacro")
-                    end, opts)
+                    end)
                     keymap("n", "<M-S-CR>", function()
-                        vim.cmd.RustLsp("rebuildProcMacros")
-                    end, opts)
+                        vim.cmd.RustLsp("codeAction")
+                    end)
 
                     keymap("n", "J", function()
                         vim.cmd.RustLsp("joinLines")
-                    end, opts)
+                    end)
                 end,
-                default_settings = require("public.ra.settings"),
+                default_settings = require("public.ra"),
                 ---@type table | (fun(project_root:string|nil):table)
                 settings = function(project_root)
                     local ra = require("rustaceanvim.config.server")
@@ -154,9 +177,7 @@ return {
                 end,
             },
             -- DAP configuration
-            dap = {
-                adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-            },
+            dap = { adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path) },
         }
 
         vim.cmd.e()

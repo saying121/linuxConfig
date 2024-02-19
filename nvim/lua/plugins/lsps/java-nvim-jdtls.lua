@@ -56,7 +56,7 @@ return {
             },
         })
 
-        -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
+        ---@see vim.lsp.start_client
         local config = {
             -- stylua: ignore
             cmd = {
@@ -79,93 +79,7 @@ return {
 
             -- workspaceFolders = { "file:://" .. vim.env.HOME .. "/Project" },
             settings = {
-                java = {
-                    eclipse = { downloadSources = true },
-                    configuration = {
-                        updateBuildConfiguration = "interactive",
-                        maven = { userSettings = nil },
-                        runtimes = {
-                            {
-                                name = "JavaSE-1.8",
-                                path = "/usr/lib/jvm/java-8-openjdk/",
-                            },
-                            {
-                                name = "JavaSE-11",
-                                path = "/usr/lib/jvm/java-11-openjdk/",
-                            },
-                            {
-                                name = "JavaSE-17",
-                                path = "/usr/lib/jvm/java-17-openjdk/",
-                            },
-                            {
-                                name = "JavaSE-21",
-                                path = "/usr/lib/jvm/java-21-openjdk/",
-                            },
-                        },
-                    },
-                    trace = { server = "verbose" },
-                    import = {
-                        gradle = { enabled = true },
-                        maven = { enabled = true },
-                        exclusions = {
-                            "**/node_modules/**",
-                            "**/.metadata/**",
-                            "**/archetype-resoutces/**",
-                            "**/META-INF/maven/**",
-                            "**/**/test/**",
-                        },
-                    },
-                    referencesCodeLens = { enabled = true },
-                    signatureHelp = { enabled = true },
-                    implementationsCodeLens = { enabled = true },
-                    format = {
-                        enabled = true,
-                        -- settings = {
-                        --     url = "/home/jrakhman/.config/nvim/lua/user/formatter/eclipse-java-custom-style.xml",
-                        --     profile = "GoogleStyle",
-                        -- },
-                    },
-                    saveActions = { organizeImports = nil },
-                    contentProvider = { preferred = "fernflower" },
-                    autobuild = { enabled = true },
-                    completion = {
-                        favoriteStaticMembers = {
-                            "org.hamcrest.MatcherAssert.assertThat",
-                            "org.hamcrest.Matchers.*",
-                            "org.hamcrest.CoreMatchers.*",
-                            "org.junit.jupiter.api.Assertions.*",
-                            "java.util.Objects.requireNonNull",
-                            "java.util.Objects.requireNonNullElse",
-                            "org.mockito.Mockito.*",
-                            "org.junit.Assert.*",
-                            "org.junit.Assume.*",
-                            "org.junit.jupiter.api.Assertions.*",
-                            "org.junit.jupiter.api.Assumptions.*",
-                            "org.junit.jupiter.api.DynamicContainer.*",
-                            "org.junit.jupiter.api.DynamicTest.*",
-                        },
-                    },
-                    maven = { downloadSources = true },
-                    references = { includeDecompiledSources = false },
-                    inlayHints = {
-                        parameterNames = {
-                            enabled = "all", -- literals, all, none
-                        },
-                    },
-                    sources = {
-                        organizeImports = {
-                            starThreshold = 9999,
-                            staticStarThreshold = 9999,
-                        },
-                    },
-                    codeGeneration = {
-                        toString = {
-                            template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
-                        },
-                        -- hashCodeEquals = { useJava7Objects = treu },
-                        useBlocks = true,
-                    },
-                },
+                java = require("public.jdtls_"),
             },
             flags = {
                 allow_incremental_sync = true,
@@ -189,32 +103,37 @@ return {
                 require("jdtls").setup_dap()
                 require("public.lsp_attach").on_attach(client, bufnr)
 
-                local opts, keymap = { noremap = true, silent = true, buffer = bufnr }, vim.keymap.set
-
+                ---@param mode string|table
+                ---@param lhs string
+                ---@param rhs string|function
+                local function keymap(mode, lhs, rhs)
+                    vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, buffer = bufnr })
+                end
                 keymap("n", "<space>f", function()
                     vim.lsp.buf.format({
                         async = true,
                         bufnr = bufnr,
                     })
-                end, opts)
+                end)
 
-                -- keymap("n", "<leader>di", require("jdtls").organize_imports, opts)
-                keymap("n", "<leader>dt", require("jdtls").test_class, opts)
-                keymap("n", "<leader>dn", require("jdtls").test_nearest_method, opts)
+                -- keymap("n", "<leader>di", require("jdtls").organize_imports)
+                keymap("n", "<leader>dt", require("jdtls").test_class)
+                keymap("n", "<leader>dn", require("jdtls").test_nearest_method)
 
-                keymap("x", "<leader>de", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
-                keymap("n", "<leader>de", require("jdtls").extract_variable, opts)
-                -- keymap("x", "<leader>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
+                keymap("x", "<leader>de", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>")
+                keymap("n", "<leader>de", require("jdtls").extract_variable)
+                -- keymap("x", "<leader>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>")
 
-                keymap("x", "<leader>cxc", [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]], opts)
-                keymap("x", "<leader>cxv", [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]], opts)
+                keymap("n", "<leader>cxc", require('jdtls').extract_constant)
+                keymap("x", "<leader>cxc", [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]])
+                keymap("x", "<leader>cxv", [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]])
 
-                keymap("n", "gS", require("jdtls.tests").goto_subjects, opts)
-                -- keymap("n", 'gs', require("jdtls.tests").super_implementation, opts)
+                keymap("n", "gS", require("jdtls.tests").goto_subjects)
+                -- keymap("n", 'gs', require("jdtls.tests").super_implementation)
 
-                keymap("n", "<leader>tt", require("jdtls.dap").test_class, opts)
-                keymap("n", "<leader>tr", require("jdtls.dap").test_nearest_method, opts)
-                keymap("n", "<leader>tT", require("jdtls.dap").pick_test, opts)
+                keymap("n", "<leader>tt", require("jdtls.dap").test_class)
+                keymap("n", "<leader>tr", require("jdtls.dap").test_nearest_method)
+                keymap("n", "<leader>tT", require("jdtls.dap").pick_test)
             end,
         }
         -- This starts a new client & server,

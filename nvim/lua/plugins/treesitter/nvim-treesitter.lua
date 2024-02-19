@@ -1,15 +1,18 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
-    version = "*",
+    -- version = "*",
     build = ":TSUpdate",
     dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "treesitter" .. "/dependencies"),
     config = function()
+        vim.treesitter.language.register("bash", "PKGBUILD")
+        vim.treesitter.language.register("bash", "zsh")
+        vim.treesitter.language.register("toml", "rtoml")
+
         -- 如果没有可用高亮就用默认的
         if require("nvim-treesitter.parsers").available_parsers()[vim.bo.filetype] == nil then
             vim.cmd("syntax on")
         end
-
         if vim.env.HTTPS_PROXY == nil then
             require("nvim-treesitter.install").prefer_git = true
             local mirror = require("public.utils").mirror()
@@ -60,7 +63,7 @@ return {
                     }
                     for k, value in pairs(tb) do
                         if lang == k and #vim.lsp.get_clients({ name = value, bufnr = buf }) > 0 then
-                        -- if lang == k then
+                            -- if lang == k then
                             return true
                         end
                     end

@@ -1,6 +1,7 @@
 local M = {}
-local current_nsid = vim.api.nvim_create_namespace("LuaSnipChoiceListSelections")
+
 M.current_win = nil
+local current_nsid = vim.api.nvim_create_namespace("LuaSnipChoiceListSelections")
 
 local function window_for_choiceNode(choiceNode)
     local buf = vim.api.nvim_create_buf(false, true)

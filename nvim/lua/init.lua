@@ -5,7 +5,7 @@ package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/shar
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
 
 --local _ = pcall(require, "lazy-config")
-require'lazy-config'
+require("lazy-config")
 
 require("lsp_configs")
 
@@ -55,6 +55,7 @@ vim.filetype.add({
     extension = {
         foo = "fooscript",
         mir = "rust",
+        conf = "conf",
         bar = function(path, bufnr)
             -- if some_condition() then
             --     return "barscript",
@@ -67,6 +68,7 @@ vim.filetype.add({
         end,
     },
     filename = {
+        ["Cargo.toml"] = "rtoml",
         [".log"] = "log",
         [".yuck"] = "yuck",
         [".typ"] = "typst",
@@ -75,13 +77,13 @@ vim.filetype.add({
         ["config"] = "config",
         ["~/.linuxConfig/wayland/waybar/config"] = "json",
         ["~/.config/waybar/config"] = "json",
-        -- ["~/.linuxConfig/wayland/swaylock/config"] = "config",
     },
     pattern = {
         ["(?i)LICENSE"] = "license",
         [".*/etc/foo/.*"] = "fooscript",
-        [".*.conf"] = "conf",
-        -- ["~/.config/hypr/*.conf"] = "conf",
+        ["~/.config/hypr/hyprland.conf"] = "hyprlang",
+        [".*/hypr/hyprland.conf"] = "hyprlang",
+        [".*/hypr/lib/.*.conf"] = "hyprlang",
         ["/proc/bus/input/.*"] = "txt",
         -- Using an optional priority
         [".*/etc/foo/.*%.conf"] = { "dosini", { priority = 10 } },

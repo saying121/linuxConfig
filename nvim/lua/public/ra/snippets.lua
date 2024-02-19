@@ -69,6 +69,13 @@ local postfix = {
         requires = "std::sync::Arc",
         scope = "expr",
     },
+    ["sync::Weak::clone"] = {
+        postfix = "sync_Weak_clone",
+        body = "Weak::clone(&${receiver})",
+        description = "Put the expression into a `sync::Weak::clone`",
+        requires = "std::sync::Weak",
+        scope = "expr",
+    },
     ["Rc::new"] = {
         postfix = "Rc",
         body = "Rc::new(${receiver})",
@@ -78,9 +85,16 @@ local postfix = {
     },
     ["Rc::clone"] = {
         postfix = "Rc_clone",
-        body = "Rc::clone(${receiver})",
+        body = "Rc::clone(&${receiver})",
         description = "Put the expression into a `Rc::clone`",
         requires = "std::rc::Rc",
+        scope = "expr",
+    },
+    ["Weak::clone"] = {
+        postfix = "Weak_clone",
+        body = "Weak::clone(&${receiver})",
+        description = "Put the expression into a `Weak::clone`",
+        requires = "std::rc::Weak",
         scope = "expr",
     },
     ["Box::pin"] = {

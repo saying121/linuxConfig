@@ -1,4 +1,5 @@
 # zmodload zsh/zprof
+
 # 自定义
 source ~/.linuxConfig/shells/zshrc
 
@@ -23,60 +24,23 @@ eval "$(lua ~/.zi/plugins/skywind3000---z.lua.git/z.lua  --init zsh once enhance
 export _ZL_ECHO=1
 export _ZL_DATA=~/.local/zlua
 
-#############################################
 # 补全
-zi ice lucid wait as'completion'
-zi light zsh-users/zsh-completions
+source ~/.linuxConfig/shells/lib/zsh/completions.zsh
 
-zi ice as"completion"
-zi snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
-
-zi ice lucid wait as'completion' blockf has'tldr' mv'zsh_tealdeer -> _tldr'
-zi snippet https://github.com/dbrgn/tealdeer/blob/main/completion/zsh_tealdeer
-
-zi ice lucid wait as'completion' blockf has'mpv'
-zi snippet https://github.com/mpv-player/mpv/blob/master/etc/_mpv.zsh
-
-zi ice lucid wait as'completion' blockf has'fd'
-zi snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/fd/_fd
-
-zi ice lucid wait as'completion' blockf has'rustc'
-zi snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rust/_rustc
-
-zi ice lucid wait as'completion' blockf has'cargo'
-zi snippet https://github.com/rust-lang/cargo/blob/master/src/etc/_cargo
-
-zi ice lucid wait as'completion' blockf has'pandoc'
-zi light srijanshetty/zsh-pandoc-completion
-
-zi ice wait lucid pick'autopair.zsh'
-zi load hlissner/zsh-autopair
-
-zi ice lucid wait has'fzf'
-zi light Aloxaf/fzf-tab
-zi ice wait lucid; zi light Freed-Wu/fzf-tab-source
-source ~/.linuxConfig/shells/lib/fzf-tab.zsh
-
-############################################################
-# git
-zi ice wait lucid; zi snippet OMZP::git
-
-zi ice wait lucid; zi light paulirish/git-open.git
-
-############################################################
 # omz
-# zi ice wait lucid; zi snippet OMZP::command-not-found
-source /usr/share/doc/find-the-command/ftc.zsh
+source ~/.linuxConfig/shells/lib/zsh/omz.zsh
 
-zi ice wait lucid; zi snippet OMZP::extract
-zi ice wait lucid; zi snippet OMZP::thefuck
+# zi ice wait lucid service"redis"
+# zi light z-shell/redis
+#
+# GIT_SLEEP_TIME=700
+# GIT_PROJECTS=z-shell/zsh-github-issues:z-shell/zi
+#
+# zi ice wait lucid service"GIT" pick"zsh-github-issues.service.zsh"
+# zi light z-shell/zsh-github-issues
 
-zi ice wait lucid; zi snippet OMZL::clipboard.zsh
-zi ice wait lucid; zi snippet OMZL::functions.zsh
-zi ice wait lucid; zi snippet OMZL::history.zsh
-
-############################################################
 # Misc
+zi ice wait lucid; zi light paulirish/git-open.git
 
 zi ice wait lucid; zi light lesonky/web-search.git
 
@@ -97,22 +61,17 @@ bindkey '^[[B' history-substring-search-down
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
-zi ice wait lucid atload"!_zsh_autosuggest_start"
-zi load zsh-users/zsh-autosuggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
-
 ############################################################
 
 # export PYTHONPATH=~/.local/lib/python3.11/site-packages
 
 alias lazyvim="NVIM_APPNAME=lazyvim nvim"
-alias nvchard="NVIM_APPNAME=NvChard nvim"
-
-zi snippet OMZP::last-working-dir
+alias nvchard="NVIM_APPNAME=nvchard nvim"
 
 eval "$(starship init zsh)"
 
 
 export CLIPPY_CONF_DIR=~/.config/rustfmt/
 # export PATH=~/.local/share/bob/nvim-bin:$PATH
+
 # zprof

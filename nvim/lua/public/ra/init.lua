@@ -104,7 +104,7 @@ return {
             forceCustomCommands = true,
             implementations = { enable = true },
             location = "above_name",
-            references = { -- Whether to show References lens
+            references = {
                 adt = { enable = true },
                 enumVariant = { enable = true },
                 method = { enable = true },
@@ -117,7 +117,10 @@ return {
             capacity = 128, -- rust-analyzer 保存在内存中的语法树数。默认值为 128。
             query = { capacities = {} }, -- 设置指定查询的 lru 容量。
         },
-        notifications = { cargoTomlNotFound = true }, -- 是否显示 can’t find Cargo.toml 错误消息。
+        notifications = {
+            cargoTomlNotFound = true, -- 是否显示 can’t find Cargo.toml 错误消息。
+            unindexedProject = true,
+        },
         numThreads = nil, -- 主循环中有多少工作线程。默认的 null 表示自动拾取。
         runnables = {
             command = nil,
@@ -125,29 +128,29 @@ return {
         },
         imports = {
             granularity = {
-                enforce = true,
+                enforce = false,
                 group = "module", --[[ crate ]]
                 enable = true,
             },
             group = { enable = true },
             merge = { glob = true },
             preferNoStd = false,
-            preferPrelude = false,
+            preferPrelude = true,
             prefix = "self", -- crate, self, plain
         },
         inlayHints = {
             bindingModeHints = { enable = true },
             chainingHints = { enable = true },
             closingBraceHints = { enable = true, minLines = 40 },
-            closureCaptureHints = { enable = true },
+            closureCaptureHints = { enable = false },
             closureReturnTypeHints = { enable = "always" }, -- never
             closureStyle = "impl_fn",
             discriminantHints = { enable = "always" },
-            expressionAdjustmentHints = {
+            expressionAdjustmentHints = { -- reborrow, loop的返回值
                 enable = "always",
-                hideOutsideUnsafe = false,
-                -- mode = "prefix",
-                mode = "postfix ",
+                hideOutsideUnsafe = true,
+                mode = "prefix",
+                -- mode = "postfix ",
             },
             lifetimeElisionHints = { enable = "always", useParameterNames = true },
             maxLength = 25,
@@ -195,7 +198,12 @@ return {
         procMacro = {
             enable = true,
             attributes = { enable = true },
-            ignore = {},
+            ignored = {
+                ["async-trait"] = { "async_trait" },
+                ["tonic"] = { "async_trait" },
+                ["napi-derive"] = { "napi" },
+                ["async-recursion"] = { "async_recursion" },
+            },
             server = nil,
         },
     },

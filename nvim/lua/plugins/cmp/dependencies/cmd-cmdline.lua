@@ -10,7 +10,6 @@ return {
             },
             {
                 { name = "spell", priority = 800 },
-                -- { name = "rime", priority = 800 },
             },
         })
         cmp.setup.cmdline(":", {

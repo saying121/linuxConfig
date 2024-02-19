@@ -57,7 +57,7 @@ return {
             update_events = { "TextChanged", "TextChangedI" },
             -- see :h User, event should never be triggered(except if it is `doautocmd`'d)
             region_check_events = { "CursorMoved", "CursorMovedI" },
-            delete_check_events = { "InsertLeave" },
+            delete_check_events = { "TextChanged" },
             -- store_selection_keys = "<Tab>", -- Supossed to be the same as the expand shortcut
             ext_opts = {
                 [types.textNode] = {
