@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "t-troebst/perfanno.nvim",
     cond = false,

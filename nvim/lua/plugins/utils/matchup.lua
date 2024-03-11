@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "andymass/vim-matchup",
     keys = "%",

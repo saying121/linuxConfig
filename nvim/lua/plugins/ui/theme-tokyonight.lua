@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "folke/tokyonight.nvim",
     event = "BufWinEnter",

@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "SeniorMars/typst.nvim",
     -- ft = "typst",

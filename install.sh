@@ -52,6 +52,8 @@ $pacMan virtualbox virtualbox-host-dkms
 sudo gpasswd -a "$USER" vboxusers
 newgrp vboxusers
 
+$pacMan virt-manager virt-viewer virt-install
+
 $pacMan wine pkgstats
 
 # 各种查看系统信息的软件

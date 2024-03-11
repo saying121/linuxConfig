@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "eandrju/cellular-automaton.nvim",
     keys = { "<leader>ra", mode = "n", desc = "rain" },

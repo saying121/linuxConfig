@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "danymat/neogen",
     dependencies = {
@@ -11,13 +12,16 @@ return {
         { "<C-S-a>", mode = { "n", "x" } },
     },
     config = function()
-        local keymap = vim.keymap.set
+        local keymap, opts = vim.keymap.set, { noremap = true, silent = true }
+
         keymap({ "n", "x" }, "<C-S-e>", function()
-            vim.cmd.Neogen("file")
-        end, { noremap = true, silent = true })
+            require("neogen").generate({
+                type = "file", -- the annotation type to generate. Currently supported: func, class, type, file
+            })
+        end, opts)
         keymap({ "n", "x" }, "<C-S-a>", function()
-            vim.cmd.Neogen()
-        end, { noremap = true, silent = true })
+            require("neogen").generate()
+        end, opts)
 
         require("neogen").setup({
             snippet_engine = "luasnip",
@@ -30,7 +34,7 @@ return {
                 },
                 rust = {
                     template = {
-                        annotation_convention = "rust_alternative", -- 'rust_alternative','rustdoc'
+                        annotation_convention = "rustdoc", -- 'rust_alternative','rustdoc'
                         use_default_comment = true,
                     },
                 },

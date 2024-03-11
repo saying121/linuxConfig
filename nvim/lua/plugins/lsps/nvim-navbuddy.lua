@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "SmiteshP/nvim-navbuddy",
     cmd = "Navbuddy",

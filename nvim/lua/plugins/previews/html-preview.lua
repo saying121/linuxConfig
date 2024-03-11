@@ -1,6 +1,7 @@
+---@type LazySpec
 return {
     "turbio/bracey.vim",
-    -- 需要调整nodejs版本
+    cond = false,
     build = "fnm use 16; npm install --prefix server",
     event = {
         "UIEnter *.html",

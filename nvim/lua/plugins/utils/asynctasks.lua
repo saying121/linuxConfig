@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "skywind3000/asynctasks.vim",
     dependencies = {

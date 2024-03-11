@@ -1,8 +1,3 @@
----@class Symbol
----@field definition? integer|nil
----@field implementation? integer|nil
----@field references? integer|nil
-
 local function h(name)
     return vim.api.nvim_get_hl(0, { name = name })
 end
@@ -54,11 +49,12 @@ local function text_format(symbol)
     return res
 end
 
+---@type LazySpec
 return {
     "Wansmer/symbol-usage.nvim",
     event = "LspAttach",
     config = function()
-        local SymbolKind = vim.lsp.protocol.SymbolKind
+        local SymbolKind, langs = vim.lsp.protocol.SymbolKind, require("symbol-usage.langs")
 
         require("symbol-usage").setup({
             ---@type table<string, any> `nvim_set_hl`-like options for highlight virtual text
@@ -71,8 +67,7 @@ return {
             ---See: #filter-kinds
             ---@type table<lsp.SymbolKind, filterKind[]>
             kinds_filter = {},
-            ---@type 'above'|'end_of_line'|'textwidth' above by default
-            vt_position = "above",
+            vt_position = "end_of_line",
             ---Text to display when request is pending. If `false`, extmark will not be
             ---created until the request is finished. Recommended to use with `above`
             ---vt_position to avoid "jumping lines".
@@ -87,10 +82,15 @@ return {
             references = { enabled = true, include_declaration = true },
             definition = { enabled = true },
             implementation = { enabled = true },
-            ---@type { lsp?: string[], filetypes?: string[] } Disables `symbol-usage.nvim' on certain LSPs or file types.
             disable = { lsp = { "rust-analyzer" }, filetypes = {} },
-            ---@type UserOpts[] See default overridings in `lua/symbol-usage/langs.lua`
-            -- filetypes = {},
+            filetypes = {
+                lua = langs.lua,
+                javascript = langs.javascript,
+                typescript = langs.javascript,
+                typescriptreact = langs.javascript,
+                javascriptreact = langs.javascript,
+                vue = langs.javascript,
+            },
 
             ---@type 'start'|'end' At which position of `symbol.selectionRange` the request to the lsp server should start. Default is `end` (try changing it to `start` if the symbol counting is not correct).
             symbol_request_pos = "end", -- Recommended redifine only in `filetypes` override table

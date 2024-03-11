@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "glepnir/lspsaga.nvim",
     -- Do make sure that your LSP plugins, loaded before loading lspsaga.
@@ -9,7 +10,6 @@ return {
         { "[e" },
         { "]e" },
     },
-    commit = "3112b7aba57653199ad20198f477d94781bb2310",
     config = function()
         local keymap = vim.keymap.set
 
@@ -36,7 +36,7 @@ return {
         local code_action = {
             num_shortcut = true,
             show_server_name = true,
-            extend_gitsigns = false,
+            extend_gitsigns = true,
             keys = {
                 -- string | table type
                 quit = "q",

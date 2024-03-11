@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "lmburns/lf.nvim",
     dependencies = { "toggleterm.nvim" },

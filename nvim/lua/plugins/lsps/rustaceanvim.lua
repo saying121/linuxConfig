@@ -1,13 +1,7 @@
----@class RustAnalyzerInitializedStatus
----@field health lsp_server_health_status
----@field quiescent boolean inactive?
-
----@alias lsp_server_health_status 'ok' | 'warning' | 'error'
-
+---@type LazySpec
 return {
     "mrcjkb/rustaceanvim",
-    -- cond = false,
-    version = "^4",
+    version = "*",
     event = {
         "UIEnter *rs",
         -- "BufWrite *rs",
@@ -41,10 +35,11 @@ return {
         local codelldb_path = extension_path .. "adapter/codelldb"
         local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
+        ---@type RustaceanConfig
         vim.g.rustaceanvim = {
             tools = {
                 --- callback to execute once rust-analyzer is done initializing the workspace
-                ---@param health RustAnalyzerInitializedStatus
+                ---@type fun(health:RustAnalyzerInitializedStatus) | nil
                 on_initialized = function(health)
                     if health.health == "ok" then
                         vim.lsp.codelens.refresh()
@@ -64,6 +59,7 @@ return {
 
                 ---@type boolean
                 -- enable_nextest = vim.fn.executable("cargo-nextest") == 1,
+                enable_nextest = false,
 
                 ---@type boolean
                 reload_workspace_from_cargo_toml = true,
@@ -136,7 +132,7 @@ return {
                     keymap("n", "<M-f>", function()
                         vim.cmd.RustLsp({ "hover", "actions" })
                     end)
-                    keymap("x", "<M-f>", function()
+                    keymap("x", "K", function()
                         vim.cmd.RustLsp({ "hover", "range" })
                     end)
                     keymap("n", "mk", function()

@@ -57,24 +57,30 @@ $ ~/.linuxConfig/install.sh clashlink
 # 安装后运行mkinitcpio
 # nvidia/nvidia-open-dkms ,二选一
 pacman -Qs nvidia
-# local/cuda 11.8.0-1
+# local/cuda 12.3.2-1
 #     NVIDIA's GPU programming toolkit
-# local/cudnn 8.6.0.163-1
-#     NVIDIA CUDA Deep Neural Network library
-# local/egl-wayland 2:1.1.11-2
+# local/cuda-tools 12.3.2-1
+#     NVIDIA's GPU programming toolkit (extra tools: nvvp, nsight)
+# local/egl-wayland 2:1.1.13-1
 #     EGLStream-based Wayland external platform
-# local/lib32-nvidia-utils 525.85.05-1
-#     NVIDIA drivers utilities (32-bit)
-# local/libvdpau 1.5-1
+# local/lib32-libvdpau 1.5-2
 #     Nvidia VDPAU library
-# local/nccl 2.15.5-1
-#     Library for NVIDIA multi-GPU and multi-node collective communication primitives
-# local/nvidia-open-dkms 525.85.05-1
+# local/libvdpau 1.5-2
+#     Nvidia VDPAU library
+# local/libxnvctrl 545.29.06-1
+#     NVIDIA NV-CONTROL X extension
+# local/nvidia-open-dkms 545.29.06-19
 #     NVIDIA open kernel modules
-# local/nvidia-utils 525.85.05-1
+# local/nvidia-settings 545.29.06-1
+#     Tool for configuring the NVIDIA graphics driver
+# local/nvidia-utils 545.29.06-4
 #     NVIDIA drivers utilities
-# local/opencl-nvidia 525.85.05-1
+# local/nvtop 3.0.2-1
+#     GPUs process monitoring for AMD, Intel and NVIDIA
+# local/opencl-nvidia 545.29.06-4
 #     OpenCL implemention for NVIDIA
+# local/supergfxctl 5.1.2-1
+#     A utility for Linux graphics switching on Intel/AMD iGPU + nVidia dGPU laptops
 ```
 
 wayland 直接(也可安装nvidia)

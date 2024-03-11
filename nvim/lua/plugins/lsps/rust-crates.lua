@@ -1,6 +1,7 @@
+---@type LazySpec
 return {
     "saecki/crates.nvim",
-    version = "v0.3.0",
+    tag = "stable",
     event = {
         "UIEnter Cargo.toml",
         "BufNewFile Cargo.toml",
@@ -40,6 +41,7 @@ return {
             loading_indicator = true,
             date_format = "%Y-%m-%d",
             thousands_separator = "_",
+            max_parallel_requests = 80,
             notification_title = "Crates",
             disable_invalid_feature_diagnostic = false,
             popup = {
@@ -53,7 +55,7 @@ return {
                 min_width = 20,
                 padding = 1,
                 keys = {
-                    hide = { "q", "<esc>" },
+                    hide = { "q" },
                     open_url = { "<cr>", "K" },
                     select = { "<cr>" },
                     select_alt = { "s" },
@@ -61,7 +63,7 @@ return {
                     copy_value = { "y" },
                     goto_item = { "gd", "K", "<C-LeftMouse>" },
                     jump_forward = { "<c-i>" },
-                    jump_back = { "<c-o>", "<C-RightMouse>" },
+                    jump_back = { "<esc>", "<c-o>", "<C-RightMouse>" },
                 },
             },
             src = {

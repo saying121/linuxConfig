@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "tzachar/highlight-undo.nvim",
     keys = { "u", "<c-r>" },

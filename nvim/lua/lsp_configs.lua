@@ -1,4 +1,4 @@
--- local methods = vim.lsp.protocol.Methods
+local methods = vim.lsp.protocol.Methods
 local severity = vim.diagnostic.severity
 
 local signs = {
@@ -58,14 +58,14 @@ vim.diagnostic.config({
         numhl = diagnostic_hl,
         texthl = diagnostic_hl,
     },
-    underline = true,
+    underline = false,
     update_in_insert = false,
 })
 
 -- 边框
--- vim.lsp.handlers[methods.textDocument_hover] = vim.lsp.with(vim.lsp.handlers.hover, {
---     border = "single",
--- })
--- vim.lsp.handlers[methods.textDocument_signatureHelp] = vim.lsp.with(vim.lsp.handlers.signature_help, {
---     border = "single",
--- })
+vim.lsp.handlers[methods.textDocument_hover] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "single",
+})
+vim.lsp.handlers[methods.textDocument_signatureHelp] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "single",
+})

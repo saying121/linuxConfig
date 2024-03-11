@@ -112,7 +112,8 @@ alias clhsts="systemctl status clash-meta@$USER.service"
 
 alias rm="trash"
 
-alias tran='trans -j -d en:zh'
+alias tranen_zh='trans -j -d en:zh'
+alias tranzh_en='trans -j -d zh:en'
 
 # alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy && sudo pkgfile -u'
 alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy'

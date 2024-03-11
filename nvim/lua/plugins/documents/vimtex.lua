@@ -4,6 +4,7 @@ local ft = {
     plaintex = "plaintex",
 }
 
+---@type LazySpec
 return {
     "lervag/vimtex",
     ft = {

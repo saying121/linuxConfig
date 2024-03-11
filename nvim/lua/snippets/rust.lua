@@ -83,6 +83,23 @@ return {
     s(":turbofish", { t({ "::<" }), i(0), t({ ">" }) }),
     s(
         {
+            trig = "pub-trait",
+            dscr = "pub trait() { … }",
+        },
+        fmta(
+            [[
+            pub trait <> {
+                <>
+            }
+            ]],
+            {
+                i(1, "Name"),
+                i(2, ""),
+            }
+        )
+    ),
+    s(
+        {
             trig = "main",
             dscr = "fn main() { … }",
         },
@@ -208,8 +225,17 @@ extern "<>" {
             ]],
             {
                 i(1, "name"),
-                i(2, ""),
-                i(3, "RetType"),
+                c(2, {
+                    i(""),
+                    fmta("<>: <>", { i(1, "arg"), i(2, "Type") }),
+                    fmta("<>: <>, <>: <>", {
+                        i(1, "arg"),
+                        i(2, "Type"),
+                        i(3, "arg"),
+                        i(4, "Type"),
+                    }),
+                }),
+                i(3, "!"),
                 i(4, "unimplemented!()"),
             },
             { delimiters = "[]" }
@@ -471,21 +497,11 @@ extern "<>" {
     ),
     s(
         {
-            trig = "macro_rules",
-            dscr = "macro_rules! … { … }",
+            trig = "macro_use",
+            dscr = "#[macro_use(…)]",
         },
-        fmt(
-            [[
-            macro_rules! [] {
-                ([]) => ([])
-            }
-            ]],
-            {
-                i(1, "name"),
-                i(2, ""),
-                i(3, ""),
-            },
-            { delimiters = "[]" }
-        )
+        fmta("#[macro_use(<>)]", {
+            i(1, ""),
+        })
     ),
 }

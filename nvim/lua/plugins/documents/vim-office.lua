@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "konfekt/vim-office",
     cond = false,

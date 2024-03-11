@@ -1,5 +1,7 @@
-local api, lsp = vim.api, vim.lsp
+local api, lsp, methods = vim.api, vim.lsp, vim.lsp.protocol.Methods
+
 local M = {}
+
 -- Use an on_attach function to only map the following keys after the language server attaches to the current buffer
 ---@param client lsp.Client
 ---@param bufnr integer
@@ -23,18 +25,16 @@ M.on_attach = function(client, bufnr)
 
     keymap("n", "<c-k>", lsp.buf.signature_help)
 
-    -- print(vim.inspect(client))
-    local cap = client.server_capabilities
-    -- print(vim.inspect(cap))
+    -- local cap = client.server_capabilities or {}
 
-    if cap.inlayHintProvider ~= nil then
+    if client.supports_method(methods.textDocument_inlayHint, { bufnr = bufnr }) then
         local _ = pcall(lsp.inlay_hint.enable, bufnr, true)
         keymap("n", "<leader>ih", function()
             lsp.inlay_hint.enable(bufnr, not lsp.inlay_hint.is_enabled())
         end)
     end
 
-    if cap.documentFormattingProvider then
+    if client.supports_method(methods.textDocument_formatting, { bufnr = bufnr }) then
         keymap("n", "<space>f", function()
             lsp.buf.format({
                 async = true,
@@ -53,13 +53,13 @@ M.on_attach = function(client, bufnr)
             })
         end)
     end
-    if cap.documentRangeFormattingProvider then
+    if client.supports_method(methods.textDocument_rangeFormatting, { bufnr = bufnr }) then
         keymap("x", "<space>f", function()
             lsp.buf.format({ async = true })
         end)
     end
 
-    if cap.documentHighlightProvider then
+    if client.supports_method(methods.textDocument_documentHighlight, { bufnr = bufnr }) then
         local group_name = "LspDocumentHighlight"
         api.nvim_create_augroup(group_name, { clear = false })
         api.nvim_clear_autocmds({ buffer = bufnr, group = group_name })
@@ -75,7 +75,7 @@ M.on_attach = function(client, bufnr)
         })
     end
 
-    if cap.codeLensProvider ~= nil and cap.codeLensProvider.resolveProvider then
+    if client.supports_method(methods.codeLens_resolve, { bufnr = bufnr }) then
         local group_name = "LspCodeLensRefresh"
         api.nvim_create_augroup(group_name, { clear = false })
         api.nvim_clear_autocmds({ buffer = bufnr, group = group_name })
@@ -96,15 +96,15 @@ M.on_attach = function(client, bufnr)
     api.nvim_create_autocmd("CursorHold", {
         buffer = bufnr,
         callback = function()
-            local d_opts = {
+            local f_opts = {
                 focusable = false,
                 close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
                 border = "rounded",
                 source = "always",
-                prefix = " ",
+                prefix = "",
                 scope = "cursor",
             }
-            vim.diagnostic.open_float(d_opts)
+            vim.diagnostic.open_float(f_opts)
             -- api.nvim_win_close(win_id, force)
         end,
     })

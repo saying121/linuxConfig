@@ -1,8 +1,10 @@
+local api, keymap = vim.api, vim.keymap.set
 require("opts")
-local keymap = vim.keymap.set
 
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+
+require("public.ft").make_ft()
 
 --local _ = pcall(require, "lazy-config")
 require("lazy-config")
@@ -14,7 +16,7 @@ _G.dapui_for_K = false
 local function UfoHover()
     local winid = require("ufo").peekFoldedLinesUnderCursor()
     if winid then
-        local bufnr = vim.api.nvim_win_get_buf(winid)
+        local bufnr = api.nvim_win_get_buf(winid)
         local keys = { "a", "i", "o", "A", "I", "O", "gd", "gr", "dd" }
         for _, k in ipairs(keys) do
             -- Add a prefix key to fire `trace` action,
@@ -24,8 +26,8 @@ local function UfoHover()
     return winid
 end
 
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
-    group = vim.api.nvim_create_augroup("FoldHover", { clear = false }),
+api.nvim_create_autocmd({ "CursorHold" }, {
+    group = api.nvim_create_augroup("FoldHover", { clear = false }),
     pattern = { "*" },
     callback = function()
         if vim.tbl_contains(vim.treesitter.get_captures_at_cursor(), "include") then
@@ -51,55 +53,7 @@ end
 
 keymap("n", "K", _G.show_documentation, { silent = true })
 
-vim.filetype.add({
-    extension = {
-        foo = "fooscript",
-        mir = "rust",
-        conf = "conf",
-        bar = function(path, bufnr)
-            -- if some_condition() then
-            --     return "barscript",
-            --         function(bufnr)
-            --             -- Set a buffer variable
-            --             vim.b[bufnr].barscript_version = 2
-            --         end
-            -- end
-            return "bar"
-        end,
-    },
-    filename = {
-        ["Cargo.toml"] = "rtoml",
-        [".log"] = "log",
-        [".yuck"] = "yuck",
-        [".typ"] = "typst",
-        ["LICENSE"] = "license",
-        ["license"] = "license",
-        ["config"] = "config",
-        ["~/.linuxConfig/wayland/waybar/config"] = "json",
-        ["~/.config/waybar/config"] = "json",
-    },
-    pattern = {
-        ["(?i)LICENSE"] = "license",
-        [".*/etc/foo/.*"] = "fooscript",
-        ["~/.config/hypr/hyprland.conf"] = "hyprlang",
-        [".*/hypr/hyprland.conf"] = "hyprlang",
-        [".*/hypr/lib/.*.conf"] = "hyprlang",
-        ["/proc/bus/input/.*"] = "txt",
-        -- Using an optional priority
-        [".*/etc/foo/.*%.conf"] = { "dosini", { priority = 10 } },
-        -- A pattern containing an environment variable
-        ["${XDG_CONFIG_HOME}/foo/git"] = "git",
-        ["README.(a+)$"] = function(path, bufnr, ext)
-            if ext == "md" then
-                return "markdown"
-            elseif ext == "rst" then
-                return "rst"
-            end
-        end,
-    },
-})
-
-vim.api.nvim_set_hl(0, "ActiveWindow", { bg = "#17252c" })
-vim.api.nvim_set_hl(0, "InactiveWindow", { bg = "#0D1B22" })
+api.nvim_set_hl(0, "ActiveWindow", { bg = "#17252c" })
+api.nvim_set_hl(0, "InactiveWindow", { bg = "#0D1B22" })
 
 -- vim.o.winhighlight = "Normal:Normal,NormalNC:InactiveWindow"

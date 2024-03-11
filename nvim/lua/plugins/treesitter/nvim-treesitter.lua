@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
@@ -5,9 +6,14 @@ return {
     build = ":TSUpdate",
     dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "treesitter" .. "/dependencies"),
     config = function()
+        local my_ft = require("public.ft")
+
+        local ft = my_ft.filename["Cargo.toml"]
+        if type(ft) == "string" then
+            vim.treesitter.language.register("toml", ft)
+        end
         vim.treesitter.language.register("bash", "PKGBUILD")
         vim.treesitter.language.register("bash", "zsh")
-        vim.treesitter.language.register("toml", "rtoml")
 
         -- 如果没有可用高亮就用默认的
         if require("nvim-treesitter.parsers").available_parsers()[vim.bo.filetype] == nil then

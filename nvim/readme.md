@@ -55,11 +55,11 @@ l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
 
 ### 关于 Cargo.toml
 
-- 把 `Cargo.toml` 改成 `rtoml` 文件类型
-- treesitter里面把 `toml` 高亮应用于 `rtoml`
-- 设置 `taplo` 在 `rtoml` 文件类型启动
+- 把 `Cargo.toml` 改成 `toml_rs` 文件类型
+- treesitter里面把 `toml` 高亮应用于 `toml_rs`
+- 设置 `taplo` 在 `toml_rs` 文件类型启动
 
-就能只给`Cargo.toml`添加一些 snippet 。
+就能只给 `Cargo.toml` 添加一些 snippet 。
 
 ## 推荐几个教程
 

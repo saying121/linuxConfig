@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "utilyre/sentiment.nvim",
     version = "*",

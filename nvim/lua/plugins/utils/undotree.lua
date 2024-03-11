@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "mbbill/undotree",
     cmd = { "UndotreeToggle", "UndotreeFocus" },

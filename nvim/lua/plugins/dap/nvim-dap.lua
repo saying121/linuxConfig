@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "mfussenegger/nvim-dap",
     cond = true,
@@ -40,13 +41,15 @@ return {
             dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
         end, opts)
 
-        keymap({ "n", "i", "t" }, "<F5>", dap.continue, opts)
-        keymap({ "n", "i", "t" }, "<F6>", dap.step_over, opts)
-        keymap({ "n", "i", "t" }, "<F7>", dap.step_into, opts)
-        keymap({ "n", "i", "t" }, "<F8>", dap.step_out, opts)
-        keymap({ "n", "i", "t" }, "<F9>", dap.step_back, opts)
-        keymap({ "n", "i", "t" }, "<F10>", dap.run_last, opts)
-        keymap({ "n", "i", "t" }, "<F11>", dap.terminate, opts)
+        keymap({ "n", "i", "t" }, "<F1>", dap.continue, opts)
+        keymap({ "n", "i", "t" }, "<F2>", dap.step_over, opts)
+        keymap({ "n", "i", "t" }, "<F3>", dap.step_into, opts)
+        keymap({ "n", "i", "t" }, "<F4>", dap.step_out, opts)
+        keymap({ "n", "i", "t" }, "<F5>", dap.step_back, opts)
+        keymap({ "n", "i", "t" }, "<F6>", dap.run_last, opts)
+        keymap({ "n", "i", "t" }, "<F7>", dap.terminate, opts)
+        keymap({ "n", "i", "t" }, "<F8>", dap.pause, opts)
+        keymap({ "n", "i", "t" }, "<F9>", dap.disconnect, opts)
         keymap({ "n", "i", "t" }, "<leader>rtc", dap.run_to_cursor, opts)
         keymap("n", "<space>dr", dap.repl.open, opts)
 
@@ -87,8 +90,6 @@ return {
             _G.dapui_for_K = false
         end
 
-        -- dap.defaults.fallback.terminal_win_cmd = 'set splitright | 10vsplit new' -- this will be override by dapui
-        -- dap.defaults.python.terminal_win_cmd = 'set splitright | 2vsplit new' -- 终端用dapui控制样式
         dap.defaults.fallback.focus_terminal = false
         dap.defaults.fallback.force_external_terminal = false
     end,

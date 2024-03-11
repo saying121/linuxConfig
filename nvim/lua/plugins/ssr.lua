@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "cshuaimin/ssr.nvim",
     keys = { { "<leader>sr", mode = { "n", "x" } } },

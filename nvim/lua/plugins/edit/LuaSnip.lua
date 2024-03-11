@@ -3,6 +3,7 @@ local choice_popup = cf.choice_popup
 local choice_popup_close = cf.choice_popup_close
 local update_choice_popup = cf.update_choice_popup
 
+---@type LazySpec
 return {
     "L3MON4D3/LuaSnip",
     version = "v2.*",

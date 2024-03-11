@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "voldikss/vim-translator",
     cmd = {

@@ -61,6 +61,13 @@ bindkey '^[[B' history-substring-search-down
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
+resume_job() {
+    fg
+}
+
+zle -N resume_job
+bindkey '^Z' resume_job
+
 ############################################################
 
 # export PYTHONPATH=~/.local/lib/python3.11/site-packages
@@ -72,6 +79,8 @@ eval "$(starship init zsh)"
 
 
 export CLIPPY_CONF_DIR=~/.config/rustfmt/
+export RUSTFLAGS="-Z threads=16"
 # export PATH=~/.local/share/bob/nvim-bin:$PATH
 
 # zprof
+

@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 local specs = {
     { import = "plugins" },
-    { import = "plugins.cmp" },
+    { import = "plugins.nvim-cmp" },
     { import = "plugins.code_test" },
     { import = "plugins.dap" },
     { import = "plugins.database" },

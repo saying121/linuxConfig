@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "nvimdev/dyninput.nvim",
     event = "InsertEnter",

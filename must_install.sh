@@ -103,7 +103,7 @@ $pacMan firewalld
 sudo systemctl enable firewalld
 
 # 翻译
-$pacMan translate-shell ldr-translate-qt goldendict
+$pacMan translate-shell pot-translation
 
 $pacMan pacman-contrib
 

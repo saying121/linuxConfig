@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "stevearc/dressing.nvim",
     lazy = true,
@@ -70,7 +71,7 @@ return {
                 -- Set to false to disable the vim.ui.select implementation
                 enabled = true,
                 -- Priority list of preferred vim.select implementations
-                backend = { "telescope", "fzf_lua", "fzf", "builtin", "nui" },
+                backend = { "telescope", "builtin", "fzf_lua", "fzf", "nui" },
                 -- Trim trailing `:` from prompt
                 trim_prompt = true,
                 -- Options for telescope selector

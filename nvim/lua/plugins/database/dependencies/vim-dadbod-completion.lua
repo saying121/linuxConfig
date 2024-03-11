@@ -1,6 +1,7 @@
+---@type LazySpec
 return {
     "kristijanhusak/vim-dadbod-completion",
-    -- dependencies = { "tpope/vim-dadbod" },
+    dependencies = { "hrsh7th/nvim-cmp" },
     config = function()
         vim.g.vim_dadbod_completion_mark = "[DB]"
 
@@ -8,8 +9,8 @@ return {
         cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
             -- Set configuration for specific filetype.
             sources = cmp.config.sources({
-                { name = "nvim_lsp" },
                 { name = "vim-dadbod-completion" },
+                { name = "nvim_lsp" },
                 { name = "luasnip" },
                 { name = "path" },
             }, {

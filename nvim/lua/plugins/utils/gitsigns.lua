@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "lewis6991/gitsigns.nvim",
     cond = function()
@@ -53,9 +54,7 @@ return {
                     if vim.wo.diff then
                         return "]c"
                     end
-                    vim.schedule(function()
-                        gs.next_hunk()
-                    end)
+                    vim.schedule(gs.next_hunk)
                     return "<Ignore>"
                 end, { expr = true })
 
@@ -63,18 +62,20 @@ return {
                     if vim.wo.diff then
                         return "[c"
                     end
-                    vim.schedule(function()
-                        gs.prev_hunk()
-                    end)
+                    vim.schedule(gs.prev_hunk)
                     return "<Ignore>"
                 end, { expr = true })
 
-                map({ "n", "x" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-                map({ "n", "x" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+                -- map({ "n", "x" }, "<leader>hs", function()
+                --     vim.cmd.Gitsigns("stage_hunk")
+                -- end)
+                -- map({ "n", "x" }, "<leader>hr", function()
+                --     vim.Gitsigns("reset_hunk")
+                -- end)
+                -- map("n", "<leader>hu", gs.undo_stage_hunk)
+                -- map("n", "<leader>hp", gs.preview_hunk)
                 map("n", "<leader>hS", gs.stage_buffer)
-                map("n", "<leader>hu", gs.undo_stage_hunk)
                 map("n", "<leader>hR", gs.reset_buffer)
-                map("n", "<leader>hp", gs.preview_hunk)
                 map("n", "<leader>hb", function()
                     gs.blame_line({ full = true })
                 end)
@@ -82,9 +83,7 @@ return {
                 map("n", "<leader>hD", function()
                     gs.diffthis("~")
                 end)
-                map("n", "<leader>bl", function()
-                    require("gitsigns").blame_line()
-                end)
+                map("n", "<leader>bl", require("gitsigns").blame_line)
                 map("n", "<leader>td", gs.toggle_deleted)
 
                 -- Text object

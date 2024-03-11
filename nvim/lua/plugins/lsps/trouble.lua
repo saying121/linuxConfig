@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "folke/trouble.nvim",
     keys = { { "<space>ll", mode = { "n" } } },

@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",

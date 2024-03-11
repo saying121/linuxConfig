@@ -153,6 +153,16 @@ local postfix = {
 }
 
 local prefix = {
+    ["let-else"] = {
+        prefix = { "let-else" },
+        body = {
+            [[let ${1:var} = ${2:var} else {
+                ${3:return;}
+            };$0]],
+        },
+        description = "Insert a async call",
+        scope = "expr",
+    },
     async = {
         prefix = { "async" },
         body = {
@@ -313,21 +323,6 @@ local friendly = {
         description = "let … = …;",
         prefix = "letv",
     },
-    macro_rules = {
-        body = { "macro_rules! ${1:name} {", "    (${2}) => (${3})", "}" },
-        description = "macro_rules! … { … }",
-        prefix = "macro_rules",
-    },
-    macro_use = {
-        body = { "#[macro_use(${1})]" },
-        description = "#[macro_use(…)]",
-        prefix = "macro_use",
-    },
-    -- main = {
-    --     body = { "fn main() {", "    ${1:unimplemented!();}", "}" },
-    --     description = "fn main() { … }",
-    --     prefix = "main",
-    -- },
     match_opt = {
         body = {
             "match ${1:expr} {",
@@ -368,16 +363,6 @@ local friendly = {
         description = "println!(…);",
         prefix = "println",
     },
-    -- repr = {
-    --     body = { "#[repr(${1})]" },
-    --     description = "#[repr(…)]",
-    --     prefix = "repr",
-    -- },
-    -- static = {
-    --     body = { "static ${1:STATIC}: ${2:Type} = ${4:init};" },
-    --     description = "static …: … = …;",
-    --     prefix = "static",
-    -- },
     thread_local = {
         body = { "thread_local!(static ${1:STATIC}: ${2:Type} = ${4:init});" },
         description = "thread_local!(static …: … = …);",

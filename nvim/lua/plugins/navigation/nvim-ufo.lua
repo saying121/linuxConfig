@@ -1,9 +1,9 @@
+---@type LazySpec
 return {
     "kevinhwang91/nvim-ufo",
     event = "VeryLazy",
     dependencies = {
         "kevinhwang91/promise-async",
-        "neovim/nvim-lspconfig",
         "luukvbaal/statuscol.nvim",
     },
     config = function()
@@ -81,13 +81,6 @@ return {
             },
         }
         require("ufo").setup(cf)
-        vim.api.nvim_create_autocmd({ "BufEnter","InsertLeave" }, {
-            group = vim.api.nvim_create_augroup("Fold", { clear = false }),
-            -- pattern = {},
-            callback = function()
-                require('ufo').openFoldsExceptKinds()
-            end,
-        })
 
         -- buffer scope handler
         -- will override global handler if it is existed

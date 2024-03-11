@@ -1,17 +1,49 @@
 local snippets = require("public.ra.snippets")
 
+local function overried_fmt()
+    local handle = io.popen("rustup show active-toolchain")
+    if not handle then
+        return nil
+    end
+    local res = handle:read("*a")
+    if string.find(res, "nightly") then
+        return nil
+    end
+    handle:close()
+    local result = string.gsub(res, "%s*%b()%s*", "")
+    -- print(res)
+    -- print(result)
+    return {
+        "rustup",
+        "+nightly",
+        "run",
+        result,
+        "rustfmt",
+        "--edition",
+        "2021",
+    }
+end
+
 return {
     ["rust-analyzer"] = {
+        assist = {
+            emitMustUse = false, -- Whether to insert #[must_use] when generating as_ methods for enum variants.
+            expressionFillDefault = "todo", -- Placeholder expression to use for missing expressions in assists.
+        },
+        cachePriming = {
+            enable = true, -- Warm up caches on project load.
+            num = 0, -- How many worker threads to handle priming caches. The default 0 means to pick automatically.
+        },
         cargo = {
-            storeload = true,
+            autoreload = true,
             buildScripts = {
                 enable = true,
                 invocationLocation = "workspace", -- 指定运行生成脚本的工作目录。-“workspace”：在工作区的根目录中运行工作区的构建脚本。
                 -- 这与设置为 once 的 rust-analyzer.cargo.buildScripts.invocationStrategy 不兼容。
                 -- “root”：在项目的根目录中运行构建脚本。此配置仅在设置了 rust-analyzer.cargo.buildScripts.overrideCommand 时有效。
-                overrideCommand = nil,
                 invocationStrategy = "per_workspace",
-                rebuildOnSave = false,
+                overrideCommand = nil,
+                rebuildOnSave = true,
                 useRustcWrapper = true,
             },
             cfgs = {}, -- List of cfg options to enable with the given values.
@@ -19,9 +51,10 @@ return {
                 -- "--offline"
             }, -- 传递给每个 cargo 调用的额外参数。
             extraEnv = {}, -- 在工作区内运行 cargo、rustc 或其他命令时将设置的额外环境变量。用于设置 RUSTFLAGS。
-            features = "all", -- 要激活的功能列表。将其设置为 "all" 以将 --all-features 传递给cargo。
+            -- features = "all", -- 要激活的功能列表。将其设置为 "all" 以将 --all-features 传递给cargo。
             noDefaultFeatures = false, -- 是否将 --no-default-features 传递给cargo
             sysroot = "discover", -- sysroot的相对路径，或“discover”以尝试通过“rustc--print sysroot”自动找到它。
+            sysrootQueryMetadata = false, -- Whether to run cargo metadata on the sysroot library allowing rust-analyzer to analyze third-party dependencies of the standard libraries.
             sysrootSrc = nil, -- 系统根库源的相对路径。如果未设置，则默认为 {cargo.sysroot}/lib/rustlib/src/rust/library 。
             target = nil, -- 编译目标覆盖(target triple).
             unsetTest = {}, -- 取消设置指定板条箱的隐含 #[cfg(test)] 。
@@ -48,15 +81,11 @@ return {
             targets = nil, -- 检查特定目标。如果为空，则默认为 rust-analyzer.cargo.target 。
             -- 可以是单个目标，例如 "x86_64-unknown-linux-gnu" 或目标列表，例如 ["aarch64-apple-darwin", "x86_64-apple-darwin"] 。
         },
-        cachePriming = {
-            enable = true, -- Warm up caches on project load.
-            num = 0, -- How many worker threads to handle priming caches. The default 0 means to pick automatically.
-        },
         completion = {
             autoimport = { enable = true },
             autoself = { enable = true },
-            callable = { snippets = "fill_arguments" }, -- 完成函数时是否添加括号和参数片段。
-            limit = nil, -- 要返回的最大完成次数。如果 None ，则极限为无穷大。
+            callable = { snippets = "fill_arguments" }, -- completion 函数时是否添加括号和参数片段。
+            limit = nil, -- 要返回的最大 completion 次数。如果 None ，则极限为无穷大。
             postfix = { enable = true }, -- Whether to show postfix snippets like dbg, if, not, etc.
             privateEditable = { enable = true },
             snippets = { custom = snippets },
@@ -77,10 +106,10 @@ return {
             warningsAsInfo = {
                 "unused_variables",
             },
-            files = {
-                excludeDirs = {}, -- rust-analyzer 将忽略这些目录。它们是相对于工作区根目录的，不支持glob。您可能还需要将文件夹添加到Code的 files.watcherExclude 中。
-                watcher = "client", -- 控制文件监视实现。
-            },
+        },
+        files = {
+            excludeDirs = {}, -- rust-analyzer 将忽略这些目录。它们是相对于工作区根目录的，不支持glob。您可能还需要将文件夹添加到Code的 files.watcherExclude 中。
+            watcher = "client", -- 控制文件监视实现。
         },
         highlightRelated = {
             breakPoints = { enable = true }, -- 当光标位于 break 、 loop 、 while 或 for 关键字上时，启用相关引用的高亮显示。
@@ -90,41 +119,25 @@ return {
             yieldPoints = { enable = true }, -- 当光标位于任何 async 或 await 关键字上时，启用高亮显示循环或块上下文的所有断点。
         },
         hover = {
+            actions = {
+                enable = true, -- 是否在Rust文件中显示悬停操作。
+                run = { enable = true },
+                debug = { enable = true },
+                gotoTypeDef = { enable = true }, -- Whether to show Go to Type Definition action. Only applies when rust-analyzer.hover.actions.enable is set.
+                implementations = { enable = false }, -- Whether to show Implementations action. Only applies when rust-analyzer.hover.actions.enable is set.
+                references = { enable = false }, -- Whether to show References action. Only applies when rust-analyzer.hover.actions.enable is set.
+            },
+            documentation = {
+                enable = true, -- Whether to show documentation on hover.
+                keywords = { enable = false }, -- Whether to show keyword hover popups.
+            },
+            links = { enable = true }, -- Use markdown syntax for links on hover.
             memoryLayout = {
                 enable = true,
                 alignment = "hexadecimal",
                 niches = false,
                 offset = "hexadecimal",
             },
-            actions = { enable = true }, -- 是否在Rust文件中显示悬停操作。
-        },
-        lens = {
-            enable = true,
-            debug = { enable = true },
-            forceCustomCommands = true,
-            implementations = { enable = true },
-            location = "above_name",
-            references = {
-                adt = { enable = true },
-                enumVariant = { enable = true },
-                method = { enable = true },
-                trait = { enable = true },
-            },
-        },
-        -- linkedProjects = {}, -- 禁用项目自动发现以支持显式指定的项目集。
-        -- 元素必须是指向 Cargo.toml 、 rust-project.json 或#2格式的JSON对象的路径。
-        lru = {
-            capacity = 128, -- rust-analyzer 保存在内存中的语法树数。默认值为 128。
-            query = { capacities = {} }, -- 设置指定查询的 lru 容量。
-        },
-        notifications = {
-            cargoTomlNotFound = true, -- 是否显示 can’t find Cargo.toml 错误消息。
-            unindexedProject = true,
-        },
-        numThreads = nil, -- 主循环中有多少工作线程。默认的 null 表示自动拾取。
-        runnables = {
-            command = nil,
-            extraArgs = {}, -- 要传递给cargo的可运行程序（如测试或二进制文件）的其他参数。例如，它可能是 --release 。
         },
         imports = {
             granularity = {
@@ -158,10 +171,60 @@ return {
             renderColons = true,
             typeHints = { enable = true, hideClosureInitialization = false, hideNamedConstructor = false },
         },
-        rustfmt = {
-            extraArgs = {},
-            rangeFormatting = { enable = true },
+        interpret = { tests = false },
+        joinLines = {
+            joinAssignments = true, -- Join lines merges consecutive declaration and initialization of an assignment.
+            joinElseIf = true, -- Join lines inserts else between consecutive ifs.
+            removeTrailingComma = true, -- Join lines removes trailing commas.
+            unwrapTrivialBlock = true, -- Join lines unwraps trivial blocks.
         },
+        lens = {
+            enable = true,
+            debug = { enable = true },
+            forceCustomCommands = true,
+            implementations = { enable = true },
+            location = "end_of_line", -- "above_name",
+            references = {
+                adt = { enable = true },
+                enumVariant = { enable = true },
+                method = { enable = true },
+                trait = { enable = true },
+            },
+        },
+        linkedProjects = {}, -- 禁用项目自动发现以支持显式指定的项目集。
+        -- 元素必须是指向 Cargo.toml 、 rust-project.json 或rust-project.json格式的JSON对象的路径。
+        lru = {
+            capacity = 128, -- rust-analyzer 保存在内存中的语法树数。默认值为 128。
+            query = { capacities = {} }, -- 设置指定查询的 lru 容量。
+        },
+        notifications = {
+            cargoTomlNotFound = true, -- 是否显示 can’t find Cargo.toml 错误消息。
+            unindexedProject = true,
+        },
+        numThreads = nil, -- 主循环中有多少工作线程。默认的 null 表示自动拾取。
+        procMacro = {
+            enable = true,
+            attributes = { enable = true },
+            ignored = {
+                ["async-trait"] = { "async_trait" },
+                ["tonic"] = { "async_trait" },
+                ["napi-derive"] = { "napi" },
+                ["async-recursion"] = { "async_recursion" },
+            },
+            server = nil,
+        },
+        references = {
+            excludeImports = false, -- Exclude imports from find-all-references.
+            excludeTests = false, -- Exclude tests from find-all-references.
+        },
+        rename = { allowExternalItems = false }, -- Allow renaming of items not belonging to the loaded workspaces.
+        runnables = {
+            command = nil,
+            extraArgs = {}, -- 要传递给cargo的可运行程序（如测试或二进制文件）的其他参数。例如，它可能是 --release 。
+        },
+        rust = { analyzerTargetDir = nil }, -- Optional path to a rust-analyzer specific target directory. This prevents rust-analyzer’s cargo check from locking the Cargo.lock at the expense of duplicating build artifacts.
+        rustc = { source = nil }, -- Path to the Cargo.toml of the rust compiler workspace, for usage in rustc_private projects, or "discover" to try to automatically find it if the rustc-dev component is installed.
+        rustfmt = overried_fmt(),
         semanticHighlighting = {
             doc = { comment = { inject = { enable = true } } },
             nonStandardTokens = true,
@@ -179,7 +242,7 @@ return {
             strings = { enable = true },
         },
         signatureInfo = {
-            detail = "full",
+            detail = "full", -- Show full signature of the callable. Only shows parameters if disabled.
             documentation = { enable = false },
         },
         typing = {
@@ -188,23 +251,13 @@ return {
         workspace = {
             symbol = {
                 search = {
+                    kind = "only_types", -- Workspace symbol search kind.
                     limit = 128, -- 限制从工作空间符号搜索返回的项目数（默认为128）。
                     -- 一些客户端，如vs code，在结果筛选时发布新的搜索，
                     -- 并且不要求在初始搜索中返回所有结果。其他客户要求提前获得所有结果，可能需要更高的限额。
                     scope = "workspace",
                 },
             },
-        },
-        procMacro = {
-            enable = true,
-            attributes = { enable = true },
-            ignored = {
-                ["async-trait"] = { "async_trait" },
-                ["tonic"] = { "async_trait" },
-                ["napi-derive"] = { "napi" },
-                ["async-recursion"] = { "async_recursion" },
-            },
-            server = nil,
         },
     },
 }

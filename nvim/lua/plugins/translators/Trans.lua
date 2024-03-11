@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "JuanZoran/Trans.nvim",
     keys = {

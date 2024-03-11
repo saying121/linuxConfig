@@ -1,11 +1,23 @@
 local lib = vim.api.nvim_get_runtime_file("", true)
 
--- local runtime_path = vim.split(package.path, ";")
--- table.insert(runtime_path, "lua/?.lua")
--- table.insert(runtime_path, "lua/?/init.lua")
+local plugins_dir = vim.fn.stdpath("data") .. "/lazy"
 
-for index, value in ipairs(lib) do
-    lib[index] = value .. "/lua"
+-- 加载所有插件太慢了
+-- local load_plugins = vim.fn.readdir(plugins_dir)
+
+local load_plugins = {
+    "rustaceanvim",
+    "plenary.nvim",
+    "nvim-lspconfig",
+    -- "nvim-cmp",
+    -- "nvim-treesitter",
+    "none-ls.nvim",
+    "LuaSnip",
+    "symbol-usage.nvim",
+}
+
+for _, value in ipairs(load_plugins) do
+    table.insert(lib, plugins_dir .. "/" .. value)
 end
 
 return {

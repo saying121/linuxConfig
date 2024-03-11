@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "kylechui/nvim-surround",
     keys = {

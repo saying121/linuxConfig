@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "ojroques/nvim-osc52",
     cond = vim.env.SSH_CLIENT ~= nil,
