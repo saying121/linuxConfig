@@ -95,7 +95,7 @@ M.on_attach = function(client, bufnr)
     end)
     api.nvim_create_autocmd("CursorHold", {
         buffer = bufnr,
-        callback = function()
+        callback = function(ev)
             local f_opts = {
                 focusable = false,
                 close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
@@ -104,6 +104,9 @@ M.on_attach = function(client, bufnr)
                 prefix = "",
                 scope = "cursor",
             }
+            if vim.bo.filetype == "markdown" then
+                return
+            end
             vim.diagnostic.open_float(f_opts)
             -- api.nvim_win_close(win_id, force)
         end,

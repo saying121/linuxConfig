@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
     "rcarriga/nvim-dap-ui",
+    dependencies = { "nvim-neotest/nvim-nio" },
     config = function()
         local dapui, keymap = require("dapui"), vim.keymap.set
         local opts = { noremap = true, silent = true }
@@ -8,7 +9,7 @@ return {
 
         dapui.setup({
             controls = {
-                element = "repl",
+                element = "console", -- repl
                 enabled = true,
                 icons = {
                     disconnect = "",
@@ -61,17 +62,17 @@ return {
                 },
                 {
                     elements = {
-                        {
-                            id = "repl",
-                            size = 0.5,
-                        },
+                        -- {
+                        --     id = "repl",
+                        --     size = 0.5,
+                        -- },
                         {
                             id = "console",
-                            size = 0.5,
+                            size = 1,
                         },
                     },
                     position = "bottom",
-                    size = 10,
+                    size = 13,
                 },
             },
             mappings = {

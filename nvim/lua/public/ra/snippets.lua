@@ -220,14 +220,14 @@ local prefix = {
         description = "let mut … = …;",
         scope = "expr",
     },
-    ["return"] = {
-        prefix = { "rt", "return" },
-        body = {
-            "return $1;",
-        },
-        description = "return …;",
-        scope = "expr",
-    },
+    -- ["return"] = {
+    --     prefix = { "rt", "return" },
+    --     body = {
+    --         "return $1;",
+    --     },
+    --     description = "return …;",
+    --     scope = "expr",
+    -- },
     ["tracing"] = {
         prefix = { "tracing_subscriber", "log_sub" },
         body = {

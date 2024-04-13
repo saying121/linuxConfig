@@ -14,8 +14,6 @@ return {
         -- end
         local null_ls = require("null-ls")
 
-        local methods = require("null-ls.methods")
-
         local sources_table = {
             null_ls.builtins.diagnostics.zsh,
             null_ls.builtins.code_actions.refactoring,

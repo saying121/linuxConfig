@@ -38,6 +38,48 @@ yzcd() {
     rm -f -- "$tmp"
 }
 
+function iplot {
+    left=-15
+    right=15
+
+    while getopts "hl:r:" opt; do
+        case $opt in
+        l)
+            left=$OPTARG
+            ;;
+        r)
+            right=$OPTARG
+            ;;
+        h)
+            echo "-l left bound
+-r right bound"
+
+            return 0
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+
+            return 0
+            ;;
+        esac
+    done
+
+    shift $((OPTIND - 1))
+
+    cat <<EOF | gnuplot
+    # set xlabel "X Axis Label"
+    set terminal pngcairo enhanced font 'Noto Sans Mono CJK SC,10'
+    set autoscale
+    set size ratio 1
+    set samples 1000
+    set output '|kitten icat --stdin yes'
+    set object 1 rectangle from screen 0,0 to screen 1,1 fillcolor rgb"#fdf6e3" behind
+    set xrange [ $left : $right]
+    plot $@
+    set output '/dev/null'
+EOF
+}
+
 cat() {
     mime=$(file -Lbs --mime-type "$1")
     category=${mime%%/*}
@@ -79,7 +121,7 @@ fi
 
 if [[ $(command -v eza) ]]; then
     alias ls='eza -F --icons=always'
-    alias ld='eza -FD --icons=always'
+    alias lsd='eza -FD --icons=always'
     alias ll='eza -F -lHhig --time-style long-iso --icons=always --git'
     alias la='eza -F --all'
     alias lal='ll -a'
@@ -115,9 +157,8 @@ alias rm="trash"
 alias tranen_zh='trans -j -d en:zh'
 alias tranzh_en='trans -j -d zh:en'
 
-# alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy && sudo pkgfile -u'
-alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy'
-
+alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy && sudo pkgfile -u'
+# alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy'
 
 cpv() {
     rsync -pogbr -hhh --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --progress "$@"

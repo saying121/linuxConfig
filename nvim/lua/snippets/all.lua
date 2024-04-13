@@ -44,17 +44,28 @@ local ext_opts = {
     snippet_passive = {},
 }
 
-local calculate_comment_string = require("Comment.ft").calculate
-local utils = require("Comment.utils")
+---Validates and unwraps the given commentstring
+---@param cstr string See 'commentstring'
+---@return string string Left side of the commentstring
+---@return string string Right side of the commentstring
+function unwrap_cstr(cstr)
+    local left, right = string.match(cstr, "(.*)%%s(.*)")
+
+    assert(
+        (left or right),
+        { msg = string.format("Invalid commentstring for %s! Read `:h commentstring` for help.", vim.bo.filetype) }
+    )
+
+    return vim.trim(left), vim.trim(right)
+end
 
 --- Get the comment string {beg,end} table
 ---@param ctype integer 1 for `line`-comment and 2 for `block`-comment
 ---@return table comment_strings {begcstring, endcstring}
 local get_cstring = function(ctype)
-    -- use the `Comments.nvim` API to fetch the comment string for the region (eq. '--%s' or '--[[%s]]' for `lua`)
-    local cstring = calculate_comment_string({ ctype = ctype, range = utils.get_region() }) or vim.bo.commentstring
+    local cstring = vim.bo.commentstring
     -- as we want only the strings themselves and not strings ready for using `format` we want to split the left and right side
-    local left, right = utils.unwrap_cstr(cstring)
+    local left, right = unwrap_cstr(cstring)
     -- create a `{left, right}` table for it
     return { left, right }
 end

@@ -36,7 +36,7 @@ return {
         local code_action = {
             num_shortcut = true,
             show_server_name = true,
-            extend_gitsigns = true,
+            extend_gitsigns = false,
             keys = {
                 -- string | table type
                 quit = "q",
@@ -117,7 +117,7 @@ return {
         end)
 
         local finder = {
-            max_height = 0.45,
+            max_height = 0.6,
             left_width = 0.3,
             default = "def+ref",
             layout = "float",

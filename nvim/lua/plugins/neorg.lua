@@ -1,10 +1,13 @@
 ---@type LazySpec
 return {
     "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
     ft = "norg",
     version = "*",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+        "vhyrro/luarocks.nvim",
+        priority = 1000,
+        config = true,
+    },
     config = function()
         vim.wo.conceallevel = 2
         require("neorg").setup({

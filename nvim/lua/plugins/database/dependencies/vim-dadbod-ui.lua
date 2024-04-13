@@ -19,8 +19,8 @@ return {
         -- :h Db_ui_buffer_name_generator
         vim.g.Db_ui_buffer_name_generator = function(opt)
             local time = vim.fn.strftime("%Y-%m-%d")
-            if opt.label == nil then
-                return time
+            if string.len(opt.table) == 0 then
+                return opt.label .. "-" .. time .. "." .. opt.filetype
             end
             return opt.table .. "-" .. opt.label .. "-" .. time .. "." .. opt.filetype
         end

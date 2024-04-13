@@ -29,7 +29,7 @@ end, { noremap = true, silent = true, buffer = true })
 vim.g.termdebugger = "rust-lldb"
 
 local function ra_settings(dir)
-    local settings = require("public.ra.settings")
+    local settings = require("public.ra")
     local settings_json = vim.json.encode(settings)
 
     local root

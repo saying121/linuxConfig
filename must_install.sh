@@ -195,7 +195,7 @@ $pacMan adobe-source-han-serif-cn-fonts \
 fc-cache -fv
 
 # rofi
-$pacMan rofi
+$pacMan rofi-lbon-wayland
 ~/.linuxConfig/rofi/install-rofi-theme.sh
 
 $aurPkg konsave

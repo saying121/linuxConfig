@@ -15,9 +15,6 @@ Exec = /usr/bin/setcap 'cap_net_admin,cap_net_bind_service=+ep' /usr/bin/clash-m
 fi
 
 if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
-    if [[ ! $(command -v clash) ]]; then
-        sudo pacman -S --needed --noconfirm clash
-    fi
     if [[ ! $(command -v clash-meta) ]]; then
         sudo pacman -S --needed --noconfirm clash-meta
     fi

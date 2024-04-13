@@ -73,7 +73,8 @@ return {
                 --     vim.Gitsigns("reset_hunk")
                 -- end)
                 -- map("n", "<leader>hu", gs.undo_stage_hunk)
-                -- map("n", "<leader>hp", gs.preview_hunk)
+                map("n", "<leader>hp", gs.preview_hunk)
+
                 map("n", "<leader>hS", gs.stage_buffer)
                 map("n", "<leader>hR", gs.reset_buffer)
                 map("n", "<leader>hb", function()

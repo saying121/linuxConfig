@@ -79,7 +79,6 @@ link_list=(
     ["$HOME/.linuxConfig/configs/npmrc"]="$HOME/.npmrc"
     ["$HOME/.linuxConfig/configs/ranger"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/rime-ls-user.yaml"]="$HOME/.local/share/rime-ls-nvim/user.yaml"
-    ["$HOME/.linuxConfig/configs/sql-language-server"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/terminology"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/tldrrc"]="$HOME/.tldrrc"
     ["$HOME/.linuxConfig/configs/w3m-config"]="$HOME/.w3m/config"

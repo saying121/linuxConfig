@@ -18,7 +18,7 @@ endif
 
 if !has('nvim')
     source ~/.config/nvim/vim-config/vimrc.vim
-    source ~/.config/nvim/viml/statusline-config.vim
+    " source ~/.config/nvim/viml/statusline-config.vim
     set scrolloff=23                                               " 在光标上下展现多少行
     set signcolumn=yes
 else
@@ -32,17 +32,17 @@ else
             let s:lesspipe_cmd = 'lesspipe'
         endif
 
-        if exists('s:lesspipe_cmd') && executable('file')
-            augroup lesspipe
-                autocmd!
-                autocmd BufReadPost *
-                            \ if empty(&l:buftype) && !did_filetype() && !&l:binary && filereadable(bufname('%')) &&
-                            \   system('file --mime --brief ' . fnamemodify(resolve(expand('%')), ':p:S')) !~# '^text/' |
-                            \   silent exe '%!' . s:lesspipe_cmd . ' ' . expand('%:S') |
-                            \   setlocal filetype=text nomodifiable readonly |
-                            \ endif
-            augroup END
-        endif
+        " if exists('s:lesspipe_cmd') && executable('file')
+        "     augroup lesspipe
+        "         autocmd!
+        "         autocmd BufReadPost *
+        "                     \ if empty(&l:buftype) && !did_filetype() && !&l:binary && filereadable(bufname('%')) &&
+        "                     \   system('file --mime --brief ' . fnamemodify(resolve(expand('%')), ':p:S')) !~# '^text/' |
+        "                     \   silent exe '%!' . s:lesspipe_cmd . ' ' . expand('%:S') |
+        "                     \   setlocal filetype=text nomodifiable readonly |
+        "                     \ endif
+        "     augroup END
+        " endif
     endif
 
     function! CheckFileReadability()

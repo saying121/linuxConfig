@@ -65,13 +65,13 @@ l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
 
 - [vim 基础教程](https://www.imooc.com/learn/1129)
 - [Vim 从入门到精通](https://github.com/wsdjeg/vim-galore-zh_cn)
-- [在 neovim 中使用 lua](https://github.com/glepnir/nvim-lua-guide-zh) 非常实用
+- [在 neovim 中使用 lua](https://github.com/glepnir/nvim-lua-guide-zh)
 - [中文速查表](https://github.com/skywind3000/awesome-cheatsheets)
 - [菜鸟教程 lua](https://www.runoob.com/lua/lua-tutorial.html)
 
 ## 版本要求
 
-最低 0.9.0 ，[dyninput.nvim](https://github.com/nvimdev/dyninput.nvim) ，
+最低 0.10.0 ，[dyninput.nvim](https://github.com/nvimdev/dyninput.nvim) ，
 内置的 inlay hints 只能在 >=0.10.0 版本才能用
 
 ### 主要插件

@@ -3,9 +3,9 @@ return {
     "mrcjkb/rustaceanvim",
     version = "*",
     event = {
-        "UIEnter *rs",
-        -- "BufWrite *rs",
-        "BufNew *rs",
+        "UIEnter *.rs",
+        "BufNew *.rs",
+        "BufEnter *.rs",
     },
     dependencies = {
         "nvim-lua/plenary.nvim",
@@ -95,9 +95,6 @@ return {
                         buffer = bufnr,
                         callback = function()
                             vim.cmd.RustLsp("flyCheck") -- defaults to 'run'
-                            -- vim.cmd.RustLsp({ "flyCheck", "run" })
-                            -- vim.cmd.RustLsp({ "flyCheck", "clear" })
-                            -- vim.cmd.RustLsp({ "flyCheck", "cancel" })
                         end,
                     })
 
@@ -159,17 +156,28 @@ return {
                         vim.cmd.RustLsp("codeAction")
                     end)
 
-                    keymap("n", "J", function()
+                    keymap({ "n", "x" }, "J", function()
                         vim.cmd.RustLsp("joinLines")
                     end)
                 end,
                 default_settings = require("public.ra"),
-                ---@type table | (fun(project_root:string|nil):table)
-                settings = function(project_root)
+                ---@type table | (fun(project_root:string|nil, default_settings: RustAnzlyzerConfig|nil):table) -- The rust-analyzer settings or a function that creates them.
+                settings = function(project_root, default_settings)
+                    project_root = project_root or vim.fn.getcwd()
+                    default_settings = require("public.ra")
+
                     local ra = require("rustaceanvim.config.server")
-                    return ra.load_rust_analyzer_settings(project_root, {
-                        settings_file_pattern = "rust-analyzer.json",
-                    })
+
+                    -- if string.find(project_root, "decrypt-browser") then
+                    --     default_settings.cargo.target = { "" }
+                    -- end
+
+                    ---@type RustAnzlyzerConfig
+                    local st =
+                        ra.load_rust_analyzer_settings(project_root, { settings_file_pattern = "rust-analyzer.json" })
+                    local res = vim.tbl_deep_extend("keep", default_settings, st)
+                    -- vim.print(res)
+                    return res
                 end,
             },
             -- DAP configuration

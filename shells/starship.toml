@@ -3,7 +3,7 @@
 # Use custom format
 # │[┌───────────────────>](bold green)
 format = '''
-[┌─](bold green)$username$sudo$os$hostname$all$line_break[└─](bold green)$character
+[╭─](bold green)$username$sudo$os$hostname$all$line_break[╰─](bold green)$character
 '''
 # right_format = "$os"
 

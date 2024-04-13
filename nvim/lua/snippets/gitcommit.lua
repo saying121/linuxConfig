@@ -43,6 +43,7 @@ local tb = {
     ci = "持续集成相关文件修改",
     release = "发布新版本",
     workflow = "工作流相关文件修改",
+    publish = "发布新版本",
 }
 
 local snippets = {

@@ -26,6 +26,53 @@ local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
+local rust_types = {
+    Result = "Ok(())",
+    Option = "Some(())",
+    Vec = "vec![]",
+}
+local rust_types_exact = {
+    bool = "false",
+    Self = "Self {  }",
+
+    i8 = "0",
+    i16 = "0",
+    i32 = "0",
+    i64 = "0",
+    i128 = "0",
+    u8 = "0",
+    u16 = "0",
+    u32 = "0",
+    u64 = "0",
+    u128 = "0",
+}
+
+local function get_rt_value()
+    local temp = vim.fn.searchpos("fn ", "bcn", vim.fn.line("w0"))
+    local pos = { math.max(temp[1] - 1, 0), temp[2] }
+    local line = pos[1]
+    local line_str = vim.api.nvim_buf_get_lines(0, line, line + 1, false)[1]
+    local startIdx, endIdx = string.find(line_str, "->%s*(.-)%s*{")
+
+    if startIdx and endIdx then
+        local result = string.sub(line_str, startIdx + 2, endIdx - 1)
+        result = string.gsub(result, "^%s*(.-)%s*$", "%1")
+
+        local exact = rust_types_exact[result]
+        if exact then
+            return exact
+        end
+
+        for key, value in pairs(rust_types) do
+            if string.find(result, key) then
+                return value
+            end
+        end
+    else
+        return ""
+    end
+end
+
 local map_to_specifier_node = function(index, e)
     return sn(index, i(1, "{} "))
 end
@@ -79,6 +126,16 @@ println!("{}", {});
 )
 
 return {
+    s({
+        trig = "rt",
+        dscr = "根据返回类型返回一个默认值",
+    }, {
+        t("return "),
+        d(1, function(args)
+            return sn(nil, i(1, get_rt_value()))
+        end, {}),
+        t(";"),
+    }),
     s("kpp", test),
     s(":turbofish", { t({ "::<" }), i(0), t({ ">" }) }),
     s(
@@ -340,7 +397,7 @@ extern "<>" {
             #[derive(Clone, Copy)]
             #[derive(Debug)]
             #[derive(Default)]
-            #[derive(PartialEq, Eq)]
+            #[derive(PartialEq, Eq, PartialOrd, Ord)]
             enum <> {
                 <>,
             }
@@ -361,7 +418,7 @@ extern "<>" {
             #[derive(Clone, Copy)]
             #[derive(Debug)]
             #[derive(Default)]
-            #[derive(PartialEq, Eq)]
+            #[derive(PartialEq, Eq, PartialOrd, Ord)]
             pub struct <> {
                 <>: <>,
             }
@@ -383,7 +440,7 @@ extern "<>" {
         #[derive(Clone, Copy)]
         #[derive(Debug)]
         #[derive(Default)]
-        #[derive(PartialEq, Eq)]
+        #[derive(PartialEq, Eq, PartialOrd, Ord)]
         pub struct {}({});
         ]],
             {
@@ -402,7 +459,7 @@ extern "<>" {
     #[derive(Clone, Copy)]
     #[derive(Debug)]
     #[derive(Default)]
-    #[derive(PartialEq, Eq)]
+    #[derive(PartialEq, Eq, PartialOrd, Ord)]
     pub struct {};
     ]],
             { i(1, "Name") }

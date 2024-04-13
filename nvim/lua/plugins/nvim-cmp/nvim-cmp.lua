@@ -54,6 +54,7 @@ return {
             spell = "[Spell]",
             vim_dadbod_completion = "[DB]",
             zsh = "[Zsh]",
+            fittencode = "[Fitten]",
         }
 
         -- 分级显示，上一级有补全就不会显示下一级
@@ -71,6 +72,7 @@ return {
                 -- end,
             },
             { name = "path", priority = 800 },
+            { name = "fittencode", priority = 900 },
         }, {
             { name = "buffer", priority = 800 },
             { name = "rg", keyword_length = 3, priority = 700 },
@@ -103,6 +105,7 @@ return {
                     local max_width = 50
                     item.kind = icons[item.kind]
                     item.menu = item.menu or source_mapping[entry.source.name]
+                    item.menu = string.sub(item.menu, 1, max_width)
                     item.abbr = string.sub(item.abbr, 1, max_width)
                     return item
                 end,

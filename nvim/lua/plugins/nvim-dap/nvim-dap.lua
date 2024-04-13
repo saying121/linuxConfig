@@ -9,7 +9,7 @@ return {
         { "<leader>sc", mode = "n" },
         { "<leader>cl", mode = "n" },
     },
-    dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "dap" .. "/dependencies"),
+    dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "nvim-dap" .. "/dependencies"),
     config = function()
         -- 对各个语言的配置
         require("dap-conf.python")

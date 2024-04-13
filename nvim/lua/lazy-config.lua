@@ -12,12 +12,13 @@ if not vim.uv.fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+-- vim.opt.rtp:prepend("/usr/lib/helix/runtime/grammars")
 
 local specs = {
     { import = "plugins" },
     { import = "plugins.nvim-cmp" },
     { import = "plugins.code_test" },
-    { import = "plugins.dap" },
+    { import = "plugins.nvim-dap" },
     { import = "plugins.database" },
     { import = "plugins.documents" },
     { import = "plugins.lsps" },

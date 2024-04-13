@@ -8,7 +8,9 @@ return {
             on_attach = function(client, bufnr)
                 require("sqls").on_attach(client, bufnr)
             end,
+
             -- cmd = { "sqls", "-config", vim.fn.getenv("HOME") .. "/sql/config.yml" },
+
             settings = {
                 sqls = {
                     -- connections = {

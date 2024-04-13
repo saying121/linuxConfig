@@ -3,7 +3,6 @@ local s = ls.snippet
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
-
 local serial = {
     ["tokio-serial"] = "tokio 的串行端口实现",
     ["mio-serial"] = "mio 的串行端口实现",
@@ -34,27 +33,29 @@ local os_crate = {
 local machine_learning = {
     ["tensorflow"] = "tensorflow 的 Rust 语言绑定。",
 }
-local crates = {
-    ["libfuzzer-sys"] = "llvm 的 lib 模糊器运行时的包装器。",
+local consts = {
     ["const_format"] = "编译时字符串格式化",
+    ["const_str"] = "compile-time string operations",
+}
+local crates = {
+    ["stacker"] = "堆栈增长库在实现可能意外破坏堆栈的深度递归算法时很有用。",
+    ["lazy_format"] = "一个实用程序箱，用于稍后格式化值",
+    ["crc32fast"] = "快速、SIMD 加速的 CRC32 (IEEE) 校验和计算",
+    ["libfuzzer-sys"] = "llvm 的 lib 模糊器运行时的包装器。",
     ["nix"] = "Rust 友好地绑定到 *nix api",
     ["embedded-hal"] = "嵌入式系统的硬件抽象层 (hal)",
     ["uuid"] = "生成和解析 uuid 的库。",
-    ["enum_dispatch"] = "动态分派方法调用的近乎直接替代，速度高达 10 倍",
     ["slab"] = "为统一数据类型预先分配存储",
-    ["hashbrown"] = "谷歌 SwissTable hash map 的 Rust 端口",
     ["castaway"] = "针对有限编译时专业化的安全、零成本的向下转型。",
     ["rustyline"] = "rustyline，基于 antirez 的 linenoise 的 readline 实现",
     ["owning_ref"] = "一个用于创建携带其所有者的引用的库。",
     ["shared_memory"] = "一个用户友好的包，允许您在进程之间共享内存",
     ["contest-algorithms"] = "编程竞赛的常用算法和数据结构",
-    ["strum"] = "用于处理枚举和字符串的有用宏",
     ["ilhook"] = "提供在 x86 和 x86_64 架构中内联挂钩二进制代码的方法的库",
     ["device_query"] = "一个基本库，用于在没有窗口的情况下按需查询键盘和鼠标状态。",
     ["defer-drop"] = "推迟将大型类型删除到后台线程",
     ["derive_builder"] = "派生 **Rust** 结构的构建器实现",
     ["semver"] = "用于Cargo语义版本控制风格的解析器和评估器",
-    ["get-cookie"] = "从本地浏览器的 cookie 存储中获取 cookie",
     ["cookie"] = "http cookie 解析和 cookie jar 管理。支持签名和私有（加密、验证）jar。",
     ["GraphQL"] = "rust lang 的 graphql 参考实现。",
     ["bitflags"] = "一个类型安全的位掩码标志生成器，对 **C** 风格标志集很有用。它可用于围绕 **C** api 创建符合人体工程学的包装器",
@@ -64,8 +65,6 @@ local crates = {
     （该库已经废弃
     用 `std::{cell::OnceCell, sync::OnceLock};
     std::{sync::LazyLock, cell::LazyCell}}` 取代）]],
-    ["opentelementry"] = "*open telemetry* 提供一组 api、库、代理和收集器服务来从您的应用程序捕获分布式跟踪和指标。您可以使用 prometheus、jaeger 和其他可观察性工具来分析它们。",
-    ["tower"] = "tower 是一个模块化和可重用组件库，用于构建强大的客户端和服务器。",
     ["closure_attr"] = "用于简化闭包捕获的属性宏",
 }
 local util = {
@@ -76,6 +75,7 @@ local util = {
     ["captcha"] = "用于生成验证码的库。",
     ["sscanf"] = "基于正则表达式的 sscanf（格式反转！()）宏",
     ["regex"] = "**Rust** 正则表达式的实现",
+    ["lazy-regex"] = "在编译时检查惰性静态正则表达式",
     ["grep-searcher"] = "作为库的快速面向行正则表达式搜索。",
     ["grep-regex"] = "将 rust 的正则表达式库与“grep”板条箱一起使用。",
     ["ignore"] = "一个快速库，用于有效地将忽略文件（例如`.gitignore`）与文件路径匹配。",
@@ -103,8 +103,11 @@ local algorithms = {
     ["rust-algorithms"] = "一个 Rust 算法库",
 }
 local perf = {
+    ["enum_dispatch"] = "动态分派方法调用的近乎直接替代，速度高达 10 倍",
+    ["opentelementry"] = "*open telemetry* 提供一组 api、库、代理和收集器服务来从您的应用程序捕获分布式跟踪和指标。您可以使用 prometheus、jaeger 和其他可观察性工具来分析它们。",
     ["mimalloc"] = "面向性能和安全的嵌入式分配器",
     ["tikv-jemallocator"] = "由 jemalloc 支持的 Rust 分配器",
+    ["tailcall"] = "安全、零成本的尾递归",
 }
 local arena = {
     ["bumpalo"] = "Rust 的快速 arena 分配舞台。",
@@ -180,6 +183,7 @@ local benchmark = {
     ["flame"] = "专为 **Rust** 打造的火焰图分析工具，可以告诉你程序在哪些代码上花费的时间过多，非常适合用于代码性能瓶颈的分析",
     ["inferno"] = "火焰图性能分析工具套件的 Rust 端口",
     ["pprof"] = "用于 Rust 程序的内部性能工具。",
+    ["coz"] = "对 `coz` 因果分析器的 rust 支持：https://github.com/plasma-umass/coz",
 }
 local maths = {
     ["cgmath"] = "用于计算机图形学的线性代数和数学库。",
@@ -196,6 +200,8 @@ local maths = {
     ["faer"] = "基本线性代数例程",
 }
 local web = {
+    ["tower"] = "tower 是一个模块化和可重用组件库，用于构建强大的客户端和服务器。",
+    ["tower-http"] = "用于 http 客户端和服务器的 tower 中间件和实用程序",
     ["surf"] = "Surf the web - HTTP 客户端框架",
     ["graphql_client"] = "类型化 graphql 请求和响应",
     ["juniper"] = "graphql 服务器库",
@@ -204,6 +210,7 @@ local web = {
     ["axum"] = "专注于人体工程学和模块化的网络框架",
     ["rocket"] = "专注于可用性、安全性、可扩展性和速度的 Web 框架。",
     ["salvo"] = "salvo 是一个强大而简单的 **Rust** Web 服务器框架。",
+    ["leptos"] = "leptos 是一个全栈、同构的 Rust Web 框架，利用细粒度的反应性来构建声明性用户界面。",
 }
 local ciphers = {
     -- block ciphers
@@ -262,6 +269,7 @@ local ciphers = {
     ["streebog"] = "Streebog (GOST R 34.11-2012) 哈希函数",
     ["tiger"] = "Tiger 哈希函数",
     ["whirlpool"] = "Whirlpool 哈希函数",
+    ["farmhash"] = "farmhash 是 cityhash（同样来自 google）的后继者。 farmhash 和之前的 cityhash 一样，使用了 austin appleby 的 murmur hash 的想法。",
 
     -- password-hashes
     ["argon2"] = "argon2 密码哈希函数的纯 Rust 实现，支持 argon2d、argon2i 和 argon2id 算法变体",
@@ -274,8 +282,10 @@ local ciphers = {
 
     ["crypto"] = "所有 rust 加密特征的外观板条箱（例如“aead”、“cipher”、“digest”）",
     ["ring"] = "使用 Rust 的安全、快速、小型加密货币。",
+    ["aws-lc-rs"] = "aws-lc-rs 是一个使用 aws-lc 进行加密操作的加密库。该库致力于与流行的 Rust 库 Ring 保持 API 兼容。",
     ["openssl"] = "OpenSSL bindings",
     ["secret-service"] = "与秘密服务 API 接口的库",
+    ["security-framework"] = "Security.framework Macos 和 ios 的绑定",
     ["der"] = "纯 rust 嵌入式友好实现抽象语法符号一 (ASN.1) 的杰出编码规则 (der)，如 ITU X.690 中所述，完全支持heapless no_std 目标",
 }
 local net = {
@@ -298,9 +308,17 @@ local net = {
     ["warp"] = "以极快的速度提供网络服务",
     ["to-socket-addrs"] = "一个小的套接字地址替换，用于指定没有端口的地址",
 }
-local threads = {
+local concurrent = {
     ["thread_local"] = "每个线程对象本地存储",
+
     ["crossbeam"] = "并发编程的工具(mpmc)",
+    ["crossbeam-channel"] = "用于消息传递的多生产者多消费者通道",
+    ["crossbeam-epoch"] = "基于纪元的垃圾收集",
+    ["crossbeam-deque"] = "并发工作窃取双端队列",
+    ["crossbeam-queue"] = "并发队列",
+    ["crossbeam-utils"] = "并发编程实用程序",
+    ["crossbeam-skiplist"] = "并发跳表",
+
     ["flume"] = "一个极快的多生产者渠道(mpmc)",
     ["parking"] = "线程 parking and unparking",
     ["rayon"] = "**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争。它根据运行时的工作负载自动调整并行度。",
@@ -347,6 +365,7 @@ local async = {
     ["async-net"] = "用于 TCP/UDP/Unix 通信的异步网络原语",
     ["async-fs"] = "异步文件系统原语",
     ["futures-lite"] = "Futures, streams, and async I/O 组合器",
+    ["async-compat"] = "tokio 和 future 之间的兼容性适配器",
 }
 local database = {
     ["metrics"] = "对数据库连接性能测试",
@@ -356,6 +375,7 @@ local database = {
     ["redis_rs"] = "简单的redis客户端库",
     ["rusqlite"] = "符合人体工程学的 sqlite 包装器",
     ["sqlx"] = "**Rust** SQL 工具包。一个异步的、纯 **Rust** 的 sql crate，具有编译时检查查询而没有 dsl。支持 postgresql、mysql 和 sqlite。",
+    ["rocksdb"] = "Facebook 的rocksdb 可嵌入数据库的 rust 包装器",
 }
 local orm = {
     ["diesel"] = "用于 postgresql、sqlite 和 mysql 的安全、可扩展的 orm 和查询构建器",
@@ -393,7 +413,7 @@ local serde = {
     ["serde-this-or-that"] = "可以指定为多种类型的字段的自定义反序列化。",
     ["serde_bytes"] = "Serde 的 `&[u8]` 和 `vec<u8>` 的优化处理",
 }
-local error = {
+local error_test = {
     ["anyhow"] = "灵活的具体错误类型建立在 std::error::error 之上",
     ["thiserror"] = "推导（错误）",
     ["color-eyre"] = "一个用于恐慌的错误报告处理程序，以及用于为各种错误提供丰富多彩、一致且格式良好的错误报告的 eyre crate。",
@@ -401,6 +421,8 @@ local error = {
     ["better-panic"] = "非常漂亮的回溯受到 python 回溯的启发。",
     ["human-panic"] = "给人类的恐慌信息",
     ["pretty_assertions"] = "使用直接替换覆盖 `assert eq!` 和 `assert ne!`，添加丰富多彩的差异。",
+    ["static_assertions"] = "编译时断言以确保满足不变量。",
+    ["predicates"] = "布尔值谓词函数的实现。",
 }
 local terminal = {
     ["owo-colors"] = "零分配的终端颜色会让人们惊叹不已",
@@ -413,6 +435,7 @@ local terminal = {
     ["ansi_term"] = "ansi 终端颜色和样式库（粗体、下划线）",
     ["clap"] = "一个简单易用、高效且功能齐全的命令行参数解析器",
     ["clap_complete"] = "为您的 clap::command 生成 shell 完成脚本",
+    ["assert_cmd"] = "测试 cli 应用程序。",
     ["figlet-rs"] = "Rust 实现 Figlet 来创建 ASCII 艺术",
 
     ["keymap"] = "用于从配置解析终端输入事件的库",
@@ -451,6 +474,8 @@ local gui = {
 local grpc = {
     ["tonic"] = "基于 http/2 的 grpc 实现侧重于高性能、互操作性和灵活性。",
     ["tonic-build"] = "`tonic` grpc 实现的 codegen 模块。",
+    ["tonic-reflection"] = "`tonic` grpc 实现的服务器反射模块。",
+    ["tonic-web"] = "grpc-web protocol translation for tonic services.",
 
     ["grpcio"] = "grpc的 **Rust** 语言实现，基于grpc c核心库。",
     ["tarpc"] = "一个 rust 的 rpc 框架，重点是易用性。",
@@ -474,6 +499,9 @@ local macro = {
     ["paste"] = "满足您所有标记粘贴需求的宏",
     ["casey"] = "ident 令牌的大小写转换宏",
     ["parsel"] = "使用 ast 节点类型作为语法的零代码解析器生成",
+    ["strum"] = "用于处理枚举和字符串的有用宏",
+    ["strum_macros"] = "用于处理枚举和字符串的有用宏",
+    ["enum-iterator"] = "用于迭代类型的所有值的工具（例如枚举的所有变体）",
 }
 local bindings = {
     ["bindgen"] = "自动生成 rust ffi 到 c 和 c++ 库的绑定。",
@@ -505,16 +533,21 @@ local test = {
     ["skeptic"] = "通过 Cargo 测试你的 Rust Markdown 文档",
 }
 local data_struct = {
+    ["bloomfilter"] = "布隆过滤器的实现",
+    ["hashbrown"] = "谷歌 SwissTable hash map 的 Rust 端口",
     ["arrayvec"] = "具有固定容量的向量，由数组支持（它也可以存储在堆栈上）。实现固定容量数组 vec 和数组 string。",
     ["arcstr"] = "更好的引用计数字符串类型，对字符串文字和引用计数子字符串提供零成本（免分配）支持。",
     ["beef"] = "更紧凑的牛",
     ["bytemuck"] = "一个用来处理成堆字节的箱子。",
     ["smol_str"] = "使用 o(1) 克隆的小字符串优化字符串类型",
     ["bytes"] = "处理字节的类型和特征",
+    ["thin-vec"] = "占用堆栈空间较少的 vec",
     ["smallvec"] = "“小向量”优化：在堆栈上存储最多少量的项目",
     ["smallstr"] = "基于smallvec的字符串容器",
     ["tinyvec"] = "`tinyvec` 提供 100% 安全的类 vec 数据结构。",
     ["tendril"] = "用于零拷贝解析的紧凑缓冲区/字符串类型",
+    ["ouroboros"] = "简单、安全的自引用结构生成。",
+    ["moka"] = "简单、安全的自引用结构生成。",
 }
 
 local all = vim.tbl_deep_extend(
@@ -522,11 +555,11 @@ local all = vim.tbl_deep_extend(
     test,
     data_struct,
     async,
-    threads,
+    concurrent,
     crates,
     database,
     encoding,
-    error,
+    error_test,
     file,
     gui,
     img,
@@ -563,11 +596,53 @@ local all = vim.tbl_deep_extend(
     unix,
     os_crate,
     machine_learning,
-    serial
+    serial,
+    consts
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']
 local snippets = {
+    s(
+        {
+            trig = "bin",
+            priority = 30000,
+            dscr = "run bin",
+        },
+        fmta(
+            [=[
+[[bin]]
+name = "<>"
+path = "<>"
+        ]=],
+            {
+                i(1, ""),
+                i(2, ""),
+            }
+        )
+    ),
+    s(
+        {
+            trig = "workspace_base",
+            priority = 30000,
+            dscr = "workspace base field",
+        },
+        fmt(
+            [[
+[workspace.package]
+edition      = "2021"
+authors      = [""]
+homepage     = ""
+# rust-version = "1.78"
+repository   = ""
+
+[workspace]
+members  = ["crates/*"]
+resolver = "2"
+exclude  = [".github", "sample/"]
+        ]],
+            {}
+        )
+    ),
     s(
         {
             trig = "release",
@@ -862,6 +937,8 @@ mixed_read_write_in_expression  = "warn"
 naive_bytecount                 = "warn"
 negative_feature_names          = "warn"
 no_effect_underscore_binding    = "warn"
+
+cargo_common_metadata = "warn"
 
 # exhaustive_enums   = "warn"
 # exhaustive_structs = "warn"

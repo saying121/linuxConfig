@@ -1,3 +1,68 @@
+---@diagnostic disable: duplicate-doc-field
+
+---@class RustAnzlyzerConfig
+---@field rust-analyzer RustAnzlyzerConfigInner
+
+---@class RustAnzlyzerConfigInner
+---@field assist Assist
+---@field cachePriming CachePriming
+---@field cargo Cargo
+---@field checkOnSave boolean
+---@field check Check
+---@field completion table
+---@field diagnostics table
+---@field files table
+---@field highlightRelated table
+---@field hover table
+---@field imports table
+---@field inlayHints table
+---@field interpret table
+---@field joinLines  table
+---@field lens table
+---@field linkedProjects string[]
+---@field lru table
+---@field notifications table
+---@field numThreads integer|nil
+---@field procMacro table
+---@field references table
+---@field rename table
+---@field runnables table
+---@field rust table
+---@field rustc table
+---@field rustfmt table|nil
+---@field semanticHighlighting table
+---@field signatureInfo table
+---@field typing table
+---@field workspace table
+
+---@class CachePriming
+---@field enable boolean
+---@field num integer
+
+---@class Assist
+---@field emitMustUse boolean
+---@field expressionFillDefault string
+
+---@class Cargo
+---@field autoreload boolean
+---@field buildScripts table
+---@field cfgs string[]
+---@field extraArgs string[]
+---@field extraEnv string[]
+---@field features string[]|string
+---@field noDefaultFeatures boolean
+---@field sysroot string
+---@field sysrootQueryMetadata boolean
+---@field sysrootSrc string|nil
+---@field target string|nil
+---@field unsetTest string[]
+
+---@class Check
+---@field allTargets boolean
+---@field targets string|string[]|nil
+---@field command string
+---@field extraArgs string[]
+
 local snippets = require("public.ra.snippets")
 
 local function overried_fmt()
@@ -11,7 +76,7 @@ local function overried_fmt()
     end
     handle:close()
     local result = string.gsub(res, "%s*%b()%s*", "")
-    -- print(res)
+    result = string.gsub(result, "stable", "nightly")
     -- print(result)
     return {
         "rustup",
@@ -23,7 +88,9 @@ local function overried_fmt()
         "2021",
     }
 end
+local fmt = overried_fmt()
 
+---@type RustAnzlyzerConfig
 return {
     ["rust-analyzer"] = {
         assist = {
@@ -31,7 +98,7 @@ return {
             expressionFillDefault = "todo", -- Placeholder expression to use for missing expressions in assists.
         },
         cachePriming = {
-            enable = true, -- Warm up caches on project load.
+            enable = false, -- Warm up caches on project load.
             num = 0, -- How many worker threads to handle priming caches. The default 0 means to pick automatically.
         },
         cargo = {
@@ -51,7 +118,7 @@ return {
                 -- "--offline"
             }, -- 传递给每个 cargo 调用的额外参数。
             extraEnv = {}, -- 在工作区内运行 cargo、rustc 或其他命令时将设置的额外环境变量。用于设置 RUSTFLAGS。
-            -- features = "all", -- 要激活的功能列表。将其设置为 "all" 以将 --all-features 传递给cargo。
+            features = "all", -- 要激活的功能列表。将其设置为 "all" 以将 --all-features 传递给cargo。
             noDefaultFeatures = false, -- 是否将 --no-default-features 传递给cargo
             sysroot = "discover", -- sysroot的相对路径，或“discover”以尝试通过“rustc--print sysroot”自动找到它。
             sysrootQueryMetadata = false, -- Whether to run cargo metadata on the sysroot library allowing rust-analyzer to analyze third-party dependencies of the standard libraries.
@@ -62,7 +129,6 @@ return {
         checkOnSave = false,
         check = {
             allTargets = true,
-            -- command = "check", -- 用于 cargo check 的命令。
             command = "clippy", -- 用于 cargo check 的命令。
             extraArgs = { "--no-deps" }, -- cargo check 的额外参数。
             extraEnv = {}, -- 运行 cargo check 时将设置的额外环境变量。扩展 rust-analyzer.cargo.extraEnv 。
@@ -78,6 +144,7 @@ return {
             -- 因此应该包括 --message-format=json 或类似的选项（如果您的客户端支持 colorDiagnosticOutput 实验功能，
             -- 则可以使用 --message-format=json-diagnostic-rendered-ansi ）。
             -- cargo check --workspace --message-format=json --all-targets
+
             targets = nil, -- 检查特定目标。如果为空，则默认为 rust-analyzer.cargo.target 。
             -- 可以是单个目标，例如 "x86_64-unknown-linux-gnu" 或目标列表，例如 ["aarch64-apple-darwin", "x86_64-apple-darwin"] 。
         },
@@ -100,7 +167,7 @@ return {
                 -- clippy 的 lint 已经有这些了
                 "needless_return",
             }, -- 要禁用的rust-analyzer诊断列表。
-            experimental = { enable = true }, -- 是否显示可能比平时有更多假阳性的实验性rust-analyzer仪诊断。
+            experimental = { enable = false }, -- 是否显示可能比平时有更多假阳性的实验性rust-analyzer仪诊断。
             remapprefix = {}, -- 解析诊断文件路径时要替换的前缀的映射。这应该是传递给 rustc 的内容作为 --remap-path-prefix 的反向映射。
             warningsAsHint = {}, -- 应以提示严重性显示的警告列表。
             warningsAsInfo = {
@@ -224,7 +291,11 @@ return {
         },
         rust = { analyzerTargetDir = nil }, -- Optional path to a rust-analyzer specific target directory. This prevents rust-analyzer’s cargo check from locking the Cargo.lock at the expense of duplicating build artifacts.
         rustc = { source = nil }, -- Path to the Cargo.toml of the rust compiler workspace, for usage in rustc_private projects, or "discover" to try to automatically find it if the rustc-dev component is installed.
-        rustfmt = overried_fmt(),
+        rustfmt = {
+            extraArgs = {},
+            overrideCommand = fmt,
+            rangeFormatting = { enable = true },
+        },
         semanticHighlighting = {
             doc = { comment = { inject = { enable = true } } },
             nonStandardTokens = true,

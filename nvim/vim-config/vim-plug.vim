@@ -10,6 +10,9 @@ call plug#begin()
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -29,4 +32,3 @@ Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
 call plug#end()
-

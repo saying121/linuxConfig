@@ -24,6 +24,11 @@ $pacMan python-debugpy delve codelldb-bin
 $aurPkg rust-lolcat-git inferno
 $aurPkg lf
 
+treesitters=("c" "lua" "bash" "query" "vimdoc" "python" "markdown")
+for lang  in "${treesitters[@]}"; do
+    $pacMan tree-sitter-"$lang"
+done
+
 $pacMan python3 python-pip python-pynvim python-pipenv python-pylsp-rope neovim-remote frogmouth python-neovim
 
 $pacMan rustup

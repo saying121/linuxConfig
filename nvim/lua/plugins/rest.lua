@@ -1,9 +1,9 @@
 ---@type LazySpec
 return {
     "rest-nvim/rest.nvim",
-    cmd = { "RestLog" },
+    cmd = { "Rest" },
+    dependencies = { "vhyrro/luarocks.nvim" },
     ft = "http",
-    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
         local keymap = vim.keymap.set
         keymap("n", "<leader>rn", "<Plug>RestNvim")
@@ -21,47 +21,86 @@ return {
         end, {})
 
         require("rest-nvim").setup({
-            -- Open request results in a horizontal split
-            result_split_horizontal = false,
-            -- Keep the http file buffer above|left when split horizontal|vertical
-            result_split_in_place = false,
-            -- stay in current windows (.http file) or change to results window (default)
-            stay_in_current_window_after_split = false,
-            -- Skip SSL verification, useful for unknown certificates
-            skip_ssl_verification = false,
-            -- Encode URL before making request
+            client = "curl",
+            env_file = ".env",
+            env_pattern = "\\.env$",
+            env_edit_command = "tabedit",
             encode_url = true,
-            -- Highlight request on run
-            highlight = {
-                enabled = true,
-                timeout = 150,
+            skip_ssl_verification = false,
+            custom_dynamic_variables = {},
+            logs = {
+                level = "info",
+                save = true,
             },
             result = {
-                -- toggle showing URL, HTTP info, headers at top the of result window
-                show_url = true,
-                -- show the generated curl command in case you want to launch
-                -- the same request via the terminal (can be verbose)
-                show_curl_command = false,
-                show_http_info = true,
-                show_headers = true,
-                -- table of curl `--write-out` variables or false if disabled
-                -- for more granular control see Statistics Spec
-                show_statistics = false,
-                -- executables or functions for formatting response body [optional]
-                -- set them to false if you want to disable them
-                formatters = {
-                    json = "jq",
-                    html = function(body)
-                        return vim.fn.system({ "tidy", "-i", "-q", "-" }, body)
-                    end,
+                split = {
+                    horizontal = false,
+                    in_place = false,
+                    stay_in_current_window_after_split = true,
+                },
+                behavior = {
+                    decode_url = true,
+                    show_info = {
+                        url = true,
+                        headers = true,
+                        http_info = true,
+                        curl_command = true,
+                    },
+                    statistics = {
+                        enable = true,
+                        ---@see https://curl.se/libcurl/c/curl_easy_getinfo.html
+                        stats = {
+                            { "total_time", title = "Time taken:" },
+                            { "size_download_t", title = "Download size:" },
+                        },
+                    },
+                    formatters = {
+                        json = "jq",
+                        html = function(body)
+                            if vim.fn.executable("tidy") == 0 then
+                                return body, { found = false, name = "tidy" }
+                            end
+                            local fmt_body = vim.fn
+                                .system({
+                                    "tidy",
+                                    "-i",
+                                    "-q",
+                                    "--tidy-mark",
+                                    "no",
+                                    "--show-body-only",
+                                    "auto",
+                                    "--show-errors",
+                                    "0",
+                                    "--show-warnings",
+                                    "0",
+                                    "-",
+                                }, body)
+                                :gsub("\n$", "")
+
+                            return fmt_body, { found = true, name = "tidy" }
+                        end,
+                    },
                 },
             },
-            -- Jump to request line on run
-            jump_to_request = false,
-            env_file = ".env",
-            custom_dynamic_variables = {},
-            yank_dry_run = true,
-            search_back = true,
+            highlight = {
+                enable = true,
+                timeout = 750,
+            },
+            ---Example:
+            ---
+            ---```lua
+            ---keybinds = {
+            ---  {
+            ---    "<localleader>rr", "<cmd>Rest run<cr>", "Run request under the cursor",
+            ---  },
+            ---  {
+            ---    "<localleader>rl", "<cmd>Rest run last<cr>", "Re-run latest request",
+            ---  },
+            ---}
+            ---
+            ---```
+            ---@see vim.keymap.set
+            keybinds = {},
         })
     end,
 }

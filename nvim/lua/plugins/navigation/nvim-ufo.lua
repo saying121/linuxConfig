@@ -53,10 +53,12 @@ return {
 
                 return { "lsp", "indent" }
             end,
-            close_fold_kinds = {
-                "imports",
-                -- "region",
-                -- "comment",
+            close_fold_kinds_for_ft = {
+                default = {
+                    "imports",
+                    -- "region",
+                    -- "comment",
+                },
             },
             enable_get_fold_virt_text = true,
             preview = {
@@ -103,9 +105,7 @@ return {
 
         keymap("n", "zR", require("ufo").openAllFolds, opts)
         keymap("n", "zM", require("ufo").closeAllFolds, opts)
-        keymap("n", "zr", function()
-            require("ufo").openFoldsExceptKinds(require("ufo.config").close_fold_kinds)
-        end, opts)
+        keymap("n", "zr", require("ufo").openFoldsExceptKinds, opts)
 
         keymap("n", "zm", function()
             require("ufo").closeFoldsWith(1)

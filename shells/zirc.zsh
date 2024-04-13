@@ -44,6 +44,8 @@ zi ice wait lucid; zi light paulirish/git-open.git
 
 zi ice wait lucid; zi light lesonky/web-search.git
 
+# eval "$(atuin init zsh)"
+
 zi ice depth=1 lucid; zi light jeffreytse/zsh-vi-mode
 
 zi ice wait lucid; zi light z-shell/H-S-MW
@@ -79,8 +81,10 @@ eval "$(starship init zsh)"
 
 
 export CLIPPY_CONF_DIR=~/.config/rustfmt/
-export RUSTFLAGS="-Z threads=16"
-# export PATH=~/.local/share/bob/nvim-bin:$PATH
+# export RUSTFLAGS="-Z threads=16"
+export PATH=~/.local/share/bob/nvim-bin:$PATH
+export RUST_BACKTRACE=1
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib/mojo
 
 # zprof
 
