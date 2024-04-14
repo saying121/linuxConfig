@@ -27,38 +27,59 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
 local rust_types = {
-    Result = "Ok(())",
-    Option = "Some(())",
-    Vec = "vec![]",
+    Result = fmta("Ok(<>)", { i(1, "()") }),
+    Option = fmta("Some(<>)", { i(1, "()") }),
+    Vec = fmta("vec![<>]", { i(1, "") }),
 }
-local rust_types_exact = {
-    bool = "false",
-    Self = "Self {  }",
+local function tps()
+    local ts = {
+        bool = "false",
+        Self = fmta("Self { <> }", { i(1, "") }),
+    }
 
-    i8 = "0",
-    i16 = "0",
-    i32 = "0",
-    i64 = "0",
-    i128 = "0",
-    u8 = "0",
-    u16 = "0",
-    u32 = "0",
-    u64 = "0",
-    u128 = "0",
-}
+    local base_types =
+        { "isize", "usize", "i8", "i16", "i32", "i64", "i128", "u8", "u16", "u32", "u64", "u128", "f32", "f64" }
+
+    for _, ty in ipairs(base_types) do
+        ts[ty] = (ty:sub(1, 1) == "f") and "0.0" or "0"
+    end
+    for idx = 1, 7, 1 do
+        local num = 2 ^ (idx - 1)
+
+        local integer_nd = fmta("Simd::from([<>; <>])", { i(1, "0"), i(2, tostring(num)) })
+        local float_nd = fmta("Simd::from([<>; <>])", { i(1, "0.0"), i(2, tostring(num)) })
+
+        for _, ty in ipairs(base_types) do
+            ts[ty .. "x" .. num] = (ty:sub(1, 1) == "f") and float_nd or integer_nd
+        end
+    end
+
+    return ts
+end
+local rust_types_exact = tps()
 
 local function get_rt_value()
-    local temp = vim.fn.searchpos("fn ", "bcn", vim.fn.line("w0"))
-    local pos = { math.max(temp[1] - 1, 0), temp[2] }
-    local line = pos[1]
+    local temp = vim.fn.searchpos("->", "bcn", vim.fn.line("w0"))
+    -- local pos = { math.max(temp[1] - 1, 0), temp[2] }
+    local line = math.max(temp[1] - 1, 0)
     local line_str = vim.api.nvim_buf_get_lines(0, line, line + 1, false)[1]
     local startIdx, endIdx = string.find(line_str, "->%s*(.-)%s*{")
 
     if startIdx and endIdx then
         local result = string.sub(line_str, startIdx + 2, endIdx - 1)
+        -- 去除两边空白符
         result = string.gsub(result, "^%s*(.-)%s*$", "%1")
 
-        local exact = rust_types_exact[result]
+        local index = result
+
+        local exact = rust_types_exact[index]
+        if exact then
+            return exact
+        end
+
+        -- 获取 `::` 最后的一段
+        index = string.match(result, ".*::(.*)")
+        exact = rust_types_exact[index]
         if exact then
             return exact
         end
@@ -132,7 +153,12 @@ return {
     }, {
         t("return "),
         d(1, function(args)
-            return sn(nil, i(1, get_rt_value()))
+            local get = get_rt_value()
+            if type(get) == "string" then
+                return sn(nil, i(1, get))
+            else
+                return sn(nil, get)
+            end
         end, {}),
         t(";"),
     }),
