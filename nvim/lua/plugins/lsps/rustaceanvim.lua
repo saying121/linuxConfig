@@ -58,7 +58,6 @@ return {
                 code_actions = { ui_select_fallback = false },
 
                 ---@type boolean
-                -- enable_nextest = vim.fn.executable("cargo-nextest") == 1,
                 enable_nextest = false,
 
                 ---@type boolean

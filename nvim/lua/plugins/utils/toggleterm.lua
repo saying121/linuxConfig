@@ -11,7 +11,7 @@ return {
     cmd = { "ToggleTerm" },
     config = function()
         local keymap, opts = vim.keymap.set, { silent = true, noremap = true }
-        keymap({ "n" }, "<M-t>", ":ToggleTerm<CR>", opts)
+        keymap({ "n" }, "<M-t>", vim.cmd.ToggleTerm, opts)
         keymap({ "t" }, "<M-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 
         require("toggleterm").setup({

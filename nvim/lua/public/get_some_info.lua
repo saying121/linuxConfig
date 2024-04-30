@@ -12,26 +12,26 @@ local is_nightly = string.find(output, "nightly") ~= nil
 function M.lsp_clients()
     local msg = "No Active Lsp"
     local lsps = ""
+
     local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-    local clients = vim.lsp.get_clients()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
     if next(clients) == nil then
         return msg
     end
 
     for _, client in ipairs(clients) do
-        local filetypes = client.config.filetypes
-        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            local name
-            if buf_ft == "rust" and is_nightly then
-                name = "ra-nightly"
-            else
-                name = client.name
-            end
-            if lsps ~= "" then
-                lsps = lsps .. ", " .. name
-            else
-                lsps = name
-            end
+        local name
+        if buf_ft == "rust" and is_nightly then
+            name = "ra-nightly"
+        else
+            name = client.name
+        end
+        if lsps ~= "" then
+            lsps = lsps .. ", " .. name
+        else
+            lsps = name
         end
     end
 

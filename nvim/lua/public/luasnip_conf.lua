@@ -1,10 +1,13 @@
+local api  = vim.api
+local lsp  = vim.lsp
+
 local M = {}
 
 M.current_win = nil
-local current_nsid = vim.api.nvim_create_namespace("LuaSnipChoiceListSelections")
+local current_nsid = api.nvim_create_namespace("LuaSnipChoiceListSelections")
 
 local function window_for_choiceNode(choiceNode)
-    local buf = vim.api.nvim_create_buf(false, true)
+    local buf = api.nvim_create_buf(false, true)
     local buf_text = {}
     local row_selection = 0
     local row_offset = 0
@@ -21,11 +24,11 @@ local function window_for_choiceNode(choiceNode)
         vim.list_extend(buf_text, text)
     end
 
-    vim.api.nvim_buf_set_text(buf, 0, 0, 0, 0, buf_text)
-    local w, h = vim.lsp.util._make_floating_popup_size(buf_text, {})
+    api.nvim_buf_set_text(buf, 0, 0, 0, 0, buf_text)
+    local w, h = lsp.util._make_floating_popup_size(buf_text, {})
 
     -- adding highlight so we can see which one is been selected.
-    local extmark = vim.api.nvim_buf_set_extmark(
+    local extmark = api.nvim_buf_set_extmark(
         buf,
         current_nsid,
         row_selection,
@@ -34,7 +37,7 @@ local function window_for_choiceNode(choiceNode)
     )
 
     -- shows window at a beginning of choiceNode.
-    local win = vim.api.nvim_open_win(buf, false, {
+    local win = api.nvim_open_win(buf, false, {
         relative = "win",
         width = w,
         height = h,
@@ -50,8 +53,8 @@ end
 function M.choice_popup(choiceNode)
     -- build stack for nested choiceNodes.
     if M.current_win then
-        vim.api.nvim_win_close(M.current_win.win_id, true)
-        vim.api.nvim_buf_del_extmark(M.current_win.buf, current_nsid, M.current_win.extmark)
+        api.nvim_win_close(M.current_win.win_id, true)
+        api.nvim_buf_del_extmark(M.current_win.buf, current_nsid, M.current_win.extmark)
     end
     local create_win = window_for_choiceNode(choiceNode)
     M.current_win = {
@@ -64,11 +67,11 @@ function M.choice_popup(choiceNode)
 end
 
 function M.update_choice_popup(choiceNode)
-    if M.current_win == nil then
-        return
-    end
-    vim.api.nvim_win_close(M.current_win.win_id, true)
-    vim.api.nvim_buf_del_extmark(M.current_win.buf, current_nsid, M.current_win.extmark)
+    -- if M.current_win == nil then
+    --     return
+    -- end
+    api.nvim_win_close(M.current_win.win_id, true)
+    api.nvim_buf_del_extmark(M.current_win.buf, current_nsid, M.current_win.extmark)
     local create_win = window_for_choiceNode(choiceNode)
     M.current_win.win_id = create_win.win_id
     M.current_win.extmark = create_win.extmark
@@ -76,11 +79,11 @@ function M.update_choice_popup(choiceNode)
 end
 
 function M.choice_popup_close()
-    if M.current_win == nil then
-        return
-    end
-    vim.api.nvim_win_close(M.current_win.win_id, true)
-    vim.api.nvim_buf_del_extmark(M.current_win.buf, current_nsid, M.current_win.extmark)
+    -- if M.current_win == nil then
+    --     return
+    -- end
+    api.nvim_win_close(M.current_win.win_id, true)
+    api.nvim_buf_del_extmark(M.current_win.buf, current_nsid, M.current_win.extmark)
     -- now we are checking if we still have previous choice we were in after exit nested choice
     M.current_win = M.current_win.prev
     if M.current_win then
@@ -90,7 +93,7 @@ function M.choice_popup_close()
         M.current_win.extmark = create_win.extmark
         M.current_win.buf = create_win.buf
     end
-    M.current_win = nil
+    -- M.current_win = nil
 end
 
 return M

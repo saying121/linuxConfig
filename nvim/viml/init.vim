@@ -18,7 +18,6 @@ endif
 
 if !has('nvim')
     source ~/.config/nvim/vim-config/vimrc.vim
-    " source ~/.config/nvim/viml/statusline-config.vim
     set scrolloff=23                                               " 在光标上下展现多少行
     set signcolumn=yes
 else

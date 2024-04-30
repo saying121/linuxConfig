@@ -59,7 +59,11 @@ end
 local rust_types_exact = tps()
 
 local function get_rt_value()
+    local temp_fn = vim.fn.searchpos("fn ", "bcn", vim.fn.line("w0"))
     local temp = vim.fn.searchpos("->", "bcn", vim.fn.line("w0"))
+    if temp[1] < temp_fn[1] then
+        return ""
+    end
     -- local pos = { math.max(temp[1] - 1, 0), temp[2] }
     local line = math.max(temp[1] - 1, 0)
     local line_str = vim.api.nvim_buf_get_lines(0, line, line + 1, false)[1]
@@ -310,6 +314,7 @@ extern "<>" {
                 i(1, "name"),
                 c(2, {
                     i(""),
+                    fmta("<>self<>", { i(1, "&"), i(2, "") }),
                     fmta("<>: <>", { i(1, "arg"), i(2, "Type") }),
                     fmta("<>: <>, <>: <>", {
                         i(1, "arg"),
@@ -360,16 +365,6 @@ extern "<>" {
                 i(1, "variable"),
             }
         )
-    ),
-    s(
-        {
-            trig = "eprintln",
-            priority = 30000,
-        },
-        fmta([[eprintln!("<>"<>);]], {
-            i(1, ""),
-            i(2, ""),
-        })
     ),
     s(
         {

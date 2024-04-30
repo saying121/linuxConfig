@@ -59,6 +59,7 @@ return {
             -- null_ls.builtins.diagnostics.revive,
             null_ls.builtins.formatting.golines,
 
+            null_ls.builtins.diagnostics.checkmake,
             null_ls.builtins.diagnostics.markdownlint,
             null_ls.builtins.diagnostics.vint,
             -- null_ls.builtins.diagnostics.selene,

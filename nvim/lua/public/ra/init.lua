@@ -233,7 +233,7 @@ return {
                 -- mode = "postfix ",
             },
             lifetimeElisionHints = { enable = "always", useParameterNames = true },
-            maxLength = 25,
+            maxLength = 20,
             parameterHints = { enable = true },
             renderColons = true,
             typeHints = { enable = true, hideClosureInitialization = false, hideNamedConstructor = false },

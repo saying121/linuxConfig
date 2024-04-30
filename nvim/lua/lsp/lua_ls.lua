@@ -6,14 +6,15 @@ local plugins_dir = vim.fn.stdpath("data") .. "/lazy"
 -- local load_plugins = vim.fn.readdir(plugins_dir)
 
 local load_plugins = {
-    "rustaceanvim",
-    "plenary.nvim",
-    "nvim-lspconfig",
+    -- "rustaceanvim",
+    -- "plenary.nvim",
+    -- "nvim-lspconfig",
     -- "nvim-cmp",
     -- "nvim-treesitter",
-    "none-ls.nvim",
-    "LuaSnip",
-    "symbol-usage.nvim",
+    -- "none-ls.nvim",
+    -- "LuaSnip",
+    -- "image.nvim",
+    -- "symbol-usage.nvim",
 }
 
 for _, value in ipairs(load_plugins) do

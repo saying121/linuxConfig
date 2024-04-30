@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
     "lewis6991/gitsigns.nvim",
+    commit = "d96ef3bbff0bdbc3916a220f5c74a04c4db033f2",
     cond = function()
         vim.fn.system("git rev-parse --is-inside-work-tree")
         return vim.v.shell_error == 0

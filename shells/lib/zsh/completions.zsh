@@ -1,8 +1,14 @@
 zi ice as"completion"
 zi light https://github.com/ziglang/shell-completions
 
-zi ice as"completion"
-zi snippet https://github.com/zsh-users/zsh/blob/master/Completion/Unix/Command/_ip
+zi ice lucid wait as'completion' blockf
+zi light zchee/zsh-completions
+
+zi ice lucid wait as'completion'
+zi light zsh-users/zsh-completions
+
+# zi ice as"completion"
+# zi snippet https://github.com/zsh-users/zsh/blob/master/Completion/Unix/Command/_ip
 
 zi ice lucid wait as'completion' blockf has'alacritty'
 zi snippet https://github.com/alacritty/alacritty/blob/master/extra/completions/_alacritty
@@ -61,14 +67,11 @@ zi snippet https://github.com/TheLocehiliosan/yadm/blob/master/completion/zsh/_y
 zi ice lucid wait as'completion' blockf has'ghq'
 zi snippet https://github.com/x-motemen/ghq/blob/master/misc/zsh/_ghq
 
-zi ice lucid wait as'completion' blockf
-zi light zchee/zsh-completions
+zi ice lucid wait as'completion' blockf has'lcode'
+zi snippet https://github.com/saying121/lcode/blob/main/completions/_lcode
 
 zi ice wait lucid as'completion' blockf has'zoxide'
 zi snippet https://github.com/ajeetdsouza/zoxide/blob/main/contrib/completions/_zoxide
-
-zi ice lucid wait as'completion'
-zi light zsh-users/zsh-completions
 
 zi ice wait lucid pick'autopair.zsh'
 zi load hlissner/zsh-autopair
@@ -77,7 +80,6 @@ zi ice lucid wait has'fzf'
 zi light Aloxaf/fzf-tab
 zi ice wait lucid; zi light Freed-Wu/fzf-tab-source
 source ~/.linuxConfig/shells/lib/zsh/fzf-tab.zsh
-
 
 zi ice wait lucid atload"!_zsh_autosuggest_start"
 zi load zsh-users/zsh-autosuggestions

@@ -3,6 +3,7 @@ local s = ls.snippet
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
+
 local serial = {
     ["tokio-serial"] = "tokio 的串行端口实现",
     ["mio-serial"] = "mio 的串行端口实现",
@@ -38,6 +39,10 @@ local consts = {
     ["const_str"] = "compile-time string operations",
 }
 local crates = {
+    ["validator"] = "常见验证函数（电子邮件、url、长度等）和特征 - 与“validator_derive”一起使用",
+    ["num-traits"] = "通用数学的数字特征",
+    ["memflow"] = "memflow物理内存自省框架的核心组件",
+    ["aliasable"] = "基本可别名（非唯一指针）类型",
     ["stacker"] = "堆栈增长库在实现可能意外破坏堆栈的深度递归算法时很有用。",
     ["lazy_format"] = "一个实用程序箱，用于稍后格式化值",
     ["crc32fast"] = "快速、SIMD 加速的 CRC32 (IEEE) 校验和计算",
@@ -114,6 +119,7 @@ local arena = {
     ["typed-arena"] = "arena，一种快速但有限的分配器类型",
     ["id-arena"] = "一个简单的、基于 id 的 arena。",
     ["generational-arena"] = "一个安全的 arena 分配器，通过使用分代索引支持删除，而不会遇到 ABA 问题。",
+    ["thunderdome"] = "具有紧凑代索引的快速竞技场分配器",
 }
 local date_time = {
     ["chrono"] = "**Rust** 的日期和时间库",
@@ -180,6 +186,8 @@ local img = {
 }
 local benchmark = {
     ["criterion"] = "criterion.rs 通过快速准确地检测和测量性能改进或回归（即使是很小的改进）来帮助您编写快速代码。您可以自信地进行优化，了解每次更改如何影响代码的性能。",
+    ["criterion_bencher_compat"] = "Bencher 常用部件的直接更换",
+    ["bencher"] = "libtest（不稳定的 rust）基准运行程序的端口，用于 rust 稳定版本。支持运行基准测试并根据名称进行过滤。基准测试执行的工作方式完全相同，仅此而已（警告：black_box仍然丢失！）。",
     ["flame"] = "专为 **Rust** 打造的火焰图分析工具，可以告诉你程序在哪些代码上花费的时间过多，非常适合用于代码性能瓶颈的分析",
     ["inferno"] = "火焰图性能分析工具套件的 Rust 端口",
     ["pprof"] = "用于 Rust 程序的内部性能工具。",
@@ -200,6 +208,7 @@ local maths = {
     ["faer"] = "基本线性代数例程",
 }
 local web = {
+    ["wasm-bindgen"] = "轻松支持 js 和 Rust 之间的交互。",
     ["tower"] = "tower 是一个模块化和可重用组件库，用于构建强大的客户端和服务器。",
     ["tower-http"] = "用于 http 客户端和服务器的 tower 中间件和实用程序",
     ["surf"] = "Surf the web - HTTP 客户端框架",
@@ -492,6 +501,7 @@ local websocket = {
     ["tungstenite"] = "基于流的轻量级 Web 套接字实现",
 }
 local macro = {
+    ["proc-macro2"] = "编译器的“proc macro” API 的替代实现，用于将基于标记的库与过程宏用例分离。",
     ["darling"] = "一个 proc-macro 库，用于在实现自定义派生时将属性读取到结构中。",
     ["macro_railroad"] = "一个为 Rust 宏生成语法图的库",
     ["quote"] = "准引用宏引用！(...)",
@@ -547,11 +557,15 @@ local data_struct = {
     ["tinyvec"] = "`tinyvec` 提供 100% 安全的类 vec 数据结构。",
     ["tendril"] = "用于零拷贝解析的紧凑缓冲区/字符串类型",
     ["ouroboros"] = "简单、安全的自引用结构生成。",
-    ["moka"] = "简单、安全的自引用结构生成。",
+}
+local cache = {
+    ["moka"] = "受 java caffeine 启发的快速并发缓存库",
+    ["TinyUFO"] = "以tinylfu作为准入策略、s3-fifo作为逐出策略的内存缓存实现",
 }
 
 local all = vim.tbl_deep_extend(
     "force",
+    cache,
     test,
     data_struct,
     async,

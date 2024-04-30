@@ -6,6 +6,23 @@ return {
     config = function()
         local lspconfig, LSP = require("lspconfig"), require("public.lsp_attach")
 
+        local configs = require("lspconfig.configs")
+
+        -- Check if the config is already defined (useful when reloading this file)
+        if not configs.termuxls then
+            configs.termuxls = {
+                default_config = {
+                    cmd = { "termux-language-server" },
+                    filetypes = { "pkgbuild" },
+                    -- root_dir = function(fname)
+                    --     return lspconfig.util.find_git_ancestor(fname)
+                    -- end,
+                    single_file_support=true,
+                    settings = {},
+                },
+            }
+        end
+
         require("lspconfig.ui.windows").default_options.border = "single"
 
         lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {

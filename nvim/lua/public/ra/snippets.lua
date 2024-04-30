@@ -157,10 +157,10 @@ local prefix = {
         prefix = { "let-else" },
         body = {
             [[let ${1:var} = ${2:var} else {
-                ${3:return;}
+                return ${3};
             };$0]],
         },
-        description = "Insert a async call",
+        description = "let … else {…};",
         scope = "expr",
     },
     async = {
@@ -169,16 +169,6 @@ local prefix = {
             "async $0",
         },
         description = "Insert a async call",
-        scope = "expr",
-    },
-    unsafe = {
-        prefix = { "unsafe" },
-        body = {
-            "unsafe {",
-            "\t$1",
-            "}$0",
-        },
-        description = "Insert a unsafe call",
         scope = "expr",
     },
     thread_spawn = {
@@ -210,14 +200,6 @@ local prefix = {
         },
         description = "Insert a tokio::spawn call",
         requires = "tokio",
-        scope = "expr",
-    },
-    letm = {
-        prefix = { "letm" },
-        body = {
-            "let mut ${1:var} = $2;$0",
-        },
-        description = "let mut … = …;",
         scope = "expr",
     },
     -- ["return"] = {
@@ -268,26 +250,6 @@ local prefix = {
 }
 
 local friendly = {
-    assert = {
-        body = { "assert!(${1});" },
-        description = "assert!(…);",
-        prefix = "assert",
-    },
-    assert_eq = {
-        body = { "assert_eq!(${1}, ${2});" },
-        description = "assert_eq!(…, …);",
-        prefix = "assert_eq",
-    },
-    debug_assert_eq = {
-        body = { "debug_assert_eq!(${1}, ${2});" },
-        description = "debug_assert_eq!(…, …)",
-        prefix = "debug_assert_eq",
-    },
-    debug_assert_ne = {
-        body = { "debug_assert_ne!(${1}, ${2});" },
-        description = "debug_assert_ne!(…, …)",
-        prefix = "debug_assert_ne",
-    },
     bench = {
         body = {
             "#[bench]",
@@ -298,30 +260,18 @@ local friendly = {
         description = "#[bench]",
         prefix = "bench",
     },
-    concat_idents = {
-        body = { "concat_idents!(${1})" },
-        description = "concat_idents!(…)",
-        prefix = "concat_idents",
-    },
-    format = {
-        body = { 'format!("${1}"${2})' },
-        description = "format!(…)",
-        prefix = "format",
-    },
-    format_args = {
-        body = { 'format_args!("${1}"${2})' },
-        description = "format_args!(…)",
-        prefix = "format_args",
-    },
     ["inline-fn"] = {
         body = { "#[inline]", "pub fn ${1:name}() {", "    ${2:unimplemented!();}", "}" },
         description = "inlined function",
         prefix = "inline-fn",
     },
-    let = {
-        body = { "let ${1:var} = ${2:expr};" },
-        description = "let … = …;",
-        prefix = "letv",
+    letm = {
+        prefix = { "letm" },
+        body = {
+            "let mut ${1:var} = $2;$0",
+        },
+        description = "let mut … = …;",
+        scope = "expr",
     },
     match_opt = {
         body = {
@@ -343,26 +293,6 @@ local friendly = {
         description = "match … { … }",
         prefix = "match_res",
     },
-    option_env = {
-        body = { 'option_env!("${1}")' },
-        description = 'option_env!("…")',
-        prefix = "option_env",
-    },
-    panic = {
-        body = { 'panic!("${1}"${2});' },
-        description = "panic!(…);",
-        prefix = "panic",
-    },
-    print = {
-        body = { 'print!("$1"$2);$0' },
-        description = "print!(…);",
-        prefix = "print",
-    },
-    println = {
-        body = { 'println!("$1"$2);$0' },
-        description = "println!(…);",
-        prefix = "println",
-    },
     thread_local = {
         body = { "thread_local!(static ${1:STATIC}: ${2:Type} = ${4:init});" },
         description = "thread_local!(static …: … = …);",
@@ -372,16 +302,6 @@ local friendly = {
         body = { "try!(${1})" },
         description = "try!(…)",
         prefix = "try",
-    },
-    write = {
-        body = { 'write!(${1}, "${2}")' },
-        description = "write!(…)",
-        prefix = "write",
-    },
-    writeln = {
-        body = { 'writeln!(${1}, "${2}")' },
-        description = "writeln!(…, …)",
-        prefix = "writeln",
     },
 }
 

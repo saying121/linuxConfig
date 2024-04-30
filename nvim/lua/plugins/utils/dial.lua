@@ -131,6 +131,16 @@ return {
                 word = false,
                 cyclic = true,
             }),
+            augend.constant.new({
+                elements = { "left", "right" },
+                word = true,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = { "up", "down" },
+                word = true,
+                cyclic = true,
+            }),
         }
 
         -- if vim.bo.ft == "lua" then

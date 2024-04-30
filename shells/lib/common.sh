@@ -5,7 +5,6 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
 
-    alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
 
@@ -13,7 +12,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
     alias diff='diff --color=auto'
-    alias ip='ip --color=auto'
+    alias ip='ip -c=auto'
 
     export LESS_TERMCAP_mb=$'\E[1;31m'  # begin blink
     export LESS_TERMCAP_md=$'\E[1;36m'  # begin bold
@@ -121,7 +120,7 @@ fi
 
 if [[ $(command -v eza) ]]; then
     alias ls='eza -F --icons=always'
-    alias lsd='eza -FD --icons=always'
+    alias lsd='eza -F -D --icons=always'
     alias ll='eza -F -lHhig --time-style long-iso --icons=always --git'
     alias la='eza -F --all'
     alias lal='ll -a'
@@ -145,12 +144,12 @@ alias rewall="~/.linuxConfig/wallpaperengine/rewall.sh"
 # ImageMagick must be installed for icat to work.
 alias imgcat="wezterm imgcat"
 
-alias my_gpgme="sudo rm -R /var/lib/pacman/sync"
+alias gpgme_err="sudo rm -R /var/lib/pacman/sync"
 
 alias clhconf="~/.linuxConfig/scripts/configClash.sh"
-alias clhres="sudo systemctl restart clash-meta@$USER.service"
-alias clhstp="sudo systemctl stop clash-meta@$USER.service"
-alias clhsts="systemctl status clash-meta@$USER.service"
+alias clhres='sudo systemctl restart clash-meta@$USER.service'
+alias clhstp='sudo systemctl stop clash-meta@$USER.service'
+alias clhsts='systemctl status clash-meta@$USER.service'
 
 alias rm="trash"
 

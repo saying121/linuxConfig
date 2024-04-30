@@ -43,8 +43,6 @@ function _G.show_documentation()
         vim.cmd("h " .. vim.fn.expand("<cword>"))
     elseif vim.tbl_contains({ "man" }, vim.bo.filetype) then
         vim.cmd("Man " .. vim.fn.expand("<cword>"))
-    elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-        require("crates").show_popup()
     elseif not UfoHover() then
         -- vim.cmd([[Lspsaga hover_doc]])
         vim.lsp.buf.hover()

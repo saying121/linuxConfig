@@ -129,7 +129,7 @@ $aurPkg sddm-theme-aerial-git
 $pacMan pipewire-pulse bluez bluez-utils pulsemixer \
     xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
     pulseaudio-alsa pavucontrol
-$pacMan redshift-wayland-git
+$pacMan redshift
 
 # 锁屏
 $pacMan betterlockscreen xidlehook dex
@@ -197,8 +197,6 @@ fc-cache -fv
 # rofi
 $pacMan rofi-lbon-wayland
 ~/.linuxConfig/rofi/install-rofi-theme.sh
-
-$aurPkg konsave
 
 # gnome 显示效果好一点
 $pacMan polkit polkit-qt5 polkit-gnome # polkit-kde-agent

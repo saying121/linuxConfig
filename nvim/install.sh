@@ -12,10 +12,14 @@ $pacMan fzf ripgrep fd lldb translate-shell \
     neovim luarocks shellcheck \
     zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-ps \
     typst deno tesseract actionlint \
-    mold lld cargo-flamegraph sccache silicon
+    mold lld sccache silicon
 $pacMan ruff-lsp vim-language-server lua-language-server bash-language-server \
     gopls yaml-language-server typescript-language-server jdtls marksman \
-    texlab typst-lsp revive tidy cargo-audit
+    texlab typst-lsp revive tidy
+
+$pacMan cargo-flamegraph cargo-binstall cargo-audit cargo-machete cargo-update \
+    cargo-nextest grcov cargo-llvm-cov
+
 $aurPkg golines
 $pacMan sqlfluff vint
 $pacMan prettier stylua
@@ -33,27 +37,26 @@ $pacMan python3 python-pip python-pynvim python-pipenv python-pylsp-rope neovim-
 
 $pacMan rustup
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
-rustup install stable beta nightly
+rustup install stable nightly
 rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain stable
-rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain nightly
-rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview miri --toolchain beta
+rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview miri --toolchain nightly
 rustup default nightly
+
 # 切换 crates 源
-cargo install crm
+cargo binstall crm
 ~/.cargo/bin/crm use rsproxy
-# `cargo install-update -h`,neotest-rust  用到
-cargo install cargo-update cargo-nextest grcov cargo-cache tokio-console sea-orm-cli
+cargo binstall cargo-cache tokio-console sea-orm-cli cargo-export
 # criterion benchmark 会用
 $pacMan gnuplot
 
 $pacMan perf
-cargo install flamegraph
+cargo binstall flamegraph
 
 # rust 交叉编译
 rustup target add x86_64-pc-windows-gnu aarch64-apple-darwin x86_64-apple-darwin
 rustup toolchain install stable-x86_64-pc-windows-gnu stable-aarch64-apple-darwin stable-x86_64-apple-darwin --force-non-host
 $aurPkg mingw-w64-gcc osxcross-git
-cargo install cargo-zigbuild
+cargo binstall cargo-zigbuild
 
 if [[ $(grep -c "osx-ndk-x86" /etc/profile) == 0 ]]; then
     # shellcheck disable=2016
@@ -68,7 +71,7 @@ fi
 
 # $aurPkg libldap24 mssql-scripter
 
-$aurPkg rime-ls rime-essay
+# $aurPkg rime-ls rime-essay
 
 $pacMan texlive-core texlive-bin
 
@@ -81,8 +84,6 @@ fnm default 18
 
 sudo npm i -g neovim npm-check-updates
 
-# sudo npm install --save-dev --save-exact prettier
-
 # 安装插件
 # if [[ ! -d ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim ]]; then
 #     git clone https://github.com/Shougo/dein.vim ~/.local/share/vim/dein/repos/github.com/Shougo/dein.vim
@@ -91,7 +92,7 @@ sudo npm i -g neovim npm-check-updates
 # vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
 
 # 给lldb配置runInTerminal
-echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+# echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
 
 if [[ $(grep -c mason /etc/profile) == 0 ]]; then
     # shellcheck disable=2016

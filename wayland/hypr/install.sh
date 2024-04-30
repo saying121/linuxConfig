@@ -15,7 +15,7 @@ aurPkg='yay -S --needed --noconfirm'
 $pacMan hyprland-nvidia \
     waybar otf-font-awesome \
     cliphist wl-clipboard \
-    swaylock-effects swayidle \
+    swaylock-effects hypridle \
     qt5-wayland qt6-wayland \
     xdg-desktop-portal-hyprland-git xdg-desktop-portal \
     brightnessctl wlsunset
@@ -26,4 +26,4 @@ $pacMan pipewire wireplumber slurp grim
 $aurPkg flameshot-git gojq satty-bin
 
 # xrandr-wlr-randr,xprop-wdisplays
-$aurPkg wlr-randr wl-color-picker wl-delicolour-picker-git hyprpicker-git
+$aurPkg wlr-randr wl-color-picker wl-delicolour-picker-git hyprpicker-git hyprprop-git

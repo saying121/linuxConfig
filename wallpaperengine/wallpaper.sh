@@ -41,7 +41,7 @@ while true; do
     # 在每个连接的显示器上输出
     for item in $screens; do
         # nohup linux-wallpaperengine --silent --assets-dir $assets --screen-root $item $id & 2>&1 >/tmp/wallpaper.log
-        linux-wallpaperengine --no-fullscreen-pause --silent --assets-dir "$assets" --screen-root "$item" "$id" & # >/dev/null &
+        linux-wallpaperengine --fps 30 --no-fullscreen-pause --silent --screen-root "$item" "$id" & # >/dev/null &
     done
 
     sleep $((60 * 40))

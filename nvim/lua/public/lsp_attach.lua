@@ -28,9 +28,9 @@ M.on_attach = function(client, bufnr)
     -- local cap = client.server_capabilities or {}
 
     if client.supports_method(methods.textDocument_inlayHint, { bufnr = bufnr }) then
-        local _ = pcall(lsp.inlay_hint.enable, bufnr, true)
+        local _ = pcall(lsp.inlay_hint.enable, true, { bufnr = bufnr })
         keymap("n", "<leader>ih", function()
-            lsp.inlay_hint.enable(bufnr, not lsp.inlay_hint.is_enabled())
+            lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled(), { bufnr = bufnr })
         end)
     end
 
@@ -82,7 +82,9 @@ M.on_attach = function(client, bufnr)
         api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
             group = group_name,
             buffer = bufnr,
-            callback = lsp.codelens.refresh,
+            callback = function()
+                lsp.codelens.refresh({ bufnr = 0 })
+            end,
         })
     end
 
