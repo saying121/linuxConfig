@@ -8,13 +8,14 @@ return {
     },
     config = function()
         -- local home = vim.env.HOME
-        local cache = vim.fn.stdpath("cache")
+        local vfn = vim.fn
+        local cache = vfn.stdpath("cache")
 
         local WORKSPACE_PATH = cache .. "/jdtls_workspace/"
         local OS
-        if vim.fn.has("mac") == 1 then
+        if vfn.has("mac") == 1 then
             OS = "mac"
-        elseif vim.fn.has("unix") == 1 then
+        elseif vfn.has("unix") == 1 then
             OS = "linux"
         else
             vim.notify("Unsupported system")
@@ -28,11 +29,11 @@ return {
         local bundles = {}
 
         -- add java test & debugger into the bundles
-        vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/extension/server/*.jar"), "\n"))
+        vim.list_extend(bundles, vim.split(vfn.glob(java_test_path .. "/extension/server/*.jar"), "\n"))
         vim.list_extend(
             bundles,
             vim.split(
-                vim.fn.glob(java_debug_adapter_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"),
+                vfn.glob(java_debug_adapter_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"),
                 "\n"
             )
         )
@@ -42,7 +43,7 @@ return {
         local root_dir = require("jdtls.setup").find_root(root_markers)
 
         -- workspace dir
-        local project_name = root_dir or vim.fn.getcwd()
+        local project_name = root_dir or vfn.getcwd()
         local workspace_dir = WORKSPACE_PATH .. project_name
         local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
         extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -71,7 +72,7 @@ return {
                 "--add-modules=ALL-SYSTEM",
                 "--add-opens", "java.base/java.util=ALL-UNNAMED",
                 "--add-opens", "java.base/java.lang=ALL-UNNAMED",
-                "-jar", vim.fn.glob(install_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
+                "-jar", vfn.glob(install_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
                 "-configuration", install_path .. "/config_" .. OS,
                 "-data", workspace_dir,
             },

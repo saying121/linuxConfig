@@ -971,9 +971,9 @@ for name, describe in pairs(all) do
                 priority = 30000,
                 dscr = describe,
             },
-            fmt(name .. [[ = { version = "<>" }]], {
+            fmta(name .. [[ = { version = "<>" }]], {
                 i(1, ""),
-            }, { delimiters = "<>" })
+            })
         )
     )
 end

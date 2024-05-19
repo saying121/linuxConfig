@@ -1,3 +1,5 @@
+local ts  = vim.treesitter
+
 ---@type LazySpec
 return {
     "nvim-treesitter/nvim-treesitter",
@@ -10,10 +12,10 @@ return {
 
         local ft = my_ft.filename["Cargo.toml"]
         if type(ft) == "string" then
-            vim.treesitter.language.register("toml", ft)
+            ts.language.register("toml", ft)
         end
-        vim.treesitter.language.register("bash", "PKGBUILD")
-        vim.treesitter.language.register("bash", "zsh")
+        ts.language.register("bash", "PKGBUILD")
+        ts.language.register("bash", "zsh")
 
         -- 如果没有可用高亮就用默认的
         if require("nvim-treesitter.parsers").available_parsers()[vim.bo.filetype] == nil then

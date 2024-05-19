@@ -1,3 +1,4 @@
+local api = vim.api
 ---@type LazySpec
 return {
     "saecki/crates.nvim",
@@ -7,8 +8,8 @@ return {
         "BufNewFile Cargo.toml",
     },
     init = function()
-        vim.api.nvim_create_autocmd({ "BufEnter" }, {
-            group = vim.api.nvim_create_augroup("CratesKeyMap", { clear = true }),
+        api.nvim_create_autocmd({ "BufEnter" }, {
+            group = api.nvim_create_augroup("CratesKeyMap", { clear = true }),
             pattern = { "Cargo.toml" },
             callback = function()
                 local crates = require("crates")
@@ -30,8 +31,8 @@ return {
     config = function()
         local crates = require("crates")
 
-        vim.api.nvim_create_autocmd("BufRead", {
-            group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
+        api.nvim_create_autocmd("BufRead", {
+            group = api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
             pattern = "Cargo.toml",
             callback = function()
                 require("cmp").setup.buffer({ sources = { { name = "crates" } } })
@@ -48,13 +49,16 @@ return {
                 completion = true,
                 hover = true,
             },
-            src = {
-                cmp = { enabled = false },
-                insert_closing_quote = true,
-                text = {
-                    prerelease = "  pre-release ",
-                    yanked = "  yanked ",
+            completion = {
+                cmp = {
+                    enabled = true,
                 },
+                crates = {
+                    enabled = true, -- disabled by default
+                    max_results = 5, -- The maximum number of search results to display
+                    min_chars = 3, -- The minimum number of charaters to type before completions begin appearing
+                },
+                insert_closing_quote = true,
             },
             smart_insert = true,
             insert_closing_quote = false,
@@ -66,6 +70,7 @@ return {
             max_parallel_requests = 80,
             notification_title = "Crates",
             disable_invalid_feature_diagnostic = false,
+            open_programs = { "xdg-open", "open" },
             popup = {
                 autofocus = true,
                 copy_register = "+",

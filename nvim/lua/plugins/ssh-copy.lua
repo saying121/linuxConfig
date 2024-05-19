@@ -1,3 +1,4 @@
+local api = vim.api
 ---@type LazySpec
 return {
     "ojroques/nvim-osc52",
@@ -9,7 +10,7 @@ return {
             end
         end
 
-        vim.api.nvim_create_autocmd("TextYankPost", { callback = copy })
+        api.nvim_create_autocmd("TextYankPost", { callback = copy })
 
         -- vim.keymap.set("n", "<leader>c", require("osc52").copy_operator, { expr = true })
         -- vim.keymap.set("n", "<leader>cc", "<leader>c_", { remap = true })

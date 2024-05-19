@@ -1,3 +1,4 @@
+local keymap = vim.keymap.set
 ---@type LazySpec
 return {
     "nvim-tree/nvim-tree.lua",
@@ -28,7 +29,7 @@ return {
     },
     version = "*",
     config = function()
-        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
+        keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
         -- disable netrw at the very start of your init.lua (strongly advised)
         -- vim.g.loaded_netrw = 1
         -- vim.g.loaded_netrwPlugin = 1
@@ -43,9 +44,9 @@ return {
             -- put some default mappings here
             api.config.mappings.default_on_attach(bufnr)
 
-            vim.keymap.set("n", "o", api.tree.change_root_to_node, opts("CD"))
-            vim.keymap.set("n", "t", api.node.open.tab, opts("Open: New Tab"))
-            vim.keymap.set("n", "u", api.tree.change_root_to_parent, opts("Up"))
+            keymap("n", "o", api.tree.change_root_to_node, opts("CD"))
+            keymap("n", "t", api.node.open.tab, opts("Open: New Tab"))
+            keymap("n", "u", api.tree.change_root_to_parent, opts("Up"))
         end
 
         require("nvim-tree").setup({

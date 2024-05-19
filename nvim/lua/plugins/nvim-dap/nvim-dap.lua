@@ -1,3 +1,7 @@
+local vfn = vim.fn
+local api = vim.api
+local keymap, opts = vim.keymap.set, { noremap = true, silent = true }
+
 ---@type LazySpec
 return {
     "mfussenegger/nvim-dap",
@@ -19,26 +23,25 @@ return {
         -- require("dap-conf.lldb")
         -----------------------------------------------------
 
-        vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
-        vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "", linehl = "", numhl = "" })
-        vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "", linehl = "", numhl = "" }) -- 
-        -- vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
-        vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "", linehl = "", numhl = "" })
+        vfn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
+        vfn.sign_define("DapBreakpointCondition", { text = " ", texthl = "", linehl = "", numhl = "" })
+        vfn.sign_define("DapLogPoint", { text = " ", texthl = "", linehl = "", numhl = "" }) -- 
+        -- vnf.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
+        vfn.sign_define("DapBreakpointRejected", { text = " ", texthl = "", linehl = "", numhl = "" })
 
-        -- vim.fn.sign_define("DapBreakpointCondition", { text = "🐛", texthl = "", linehl = "", numhl = "" })
-        -- vim.fn.sign_define("DapLogPoint", { text = "🇱", texthl = "", linehl = "", numhl = "" }) -- 
-        vim.fn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" })
-        -- vim.fn.sign_define("DapBreakpointRejected", { text = "⚠️", texthl = "", linehl = "", numhl = "" }) -- ✋
+        -- vnf.sign_define("DapBreakpointCondition", { text = "🐛", texthl = "", linehl = "", numhl = "" })
+        -- vnf.sign_define("DapLogPoint", { text = "🇱", texthl = "", linehl = "", numhl = "" }) -- 
+        vfn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" })
+        -- vnf.sign_define("DapBreakpointRejected", { text = "⚠️", texthl = "", linehl = "", numhl = "" }) -- ✋
 
         local dap, widgets = require("dap"), require("dap.ui.widgets")
-        local keymap, opts = vim.keymap.set, { noremap = true, silent = true }
 
         keymap("n", "<space>b", dap.toggle_breakpoint, opts)
         keymap("n", "<space>B", function()
-            dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+            dap.set_breakpoint(vfn.input("Breakpoint condition: "))
         end, opts)
         keymap("n", "<space>lp", function()
-            dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+            dap.set_breakpoint(nil, nil, vfn.input("Log point message: "))
         end, opts)
 
         keymap({ "n", "i", "t" }, "<F1>", dap.continue, opts)
@@ -70,22 +73,22 @@ return {
         -- 自动开启ui
         dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open()
-            vim.api.nvim_command("DapVirtualTextEnable")
+            api.nvim_command("DapVirtualTextEnable")
             _G.dapui_for_K = true
         end
 
         dap.listeners.before.event_terminated["dapui_config"] = function()
-            vim.api.nvim_command("DapVirtualTextEnable")
+            api.nvim_command("DapVirtualTextEnable")
             -- dapui.close()
             _G.dapui_for_K = false
         end
         dap.listeners.before.event_exited["dapui_config"] = function()
-            vim.api.nvim_command("DapVirtualTextEnable")
+            api.nvim_command("DapVirtualTextEnable")
             -- dapui.close()
             _G.dapui_for_K = false
         end
         dap.listeners.before.disconnect["dapui_config"] = function()
-            vim.api.nvim_command("DapVirtualTextEnable")
+            api.nvim_command("DapVirtualTextEnable")
             -- dapui.close()
             _G.dapui_for_K = false
         end

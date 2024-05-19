@@ -1,3 +1,4 @@
+        local api = vim.api
 ---@type LazySpec
 return {
     "toppair/peek.nvim",
@@ -9,8 +10,8 @@ return {
     config = function()
         local peek = require("peek")
 
-        vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-        vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+        api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+        api.nvim_create_user_command("PeekClose", require("peek").close, {})
 
         peek.setup({
             auto_load = false, -- whether to automatically load preview when

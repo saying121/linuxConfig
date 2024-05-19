@@ -1,3 +1,6 @@
+local api = vim.api
+local vfn = vim.fn
+
 ---@type LazySpec
 return {
     "rest-nvim/rest.nvim",
@@ -10,13 +13,13 @@ return {
         keymap("n", "<leader>rp", "<Plug>RestNvimPreview")
         keymap("n", "<leader>rl", "<Plug>RestNvimLast")
 
-        vim.api.nvim_create_user_command("RestNvim", function()
+        api.nvim_create_user_command("RestNvim", function()
             require("rest-nvim").run()
         end, {})
-        vim.api.nvim_create_user_command("RestNvimPreview", function()
+        api.nvim_create_user_command("RestNvimPreview", function()
             require("rest-nvim").run(true)
         end, {})
-        vim.api.nvim_create_user_command("RestNvimLast", function()
+        api.nvim_create_user_command("RestNvimLast", function()
             require("rest-nvim").last()
         end, {})
 
@@ -57,25 +60,23 @@ return {
                     formatters = {
                         json = "jq",
                         html = function(body)
-                            if vim.fn.executable("tidy") == 0 then
+                            if vfn.executable("tidy") == 0 then
                                 return body, { found = false, name = "tidy" }
                             end
-                            local fmt_body = vim.fn
-                                .system({
-                                    "tidy",
-                                    "-i",
-                                    "-q",
-                                    "--tidy-mark",
-                                    "no",
-                                    "--show-body-only",
-                                    "auto",
-                                    "--show-errors",
-                                    "0",
-                                    "--show-warnings",
-                                    "0",
-                                    "-",
-                                }, body)
-                                :gsub("\n$", "")
+                            local fmt_body = vfn.system({
+                                "tidy",
+                                "-i",
+                                "-q",
+                                "--tidy-mark",
+                                "no",
+                                "--show-body-only",
+                                "auto",
+                                "--show-errors",
+                                "0",
+                                "--show-warnings",
+                                "0",
+                                "-",
+                            }, body):gsub("\n$", "")
 
                             return fmt_body, { found = true, name = "tidy" }
                         end,

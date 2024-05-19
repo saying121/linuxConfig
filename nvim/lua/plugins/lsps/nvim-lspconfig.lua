@@ -1,3 +1,5 @@
+local vfn = vim.fn
+
 ---@type LazySpec
 return {
     "neovim/nvim-lspconfig",
@@ -8,16 +10,15 @@ return {
 
         local configs = require("lspconfig.configs")
 
-        -- Check if the config is already defined (useful when reloading this file)
         if not configs.termuxls then
             configs.termuxls = {
                 default_config = {
                     cmd = { "termux-language-server" },
-                    filetypes = { "pkgbuild" },
+                    filetypes = { "PKGBUILD" },
                     -- root_dir = function(fname)
                     --     return lspconfig.util.find_git_ancestor(fname)
                     -- end,
-                    single_file_support=true,
+                    single_file_support = true,
                     settings = {},
                 },
             }
@@ -36,14 +37,14 @@ return {
         })
 
         -- 要禁用某个 lsp 就去改后缀名
-        local lsp_path = vim.fn.stdpath("config") .. "/lua/lsp"
-        local file_name_list = vim.fn.readdir(lsp_path)
+        local lsp_path = vfn.stdpath("config") .. "/lua/lsp"
+        local file_name_list = vfn.readdir(lsp_path)
 
         for _, the_file_name in ipairs(file_name_list) do
             if vim.endswith(the_file_name, ".lua") then
                 local lsp_name = string.sub(the_file_name, 1, #the_file_name - 4)
 
-                ---@type lsp.ClientConfig
+                ---@type vim.lsp.ClientConfig
                 local configs = vim.tbl_deep_extend("force", {
                     on_attach = LSP.on_attach,
                 }, require("lsp." .. lsp_name))

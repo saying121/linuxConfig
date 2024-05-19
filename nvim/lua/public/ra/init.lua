@@ -281,7 +281,7 @@ return {
             server = nil,
         },
         references = {
-            excludeImports = false, -- Exclude imports from find-all-references.
+            excludeImports = true, -- Exclude imports from find-all-references.
             excludeTests = false, -- Exclude tests from find-all-references.
         },
         rename = { allowExternalItems = false }, -- Allow renaming of items not belonging to the loaded workspaces.

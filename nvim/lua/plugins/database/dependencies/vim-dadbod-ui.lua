@@ -1,3 +1,5 @@
+local api = vim.api
+local vfn = vim.fn
 ---@type LazySpec
 return {
     "kristijanhusak/vim-dadbod-ui",
@@ -18,7 +20,7 @@ return {
 
         -- :h Db_ui_buffer_name_generator
         vim.g.Db_ui_buffer_name_generator = function(opt)
-            local time = vim.fn.strftime("%Y-%m-%d")
+            local time = vfn.strftime("%Y-%m-%d")
             if string.len(opt.table) == 0 then
                 return opt.label .. "-" .. time .. "." .. opt.filetype
             end
@@ -52,8 +54,8 @@ return {
             connection_ok = "✓",
             connection_error = "✕",
         }
-        -- vim.fn['db_ui#connections_list']()
-        -- vim.fn["db_ui#statusline"]({
+        -- vfn['db_ui#connections_list']()
+        -- vfn["db_ui#statusline"]({
         --     prefix = "DB: ",
         --     separator = " -> ",
         --     show = { "db_name", "schema", "table" },
@@ -63,7 +65,7 @@ return {
             local query_str
 
             if string.len(table_name) == 0 then
-                table_name = vim.fn.input("Enter table name:", "")
+                table_name = vfn.input("Enter table name:", "")
                 query_str = string.format(
                     "SELECT column_name, data_type FROM information_schema.columns WHERE table_name='%s'",
                     table_name
@@ -77,7 +79,7 @@ return {
             end
 
             ---@type table<integer, string[]>
-            local rows = vim.fn["db_ui#query"](query_str)
+            local rows = vfn["db_ui#query"](query_str)
             local len = #rows
 
             ---@type string|table
@@ -98,9 +100,9 @@ return {
             lines = lines .. last .. ");"
             lines = vim.split(lines, "\n")
 
-            local line_count = vim.api.nvim_buf_line_count(0)
+            local line_count = api.nvim_buf_line_count(0)
 
-            vim.api.nvim_buf_set_lines(0, line_count, line_count, false, lines)
+            api.nvim_buf_set_lines(0, line_count, line_count, false, lines)
         end
 
         vim.keymap.set("n", "<leader>is", gen_insert)

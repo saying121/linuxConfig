@@ -1,3 +1,5 @@
+local api = vim.api
+local vfn = vim.fn
 ---@type LazySpec
 return {
     "nvim-neotest/neotest",
@@ -22,7 +24,7 @@ return {
         local keymap, opts = vim.keymap.set, { silent = true, noremap = true }
 
         keymap("n", "<leader>tf", function()
-            nt.run.run(vim.fn.expand("%"))
+            nt.run.run(vfn.expand("%"))
         end, opts)
 
         keymap("n", "<leader>tr", function()
@@ -49,8 +51,8 @@ return {
             nt.jump.prev({ status = "failed" })
         end, opts)
 
-        vim.api.nvim_create_autocmd({ "FileType" }, {
-            group = vim.api.nvim_create_augroup("NeotestKeyMap", { clear = true }),
+        api.nvim_create_autocmd({ "FileType" }, {
+            group = api.nvim_create_augroup("NeotestKeyMap", { clear = true }),
             pattern = { "neotest-output" },
             callback = function()
                 local opts1 = { silent = true, noremap = true, buffer = true }

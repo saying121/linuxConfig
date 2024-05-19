@@ -1,3 +1,5 @@
+local api = vim.api
+local vcmd = vim.cmd
 ---@type LazySpec
 return {
     "mrcjkb/rustaceanvim",
@@ -43,7 +45,7 @@ return {
                 on_initialized = function(health)
                     if health.health == "ok" then
                         vim.lsp.codelens.refresh()
-                        vim.cmd.RustLsp("flyCheck")
+                        vcmd.RustLsp("flyCheck")
                     elseif health.health == "warning" then
                         vim.notify("ra health" .. health.health, vim.log.levels.WARN)
                     elseif health.health == "error" then
@@ -69,8 +71,8 @@ return {
                     ---@see vim.api.nvim_open_win()
                     ---@type string[][] | string
                     border = "rounded",
-                    max_width = math.floor(vim.api.nvim_win_get_width(0) * 0.7),
-                    max_height = math.floor(vim.api.nvim_win_get_height(0) * 0.7),
+                    max_width = math.floor(api.nvim_win_get_width(0) * 0.7),
+                    max_height = math.floor(api.nvim_win_get_height(0) * 0.7),
 
                     --- whether the floating window gets automatically focused
                     --- default: false
@@ -83,17 +85,17 @@ return {
             server = {
                 ---@type boolean
                 standalone = true,
-                ---@param client lsp.Client
+                ---@param client vim.lsp.Client
                 ---@param bufnr integer
                 on_attach = function(client, bufnr)
                     local group_name = "RustFlyCheck"
-                    vim.api.nvim_create_augroup(group_name, { clear = false })
-                    vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group_name })
-                    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+                    api.nvim_create_augroup(group_name, { clear = false })
+                    api.nvim_clear_autocmds({ buffer = bufnr, group = group_name })
+                    api.nvim_create_autocmd({ "BufWritePost" }, {
                         group = group_name,
                         buffer = bufnr,
                         callback = function()
-                            vim.cmd.RustLsp("flyCheck") -- defaults to 'run'
+                            vcmd.RustLsp("flyCheck") -- defaults to 'run'
                         end,
                     })
 
@@ -119,44 +121,47 @@ return {
                             end
                         end
                         if found then
-                            vim.cmd.RustLsp("explainError")
+                            vcmd.RustLsp("explainError")
                         else
-                            vim.cmd.RustLsp("renderDiagnostic")
+                            vcmd.RustLsp("renderDiagnostic")
                         end
                     end)
 
                     keymap("n", "<M-f>", function()
-                        vim.cmd.RustLsp({ "hover", "actions" })
+                        vcmd.RustLsp({ "hover", "actions" })
                     end)
                     keymap("x", "K", function()
-                        vim.cmd.RustLsp({ "hover", "range" })
+                        vcmd.RustLsp({ "hover", "range" })
                     end)
                     keymap("n", "mk", function()
-                        vim.cmd.RustLsp({ "moveItem", "up" })
+                        vcmd.RustLsp({ "moveItem", "up" })
                     end)
                     keymap("n", "mj", function()
-                        vim.cmd.RustLsp({ "moveItem", "down" })
+                        vcmd.RustLsp({ "moveItem", "down" })
                     end)
                     keymap("n", "<leader>R", function()
-                        vim.cmd.RustLsp("runnables")
+                        vcmd.RustLsp("runnables")
                     end)
                     keymap("n", "<leader>D", function()
-                        vim.cmd.RustLsp({
+                        vcmd.RustLsp({
                             "debuggables" --[[ , 'last' ]],
                         })
                     end)
                     keymap("n", "<C-g>", function()
-                        vim.cmd.RustLsp("openCargo")
+                        vcmd.RustLsp("openCargo")
+                    end)
+                    keymap("n", "<C-S-m>", function()
+                        vcmd.RustLsp("rebuildProcMacros")
                     end)
                     keymap("n", "<S-CR>", function()
-                        vim.cmd.RustLsp("expandMacro")
+                        vcmd.RustLsp("expandMacro")
                     end)
                     keymap("n", "<M-S-CR>", function()
-                        vim.cmd.RustLsp("codeAction")
+                        vcmd.RustLsp("codeAction")
                     end)
 
                     keymap({ "n", "x" }, "J", function()
-                        vim.cmd.RustLsp("joinLines")
+                        vcmd.RustLsp("joinLines")
                     end)
                 end,
                 default_settings = require("public.ra"),
@@ -183,6 +188,6 @@ return {
             dap = { adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path) },
         }
 
-        vim.cmd.e()
+        vcmd.e()
     end,
 }

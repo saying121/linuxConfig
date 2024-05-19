@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 
-export ALL_PROXY=http://127.0.0.1:7890
-export HTTPS_PROXY=http://127.0.0.1:7890
-export HTTP_PROXY=http://127.0.0.1:7890
+# export ALL_PROXY=http://127.0.0.1:7897
+# export HTTPS_PROXY=http://127.0.0.1:7897
+# export HTTP_PROXY=http://127.0.0.1:7897
 
 pacMan='sudo pacman -S --needed --noconfirm'
 aurPkg='yay -S --needed --noconfirm'
 
+# $pacMan neovim
 $pacMan fzf ripgrep fd lldb translate-shell \
     jdk17-openjdk go cmake \
-    neovim luarocks shellcheck \
-    zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-ps \
+    luarocks shellcheck \
+    zathura zathura-djvu zathura-ps zathura-ps \
     typst deno tesseract actionlint \
     mold lld sccache silicon
+# zathura-pdf-mupdf
 $pacMan ruff-lsp vim-language-server lua-language-server bash-language-server \
     gopls yaml-language-server typescript-language-server jdtls marksman \
-    texlab typst-lsp revive tidy
+    texlab typst-lsp revive tidy platformio-core platformio-core-udev biome shfmt
+
+$aurPkg basedpyright-git
 
 $pacMan cargo-flamegraph cargo-binstall cargo-audit cargo-machete cargo-update \
     cargo-nextest grcov cargo-llvm-cov
@@ -29,11 +33,12 @@ $aurPkg rust-lolcat-git inferno
 $aurPkg lf
 
 treesitters=("c" "lua" "bash" "query" "vimdoc" "python" "markdown")
-for lang  in "${treesitters[@]}"; do
+for lang in "${treesitters[@]}"; do
     $pacMan tree-sitter-"$lang"
 done
 
-$pacMan python3 python-pip python-pynvim python-pipenv python-pylsp-rope neovim-remote frogmouth python-neovim
+$pacMan python3 python-pip python-pynvim python-pipenv neovim-remote frogmouth python-neovim
+$aurPkg python-pylsp-all
 
 $pacMan rustup
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
@@ -43,20 +48,20 @@ rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-t
 rustup default nightly
 
 # 切换 crates 源
-cargo binstall crm
+cargo binstall -y crm
 ~/.cargo/bin/crm use rsproxy
-cargo binstall cargo-cache tokio-console sea-orm-cli cargo-export
+cargo binstall -y cargo-cache tokio-console sea-orm-cli cargo-export
 # criterion benchmark 会用
 $pacMan gnuplot
 
 $pacMan perf
-cargo binstall flamegraph
+cargo binstall -y flamegraph
 
 # rust 交叉编译
-rustup target add x86_64-pc-windows-gnu aarch64-apple-darwin x86_64-apple-darwin
-rustup toolchain install stable-x86_64-pc-windows-gnu stable-aarch64-apple-darwin stable-x86_64-apple-darwin --force-non-host
-$aurPkg mingw-w64-gcc osxcross-git
-cargo binstall cargo-zigbuild
+# rustup target add x86_64-pc-windows-gnu aarch64-apple-darwin x86_64-apple-darwin
+# rustup toolchain install stable-x86_64-pc-windows-gnu stable-aarch64-apple-darwin stable-x86_64-apple-darwin --force-non-host
+# $aurPkg mingw-w64-gcc osxcross-git
+# cargo binstall -y cargo-zigbuild
 
 if [[ $(grep -c "osx-ndk-x86" /etc/profile) == 0 ]]; then
     # shellcheck disable=2016

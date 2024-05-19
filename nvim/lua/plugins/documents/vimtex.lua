@@ -1,3 +1,4 @@
+local vfn = vim.fn
 local ft = {
     tex = "tex",
     bib = "bib",
@@ -32,7 +33,7 @@ return {
         vim.g.vimtex_compiler_method = "latexmk"
         vim.g.vimtex_compiler_latexmk = {
             -- 编译目标目录
-            build_dir = vim.fn.getcwd() .. "/build_tex/" .. vim.fn.expand("%:t:r"),
+            build_dir = vfn.getcwd() .. "/build_tex/" .. vfn.expand("%:t:r"),
         }
 
         -- Most VimTeX mappings rely on localleader and this can be changed with the

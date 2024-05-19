@@ -46,7 +46,7 @@ return {
                 -- CodeLens
                 -- WARNING: Experimental feature also in VSCode, because it might hit performance of server.
                 -- possible values: ("off"|"all"|"implementations_only"|"references_only")
-                code_lens = "all",
+                code_lens = "off",
                 -- by default code lenses are displayed on all referencable values and for some of you it can
                 -- be too much this option reduce count of them by removing member references from lenses
                 disable_member_code_lens = true,

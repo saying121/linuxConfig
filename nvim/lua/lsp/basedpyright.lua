@@ -3,7 +3,7 @@ local LSP = require("public.lsp_attach")
 return {
     single_file_support = true,
     settings = {},
-    ---@param client lsp.Client
+    ---@param client vim.lsp.Client
     ---@param bufnr integer
     on_attach = function(client,bufnr)
         LSP.on_attach(client, bufnr)

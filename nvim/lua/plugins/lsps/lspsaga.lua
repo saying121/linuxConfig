@@ -1,3 +1,4 @@
+local vcmd = vim.cmd
 ---@type LazySpec
 return {
     "glepnir/lspsaga.nvim",
@@ -27,10 +28,10 @@ return {
             },
         }
         keymap("n", "<Leader>ci", function()
-            vim.cmd.Lspsaga("incoming_calls")
+            vcmd.Lspsaga("incoming_calls")
         end)
         keymap("n", "<Leader>co", function()
-            vim.cmd.Lspsaga("outgoing_calls")
+            vcmd.Lspsaga("outgoing_calls")
         end)
 
         local code_action = {
@@ -44,7 +45,7 @@ return {
             },
         }
         keymap({ "n", "x" }, "<M-CR>", function()
-            vim.cmd.Lspsaga("code_action")
+            vcmd.Lspsaga("code_action")
         end)
 
         local definition = {
@@ -56,16 +57,16 @@ return {
             close = "<C-c>k",
         }
         keymap("n", "gd", function()
-            vim.cmd.Lspsaga("goto_definition")
+            vcmd.Lspsaga("goto_definition")
         end)
         keymap("n", "gD", function()
-            vim.cmd.Lspsaga("peek_definition")
+            vcmd.Lspsaga("peek_definition")
         end)
         keymap("n", "gy", function()
-            vim.cmd.Lspsaga("goto_type_definition")
+            vcmd.Lspsaga("goto_type_definition")
         end)
         keymap("n", "gY", function()
-            vim.cmd.Lspsaga("peek_type_definition")
+            vcmd.Lspsaga("peek_type_definition")
         end)
 
         -- vim.diagnostic.config({
@@ -95,7 +96,7 @@ return {
         -- You can pass argument ++unfocus to
         -- unfocus the show_line_diagnostics floating window
         keymap("n", "<space>gg", function()
-            vim.cmd.Lspsaga("show_line_diagnostics")
+            vcmd.Lspsaga("show_line_diagnostics")
         end)
 
         -- keymap("n", "<space>sw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
@@ -103,10 +104,10 @@ return {
         -- keymap("n", "<space>ll", "<cmd>Lspsaga show_buf_diagnostics<CR>")
         -- Diagnostic jump
         keymap("n", "[d", function()
-            vim.cmd.Lspsaga("diagnostic_jump_prev")
+            vcmd.Lspsaga("diagnostic_jump_prev")
         end)
         keymap("n", "]d", function()
-            vim.cmd.Lspsaga("diagnostic_jump_next")
+            vcmd.Lspsaga("diagnostic_jump_next")
         end)
         -- Diagnostic jump with filters such as only jumping to an error
         keymap("n", "[e", function()
@@ -134,16 +135,16 @@ return {
         }
         -- you can use <C-t> to jump back
         keymap("n", "gh", function()
-            vim.cmd.Lspsaga("finder")
+            vcmd.Lspsaga("finder")
         end)
         keymap("n", "gi", function()
-            vim.cmd.Lspsaga({ "finder", "imp" })
+            vcmd.Lspsaga({ "finder", "imp" })
         end)
         keymap("n", "gH", function()
-            vim.cmd.Lspsaga({ "finder", "def+ref+imp" })
+            vcmd.Lspsaga({ "finder", "def+ref+imp" })
         end)
         keymap("n", "gF", function()
-            vim.cmd.Lspsaga({ "finder", "def" })
+            vcmd.Lspsaga({ "finder", "def" })
         end)
 
         local hover = {
@@ -154,7 +155,7 @@ return {
         }
         -- If you want to jump to the hover window you should use the wincmd command "<C-w>w"
         keymap("n", "ck", function()
-            vim.cmd.Lspsaga({ "hover_doc", "++keep" })
+            vcmd.Lspsaga({ "hover_doc", "++keep" })
         end)
 
         local outline = {
@@ -171,7 +172,7 @@ return {
             },
         }
         keymap("n", "<leader>ol", function()
-            vim.cmd.Lspsaga({ "outline" })
+            vcmd.Lspsaga({ "outline" })
         end)
 
         local rename = {
@@ -187,11 +188,11 @@ return {
         }
         -- Rename all occurrences of the hovered word for the entire file
         keymap("n", "<space>rn", function()
-            vim.cmd.Lspsaga("rename")
+            vcmd.Lspsaga("rename")
         end)
         -- Rename all occurrences of the hovered word for the selected files
         keymap("n", "<space>Rn", function()
-            vim.cmd.Lspsaga({ "rename", "++project" })
+            vcmd.Lspsaga({ "rename", "++project" })
         end)
 
         require("lspsaga").setup({
@@ -231,7 +232,7 @@ return {
         })
 
         keymap({ "n", "t" }, "<M-a>", function()
-            vim.cmd.Lspsaga("term_toggle")
+            vcmd.Lspsaga("term_toggle")
         end)
     end,
 }

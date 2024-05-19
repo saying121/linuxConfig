@@ -16,6 +16,8 @@ hi CallHierarchyNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi OutlinePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi MiniStatusLineModeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
+hi CursorLineNr guifg=Cyan
+
 " hi Comment Comment       xxx cterm=italic gui=italic guifg=#565f89
 " hi Comment guibg=NONE cterm=italic guifg=#73DACA ctermfg=NONE
 " hi Comment guibg=NONE cterm=italic guifg=#73dae3 ctermfg=NONE

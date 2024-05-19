@@ -1,3 +1,4 @@
+local api = vim.api
 ---@type LazySpec
 return {
     "lmburns/lf.nvim",
@@ -46,10 +47,10 @@ return {
 
         vim.keymap.set("n", "<leader>lf", "<Cmd>Lf<CR>")
 
-        vim.api.nvim_create_autocmd({ "User" }, {
+        api.nvim_create_autocmd({ "User" }, {
             pattern = "LfTermEnter",
             callback = function(a)
-                vim.api.nvim_buf_set_keymap(a.buf, "t", "q", "q", { nowait = true })
+                api.nvim_buf_set_keymap(a.buf, "t", "q", "q", { nowait = true })
             end,
         })
     end,

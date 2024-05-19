@@ -1,3 +1,4 @@
+                local vfn = vim.fn
 ---@type LazySpec
 return {
     "nvim-telescope/telescope.nvim",
@@ -49,12 +50,12 @@ return {
 
         local function find_files_from_git_root()
             local function is_git_repo()
-                vim.fn.system("git rev-parse --is-inside-work-tree")
+                vfn.system("git rev-parse --is-inside-work-tree")
 
                 return vim.v.shell_error == 0
             end
             if is_git_repo() then
-                opts = { cwd = util.get_root_dir(vim.fn.getcwd(), "/.git") }
+                opts = { cwd = util.get_root_dir(vfn.getcwd(), "/.git") }
             end
             builtin.find_files(opts)
         end
@@ -62,12 +63,12 @@ return {
 
         local function live_grep_from_git_root()
             local function is_git_repo()
-                vim.fn.system("git rev-parse --is-inside-work-tree")
+                vfn.system("git rev-parse --is-inside-work-tree")
 
                 return vim.v.shell_error == 0
             end
             if is_git_repo() then
-                opts = { cwd = util.get_root_dir(vim.fn.getcwd(), "/.git") }
+                opts = { cwd = util.get_root_dir(vfn.getcwd(), "/.git") }
             end
             builtin.live_grep(opts)
         end

@@ -50,7 +50,7 @@ return {
         {
             trig = "tex",
             priority = 30000,
-            dscr = describe,
+            dscr = "tex ignore",
         },
         fmta([[
 ### TeX
@@ -362,7 +362,7 @@ TSWLatexianTemp*
         {
             trig = "lua",
             priority = 30000,
-            dscr = describe,
+            dscr = "lua ignore",
         },
         fmta([[
 ### Lua
@@ -413,7 +413,7 @@ luac.out
         {
             trig = "dart",
             priority = 30000,
-            dscr = describe,
+            dscr = "dart ignore",
         },
         fmta([[
 ### Dart
@@ -451,7 +451,7 @@ doc/api/
         {
             trig = "java",
             priority = 30000,
-            dscr = describe,
+            dscr = "java ignore",
         },
         fmta([[
 ### Java
@@ -486,7 +486,7 @@ replay_pid*
         {
             trig = "go",
             priority = 30000,
-            dscr = describe,
+            dscr = "go ignore",
         },
         fmta([[
 ### Go
@@ -518,7 +518,7 @@ go.work
         {
             trig = "cpp",
             priority = 30000,
-            dscr = describe,
+            dscr =   "cpp ignore",
         },
         fmta([[
 ### C++
@@ -561,7 +561,7 @@ go.work
         {
             trig = "c",
             priority = 30000,
-            dscr = describe,
+            dscr =  "c ignore",
         },
         fmta([[
 ### C
@@ -624,7 +624,7 @@ dkms.conf
         {
             trig = "rust",
             priority = 30000,
-            dscr = describe,
+            dscr = "rust ignore",
         },
         fmta([[
 ### Rust
@@ -648,6 +648,6 @@ rustc-ice*
     s({
         trig = "mis",
         priority = 30000,
-        dscr = describe,
+        dscr = "mis ignore",
     }, fmta(mis, {}, {})),
 }

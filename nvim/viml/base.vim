@@ -42,9 +42,9 @@ set cindent                                                    " 用c语言缩�
 " 统一tab为4
 set shiftwidth=4                                               " >>命令缩进的空格数
 set tabstop=4                                                  " TAB键宽度
+set softtabstop=4                                              " 将连续数量的空格视作一个tab,可以一次删除
 set smarttab                                                   " 根据文件中其他地方的缩进空格个数来确定一个 tab 是多少个空格
 set expandtab                                                  " 把TAB换成空格
-set softtabstop=4                                              " 将连续数量的空格视作一个tab,可以一次删除
 
 set updatetime=100                                             " swap时文件,防止崩溃,和CursorHole事件时间间隔，用 antoinemadec/FixCursorHold.nvim 解耦CursorHole
 set directory=~/.local/share/nvim/swapFile                     " swap文件位置

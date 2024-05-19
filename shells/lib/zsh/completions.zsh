@@ -67,9 +67,6 @@ zi snippet https://github.com/TheLocehiliosan/yadm/blob/master/completion/zsh/_y
 zi ice lucid wait as'completion' blockf has'ghq'
 zi snippet https://github.com/x-motemen/ghq/blob/master/misc/zsh/_ghq
 
-zi ice lucid wait as'completion' blockf has'lcode'
-zi snippet https://github.com/saying121/lcode/blob/main/completions/_lcode
-
 zi ice wait lucid as'completion' blockf has'zoxide'
 zi snippet https://github.com/ajeetdsouza/zoxide/blob/main/contrib/completions/_zoxide
 

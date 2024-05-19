@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo -e "\e[1;33m
 
@@ -60,11 +60,12 @@ link_list=(
     ["$HOME/.linuxConfig/X11/Xresources"]="$HOME/.Xresources"
     ["$HOME/.linuxConfig/X11/xinitrc"]="$HOME/.xinitrc"
     ["$HOME/.linuxConfig/X11/xprofile"]="$HOME/.xprofile"
-    ["$HOME/.linuxConfig/configs/cargo-config.toml"]="$HOME/.cargo/config"
+    ["$HOME/.linuxConfig/configs/cargo-config.toml"]="$HOME/.cargo/config.toml"
     ["$HOME/.linuxConfig/configs/.sqlfluff"]="$HOME/.sqlfluff"
     ["$HOME/.linuxConfig/configs/taplo.toml"]="$HOME/.taplo.toml"
     ["$HOME/.linuxConfig/configs/gtkrc-2.0"]="$HOME/.gtkrc-2.0"
     ["$HOME/.linuxConfig/configs/dunst"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/mimeapps.list"]="$HOME/.config/mimeapps.list"
     ["$HOME/.linuxConfig/configs/yazi"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/fcitxs-config/fcitx"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/fcitxs-config/fcitx5"]="$HOME/.config"
@@ -150,9 +151,9 @@ sudo sed -i.bak 's/^#HibernateDelaySec=.*/HibernateDelaySec=7200/' /etc/systemd/
 [[ -d ~/.config/systemd/user ]] || mkdir -p ~/.config/systemd/user
 
 if [[ $XDG_SESSION_TYPE == wayland ]]; then
-    the_cmd="libinput list-devices"
+    the_cmd="sudo libinput list-devices"
 else
-    the_cmd="xinput list"
+    the_cmd="sudo xinput list"
 fi
 
 # 判断有没有 touchpad

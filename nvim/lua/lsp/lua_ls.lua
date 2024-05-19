@@ -1,4 +1,7 @@
-local lib = vim.api.nvim_get_runtime_file("", true)
+local lib = {
+    vim.env.VIMRUNTIME, -- 只有nvim内置的api
+}
+-- vim.api.nvim_get_runtime_file("", true)
 
 local plugins_dir = vim.fn.stdpath("data") .. "/lazy"
 
@@ -6,6 +9,7 @@ local plugins_dir = vim.fn.stdpath("data") .. "/lazy"
 -- local load_plugins = vim.fn.readdir(plugins_dir)
 
 local load_plugins = {
+    "lazy.nvim",
     -- "rustaceanvim",
     -- "plenary.nvim",
     -- "nvim-lspconfig",

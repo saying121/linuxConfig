@@ -74,7 +74,7 @@ return {
 
         null_ls.setup({
             sources = sources_table,
-            ---@param _client lsp.Client
+            ---@param _client vim.lsp.Client
             ---@param bufnr integer
             on_attach = function(_client, bufnr)
                 vim.keymap.set({ "n", "x" }, "<space>f", function()

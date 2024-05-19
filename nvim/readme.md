@@ -53,6 +53,11 @@ t[nore]map     |  -   |  -  |  -  |  -  |  -  |  -  | yes  |  -   |
 l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
 ```
 
+```bash
+# platformio 生成 compile_commands.json
+pio run -t compiledb
+```
+
 ### 关于 Cargo.toml
 
 - 把 `Cargo.toml` 改成 `toml_rs` 文件类型
@@ -131,7 +136,5 @@ git pull
 ```
 
 ## 一些已知问题
-
-dap 调试不能设置 codelldb 不跳进反汇编，只有通过 vscode 才可以设置。
 
 `./viml/init.vim` 有一段打开二进制文件的自动命令，有可能导致一些文本文件打不开，自行注释。或者在 `./lua/init.lua` 中添加文件类型。

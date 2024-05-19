@@ -42,8 +42,8 @@ chattr +C /mnt/var/log
 chattr +C /mnt/var/cache/pacman/pkg
 
 (3)efi
-mkdir /mnt/boot
-mount /dev/for_efi /mnt/boot
+mkdir /mnt/efi
+mount /dev/for_efi /mnt/efi
 
 4.End
 edit /etc/mkinitcpio.conf

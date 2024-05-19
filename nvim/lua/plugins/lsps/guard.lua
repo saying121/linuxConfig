@@ -6,8 +6,9 @@ return {
     -- keys = "<space>f",
     config = function()
         local keymap = vim.keymap.set
-        vim.api.nvim_create_autocmd({ "UIEnter", "BufEnter" }, {
-            group = vim.api.nvim_create_augroup("Fmt", { clear = true }),
+        local api = vim.api
+        api.nvim_create_autocmd({ "UIEnter", "BufEnter" }, {
+            group = api.nvim_create_augroup("Fmt", { clear = true }),
             pattern = { "typst", "zsh" },
             callback = function()
                 keymap({ "n", "x" }, "<space>f", vim.cmd.GuardFmt, { bufnr = 0 })

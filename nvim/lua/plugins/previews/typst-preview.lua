@@ -1,3 +1,5 @@
+local vfn = vim.fn
+local api = vim.api
 ---@type LazySpec
 return {
     "chomosuke/typst-preview.nvim",
@@ -6,8 +8,8 @@ return {
     end,
     ft = "typst",
     config = function()
-        vim.api.nvim_create_autocmd({ "BufNew", "BufWinEnter", "BufEnter" }, {
-            group = vim.api.nvim_create_augroup("TypstPreview", { clear = true }),
+        api.nvim_create_autocmd({ "BufNew", "BufWinEnter", "BufEnter" }, {
+            group = api.nvim_create_augroup("TypstPreview", { clear = true }),
             pattern = { "typst", "*.typ" },
             callback = function()
                 local opts = { noremap = true, silent = true, buffer = true }
@@ -23,7 +25,7 @@ return {
             debug = false,
             -- This function will be called to determine the root of the typst project
             get_root = function(bufnr_of_typst_buffer)
-                return vim.fn.getcwd()
+                return vfn.getcwd()
                 -- return vim.fn.fnamemodify(vim.fn.expand("%:p"), ":h")
             end,
         })

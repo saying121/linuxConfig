@@ -1,3 +1,6 @@
+local vfn = vim.fn
+local api = vim.api
+
 ---@type LazySpec
 return {
     "kevinhwang91/nvim-ufo",
@@ -13,19 +16,19 @@ return {
         local handler = function(virtText, lnum, endLnum, width, truncate)
             local newVirtText = {}
             local suffix = ("    %d "):format(endLnum - lnum)
-            local sufWidth = vim.fn.strdisplaywidth(suffix)
+            local sufWidth = vfn.strdisplaywidth(suffix)
             local targetWidth = width - sufWidth
             local curWidth = 0
             for _, chunk in ipairs(virtText) do
                 local chunkText = chunk[1]
-                local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                local chunkWidth = vfn.strdisplaywidth(chunkText)
                 if targetWidth > curWidth + chunkWidth then
                     table.insert(newVirtText, chunk)
                 else
                     chunkText = truncate(chunkText, targetWidth - curWidth)
                     local hlGroup = chunk[2]
                     table.insert(newVirtText, { chunkText, hlGroup })
-                    chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                    chunkWidth = vfn.strdisplaywidth(chunkText)
                     -- str width returned from truncate() may less than 2nd argument, need padding
                     if curWidth + chunkWidth < targetWidth then
                         suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
@@ -122,8 +125,8 @@ return {
             "dbui",
         }
 
-        vim.api.nvim_create_autocmd({ "BufEnter" }, {
-            group = vim.api.nvim_create_augroup("UfoDetachs", { clear = true }),
+        api.nvim_create_autocmd({ "BufEnter" }, {
+            group = api.nvim_create_augroup("UfoDetachs", { clear = true }),
             pattern = ft,
             callback = function()
                 vim.cmd("UfoDetach")

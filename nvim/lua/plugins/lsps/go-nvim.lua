@@ -1,3 +1,4 @@
+local api = vim.api
 ---@type LazySpec
 return {
     "ray-x/go.nvim",
@@ -92,8 +93,8 @@ return {
             iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the beginning of if err statement
         })
 
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            group = vim.api.nvim_create_augroup("GoImport", {}),
+        api.nvim_create_autocmd("BufWritePre", {
+            group = api.nvim_create_augroup("GoImport", {}),
             pattern = "*.go",
             callback = function()
                 require("go.format").goimport()

@@ -1,3 +1,5 @@
+local vcmd = vim.cmd
+
 ---@type LazySpec
 return {
     "folke/tokyonight.nvim",
@@ -15,7 +17,7 @@ return {
             },
         })
 
-        vim.cmd.colorscheme("tokyonight")
-        vim.cmd.colorscheme("mycolors")
+        vcmd.colorscheme("tokyonight")
+        vcmd.colorscheme("mycolors")
     end,
 }

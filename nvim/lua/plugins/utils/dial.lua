@@ -1,3 +1,4 @@
+local keymap = vim.keymap.set
 ---@type LazySpec
 return {
     "monaqa/dial.nvim",
@@ -6,12 +7,12 @@ return {
         { "<C-x>", mode = { "n", "x" } },
     },
     config = function()
-        vim.keymap.set("n", "<C-a>", require("dial.map").inc_normal("mygroup"), { noremap = true })
-        vim.keymap.set("n", "<C-x>", require("dial.map").dec_normal("mygroup"), { noremap = true })
-        vim.keymap.set("x", "<C-a>", require("dial.map").inc_visual("mygroup"), { noremap = true })
-        vim.keymap.set("x", "<C-x>", require("dial.map").dec_visual("mygroup"), { noremap = true })
-        vim.keymap.set("x", "g<C-a>", require("dial.map").inc_gvisual("mygroup"), { noremap = true })
-        vim.keymap.set("x", "g<C-x>", require("dial.map").dec_gvisual("mygroup"), { noremap = true })
+        keymap("n", "<C-a>", require("dial.map").inc_normal("mygroup"), { noremap = true })
+        keymap("n", "<C-x>", require("dial.map").dec_normal("mygroup"), { noremap = true })
+        keymap("x", "<C-a>", require("dial.map").inc_visual("mygroup"), { noremap = true })
+        keymap("x", "<C-x>", require("dial.map").dec_visual("mygroup"), { noremap = true })
+        keymap("x", "g<C-a>", require("dial.map").inc_gvisual("mygroup"), { noremap = true })
+        keymap("x", "g<C-x>", require("dial.map").dec_gvisual("mygroup"), { noremap = true })
 
         local augend = require("dial.augend")
         local mygroup = {

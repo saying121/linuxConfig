@@ -86,7 +86,7 @@ local function goto_definition(split_cmd)
       vim.cmd(split_cmd)
     end
 
-    if vim.tbl_islist(result) then
+    if vim.islist(result) then
       util.jump_to_location(result[1])
 
       if #result > 1 then

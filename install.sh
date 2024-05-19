@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-export ALL_PROXY=http://127.0.0.1:7890
-export HTTPS_PROXY=http://127.0.0.1:7890
-export HTTP_PROXY=http://127.0.0.1:7890
+./proxy.sh
+socket=http://127.0.0.1:7897
 
-git config --global https.proxy 'http://127.0.0.1:7890'
-git config --global http.proxy 'http://127.0.0.1:7890'
+git config --global https.proxy $socket
+git config --global http.proxy $socket
 git config --global http.postBuffer 524288000
+git config credential.helper 'cache --timeout=3600'
 
 get_package_manager() {
     if [[ $(grep -c arch /etc/os-release) != 0 ]]; then
@@ -32,7 +32,7 @@ $pacMan sshfs python-nautilus kdeconnect
 $aurPkg music-you-bin
 
 # theme
-$pacMan adwaita-qt5 adwaita-qt6
+$aurPkg adwaita-qt5-git adwaita-qt6-git kvantum-theme-libawaita-git
 # sddm theme,分多次安装，有的会安装失败
 $aurPkg sddm-theme-tokyo-night
 $aurPkg sddm-theme-aerial-git

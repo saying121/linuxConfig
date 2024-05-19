@@ -60,7 +60,7 @@ local clangd_flags = {
 
 lspsnips = {}
 return {
-    ---@param client lsp.Client
+    ---@param client vim.lsp.Client
     ---@param bufnr integer
     -- on_attach = function(client, bufnr)
     --     local orig_rpc_request = client.rpc.request

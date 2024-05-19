@@ -1,3 +1,4 @@
+local vfn = vim.fn
 local M = {}
 
 --- 在表的长度里面随机取值
@@ -5,15 +6,15 @@ local M = {}
 ---@return integer
 function M.get_rand(the_list)
     -- return math.random(1, #the_list)
-    return vim.fn.rand() % #the_list + 1
+    return vfn.rand() % #the_list + 1
 end
 
 --- 获取文件路径
 ---@param dir_name string
 ---@return string
 function M.get_random_file_path(dir_name)
-    local dir_path = vim.fn.stdpath("config") .. "/dashboard/" .. dir_name
-    local file_name = vim.fn.readdir(dir_path)
+    local dir_path = vfn.stdpath("config") .. "/dashboard/" .. dir_name
+    local file_name = vfn.readdir(dir_path)
     -- file_name = { 'dinosaur.cat' } -- 测试某个
     return dir_path .. "/" .. file_name[M.get_rand(file_name)]
 end
@@ -22,7 +23,7 @@ local utils = require("public.utils")
 local split = 28
 local split1 = 25
 local total = split + split1
-local result = vim.fn.rand() % total
+local result = vfn.rand() % total
 -- result = 1
 -- result = 60
 
@@ -31,7 +32,7 @@ return {
     {
         "glepnir/dashboard-nvim",
         cond = function()
-            return vim.fn.argc() == 0 and result < split
+            return vfn.argc() == 0 and result < split
         end,
         dependencies = {
             {
@@ -66,7 +67,7 @@ return {
             }
 
             local use_prev
-            if vim.fn.getenv("TERM") == "xterm-kitty" then
+            if vfn.getenv("TERM") == "xterm-kitty" then
                 use_prev = all_prev[M.get_rand(all_prev)]
             else
                 use_prev = all_prev[1]
@@ -138,7 +139,7 @@ return {
     {
         "goolord/alpha-nvim",
         cond = function()
-            return vim.fn.argc() == 0 and result >= split
+            return vfn.argc() == 0 and result >= split
         end,
         config = function()
             local alpha = require("alpha")
@@ -218,12 +219,13 @@ return {
             }
 
             local stats = require("lazy").stats()
+            local vson = vim.version()
             local version = "  󰥱 v"
-                .. vim.version().major
+                .. vson.major
                 .. "."
-                .. vim.version().minor
+                .. vson.minor
                 .. "."
-                .. vim.version().patch
+                .. vson.patch
             local footer = {
                 type = "text",
                 val = "Neovim " .. version .. "  " .. stats.count .. " plugins ",
@@ -233,7 +235,7 @@ return {
                 },
             }
             local prev
-            if vim.fn.getenv("TERM") == "xterm-kitty" then
+            if vfn.getenv("TERM") == "xterm-kitty" then
                 prev = all_prev[M.get_rand(all_prev)]
             else
                 prev = all_prev[1]

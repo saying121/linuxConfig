@@ -1,8 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-export ALL_PROXY=http://127.0.0.1:7890
-export HTTPS_PROXY=http://127.0.0.1:7890
-export HTTP_PROXY=http://127.0.0.1:7890
+./proxy.sh
 # link config
 ~/.linuxConfig/linkConfig.sh
 
@@ -37,7 +35,7 @@ $pacMan kitty terminology wezterm ttf-nerd-fonts-symbols-mono
 
 # 开发工具
 $pacMan inetutils dnsutils networkmanager fd tree \
-    clash
+
 # 路由跟踪
 $pacMan traceroute mtr
 
@@ -125,6 +123,7 @@ $pacMan gst-libav phonon-qt5-gstreamer gst-plugins-good qt5-quickcontrols qt5-gr
 $aurPkg sddm sddm-conf-git xinit-xsession
 $aurPkg sddm-theme-aerial-git
 
+
 # x11,蓝牙耳机自动切换，pavucontrol:音量控制,安装 pipewire-pulse包. 它将代替 pulseaudio包 和 pulseaudio-bluetooth包
 $pacMan pipewire-pulse bluez bluez-utils pulsemixer \
     xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
@@ -175,6 +174,7 @@ $aurPkg gotop cpufetch fastfetch onefetch fetchfetch hardinfo
 
 # 浏览器
 $aurPkg microsoft-edge-stable-bin google-chrome
+xdg-settings set default-web-browser microsoft-edge-stable.desktop
 
 # 编辑器，ide
 $aurPkg visual-studio-code-bin # intellij-idea-ultimate-edition

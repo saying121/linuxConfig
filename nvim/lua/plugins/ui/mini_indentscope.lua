@@ -1,3 +1,4 @@
+local api = vim.api
 ---@type LazySpec
 return {
     "echasnovski/mini.indentscope",
@@ -5,8 +6,8 @@ return {
     version = "*",
     event = "VeryLazy",
     init = function()
-        vim.api.nvim_create_autocmd("FileType", {
-            group = vim.api.nvim_create_augroup("IndentScope", { clear = true }),
+        api.nvim_create_autocmd("FileType", {
+            group = api.nvim_create_augroup("IndentScope", { clear = true }),
             pattern = {
                 "Trouble",
                 "alpha",

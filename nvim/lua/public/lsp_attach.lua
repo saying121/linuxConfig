@@ -3,7 +3,7 @@ local api, lsp, methods = vim.api, vim.lsp, vim.lsp.protocol.Methods
 local M = {}
 
 -- Use an on_attach function to only map the following keys after the language server attaches to the current buffer
----@param client lsp.Client
+---@param client vim.lsp.Client
 ---@param bufnr integer
 M.on_attach = function(client, bufnr)
     -- lsp.semantic_tokens.start(bufnr, client.id)
@@ -16,21 +16,15 @@ M.on_attach = function(client, bufnr)
     end
 
     keymap("n", "<leader>v", function()
-        if vim.diagnostic.is_disabled() then
-            vim.diagnostic.enable()
-        else
-            vim.diagnostic.disable()
-        end
+        vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
     end)
 
     keymap("n", "<c-k>", lsp.buf.signature_help)
 
-    -- local cap = client.server_capabilities or {}
-
     if client.supports_method(methods.textDocument_inlayHint, { bufnr = bufnr }) then
         local _ = pcall(lsp.inlay_hint.enable, true, { bufnr = bufnr })
         keymap("n", "<leader>ih", function()
-            lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled(), { bufnr = bufnr })
+            lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
         end)
     end
 
@@ -83,7 +77,7 @@ M.on_attach = function(client, bufnr)
             group = group_name,
             buffer = bufnr,
             callback = function()
-                lsp.codelens.refresh({ bufnr = 0 })
+                lsp.codelens.refresh({ bufnr = bufnr })
             end,
         })
     end
