@@ -30,6 +30,8 @@ return {
         Lua = {
             completion = {
                 enable = true,
+                showWord = false,
+                workspaceWord = false,
                 callSnippet = "Replace",
                 displayContext = 0,
                 -- keywordSnippet = "Replace",

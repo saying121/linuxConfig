@@ -37,9 +37,11 @@ styles/
 .idea
 node_modules/
 silicon-*
+target/
 build_rust/
 build_c_cpp/
 build_go/
+build/
 flamegraph/
 flamegraph.svg
 perf.data*
@@ -479,6 +481,7 @@ doc/api/
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+kls_database.db
 
 ]] .. mis, {}, {})
     ),

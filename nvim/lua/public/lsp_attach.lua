@@ -1,4 +1,4 @@
-local api, lsp, methods = vim.api, vim.lsp, vim.lsp.protocol.Methods
+local api, lsp, lspb, methods = vim.api, vim.lsp, vim.lsp.buf, vim.lsp.protocol.Methods
 
 local M = {}
 
@@ -19,7 +19,7 @@ M.on_attach = function(client, bufnr)
         vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
     end)
 
-    keymap("n", "<c-k>", lsp.buf.signature_help)
+    keymap("n", "<c-k>", lspb.signature_help)
 
     if client.supports_method(methods.textDocument_inlayHint, { bufnr = bufnr }) then
         local _ = pcall(lsp.inlay_hint.enable, true, { bufnr = bufnr })
@@ -30,7 +30,7 @@ M.on_attach = function(client, bufnr)
 
     if client.supports_method(methods.textDocument_formatting, { bufnr = bufnr }) then
         keymap("n", "<space>f", function()
-            lsp.buf.format({
+            lspb.format({
                 async = true,
                 bufnr = bufnr,
                 filter = function(client1)
@@ -49,7 +49,15 @@ M.on_attach = function(client, bufnr)
     end
     if client.supports_method(methods.textDocument_rangeFormatting, { bufnr = bufnr }) then
         keymap("x", "<space>f", function()
-            lsp.buf.format({ async = true })
+            lspb.format({ async = true })
+        end)
+    end
+
+    if client.name == "lemminx" then
+        -- it support
+        -- methods.textDocument_rangesFormatting
+        keymap({ "n", "x" }, "<space>f", function()
+            lspb.format({ async = true })
         end)
     end
 
@@ -60,12 +68,12 @@ M.on_attach = function(client, bufnr)
         api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             group = group_name,
             buffer = bufnr,
-            callback = lsp.buf.document_highlight,
+            callback = lspb.document_highlight,
         })
         api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
             group = group_name,
             buffer = bufnr,
-            callback = lsp.buf.clear_references,
+            callback = lspb.clear_references,
         })
     end
 

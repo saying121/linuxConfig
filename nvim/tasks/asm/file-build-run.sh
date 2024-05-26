@@ -10,7 +10,7 @@ VIM_FILENOEXT=$3
 
 # compiler="nasm"
 compiler="yasm"
-bits="elf64"
+bits="elf"
 
 outfile_o="$VIM_FILEDIR"/$build_dir/"$VIM_FILENOEXT".o
 output="$VIM_FILEDIR"/$build_dir/"$VIM_FILENOEXT"
