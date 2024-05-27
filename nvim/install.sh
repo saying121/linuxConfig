@@ -9,15 +9,16 @@ aurPkg='yay -S --needed --noconfirm'
 
 # $pacMan neovim
 $pacMan fzf ripgrep fd lldb translate-shell \
-    jdk17-openjdk go cmake \
+    jdk17-openjdk jdk21-openjdk go cmake \
     luarocks shellcheck \
     zathura zathura-djvu zathura-ps zathura-ps \
     typst deno tesseract actionlint \
     mold lld sccache silicon
 # zathura-pdf-mupdf
 $pacMan ruff-lsp vim-language-server lua-language-server bash-language-server \
-    gopls yaml-language-server typescript-language-server jdtls marksman \
-    texlab typst-lsp revive tidy platformio-core platformio-core-udev biome shfmt
+    gopls yaml-language-server typescript-language-server jdtls gradle marksman \
+    texlab typst-lsp revive tidy platformio-core platformio-core-udev biome shfmt \
+    lemminx kotlin-language-server
 
 $aurPkg basedpyright-git
 

@@ -73,3 +73,4 @@ text/x-cmake=nvim.desktop;
 x-scheme-handler/clash=clash-verge.desktop
 x-scheme-handler/http=microsoft-edge.desktop;
 x-scheme-handler/https=microsoft-edge.desktop;
+x-scheme-handler/lxmusic=lx-music-desktop.desktop

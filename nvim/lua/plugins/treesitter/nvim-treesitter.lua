@@ -18,9 +18,9 @@ return {
         ts.language.register("bash", "zsh")
 
         -- 如果没有可用高亮就用默认的
-        if require("nvim-treesitter.parsers").available_parsers()[vim.bo.filetype] == nil then
-            vim.cmd("syntax on")
-        end
+        -- if require("nvim-treesitter.parsers").available_parsers()[vim.bo.filetype] == nil then
+        --     vim.cmd("syntax on")
+        -- end
         if vim.env.HTTPS_PROXY == nil then
             require("nvim-treesitter.install").prefer_git = true
             local mirror = require("public.utils").mirror()
@@ -85,7 +85,7 @@ return {
                     end
 
                     local tb = {
-                        rust = "rust-analyzer",
+                        -- rust = "rust-analyzer",
                         zig = "zls",
                     }
                     for k, value in pairs(tb) do
