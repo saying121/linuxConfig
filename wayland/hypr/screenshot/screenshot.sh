@@ -56,7 +56,7 @@ case $1 in
     #EDIT=true
     #pause_focused_screen &
     #take_fullscreen
-    grim -l 1 -o $(hyprctl monitors -j | gojq '.[] | select(.focused == true) | .name' -r) - |
+    grim -l 1 -o "$(hyprctl monitors -j | gojq '.[] | select(.focused == true) | .name' -r)" - |
         satty -f - --fullscreen --init-tool crop --copy-command wl-copy --early-exit
     ;;
 esac

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 VIM_FILENAME=$1
-NEOVIM="nvim"
+NEOVIM="nvim/lua"
 
 if [[ $PWD == *$NEOVIM* ]]; then
     echo "use neovim for Lua script runner"

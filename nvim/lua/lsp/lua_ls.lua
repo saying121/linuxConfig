@@ -10,6 +10,7 @@ local plugins_dir = vim.fn.stdpath("data") .. "/lazy"
 
 local load_plugins = {
     "lazy.nvim",
+    -- "trouble.nvim",
     -- "rustaceanvim",
     -- "plenary.nvim",
     -- "nvim-lspconfig",

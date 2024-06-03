@@ -15,6 +15,7 @@ return {
         local null_ls = require("null-ls")
 
         local sources_table = {
+            null_ls.builtins.diagnostics.mypy,
             null_ls.builtins.diagnostics.zsh,
             null_ls.builtins.code_actions.refactoring,
             null_ls.builtins.diagnostics.sqlfluff.with({
@@ -60,7 +61,7 @@ return {
             null_ls.builtins.formatting.golines,
 
             null_ls.builtins.diagnostics.checkmake,
-            null_ls.builtins.diagnostics.markdownlint,
+            null_ls.builtins.diagnostics.markdownlint_cli2,
             null_ls.builtins.diagnostics.vint,
             -- null_ls.builtins.diagnostics.selene,
             null_ls.builtins.diagnostics.protolint,

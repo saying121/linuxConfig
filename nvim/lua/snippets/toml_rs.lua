@@ -316,6 +316,8 @@ local net = {
     ["url"] = "**Rust** 的 **URL** 库，基于 WHATWG url 标准",
     ["warp"] = "以极快的速度提供网络服务",
     ["to-socket-addrs"] = "一个小的套接字地址替换，用于指定没有端口的地址",
+
+    ["nftables"] = "nftables json api 的安全抽象。它可用于在 Rust 中创建 nftables 规则集并从 json 解析现有的 nftables 规则集。",
 }
 local concurrent = {
     ["thread_local"] = "每个线程对象本地存储",

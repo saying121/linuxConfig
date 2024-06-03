@@ -39,7 +39,8 @@ for lang in "${treesitters[@]}"; do
 done
 
 $pacMan python3 python-pip python-pynvim python-pipenv neovim-remote frogmouth python-neovim
-$aurPkg python-pylsp-all
+$aurPkg python-lsp-server python-pylsp-mypy python-rope python-mccabe python-pylsp-rope
+# python-*-stubs
 
 $pacMan rustup
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static

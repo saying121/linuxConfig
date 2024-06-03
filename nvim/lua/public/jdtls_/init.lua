@@ -48,6 +48,7 @@ return {
     contentProvider = { preferred = "fernflower" },
     autobuild = { enabled = true },
     completion = {
+        postfix = { enabled = true },
         favoriteStaticMembers = {
             "org.hamcrest.MatcherAssert.assertThat",
             "org.hamcrest.Matchers.*",

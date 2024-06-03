@@ -76,7 +76,7 @@ return {
             show_code_action = true,
             jump_num_shortcut = true,
             max_width = 0.7,
-            max_height = 0.6,
+            max_height = 0.8,
             text_hl_follow = true,
             border_follow = true,
             extend_relatedInformation = true,

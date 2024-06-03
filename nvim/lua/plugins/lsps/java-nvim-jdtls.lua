@@ -2,6 +2,7 @@
 return {
     "mfussenegger/nvim-jdtls",
     dependencies = { "williamboman/mason.nvim" },
+    ft = "java",
     event = {
         "UIEnter *.java",
         "BufNew *.java",
@@ -126,7 +127,7 @@ return {
                 keymap("n", "<leader>de", require("jdtls").extract_variable)
                 -- keymap("x", "<leader>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>")
 
-                keymap("n", "<leader>cxc", require('jdtls').extract_constant)
+                keymap("n", "<leader>cxc", require("jdtls").extract_constant)
                 keymap("x", "<leader>cxc", [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]])
                 keymap("x", "<leader>cxv", [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]])
 
@@ -138,9 +139,13 @@ return {
                 keymap("n", "<leader>tT", require("jdtls.dap").pick_test)
             end,
         }
-        -- This starts a new client & server,
-        -- or attaches to an existing client & server depending on the `root_dir`.
-        require("jdtls").start_or_attach(config)
         require("jdtls").setup_dap({ hotcodereplace = "auto" })
+
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "java",
+            callback = function()
+                require("jdtls").start_or_attach(config)
+            end,
+        })
     end,
 }

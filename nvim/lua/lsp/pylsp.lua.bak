@@ -2,32 +2,28 @@ return {
     settings = {
         pylsp = {
             plugins = {
+                pylsp_mypy = { enabled = false },
                 jedi_completion = {
                     include_params = true,
+                    fuzzy = true,
+                    cache_for = { "pandas", "numpy", "matplotlib", "tensorflow" },
                 },
-                flake8 = {
-                    enabled = false,
-                },
-                autopep8 = {
-                    enabled = false,
-                },
-                -- jedi = {
-                --     auto_import_moduls = { 'numpy', 'math' },
-                -- },
-                pycodestyle = {
-                    enabled = false,
-                },
-                yapf = {
-                    enabled = true,
+                jedi = {
+                    auto_import_moduls = { "pandas", "numpy", "math" },
+                    extra_paths = {},
                 },
                 rope_autoimport = {
-                    enabled = false,
+                    enabled = true,
                     memory = false,
+                    completions = { enabled = false }, -- too slow
+                    code_actions = { enabled = true },
                 },
-                rope_completion = {
-                    enabled = false,
-                    eager = false,
-                },
+                flake8 = { enabled = false },
+                autopep8 = { enabled = false },
+                pycodestyle = { enabled = false },
+                yapf = { enabled = false },
+                pyflakes = { enabled = false },
+                mccabe = { enabled = false },
             },
         },
     },
