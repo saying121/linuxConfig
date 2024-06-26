@@ -69,6 +69,7 @@ xnoremap > >gv
 "+ 是在系统剪切板中表示选择后Ctrl+c复制的内容
 " set clipboard^=unnamed          " *寄存器
 set clipboard^=unnamedplus          " +寄存器
+" :h clipboard
 nnoremap Y y$
 xnoremap p P
 

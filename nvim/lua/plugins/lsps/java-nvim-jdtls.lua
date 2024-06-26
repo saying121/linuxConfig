@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
     "mfussenegger/nvim-jdtls",
+    cond = false,
     dependencies = { "williamboman/mason.nvim" },
     ft = "java",
     event = {

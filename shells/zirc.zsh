@@ -57,7 +57,7 @@ zi light z-shell/F-Sy-H
 # 高亮主题
 # fast-theme ~/.linuxConfig/shells/z-shell.ini
 
-# /bin/cat -v 然后按下按键查看,C-n,C-p 不知道为啥不成功
+# /bin/cat -v 然后按下按键查看按键对应字符串, C-n,C-p 不知道为啥不成功
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^P' history-substring-search-up
@@ -69,6 +69,14 @@ resume_job() {
 
 zle -N resume_job
 bindkey '^Z' resume_job
+
+
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
 
 ############################################################
 
@@ -82,7 +90,7 @@ eval "$(starship init zsh)"
 
 export CLIPPY_CONF_DIR=~/.config/rustfmt/
 # export RUSTFLAGS="-Z threads=16"
-export PATH=~/.local/share/bob/nvim-bin:$PATH
+# export PATH=~/.local/share/bob/nvim-bin:$PATH
 export RUST_BACKTRACE=1
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib/mojo
 

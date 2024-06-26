@@ -53,9 +53,8 @@ M.on_attach = function(client, bufnr)
         end)
     end
 
-    if client.name == "lemminx" then
-        -- it support
-        -- methods.textDocument_rangesFormatting
+    -- shit
+    if client.name == "lemminx" or client.name == "jdtls" then
         keymap({ "n", "x" }, "<space>f", function()
             lspb.format({ async = true })
         end)

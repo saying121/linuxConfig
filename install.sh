@@ -95,3 +95,5 @@ $pacMan easyeffects calf lsp-plugins-lv2 zam-plugins-lv2 mda.lv2 yelp
 # sudo systemctl start mariadb.service
 
 # $pacMan orca festival espeak-ng
+
+$aurPkg xwaylandvideobridge wemeet-bin

@@ -4,6 +4,11 @@ local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 
+local wasm = {
+    ["wasmtime"] = "用于公开 wasmtime 运行时的高级 API",
+    ["wit-bindgen"] = "rust 绑定生成器和运行时支持 wit 和 Component Model。将 Rust 程序编译到 Component Model 时使用。",
+}
+
 local serial = {
     ["tokio-serial"] = "tokio 的串行端口实现",
     ["mio-serial"] = "mio 的串行端口实现",
@@ -164,6 +169,7 @@ local log = {
     ["minitrace"] = "用于 Rust 的高性能时间线跟踪库",
 }
 local file = {
+    ["fcntl"] = "fcntl (2) 的包装器和方便的方法，使与其交互更容易。",
     ["tempfile"] = "用于管理临时文件和目录的库。",
     ["tempdir"] = "用于管理临时目录并在删除时删除所有内容的库。",
     ["dirs"] = [[一个小型低级库，通过利用 Linux 上的 xdg 基本/用户目录规范（已知的文件夹 api）定义的机制，
@@ -613,7 +619,8 @@ local all = vim.tbl_deep_extend(
     os_crate,
     machine_learning,
     serial,
-    consts
+    consts,
+    wasm
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']
@@ -710,7 +717,7 @@ absurd_extreme_comparisons = "allow"
 empty_enum_variants_with_brackets = "warn"
 match_same_arms                   = "warn"
 missing_asserts_for_indexing      = "warn"
-multiple_unsafe_ops_per_block     = "warn"
+# multiple_unsafe_ops_per_block     = "warn"
 uninhabited_references            = "warn"
 wildcard_dependencies             = "warn"
 

@@ -180,7 +180,7 @@ for name, describe in pairs(proto_types) do
                     priority = 30000,
                     dscr = describe,
                 },
-                fmta(name .. [[ <> = <>; ]], {
+                fmta(name .. [[ <> = <>;]], {
                     i(1, ""),
                     i(2, "1"),
                 })

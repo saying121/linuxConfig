@@ -1,6 +1,8 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local mirror = require("public.utils").mirror()
 
+local dev_path = vim.env.HOME .. "/nvim_projects/"
+
 if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -12,6 +14,7 @@ if not vim.uv.fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+vim.opt.rtp:prepend(dev_path)
 -- vim.opt.rtp:prepend("/usr/lib/helix/runtime/grammars")
 
 local specs = {
@@ -51,9 +54,11 @@ require("lazy").setup({
     },
     dev = {
         -- directory where you store your local plugin projects
-        path = vim.env.HOME .. "/nvim_projects/",
+        path = dev_path,
         ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
         patterns = {
+            -- "saying121",
+            -- "dyninput",
             -- "rustaceanvim",
         }, -- For example {"folke"}
     },

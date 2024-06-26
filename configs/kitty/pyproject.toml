@@ -1,0 +1,41 @@
+[tool.pylsp-mypy]
+enabled   = true
+live_mode = true
+strict    = true
+exclude   = ["tests/*"]
+
+[tool.basedpyright]
+include        = ["src", "/usr/lib/kitty"]
+exclude        = ["**/node_modules", "**/__pycache__", "src/experimental", "src/typestubs"]
+ignore         = ["src/oldstuff"]
+defineConstant = { DEBUG = true }
+stubPath       = "src/stubs"
+
+reportMissingImports   = true
+reportMissingTypeStubs = false
+reportAny              = false
+
+reportPrivateImportUsage  = false
+reportUnknownVariableType = false
+reportUnknownParameterType = false
+reportUnknownArgumentType = false
+
+pythonVersion  = "3.12"
+pythonPlatform = "Linux"
+
+typeCheckingMode = "strict" # ["off", "basic", "standard", "strict", "all"]
+
+executionEnvironments = [
+    { root = "src/web", pythonVersion = "3.12", pythonPlatform = "Windows", extraPaths = [
+        "src/service_libs",
+    ] },
+    { root = "src/sdk", pythonVersion = "3.12", extraPaths = [
+        "src/backend",
+    ] },
+    { root = "src/tests", extraPaths = [
+        "src/tests/e2e",
+        "src/sdk",
+    ] },
+    { root = "src" },
+    { root = "./" },
+]

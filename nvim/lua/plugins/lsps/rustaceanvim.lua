@@ -1,5 +1,5 @@
-local api = vim.api
-local vcmd = vim.cmd
+local api, lsp, vcmd = vim.api, vim.lsp, vim.cmd
+
 ---@type LazySpec
 return {
     "mrcjkb/rustaceanvim",
@@ -20,7 +20,6 @@ return {
                 -- Handler for URL's (used for opening documentation)
                 url_handler = "xdg-open", -- string | function(string)
             },
-            -- ft = "rust",
             config = function(_, opt)
                 require("ferris").setup(opt)
             end,
@@ -41,15 +40,17 @@ return {
         vim.g.rustaceanvim = {
             tools = {
                 --- callback to execute once rust-analyzer is done initializing the workspace
-                ---@type fun(health:RustAnalyzerInitializedStatus) | nil
-                on_initialized = function(health)
-                    if health.health == "ok" then
-                        vim.lsp.codelens.refresh()
+                ---@type fun(health: RustAnalyzerInitializedStatus) | nil
+                on_initialized = function(status)
+                    local health = status.health
+
+                    if health == "ok" then
                         vcmd.RustLsp("flyCheck")
-                    elseif health.health == "warning" then
-                        vim.notify("ra health" .. health.health, vim.log.levels.WARN)
-                    elseif health.health == "error" then
-                        vim.notify("ra health" .. health.health, vim.log.levels.ERROR)
+                        lsp.codelens.refresh()
+                    elseif health == "warning" then
+                        vim.notify("ra health" .. health, vim.log.levels.WARN)
+                    elseif health == "error" then
+                        vim.notify("ra health" .. health, vim.log.levels.ERROR)
                     end
                 end,
 

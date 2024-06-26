@@ -3,6 +3,10 @@
 # copy from
 # https://github.com/megalithic/dotfiles/blob/main/config/kitty/tab_bar.py
 
+# export PYTHONPATH=/usr/lib/kitty/:$PYTHONPATH
+# import sys
+# sys.path.append('/lib/kitty/')
+
 from kitty.fast_data_types import Screen
 from kitty.rgb import Color
 from kitty.tab_bar import (

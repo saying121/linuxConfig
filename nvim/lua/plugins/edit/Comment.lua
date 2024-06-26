@@ -2,14 +2,20 @@
 return {
     "numToStr/Comment.nvim",
     keys = {
-        { "gc", mode = { "n", "x" } },
-        { "gb", mode = { "n", "x" } },
+        { "gcc", mode = { "n" } },
+        { "gcA", mode = { "n" } },
+        { "gco", mode = { "n" } },
+        { "gcO", mode = { "n" } },
+        { "gc", mode = { "x" } },
+        { "gbc", mode = { "n" } },
+        { "gb", mode = { "x" } },
     },
     config = function()
-        require("Comment").setup({})
+        require("Comment").setup()
 
         local ft = require("Comment.ft")
-        ft.hyprlang = { "#%s" }
-        ft.PKGBUILD = { "#%s" }
+
+        ft({ "toml", "graphql", "PKGBUILD" }, "#%s")
+        ft({ "go", "rust", "wit" }, ft.get("c"))
     end,
 }
