@@ -31,6 +31,8 @@ sudo pacman -Syyu --noconfirm
 $pacMan yay paru
 # yay -Syyu --noconfirm
 
+$pacMan linux-cachyos linux-cachyos-headers linux-zen linux-zen-headers
+
 $pacMan kitty terminology wezterm ttf-nerd-fonts-symbols-mono
 
 # 开发工具
