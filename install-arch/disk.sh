@@ -46,40 +46,43 @@ if [ -z "$btrfs_part" ] || [ -z "$efi_part" ] || [ -z "$swap_part" ]; then
 fi
 
 # (1)efi
-mkfs.vfat /dev/"$efi_part"
+mkfs.vfat "$efi_part"
 
 # (2)root and home
-mkfs.btrfs /dev/"$btrfs_part"
+mkfs.btrfs "$btrfs_part"
 
 # (3)swap
-mkswap /dev/"$swap_part"
-swapon /dev/"$swap_part"
+mkswap "$swap_part"
+swapon "$swap_part"
 
 # 3.
-mount /dev/"$btrfs_part" /mnt
+mount "$btrfs_part" /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@log
 btrfs subvolume create /mnt/@pkg
-umount /dev/"$btrfs_part"
+umount "$btrfs_part"
 
 # ---
 
 # root
-mount /dev/"$btrfs_part" /mnt -o subvol=@,noatime,discard=async,compress=zstd
+mount "$btrfs_part" /mnt -o subvol=@,noatime,discard=async,compress=zstd
 
-mkdir /mnt/home
-mount /dev/"$btrfs_part" /mnt/home -o subvol=@home,noatime,discard=async,compress=zstd
+home=/mnt/home
+mkdir $home
+mount "$btrfs_part" $home -o subvol=@home,noatime,discard=async,compress=zstd
 
-# (3)efi
-mkdir /mnt/efi
-mount /dev/for_efi /mnt/efi
+efi=/mnt/efi
+mkdir $efi
+mount for_efi $efi
 
-mkdir -p /mnt/var/log
-mount /dev/"$btrfs_part" /mnt/var/log -o subvol=@log,noatime,discard=async,compress=zstd
+log=/mnt/var/log
+mkdir -p $log
+mount "$btrfs_part" $log -o subvol=@log,noatime,discard=async,compress=zstd
 
-mkdir -p /mnt/var/cache/pacman/pkg
-mount /dev/"$btrfs_part" /mnt/var/cache/pacman/pkg -o subvol=@pkg,noatime,discard=async,compress=zstd
+pkg=/mnt/var/cache/pacman/pkg
+mkdir -p $pkg
+mount "$btrfs_part" $pkg -o subvol=@pkg,noatime,discard=async,compress=zstd
 
 chattr +C /mnt/var/log
 chattr +C /mnt/var/cache/pacman/pkg
