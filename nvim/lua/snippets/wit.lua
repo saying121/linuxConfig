@@ -82,60 +82,75 @@ local all = {
             trig = "record",
             dscr = "like `struct`",
         },
-        fmta([[record <> {
+        fmta(
+            [[record <> {
     <>
-}]], {
-            i(1, ""),
-            i(2, ""),
-        })
+}]],
+            {
+                i(1, ""),
+                i(2, ""),
+            }
+        )
     ),
     s(
         {
             trig = "variant",
             dscr = "like `enum Name { A(i32), B }`",
         },
-        fmta([[variant <> {
+        fmta(
+            [[variant <> {
     <>
-}]], {
-            i(1, ""),
-            i(2, ""),
-        })
+}]],
+            {
+                i(1, ""),
+                i(2, ""),
+            }
+        )
     ),
     s(
         {
             trig = "enum",
             dscr = "like `enum Name { A, B }`",
         },
-        fmta([[enum <> {
+        fmta(
+            [[enum <> {
     <>
-}]], {
-            i(1, ""),
-            i(2, ""),
-        })
+}]],
+            {
+                i(1, ""),
+                i(2, ""),
+            }
+        )
     ),
     s(
         {
             trig = "resource",
             dscr = "mean can't copy",
         },
-        fmta([[resource <> {
+        fmta(
+            [[resource <> {
     <>
-}]], {
-            i(1, ""),
-            i(2, ""),
-        })
+}]],
+            {
+                i(1, ""),
+                i(2, ""),
+            }
+        )
     ),
     s(
         {
             trig = "flags",
             dscr = "all `true/false`",
         },
-        fmta([[flags <> {
+        fmta(
+            [[flags <> {
     <>
-}]], {
-            i(1, ""),
-            i(2, ""),
-        })
+}]],
+            {
+                i(1, ""),
+                i(2, ""),
+            }
+        )
     ),
     s(
         {
@@ -162,7 +177,7 @@ local all = {
             trig = "fnr",
             dscr = "",
         },
-        fmt('{}: func({}) -> {};', {
+        fmt("{}: func({}) -> {};", {
             i(1, "name"),
             i(2, ""),
             i(3, "type"),
@@ -171,31 +186,53 @@ local all = {
     s(
         {
             trig = "interface",
-            dscr = "接口是一组命名的类型和函数",
+            dscr = "一组命名的类型和函数",
         },
-        fmta([[interface <>{
+        fmta(
+            [[interface <> {
     <>
-}]], {
-            i(1, ""),
-            i(2, ""),
-        })
+}]],
+            {
+                i(1, ""),
+                i(2, ""),
+            }
+        )
     ),
     s(
         {
             trig = "world",
-            dscr = "描述一组导入和导出",
+            dscr = "描述一组 exprots 和 imports",
         },
-        fmta([[world <>{
+        fmta(
+            [[world <> {
     <>
-}]], {
-            i(1, ""),
-            i(2, ""),
-        })
+}]],
+            {
+                i(1, ""),
+                i(2, ""),
+            }
+        )
     ),
+    s({
+        trig = "include",
+        dscr = "共享 exports 和 imports",
+    }, fmta([[include <>;]], { i(1, "") })),
+    s({
+        trig = "export",
+        dscr = "需要自己实现这些东西",
+    }, fmta([[export <>;]], { i(1, "") })),
+    s({
+        trig = "import",
+        dscr = "需要外部实现这些东西",
+    }, fmta([[import <>;]], { i(1, "") })),
+    s({
+        trig = "package",
+        dscr = "",
+    }, fmta([[package <>;]], { i(1, "") })),
 }
 
 for _, value in ipairs(ints) do
-    local sint = "s" .. value
+    local sint = "i" .. value
     table.insert(
         all,
         s({
@@ -213,9 +250,5 @@ for _, value in ipairs(ints) do
         }, fmta(uint .. " ", {}))
     )
 end
--- all = vim.tbl_deep_extend(
---     "force",
---     all,
--- )
 
 return all

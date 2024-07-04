@@ -1,4 +1,5 @@
-        local api = vim.api
+local api = vim.api
+
 ---@type LazySpec
 return {
     "toppair/peek.nvim",

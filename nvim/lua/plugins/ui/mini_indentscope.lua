@@ -19,6 +19,7 @@ return {
                 "neo-tree",
                 "NvimTree",
                 "toggleterm",
+                "markdown",
             },
             callback = function()
                 vim.b.miniindentscope_disable = true
