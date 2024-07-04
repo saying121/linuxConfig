@@ -34,7 +34,7 @@ $pacMan yay paru
 $pacMan kitty terminology wezterm ttf-nerd-fonts-symbols-mono
 
 # 开发工具
-$pacMan inetutils dnsutils networkmanager fd tree \
+$pacMan inetutils dnsutils networkmanager fd tree
 
 # 路由跟踪
 $pacMan traceroute mtr

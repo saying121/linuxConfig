@@ -36,14 +36,13 @@ local specs = {
 }
 
 require("lazy").setup({
-    spec = specs,
+    -- leave nil when passing the spec as the first argument to setup()
+    spec = specs, ---@type table<LazySpec>
     root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
     defaults = {
         lazy = false, -- should plugins be lazy-loaded?
         version = nil, -- version = "*", -- enable this to try installing the latest stable versions of plugins
     },
-    -- leave nil when passing the spec as the first argument to setup()
-    -- spec = nil, ---@type LazySpec
     -- lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json", -- lockfile generated after running update.
     git = {
         -- defaults for the `Lazy log` command

@@ -1,4 +1,4 @@
-icon-picker.lua
+# icon-picker.lua
 
 |               keys               |   作用   | mode |
 | :------------------------------: | :------: | :--: |
@@ -8,7 +8,7 @@ icon-picker.lua
 
 ---
 
-asynctasks.lua
+# asynctasks.lua
 
 |          keys           |         作用          | mode |
 | :---------------------: | :-------------------: | :--: |

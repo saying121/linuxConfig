@@ -178,8 +178,11 @@ return {
                     -- end
 
                     ---@type RustAnzlyzerConfig
-                    local st =
-                        ra.load_rust_analyzer_settings(project_root, { settings_file_pattern = "rust-analyzer.json" })
+                    local st = ra.load_rust_analyzer_settings(project_root .. "/.vscode", {
+                        -- settings_file_pattern = "rust-analyzer.json",
+                        settings_file_pattern = "settings.json",
+                        default_settings = default_settings,
+                    })
                     local res = vim.tbl_deep_extend("keep", default_settings, st)
                     -- vim.print(res)
                     return res

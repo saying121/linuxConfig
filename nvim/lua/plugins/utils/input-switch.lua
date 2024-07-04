@@ -5,6 +5,8 @@ return {
     dev = false,
     -- event = { "InsertEnter", "CmdlineEnter" },
     config = function()
-        require("input").setup({})
+        require("input-switch").setup({
+            comment = false,
+        })
     end,
 }
