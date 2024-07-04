@@ -10,9 +10,7 @@ return {
     build = function()
         require("Trans").install()
     end,
-    dependencies = {
-        "kkharji/sqlite.lua",
-    },
+    dependencies = { "kkharji/sqlite.lua" },
     config = function()
         local keymap, opts = vim.keymap.set, { noremap = true, silent = true }
         keymap({ "n", "x" }, "my", ":Translate<CR>", opts)

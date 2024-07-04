@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
     "epwalsh/obsidian.nvim",
-    cond=false,
+    cond = false,
     version = "*", -- recommended, use latest release instead of latest commit
     -- lazy = true,
     -- event = {
