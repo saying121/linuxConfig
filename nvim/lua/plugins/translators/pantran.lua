@@ -1,15 +1,26 @@
+---@type LazySpec
 return {
     "potamides/pantran.nvim",
+    keys = {
+        { "<leader>tr", mode = { "n", "x" } },
+    },
     config = function()
         local pantran = require("pantran")
 
         local opts = { noremap = true, silent = true, expr = true }
+        local keymap = vim.keymap.set
 
-        vim.keymap.set("n", "<leader>ttt", function()
-            require("pantran.async").run(function()
-                vim.print(require("pantran.engines").google:languages())
-            end)
+        keymap("n", "<leader>tr", pantran.motion_translate, opts)
+        keymap("n", "<leader>trr", function()
+            return pantran.motion_translate() .. "_"
         end, opts)
+        keymap("x", "<leader>tr", pantran.motion_translate, opts)
+
+        -- keymap("n", "<leader>ttt", function()
+        --     require("pantran.async").run(function()
+        --         vim.print(require("pantran.engines").google:languages())
+        --     end)
+        -- end, opts)
 
         pantran.setup({
             -- Default engine to use for translation. To list valid engine names run
@@ -64,10 +75,5 @@ return {
                 },
             },
         })
-        vim.keymap.set("n", "<leader>tr", pantran.motion_translate, opts)
-        vim.keymap.set("n", "<leader>trr", function()
-            return pantran.motion_translate() .. "_"
-        end, opts)
-        vim.keymap.set("x", "<leader>tr", pantran.motion_translate, opts)
     end,
 }

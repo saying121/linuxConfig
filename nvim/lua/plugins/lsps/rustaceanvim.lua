@@ -10,7 +10,6 @@ return {
         "BufEnter *.rs",
     },
     dependencies = {
-        "nvim-lua/plenary.nvim",
         "mfussenegger/nvim-dap",
         {
             "vxpm/ferris.nvim",

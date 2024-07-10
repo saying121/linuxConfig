@@ -1,19 +1,19 @@
 [formatting]
-align_entries         = true   # 垂直对齐条目。之间有表标题、注释或空行的条目未对齐。
-align_comments        = true   # 垂直对齐条目和项目后的连续注释。这适用于条目或数组项之后的注释。
-array_trailing_comma  = true   # 为多行数组添加尾随逗号。
-array_auto_expand     = true   # 自动将数组扩展到多行
-array_auto_collapse   = true   # 如果数组适合一行，则自动折叠数组。
-compact_arrays        = true   # 省略单行数组内的空白填充。
-compact_inline_tables = false  # 省略内联表内的空白填充。
-inline_table_expa     = true   # 扩展内联表内的值（例如数组）。nd
-compact_entries       = false  # 省略 = 周围的空格。
-column_width          = 120     # 目标最大列宽，之后数组将扩展为新行。
-indent_tables         = false  # 如果子表按顺序排列，则缩进。
-indent_entries        = false  # 缩进表格下的条目。
-trailing_newline      = true   # 将尾随换行符添加到源中。
-reorder_keys          = false  # 按字母顺序重新排序不以空行分隔的键。
-reorder_arrays        = false  # 按字母顺序重新排序不以空行分隔的数组值。
-allowed_blank_lines   = 2      # 允许的最大连续空白行数。
-crlf                  = false  # 使用 CRLF 行结尾。
+# align_entries         = true   # 垂直对齐条目。之间有表标题、注释或空行的条目未对齐。
+# align_comments        = true   # 垂直对齐条目和项目后的连续注释。这适用于条目或数组项之后的注释。
+# array_trailing_comma  = true   # 为多行数组添加尾随逗号。
+# array_auto_expand     = true   # 自动将数组扩展到多行
+# array_auto_collapse   = true   # 如果数组适合一行，则自动折叠数组。
+# compact_arrays        = true   # 省略单行数组内的空白填充。
+# compact_inline_tables = false  # 省略内联表内的空白填充。
+# inline_table_expa     = true   # 扩展内联表内的值（例如数组）。nd
+# compact_entries       = false  # 省略 = 周围的空格。
+# column_width          = 120     # 目标最大列宽，之后数组将扩展为新行。
+# indent_tables         = false  # 如果子表按顺序排列，则缩进。
+# indent_entries        = false  # 缩进表格下的条目。
+# trailing_newline      = true   # 将尾随换行符添加到源中。
+# reorder_keys          = false  # 按字母顺序重新排序不以空行分隔的键。
+# reorder_arrays        = false  # 按字母顺序重新排序不以空行分隔的数组值。
+# allowed_blank_lines   = 2      # 允许的最大连续空白行数。
+# crlf                  = false  # 使用 CRLF 行结尾。
 indent_string         = "    "
