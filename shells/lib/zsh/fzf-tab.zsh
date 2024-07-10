@@ -51,7 +51,7 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ "$group" == *"process ID"* ]] && ps --pid=$word -o cmd --no-headers -w -w'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 
-zstyle ':fzf-tab:complete:systemctl:argument-rest' fzf-flags --preview-window=down:3:wrap
+zstyle ':fzf-tab:complete:systemctl:argument-rest' fzf-flags --preview-window=down:5:wrap
 
 # Take advantage of $LS_COLORS for completion as well
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"

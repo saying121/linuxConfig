@@ -9,6 +9,7 @@ M.extension = {
     log = "log",
     yuck = "yuck",
     slint = "slint",
+    service = "systemd",
     bar = function(path, bufnr)
         -- if some_condition() then
         --     return "barscript",

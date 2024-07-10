@@ -4,6 +4,7 @@ local api, lsp, vcmd = vim.api, vim.lsp, vim.cmd
 return {
     "mrcjkb/rustaceanvim",
     version = "*",
+    -- cond=false,
     event = {
         "UIEnter *.rs",
         "BufNew *.rs",

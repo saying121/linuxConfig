@@ -93,5 +93,6 @@ export CLIPPY_CONF_DIR=~/.config/rustfmt/
 # export PATH=~/.local/share/bob/nvim-bin:$PATH
 export RUST_BACKTRACE=1
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib/mojo
+export PATH=$PATH:~/.rustup/toolchains/1.44-x86_64-unknown-linux-gnu/bin/
 
 # zprof

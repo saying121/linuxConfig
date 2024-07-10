@@ -57,7 +57,7 @@ require("lazy").setup({
         path = dev_path,
         ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
         patterns = {
-            -- "saying121",
+            "saying121",
             -- "dyninput",
             -- "rustaceanvim",
         }, -- For example {"folke"}
