@@ -17,5 +17,6 @@ return {
 
         ft({ "toml", "graphql", "PKGBUILD" }, "#%s")
         ft({ "go", "rust", "wit" }, ft.get("c"))
+        ft({ "kbd" }, { ";;%s", "#| %s |#" })
     end,
 }

@@ -11,6 +11,7 @@ M.extension = {
     slint = "slint",
     service = "systemd",
     dae = "config",
+    kbd = "scheme",
     bar = function(path, bufnr)
         -- if some_condition() then
         --     return "barscript",

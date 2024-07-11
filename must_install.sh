@@ -32,22 +32,13 @@ $pacMan yay paru
 # yay -Syyu --noconfirm
 
 $pacMan kitty terminology wezterm ttf-nerd-fonts-symbols-mono
+$pacMan dae
 
 # 开发工具
 $pacMan inetutils dnsutils networkmanager fd tree
 
 # 路由跟踪
 $pacMan traceroute mtr
-
-# 调用关于clash的脚本，配置clash
-# echo "
-#
-# *******************************************
-# **** 填入clash链接，也可以不填直接回车 ****
-# *******************************************
-# "
-# read -r link
-# ~/.linuxConfig/scripts/configClash.sh "$link"
 
 $pacMan figlet ffmpeg \
     bc man net-tools psmisc sudo ripgrep fzf trash-cli wget \
@@ -167,6 +158,9 @@ sudo systemctl start input-remapper
 input-remapper-control --command start --device "Keyboard K380 Keyboard" --preset "capslock+"
 input-remapper-control --command start --device "AT Translated Set 2 keyboard" --preset "capslock+"
 input-remapper-control --command start --device "SINO WEALTH Gaming KB " --preset "capslock+"
+
+$aurPkg kanata-bin
+./scripts/kanata.sh
 
 # 各种查看系统信息的软件
 $pacMan htop atop iotop iftop glances sysstat plasma-systemmonitor

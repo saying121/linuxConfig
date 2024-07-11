@@ -1,0 +1,71 @@
+(deflocalkeys-linux
+  ì 13
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defvar
+  tap-timeout 100
+  hold-timeout 120
+  tt $tap-timeout
+  ht $hold-timeout
+)
+
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defalias
+  cap (layer-while-held capslock)
+  swit (tap-hold $tt $ht spc (layer-while-held centernum))
+
+  defl (layer-switch base-layer)
+  delline (macro home S-end bspc)
+  newline (macro end S-ret)
+
+  ! S-1
+  @ S-2
+  # S-3
+  $ S-4
+  % S-5
+  ^ S-6
+  & S-7
+  * S-8
+  ;; ( S-8
+  ;; ) S-9
+  _ S--
+  + S-=
+
+  < S-,
+  > S-.
+
+  ? S-/
+  | S-\
+)
+
+(deflayermap (base-layer)
+  caps @cap
+  spc @swit
+)
+
+(deflayer centernum
+  grv    1        2        3        4        5        6        7        8        9        0        -        =        bspc
+  S-grv   @!       @@       @#       @$       @%       @^       @&       @*       S-9      S-0      @_       @+       bspc
+  @defl    1        2        3        4        5        6        7        8        9        0        -        =
+  lsft      \        @|       +        @<       @>       n        @?       ,        .        /        rsft
+  lctl   lmet    lalt                        spc                            ralt     @defl    rctl
+)
+
+(deflayer capslock
+  grv   1           2           3           4           5           6           7             8           9           0        -        =        @delline
+  tab    C-w         bspc        up          del         A-d         y           S-home        S-up        S-end       C-p      [        ]        \
+  @defl   C-left      left        down        right       C-right     C-S-left    S-left        S-down      S-right     home     '        @newline
+  lsft     C-z         C-x         C-c         C-v         b           C-n         C-S-right     C-,         C-.         end       rsft
+  lctl   lmet    lalt                                    ret                                          ralt       rmet       rctl
+)
