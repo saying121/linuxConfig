@@ -3,7 +3,7 @@ local M = {}
 function M.mirror()
     if vim.env.HTTPS_PROXY == nil then
         return ""
-        -- return "https://ghproxy.com/"
+        -- return "https://mirror.ghproxy.com/"
     else
         return ""
     end

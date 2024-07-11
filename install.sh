@@ -3,8 +3,8 @@
 ./proxy.sh
 socket=http://127.0.0.1:7897
 
-git config --global https.proxy $socket
-git config --global http.proxy $socket
+# git config --global https.proxy $socket
+# git config --global http.proxy $socket
 git config --global http.postBuffer 524288000
 git config credential.helper 'cache --timeout=3600'
 
