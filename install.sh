@@ -48,13 +48,13 @@ $aurPkg linux-wallpaperengine-git
 # komorebi
 
 # installVirtualBox
-$pacMan virtualbox virtualbox-host-dkms
-sudo gpasswd -a "$USER" vboxusers
-newgrp vboxusers
+# $pacMan virtualbox virtualbox-host-dkms
+# sudo gpasswd -a "$USER" vboxusers
+# newgrp vboxusers
 
 $pacMan virt-manager virt-viewer virt-install
 
-$pacMan wine pkgstats
+$pacMan pkgstats
 
 # 各种查看系统信息的软件
 $pacMan htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor

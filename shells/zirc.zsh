@@ -96,3 +96,4 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib/mojo
 export PATH=$PATH:~/.rustup/toolchains/1.44-x86_64-unknown-linux-gnu/bin/
 
 # zprof
+export PATH=$PATH:~/.modular/pkg/packages.modular.com_mojo/bin/

@@ -157,7 +157,7 @@ alias "sudo rm"="sudo trash"
 alias tranen_zh='trans -j -d en:zh'
 alias tranzh_en='trans -j -d zh:en'
 
-alias upgrade='paru -Syu --noconfirm --overwrite "*" && paru -Fy && sudo pkgfile -u'
+alias upgrade='paru -Syu --noconfirm --overwrite "*"; paru -Fy; sudo pkgfile -u'
 # alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy && sudo pkgfile -u'
 # alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy'
 
