@@ -41,16 +41,6 @@ $pacMan inetutils dnsutils networkmanager fd tree \
 # 路由跟踪
 $pacMan traceroute mtr
 
-# 调用关于clash的脚本，配置clash
-# echo "
-#
-# *******************************************
-# **** 填入clash链接，也可以不填直接回车 ****
-# *******************************************
-# "
-# read -r link
-# ~/.linuxConfig/scripts/configClash.sh "$link"
-
 $pacMan figlet ffmpeg \
     bc man net-tools psmisc sudo ripgrep fzf trash-cli wget \
     vim bash eza bat \

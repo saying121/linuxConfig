@@ -146,11 +146,6 @@ alias imgcat="wezterm imgcat"
 
 alias gpgme_err="sudo rm -R /var/lib/pacman/sync"
 
-alias clhconf="~/.linuxConfig/scripts/configClash.sh"
-alias clhres='sudo systemctl restart clash-meta@$USER.service'
-alias clhstp='sudo systemctl stop clash-meta@$USER.service'
-alias clhsts='systemctl status clash-meta@$USER.service'
-
 alias rm="trash"
 alias "sudo rm"="sudo trash"
 

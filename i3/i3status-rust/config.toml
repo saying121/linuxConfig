@@ -62,12 +62,6 @@ critical_mem = 90
 # block = "nvidia_gpu"
 
 # [[block]]
-# block = "service_status"
-# service = "clash"
-# active_format = " ^icon_tea "
-# inactive_format = " no ^icon_tea "
-
-# [[block]]
 # block = "disk_space"
 # path = "/"
 # info_type = "available"
