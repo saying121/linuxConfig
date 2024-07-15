@@ -1,4 +1,5 @@
 return {
     root_dir = require("lspconfig").util.root_pattern(".git"),
-    -- settings = require("public.ra"),
+    single_file_support = true,
+    settings = {},
 }

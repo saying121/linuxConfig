@@ -123,10 +123,8 @@ group {
         policy: min_moving_avg
     }
     Bing {
-        filter: name(regex: '(?i)HK', keyword: "香港", regex: '(?i)Hongkong',
-            keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore',
+        filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore',
             regex: '(?i)chatgpt',
-            keyword: '台湾', regex: "(?i)Taiwan",
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
             keyword: '英国')
         policy: min_moving_avg
@@ -185,15 +183,10 @@ routing {
     # "dip" 意思是目的IP.
     dip(224.0.0.0/3, 'ff00::/8') -> direct
 
-    # 该设置允许你直接访问私有地址而不是通过代理，如果你想访问代理主机的私有网络地址，可以修改下面配置
-    dip(geoip:private) -> direct
-
     ### 以下是自定义规则
-    ### 以下为自定义规则
 
     # 禁用 h3，因为它通常消耗很多 CPU 和内存资源
-    l4proto(udp) && dport(443) -> block
-    dip(geoip:cn) -> direct
+    # l4proto(udp) && dport(443) -> block
 
     # 内置出站：block, direct, must_rules
     # must_rules 表示不将DNS流量重定向至dae并继续匹配。
@@ -216,7 +209,7 @@ routing {
 
     domain(regex: '\.goo.*\.com$') -> Google
     domain(geosite:category-ads) -> block
-    domain(geosite:cn) -> direct
+    domain(bilibili.com) -> direct
     # 组合规则
     domain(keyword: google, suffix: www.twitter.com, suffix: v2raya.org) -> proxy_all
 
@@ -227,21 +220,16 @@ routing {
     dip(8.8.8.8) -> direct
     # 单个IP段匹配
     # dip(101.97.0.0/16) -> direct
-    # geoip匹配
-    dip(geoip:private) -> direct
-    # 多目的IP规则
+    # 多目的IP规则, geoip:private 设置允许你直接访问私有地址而不是通过代理，如果你想访问代理主机的私有网络地址，可以修改下面配置
     dip(geoip:cn, geoip:private) -> direct
     # dip(9.9.9.9, 223.5.5.5) -> direct
 
 
     ## 源IP规则
-    sip(192.168.0.0/24) -> proxy_all
+    # sip(192.168.0.0/24) -> proxy_all
     sip(192.168.50.0/24) -> direct
     # 多源IP规则
-    sip(192.168.0.6, 192.168.0.10, 192.168.0.15) -> direct
-
-    # ip规则
-    ip(geoip:cn) -> direct
+    # sip(192.168.0.6, 192.168.0.10, 192.168.0.15) -> direct
 
 
     ## 目的端口规则
@@ -261,15 +249,6 @@ routing {
     l4proto(tcp) -> proxy_all
     # udp
     l4proto(udp) -> direct
-
-    ## IP版本规则:
-    # IPv4
-    # ipversion(4) -> block
-    # IPv6
-    # ipversion(6) -> ipv6_group
-
-    ## 源MAC规则
-    # mac('02:42:ac:11:00:02') -> direct
 
     ## 进程名规则 (当绑定WAN接口是只支持本地进程)
     pname(curl) -> direct
@@ -297,6 +276,21 @@ routing {
             geosite:category-scholar-cn
         ) -> proxy_all
 
+    ## Must rules
+    # 对于以下规则，DNS请求将会被强制重定向到dae，除了mosdns的请求
+    # 不同于must_direct/must_my_group，来自mosdns的流量会继续匹配其他规则
+    pname(mosdns) -> must_rules
+    ip(geoip:cn) -> direct
+    domain(geosite:cn) -> direct
+
+    fallback: proxy_all
+
+    ## IP版本规则:
+    # IPv4
+    # ipversion(4) -> block
+    # IPv6
+    # ipversion(6) -> ipv6_group
+
     ## 自定义 DAT 文件
     # domain(ext:"yourdatfile.dat:yourtag")->direct
     # dip(ext:"yourdatfile.dat:yourtag")->direct
@@ -315,12 +309,6 @@ routing {
     # 3. Set routing rules in dae config file.
     domain(geosite:disney) -> direct(mark: 0x800)
 
-    ## Must rules
-    # 对于以下规则，DNS请求将会被强制重定向到dae，除了mosdns的请求
-    # 不同于must_direct/must_my_group，来自mosdns的流量会继续匹配其他规则
-    pname(mosdns) -> must_rules
-    ip(geoip:cn) -> direct
-    domain(geosite:cn) -> direct
-
-    fallback: proxy_all
+    ## 源MAC规则
+    # mac('02:42:ac:11:00:02') -> direct
 }

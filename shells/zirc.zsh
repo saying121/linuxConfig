@@ -97,3 +97,4 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib/mojo
 # export WASMTIME_DEBUG_BINDGEN=1
 
 # zprof
+export PATH=$PATH:~/.modular/pkg/packages.modular.com_mojo/bin/

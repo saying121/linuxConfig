@@ -18,10 +18,17 @@ if [[ $(grep "\[archlinuxcn\]" -c /etc/pacman.conf) = 0 ]]; then
     # shellcheck disable=2016
     echo '
 [archlinuxcn]
+Include = /etc/pacman.d/cnlist
+' | sudo tee -a /etc/pacman.conf
+
+    # shellcheck disable=2016
+    echo '
 Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 Server = http://mirrors.163.com/archlinux-cn/$arch
-' | sudo tee -a /etc/pacman.conf
+' | sudo tee -a /etc/pacman.d/cnlist
 fi
+
+sudo pacman-key --lsign-key "farseerfc@archlinux.org"
 
 sudo pacman -Syy --noconfirm
 sudo pacman -Fyy --noconfirm

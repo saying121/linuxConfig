@@ -90,7 +90,6 @@ link_list=(
     ["$HOME/.linuxConfig/formatters/stylua"]="$HOME/.config"
     ["$HOME/.linuxConfig/i3"]="$HOME/.config"
     ["$HOME/.linuxConfig/i3/i3status-rust"]="$HOME/.config"
-    ["$HOME/.linuxConfig/input-remapper-2"]="$HOME/.config"
     ["$HOME/.linuxConfig/nvim"]="$HOME/.config"
     ["$HOME/.linuxConfig/nvim/coc-config/coc-settings.json"]="$HOME/.vim/coc-settings.json"
     ["$HOME/.linuxConfig/nvim/tasks.ini"]="$HOME/.vim/tasks.ini"
@@ -112,12 +111,6 @@ link_list=(
 [[ -d ~/.local/shells ]] || mkdir -p ~/.local/shells
 [[ -d ~/.vim ]] || mkdir ~/.vim
 [[ -d ~/.w3m ]] || mkdir ~/.w3m
-
-# keymap 路径带有空格就单拎出来
-path="$HOME/.config/input-remapper-2"
-if [[ -d $path && ! -L $path ]]; then
-    mv "$path" "$path""_bak"
-fi
 
 for path in "${!link_list[@]}"; do
     # 配置为目录会被备份

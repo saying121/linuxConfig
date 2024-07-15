@@ -582,4 +582,25 @@ extern "<>" {
             i(1, ""),
         })
     ),
+    -- s(
+    --     {
+    --         trig = "acm",
+    --         dscr = "#[macro_use(…)]",
+    --     },
+    --     fmta(
+    --         [[
+    --     fn main() {
+    --         use std::io::prelude::*;
+    --
+    --         let stdin = std::io::stdin();
+    --         for line in stdin.lock().lines().map(|l| l.unwrap()) {
+    --             <>
+    --         }
+    --     }
+    --     ]],
+    --         {
+    --             i(1, ""),
+    --         }
+    --     )
+    -- ),
 }

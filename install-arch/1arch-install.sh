@@ -30,13 +30,13 @@ mount /dev/my_btrfs /mnt -o subvol=@,noatime,discard=async,compress=zstd
 
 (2)home
 mkdir /mnt/home
-mount /dev/my_btrfs /mnt -o subvol=@home,noatime,discard=async,compress=zstd
+mount /dev/my_btrfs /mnt/home -o subvol=@home,noatime,discard=async,compress=zstd
 
 mkdir -p /mnt/var/log
-mount /dev/my_btrfs /mnt -o subvol=@log,noatime,discard=async,compress=zstd
+mount /dev/my_btrfs /mnt/var/log -o subvol=@log,noatime,discard=async,compress=zstd
 
 mkdir -p /mnt/var/cache/pacman/pkg
-mount /dev/my_btrfs /mnt -o subvol=@pkg,noatime,discard=async,compress=zstd
+mount /dev/my_btrfs /mnt/var/cache/pacman/pkg -o subvol=@pkg,noatime,discard=async,compress=zstd
 
 chattr +C /mnt/var/log
 chattr +C /mnt/var/cache/pacman/pkg
@@ -45,7 +45,7 @@ chattr +C /mnt/var/cache/pacman/pkg
 mkdir /mnt/efi
 mount /dev/for_efi /mnt/efi
 
-4.End
+4.End when chroot
 edit /etc/mkinitcpio.conf
 MODULES=() -> MODULES=(btrfs)
 
@@ -63,7 +63,7 @@ fi
 
 timedatectl set-ntp true
 # 基础
-pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware zsh linux-firmware-qlogic
+pacstrap /mnt base base-devel linux-cachyos linux-cachyos-headers linux-firmware zsh linux-firmware-qlogic
 
 genfstab -U /mnt >/mnt/etc/fstab
 

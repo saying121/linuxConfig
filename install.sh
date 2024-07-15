@@ -3,8 +3,8 @@
 ./proxy.sh
 socket=http://127.0.0.1:7897
 
-git config --global https.proxy $socket
-git config --global http.proxy $socket
+# git config --global https.proxy $socket
+# git config --global http.proxy $socket
 git config --global http.postBuffer 524288000
 git config credential.helper 'cache --timeout=3600'
 
@@ -48,13 +48,13 @@ $aurPkg linux-wallpaperengine-git
 # komorebi
 
 # installVirtualBox
-$pacMan virtualbox virtualbox-host-dkms
-sudo gpasswd -a "$USER" vboxusers
-newgrp vboxusers
+# $pacMan virtualbox virtualbox-host-dkms
+# sudo gpasswd -a "$USER" vboxusers
+# newgrp vboxusers
 
 $pacMan virt-manager virt-viewer virt-install
 
-$pacMan wine pkgstats
+$pacMan pkgstats
 
 # 各种查看系统信息的软件
 $pacMan htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor

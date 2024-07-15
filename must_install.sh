@@ -31,6 +31,8 @@ sudo pacman -Syyu --noconfirm
 $pacMan yay paru
 # yay -Syyu --noconfirm
 
+$pacMan linux-cachyos linux-cachyos-headers linux-zen linux-zen-headers
+
 $pacMan kitty terminology wezterm ttf-nerd-fonts-symbols-mono
 $pacMan dae
 
@@ -150,17 +152,6 @@ $pacMan lux-dl
 
 # install Gimp
 $pacMan gimp gvfs gutenprint
-
-# input-remapper
-$aurPkg input-remapper-git
-sudo systemctl enable input-remapper
-sudo systemctl start input-remapper
-input-remapper-control --command start --device "Keyboard K380 Keyboard" --preset "capslock+"
-input-remapper-control --command start --device "AT Translated Set 2 keyboard" --preset "capslock+"
-input-remapper-control --command start --device "SINO WEALTH Gaming KB " --preset "capslock+"
-
-$aurPkg kanata-bin
-./scripts/kanata.sh
 
 # 各种查看系统信息的软件
 $pacMan htop atop iotop iftop glances sysstat plasma-systemmonitor

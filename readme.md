@@ -18,16 +18,6 @@
 
 `./linkConfig.sh` 会尝试取代现有配置，运行时会提示，回车为不取代，输入 **yes** 才尝试取代。
 
-## 先运行
-
-```bash
-# 后跟 clash 订阅链接，而且链接要加双引号，不然有可能下载失败
-$ ~/.linuxConfig/scripts/configClash.sh
-```
-
-[yacd](http://yacd.metacubex.one) 可以管理 clash,
-端口为配置文件里面 [external-controller](http://127.0.0.1:19090)  的端口
-
 ## 如果要使用本配置，执行下面代码，包含 `ranger` 的插件
 
 ```bash
@@ -40,15 +30,6 @@ git clone --recursive https://github.com/saying121/.linuxConfig.git ~/.linuxConf
 $ git clone https://github.com/saying121/.linuxConfig.git ~/.linuxConfig
 # 然后拉子自模块
 $ git submodule update --init --recursive
-```
-
-## Clone 完成后
-
-```bash
-# 先自行配置代理,或者用./scripts/configClash.sh 脚本配置
-
-# 正常用就运行，包含常用的软件
-$ ~/.linuxConfig/install.sh clashlink
 ```
 
 ## Nvidia，自行选择是否安装，最好看 archwiki

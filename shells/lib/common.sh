@@ -146,17 +146,12 @@ alias imgcat="wezterm imgcat"
 
 alias gpgme_err="sudo rm -R /var/lib/pacman/sync"
 
-alias clhconf="~/.linuxConfig/scripts/configClash.sh"
-alias clhres='sudo systemctl restart clash-meta@$USER.service'
-alias clhstp='sudo systemctl stop clash-meta@$USER.service'
-alias clhsts='systemctl status clash-meta@$USER.service'
-
 alias rm="trash"
 
 alias tranen_zh='trans -j -d en:zh'
 alias tranzh_en='trans -j -d zh:en'
 
-alias upgrade='paru -Syu --noconfirm --overwrite "*" && paru -Fy && sudo pkgfile -u'
+alias upgrade='paru -Syu --noconfirm --overwrite "*"; paru -Fy; sudo pkgfile -u'
 # alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy && sudo pkgfile -u'
 # alias upgrade='yay -Syu --noconfirm --overwrite "*" && yay -Fy'
 

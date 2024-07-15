@@ -9,7 +9,7 @@ local clangd_flags = {
     -- "--completion-style=detailed",
 
     "--header-insertion-decorators",
-        "--enable-config", -- clangd 11+ supports reading from .clangd configuration file
+    "--enable-config", -- clangd 11+ supports reading from .clangd configuration file
     "--offset-encoding=utf-16",
     "--ranking-model=heuristics",
     -- 跨文件重命名变量
@@ -48,7 +48,7 @@ local clangd_flags = {
     -- 启用这项时，补全函数时，将会给参数提供占位符，键入后按 Tab 可以切换到下一占位符，乃至函数末
     "--function-arg-placeholders=true",
 
-        "--suggest-missing-includes",
+    "--suggest-missing-includes",
 }
 
 -- local ls = require("luasnip")
@@ -106,7 +106,7 @@ return {
     cmd = {
         -- see clangd --help-hidden
         "clangd",
-        unpack(clangd_flags)
+        unpack(clangd_flags),
         -- by default, clang-tidy use -checks=clang-diagnostic-*,clang-analyzer-*
         -- to add more checks, create .clang-tidy file in the root directory
         -- and add Checks key, see https://clang.llvm.org/extra/clang-tidy/
