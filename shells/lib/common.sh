@@ -152,7 +152,6 @@ alias clhstp='sudo systemctl stop clash-meta@$USER.service'
 alias clhsts='systemctl status clash-meta@$USER.service'
 
 alias rm="trash"
-alias "sudo rm"="sudo trash"
 
 alias tranen_zh='trans -j -d en:zh'
 alias tranzh_en='trans -j -d zh:en'
