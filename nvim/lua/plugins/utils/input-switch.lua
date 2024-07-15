@@ -7,7 +7,7 @@ return {
         require("input-switch").setup({
             switch_to_en = "fcitx5-remote -c",
             switch_no_en = "fcitx5-remote -o",
-            comment = true,
+            comment = false,
         })
     end,
 }

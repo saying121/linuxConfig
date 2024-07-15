@@ -36,7 +36,7 @@ $pacMan linux-cachyos linux-cachyos-headers linux-zen linux-zen-headers
 $pacMan kitty terminology wezterm ttf-nerd-fonts-symbols-mono
 
 # 开发工具
-$pacMan inetutils dnsutils networkmanager fd tree \
+$pacMan inetutils dnsutils networkmanager fd tree
 
 # 路由跟踪
 $pacMan traceroute mtr
