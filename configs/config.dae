@@ -70,15 +70,15 @@ global {
 subscription {
   # 在下面填入你的订阅链接。
   sf: ""
-  fny: ""
+  # fny: ''
 }
 
 # 更多的 DNS 样例见 https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/dns.md
 dns {
-    upstream {
-        googledns: 'tcp+udp://dns.google.com:53'
-        alidns: 'udp://dns.alidns.com:53'
-    }
+  upstream {
+    googledns: 'tcp+udp://dns.google.com:53'
+    alidns: 'udp://dns.alidns.com:53'
+  }
     routing {
         # 根据DNS查询的请求，决定使用哪个DNS服务器
         # 规则从上到下匹配

@@ -39,4 +39,16 @@ GRANT ALL PRIVILEGES ON *.* TO '<>'@'localhost';
             { i(1, [[name]]) }
         )
     ),
+    s(
+        {
+            trig = "table_sql",
+            dscr = "",
+        },
+        fmta(
+            [[
+SELECT <> FROM sqlite_master
+            ]],
+            { i(1, [[sql]]) }
+        )
+    ),
 }

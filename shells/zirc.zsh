@@ -91,6 +91,7 @@ eval "$(starship init zsh)"
 export CLIPPY_CONF_DIR=~/.config/rustfmt/
 # export RUSTFLAGS="-Z threads=16"
 # export PATH=~/.local/share/bob/nvim-bin:$PATH
+export PATH=$PATH:~/.local/share/gem/ruby/3.0.0/bin
 export RUST_BACKTRACE=1
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib/mojo
 # export WASMTIME_DEBUG_BINDGEN=1

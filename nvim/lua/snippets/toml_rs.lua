@@ -44,6 +44,7 @@ local consts = {
     ["const_str"] = "compile-time string operations",
 }
 local crates = {
+    ["figment"] = "一个如此自由的配置库，它是不真实的。",
     ["validator"] = "常见验证函数（电子邮件、url、长度等）和特征 - 与“validator_derive”一起使用",
     ["num-traits"] = "通用数学的数字特征",
     ["memflow"] = "memflow物理内存自省框架的核心组件",
@@ -565,6 +566,7 @@ local data_struct = {
     ["tinyvec"] = "`tinyvec` 提供 100% 安全的类 vec 数据结构。",
     ["tendril"] = "用于零拷贝解析的紧凑缓冲区/字符串类型",
     ["ouroboros"] = "简单、安全的自引用结构生成。",
+    ["indexmap"] = "顺序一致且迭代速度快的哈希表。",
 }
 local cache = {
     ["moka"] = "受 java caffeine 启发的快速并发缓存库",

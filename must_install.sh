@@ -34,6 +34,7 @@ $pacMan yay paru
 $pacMan linux-cachyos linux-cachyos-headers linux-zen linux-zen-headers
 
 $pacMan kitty terminology wezterm ttf-nerd-fonts-symbols-mono
+$pacMan dae
 
 # 开发工具
 $pacMan inetutils dnsutils networkmanager fd tree

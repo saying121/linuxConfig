@@ -1,9 +1,10 @@
 cached_layouts
+
 chttrans.conf_*
 
 notifications.conf
-notifications.conf_**
-notifications_**.conf
+notifications.conf_*
+notifications_*.conf
 
 pinyin.conf_*
 pinyin_*.conf

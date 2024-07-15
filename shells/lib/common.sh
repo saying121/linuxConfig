@@ -147,7 +147,6 @@ alias imgcat="wezterm imgcat"
 alias gpgme_err="sudo rm -R /var/lib/pacman/sync"
 
 alias rm="trash"
-alias "sudo rm"="sudo trash"
 
 alias tranen_zh='trans -j -d en:zh'
 alias tranzh_en='trans -j -d zh:en'
