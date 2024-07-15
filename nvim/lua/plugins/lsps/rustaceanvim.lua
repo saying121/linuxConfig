@@ -177,6 +177,9 @@ return {
                     --     default_settings.cargo.target = { "" }
                     -- end
 
+                    -- local st =
+                    --     ra.load_rust_analyzer_settings(project_root, { settings_file_pattern = "rust-analyzer.json" })
+
                     ---@type RustAnzlyzerConfig
                     local st = ra.load_rust_analyzer_settings(project_root .. "/.vscode", {
                         -- settings_file_pattern = "rust-analyzer.json",

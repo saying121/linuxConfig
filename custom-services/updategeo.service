@@ -1,0 +1,13 @@
+[Unit]
+Description=Update geosite geoip
+Requires=dae.service
+After=dae.service
+
+[Service]
+Type=oneshot
+ExecStart=mkdir -p /usr/local/share/dae/
+ExecStart=curl -L -o /usr/local/share/dae/geoip.dat https://github.com/v2fly/geoip/releases/latest/download/geoip.dat
+ExecStart=curl -L -o /usr/local/share/dae/geosite.dat https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat
+
+[Install]
+WantedBy=multi-user.target

@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-proxy=https://mirror.ghproxy.com/
+# proxy=https://mirror.ghproxy.com/
 
-sudo mkdir -p /usr/local/share/dae/
-pushd /usr/local/share/dae/ || exit
+if [[ -n $1 ]]; then
+    sudo mkdir -p /etc/dae/
+    # sudo cp ~/.linuxConfig/configs/config.dae /etc/dae/config.dae
+fi
 
-sudo curl -L -o geoip.dat "$proxy"https://github.com/v2fly/geoip/releases/latest/download/geoip.dat
-sudo curl -L -o geosite.dat "$proxy"https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat
-
-popd || exit
+sudo install -m 644 ~/.linuxConfig/custom-services/updategeo.service /lib/systemd/system/updategeo.service
+sudo install -m 644 ~/.linuxConfig/custom-services/updategeo.timer /lib/systemd/system/updategeo.timer
+sudo systemctl daemon-reload
+sudo systemctl enable --now updategeo.timer
