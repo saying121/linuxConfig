@@ -122,6 +122,7 @@ return {
                 -- defaults for hover and signature help
                 documentation = {
                     view = "hover",
+                    ---@type NoiceViewOptions
                     opts = {
                         lang = "markdown",
                         replace = true,
