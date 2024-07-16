@@ -1,7 +1,14 @@
 cached_layouts
+
 chttrans.conf_*
+
 notifications.conf
 notifications.conf_*
+notifications_*.conf
+
 pinyin.conf_*
+pinyin_*.conf
+
 punctuation.conf
 punctuation.conf_*
+punctuation_*.conf

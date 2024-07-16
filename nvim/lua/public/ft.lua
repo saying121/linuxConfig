@@ -10,6 +10,7 @@ M.extension = {
     yuck = "yuck",
     slint = "slint",
     service = "systemd",
+    timer = "systemd",
     dae = "config",
     kbd = "scheme",
     bar = function(path, bufnr)
