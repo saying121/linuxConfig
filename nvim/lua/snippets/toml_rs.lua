@@ -105,6 +105,7 @@ local some_display = {
 local iterators = {
     ["rev_lines"] = "rust 迭代器用于逐行读取文件并反向读取缓冲区",
     ["itertools"] = "额外的迭代器适配器、迭代器方法、自由函数和宏。",
+    ["simd-itertools"] = "用于常见操作（例如 contains、max、find 等）的 simd 加速替代方案。",
 }
 local algorithms = {
     ["raft"] = "raft算法的Rust语言实现。",
