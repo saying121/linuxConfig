@@ -84,6 +84,7 @@ link_list=(
     ["$HOME/.linuxConfig/configs/tldrrc"]="$HOME/.tldrrc"
     ["$HOME/.linuxConfig/configs/w3m-config"]="$HOME/.w3m/config"
     ["$HOME/.linuxConfig/configs/wezterm"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/festivalrc"]="$HOME/.festivalrc"
     ["$HOME/.linuxConfig/formatters/clang-format"]="$HOME/.clang-format"
     ["$HOME/.linuxConfig/formatters/prettierrc.json"]="$HOME/.prettierrc.json"
     ["$HOME/.linuxConfig/formatters/rustfmt"]="$HOME/.config"
@@ -112,10 +113,11 @@ link_list=(
 [[ -d ~/.vim ]] || mkdir ~/.vim
 [[ -d ~/.w3m ]] || mkdir ~/.w3m
 
-for path in "${!link_list[@]}"; do
+for source_path in "${!link_list[@]}"; do
+    dst_path_or_link=${link_list[$source_path]}
     # 配置为目录会被备份
-    be_back=$(echo "$path" | awk -F / '{print $NF}')
-    be_back_path=${link_list[$path]}/$be_back
+    be_back=$(echo "$source_path" | awk -F / '{print $NF}')
+    be_back_path=$dst_path_or_link/$be_back
 
     # 如果有要备份的目录，而且不是软连接
     if [[ -d $be_back_path && ! -L $be_back_path ]]; then
@@ -126,15 +128,15 @@ for path in "${!link_list[@]}"; do
         mv "$be_back_path" "$be_back_path""_bak"
     # 目录为软连接，或者没有目录
     else
-        ln -sf "$path" "${link_list[$path]}"
+        ln -sf "$source_path" "$dst_path_or_link"
         continue
     fi
 
     # 存在为软连接的配置就强制覆盖，否则尝试链接
-    if [[ -L ${link_list[$path]} ]]; then
-        ln -sf "$path" "${link_list[$path]}"
+    if [[ -L ${link_list[$source_path]} ]]; then
+        ln -sf "$source_path" "$dst_path_or_link"
     else
-        ln -s "$path" "${link_list[$path]}"
+        ln -s "$source_path" "$dst_path_or_link"
     fi
 done
 

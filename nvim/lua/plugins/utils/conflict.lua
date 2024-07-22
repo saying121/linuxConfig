@@ -1,12 +1,13 @@
 return {
     "akinsho/git-conflict.nvim",
-    build=[[
+    build = [[
 git config --global merge.tool git-conflict
-git config --global mergetool.git-conflict.cmd 'nvim "$MERGED"'
+git config --global mergetool.git-conflict.cmd 'nvim -c GitConflictRefresh "$MERGED"'
 git config --global mergetool.git-conflict.trustExitCode true
 git config --global mergetool.keepBackup false
     ]],
     version = "*",
+    cmd = { "GitConflictRefresh" },
     config = function()
         require("git-conflict").setup({
             default_mappings = false,

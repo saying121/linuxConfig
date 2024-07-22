@@ -4,10 +4,10 @@ Description=Update geosite geoip timer
 [Timer]
 ; OnCalendar=Sat *-*-* 03:10:00
 OnCalendar=Sat
-; OnActiveSec=15
+OnActiveSec=15
 ; RandomizedDelaySec=60
 ; Persistent=true
-AccuracySec=24h
+AccuracySec=168h
 
 [Install]
 WantedBy=timers.target

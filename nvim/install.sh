@@ -45,9 +45,12 @@ $aurPkg python-lsp-server python-pylsp-mypy python-rope python-mccabe python-pyl
 $pacMan rustup
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 rustup install stable nightly
-rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain stable
-rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview miri --toolchain nightly
-rustup default nightly
+channel=(stable nightly)
+for ch in "${!channel[@]}"; do
+    rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain "$ch"
+done
+rustup component add miri --toolchain nightly
+# rustup default nightly
 
 # 切换 crates 源
 cargo binstall -y crm
