@@ -79,7 +79,7 @@ $pacMan perl-image-exiftool mdcat libreoffice-fresh highlight git-delta atool ba
 $aurPkg ctpv-git epub2txt-git
 
 # sudo pacman -Syu --noconfirm
-$pacMan foliate festival festival-english \
+$pacMan foliate festival festival-us \
     openssh ntfs-3g exfat-utils viu \
     pandoc xdg-utils youtube-dl numlockx rsync arch-install-scripts \
     gimagereader-qt tesseract-data-eng tesseract-data-chi_sim \

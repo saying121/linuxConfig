@@ -12,6 +12,7 @@ return {
     },
     dependencies = {
         "mfussenegger/nvim-dap",
+    "akinsho/toggleterm.nvim",
         {
             "vxpm/ferris.nvim",
             opts = {

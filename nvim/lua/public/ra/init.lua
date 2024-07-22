@@ -160,6 +160,7 @@ return {
         diagnostics = {
             enable = true,
             disabled = {
+                'unfulfilled_lint_expectations',
                 -- rustc 的 lint 已经有这些了
                 "unused_variables",
                 "unused_mut", -- rustc 更准确

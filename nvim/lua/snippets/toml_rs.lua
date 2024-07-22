@@ -27,6 +27,7 @@ local unix = {
     ["libc"] = "原始 FFI 绑定到 libc 等平台库。",
     ["dbus"] = "绑定到 d-bus，这是 Linux 上常用的用于进程间通信的总线。",
     ["linux-raw-sys"] = "为 linux 用户空间 api 生成绑定",
+    ["daemonize"] = "一个库，使您的代码能够作为守护进程在类 UNIX 系统上运行。",
 }
 local os_crate = {
     ["rustix"] = "与 POSIX/Unix/Linux/Winsock 类系统调用的安全 Rust 绑定(uring,memory map,mount,pipe,libc)",
