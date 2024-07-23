@@ -68,17 +68,18 @@ global {
 }
 
 subscription {
-  # 在下面填入你的订阅链接。
-  sf: ""
-  # fny: ''
+    # 在下面填入你的订阅链接。
+    sf: ""
+    yiyuan: ""
+    # fny: ""
 }
 
 # 更多的 DNS 样例见 https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/dns.md
 dns {
-  upstream {
-    googledns: 'tcp+udp://dns.google.com:53'
-    alidns: 'udp://dns.alidns.com:53'
-  }
+    upstream {
+        googledns: 'tcp+udp://dns.google.com:53'
+        alidns: 'udp://dns.alidns.com:53'
+    }
     routing {
         # 根据DNS查询的请求，决定使用哪个DNS服务器
         # 规则从上到下匹配
@@ -119,7 +120,7 @@ dns {
 
 group {
     proxy_all {
-        filter: !name(keyword: "日本")
+        filter: !name(keyword: "日本", keyword: "倍")
         policy: min_moving_avg
     }
     Bing {
@@ -127,6 +128,7 @@ group {
             regex: '(?i)chatgpt',
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
             keyword: '英国')
+            && !name(keyword: "倍")
         policy: min_moving_avg
     }
     Google {
@@ -136,38 +138,47 @@ group {
             keyword: '台湾', regex: "(?i)Taiwan",
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
             keyword: '英国')
+            && !name(keyword: "倍")
         policy: min_moving_avg
     }
     Hongkong {
         filter: name(keyword: 'HK', keyword: "香港", regex: '(?i)Hongkong')
+            && !name(keyword: "倍")
         policy: min_moving_avg
     }
     Singapore {
         filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore')
+            && !name(keyword: "倍")
         policy: min_moving_avg
     }
     ChatGPT {
         filter: name(regex: '(?i)chatgpt')
+            && !name(keyword: "倍")
         policy: min_moving_avg
     }
     Taiwan {
         filter: name(keyword: '台湾', keyword: "(?i)Taiwan")
+            && !name(keyword: "倍")
         policy: min_moving_avg
     }
     America {
         filter: name(keyword: '美国', keyword: "🇺🇸", regex: '(?i)America')
+            && !name(keyword: "倍")
         policy: min_moving_avg
     }
     Japan {
         filter: name(keyword: '日本', keyword: "🇯🇵")
+            && !name(keyword: "倍")
         policy: min_moving_avg
     }
     UK {
         filter: name(keyword: '英国')
+            && !name(keyword: "倍")
         policy: min_moving_avg
     }
     Netflix {
         filter: name(regex: '(?i)Netflix', keyword: '奈飞')
+            && !name(keyword: "倍")
         policy: min_moving_avg
     }
 }
@@ -186,7 +197,7 @@ routing {
     ### 以下是自定义规则
 
     # 禁用 h3，因为它通常消耗很多 CPU 和内存资源
-    # l4proto(udp) && dport(443) -> block
+    l4proto(udp) && dport(443) -> block
 
     # 内置出站：block, direct, must_rules
     # must_rules 表示不将DNS流量重定向至dae并继续匹配。
@@ -195,25 +206,6 @@ routing {
     # "must_direct" 也可以写作 "direct(must)"。
     # 同样，"must_groupname"也支持不劫持、处理 DNS 流量，相当于"groupname(must)"。
     # groupname指的是出站分组
-
-    ## 域名规则
-
-    # 后缀匹配
-    domain(suffix: v2raya.org) -> proxy_all
-    # 全匹配，两种写法
-    domain(full: dns.google.com) -> proxy_all # equals to domain(v2raya.org) -> proxy_all
-    domain(keyword: facebook) -> proxy_all
-
-    domain(suffix: cn.bing.com) -> block
-    domain(regex: '(?i)bing', keyword: bing, suffix: bing.com) -> Bing
-
-    domain(regex: '\.goo.*\.com$') -> Google
-    domain(geosite:category-ads) -> block
-    domain(bilibili.com) -> direct
-    # 组合规则
-    domain(keyword: google, suffix: www.twitter.com, suffix: v2raya.org) -> proxy_all
-
-    domain(keyword: github) -> proxy_all
 
     ## 目的IP规则
     # 单个IP匹配
@@ -224,13 +216,9 @@ routing {
     dip(geoip:cn, geoip:private) -> direct
     # dip(9.9.9.9, 223.5.5.5) -> direct
 
-
     ## 源IP规则
-    # sip(192.168.0.0/24) -> proxy_all
-    sip(192.168.50.0/24) -> direct
-    # 多源IP规则
+    sip(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) -> direct
     # sip(192.168.0.6, 192.168.0.10, 192.168.0.15) -> direct
-
 
     ## 目的端口规则
     # 单个端口
@@ -249,6 +237,25 @@ routing {
     l4proto(tcp) -> proxy_all
     # udp
     l4proto(udp) -> direct
+
+    ## 域名规则 ######
+
+    # 后缀匹配
+    domain(suffix: v2raya.org) -> proxy_all
+    # 全匹配，两种写法
+    domain(full: dns.google.com) -> proxy_all # equals to domain(v2raya.org) -> proxy_all
+    domain(keyword: facebook) -> proxy_all
+
+    domain(suffix: cn.bing.com) -> block
+    domain(regex: '(?i)bing', keyword: bing, suffix: bing.com) -> Bing
+
+    domain(regex: '\.goo.*\.com$') -> Google
+    domain(geosite:category-ads) -> block
+    # domain(suffix: bilibili.com ) -> direct
+    # 组合规则
+    domain(keyword: google, suffix: www.twitter.com, suffix: v2raya.org) -> proxy_all
+
+    domain(keyword: github) -> proxy_all
 
     ## 进程名规则 (当绑定WAN接口是只支持本地进程)
     pname(curl) -> direct
@@ -307,7 +314,7 @@ routing {
     # >> ip -6 route add default dev wg0 scope global table 1145
     # Notice that interface wg0, mark 0x800, table 1145 can be set by preferences, but cannot conflict.
     # 3. Set routing rules in dae config file.
-    domain(geosite:disney) -> direct(mark: 0x800)
+    # domain(geosite:disney) -> direct(mark: 0x800)
 
     ## 源MAC规则
     # mac('02:42:ac:11:00:02') -> direct
