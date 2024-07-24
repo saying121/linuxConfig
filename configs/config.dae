@@ -194,10 +194,31 @@ routing {
     # "dip" 意思是目的IP.
     dip(224.0.0.0/3, 'ff00::/8') -> direct
 
-    ### 以下是自定义规则
-
     # 禁用 h3，因为它通常消耗很多 CPU 和内存资源
     l4proto(udp) && dport(443) -> block
+
+    ### 以下是自定义规则
+
+    ## 域名规则 ######
+
+    # 后缀匹配
+    domain(suffix: v2raya.org) -> proxy_all
+    # 全匹配，两种写法
+    domain(full: dns.google.com) -> proxy_all
+    domain(keyword: facebook) -> proxy_all
+
+    domain(regex: '(?i)bing', keyword: bing, suffix: bing.com) -> Bing
+    domain(full: cn.bing.com) -> block
+
+    # domain(regex: '\.goo.*\.com$') -> Google
+    domain(geosite:category-ads) -> block
+    # domain(suffix: bilibili.com ) -> direct
+    domain(keyword: google, suffix: www.twitter.com, suffix: v2raya.org) -> proxy_all
+
+    domain(keyword: github) -> proxy_all
+
+    ## 进程名规则 (当绑定WAN接口是只支持本地进程)
+    pname(curl) -> direct
 
     # 内置出站：block, direct, must_rules
     # must_rules 表示不将DNS流量重定向至dae并继续匹配。
@@ -208,29 +229,28 @@ routing {
     # groupname指的是出站分组
 
     ## 目的IP规则
-    # 单个IP匹配
-    dip(8.8.8.8) -> direct
+    dip(8.8.8.8) -> proxy_all
     # 单个IP段匹配
     # dip(101.97.0.0/16) -> direct
     # 多目的IP规则, geoip:private 设置允许你直接访问私有地址而不是通过代理，如果你想访问代理主机的私有网络地址，可以修改下面配置
     dip(geoip:cn, geoip:private) -> direct
     # dip(9.9.9.9, 223.5.5.5) -> direct
 
-    ## 源IP规则
     dip(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) -> direct
+    ## 源IP规则
     # sip(192.168.0.6, 192.168.0.10, 192.168.0.15) -> direct
 
     ## 目的端口规则
     # 单个端口
-    dport(80) -> direct
+    # dport(80) -> direct
     # 端口范围
-    dport(10080-30000) -> direct
+    # dport(10080-30000) -> direct
 
     ## 源端口规则
     # 单个端口
-    sport(38563) -> direct
+    # sport(38563) -> direct
     # 端口范围
-    sport(10080-30000) -> direct
+    # sport(10080-30000) -> direct
 
     ## 四层协议规则:
     # tcp
@@ -238,36 +258,14 @@ routing {
     # udp
     l4proto(udp) -> direct
 
-    ## 域名规则 ######
-
-    # 后缀匹配
-    domain(suffix: v2raya.org) -> proxy_all
-    # 全匹配，两种写法
-    domain(full: dns.google.com) -> proxy_all # equals to domain(v2raya.org) -> proxy_all
-    domain(keyword: facebook) -> proxy_all
-
-    domain(suffix: cn.bing.com) -> block
-    domain(regex: '(?i)bing', keyword: bing, suffix: bing.com) -> Bing
-
-    domain(regex: '\.goo.*\.com$') -> Google
-    domain(geosite:category-ads) -> block
-    # domain(suffix: bilibili.com ) -> direct
-    # 组合规则
-    domain(keyword: google, suffix: www.twitter.com, suffix: v2raya.org) -> proxy_all
-
-    domain(keyword: github) -> proxy_all
-
-    ## 进程名规则 (当绑定WAN接口是只支持本地进程)
-    pname(curl) -> direct
-
     ## DSCP规则 (匹配 DSCP; 对于绕过BT有用).
     # See https://github.com/daeuniverse/dae/discussions/295
     dscp(0x4) -> direct
 
     ## "且"规则
     dip(geoip:cn) && dport(80) -> direct
-    dip(8.8.8.8) && l4proto(tcp) && dport(1-1023, 8443) -> proxy_all
-    dip(1.1.1.1) && sip(10.0.0.1, 172.20.0.0/16) -> direct
+    # dip(8.8.8.8) && l4proto(tcp) && dport(1-1023, 8443) -> proxy_all
+    # dip(1.1.1.1) && sip(10.0.0.1, 172.20.0.0/16) -> direct
 
     ## “非“规则
     # 下面代表，域名不是geosite类型为google-scholar或者category-scholar-!cn或者category-scholar-cn
