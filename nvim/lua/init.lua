@@ -1,13 +1,10 @@
-local api, keymap = vim.api, vim.keymap.set
+local api, keymap, vcmd = vim.api, vim.keymap.set, vim.cmd
 require("opts")
 
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
 
 require("public.ft").make_ft()
-
---local _ = pcall(require, "lazy-config")
-require("lazy-config")
 
 require("lsp_configs")
 
@@ -36,15 +33,23 @@ api.nvim_create_autocmd({ "CursorHold" }, {
     end,
 })
 
+api.nvim_create_autocmd("ColorScheme", {
+    group = api.nvim_create_augroup("ColorSchemeMod", { clear = false }),
+    pattern = "*",
+    callback = function()
+        vcmd.source(vim.fn.stdpath("config") .. "/colors/mycolors.vim")
+    end,
+})
+
 function _G.show_documentation()
     if _G.dapui_for_K then
         require("dapui").eval()
     elseif vim.tbl_contains({ "help" }, vim.bo.filetype) then
-        vim.cmd("h " .. vim.fn.expand("<cword>"))
+        vcmd.help(vim.fn.expand("<cword>"))
     elseif vim.tbl_contains({ "man" }, vim.bo.filetype) then
-        vim.cmd("Man " .. vim.fn.expand("<cword>"))
+        vcmd.Man(vim.fn.expand("<cword>"))
     elseif not UfoHover() then
-        -- vim.cmd([[Lspsaga hover_doc]])
+        -- vcmd([[Lspsaga hover_doc]])
         vim.lsp.buf.hover()
     end
 end
@@ -55,3 +60,5 @@ api.nvim_set_hl(0, "ActiveWindow", { bg = "#17252c" })
 api.nvim_set_hl(0, "InactiveWindow", { bg = "#0D1B22" })
 
 -- vim.o.winhighlight = "Normal:Normal,NormalNC:InactiveWindow"
+
+require("lazy-config")

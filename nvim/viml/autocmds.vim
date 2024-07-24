@@ -36,10 +36,10 @@ augroup File
     " 自动赋予执行权限
     autocmd BufWritePost *.sh,*.py,*.awk,*.zsh silent !chmod +x %
     " 读取模板
-    autocmd BufNewFile *.sh silent 0r ~/.config/nvim/viml/template/bash.sh | normal G
-    autocmd BufNewFile *.zsh silent 0r ~/.config/nvim/viml/template/zsh.zsh | normal G
-    autocmd BufNewFile *.py silent 0r ~/.config/nvim/viml/template/python3.py| normal G
-    autocmd BufNewFile *.html silent 0r ~/.config/nvim/viml/template/html.html| normal Gdd4G16|
-    autocmd BufNewFile *.vim silent 0r ~/.config/nvim/viml/template/vim.vim| normal G
-    autocmd BufNewFile *.awk silent 0r ~/.config/nvim/viml/template/awk.awk| normal G
+    autocmd BufNewFile *.sh silent 0r ~/.config/nvim/viml/template/bash.sh     | normal G
+    autocmd BufNewFile *.zsh silent 0r ~/.config/nvim/viml/template/zsh.zsh    | normal G
+    autocmd BufNewFile *.py silent 0r ~/.config/nvim/viml/template/python3.py  | normal G
+    autocmd BufNewFile *.html silent 0r ~/.config/nvim/viml/template/html.html | normal Gdd4G16|
+    autocmd BufNewFile *.vim silent 0r ~/.config/nvim/viml/template/vim.vim    | normal G
+    autocmd BufNewFile *.awk silent 0r ~/.config/nvim/viml/template/awk.awk    | normal G
 augroup END

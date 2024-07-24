@@ -55,7 +55,8 @@ return {
             vim_dadbod_completion = "[DB]",
             zsh = "[Zsh]",
             fittencode = "[Fitten]",
-            crates="[Crates]"
+            crates = "[Crates]",
+            lazydev = "[LazyDev]",
         }
 
         -- 分级显示，上一级有补全就不会显示下一级
@@ -105,7 +106,7 @@ return {
                 format = function(entry, item)
                     local max_width = 50
                     item.kind = icons[item.kind]
-                    item.menu = item.menu or source_mapping[entry.source.name]
+                    item.menu = item.menu or source_mapping[entry.source.name] or ""
                     item.menu = string.sub(item.menu, 1, max_width)
                     item.abbr = string.sub(item.abbr, 1, max_width)
                     return item
@@ -218,6 +219,33 @@ return {
                     end
                 end,
             },
+        })
+
+        require("cmp").setup.filetype({ "lua" }, {
+            sources = cmp_cfg.sources({
+                {
+                    name = "luasnip",
+                    priority = 1000,
+                },
+                {
+                    name = "lazydev",
+                    priority = 1000,
+                },
+                {
+                    name = "nvim_lsp",
+                    priority = 1000,
+                    -- entry_filter = function(entry, ctx)
+                    --     return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+                    -- end,
+                },
+                { name = "path", priority = 800 },
+                { name = "fittencode", priority = 900 },
+            }, {
+                { name = "buffer", priority = 800 },
+                { name = "rg", keyword_length = 3, priority = 700 },
+            }, {
+                { name = "spell", priority = 600 },
+            }),
         })
     end,
 }

@@ -3,7 +3,7 @@ local vcmd = vim.cmd
 ---@type LazySpec
 return {
     "folke/tokyonight.nvim",
-    event = "BufWinEnter",
+    -- event = "BufWinEnter",
     -- cond = false,
     config = function()
         require("tokyonight").setup({
@@ -18,6 +18,5 @@ return {
         })
 
         vcmd.colorscheme("tokyonight")
-        vcmd.colorscheme("mycolors")
     end,
 }

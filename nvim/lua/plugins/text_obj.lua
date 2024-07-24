@@ -10,6 +10,6 @@ return {
         keymap({ "o", "x" }, "U", function()
             require("various-textobjs").url()
         end)
-        keymap("x", "L", "g$")
+        keymap("x", "L", "g_")
     end,
 }

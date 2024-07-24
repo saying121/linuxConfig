@@ -1,6 +1,6 @@
 scriptencoding utf-8
 
-colorscheme elflord
+" colorscheme elflord
 
 " plugins
 source ~/.config/nvim/vim-config/vim-plug.vim
