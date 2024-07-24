@@ -2,7 +2,7 @@ local vfn = vim.fn
 ---@type LazySpec
 return {
     "andythigpen/nvim-coverage",
-    build = '[[ "$(command -v grcov)" = "" ]] && cargo install grcov',
+    build = '[[ "$(command -v grcov)" = "" ]] && cargo binstall grcov',
     cmd = {
         "Coverage",
         "CoverageSummary",

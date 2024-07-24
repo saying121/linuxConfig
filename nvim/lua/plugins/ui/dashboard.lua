@@ -34,21 +34,6 @@ return {
         cond = function()
             return vfn.argc() == 0 and result < split
         end,
-        dependencies = {
-            {
-                "folke/drop.nvim",
-                config = function()
-                    require("drop").setup({
-                        ---@alias DropTheme|string "leaves" | "snow" | "stars" | "xmas" | "spring" | "summer"
-                        theme = "snow", -- can be one of rhe default themes, or a custom theme
-                        max = 40, -- maximum number of drops on the screen
-                        interval = 150, -- every 150ms we update the drops
-                        screensaver = 1000 * 60 * 5, -- show after 5 minutes. Set to false, to disable
-                        filetypes = { "dashboard", "alpha", "starter" }, -- will enable/disable automatically for the following filetypes
-                    })
-                end,
-            },
-        },
         config = function()
             local path_cat = M.get_random_file_path("the_cat")
             local all_prev = {
@@ -220,12 +205,7 @@ return {
 
             local stats = require("lazy").stats()
             local vson = vim.version()
-            local version = "  󰥱 v"
-                .. vson.major
-                .. "."
-                .. vson.minor
-                .. "."
-                .. vson.patch
+            local version = "  󰥱 v" .. vson.major .. "." .. vson.minor .. "." .. vson.patch
             local footer = {
                 type = "text",
                 val = "Neovim " .. version .. "  " .. stats.count .. " plugins ",
