@@ -45,6 +45,7 @@ local consts = {
     ["const_str"] = "compile-time string operations",
 }
 local crates = {
+    ["trait-variant"] = "用于处理 Rust 中的 impl 特征的实用程序",
     ["figment"] = "一个如此自由的配置库，它是不真实的。",
     ["validator"] = "常见验证函数（电子邮件、url、长度等）和特征 - 与“validator_derive”一起使用",
     ["num-traits"] = "通用数学的数字特征",
