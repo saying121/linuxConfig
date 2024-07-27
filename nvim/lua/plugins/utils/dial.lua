@@ -93,6 +93,43 @@ return {
             }),
             augend.constant.new({
                 elements = {
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                },
+                word = true,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = {
+                    "Mon",
+                    "Tue",
+                    "Wed",
+                    "Thu",
+                    "Fri",
+                    "Sat",
+                    "Sun",
+                },
+                word = true,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = {
+                    "error",
+                    "warn",
+                    "info",
+                    "debug",
+                    "trace",
+                },
+                word = true,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = {
                     "first",
                     "second",
                     "third",
