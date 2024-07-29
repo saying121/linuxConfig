@@ -3,7 +3,8 @@ Description=Update geosite geoip timer
 
 [Timer]
 ; OnCalendar=Sat *-*-* 03:10:00
-OnCalendar=Sat
+OnCalendar=Tue, Thu, Sat
+Saturday
 OnActiveSec=15
 ; RandomizedDelaySec=60
 ; Persistent=true
