@@ -3,7 +3,8 @@ return {
     "sindrets/diffview.nvim",
     cmd = { "DiffviewOpen" },
     build = [[
-git config --global merge.tool git-conflict git config --global mergetool.git-conflict.cmd 'nvim +DiffviewOpen'
+git config --global merge.tool git-conflict
+git config --global mergetool.git-conflict.cmd 'nvim +DiffviewOpen'
 git config --global mergetool.git-conflict.trustExitCode true
 git config --global mergetool.keepBackup false
     ]],

@@ -1,6 +1,6 @@
 local utils = require("public.utils")
 
-local really_root = utils.get_root_dir(vim.fn.getcwd(), "/Cargo.toml")
+local really_root = utils.get_root_dir(vim.uv.cwd(), "/Cargo.toml")
 
 -- local function is_git_repo()
 --     vim.fn.system("git rev-parse --is-inside-work-tree")
@@ -37,11 +37,11 @@ local function ra_settings(dir)
     if string.len(dir) > 0 then
         root = dir
     else
-        local dir = utils.get_root_dir(vim.fn.getcwd(), "/.git")
+        local dir = utils.get_root_dir(vim.uv.cwd(), "/.git")
         if dir then
             root = dir
         else
-            root = vim.fn.getcwd()
+            root = vim.uv.cwd()
         end
     end
     local path = root .. "/rust-analyzer.json"
