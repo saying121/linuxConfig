@@ -10,7 +10,7 @@ global {
     so_mark_from_dae: 0
 
     # 日志级别: error, warn, info, debug, trace.
-    log_level: info
+    log_level: warn
 
     # 是否禁止等待网络，在拉取订阅之前
     disable_waiting_network: false
@@ -77,19 +77,19 @@ dns {
         # 根据DNS查询的请求，决定使用哪个DNS服务器
         # 规则从上到下匹配
         request {
+            # 全匹配和正则匹配
+            # qname(full: ok.com, regex: '^yes') -> googledns
             # 内置出站:asis,reject
-            # 可用的方法qname, qtype
+            # 可用的方法 qname, qtype
             # 广告拒绝
             qname(geosite:category-ads-all) -> reject
             # 这里的意思是google中是cn的域名使用alidns
-            qname(geosite:google@cn) -> alidns
+            qname(geosite:google@cn, geosite:cn, geosite:china-list, geosite:private) -> alidns
             # 匹配后缀，匹配关键字
             # qname(suffix: abc.com, keyword: google) -> googledns
-            qname(keyword: google, keyword: bing) -> googledns
-            # 全匹配和正则匹配
-            # qname(full: ok.com, regex: '^yes') -> googledns
-             # DNS 请求类型
-             # ipv4和ipv6请求使用alidns
+            qname(geosite:gfw, geosite:geolocation-!cn, keyword: bing) -> googledns
+            # DNS 请求类型
+            # ipv4和ipv6请求使用alidns
             # qtype(a, aaaa) -> alidns
             # cname请求googledns
             # qtype(cname) -> googledns
@@ -249,27 +249,6 @@ routing {
     # 禁用 h3，因为它通常消耗很多 CPU 和内存资源
     l4proto(udp) && dport(443) -> block
 
-    ### 以下是自定义规则
-
-    # 后缀匹配
-    domain(suffix: v2raya.org) -> proxy_all
-    # 全匹配，两种写法
-    domain(full: dns.google.com, keyword: github, suffix: aur.archlinux.org) -> Excellent
-    domain(keyword: facebook) -> proxy_all
-
-    domain(full: cn.bing.com) -> block
-    domain(regex: '(?i)bing', keyword: bing, suffix: bing.com) -> BingExcellent
-
-    # domain(regex: '\.goo.*\.com$') -> Google
-    domain(geosite:category-ads) -> block
-    # domain(suffix: bilibili.com ) -> direct
-    domain(keyword: google, suffix: www.twitter.com, suffix: v2raya.org) -> proxy_all
-
-    domain(keyword: github) -> proxy_all
-
-    ## 进程名规则 (当绑定WAN接口是只支持本地进程)
-    pname(curl) -> direct
-
     # 内置出站：block, direct, must_rules
     # must_rules 表示不将DNS流量重定向至dae并继续匹配。
     # 对于单条规则，"direct"和"must_direct"的区别在于"direct"会劫持并处理DNS请求（用于流量分割使用），而"must_direct"不会。
@@ -278,29 +257,50 @@ routing {
     # 同样，"must_groupname"也支持不劫持、处理 DNS 流量，相当于"groupname(must)"。
     # groupname指的是出站分组
 
+    domain(geosite:category-ads-all) -> block
+    dip(geoip:cn, geoip:private) -> direct
+    dip(geoip:cn) && dport(80) -> direct
+    domain(geosite:google@cn, geosite:cn) -> direct
+
+    domain(regex: '(?i)bing', keyword: bing, suffix: bing.com) -> BingExcellent
+    # dip(geoip:google) -> Excellent
+    domain(suffix: v2raya.org) -> proxy_all
+    domain(
+        full: dns.google.com,
+        full: devv.ai,
+        full: poe.com,
+        suffix: google.com,
+        keyword: github,
+        full: aur.archlinux.org,
+        full: translate.google.com,
+        full: translate.yandex.com,
+        suffix: deepl.com,
+        suffix: crates.io
+    ) -> Excellent
+    dip(geoip:us) -> proxy_all
+
+    domain(full: cn.bing.com) -> block
+
+    domain(geosite:gfw, geosite:geolocation-!cn) -> proxy_all
+
+    dip(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) -> direct
+    pname(curl) -> direct ## 进程名规则 (当绑定WAN接口是只支持本地进程)
+
     ## 目的IP规则
     dip(8.8.8.8) -> proxy_all
     # 单个IP段匹配
     # dip(101.97.0.0/16) -> direct
-    # 多目的IP规则, geoip:private 设置允许你直接访问私有地址而不是通过代理，如果你想访问代理主机的私有网络地址，可以修改下面配置
-    dip(geoip:cn, geoip:private) -> direct
-    # dip(9.9.9.9, 223.5.5.5) -> direct
 
-    dip(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) -> direct
     ## 源IP规则
     # sip(192.168.0.6, 192.168.0.10, 192.168.0.15) -> direct
 
     ## 目的端口规则
-    # 单个端口
-    # dport(80) -> direct
-    # 端口范围
-    # dport(10080-30000) -> direct
+    # dport(80) -> direct # 单个端口
+    # dport(10080-30000) -> direct # 端口范围
 
     ## 源端口规则
-    # 单个端口
-    # sport(38563) -> direct
-    # 端口范围
-    # sport(10080-30000) -> direct
+    # sport(38563) -> direct # 单个端口
+    # sport(10080-30000) -> direct # 端口范围
 
     ## 四层协议规则:
     # tcp
@@ -312,8 +312,6 @@ routing {
     # See https://github.com/daeuniverse/dae/discussions/295
     dscp(0x4) -> direct
 
-    ## "且"规则
-    dip(geoip:cn) && dport(80) -> direct
     # dip(8.8.8.8) && l4proto(tcp) && dport(1-1023, 8443) -> proxy_all
     # dip(1.1.1.1) && sip(10.0.0.1, 172.20.0.0/16) -> direct
 
@@ -335,8 +333,6 @@ routing {
     # 对于以下规则，DNS请求将会被强制重定向到dae，除了mosdns的请求
     # 不同于must_direct/must_my_group，来自mosdns的流量会继续匹配其他规则
     pname(mosdns) -> must_rules
-    ip(geoip:cn) -> direct
-    domain(geosite:cn) -> direct
 
     fallback: proxy_all
 
