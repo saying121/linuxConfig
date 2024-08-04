@@ -1,4 +1,5 @@
-                local vfn = vim.fn
+local vfn = vim.fn
+
 ---@type LazySpec
 return {
     "nvim-telescope/telescope.nvim",

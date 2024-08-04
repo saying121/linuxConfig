@@ -123,7 +123,7 @@ return {
                 --use multiple configs (|ultimate-autopair-map-multi-config|)
                 hopout = false,
                 -- (|) > tabout > ()|
-                do_nothing_if_fail = true,
+                do_nothing_if_fail = false,
                 --add a module so that if close fails
                 --then a `\t` will not be inserted
             },
