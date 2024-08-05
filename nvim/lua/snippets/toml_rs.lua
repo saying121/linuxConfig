@@ -401,14 +401,6 @@ local database = {
 }
 local orm = {
     ["diesel"] = "用于 postgresql、sqlite 和 mysql 的安全、可扩展的 orm 和查询构建器",
-    ["rbs"] = "orm的序列化框架",
-    ["rbatis"] = "**Rust** sql 工具包和 orm 库。一个异步的、纯 **Rust** 的 sql crate，具有编译时动态 sql",
-    ["rbdc-mysql"] = "rust sql 工具包和 orm 库。一个异步、纯 **Rust** sql 箱，具有编译时动态 sql",
-    ["rbdc-pg"] = "**Rust** sql 工具包和 orm 库。一个异步、纯 **Rust** sql 箱，具有编译时动态 sql",
-    ["rbdc-sqlite"] = "**Rust** sql 工具包和 orm 库。一个异步、纯 **Rust** sql 箱，具有编译时动态 sql",
-    ["rbdc-mssql"] = "**Rust** sql 工具包和 orm 库。一个异步、纯 **Rust** sql 箱，具有编译时动态 sql",
-    ["rbdc-oracle"] = "一个简单的 rbatis 的 oracle 驱动程序",
-    ["rbdc-tdengine"] = "rbatis 的 tdengine 驱动程序",
     ["sea-orm"] = "**Rust** 的异步和动态 orm",
     ["sea-orm-migration"] = "SeaORM 的迁移实用程序",
     ["sea-query"] = "用于 mysql、postgres 和 sqlite 的动态查询生成器。(sea-orm 包含了这个)",

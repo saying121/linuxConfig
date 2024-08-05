@@ -8,7 +8,8 @@ xnoremap * *N
 nnoremap # #N
 xnoremap # #N
 
-nnoremap ,, ggVG
+" nnoremap ,, ggVG
+nnoremap ' ;
 
 " 多行移动
 xnoremap <M-j> :m '>+1<cr>gv=gv
