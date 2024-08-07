@@ -1,16 +1,12 @@
 [Unit]
 Description=Update geosite geoip
-Requires=dae.service
-After=dae.service
+; Requires=dae.service
+; After=dae.service
 
 [Service]
 Type=oneshot
-ExecStart=mkdir -p /usr/local/share/dae/
-; ExecStart=curl -L -o /usr/local/share/dae/geoip.dat https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
-; ExecStart=curl -L -o /usr/local/share/dae/geosite.dat https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
-ExecStart=curl -L -o /usr/local/share/dae/geoip.dat https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
-ExecStart=curl -L -o /usr/local/share/dae/geosite.dat https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
-ExecStart=dae reload
+ExecStart=updategeo
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
