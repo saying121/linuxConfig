@@ -52,7 +52,7 @@ return {
             path = "[Path]",
             rg = "[Rg]",
             spell = "[Spell]",
-            vim_dadbod_completion = "[DB]",
+            ["vim-dadbod-completion"] = "[DB]",
             zsh = "[Zsh]",
             fittencode = "[Fitten]",
             crates = "[Crates]",

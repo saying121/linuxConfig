@@ -18,12 +18,12 @@ else
     curl -L -o $geosite_file https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
 fi
 
-if [ -s "$geoip_file" ] && [ "$(stat -c%s $geoip_file)" -lt 11000000 ] && [ -s $geoip_file_bak ]; then
+if [[ ! -e "$geoip_file" || "$(stat -c%s $geoip_file)" -lt 11000000 && -s $geoip_file_bak ]]; then
     mv -f $geoip_file_bak $geoip_file
 fi
 
-if [ -s "$geosite_file" ] && [ "$(stat -c%s $geosite_file)" -lt 6400000 ] && [ -s $geosite_file_bak ]; then
+if [[ ! -e "$geosite_file" || "$(stat -c%s $geosite_file)" -lt 6200000 && -s $geosite_file_bak ]]; then
     mv -f $geosite_file_bak $geosite_file
 fi
 
-systemctl restart dae
+# systemctl restart dae

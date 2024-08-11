@@ -1,12 +1,12 @@
 [Unit]
 Description=Update geosite geoip
-; Requires=dae.service
-; After=dae.service
+Requires=dae.service
+After=dae.service
 
 [Service]
 Type=oneshot
 ExecStart=updategeo
-Restart=on-failure
+; Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target

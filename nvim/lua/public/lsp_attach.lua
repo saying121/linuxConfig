@@ -54,7 +54,12 @@ M.on_attach = function(client, bufnr)
     end
 
     -- shit
-    if client.name == "lemminx" or client.name == "jdtls" then
+    local lsps = {
+        "lemminx",
+        "jdtls",
+        "tinymist",
+    }
+    if vim.tbl_contains(lsps, client.name) then
         keymap({ "n", "x" }, "<space>f", function()
             lspb.format({ async = true })
         end)
