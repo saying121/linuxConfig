@@ -213,3 +213,5 @@ alias gitlog="git log --graph --pretty=format:'%>|(12,trunc)%Cred%h%Creset  -  %
 if [[ $TERM = "xterm-kitty" ]]; then
     alias ssh="kitten ssh"
 fi
+alias daeres="sudo systemctl restart dae"
+alias daestop="sudo systemctl stop dae"

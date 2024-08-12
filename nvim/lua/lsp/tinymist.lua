@@ -5,7 +5,8 @@ return {
     end,
     single_file_support = true,
     settings = {
-        -- exportPdf = "onType",
-        -- outputPath = vim.fn.getcwd(),
+        exportPdf = "onSave",
+        typstExtraArgs = {},
+        formatterMode = "typstyle",
     },
 }
