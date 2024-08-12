@@ -123,6 +123,14 @@ return {
     },
     {
         "goolord/alpha-nvim",
+        init = function()
+            local api = vim.api
+            api.nvim_create_autocmd({ "FileType" }, {
+                group = api.nvim_create_augroup("NoCursorline", { clear = false }),
+                pattern = { "dashboard", "alpha" },
+                command = "setlocal nocursorline",
+            })
+        end,
         cond = function()
             return vfn.argc() == 0 and result >= split
         end,

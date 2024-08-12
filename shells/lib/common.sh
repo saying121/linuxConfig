@@ -209,3 +209,7 @@ export RUSTC_WRAPPER=sccache
 export PATH=$PATH:~/.linuxConfig/scripts
 
 alias gitlog="git log --graph --pretty=format:'%>|(12,trunc)%Cred%h%Creset  -  %C(yellow)%<(60,trunc)%s%Creset %Cgreen%<(30,trunc)%d %C(bold blue)%<(15,trunc)%an%Creset%>(1)%>(50)%cd' --date=format-local:'%Y-%m-%d %H:%M:%S'"
+
+if [[ $TERM = "xterm-kitty" ]]; then
+    alias ssh="kitten ssh"
+fi

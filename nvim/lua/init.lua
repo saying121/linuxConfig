@@ -33,6 +33,13 @@ api.nvim_create_autocmd({ "CursorHold" }, {
         end
     end,
 })
+api.nvim_create_autocmd({ "FileType" }, {
+    group = api.nvim_create_augroup("NoCursorline", { clear = false }),
+    pattern = { "dashboard", "alpha" },
+    callback = function()
+        vim.cmd.setlocal("nocursorline")
+    end,
+})
 
 api.nvim_create_autocmd("ColorScheme", {
     group = api.nvim_create_augroup("ColorSchemeMod", { clear = false }),
