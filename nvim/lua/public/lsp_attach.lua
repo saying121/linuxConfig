@@ -112,7 +112,12 @@ M.on_attach = function(client, bufnr)
                 prefix = "",
                 scope = "cursor",
             }
-            if vim.bo.filetype == "markdown" then
+            local ft = {
+                "markdown",
+                "python",
+                "rust",
+            }
+            if vim.tbl_contains(ft, vim.bo.filetype) then
                 return
             end
             vim.diagnostic.open_float(f_opts)
