@@ -2,7 +2,7 @@
 
 (("fn"       @keyword.function) (#set! conceal "󰊕"))
 
-(("use" @keyword.import) (#set! conceal ""))
+(("use" @keyword.import) (#set! conceal "󰋺"))
 ;(("mod" @keyword.import) (#set! conceal "󰕳"))
 
 ;(("default" @keyword) (#set! conceal "󰕳"))

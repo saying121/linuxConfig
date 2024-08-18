@@ -71,7 +71,7 @@ return {
                     -- disable_move = true,
                     center = {
                         {
-                            icon = "  ",
+                            icon = "󰈢  ",
                             icon_hl = "DashBoardIcon",
                             desc = "Recently opened files           ",
                             desc_hl = "DashBoardCenter",
@@ -107,7 +107,7 @@ return {
                             action = "e $MYVIMRC",
                         },
                         {
-                            icon = "  ",
+                            icon = "󰗼  ",
                             icon_hl = "DashBoardIcon",
                             desc = "Exit                            ",
                             desc_hl = "DashBoardCenter",

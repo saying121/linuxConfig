@@ -84,7 +84,7 @@ function M.linux_distro()
     if vim.fn.has("win") then
         return "OS:"
     elseif vim.fn.has("mac") then
-        return "OS:"
+        return "OS:󰀵"
     end
 
     return uname.sysname
@@ -117,7 +117,7 @@ function M.fileformat()
     if fft == "dos" then
         return "FF:"
     elseif fft == "mac" then
-        return "FF:"
+        return "FF:󰀵"
     end
 
     return fft

@@ -1,3 +1,3 @@
 ;; extends
 
-(("func" @keyword.function) (#set! conceal ""))
+(("func" @keyword.function) (#set! conceal "󰊕"))

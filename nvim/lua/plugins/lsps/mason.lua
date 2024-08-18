@@ -34,8 +34,8 @@ return {
         ui = {
             icons = {
                 package_pending = " ",
-                package_installed = " ",
-                package_uninstalled = " ﮊ",
+                package_installed = "󰄳 ",
+                package_uninstalled = "󰚌 ",
             },
             check_outdated_packages_on_open = true,
             -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.

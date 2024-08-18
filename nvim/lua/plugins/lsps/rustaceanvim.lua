@@ -114,7 +114,7 @@ return {
                     keymap("n", "<leader>vi", require("ferris.methods.view_item_tree"))
 
                     keymap("n", "<M-e>", function()
-                        vcmd.RustLsp({ "renderDiagnostic", "current" })
+                        vcmd.RustLsp({ "renderDiagnostic", "cycle" })
                     end)
 
                     keymap("n", "<M-f>", function()
