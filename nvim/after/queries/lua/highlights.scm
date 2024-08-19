@@ -4,7 +4,7 @@
 (("function" @keyword.function) (#set! conceal "󰊕"))
 ;(("if" @conditional) (#set! conceal "?"))
 (("in" @keyword) (#set! conceal "∈"))
-((function_call name: (identifier) @function.builtin (#eq? @function.builtin "require")) (#set! conceal ""))
+((function_call name: (identifier) @function.builtin (#eq? @function.builtin "require")) (#set! conceal "󰋺"))
 (("and" @keyword.function) (#set! conceal "⩓"))
 (("not" @keyword.function) (#set! conceal "❗"))
 

@@ -22,7 +22,7 @@ set listchars+=precedes:⇐                                      " 一行前面�
 set listchars+=leadmultispace:│\ \ \ ,
 " set listchars+=space:·
 set listchars+=eol:
-" set listchars+=conceal:﬒
+" set listchars+=conceal:󰘓
 set list
 
 set number                                                     " 显示行号

@@ -25,12 +25,12 @@ return {
 
         vfn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
         vfn.sign_define("DapBreakpointCondition", { text = " ", texthl = "", linehl = "", numhl = "" })
-        vfn.sign_define("DapLogPoint", { text = " ", texthl = "", linehl = "", numhl = "" }) -- 
+        vfn.sign_define("DapLogPoint", { text = " ", texthl = "", linehl = "", numhl = "" }) -- 󰍩
         -- vnf.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
         vfn.sign_define("DapBreakpointRejected", { text = " ", texthl = "", linehl = "", numhl = "" })
 
         -- vnf.sign_define("DapBreakpointCondition", { text = "🐛", texthl = "", linehl = "", numhl = "" })
-        -- vnf.sign_define("DapLogPoint", { text = "🇱", texthl = "", linehl = "", numhl = "" }) -- 
+        -- vnf.sign_define("DapLogPoint", { text = "🇱", texthl = "", linehl = "", numhl = "" }) -- 󰍩
         vfn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" })
         -- vnf.sign_define("DapBreakpointRejected", { text = "⚠️", texthl = "", linehl = "", numhl = "" }) -- ✋
 

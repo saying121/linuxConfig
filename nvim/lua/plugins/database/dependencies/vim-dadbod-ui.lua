@@ -29,28 +29,28 @@ return {
 
         vim.g.db_ui_icons = {
             expanded = {
-                db = "▾ ",
+                db = "▾ 󰆼",
                 buffers = "▾ ",
                 saved_queries = "▾ ",
                 schemas = "▾ ",
-                schema = "▾ פּ",
-                tables = "▾ 藺", -- ﴶ
+                schema = "▾ 󰙅",
+                tables = "▾ 󰓱",
                 table = "▾ ",
             },
             collapsed = {
-                db = "▸ ",
+                db = "▸ 󰆼",
                 buffers = "▸ ",
                 saved_queries = "▸ ",
                 schemas = "▸ ",
-                schema = "▸ פּ",
-                tables = "▸ 藺", -- ﴶ
+                schema = "▸ 󰙅",
+                tables = "▸ 󰓱",
                 table = "▸ ",
             },
             saved_query = "",
-            new_query = "璘",
-            tables = "離", -- ﴶ
-            buffers = "﬘",
-            add_connection = "",
+            new_query = "󰓰",
+            tables = "󰓫",
+            buffers = "󰕸",
+            add_connection = "󰆺",
             connection_ok = "✓",
             connection_error = "✕",
         }

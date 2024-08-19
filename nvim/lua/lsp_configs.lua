@@ -4,7 +4,7 @@ local severity = vim.diagnostic.severity
 local signs = {
     [severity.ERROR] = "", --
     [severity.WARN] = "", --
-    [severity.INFO] = "", --
+    [severity.INFO] = "󰋽", --
     [severity.HINT] = "", --📌 
 }
 local diagnostic_hl = {

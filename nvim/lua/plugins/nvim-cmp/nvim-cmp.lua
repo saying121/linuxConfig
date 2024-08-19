@@ -7,7 +7,7 @@ local icons = {
     Variable = "󰀫",
     Class = "󰠱",
     Interface = "",
-    Module = "全", -- 
+    Module = "󰕳", -- 
     Property = "󰜢",
     Unit = "󰑭",
     Value = "󰎠",
@@ -57,6 +57,7 @@ return {
             fittencode = "[Fitten]",
             crates = "[Crates]",
             lazydev = "[LazyDev]",
+            luasnip_choice = "[Choice]",
         }
 
         -- 分级显示，上一级有补全就不会显示下一级
@@ -73,6 +74,7 @@ return {
                 --     return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
                 -- end,
             },
+            { name = "luasnip_choice" },
             { name = "path", priority = 800 },
             { name = "fittencode", priority = 900 },
         }, {

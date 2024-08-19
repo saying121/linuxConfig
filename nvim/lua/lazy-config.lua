@@ -71,7 +71,7 @@ require("lazy").setup({
         border = "double", -- "rounded", "shadow", "single",
         icons = {
             ft = "",
-            lazy = "鈴 ",
+            lazy = "󰒲 ",
             loaded = "",
             not_loaded = "",
         },

@@ -7,7 +7,6 @@ package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/shar
 require("public.ft").make_ft()
 
 require("lsp_configs")
--- require("completion")
 
 _G.dapui_for_K = false
 

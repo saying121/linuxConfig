@@ -130,7 +130,7 @@ return {
         check = {
             allTargets = true,
             command = "clippy", -- 用于 cargo check 的命令。
-            extraArgs = { "--no-deps" }, -- cargo check 的额外参数。
+            extraArgs = { "--no-deps", "--message-format=json-diagnostic-rendered-ansi" }, -- cargo check 的额外参数。
             extraEnv = {}, -- 运行 cargo check 时将设置的额外环境变量。扩展 rust-analyzer.cargo.extraEnv 。
             features = "all", -- 要激活的功能列表。默认为 rust-analyzer.cargo.features 。设置为 "all" ，将 --all-features 传递给Cargo。
             invocationLocation = "workspace", -- 指定运行检查的工作目录。-“workspace”：对相应工作区的根目录中的工作区进行检查。
@@ -140,11 +140,7 @@ return {
             -- 如果设置了 per_workspace ，则将对每个工作区执行该命令。如果设置了 once ，则该命令将执行一次。
             -- 此配置仅在设置了 rust-analyzer.cargo.buildScripts.overrideCommand 时有效。
             noDefaultFeatures = nil, -- 是否将 --no-default-features 传递给Cargo。
-            overrideCommand = nil, -- 重写rust-analyzer在保存时用于诊断的命令，而不是 cargo check 。该命令是输出json所必需的，
-            -- 因此应该包括 --message-format=json 或类似的选项（如果您的客户端支持 colorDiagnosticOutput 实验功能，
-            -- 则可以使用 --message-format=json-diagnostic-rendered-ansi ）。
-            -- cargo check --workspace --message-format=json --all-targets
-
+            -- overrideCommand = { "cargo", "clippy", "--tests", "--message-format=json-diagnostic-rendered-ansi" },
             targets = nil, -- 检查特定目标。如果为空，则默认为 rust-analyzer.cargo.target 。
             -- 可以是单个目标，例如 "x86_64-unknown-linux-gnu" 或目标列表，例如 ["aarch64-apple-darwin", "x86_64-apple-darwin"] 。
         },
@@ -160,7 +156,7 @@ return {
         diagnostics = {
             enable = true,
             disabled = {
-                'unfulfilled_lint_expectations',
+                "unfulfilled_lint_expectations",
                 -- rustc 的 lint 已经有这些了
                 "unused_variables",
                 "unused_mut", -- rustc 更准确
@@ -174,6 +170,7 @@ return {
             warningsAsInfo = {
                 "unused_variables",
             },
+            styleLints = { enable = true },
         },
         files = {
             excludeDirs = {}, -- rust-analyzer 将忽略这些目录。它们是相对于工作区根目录的，不支持glob。您可能还需要将文件夹添加到Code的 files.watcherExclude 中。

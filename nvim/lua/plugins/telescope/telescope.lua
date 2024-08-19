@@ -121,7 +121,7 @@ return {
                 --     find_command = {},
                 -- },
                 buffers = {
-                    prompt_prefix = "﬘ ",
+                    prompt_prefix = "󰕸 ",
                     mappings = {
                         i = {
                             ["<c-d>"] = actions.delete_buffer + actions.move_to_top,

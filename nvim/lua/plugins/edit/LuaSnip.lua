@@ -1,7 +1,7 @@
-local cf = require("public.luasnip_conf")
-local choice_popup = cf.choice_popup
-local choice_popup_close = cf.choice_popup_close
-local update_choice_popup = cf.update_choice_popup
+-- local cf = require("public.luasnip_conf")
+-- local choice_popup = cf.choice_popup
+-- local choice_popup_close = cf.choice_popup_close
+-- local update_choice_popup = cf.update_choice_popup
 
 ---@type LazySpec
 return {
@@ -12,6 +12,12 @@ return {
     dependencies = {
         "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
+        "doxnit/cmp-luasnip-choice",
+        config = function()
+            require("cmp_luasnip_choice").setup({
+                auto_open = true, -- Automatically open nvim-cmp on choice node (default: true)
+            })
+        end,
     },
     config = function()
         local luasnip, opts = require("luasnip"), { noremap = true, silent = true }
@@ -176,26 +182,26 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load({
             exclude = { "rust", "gitcommit" },
         })
-
-        local gp = vim.api.nvim_create_augroup("choice_popup", { clear = false })
-        vim.api.nvim_create_autocmd({ "User" }, {
-            group = gp,
-            pattern = { "LuasnipChoiceNodeEnter" },
-            callback = function()
-                choice_popup(luasnip.session.event_node)
-            end,
-        })
-        vim.api.nvim_create_autocmd({ "User" }, {
-            group = gp,
-            pattern = { "LuasnipChoiceNodeLeave" },
-            callback = choice_popup_close,
-        })
-        vim.api.nvim_create_autocmd({ "User" }, {
-            group = gp,
-            pattern = { "LuasnipChangeChoice" },
-            callback = function()
-                update_choice_popup(luasnip.session.event_node)
-            end,
-        })
+        --
+        -- local gp = vim.api.nvim_create_augroup("choice_popup", { clear = false })
+        -- vim.api.nvim_create_autocmd({ "User" }, {
+        --     group = gp,
+        --     pattern = { "LuasnipChoiceNodeEnter" },
+        --     callback = function()
+        --         choice_popup(luasnip.session.event_node)
+        --     end,
+        -- })
+        -- vim.api.nvim_create_autocmd({ "User" }, {
+        --     group = gp,
+        --     pattern = { "LuasnipChoiceNodeLeave" },
+        --     callback = choice_popup_close,
+        -- })
+        -- vim.api.nvim_create_autocmd({ "User" }, {
+        --     group = gp,
+        --     pattern = { "LuasnipChangeChoice" },
+        --     callback = function()
+        --         update_choice_popup(luasnip.session.event_node)
+        --     end,
+        -- })
     end,
 }

@@ -96,7 +96,11 @@ return {
         -- You can pass argument ++unfocus to
         -- unfocus the show_line_diagnostics floating window
         keymap("n", "<space>gg", function()
-            vcmd.Lspsaga("show_line_diagnostics")
+            if vim.bo.filetype == "rust" then
+                vcmd.RustLsp({ "renderDiagnostic", "current" })
+            else
+                vcmd.Lspsaga("show_line_diagnostics")
+            end
         end)
 
         -- keymap("n", "<space>sw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")

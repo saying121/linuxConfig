@@ -27,9 +27,55 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
 local rust_types = {
-    Result = fmta("Ok(<>)", { i(1, "()") }),
-    Option = fmta("Some(<>)", { i(1, "()") }),
-    Vec = fmta("vec![<>]", { i(1, "") }),
+    Result = c(1, {
+        fmta("Ok(<>)", { i(1, "()") }),
+        fmta("Err(<>)", { i(1, "()") }),
+    }),
+    Option = c(1, {
+        fmta("Some(<>)", { i(1, "()") }),
+        fmta("<>", { i(1, "None") }),
+    }),
+    Vec = c(1, {
+        fmta("vec![<>]", { i(1, "") }),
+        fmta("Vec::with_capacity(<>)", { i(1, "") }),
+        fmta("Vec::new(<>)", { i(1, "") }),
+    }),
+    VecDeque = c(1, {
+        fmta("Vec::with_capacity(<>)", { i(1, "") }),
+        fmta("Vec::new(<>)", { i(1, "") }),
+    }),
+    HashMap = c(1, {
+        fmta("HashMap::with_capacity(<>)", { i(1, "") }),
+        fmta("HashMap::with_capacity_and_hasher(<>, <>)", { i(1, ""), i(2, "") }),
+        fmta("HashMap::with_hasher(<>)", { i(1, "") }),
+        fmta("HashMap::default(<>)", { i(1, "") }),
+        fmta("HashMap::<>", { i(1, "") }),
+    }),
+    HashSet = c(1, {
+        fmta("HashSet::with_capacity(<>)", { i(1, "") }),
+        fmta("HashSet::with_capacity_and_hasher(<>, <>)", { i(1, ""), i(2, "") }),
+        fmta("HashSet::with_hasher(<>)", { i(1, "") }),
+        fmta("HashSet::default(<>)", { i(1, "") }),
+        fmta("HashSet::<>", { i(1, "") }),
+    }),
+    BTreeMap = c(1, {
+        fmta("BtreeMap::default(<>)", { i(1, "") }),
+        fmta("BtreeMap::<>", { i(1, "") }),
+    }),
+    BTreeSet = c(1, {
+        fmta("BtreeMap::default(<>)", { i(1, "") }),
+        fmta("BtreeMap::<>", { i(1, "") }),
+    }),
+    BinaryHeap = c(1, {
+        fmta("BinaryHeap::with_capacity(<>)", { i(1, "") }),
+        fmta("BinaryHeap::default(<>)", { i(1, "") }),
+        fmta("BinaryHeap::<>", { i(1, "") }),
+    }),
+    LinkedList = c(1, {
+        fmta("LinkedList::default(<>)", { i(1, "") }),
+        fmta("LinkedList::from_iter(<>)", { i(1, "") }),
+        fmta("LinkedList::<>", { i(1, "") }),
+    }),
 }
 local function tps()
     local ts = {
@@ -70,11 +116,12 @@ local function get_rt_value()
     local startIdx, endIdx = string.find(line_str, "->%s*(.-)%s*{")
 
     if startIdx and endIdx then
-        local result = string.sub(line_str, startIdx + 2, endIdx - 1)
+        local raw_typ = string.sub(line_str, startIdx + 2, endIdx - 1)
         -- 去除两边空白符
-        result = string.gsub(result, "^%s*(.-)%s*$", "%1")
+        raw_typ = string.gsub(raw_typ, "^%s*(.-)%s*$", "%1")
+        -- print(raw_typ)
 
-        local index = result
+        local index = raw_typ
 
         local exact = rust_types_exact[index]
         if exact then
@@ -82,14 +129,14 @@ local function get_rt_value()
         end
 
         -- 获取 `::` 最后的一段
-        index = string.match(result, ".*::(.*)")
+        index = string.match(raw_typ, ".*::(.*)")
         exact = rust_types_exact[index]
         if exact then
             return exact
         end
 
         for key, value in pairs(rust_types) do
-            if string.find(result, key) then
+            if string.find(raw_typ, key) then
                 return value
             end
         end

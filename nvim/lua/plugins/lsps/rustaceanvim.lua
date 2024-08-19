@@ -12,7 +12,7 @@ return {
     },
     dependencies = {
         "mfussenegger/nvim-dap",
-    "akinsho/toggleterm.nvim",
+        "akinsho/toggleterm.nvim",
         {
             "vxpm/ferris.nvim",
             opts = {
@@ -114,19 +114,7 @@ return {
                     keymap("n", "<leader>vi", require("ferris.methods.view_item_tree"))
 
                     keymap("n", "<M-e>", function()
-                        local diagnostics = vim.diagnostic.get(bufnr, { severity = vim.diagnostic.severity.ERROR })
-                        local found = false
-                        for _, diagnostic in ipairs(diagnostics) do
-                            if diagnostic.source == "rustc" then
-                                found = true
-                                break
-                            end
-                        end
-                        if found then
-                            vcmd.RustLsp("explainError")
-                        else
-                            vcmd.RustLsp("renderDiagnostic")
-                        end
+                        vcmd.RustLsp({ "renderDiagnostic", "cycle" })
                     end)
 
                     keymap("n", "<M-f>", function()
