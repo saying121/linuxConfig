@@ -45,11 +45,9 @@ local consts = {
     ["const_str"] = "compile-time string operations",
 }
 local crates = {
-    ["num-trait"] = "通用数学的数字特征",
     ["trait-variant"] = "用于处理 Rust 中的 impl 特征的实用程序",
     ["figment"] = "一个如此自由的配置库，它是不真实的。",
     ["validator"] = "常见验证函数（电子邮件、url、长度等）和特征 - 与“validator_derive”一起使用",
-    ["num-traits"] = "通用数学的数字特征",
     ["memflow"] = "memflow物理内存自省框架的核心组件",
     ["aliasable"] = "基本可别名（非唯一指针）类型",
     ["stacker"] = "堆栈增长库在实现可能意外破坏堆栈的深度递归算法时很有用。",
@@ -205,11 +203,13 @@ local benchmark = {
     ["coz"] = "对 `coz` 因果分析器的 rust 支持：https://github.com/plasma-umass/coz",
 }
 local maths = {
+    ["medians"] = "中位数、统计测量、数学、统计学",
+    ["num-traits"] = "通用数学的数字特征",
+    ["num"] = "**Rust** 的数字类型和特征的集合，包括 *bigint*、*complex*、*rational*、范围迭代器、泛型整数等等！",
+    ["num-complex"] = "**Rust** 的复数实现",
     ["cgmath"] = "用于计算机图形学的线性代数和数学库。",
     ["approx"] = "近似浮点相等比较和断言。",
     ["ndarray"] = "用于一般元素和数字的 n 维数组。轻量级数组视图和切片；视图支持分块和拆分。",
-    ["num"] = "**Rust** 的数字类型和特征的集合，包括 *bigint*、*complex*、*rational*、范围迭代器、泛型整数等等！",
-    ["num-complex"] = "**Rust** 的复数实现",
     ["rand"] = "该包提供了随机源",
     ["rand_distr"] = "从随机数分布中抽样",
     ["nalgebra"] = "具有变换和静态大小或动态大小矩阵的通用线性代数库。",
