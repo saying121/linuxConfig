@@ -37,11 +37,11 @@ return {
         local codelldb_path = extension_path .. "adapter/codelldb"
         local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
-        ---@type RustaceanConfig
+        ---@type rustaceanvim.Config
         vim.g.rustaceanvim = {
             tools = {
                 --- callback to execute once rust-analyzer is done initializing the workspace
-                ---@type fun(health: RustAnalyzerInitializedStatus) | nil
+                ---@type fun(health:rustaceanvim.RAInitializedStatus) | nil
                 on_initialized = function(status)
                     local health = status.health
 
@@ -61,7 +61,6 @@ return {
 
                 code_actions = { ui_select_fallback = false },
 
-                ---@type boolean
                 enable_nextest = false,
 
                 ---@type boolean
@@ -81,7 +80,7 @@ return {
                     ---@type boolean
                     auto_focus = true,
                 },
-                rustc = { edition = "2021" },
+                rustc = { default_edition = "2021" },
             },
             -- LSP configuration
             server = {

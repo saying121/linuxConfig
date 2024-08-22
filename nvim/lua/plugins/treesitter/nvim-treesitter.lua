@@ -14,6 +14,10 @@ return {
         if type(ft) == "string" then
             ts.language.register("toml", ft)
         end
+        ft = my_ft.filename["rust-toolchain.toml"]
+        if type(ft) == "string" then
+            ts.language.register("toml", ft)
+        end
         ts.language.register("bash", "PKGBUILD")
         ts.language.register("bash", "zsh")
 
