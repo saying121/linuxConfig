@@ -155,7 +155,7 @@ $pacMan gimp gvfs gutenprint
 
 # 各种查看系统信息的软件
 $pacMan htop atop iotop iftop glances sysstat plasma-systemmonitor
-$aurPkg gotop cpufetch fastfetch onefetch fetchfetch hardinfo
+$aurPkg cpufetch fastfetch onefetch fetchfetch hardinfo
 
 # 浏览器
 $aurPkg microsoft-edge-stable-bin google-chrome
@@ -176,7 +176,7 @@ $pacMan adobe-source-han-serif-cn-fonts \
     adobe-source-han-sans-cn-fonts \
     wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
     noto-fonts-extra ttf-hack-nerd ttf-sil-padauk \
-    nerd-fonts-complete
+    # nerd-fonts-complete
 fc-cache -fv
 
 # rofi
