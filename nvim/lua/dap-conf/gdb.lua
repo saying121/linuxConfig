@@ -12,7 +12,7 @@ dap.configurations.c = {
         type = "gdb",
         request = "launch",
         program = function()
-            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            return vim.fn.input("Path to executable: ", vim.uv.cwd() .. "/", "file")
         end,
         cwd = "${workspaceFolder}",
         console = "integratedTerminal",
@@ -24,7 +24,7 @@ dap.configurations.rust = {
         type = "gdb",
         request = "launch",
         program = function()
-            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+            return vim.fn.input("Path to executable: ", vim.uv.cwd() .. "/target/debug/", "file")
         end,
         cwd = "${workspaceFolder}",
         console = "integratedTerminal",

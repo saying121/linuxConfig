@@ -1,7 +1,7 @@
 local dap = require("dap")
 
 local function get_python()
-    local cwd = vim.fn.getcwd()
+    local cwd = vim.uv.cwd()
     local virtualenv = vim.fn.getenv("VIRTUAL_ENV")
 
     if virtualenv ~= vim.NIL and virtualenv ~= "" then

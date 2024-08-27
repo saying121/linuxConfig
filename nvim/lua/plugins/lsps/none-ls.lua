@@ -7,7 +7,7 @@ return {
     config = function()
         -- local ut = require("public.utils")
 
-        -- local cwd = vim.fn.getcwd()
+        -- local cwd = vim.uv.cwd()
         --
         -- if ut.is_git_repo() then
         --     cwd = ut.find_root_cwd(".git")

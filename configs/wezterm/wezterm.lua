@@ -21,7 +21,7 @@ return {
         "WenQuanYi Zen Hei Mono",
         "JetBrains Mono",
     }),
-    font_size = 14,
+    font_size = 10.8,
     use_cap_height_to_scale_fallback_fonts = true,
     window_background_opacity = 0.85,
     window_padding = { top = 0, bottom = 0, left = 0, right = 0 },

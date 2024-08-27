@@ -120,7 +120,6 @@ M.on_attach = function(client, bufnr)
             if vim.tbl_contains(ft, vim.bo.filetype) then
                 return
             end
-            vim.diagnostic.open_float(f_opts)
             -- api.nvim_win_close(win_id, force)
         end,
     })

@@ -140,6 +140,7 @@ return {
                         cond = require("noice").api.status.command.has,
                         -- color = { fg = "ff9e64" },
                     },
+                     "rest",
                     -- {
                     --     require("noice").api.status.message.get_hl,
                     --     cond = require("noice").api.status.message.has,

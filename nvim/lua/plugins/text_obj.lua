@@ -4,6 +4,7 @@ return {
     "chrisgrieser/nvim-various-textobjs",
     -- keys = { { "v", mode = { "n" } } },
     lazy = false,
+    cond = false,
     -- opts = { useDefaultKeymaps = true },
     config = function()
         require("various-textobjs").setup({ useDefaultKeymaps = true })

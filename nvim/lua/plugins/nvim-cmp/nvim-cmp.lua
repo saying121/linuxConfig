@@ -23,7 +23,7 @@ local icons = {
     Struct = "󰙅",
     Event = "",
     Operator = "󰆕",
-    TypeParameter = "",
+    TypeParameter = "",
 }
 ---@type LazySpec
 return {

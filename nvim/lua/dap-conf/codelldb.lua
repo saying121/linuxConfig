@@ -20,7 +20,7 @@ dap.adapters.codelldb = {
 
 local util = require("public.utils")
 -- 调用函数，传入当前工作目录和要找的文件夹作为参数
-local git_root = util.get_root_dir(vim.fn.getcwd(), "/.git")
+local git_root = util.get_root_dir(vim.uv.cwd(), "/.git")
 
 local content = nil
 local name
@@ -64,7 +64,7 @@ dap.configurations.rust = {
                 -- vim.ui.input({}, on_confirm)
                 return vim.fn.input("Path to executable: ", git_root .. "/target/debug/", "file")
             else
-                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/build_rust/", "file")
+                return vim.fn.input("Path to executable: ", vim.uv.cwd() .. "/build_rust/", "file")
             end
         end,
         cwd = "${workspaceFolder}",
@@ -79,7 +79,7 @@ dap.configurations.cpp = {
         type = "codelldb",
         request = "launch",
         program = function()
-            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/build_c_cpp/", "file")
+            return vim.fn.input("Path to executable: ", vim.uv.cwd() .. "/build_c_cpp/", "file")
         end,
         cwd = "${workspaceFolder}",
         stopOnEntry = false,

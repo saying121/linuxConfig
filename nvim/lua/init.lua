@@ -1,8 +1,10 @@
 local api, keymap, vcmd = vim.api, vim.keymap.set, vim.cmd
 require("opts")
 
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+package.path = package.path .. ";" .. vim.uv.os_homedir() .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.uv.os_homedir() .. "/.luarocks/share/lua/5.1/?.lua;"
+package.cpath = package.cpath .. ";" .. vim.uv.os_homedir() .. "/.luarocks/lib/lua/5.1/?.so;"
+package.cpath = package.cpath .. ";" .. vim.uv.os_homedir() .. "/.local/share/nvim/rocks/lib/lua/5.1/?.so"
 
 require("public.ft").make_ft()
 
@@ -30,6 +32,13 @@ api.nvim_create_autocmd({ "CursorHold" }, {
         if vim.tbl_contains(vim.treesitter.get_captures_at_cursor(), "include") then
             UfoHover()
         end
+    end,
+})
+api.nvim_create_autocmd({ "FileType" }, {
+    group = api.nvim_create_augroup("NoCursorline", { clear = false }),
+    pattern = { "dashboard", "alpha" },
+    callback = function()
+        vim.cmd.setlocal("nocursorline")
     end,
 })
 
