@@ -73,6 +73,11 @@ zi snippet https://github.com/ajeetdsouza/zoxide/blob/main/contrib/completions/_
 zi ice wait lucid pick'autopair.zsh'
 zi load hlissner/zsh-autopair
 
+# export ATUIN_NOBIND="true"
+zi ice lucid wait has'atuin'
+zi load ellie/atuin
+# bindkey '^r' atuin-search
+
 zi ice lucid wait has'fzf'
 zi light Aloxaf/fzf-tab
 zi ice wait lucid; zi light Freed-Wu/fzf-tab-source

@@ -10,7 +10,7 @@ local is_nightly = string.find(output, "nightly") ~= nil
 
 -- 获取 lsp 名字
 function M.lsp_clients()
-    local msg = "No Active Lsp"
+    local msg = "No Lsp"
     local lsps = ""
 
     local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })

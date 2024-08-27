@@ -69,7 +69,6 @@ return {
             thousands_separator = "_",
             max_parallel_requests = 80,
             notification_title = "Crates",
-            disable_invalid_feature_diagnostic = false,
             open_programs = { "xdg-open", "open" },
             popup = {
                 autofocus = true,

@@ -1,8 +1,10 @@
 local api, keymap, vcmd = vim.api, vim.keymap.set, vim.cmd
 require("opts")
 
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+package.path = package.path .. ";" .. vim.uv.os_homedir() .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.uv.os_homedir() .. "/.luarocks/share/lua/5.1/?.lua;"
+package.cpath = package.cpath .. ";" .. vim.uv.os_homedir() .. "/.luarocks/lib/lua/5.1/?.so;"
+package.cpath = package.cpath .. ";" .. vim.uv.os_homedir() .. "/.local/share/nvim/rocks/lib/lua/5.1/?.so"
 
 require("public.ft").make_ft()
 

@@ -44,11 +44,9 @@ zi ice wait lucid; zi light paulirish/git-open.git
 
 zi ice wait lucid; zi light lesonky/web-search.git
 
-# eval "$(atuin init zsh)"
-
 zi ice depth=1 lucid; zi light jeffreytse/zsh-vi-mode
 
-zi ice wait lucid; zi light z-shell/H-S-MW
+# zi ice wait lucid; zi light z-shell/H-S-MW
 
 # 这两个插件按照这个顺序加载
 zi ice wait lucid; zi light zsh-users/zsh-history-substring-search
@@ -58,10 +56,10 @@ zi light z-shell/F-Sy-H
 # fast-theme ~/.linuxConfig/shells/z-shell.ini
 
 # /bin/cat -v 然后按下按键查看按键对应字符串, C-n,C-p 不知道为啥不成功
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
+# bindkey '^P' history-substring-search-up
+# bindkey '^N' history-substring-search-down
 
 resume_job() {
     fg
