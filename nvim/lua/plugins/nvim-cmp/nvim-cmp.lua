@@ -27,7 +27,9 @@ local icons = {
 }
 ---@type LazySpec
 return {
-    "hrsh7th/nvim-cmp",
+    -- "hrsh7th/nvim-cmp",
+    "yioneko/nvim-cmp",
+    branch = "perf",
     event = { "InsertEnter", "CmdlineEnter" },
     cond = true,
     dependencies = {
@@ -123,8 +125,8 @@ return {
                         cmp.select_next_item()
                     elseif luasnip.locally_jumpable(1) then
                         luasnip.jump(1)
-                    -- elseif luasnip.expand_or_locally_jumpable() then
-                    --     luasnip.expand_or_jump()
+                    elseif luasnip.expand_or_locally_jumpable() then
+                        luasnip.expand_or_jump()
                     else
                         fallback()
                     end

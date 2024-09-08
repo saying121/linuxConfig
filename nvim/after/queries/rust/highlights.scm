@@ -28,7 +28,7 @@
 (("<=" @operator) (#set! conceal "󰥽"))
 (("!=" @operator) (#set! conceal "󰦎"))
 ;(("!" @operator) (#set! conceal "❗")) ; 宏的!也被换了
-(("/" @operator) (#set! conceal "÷"))
+; (("/" @operator) (#set! conceal "÷"))
 ; (("*" @operator) (#set! conceal "✖")) ; 裸指针的也换掉了
 
 ; (("->" @punctuation.delimiter) (#set! conceal "→"))

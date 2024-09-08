@@ -1,5 +1,11 @@
 local api = vim.api
 ---@type LazySpec
+-- return {
+--     "nvimdev/indentmini.nvim",
+--     config = function()
+--         require("indentmini").setup() -- use default config
+--     end,
+-- }
 return {
     "echasnovski/mini.indentscope",
     -- cond = false,

@@ -55,7 +55,9 @@ return {
             respect_buf_cwd = false,
             update_focused_file = {
                 enable = true,
-                update_root = true,
+                update_root = {
+                    enable = true,
+                },
             },
             sort_by = "case_sensitive",
             renderer = {
@@ -88,6 +90,12 @@ return {
                 enable = true,
                 show_on_dirs = true,
                 debounce_delay = 50,
+                icons = {
+                    hint = "",
+                    info = "",
+                    warning = "",
+                    error = "",
+                },
             },
             filters = {
                 dotfiles = true,

@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
     "kristijanhusak/vim-dadbod-completion",
-    dependencies = { "hrsh7th/nvim-cmp" },
+    -- dependencies = { "hrsh7th/nvim-cmp" },
     config = function()
         vim.g.vim_dadbod_completion_mark = "[DB]"
 

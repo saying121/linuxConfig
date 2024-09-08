@@ -1,4 +1,5 @@
 local api, lsp, lspb, methods = vim.api, vim.lsp, vim.lsp.buf, vim.lsp.protocol.Methods
+local diagnostic = vim.diagnostic
 
 local M = {}
 
@@ -16,10 +17,12 @@ M.on_attach = function(client, bufnr)
     end
 
     keymap("n", "<leader>v", function()
-        vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+        diagnostic.enable(not diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
     end)
 
-    keymap("n", "<c-k>", lspb.signature_help)
+    if client.supports_method(methods.textDocument_signatureHelp, { bufnr = bufnr }) then
+        keymap("n", "<c-k>", lspb.signature_help)
+    end
 
     if client.supports_method(methods.textDocument_inlayHint, { bufnr = bufnr }) then
         local _ = pcall(lsp.inlay_hint.enable, true, { bufnr = bufnr })
@@ -96,7 +99,7 @@ M.on_attach = function(client, bufnr)
 
     -- diagnostic
     keymap("n", "<space>e", function()
-        local _, winid = vim.diagnostic.open_float({ source = true, scope = "cursor" })
+        local _, winid = diagnostic.open_float({ source = true, scope = "cursor" })
         if winid then
             api.nvim_set_current_win(winid)
         end
