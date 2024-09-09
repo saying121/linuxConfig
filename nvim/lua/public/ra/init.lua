@@ -37,7 +37,7 @@
 
 ---@class CachePriming
 ---@field enable boolean
----@field num integer
+---@field numThreads integer
 
 ---@class Assist
 ---@field emitMustUse boolean
@@ -65,7 +65,7 @@
 
 local snippets = require("public.ra.snippets")
 
-local function overried_fmt()
+local function extra_args_()
     local handle = io.popen("rustup show active-toolchain")
     if not handle then
         return nil
@@ -75,20 +75,11 @@ local function overried_fmt()
         return nil
     end
     handle:close()
-    local result = string.gsub(res, "%s*%b()%s*", "")
-    result = string.gsub(result, "stable", "nightly")
-    -- print(result)
     return {
-        "rustup",
         "+nightly",
-        "run",
-        result,
-        "rustfmt",
-        "--edition",
-        "2021",
     }
 end
-local fmt = overried_fmt()
+local extra_args = extra_args_()
 
 ---@type RustAnzlyzerConfig
 return {
@@ -99,7 +90,7 @@ return {
         },
         cachePriming = {
             enable = true, -- Warm up caches on project load.
-            num = 0, -- How many worker threads to handle priming caches. The default 0 means to pick automatically.
+            numThreads = 0, -- How many worker threads to handle priming caches. The default 0 means to pick automatically.
         },
         cargo = {
             autoreload = true,
@@ -290,8 +281,8 @@ return {
         rust = { analyzerTargetDir = nil }, -- Optional path to a rust-analyzer specific target directory. This prevents rust-analyzer’s cargo check from locking the Cargo.lock at the expense of duplicating build artifacts.
         rustc = { source = nil }, -- Path to the Cargo.toml of the rust compiler workspace, for usage in rustc_private projects, or "discover" to try to automatically find it if the rustc-dev component is installed.
         rustfmt = {
-            extraArgs = {},
-            overrideCommand = fmt,
+            extraArgs = extra_args,
+            -- overrideCommand = fmt,
             rangeFormatting = { enable = true },
         },
         semanticHighlighting = {

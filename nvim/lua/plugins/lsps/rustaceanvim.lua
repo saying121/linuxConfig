@@ -1,25 +1,19 @@
 local api, lsp, vcmd = vim.api, vim.lsp, vim.cmd
+local log = vim.log
 
 ---@type LazySpec
 return {
     "mrcjkb/rustaceanvim",
     version = "*",
+    ft = "rust",
     -- cond=false,
-    event = {
-        "UIEnter *.rs",
-        "BufNew *.rs",
-        "BufEnter *.rs",
-    },
     dependencies = {
         "mfussenegger/nvim-dap",
         "akinsho/toggleterm.nvim",
         {
             "vxpm/ferris.nvim",
             opts = {
-                -- If true, will automatically create commands for each LSP method
-                create_commands = true, -- bool
-                -- Handler for URL's (used for opening documentation)
-                url_handler = "xdg-open", -- string | function(string)
+                create_commands = false,
             },
             config = function(_, opt)
                 require("ferris").setup(opt)
@@ -37,11 +31,9 @@ return {
         local codelldb_path = extension_path .. "adapter/codelldb"
         local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
-        ---@type RustaceanConfig
+        ---@type rustaceanvim.Opts
         vim.g.rustaceanvim = {
             tools = {
-                --- callback to execute once rust-analyzer is done initializing the workspace
-                ---@type fun(health: RustAnalyzerInitializedStatus) | nil
                 on_initialized = function(status)
                     local health = status.health
 
@@ -49,29 +41,23 @@ return {
                         vcmd.RustLsp("flyCheck")
                         lsp.codelens.refresh()
                     elseif health == "warning" then
-                        vim.notify("ra health" .. health, vim.log.levels.WARN)
+                        vim.notify("ra health is " .. health, log.levels.WARN)
                     elseif health == "error" then
-                        vim.notify("ra health" .. health, vim.log.levels.ERROR)
+                        vim.notify("ra health is " .. health, log.levels.ERROR)
                     end
                 end,
 
-                --- options right now: termopen / quickfix / toggleterm / vimux
                 executor = executors.toggleterm,
                 test_executor = executors.toggleterm,
 
                 code_actions = { ui_select_fallback = false },
 
-                ---@type boolean
                 enable_nextest = false,
 
-                ---@type boolean
                 reload_workspace_from_cargo_toml = true,
                 hover_actions = { replace_builtin_hover = false },
 
                 float_win_config = {
-                    -- the border that is used for the hover window or explain_error window
-                    ---@see vim.api.nvim_open_win()
-                    ---@type string[][] | string
                     border = "rounded",
                     max_width = math.floor(api.nvim_win_get_width(0) * 0.7),
                     max_height = math.floor(api.nvim_win_get_height(0) * 0.7),
@@ -81,12 +67,12 @@ return {
                     ---@type boolean
                     auto_focus = true,
                 },
-                rustc = { edition = "2021" },
+                rustc = { default_edition = "2021" },
             },
             -- LSP configuration
             server = {
                 ---@type boolean
-                standalone = true,
+                standalone = false,
                 ---@param client vim.lsp.Client
                 ---@param bufnr integer
                 on_attach = function(client, bufnr)
@@ -97,7 +83,7 @@ return {
                         group = group_name,
                         buffer = bufnr,
                         callback = function()
-                            vcmd.RustLsp("flyCheck") -- defaults to 'run'
+                            vcmd.RustLsp("flyCheck")
                         end,
                     })
 
@@ -130,7 +116,7 @@ return {
                         vcmd.RustLsp({ "moveItem", "down" })
                     end)
                     keymap("n", "<leader>R", function()
-                        vcmd.RustLsp("runnables")
+                        vcmd.RustLsp("run")
                     end)
                     keymap("n", "<leader>D", function()
                         vcmd.RustLsp({
@@ -181,9 +167,10 @@ return {
                 end,
             },
             -- DAP configuration
-            dap = { adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path) },
+            dap = {
+                adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
+                autoload_configurations = true,
+            },
         }
-
-        vcmd.e()
     end,
 }

@@ -44,6 +44,10 @@ local consts = {
     ["const_format"] = "编译时字符串格式化",
     ["const_str"] = "compile-time string operations",
 }
+local embedded = {
+    ["embedded-hal"] = "嵌入式系统的硬件抽象层 (hal)",
+    ["embassy"] = "现代嵌入式框架，使用 Rust 和异步。",
+}
 local crates = {
     ["trait-variant"] = "用于处理 Rust 中的 impl 特征的实用程序",
     ["figment"] = "一个如此自由的配置库，它是不真实的。",
@@ -55,7 +59,6 @@ local crates = {
     ["crc32fast"] = "快速、SIMD 加速的 CRC32 (IEEE) 校验和计算",
     ["libfuzzer-sys"] = "llvm 的 lib 模糊器运行时的包装器。",
     ["nix"] = "Rust 友好地绑定到 *nix api",
-    ["embedded-hal"] = "嵌入式系统的硬件抽象层 (hal)",
     ["uuid"] = "生成和解析 uuid 的库。",
     ["slab"] = "为统一数据类型预先分配存储",
     ["castaway"] = "针对有限编译时专业化的安全、零成本的向下转型。",
@@ -78,6 +81,7 @@ local crates = {
     用 `std::{cell::OnceCell, sync::OnceLock};
     std::{sync::LazyLock, cell::LazyCell}}` 取代）]],
     ["closure_attr"] = "用于简化闭包捕获的属性宏",
+    ["ufmt"] = "μfmt，一个比core：：fmt小（6- 40倍）、快（2- 9倍）、无恐慌的替代品",
 }
 local util = {
     ["cfg-if"] = "根据大量 #[cfg] 参数以符合人体工程学的方式定义项目的宏。其结构类似于 if-else 链，第一个匹配的分支是发出的项目。",
@@ -92,6 +96,7 @@ local util = {
     ["grep-regex"] = "将 rust 的正则表达式库与“grep”板条箱一起使用。",
     ["ignore"] = "一个快速库，用于有效地将忽略文件（例如`.gitignore`）与文件路径匹配。",
     ["imara-diff"] = "最小的 terminfo 库。",
+    ["either"] = "带有变体“Left”和“Right”的枚举“Either”是一种通用的和类型，有两种情况。",
 }
 local parser = {
     ["nom"] = "面向字节、零拷贝、解析器组合器库",
@@ -139,9 +144,9 @@ local str_parser = {
     ["percent-encoding"] = "百分比编码和解码",
     ["unicode-segmentation"] = "这个板条箱根据 Unicode 标准附件 #29 规则提供字素簇、单词和句子边界。",
     ["unicode-width"] = "根据 unicode 标准附件 #11 规则确定 `char` 和 `str` 类型的显示宽度。",
+    ["str_indices"] = "在字符串切片上的索引方案之间进行计数和转换。",
 }
 local encoding = {
-    ["dashmap"] = "用于 **Rust** 的超快并发哈希映射。",
     ["digest"] = "加密散列函数和消息认证码的特征",
     ["ring"] = "使用 **Rust** 的安全、快速、小型加密",
     ["serpent"] = "蛇块密码",
@@ -170,6 +175,7 @@ local log = {
     ["structured-logger"] = "日志箱的日志记录实现，将同步或异步的结构化值以 json、cbor 或任何其他格式记录到文件、stderr、stdout 或任何其他目标中。",
     ["console-subscriber"] = "用于收集 tokio 控制台遥测数据的“tracing-subscriber::layer”。",
     ["minitrace"] = "用于 Rust 的高性能时间线跟踪库",
+    ["defmt"] = "一个高效的日志框架，目标是资源受限的设备，如微控制器",
 }
 local file = {
     ["fcntl"] = "fcntl (2) 的包装器和方便的方法，使与其交互更容易。",
@@ -411,6 +417,7 @@ local serde = {
     ["jsonpath"] = "Rust 的 jsonpath",
     ["serde"] = "一个通用的序列化/反序列化框架",
     ["serde_json"] = "一种 json 序列化文件格式",
+    ["serde_assert"] = "测试 Serde Serialize 和 Deserialize 实施 的 库 。",
     ["rkyv"] = "Rust 的零拷贝反序列化框架",
     ["rmp_serde"] = "rmp 的 serde 绑定",
     ["ser-raw"] = [[简单快速的序列化器
@@ -426,17 +433,7 @@ local serde = {
     ["bincode"] = "用于将结构转换为字节的二进制序列化/反序列化策略，反之亦然！",
     ["serde-this-or-that"] = "可以指定为多种类型的字段的自定义反序列化。",
     ["serde_bytes"] = "Serde 的 `&[u8]` 和 `vec<u8>` 的优化处理",
-}
-local error_test = {
-    ["anyhow"] = "灵活的具体错误类型建立在 std::error::error 之上",
-    ["thiserror"] = "推导（错误）",
-    ["color-eyre"] = "一个用于恐慌的错误报告处理程序，以及用于为各种错误提供丰富多彩、一致且格式良好的错误报告的 eyre crate。",
-    ["miette"] = "花哨的诊断报告库和协议，适合我们这些不是编译器黑客的凡人。",
-    ["better-panic"] = "非常漂亮的回溯受到 python 回溯的启发。",
-    ["human-panic"] = "给人类的恐慌信息",
-    ["pretty_assertions"] = "使用直接替换覆盖 `assert eq!` 和 `assert ne!`，添加丰富多彩的差异。",
-    ["static_assertions"] = "编译时断言以确保满足不变量。",
-    ["predicates"] = "布尔值谓词函数的实现。",
+    ["postcard"] = "Rust的no_std + serde兼容消息库",
 }
 local terminal = {
     ["owo-colors"] = "零分配的终端颜色会让人们惊叹不已",
@@ -546,6 +543,28 @@ local notify = {
 }
 local test = {
     ["skeptic"] = "通过 Cargo 测试你的 Rust Markdown 文档",
+    ["insta"] = "Rust 的快照测试库",
+    ["snapbox"] = "快照测试工具箱",
+    ["pretty_assertions"] = "使用直接替换覆盖 `assert eq!` 和 `assert ne!`，添加丰富多彩的差异。",
+    ["static_assertions"] = "编译时断言以确保满足不变量。",
+    ["similar"] = "一个基于 diff 的 Rust 高级 diff 库",
+    ["similar-asserts"] = "提供 assert_eq! 就像具有彩色差异输出资源的宏一样",
+    ["testcontainers"] = "一个用于在 Rust 中针对 docker 容器进行集成测试的库。",
+    ["testcontainers-modules"] = "社区维护的 Rust 测试容器模块",
+    ["fakeit"] = "具有 130 多个功能的假数据生成器库",
+    ["proptest"] = "基于假设的性能测试和收缩。",
+    ["trybuild"] = "用于编译器诊断的ui测试的测试工具",
+    ["rstest"] = "Fixture-based的Rust测试框架ui测试的测试工具",
+}
+local error_handle = {
+    ["anyhow"] = "灵活的具体错误类型建立在 std::error::error 之上",
+    ["thiserror"] = "推导（错误）",
+    ["color-eyre"] = "一个用于恐慌的错误报告处理程序，以及用于为各种错误提供丰富多彩、一致且格式良好的错误报告的 eyre crate。",
+    ["miette"] = "花哨的诊断报告库和协议，适合我们这些不是编译器黑客的凡人。",
+    ["better-panic"] = "非常漂亮的回溯受到 python 回溯的启发。",
+    ["human-panic"] = "给人类的恐慌信息",
+    ["predicates"] = "布尔值谓词函数的实现。",
+    ["always-assert"] = "长期运行的健壮应用程序的可恢复断言",
 }
 local data_struct = {
     ["bloomfilter"] = "布隆过滤器的实现",
@@ -563,6 +582,15 @@ local data_struct = {
     ["tendril"] = "用于零拷贝解析的紧凑缓冲区/字符串类型",
     ["ouroboros"] = "简单、安全的自引用结构生成。",
     ["indexmap"] = "顺序一致且迭代速度快的哈希表。",
+    ["heapless"] = "静态友好的数据结构，不需要动态内存分配",
+    ["modular-bitfield"] = "允许使用模块化构建块轻松定义位域类型。",
+    ["fixed"] = "Fixed-point numbers.",
+    ["fixed-sqrt"] = "Fixed-point numbers 的平方根",
+    ["scaled"] = "带有定点标量的欧几里得点和向量类型",
+    ["bilge"] = "使用位大小的类型，就像它们是 Rust 的一个功能一样。",
+    ["dashmap"] = "用于 **Rust** 的超快并发哈希映射。",
+    ["seize"] = "针对并发数据结构的快速、高效且稳健的内存回收。",
+    ["rustc-hash"] = "rustc 使用的快速、非加密哈希算法",
 }
 local cache = {
     ["moka"] = "受 java caffeine 启发的快速并发缓存库",
@@ -579,7 +607,7 @@ local all = vim.tbl_deep_extend(
     crates,
     database,
     encoding,
-    error_test,
+    error_handle,
     file,
     gui,
     img,
@@ -618,7 +646,8 @@ local all = vim.tbl_deep_extend(
     machine_learning,
     serial,
     consts,
-    wasm
+    wasm,
+    embedded
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']
@@ -678,6 +707,7 @@ lto = true
 strip = true
 codegen-units = 1
 panic = "abort"
+debug = 0
 
         ]],
             {}

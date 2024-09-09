@@ -17,7 +17,7 @@ global {
 
     ##### 网络接口和内核选项
     # 如果你需要为其他局域网设备提供代理，需要绑定LAN接口，多个网卡","分割
-    lan_interface: eth0,docker0
+    lan_interface: docker0
 
     # 如果你要代理本机流量，需要绑定WAN接口，多个接口","分割，也可以使用自动检测"auto"
     wan_interface: auto
@@ -84,7 +84,7 @@ dns {
             # 广告拒绝
             qname(geosite:category-ads-all) -> reject
             # 这里的意思是google中是cn的域名使用alidns
-            qname(geosite:google@cn, geosite:cn, geosite:china-list, geosite:private) -> alidns
+            qname(geosite:google@cn, geosite:cn, geosite:china-list, geosite:private, geosite: apple-cn) -> alidns
             # 匹配后缀，匹配关键字
             # qname(suffix: abc.com, keyword: google) -> googledns
             qname(geosite:gfw, geosite:geolocation-!cn, keyword: bing) -> googledns
@@ -125,7 +125,7 @@ subscription {
 group {
     Excellent {
         filter: subtag(fny) && !name(keyword: "日本", keyword: "倍")
-        policy: min_moving_avg
+        policy: min_avg10
     }
     BingExcellent {
         filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore',
@@ -133,47 +133,47 @@ group {
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
             keyword: '英国')
             && subtag(fny) && !name(keyword: "日本", keyword: "倍")
-        policy: min_moving_avg
+        policy: min_avg10
     }
     TaiwanExcellent {
         filter: name(keyword: '台湾', keyword: "(?i)Taiwan")
             && subtag(fny) && !name(keyword: "日本", keyword: "倍")
-        policy: min_moving_avg
+        policy: min_avg10
     }
     HongkongExcellent {
         filter: name(keyword: 'HK', keyword: "香港", regex: '(?i)Hongkong')
             && subtag(fny) && !name(keyword: "日本", keyword: "倍")
-        policy: min_moving_avg
+        policy: min_avg10
     }
     SingaporeExcellent {
         filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore')
             && subtag(fny) && !name(keyword: "日本", keyword: "倍")
-        policy: min_moving_avg
+        policy: min_avg10
     }
     ChatGPTExcellent {
         filter: name(regex: '(?i)chatgpt')
             && subtag(fny) && !name(keyword: "日本", keyword: "倍")
-        policy: min_moving_avg
+        policy: min_avg10
     }
     AmericaExcellent {
         filter: name(keyword: '美国', keyword: "🇺🇸", regex: '(?i)America')
             && subtag(fny) && !name(keyword: "日本", keyword: "倍")
-        policy: min_moving_avg
+        policy: min_avg10
     }
     UKExcellent {
         filter: name(keyword: '英国')
             && subtag(fny) && !name(keyword: "日本", keyword: "倍")
-        policy: min_moving_avg
+        policy: min_avg10
     }
     NetflixExcellent {
         filter: name(regex: '(?i)Netflix', keyword: '奈飞')
             && subtag(fny) && !name(keyword: "日本", keyword: "倍")
-        policy: min_moving_avg
+        policy: min_avg10
     }
 
     proxy_all {
         filter: !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
     Bing {
         filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore',
@@ -181,7 +181,7 @@ group {
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
             keyword: '英国')
             && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
     Google {
         filter: name(regex: '(?i)HK', keyword: "香港", regex: '(?i)Hongkong',
@@ -191,47 +191,47 @@ group {
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
             keyword: '英国')
             && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
     Hongkong {
         filter: name(keyword: 'HK', keyword: "香港", regex: '(?i)Hongkong')
             && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
     Singapore {
         filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore')
             && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
     ChatGPT {
         filter: name(regex: '(?i)chatgpt')
             && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
     Taiwan {
         filter: name(keyword: '台湾', keyword: "(?i)Taiwan")
             && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
     America {
         filter: name(keyword: '美国', keyword: "🇺🇸", regex: '(?i)America')
             && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
     Japan {
         filter: name(keyword: '日本', keyword: "🇯🇵")
             && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
     UK {
         filter: name(keyword: '英国')
             && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
     Netflix {
         filter: name(regex: '(?i)Netflix', keyword: '奈飞')
             && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_moving_avg
+        policy: min_avg10
     }
 }
 
@@ -263,7 +263,7 @@ routing {
     domain(geosite:google@cn, geosite:cn) -> direct
 
     domain(regex: '(?i)bing', keyword: bing, suffix: bing.com) -> BingExcellent
-    # dip(geoip:google) -> Excellent
+    dip(geoip:google) -> Excellent
     domain(suffix: v2raya.org) -> proxy_all
     domain(
         full: dns.google.com,
@@ -277,7 +277,8 @@ routing {
         suffix: deepl.com,
         suffix: crates.io
     ) -> Excellent
-    dip(geoip:us) -> proxy_all
+
+    dip(geoip:us, geoip:telegram) -> proxy_all
 
     domain(full: cn.bing.com) -> block
 

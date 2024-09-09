@@ -27,6 +27,7 @@ M.extension = {
 ---@type table<string, string|table|function>
 M.filename = {
     ["Cargo.toml"] = "toml_rs",
+    ["rust-toolchain.toml"] = "toml_rs_tc",
     ["LICENSE"] = "license",
     ["license"] = "license",
     ["config"] = "config",
