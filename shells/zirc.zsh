@@ -86,7 +86,7 @@ alias nvchard="NVIM_APPNAME=nvchard nvim"
 eval "$(starship init zsh)"
 
 
-export CLIPPY_CONF_DIR=~/.config/rustfmt/
+# export CLIPPY_CONF_DIR=~/.config/rustfmt/
 # export RUSTFLAGS="-Z threads=16"
 # export PATH=~/.local/share/bob/nvim-bin:$PATH
 export PATH=$PATH:~/.local/share/gem/ruby/3.0.0/bin

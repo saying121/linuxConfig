@@ -98,7 +98,7 @@ return {
             expressionFillDefault = "todo", -- Placeholder expression to use for missing expressions in assists.
         },
         cachePriming = {
-            enable = false, -- Warm up caches on project load.
+            enable = true, -- Warm up caches on project load.
             num = 0, -- How many worker threads to handle priming caches. The default 0 means to pick automatically.
         },
         cargo = {

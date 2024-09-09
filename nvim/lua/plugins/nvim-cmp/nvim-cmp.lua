@@ -27,7 +27,9 @@ local icons = {
 }
 ---@type LazySpec
 return {
-    "hrsh7th/nvim-cmp",
+    -- "hrsh7th/nvim-cmp",
+    "yioneko/nvim-cmp",
+    branch = "perf",
     event = { "InsertEnter", "CmdlineEnter" },
     cond = true,
     dependencies = {
