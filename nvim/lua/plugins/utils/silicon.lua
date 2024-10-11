@@ -1,7 +1,10 @@
 ---@type LazySpec
 return {
     "segeljakt/vim-silicon",
-    cmd = "Silicon",
+    cmd = {
+        "Silicon",
+        "SiliconHighlight",
+},
     config = function()
         vim.g.silicon = {
             ["theme"] = "Dracula",

@@ -22,7 +22,7 @@ $pacMan waybar otf-font-awesome \
     # gnome-calendar \
 
 $pacMan pipewire wireplumber slurp grim
-$aurPkg flameshot-git gojq satty-bin
+$aurPkg flameshot-git gojq satty
 
 # xrandr-wlr-randr,xprop-wdisplays
 $aurPkg wlr-randr wl-color-picker wl-delicolour-picker-git hyprpicker-git hyprprop-git

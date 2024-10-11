@@ -150,6 +150,7 @@ return {
                 -- final_score = orig_score + ((#sources - (source_index - 1)) * sorting.priority_weight)
                 priority_weight = 2,
                 comparators = {
+                    compare.recently_used,
                     compare.exact,
                     compare.offset,
                     -- separated-word
@@ -159,7 +160,6 @@ return {
                     -- https://github.com/hrsh7th/nvim-cmp/issues/883#issuecomment-1094512075
                     compare.locality,
                     compare.scopes,
-                    compare.recently_used,
                     compare.length,
                     compare.kind,
                     compare.sort_text,

@@ -20,10 +20,8 @@ vim.opt.rtp:prepend(dev_path)
 local specs = {
     { import = "plugins" },
     { import = "plugins.nvim-cmp" },
-    { import = "plugins.code_test" },
     { import = "plugins.nvim-dap" },
     { import = "plugins.database" },
-    { import = "plugins.documents" },
     { import = "plugins.lsps" },
     { import = "plugins.edit" },
     { import = "plugins.navigation" },

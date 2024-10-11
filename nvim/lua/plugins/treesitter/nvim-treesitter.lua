@@ -89,7 +89,7 @@ return {
                     end
 
                     local tb = {
-                        -- rust = "rust-analyzer",
+                        rust = "rust-analyzer",
                         zig = "zls",
                     }
                     for k, value in pairs(tb) do

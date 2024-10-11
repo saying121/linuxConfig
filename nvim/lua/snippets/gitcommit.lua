@@ -44,6 +44,7 @@ local tb = {
     release = "发布新版本",
     workflow = "工作流相关文件修改",
     publish = "发布新版本",
+    misc = "琐碎改动",
 }
 
 local snippets = {

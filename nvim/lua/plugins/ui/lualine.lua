@@ -41,6 +41,14 @@ return {
             vim.fn["db_ui#query"]({})
         end
 
+        local function rs_cond()
+            return vim.bo.filetype == "rust"
+        end
+        local function rs_target()
+            ---@diagnostic disable-next-line: missing-parameter
+            return vim.g.rustaceanvim.server.settings()["rust-analyzer"].cargo.target
+        end
+
         local function dbui_connections()
             local list = vim.fn["db_ui#connections_list"]()
             local conn = ""
@@ -140,7 +148,7 @@ return {
                         cond = require("noice").api.status.command.has,
                         -- color = { fg = "ff9e64" },
                     },
-                     "rest",
+                    "rest",
                     -- {
                     --     require("noice").api.status.message.get_hl,
                     --     cond = require("noice").api.status.message.has,
@@ -153,6 +161,10 @@ return {
                         icon = { align = "left" }, -- Display filetype icon on the right hand side
                         -- icon =    {'X', align='right'}
                         -- Icon string ^ in table is ignored in filetype component
+                    },
+                    {
+                        rs_target,
+                        cond = rs_cond,
                     },
                     {
                         require("public.get_some_info").lsp_clients,
