@@ -49,3 +49,7 @@ rustflags = ["-C", "link-arg=-fuse-ld=mold"]
 
 [unstable]
 gc = true
+
+[profile.profiling]
+inherits = "release"
+debug = true

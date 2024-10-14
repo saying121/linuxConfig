@@ -50,7 +50,7 @@ git config --global mergetool.keepBackup false
 
         require("diffview").setup({
             diff_binaries = false, -- Show diffs for binaries
-            enhanced_diff_hl = false, -- See |diffview-config-enhanced_diff_hl|
+            enhanced_diff_hl = true, -- See |diffview-config-enhanced_diff_hl|
             git_cmd = { "git" }, -- The git executable followed by default args.
             hg_cmd = { "hg" }, -- The hg executable followed by default args.
             use_icons = true, -- Requires nvim-web-devicons
@@ -75,7 +75,7 @@ git config --global mergetool.keepBackup false
                 },
                 merge_tool = {
                     -- Config for conflicted files in diff views during a merge or rebase.
-                    layout = "diff4_mixed",
+                    layout = "diff3_mixed",
                     disable_diagnostics = true, -- Temporarily disable diagnostics for diff buffers while in the view.
                     winbar_info = true, -- See |diffview-config-view.x.winbar_info|
                 },

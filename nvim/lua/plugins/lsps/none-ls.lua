@@ -15,9 +15,9 @@ return {
         local null_ls = require("null-ls")
 
         local sources_table = {
-            -- null_ls.builtins.diagnostics.mypy,
-            null_ls.builtins.diagnostics.zsh,
+            -- null_ls.builtins.diagnostics.zsh,
             null_ls.builtins.code_actions.refactoring,
+            null_ls.builtins.code_actions.gitrebase,
             null_ls.builtins.diagnostics.sqlfluff.with({
                 filetypes = { "sql", "mysql" },
             }),
@@ -27,14 +27,12 @@ return {
             null_ls.builtins.formatting.prettier.with({
                 filetypes = {
                     "vue",
-                    "css",
                     "scss",
                     "less",
                     "html",
                     "yaml",
                     "markdown",
                     "markdown.mdx",
-                    "graphql",
                     "handlebars",
                 },
             }),
@@ -46,6 +44,8 @@ return {
                     "typescriptreact",
                     "json",
                     "jsonc",
+                    "css",
+                    "graphql",
                 },
             }),
             null_ls.builtins.formatting.stylua,

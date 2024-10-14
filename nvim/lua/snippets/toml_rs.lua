@@ -555,6 +555,7 @@ local test = {
     ["proptest"] = "基于假设的性能测试和收缩。",
     ["trybuild"] = "用于编译器诊断的ui测试的测试工具",
     ["rstest"] = "Fixture-based的Rust测试框架ui测试的测试工具",
+    ["test-with"] = "一个库可以帮助您运行带条件的测试",
 }
 local error_handle = {
     ["anyhow"] = "灵活的具体错误类型建立在 std::error::error 之上",

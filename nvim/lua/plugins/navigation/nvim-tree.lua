@@ -59,6 +59,9 @@ return {
                     enable = true,
                 },
             },
+            view = {
+                width = 60,
+            },
             sort_by = "case_sensitive",
             renderer = {
                 root_folder_label = false,
@@ -84,6 +87,11 @@ return {
                             arrow_closed = "",
                         },
                     },
+                },
+            },
+            actions = {
+                open_file = {
+                    quit_on_open = true,
                 },
             },
             diagnostics = {

@@ -35,9 +35,9 @@ local all = {
         fmta(
             [[
 [toolchain]
-channel    = "<>"
+channel = "<>"
 components = ["rustfmt", "clippy"]
-profile    = "minimal"
+profile = "minimal"
         ]],
             {
                 c(1, {

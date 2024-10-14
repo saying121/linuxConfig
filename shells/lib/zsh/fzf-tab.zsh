@@ -3,7 +3,7 @@
 export RUNEWIDTH_EASTASIAN=0
 
 # lesspipe.sh 会读取home的.lessfilter
-export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --history=$HOME/.zi/cache/fzfhistory --preview='lesspipe.sh {}' --bind 'ctrl-p:preview-up,ctrl-n:preview-down'"
+export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --history=$HOME/.zi/cache/fzfhistory --preview='lesspipe.sh {}' --bind 'alt-p:preview-up,alt-n:preview-down'"
 export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build,dist,vendor} --type f"
 
 export LESSOPEN='|lesspipe.sh %s'
@@ -35,10 +35,10 @@ zstyle ':fzf-tab:complete:yay:*' fzf-preview $(printf $format 'yay' 'yay')
 zstyle ':fzf-tab:complete:paru:*' fzf-preview $(printf $format 'paru' 'paru')
 
 zstyle ':fzf-tab:complete:cargo:*' fzf-preview 'cargo help $word | bat --color=always -plhelp'
-zstyle ':fzf-tab:complete:cargo-(run|rustc):options' fzf-flags --preview-window=down:0:wrap
+zstyle ':fzf-tab:complete:cargo-(run|rustc|check):options' fzf-flags --preview-window=down:0:wrap
 
-zstyle ':fzf-tab:complete:(lcode):*' fzf-flags --preview-window=down:3:wrap --height=50%
-zstyle ':fzf-tab:complete:(rustc|rg|gcc|g++|lcode):options' fzf-flags --preview-window=down:3:wrap --height=50%
+zstyle ':fzf-tab:complete:(lcode|perf|rustup):*' fzf-flags --preview-window=down:3:wrap --height=50%
+zstyle ':fzf-tab:complete:(rustc|rg|gcc|g++):options' fzf-flags --preview-window=down:3:wrap --height=50%
 
 zstyle ':fzf-tab:complete:_zlua:*' query-string input
 
@@ -52,7 +52,7 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ "$group" == *
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 
 # zstyle ':fzf-tab:complete:systemctl-status:*' command-arguments '(@)' '--user' fzf-preview 'systemctl --user status -- $word'
-zstyle ':fzf-tab:complete:systemctl:argument-rest' fzf-flags --preview-window=down:5:wrap
+zstyle ':fzf-tab:complete:systemctl:argument-rest' fzf-flags --preview-window=down:5:wrap --height=60%
 
 # Take advantage of $LS_COLORS for completion as well
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
