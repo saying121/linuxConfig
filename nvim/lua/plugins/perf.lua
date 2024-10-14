@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
     "t-troebst/perfanno.nvim",
-    cond = false,
+    cond = true,
     cmd = "PerfLoadFlat",
     config = function()
         require("perfanno").setup({

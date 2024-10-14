@@ -63,7 +63,7 @@ global {
     tls_implementation: utls
 
     # utls要模仿的客户端，仅当utls时生效
-    # 参考 https：//github.com/daeuniverse/dae/blob/331fa23c16/component/outbound/transport/tls/utls.go#L17
+    # 参考 https://github.com/daeuniverse/dae/blob/331fa23c16/component/outbound/transport/tls/utls.go#L17
     utls_imitate: chrome_auto
 }
 
@@ -72,6 +72,8 @@ dns {
     upstream {
         googledns: 'tcp+udp://dns.google.com:53'
         alidns: 'udp://dns.alidns.com:53'
+        txdns: 'udp://119.29.29.29:53'
+        # txdns: 'https://doh.pub/dns-query:443'
     }
     routing {
         # 根据DNS查询的请求，决定使用哪个DNS服务器
@@ -87,14 +89,14 @@ dns {
             qname(geosite:google@cn, geosite:cn, geosite:china-list, geosite:private, geosite: apple-cn) -> alidns
             # 匹配后缀，匹配关键字
             # qname(suffix: abc.com, keyword: google) -> googledns
-            qname(geosite:gfw, geosite:geolocation-!cn, keyword: bing) -> googledns
+            qname(geosite:gfw, geosite:geolocation-!cn, keyword: bing, keyword: google) -> googledns
             # DNS 请求类型
             # ipv4和ipv6请求使用alidns
             # qtype(a, aaaa) -> alidns
             # cname请求googledns
             # qtype(cname) -> googledns
             # 默认DNS服务器
-            fallback: googledns
+            fallback: alidns
         }
         # 根据DNS查询的响应，决定接受或者使用另外一个DNS服务器重新查询记录
         # 规则从上到下匹配
@@ -120,9 +122,15 @@ subscription {
     sf: "file://sf.yml"
     yiyuan: "file://yiyuan.yml"
     fny: "file://fny.yml"
+    pq: "file://pq.yml"
 }
 
 group {
+    proxy_all {
+        filter: !name(keyword: "日本", keyword: "倍")
+        policy: min_avg10
+    }
+
     Excellent {
         filter: subtag(fny) && !name(keyword: "日本", keyword: "倍")
         policy: min_avg10
@@ -171,16 +179,12 @@ group {
         policy: min_avg10
     }
 
-    proxy_all {
-        filter: !name(keyword: "日本", keyword: "倍") && !subtag(fny)
-        policy: min_avg10
-    }
     Bing {
         filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore',
             regex: '(?i)chatgpt',
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
             keyword: '英国')
-            && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
+            && !name(keyword: "日本", keyword: "倍")
         policy: min_avg10
     }
     Google {
@@ -190,47 +194,87 @@ group {
             keyword: '台湾', regex: "(?i)Taiwan",
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
             keyword: '英国')
-            && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
+            && !name(keyword: "日本", keyword: "倍")
         policy: min_avg10
     }
     Hongkong {
         filter: name(keyword: 'HK', keyword: "香港", regex: '(?i)Hongkong')
-            && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
+            && !name(keyword: "日本", keyword: "倍")
         policy: min_avg10
     }
     Singapore {
         filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore')
-            && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
+            && !name(keyword: "日本", keyword: "倍")
         policy: min_avg10
     }
     ChatGPT {
         filter: name(regex: '(?i)chatgpt')
-            && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
+            && !name(keyword: "日本", keyword: "倍")
         policy: min_avg10
     }
     Taiwan {
         filter: name(keyword: '台湾', keyword: "(?i)Taiwan")
-            && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
+            && !name(keyword: "日本", keyword: "倍")
         policy: min_avg10
     }
     America {
         filter: name(keyword: '美国', keyword: "🇺🇸", regex: '(?i)America')
-            && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
+            && !name(keyword: "日本", keyword: "倍")
         policy: min_avg10
     }
     Japan {
         filter: name(keyword: '日本', keyword: "🇯🇵")
-            && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
+            && !name(keyword: "倍")
         policy: min_avg10
     }
     UK {
         filter: name(keyword: '英国')
-            && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
+            && !name(keyword: "日本", keyword: "倍")
         policy: min_avg10
     }
     Netflix {
         filter: name(regex: '(?i)Netflix', keyword: '奈飞')
-            && !name(keyword: "日本", keyword: "倍") && !subtag(fny)
+            && !name(keyword: "日本", keyword: "倍")
+        policy: min_avg10
+    }
+    Korea {
+        filter: name(keyword: '韩国')
+            && !name(keyword: "日本", keyword: "倍")
+        policy: min_avg10
+    }
+    Sweden {
+        filter: name(keyword: '瑞典')
+            && !name(keyword: "日本", keyword: "倍")
+        policy: min_avg10
+    }
+    Australia {
+        filter: name(keyword: '澳大利亚')
+            && !name(keyword: "日本", keyword: "倍")
+        policy: min_avg10
+    }
+    France {
+        filter: name(keyword: '法国')
+            && !name(keyword: "日本", keyword: "倍")
+        policy: min_avg10
+    }
+    Dubai {
+        filter: name(keyword: '迪拜')
+            && !name(keyword: "日本", keyword: "倍")
+        policy: min_avg10
+    }
+    Brazil {
+        filter: name(keyword: '巴西')
+            && !name(keyword: "日本", keyword: "倍")
+        policy: min_avg10
+    }
+    Switzerland {
+        filter: name(keyword: '瑞士')
+            && !name(keyword: "日本", keyword: "倍")
+        policy: min_avg10
+    }
+    Idian {
+        filter: name(keyword: '印度')
+            && !name(keyword: "日本", keyword: "倍")
         policy: min_avg10
     }
 }
@@ -266,16 +310,17 @@ routing {
     dip(geoip:google) -> Excellent
     domain(suffix: v2raya.org) -> proxy_all
     domain(
-        full: dns.google.com,
-        full: devv.ai,
-        full: poe.com,
-        suffix: google.com,
-        keyword: github,
-        full: aur.archlinux.org,
-        full: translate.google.com,
-        full: translate.yandex.com,
-        suffix: deepl.com,
-        suffix: crates.io
+        full: dns.google.com
+        , full: devv.ai
+        , full: poe.com
+        , suffix: google.com
+        , keyword: github
+        , full: aur.archlinux.org
+        , full: translate.google.com
+        , full: translate.yandex.com
+        , suffix: deepl.com
+        , suffix: medium.com
+        , suffix: docs.pola.rs
     ) -> Excellent
 
     dip(geoip:us, geoip:telegram) -> proxy_all
@@ -286,6 +331,7 @@ routing {
 
     dip(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) -> direct
     pname(curl) -> direct ## 进程名规则 (当绑定WAN接口是只支持本地进程)
+    pname(qbittorrent) -> direct ## 进程名规则 (当绑定WAN接口是只支持本地进程)
 
     ## 目的IP规则
     dip(8.8.8.8) -> proxy_all

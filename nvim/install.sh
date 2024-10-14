@@ -47,7 +47,7 @@ export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 rustup install stable nightly
 channel=(stable nightly)
 for ch in "${!channel[@]}"; do
-    rustup component add rust-analysis rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain "$ch"
+    rustup component add rust-analyzer rustc-dev clippy rustfmt llvm-tools-preview --toolchain "$ch"
 done
 rustup component add miri --toolchain nightly
 # rustup default nightly
@@ -108,10 +108,10 @@ if [[ $(grep -c mason /etc/profile) == 0 ]]; then
     # shellcheck disable=2016
     echo '
 export PATH=$PATH:~/.local/share/nvim/mason/bin
-export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
-
-export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/
     ' | sudo tee -a /etc/profile
 
     source /etc/profile
 fi
+# export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+#
+# export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/
