@@ -1,5 +1,6 @@
 local ls = require("luasnip")
 local s = ls.snippet
+local c = ls.choice_node
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
@@ -877,8 +878,11 @@ for name, describe in pairs(all) do
                 priority = 30000,
                 dscr = describe,
             },
-            fmta(name .. [[ = { version = "<>" }]], {
-                i(1, ""),
+            fmta(name .. [[ = { <> }]], {
+                c(1, {
+                    fmta('version = "<>"', { i(1, "") }),
+                    i(1, "workspace = true"),
+                }),
             })
         )
     )

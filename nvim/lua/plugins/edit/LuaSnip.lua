@@ -14,12 +14,6 @@ return {
     dependencies = {
         "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
-        -- "doxnit/cmp-luasnip-choice",
-        config = function()
-            require("cmp_luasnip_choice").setup({
-                auto_open = true, -- Automatically open nvim-cmp on choice node (default: true)
-            })
-        end,
     },
     config = function()
         local luasnip, opts = require("luasnip"), { noremap = true, silent = true }

@@ -14,6 +14,7 @@
   "cmp-cmdline": { "branch": "main", "commit": "bc85ff5323f4d314f92556bea15ebaac94d58054" },
   "cmp-dap": { "branch": "master", "commit": "ea92773e84c0ad3288c3bc5e452ac91559669087" },
   "cmp-git": { "branch": "main", "commit": "ec049036e354ed8ed0215f2427112882e1ea7051" },
+  "cmp-luasnip-choice": { "branch": "master", "commit": "97a367851bc17984b56164b5427a53919aed873a" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "56cffa9992469b9676494744f09667808392c1b3" },
   "cmp-rg": { "branch": "master", "commit": "d6cea15ad504369ec98f3de73b9631dfdd23a671" },
   "cmp-spell": { "branch": "master", "commit": "694a4e50809d6d645c1ea29015dad0c293f019d6" },
