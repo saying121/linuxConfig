@@ -227,9 +227,9 @@ local prefix = {
         prefix = { "tracing_subscriber", "log_sub" },
         body = {
             "tracing_subscriber::fmt()",
-            ".with_max_level(tracing::Level::DEBUG)",
-            ".with_test_writer()",
-            ".init();",
+            "    .with_max_level(tracing::Level::DEBUG)",
+            "    .with_test_writer()",
+            "    .init();",
         },
         requires = { "tracing_subscriber", "tracing" },
         description = "subscriber debug",

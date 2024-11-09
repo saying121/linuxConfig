@@ -415,11 +415,22 @@ extern "<>" {
     ),
     s(
         {
+            trig = "expect",
+            dscr = "#![expect(…)]",
+        },
+        fmt([=[#![expect({}, reason = "{}")]]=], {
+            i(1, ""),
+            i(2, ""),
+        })
+    ),
+    s(
+        {
             trig = "allow",
             dscr = "#![allow(…)]",
         },
-        fmt("#![allow({})]", {
+        fmt([=[#![allow({}, reason = "{}")]]=], {
             i(1, ""),
+            i(2, ""),
         })
     ),
     s({

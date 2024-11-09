@@ -14,7 +14,8 @@ return {
             sources = cmp.config.sources({
                 { name = "git", priority = 1900 },
                 { name = "luasnip", priority = 1000 },
-                { name = "path", priority = 830 },
+                -- { name = "path", priority = 830 },
+                { name = "async_path", priority = 830 },
             }, {
                 { name = "buffer", priority = 800 },
                 { name = "rg", keyword_length = 4, priority = 700 },

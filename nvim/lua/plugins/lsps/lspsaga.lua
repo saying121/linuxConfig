@@ -120,6 +120,12 @@ return {
         keymap("n", "]e", function()
             require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
         end)
+        keymap("n", "[w", function()
+            require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.WARN })
+        end)
+        keymap("n", "]w", function()
+            require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.WARN })
+        end)
 
         local finder = {
             max_height = 0.6,

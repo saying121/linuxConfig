@@ -1,12 +1,38 @@
+local utils = require("public.utils")
+
 local M = {}
 
-local handle = io.popen("rust-analyzer --version")
+local handle = io.popen("rustc --version")
 local output
 if handle then
     output = handle:read("*a")
     handle:close()
 end
 local is_nightly = string.find(output, "nightly") ~= nil
+
+-- cache
+local rust_version = {}
+
+--- 把rustc --version --verbose 解析为kv
+---@return table|nil
+function M.parse_rustc_version()
+    if not vim.tbl_isempty(rust_version) then
+        return rust_version
+    end
+
+    local version_string = utils.cmd_stdout("rustc --version --verbose")
+    if version_string == nil then
+        return nil
+    end
+    for line in version_string:gmatch("[^\r\n]+") do
+        local key, value = line:match("^(.-):%s*(.*)$")
+        if key then
+            rust_version[key] = value
+        end
+    end
+
+    return rust_version
+end
 
 -- 获取 lsp 名字
 function M.lsp_clients()
@@ -24,7 +50,12 @@ function M.lsp_clients()
     for _, client in ipairs(clients) do
         local name
         if buf_ft == "rust" and is_nightly then
-            name = "ra-nightly"
+            local rust_info = M.parse_rustc_version()
+            if rust_info then
+                name = "ra-" .. rust_info.release
+            else
+                name = "ra-nightly"
+            end
         else
             name = client.name
         end

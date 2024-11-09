@@ -28,14 +28,16 @@ local icons = {
 ---@type LazySpec
 return {
     -- "hrsh7th/nvim-cmp",
-    "yioneko/nvim-cmp",
-    branch = "perf",
+    "iguanacucumber/magazine.nvim",
+    name = "nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     cond = true,
     dependencies = {
         "f3fora/cmp-spell",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
+        -- "hrsh7th/cmp-buffer",
+        { "iguanacucumber/mag-buffer", name = "cmp-buffer" },
+        -- "hrsh7th/cmp-path",
+        { "https://codeberg.org/FelipeLema/cmp-async-path", --[[ name = "cmp-path" ]] },
         "lukas-reineke/cmp-rg",
         require("public.utils").req_lua_files_return_table("plugins/" .. "nvim-cmp" .. "/dependencies"),
     },
@@ -51,7 +53,8 @@ return {
             latex_symbols = "[Latex]",
             luasnip = "[LuaSnip]",
             nvim_lsp = "[LSP]",
-            path = "[Path]",
+            -- path = "[Path]",
+            async_path = "[Path]",
             rg = "[Rg]",
             spell = "[Spell]",
             ["vim-dadbod-completion"] = "[DB]",
@@ -77,7 +80,8 @@ return {
                 -- end,
             },
             { name = "luasnip_choice" },
-            { name = "path", priority = 800 },
+            -- { name = "path", priority = 800 },
+            { name = "async_path", priority = 800 },
             { name = "fittencode", priority = 900 },
         }, {
             { name = "buffer", priority = 800 },
@@ -244,7 +248,8 @@ return {
                     --     return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
                     -- end,
                 },
-                { name = "path", priority = 800 },
+                -- { name = "path", priority = 800 },
+                { name = "async_path", priority = 800 },
                 { name = "fittencode", priority = 900 },
             }, {
                 { name = "buffer", priority = 800 },

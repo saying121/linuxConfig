@@ -1,6 +1,8 @@
 ---@type LazySpec
 return {
-    "hrsh7th/cmp-cmdline",
+    -- "hrsh7th/cmp-cmdline",
+    "iguanacucumber/mag-cmdline",
+    name = "cmp-cmdline",
     config = function()
         local cmp = require("cmp")
         cmp.setup.cmdline({ "/", "?" }, {
