@@ -8,7 +8,12 @@ local get_sehll = function()
     end
 end
 
+local gpus  = wezterm.gui.enumerate_gpus()
+
 return {
+    webgpu_preferred_adapter = gpus[1],
+    max_fps = 60,
+    -- front_end = "WebGpu",
     default_prog = get_sehll(),
     font = wezterm.font_with_fallback({
         "Hack Nerd Font",

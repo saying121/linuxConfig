@@ -40,13 +40,13 @@ return {
         local function dbui_query()
             vim.fn["db_ui#query"]({})
         end
-
-        local function rs_cond()
-            return vim.bo.filetype == "rust"
-        end
         local function rs_target()
             ---@diagnostic disable-next-line: missing-parameter
             return vim.g.rustaceanvim.server.settings()["rust-analyzer"].cargo.target
+        end
+
+        local function rs_cond()
+            return vim.bo.filetype == "rust" and rs_target()
         end
 
         local function dbui_connections()

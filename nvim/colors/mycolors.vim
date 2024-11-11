@@ -39,8 +39,6 @@ hi NvimTreeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi NvimTreeNormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi NvimTreeWinSeparator guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
-" hi Folded guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-
 " hi TelescopeBorder guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
 " hi TelescopeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 " hi TelescopePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
@@ -60,7 +58,7 @@ hi FloatBorder guibg=NONE
 " hi LspInfoList guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=DarkCyan
 " hi LspInfoTitle guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=DarkCyan
 
-hi Folded guibg=NONE cterm=NONE "guifg=red ctermfg=NONE
+" hi Folded guibg=NONE cterm=NONE "guifg=red ctermfg=NONE
 hi FoldColumn guibg=NONE cterm=NONE guifg=DarkCyan ctermfg=NONE
 hi SignColumn ctermbg=NONE guifg=DarkCyan ctermfg=NONE gui=italic guibg=NONE
 " hi Folded ctermbg=0 ctermfg=169

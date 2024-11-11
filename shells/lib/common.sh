@@ -215,3 +215,4 @@ if [[ $TERM = "xterm-kitty" ]]; then
 fi
 alias daeres="sudo systemctl restart dae"
 alias daestop="sudo systemctl stop dae"
+alias gitroot='cd $(git rev-parse --show-toplevel)'

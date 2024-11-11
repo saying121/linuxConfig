@@ -133,6 +133,7 @@ local arena = {
     ["id-arena"] = "一个简单的、基于 id 的 arena。",
     ["generational-arena"] = "一个安全的 arena 分配器，通过使用分代索引支持删除，而不会遇到 ABA 问题。",
     ["thunderdome"] = "具有紧凑代索引的快速竞技场分配器",
+    ["slotmap"] = "槽位图数据结构",
 }
 local date_time = {
     ["chrono"] = "**Rust** 的日期和时间库",
@@ -237,6 +238,7 @@ local web = {
     ["rocket"] = "专注于可用性、安全性、可扩展性和速度的 Web 框架。",
     ["salvo"] = "salvo 是一个强大而简单的 **Rust** Web 服务器框架。",
     ["leptos"] = "leptos 是一个全栈、同构的 Rust Web 框架，利用细粒度的反应性来构建声明性用户界面。",
+    ["object_store"] = "通用对象存储接口，用于与 aws s3、google 云存储、azure blob 存储和本地文件进行统一交互。",
 }
 local ciphers = {
     -- block ciphers

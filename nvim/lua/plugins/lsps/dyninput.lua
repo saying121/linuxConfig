@@ -39,5 +39,7 @@ return {
                 ["|"] = { "|| {!}", rs.closure_fn },
             },
         })
+
+        -- vim.cmd.e()
     end,
 }
