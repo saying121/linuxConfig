@@ -4,7 +4,10 @@ local vfn = vim.fn
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre" },
-    dependencies = { "hrsh7th/cmp-nvim-lsp" },
+    dependencies = {
+        -- "hrsh7th/cmp-nvim-lsp",
+        { "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
+    },
     config = function()
         local lspconfig, LSP = require("lspconfig"), require("public.lsp_attach")
 

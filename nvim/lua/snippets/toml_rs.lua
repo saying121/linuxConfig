@@ -1,5 +1,6 @@
 local ls = require("luasnip")
 local s = ls.snippet
+local c = ls.choice_node
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
@@ -558,6 +559,7 @@ local test = {
     ["trybuild"] = "用于编译器诊断的ui测试的测试工具",
     ["rstest"] = "Fixture-based的Rust测试框架ui测试的测试工具",
     ["test-with"] = "一个库可以帮助您运行带条件的测试",
+    ["mockito"] = "HTTP mocking for Rust!",
 }
 local error_handle = {
     ["anyhow"] = "灵活的具体错误类型建立在 std::error::error 之上",
@@ -879,8 +881,11 @@ for name, describe in pairs(all) do
                 priority = 30000,
                 dscr = describe,
             },
-            fmta(name .. [[ = { version = "<>" }]], {
-                i(1, ""),
+            fmta(name .. [[ = { <> }]], {
+                c(1, {
+                    fmta('version = "<>"', { i(1, "") }),
+                    i(1, "workspace = true"),
+                }),
             })
         )
     )

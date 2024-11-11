@@ -1,6 +1,8 @@
 ---@type LazySpec
 return {
-    "hrsh7th/cmp-cmdline",
+    -- "hrsh7th/cmp-cmdline",
+    "iguanacucumber/mag-cmdline",
+    name = "cmp-cmdline",
     config = function()
         local cmp = require("cmp")
         cmp.setup.cmdline({ "/", "?" }, {
@@ -17,7 +19,8 @@ return {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
                 { name = "cmdline", priority = 1000 },
-                { name = "path", priority = 900 },
+                -- { name = "path", priority = 900 },
+                { name = "async_path", priority = 900 },
             }, {
                 { name = "buffer", priority = 800 },
                 { name = "rg", keyword_length = 4, priority = 700 },

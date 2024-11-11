@@ -1,3 +1,4 @@
+local get_info = require("public.get_some_info")
 ---@type LazySpec
 return {
     "nvim-lualine/lualine.nvim",
@@ -43,6 +44,11 @@ return {
         local function rs_target()
             ---@diagnostic disable-next-line: missing-parameter
             return vim.g.rustaceanvim.server.settings()["rust-analyzer"].cargo.target
+                or get_info.parse_rustc_version().host
+        end
+
+        local function rs_cond()
+            return vim.bo.filetype == "rust"
         end
 
         local function rs_cond()
@@ -167,16 +173,21 @@ return {
                         cond = rs_cond,
                     },
                     {
-                        require("public.get_some_info").lsp_clients,
+                        get_info.lsp_clients,
                         -- icon = " LSP:",
                         icon = " :",
                     },
-                    "encoding",
+                    {
+                        "encoding",
+                        cond = function()
+                            return vim.api.nvim_get_option_value("fileencoding", { buf = 0 }) ~= "utf-8"
+                        end,
+                    },
                     -- "fileformat",
                 },
                 lualine_y = {
-                    -- require("public.get_some_info").linux_distro,
-                    require("public.get_some_info").fileformat,
+                    -- get_info.linux_distro,
+                    get_info.fileformat,
                 },
                 lualine_z = { "location", "%L" },
             },

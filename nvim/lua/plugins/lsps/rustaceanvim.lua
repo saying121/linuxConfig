@@ -15,21 +15,10 @@ return {
             opts = {
                 create_commands = false,
             },
-            config = function(_, opt)
-                require("ferris").setup(opt)
-            end,
         },
     },
     config = function()
         local executors = require("rustaceanvim.executors")
-        local extension_path = "/usr/lib/codelldb/"
-
-        if not require("public.utils").file_exists(extension_path) then
-            extension_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/codelldb/extension/"
-        end
-
-        local codelldb_path = extension_path .. "adapter/codelldb"
-        local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
         ---@type rustaceanvim.Opts
         vim.g.rustaceanvim = {
@@ -50,7 +39,7 @@ return {
                 executor = executors.toggleterm,
                 test_executor = executors.toggleterm,
 
-                code_actions = { ui_select_fallback = false },
+                code_actions = { ui_select_fallback = true },
 
                 enable_nextest = false,
 
@@ -165,11 +154,6 @@ return {
                     -- vim.print(res)
                     return res
                 end,
-            },
-            -- DAP configuration
-            dap = {
-                adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
-                autoload_configurations = true,
             },
         }
     end,

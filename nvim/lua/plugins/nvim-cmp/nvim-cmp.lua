@@ -27,21 +27,33 @@ local icons = {
 }
 ---@type LazySpec
 return {
-    "hrsh7th/nvim-cmp",
-    -- "yioneko/nvim-cmp",
-    -- branch = "perf",
+    -- "hrsh7th/nvim-cmp",
+    "iguanacucumber/magazine.nvim",
+    name = "nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     cond = true,
     dependencies = {
         "f3fora/cmp-spell",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
+        -- "hrsh7th/cmp-buffer",
+        { "iguanacucumber/mag-buffer", name = "cmp-buffer" },
+        -- "hrsh7th/cmp-path",
+        {
+            "https://codeberg.org/FelipeLema/cmp-async-path", --[[ name = "cmp-path" ]]
+        },
         "lukas-reineke/cmp-rg",
+        {
+            "doxnit/cmp-luasnip-choice",
+            config = function()
+                require("cmp_luasnip_choice").setup({
+                    auto_open = true, -- Automatically open nvim-cmp on choice node (default: true)
+                })
+            end,
+        },
         require("public.utils").req_lua_files_return_table("plugins/" .. "nvim-cmp" .. "/dependencies"),
     },
     config = function()
         local luasnip, cmp, compare = require("luasnip"), require("cmp"), require("cmp.config.compare")
-        ---@type cmp.Config
+        ---@type cmp.ConfigSchema
         local cmp_cfg = cmp.config
 
         local source_mapping = {
@@ -51,15 +63,15 @@ return {
             latex_symbols = "[Latex]",
             luasnip = "[LuaSnip]",
             nvim_lsp = "[LSP]",
-            path = "[Path]",
+            -- path = "[Path]",
+            async_path = "[Path]",
             rg = "[Rg]",
             spell = "[Spell]",
             ["vim-dadbod-completion"] = "[DB]",
             zsh = "[Zsh]",
-            fittencode = "[Fitten]",
             crates = "[Crates]",
             lazydev = "[LazyDev]",
-            luasnip_choice = "[Choice]",
+            -- luasnip_choice = "[Choice]",
         }
 
         -- 分级显示，上一级有补全就不会显示下一级
@@ -76,9 +88,9 @@ return {
                 --     return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
                 -- end,
             },
-            { name = "luasnip_choice" },
-            { name = "path", priority = 800 },
-            { name = "fittencode", priority = 900 },
+            -- { name = "luasnip_choice" },
+            -- { name = "path", priority = 800 },
+            { name = "async_path", priority = 800 },
         }, {
             { name = "buffer", priority = 800 },
             { name = "rg", keyword_length = 3, priority = 700 },
@@ -88,6 +100,7 @@ return {
 
         ---@type cmp.ConfigSchema
         local config = {
+            ---@diagnostic disable-next-line: missing-fields
             matching = {
                 disallow_fuzzy_matching = false,
                 disallow_partial_fuzzy_matching = false,
@@ -101,7 +114,9 @@ return {
                 end,
             },
             window = {
+                ---@diagnostic disable-next-line: undefined-field
                 completion = cmp_cfg.window.bordered(),
+                ---@diagnostic disable-next-line: undefined-field
                 documentation = cmp_cfg.window.bordered(),
             },
             formatting = {
@@ -227,7 +242,7 @@ return {
             },
         })
 
-        require("cmp").setup.filetype({ "lua" }, {
+        cmp.setup.filetype({ "lua" }, {
             sources = cmp_cfg.sources({
                 {
                     name = "luasnip",
@@ -244,8 +259,8 @@ return {
                     --     return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
                     -- end,
                 },
-                { name = "path", priority = 800 },
-                { name = "fittencode", priority = 900 },
+                -- { name = "path", priority = 800 },
+                { name = "async_path", priority = 800 },
             }, {
                 { name = "buffer", priority = 800 },
                 { name = "rg", keyword_length = 3, priority = 700 },

@@ -66,7 +66,7 @@ set conceallevel=2
 
 set nowrap
 
-set fillchars=eob:\ ,fold:\ ,foldopen:,foldsep:\ ,foldclose:
+set fillchars=eob:\ ,fold:\ ,foldopen:,foldsep:\ ,foldclose:,foldsep:
 set foldcolumn=1
 set foldlevel=99
 set foldlevelstart=99

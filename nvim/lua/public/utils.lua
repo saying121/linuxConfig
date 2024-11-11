@@ -1,5 +1,19 @@
 local M = {}
 
+--- 运行命令并获取stdout
+---@param cmd string
+---@return string|nil
+function M.cmd_stdout(cmd)
+    local handle = io.popen(cmd)
+    if not handle then
+        return nil
+    end
+    local out = handle:read("*a")
+    handle:close()
+
+    return out
+end
+
 function M.mirror()
     if vim.env.HTTPS_PROXY == nil then
         return ""

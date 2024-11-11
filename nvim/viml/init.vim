@@ -1,12 +1,10 @@
 scriptencoding utf-8
 " 基本设置
-source ~/.config/nvim/viml/base.vim
 
-source ~/.config/nvim/viml/keymaps.vim
-
-source ~/.config/nvim/viml/functions.vim
-
-source ~/.config/nvim/viml/autocmds.vim
+execute 'source' stdpath('config') . '/viml/base.vim'
+execute 'source' stdpath('config') . '/viml/keymaps.vim'
+execute 'source' stdpath('config') . '/viml/functions.vim'
+execute 'source' stdpath('config') . '/viml/autocmds.vim'
 
 " ----------------------
 
