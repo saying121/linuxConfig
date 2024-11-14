@@ -56,7 +56,6 @@ local crates = {
     ["memflow"] = "memflow物理内存自省框架的核心组件",
     ["aliasable"] = "基本可别名（非唯一指针）类型",
     ["stacker"] = "堆栈增长库在实现可能意外破坏堆栈的深度递归算法时很有用。",
-    ["lazy_format"] = "一个实用程序箱，用于稍后格式化值",
     ["crc32fast"] = "快速、SIMD 加速的 CRC32 (IEEE) 校验和计算",
     ["libfuzzer-sys"] = "llvm 的 lib 模糊器运行时的包装器。",
     ["nix"] = "Rust 友好地绑定到 *nix api",
@@ -108,6 +107,10 @@ local parser = {
 local some_display = {
     ["parse-display"] = "使用通用设置实现显示和 str 的程序宏。",
     ["custom-format"] = "Rust 的自定义格式。",
+    ["lazy_format"] = "一个实用程序箱，用于稍后格式化值",
+    ["strfmt"] = "用于格式化动态字符串的 Rust 库",
+    ["formatx"] = "用于在运行时格式化非文字字符串的宏",
+    ["dyn-fmt"] = "提供动态字符串格式。",
 }
 local iterators = {
     ["rev_lines"] = "rust 迭代器用于逐行读取文件并反向读取缓冲区",
@@ -124,9 +127,12 @@ local algorithms = {
 local perf = {
     ["enum_dispatch"] = "动态分派方法调用的近乎直接替代，速度高达 10 倍",
     ["opentelementry"] = "*open telemetry* 提供一组 api、库、代理和收集器服务来从您的应用程序捕获分布式跟踪和指标。您可以使用 prometheus、jaeger 和其他可观察性工具来分析它们。",
+    ["tailcall"] = "安全、零成本的尾递归",
+}
+local alloc = {
     ["mimalloc"] = "面向性能和安全的嵌入式分配器",
     ["tikv-jemallocator"] = "由 jemalloc 支持的 Rust 分配器",
-    ["tailcall"] = "安全、零成本的尾递归",
+    ["allocator-api2"] = "Rust 分配器 API 的镜像",
 }
 local arena = {
     ["bumpalo"] = "Rust 的快速 arena 分配舞台。",
@@ -652,7 +658,8 @@ local all = vim.tbl_deep_extend(
     serial,
     consts,
     wasm,
-    embedded
+    embedded,
+    alloc
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']
@@ -742,7 +749,6 @@ opt-level = 3
         fmta(
             [[
 [<>lints.rust]
-temporary_cstring_as_ptr = "deny"
 
 [<>lints.clippy]
 perf = { level = "deny", priority = -1 }
