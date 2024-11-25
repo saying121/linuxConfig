@@ -8,6 +8,7 @@ zi ice wait lucid; zi snippet OMZL::clipboard.zsh
 zi ice wait lucid; zi snippet OMZL::functions.zsh
 zi ice wait lucid; zi snippet OMZL::history.zsh
 
+zi snippet OMZL::git.zsh
 zi ice wait lucid; zi snippet OMZP::git
 
 zi snippet OMZP::last-working-dir

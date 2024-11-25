@@ -7,14 +7,17 @@ geoip_file_bak=$geoip_file".bak"
 geosite_file="/usr/local/share/dae/geosite.dat"
 geosite_file_bak=$geosite_file".bak"
 
-[ -e $geoip_file ] && mv -f $geoip_file $geoip_file_bak
-[ -e $geosite_file ] && mv -f $geosite_file $geosite_file_bak
-
 if pgrep -x dae >/dev/null 2>&1; then
+    [ -e $geoip_file ] && mv -f $geoip_file $geoip_file_bak
     curl -L -o $geoip_file https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+
+    [ -e $geosite_file ] && mv -f $geosite_file $geosite_file_bak
     curl -L -o $geosite_file https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
 else
+    [ -e $geoip_file ] && mv -f $geoip_file $geoip_file_bak
     curl -L -o $geoip_file https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
+
+    [ -e $geosite_file ] && mv -f $geosite_file $geosite_file_bak
     curl -L -o $geosite_file https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
 fi
 

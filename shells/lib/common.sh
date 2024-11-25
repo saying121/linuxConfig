@@ -206,6 +206,7 @@ thread_num=$(nproc)
 export MAKEFLAGS="-j$thread_num"
 
 export PATH=$PATH:~/.linuxConfig/scripts
+export PATH=$PATH:~/.ghcup/bin
 
 alias gitlog="git log --graph --pretty=format:'%>|(12,trunc)%Cred%h%Creset  -  %C(yellow)%<(60,trunc)%s%Creset %Cgreen%<(30,trunc)%d %C(bold blue)%<(15,trunc)%an%Creset%>(1)%>(50)%cd' --date=format-local:'%Y-%m-%d %H:%M:%S'"
 
@@ -214,7 +215,6 @@ if [[ $TERM = "xterm-kitty" ]]; then
 fi
 alias daeres="sudo systemctl restart dae"
 alias daestop="sudo systemctl stop dae"
-alias gitroot='cd $(git rev-parse --show-toplevel)'
 
 export SCCACHE_CACHE_SIZE="40G"
 export RUSTC_WRAPPER=sccache
