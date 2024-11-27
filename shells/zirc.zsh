@@ -96,9 +96,4 @@ export PATH=$PATH:~/.local/share/gem/ruby/3.0.0/bin
 # export WASMTIME_DEBUG_BINDGEN=1
 
 # zprof
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib/mojo
-# export PATH=$PATH:~/.modular/pkg/packages.modular.com_mojo/bin/
-# export LD_LIBRARY_PATH=/home/saying/.local/lib/arch-mojo:$LD_LIBRARY_PATH
 
-export OPENDAL_TEST="fs"
-export OPENDAL_FS_ROOT="/tmp/"
