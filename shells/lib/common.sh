@@ -215,7 +215,6 @@ if [[ $TERM = "xterm-kitty" ]]; then
 fi
 alias daeres="sudo systemctl restart dae"
 alias daestop="sudo systemctl stop dae"
-alias gitroot='cd $(git rev-parse --show-toplevel)'
 
 export RUSTC_WRAPPER=sccache
 export SCCACHE_CACHE_SIZE=40G

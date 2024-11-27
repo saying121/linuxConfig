@@ -1,7 +1,5 @@
 [Unit]
 Description=Update geosite geoip
-Requires=dae.service
-After=dae.service
 
 [Service]
 Type=oneshot

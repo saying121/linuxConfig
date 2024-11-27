@@ -7,9 +7,6 @@ zi light zchee/zsh-completions
 zi ice lucid wait as'completion'
 zi light zsh-users/zsh-completions
 
-# zi ice as"completion"
-# zi snippet https://github.com/zsh-users/zsh/blob/master/Completion/Unix/Command/_ip
-
 zi ice lucid wait as'completion' blockf has'alacritty'
 zi snippet https://github.com/alacritty/alacritty/blob/master/extra/completions/_alacritty
 
@@ -31,9 +28,6 @@ zi snippet https://github.com/dbrgn/tealdeer/blob/main/completion/zsh_tealdeer
 zi ice as"completion"
 zi snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
-# zi ice lucid wait as'completion' blockf has'flatpak'
-# zi light https://github.com/flatpak/flatpak/blob/main/completion/_flatpak
-
 zi ice lucid wait as'completion' blockf mv'git-completion.zsh -> _git'
 zi snippet https://github.com/git/git/blob/master/contrib/completion/git-completion.zsh
 
@@ -45,9 +39,6 @@ zi snippet https://github.com/jarun/Buku/blob/master/auto-completion/zsh/_buku
 
 zi ice lucid wait as'completion' blockf has'mpv'
 zi snippet https://github.com/mpv-player/mpv/blob/master/etc/_mpv.zsh
-
-zi ice lucid wait as'completion' blockf has'fd'
-zi snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/fd/_fd
 
 zi ice lucid wait as'completion' blockf has'rustc'
 zi snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rust/_rustc
