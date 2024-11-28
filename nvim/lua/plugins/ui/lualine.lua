@@ -154,7 +154,12 @@ return {
                         cond = require("noice").api.status.command.has,
                         -- color = { fg = "ff9e64" },
                     },
-                    "rest",
+                    {
+                        "rest",
+                        cond = function()
+                            return vim.bo.ft == "http"
+                        end,
+                    },
                     -- {
                     --     require("noice").api.status.message.get_hl,
                     --     cond = require("noice").api.status.message.has,

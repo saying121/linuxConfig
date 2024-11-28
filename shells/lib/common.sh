@@ -216,5 +216,5 @@ fi
 alias daeres="sudo systemctl restart dae"
 alias daestop="sudo systemctl stop dae"
 
-export SCCACHE_CACHE_SIZE="40G"
 export RUSTC_WRAPPER=sccache
+export SCCACHE_CACHE_SIZE=40G

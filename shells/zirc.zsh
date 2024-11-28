@@ -97,3 +97,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib/mojo
 # zprof
 export PATH=$PATH:~/.modular/pkg/packages.modular.com_mojo/bin/
 export LD_LIBRARY_PATH=/home/saying/.local/lib/arch-mojo:$LD_LIBRARY_PATH
+
+export TEST_DATABASE_URL=postgres://postgres@localhost/luoxiao_test
+export DATABASE_URL=postgres://postgres@localhost/luoxiao
+export OPENDAL_TEST="fs"
+export OPENDAL_FS_ROOT="/tmp/"
