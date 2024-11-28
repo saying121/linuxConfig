@@ -1,32 +1,34 @@
 #!/usr/bin/env bash
 
-mkdir -p /usr/local/share/dae/
+dir=/usr/local/share/dae
+mkdir -p $dir
 
-geoip_file="/usr/local/share/dae/geoip.dat"
-geoip_file_bak=$geoip_file".bak"
-geosite_file="/usr/local/share/dae/geosite.dat"
-geosite_file_bak=$geosite_file".bak"
+geoip_file=$dir"/geoip.dat"
+geosite_file=$dir"/geosite.dat"
+
+down_geo() {
+    target="$1"
+    url="$2"
+
+    tmp=$target".tmp"
+    echo "$target"
+    echo "$tmp"
+
+    curl -L -o "$tmp" "$url"
+
+    if [[ $? ]]; then
+        mv -f "$tmp" "$target"
+    fi
+}
 
 if pgrep -x dae >/dev/null 2>&1; then
-    [ -e $geoip_file ] && mv -f $geoip_file $geoip_file_bak
-    curl -L -o $geoip_file https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
-
-    [ -e $geosite_file ] && mv -f $geosite_file $geosite_file_bak
-    curl -L -o $geosite_file https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
+    echo "with dae"
+    down_geo $geoip_file https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+    down_geo $geosite_file https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
 else
-    [ -e $geoip_file ] && mv -f $geoip_file $geoip_file_bak
-    curl -L -o $geoip_file https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
-
-    [ -e $geosite_file ] && mv -f $geosite_file $geosite_file_bak
-    curl -L -o $geosite_file https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
-fi
-
-if [[ ! -e "$geoip_file" || "$(stat -c%s $geoip_file)" -lt 11000000 && -s $geoip_file_bak ]]; then
-    mv -f $geoip_file_bak $geoip_file
-fi
-
-if [[ ! -e "$geosite_file" || "$(stat -c%s $geosite_file)" -lt 6200000 && -s $geosite_file_bak ]]; then
-    mv -f $geosite_file_bak $geosite_file
+    echo "no dae"
+    down_geo $geoip_file https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
+    down_geo $geosite_file https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
 fi
 
 # systemctl restart dae
