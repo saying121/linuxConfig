@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+bold=$(tput bold)
+yellow=$(tput setaf 3)
+normal=$(tput sgr0)
+
 dir=/usr/local/share/dae
 mkdir -p $dir
 
@@ -12,7 +16,7 @@ down_geo() {
 
     tmp=$target".tmp"
 
-    echo "-> $tmp -> $target"
+    printf "${bold}%s${normal} %s ${bold}%s${normal}\n\n" "$tmp" "->" "$target"
 
     wget -qO "$tmp" "$url"
 
@@ -22,20 +26,15 @@ down_geo() {
 }
 
 if pgrep -x dae >/dev/null 2>&1; then
-    echo "with dae"
-
     prefix=https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download
-
-    down_geo $geoip_file $prefix/geoip.dat &
-    down_geo $geosite_file $prefix/geosite.dat &
 else
-    echo "no dae"
-
     prefix=https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release
-
-    down_geo $geoip_file $prefix/geoip.dat &
-    down_geo $geosite_file $prefix/geosite.dat &
 fi
+
+printf "prefix: ${bold}${yellow}%s${normal}\n\n" $prefix
+
+down_geo $geoip_file $prefix/geoip.dat &
+down_geo $geosite_file $prefix/geosite.dat &
 
 wait
 
