@@ -11,10 +11,10 @@ down_geo() {
     url="$2"
 
     tmp=$target".tmp"
-    echo "$target"
-    echo "$tmp"
 
-    curl -L -o "$tmp" "$url"
+    echo "-> $tmp -> $target"
+
+    wget -qO "$tmp" "$url"
 
     if [[ $? ]]; then
         mv -f "$tmp" "$target"
@@ -23,12 +23,20 @@ down_geo() {
 
 if pgrep -x dae >/dev/null 2>&1; then
     echo "with dae"
-    down_geo $geoip_file https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
-    down_geo $geosite_file https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
+
+    prefix=https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download
+
+    down_geo $geoip_file $prefix/geoip.dat &
+    down_geo $geosite_file $prefix/geosite.dat &
 else
     echo "no dae"
-    down_geo $geoip_file https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
-    down_geo $geosite_file https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
+
+    prefix=https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release
+
+    down_geo $geoip_file $prefix/geoip.dat &
+    down_geo $geosite_file $prefix/geosite.dat &
 fi
+
+wait
 
 # systemctl restart dae
