@@ -18,9 +18,7 @@ down_geo() {
 
     printf "${bold}%s${normal} %s ${bold}%s${normal}\n\n" "$tmp" "->" "$target"
 
-    wget -qO "$tmp" "$url"
-
-    if [[ $? ]]; then
+    if wget -qO "$tmp" "$url"; then
         mv -f "$tmp" "$target"
     fi
 }

@@ -7,14 +7,16 @@ return {
         { "<C-x>", mode = { "n", "x" } },
     },
     config = function()
-        keymap("n", "<C-a>", require("dial.map").inc_normal("mygroup"), { noremap = true })
-        keymap("n", "<C-x>", require("dial.map").dec_normal("mygroup"), { noremap = true })
-        keymap("x", "<C-a>", require("dial.map").inc_visual("mygroup"), { noremap = true })
-        keymap("x", "<C-x>", require("dial.map").dec_visual("mygroup"), { noremap = true })
-        keymap("x", "g<C-a>", require("dial.map").inc_gvisual("mygroup"), { noremap = true })
-        keymap("x", "g<C-x>", require("dial.map").dec_gvisual("mygroup"), { noremap = true })
-
+        local dial_map = require("dial.map")
         local augend = require("dial.augend")
+
+        keymap("n", "<C-a>", dial_map.inc_normal("mygroup"), { noremap = true })
+        keymap("n", "<C-x>", dial_map.dec_normal("mygroup"), { noremap = true })
+        keymap("x", "<C-a>", dial_map.inc_visual("mygroup"), { noremap = true })
+        keymap("x", "<C-x>", dial_map.dec_visual("mygroup"), { noremap = true })
+        keymap("x", "g<C-a>", dial_map.inc_gvisual("mygroup"), { noremap = true })
+        keymap("x", "g<C-x>", dial_map.dec_gvisual("mygroup"), { noremap = true })
+
         local mygroup = {
             augend.integer.alias.decimal,
             augend.constant.alias.bool, -- boolean value (true <-> false)
@@ -176,6 +178,20 @@ return {
             }),
             augend.constant.new({
                 elements = { "up", "down" },
+                word = true,
+                cyclic = true,
+            }),
+            augend.constant.new({
+                elements = {
+                    "FIX",
+                    "TODO",
+                    "HACK",
+                    "WARN",
+                    "PERF",
+                    "NOTE",
+                    "TEST",
+                    "SAFETY",
+                },
                 word = true,
                 cyclic = true,
             }),
