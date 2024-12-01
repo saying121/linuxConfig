@@ -1,21 +1,27 @@
 #!/usr/bin/env bash
 
+bold=$(tput bold)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+cyan=$(tput setaf 6)
+normal=$(tput sgr0)
+
 time_with_color() {
     "$@"
     LEC=$?
     printf "\n"
-    printf "\e[1;36m<<<<<<<<<<<<<<<<<< time >>>>>>>>>>>>>>>>>>\e[0m"
-    echo -n $'\e[0;93m'
+    echo -n "${bold}${cyan}<<<<<<<<<<<<<<<<<< time >>>>>>>>>>>>>>>>>>${bold}${normal}"
+    echo -n "$yellow"
     # return $LEC
 }
 
 time time_with_color "$@"
 
 # 结束变色
-echo -n $'\e[0m'
+echo -n "${normal}"
 
 # 剩余文字蓝色
-echo -n $'\e[0;34m'
+echo -n "${blue}"
 
 # 命令是否成功执行
 exit $LEC
