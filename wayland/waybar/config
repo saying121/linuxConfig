@@ -11,7 +11,8 @@
     "modules-center": [
         "hyprland/submap",
         "hyprland/workspaces",
-        "clock"
+        "clock",
+        "custom/background"
     ],
     "modules-right": [
         "network",
@@ -141,20 +142,21 @@
     },
     "clock": {
         "format": "<b>{:%H:%M}</b>",
-        "tooltip-format": "<big>{:%Y-%m-%d %A %Z}</big>",
+        "tooltip-format": "<big>{:%Y-%m-%d %A %Z %H:%M}</big>",
+        "format-alt": "{:%m-%d %H:%M}",
         "on-double-click": "gnome-clocks",
         "on-click-right": "[[ $(ps -ef | grep -c gnome-calenda[r]) -gt 0 ]] && killall gnome-calendar || gnome-calendar"
     },
     "cpu": {
-        "interval": 15,
+        "interval": 5,
         "format": " \uf2db {}% ",
         "max-length": 10,
         "on-click-right": "[[ $(ps -ef | grep -c plasma-systemmonito[r]) -gt 0 ]] && killall plasma-systemmonitor || plasma-systemmonitor"
     },
     "memory": {
-        "interval": 30,
+        "interval": 15,
         "format": "\uf0c9 {percentage}% {used:0.1f}G/{total:0.1f}G ",
-        "tooltip-format": "\uf0c9 {percentage}% {used:0.1f}G/{total:0.1f}G {swapPercentage}% {swapUsed}G/{swapTotal}G ",
+        "tooltip-format": "\uf0c9 {percentage}% {used:0.1f}G/{total:0.1f}G 󰍛{swapPercentage}% {swapUsed}G/{swapTotal}G ",
         "max-length": 26
     },
     "mpris": {
