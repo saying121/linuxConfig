@@ -136,7 +136,7 @@ window#waybar.hidden {
 
 #pulseaudio {
     background: @mantle;
-    border-radius: 0px 0px 0px 0px;
+    border-radius: 15px 0px 0px 15px;
     color: @subtext1;
     margin: 3px 0px 3px 0px;
 }
