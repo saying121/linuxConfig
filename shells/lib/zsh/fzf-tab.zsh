@@ -37,7 +37,7 @@ zstyle ':fzf-tab:complete:paru:*' fzf-preview $(printf $format 'paru' 'paru')
 zstyle ':fzf-tab:complete:cargo:*' fzf-preview 'cargo help $word | bat --color=always -plhelp'
 zstyle ':fzf-tab:complete:cargo-(run|rustc|check):options' fzf-flags --preview-window=down:0:wrap
 
-zstyle ':fzf-tab:complete:(lcode|perf|rustup):*' fzf-flags --preview-window=down:3:wrap --height=50%
+zstyle ':fzf-tab:complete:(lcode|perf|rustup|journalctl):*' fzf-flags --preview-window=down:3:wrap --height=50%
 zstyle ':fzf-tab:complete:(rustc|rg|gcc|g++):options' fzf-flags --preview-window=down:3:wrap --height=50%
 
 zstyle ':fzf-tab:complete:_zlua:*' query-string input
