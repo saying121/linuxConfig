@@ -18,8 +18,13 @@ down_geo() {
 
     printf "${bold}%s${normal} %s ${bold}%s${normal}\n\n" "$tmp" "->" "$target"
 
-    if wget -qO "$tmp" "$url"; then
+    file="${target##*/}"
+
+    if wget -T 5 -qcO "$tmp" "$url"; then
         mv -f "$tmp" "$target"
+        echo "finished: $file"
+    else
+        echo "failed: $file"
     fi
 }
 

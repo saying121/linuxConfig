@@ -11,5 +11,5 @@ sudo install -m 655 ~/.linuxConfig/scripts/updategeo.sh /usr/bin/updategeo
 sudo install -m 644 ~/.linuxConfig/custom-services/updategeo.service /lib/systemd/system/updategeo.service
 sudo install -m 644 ~/.linuxConfig/custom-services/updategeo.timer /lib/systemd/system/updategeo.timer
 sudo systemctl daemon-reload
-sudo systemctl enable --now updategeo.timer
+sudo systemctl enable updategeo.timer
 sudo systemctl start updategeo
