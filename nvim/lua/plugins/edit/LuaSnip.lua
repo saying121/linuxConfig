@@ -11,8 +11,9 @@ return {
     version = "v2.*",
     build = "make install_jsregexp", -- install jsregexp (optional!).
     event = { "InsertEnter" },
+    lazy = true,
     dependencies = {
-        "saadparwaiz1/cmp_luasnip",
+        -- "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
     },
     config = function()
