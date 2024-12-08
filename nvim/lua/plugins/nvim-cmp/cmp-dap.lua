@@ -2,7 +2,8 @@ local api = vim.api
 ---@type LazySpec
 return {
     "rcarriga/cmp-dap",
-    cond = true,
+    cond = false,
+    lazy = true,
     ft = "dap-repl",
     config = function()
         require("cmp").setup({

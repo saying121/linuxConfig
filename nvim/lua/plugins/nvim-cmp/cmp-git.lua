@@ -1,7 +1,8 @@
 ---@type LazySpec
 return {
     "petertriho/cmp-git",
-    cond = true,
+    cond = false,
+    lazy = true,
     event = {
         "UIEnter COMMIT_EDITMSG",
         "BufNew COMMIT_EDITMSG",
@@ -63,7 +64,8 @@ return {
                     format = format.github.pull_requests,
                 },
             },
-            gitlab = { hosts = {}, -- list of private instances of gitlab
+            gitlab = {
+                hosts = {}, -- list of private instances of gitlab
                 issues = {
                     limit = 100,
                     state = "opened", -- opened, closed, all
