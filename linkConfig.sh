@@ -24,11 +24,6 @@ export XDG_DATA_HOME=~/.local/share
 export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
 
-export ALL_PROXY=http://127.0.0.1:7890
-export HTTPS_PROXY=http://127.0.0.1:7890
-export HTTP_PROXY=http://127.0.0.1:7890
-export NO_PROXY=baidu.com,qq.com
-
 export EDITOR=nvim
 
 export PATH=$PATH:~/.cargo/bin:~/.local/bin:~/go/bin

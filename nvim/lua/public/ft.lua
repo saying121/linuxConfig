@@ -33,6 +33,7 @@ M.filename = {
     ["config"] = "config",
     ["~/.linuxConfig/wayland/waybar/config"] = "json",
     ["~/.config/waybar/config"] = "json",
+    ["~/.ssh/config"] = "ssh_config",
     ["~/.config/microsoft-edge/Default/Bookmarks"] = "json",
     ["~/.config/google-chrome/Default/Bookmarks"] = "json",
     ["hyprland.conf"] = "hyprlang",
