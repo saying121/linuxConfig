@@ -14,6 +14,7 @@ return {
             -- Useful if the plugin has globals or types you want to use
             -- vim.env.LAZY .. "/LazyVim", -- see below
             "lazy.nvim",
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         },
     },
 }
