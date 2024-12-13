@@ -50,6 +50,8 @@ local embedded = {
     ["embassy"] = "现代嵌入式框架，使用 Rust 和异步。",
 }
 local crates = {
+    ["parse_duration"] = "从字符串中解析持续时间。",
+    ["ubyte"] = "一个简单的、完整的、const-一切、饱和的、人性化的、没有字节单元的标准库。",
     ["trait-variant"] = "用于处理 Rust 中的 impl 特征的实用程序",
     ["figment"] = "一个如此自由的配置库，它是不真实的。",
     ["validator"] = "常见验证函数（电子邮件、url、长度等）和特征 - 与“validator_derive”一起使用",
@@ -126,7 +128,7 @@ local algorithms = {
 }
 local perf = {
     ["enum_dispatch"] = "动态分派方法调用的近乎直接替代，速度高达 10 倍",
-    ["opentelementry"] = "*open telemetry* 提供一组 api、库、代理和收集器服务来从您的应用程序捕获分布式跟踪和指标。您可以使用 prometheus、jaeger 和其他可观察性工具来分析它们。",
+    ["opentelemetry"] = "*open telemetry* 提供一组 api、库、代理和收集器服务来从您的应用程序捕获分布式跟踪和指标。您可以使用 prometheus、jaeger 和其他可观察性工具来分析它们。",
     ["tailcall"] = "安全、零成本的尾递归",
 }
 local alloc = {
