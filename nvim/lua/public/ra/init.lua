@@ -147,6 +147,7 @@ return {
         diagnostics = {
             enable = true,
             disabled = {
+                "proc-macro-disabled",
                 "unfulfilled_lint_expectations",
                 -- rustc 的 lint 已经有这些了
                 "unused_variables",

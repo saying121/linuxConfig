@@ -1,4 +1,4 @@
-local ts  = vim.treesitter
+local ts = vim.treesitter
 
 ---@type LazySpec
 return {
@@ -35,7 +35,11 @@ return {
             end
         end
 
+        local parser_dir = vim.fn.stdpath("data") .. "/ts_parser"
+        vim.opt.runtimepath:append(parser_dir)
+
         require("nvim-treesitter.configs").setup({
+            parser_install_dir = parser_dir,
             ensure_installed = "all",
             ignore_install = {
                 "c",
