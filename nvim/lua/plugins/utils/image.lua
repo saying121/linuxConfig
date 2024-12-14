@@ -3,7 +3,7 @@ return {
     "3rd/image.nvim",
     -- cond = false,
     ft = { "markdown", "norg", "image_nvim" },
-    build = "luarocks --local install magick --lua-version 5.1",
+    opts = {},
     config = function()
         require("image").setup({
             backend = "kitty",
