@@ -47,7 +47,7 @@ require("lazy").setup({
         -- defaults for the `Lazy log` command
         -- log = { "-10" }, -- show the last 10 commits
         log = { "--since=3 days ago" }, -- show commits from the last 3 days
-        timeout = 180, -- kill processes that take more than 2 minutes
+        timeout = 20, -- seconds
         url_format = mirror .. "https://github.com/%s.git",
     },
     dev = {
@@ -129,5 +129,9 @@ require("lazy").setup({
         files = { "README.md", "lua/**/README.md" },
         -- only generate markdown helptags for plugins that dont have docs
         skip_if_doc_exists = false,
+    },
+    rocks = {
+        enabled = true,
+        hererocks = true,
     },
 })
