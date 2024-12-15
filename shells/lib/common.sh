@@ -210,6 +210,8 @@ debug_rust() {
 # thread_num=$(nproc)
 export MAKEFLAGS="-j"
 
+
+export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
 export PATH=$PATH:~/.linuxConfig/scripts
 export PATH=$PATH:~/.ghcup/bin
 
