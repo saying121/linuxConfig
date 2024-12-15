@@ -54,7 +54,7 @@ return {
                     --- whether the floating window gets automatically focused
                     --- default: false
                     ---@type boolean
-                    auto_focus = true,
+                    auto_focus = false,
                 },
                 rustc = { default_edition = "2021" },
             },
