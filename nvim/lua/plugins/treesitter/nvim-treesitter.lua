@@ -44,10 +44,9 @@ return {
             ignore_install = {
                 "c",
                 "lua",
-                "bash",
                 "query",
                 "vimdoc",
-                "python",
+                -- "python",
                 "markdown",
                 "markdown_inline",
                 "comment",

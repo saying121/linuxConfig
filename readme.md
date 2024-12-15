@@ -27,9 +27,8 @@ git clone --recursive https://github.com/saying121/.linuxConfig.git ~/.linuxConf
 ### 也可以执行
 
 ```bash
-$ git clone https://github.com/saying121/.linuxConfig.git ~/.linuxConfig
-# 然后拉子自模块
-$ git submodule update --init --recursive
+git clone https://github.com/saying121/linuxConfig.git ~/.linuxConfig
+git submodule update --init --recursive
 ```
 
 ## Nvidia，自行选择是否安装，最好看 archwiki
