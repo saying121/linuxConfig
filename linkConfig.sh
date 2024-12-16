@@ -17,7 +17,7 @@ if [[ ! $answer = yes ]]; then
 fi
 
 # 环境变量
-if [[ $(grep -c PROXY /etc/profile) == 0 ]]; then
+if [[ $(grep -c EDITOR /etc/profile) == 0 ]]; then
     # shellcheck disable=2016
     echo '
 export XDG_DATA_HOME=~/.local/share
