@@ -18,7 +18,6 @@ brew install --cask nikitabobko/tap/aerospace
 brew tap FelixKratz/formulae
 brew install borders
 brew services start borders
-
 brew install bat mdcat
 brew install ctpv lf yazi chafa
 
