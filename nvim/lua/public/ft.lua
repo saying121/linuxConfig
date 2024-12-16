@@ -12,7 +12,6 @@ M.extension = {
     service = "systemd",
     timer = "systemd",
     dae = "config",
-    kbd = "scheme",
     bar = function(path, bufnr)
         -- if some_condition() then
         --     return "barscript",
@@ -26,6 +25,7 @@ M.extension = {
 }
 ---@type table<string, string|table|function>
 M.filename = {
+    ["kanata.kbd"] = "scheme",
     ["Cargo.toml"] = "toml_rs",
     ["rust-toolchain.toml"] = "toml_rs_tc",
     ["LICENSE"] = "license",

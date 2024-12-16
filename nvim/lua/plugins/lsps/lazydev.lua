@@ -1,9 +1,9 @@
 ---@type LazySpec
 return {
     "folke/lazydev.nvim",
-    cond = function()
-        return string.find(vim.fn.expand("%:p"), "nvim/lua") ~= nil
-    end,
+    -- cond = function()
+    --     return string.find(vim.fn.expand("%:p"), "nvim/lua") ~= nil
+    -- end,
     ft = "lua",
     dependencies = {
         { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
