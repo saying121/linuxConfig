@@ -44,6 +44,7 @@ zi ice wait lucid; zi light paulirish/git-open.git
 
 zi ice wait lucid; zi light lesonky/web-search.git
 
+ZVM_VI_EDITOR=nvim
 zi ice depth=1 lucid; zi light jeffreytse/zsh-vi-mode
 
 # zi ice wait lucid; zi light z-shell/H-S-MW
