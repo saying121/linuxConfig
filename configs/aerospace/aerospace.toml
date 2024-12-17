@@ -53,8 +53,8 @@ outer.right = 3
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
-alt-enter = ['exec-and-forget kitty']
-# alt-enter = ['exec-and-forget wezterm']
+# alt-enter = ['exec-and-forget kitty --single-instance']
+alt-enter = ['exec-and-forget wezterm start']
 # ctrl-cmd-t = ['exec-and-forget kitty']
 alt-f = 'fullscreen'
 shift-alt-q = 'close --quit-if-last-window'
