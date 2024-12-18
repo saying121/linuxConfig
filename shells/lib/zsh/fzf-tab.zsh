@@ -29,16 +29,17 @@ zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 
-format='bat --color=always -plyaml <(%s -Qi $word 2>/dev/null || %s -Si $word)'
-zstyle ':fzf-tab:complete:pacman:*' fzf-preview $(printf $format 'pacman' 'pacman')
-zstyle ':fzf-tab:complete:yay:*' fzf-preview $(printf $format 'yay' 'yay')
-zstyle ':fzf-tab:complete:paru:*' fzf-preview $(printf $format 'paru' 'paru')
+# format='bat --color=always -plyaml <(%s -Qi $word 2>/dev/null || %s -Si $word)'
+# zstyle ':fzf-tab:complete:pacman:*' fzf-preview $(printf $format 'pacman' 'pacman')
+# zstyle ':fzf-tab:complete:yay:*' fzf-preview $(printf $format 'yay' 'yay')
+# zstyle ':fzf-tab:complete:paru:*' fzf-preview $(printf $format 'paru' 'paru')
 
 zstyle ':fzf-tab:complete:cargo:*' fzf-preview 'cargo help $word | bat --color=always -plhelp'
 zstyle ':fzf-tab:complete:cargo-(run|rustc|check):options' fzf-flags --preview-window=down:0:wrap
 
 zstyle ':fzf-tab:complete:(lcode|perf|rustup):*' fzf-flags --preview-window=down:3:wrap --height=50%
 zstyle ':fzf-tab:complete:(rustc|rg|gcc|g++):options' fzf-flags --preview-window=down:3:wrap --height=50%
+zstyle ':fzf-tab:complete:git-fetch:*' fzf-flags --preview-window=down:3:wrap --height=50%
 
 zstyle ':fzf-tab:complete:_zlua:*' query-string input
 

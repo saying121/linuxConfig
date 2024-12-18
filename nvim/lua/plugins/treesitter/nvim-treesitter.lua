@@ -42,6 +42,7 @@ return {
             parser_install_dir = parser_dir,
             ensure_installed = "all",
             ignore_install = {
+                "hoon",
                 "c",
                 "lua",
                 "bash",

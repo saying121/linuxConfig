@@ -25,7 +25,7 @@
 (("lambda"       @include) (#set! conceal "λ"))
 (("in"           @keyword) (#set! conceal "∈"))
 (("and"          @keyword.operator) (#set! conceal "⩓"))
-(("or"           @keyword.operator) (#set! conceal "⩔"))
+(("or"           @keyword.operator) (#set! conceal "∨"))
 (("not"          @keyword.operator) (#set! conceal "❗")) ; ❕
 
 ((">=" @operator) (#set! conceal "󰥮"))
