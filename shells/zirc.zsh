@@ -84,6 +84,7 @@ alias lazyvim="NVIM_APPNAME=lazyvim nvim"
 alias nvchard="NVIM_APPNAME=nvchard nvim"
 
 eval "$(starship init zsh)"
+eval "$(uv generate-shell-completion zsh)"
 
 
 # export CLIPPY_CONF_DIR=~/.config/rustfmt/
