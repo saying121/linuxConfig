@@ -8,7 +8,7 @@ local get_sehll = function()
     end
 end
 
-local gpus  = wezterm.gui.enumerate_gpus()
+local gpus = wezterm.gui.enumerate_gpus()
 
 return {
     webgpu_preferred_adapter = gpus[1],

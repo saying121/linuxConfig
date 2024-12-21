@@ -10,7 +10,7 @@ return {
         "mikavilpas/blink-ripgrep.nvim",
     },
     -- use a release tag to download pre-built binaries
-    version = "v0.*",
+    version = "v0.8",
     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     -- build = 'cargo build --release',
     -- If you use nix, you can build from source using latest nightly rust with:
@@ -20,7 +20,7 @@ return {
     ---@type blink.cmp.Config
     opts = {
         keymap = {
-            preset = "default",
+            preset = "super-tab",
             ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
             ["<A-u>"] = { "hide" },
             ["<C-y>"] = { "select_and_accept" },
@@ -44,8 +44,6 @@ return {
                 "fallback",
             },
         },
-        -- Disables keymaps, completions and signature help for these filetypes
-        blocked_filetypes = {},
         snippets = {
             -- Function to use when expanding LSP provided snippets
             expand = function(snippet)
@@ -110,53 +108,7 @@ return {
                 show_on_x_blocked_trigger_characters = { "'", '"', "(" },
             },
             list = {
-                -- Maximum number of items to display
-                max_items = 200,
-                -- Controls if completion items will be selected automatically,
-                -- and whether selection automatically inserts
-                selection = "preselect",
-                -- Controls how the completion items are selected
-                -- 'preselect' will automatically select the first item in the completion list
-                -- 'manual' will not select any item by default
-                -- 'auto_insert' will not select any item by default, and insert the completion items automatically
-                -- when selecting them
-                --
-                -- You may want to bind a key to the `cancel` command, which will undo the selection
-                -- when using 'auto_insert'
-                cycle = {
-                    -- When `true`, calling `select_next` at the *bottom* of the completion list
-                    -- will select the *first* completion item.
-                    from_bottom = true,
-                    -- When `true`, calling `select_prev` at the *top* of the completion list
-                    -- will select the *last* completion item.
-                    from_top = true,
-                },
-            },
-            accept = {
-                -- Create an undo point when accepting a completion item
-                create_undo_point = true,
-                -- Experimental auto-brackets support
-                ---@diagnostic disable-next-line: missing-fields
-                auto_brackets = {
-                    -- Whether to auto-insert brackets for functions
-                    enabled = false,
-                    -- Default brackets to use for unknown languages
-                    default_brackets = { "(", ")" },
-                    -- Overrides the default blocked filetypes
-                    override_brackets_for_filetypes = {},
-                    -- Synchronously use the kind of the item to determine if brackets should be added
-                    kind_resolution = {
-                        enabled = true,
-                        blocked_filetypes = { "typescriptreact", "javascriptreact", "vue" },
-                    },
-                    -- Asynchronously use semantic token to determine if brackets should be added
-                    semantic_token_resolution = {
-                        enabled = true,
-                        blocked_filetypes = {},
-                        -- How long to wait for semantic tokens to return before assuming no brackets should be added
-                        timeout_ms = 400,
-                    },
-                },
+                selection = "auto_insert",
             },
             ---@diagnostic disable-next-line: missing-fields
             menu = {
@@ -164,111 +116,6 @@ return {
                 min_width = 15,
                 max_height = 10,
                 border = "rounded",
-                winblend = 0,
-                winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
-                -- Keep the cursor X lines away from the top/bottom of the window
-                scrolloff = 2,
-                -- Note that the gutter will be disabled when border ~= 'none'
-                scrollbar = true,
-                -- Which directions to show the window,
-                -- falling back to the next direction when there's not enough space
-                direction_priority = { "s", "n" },
-
-                -- Whether to automatically show the window when new completion items are available
-                auto_show = true,
-
-                -- Controls how the completion items are rendered on the popup window
-                draw = {
-                    -- Aligns the keyword you've typed to a component in the menu
-                    align_to_component = "label", -- or 'none' to disable
-                    -- Left and right padding, optionally { left, right } for different padding on each side
-                    padding = 1,
-                    -- Gap between columns
-                    gap = 1,
-                    -- Use treesitter to highlight the label text
-                    treesitter = false,
-
-                    -- Components to render, grouped by column
-                    columns = { { "kind_icon" }, { "label", "label_description", gap = 1 } },
-                    -- for a setup similar to nvim-cmp: https://github.com/Saghen/blink.cmp/pull/245#issuecomment-2463659508
-                    -- columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
-
-                    -- Definitions for possible components to render. Each component defines:
-                    --   ellipsis: whether to add an ellipsis when truncating the text
-                    --   width: control the min, max and fill behavior of the component
-                    --   text function: will be called for each item
-                    --   highlight function: will be called only when the line appears on screen
-                    components = {
-                        kind_icon = {
-                            ellipsis = false,
-                            text = function(ctx)
-                                return ctx.kind_icon .. ctx.icon_gap
-                            end,
-                            highlight = function(ctx)
-                                return require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
-                                    or ("BlinkCmpKind" .. ctx.kind)
-                            end,
-                        },
-
-                        kind = {
-                            ellipsis = false,
-                            width = { fill = true },
-                            text = function(ctx)
-                                return ctx.kind
-                            end,
-                            highlight = function(ctx)
-                                return require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
-                                    or ("BlinkCmpKind" .. ctx.kind)
-                            end,
-                        },
-
-                        label = {
-                            width = { fill = true, max = 60 },
-                            text = function(ctx)
-                                return ctx.label .. ctx.label_detail
-                            end,
-                            highlight = function(ctx)
-                                -- label and label details
-                                local highlights = {
-                                    {
-                                        0,
-                                        #ctx.label,
-                                        group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
-                                    },
-                                }
-                                if ctx.label_detail then
-                                    table.insert(
-                                        highlights,
-                                        { #ctx.label, #ctx.label + #ctx.label_detail, group = "BlinkCmpLabelDetail" }
-                                    )
-                                end
-
-                                -- characters matched on the label by the fuzzy matcher
-                                for _, idx in ipairs(ctx.label_matched_indices) do
-                                    table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
-                                end
-
-                                return highlights
-                            end,
-                        },
-
-                        label_description = {
-                            width = { max = 30 },
-                            text = function(ctx)
-                                return ctx.label_description
-                            end,
-                            highlight = "BlinkCmpLabelDescription",
-                        },
-
-                        source_name = {
-                            width = { max = 30 },
-                            text = function(ctx)
-                                return ctx.source_name
-                            end,
-                            highlight = "BlinkCmpSource",
-                        },
-                    },
-                },
             },
             documentation = {
                 -- Controls whether the documentation window will automatically show when selecting a completion item
@@ -290,13 +137,6 @@ return {
                     winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
                     -- Note that the gutter will be disabled when border ~= 'none'
                     scrollbar = true,
-                    -- Which directions to show the documentation window,
-                    -- for each of the possible menu window directions,
-                    -- falling back to the next direction when there's not enough space
-                    direction_priority = {
-                        menu_north = { "e", "w", "n", "s" },
-                        menu_south = { "e", "w", "s", "n" },
-                    },
                 },
             },
             -- Displays a preview of the selected item on the current line
@@ -329,58 +169,26 @@ return {
                 treesitter_highlighting = true,
             },
         },
-        fuzzy = {
-            -- when enabled, allows for a number of typos relative to the length of the query
-            -- disabling this matches the behavior of fzf
-            use_typo_resistance = true,
-            -- frencency tracks the most recently/frequently used items and boosts the score of the item
-            use_frecency = true,
-            -- proximity bonus boosts the score of items matching nearby words
-            use_proximity = true,
-            max_items = 200,
-            -- controls which sorts to use and in which order, these three are currently the only allowed options
-            sorts = { "label", "kind", "score" },
-
-            prebuilt_binaries = {
-                -- Whether or not to automatically download a prebuilt binary from github. If this is set to `false`
-                -- you will need to manually build the fuzzy binary dependencies by running `cargo build --release`
-                download = true,
-                -- When downloading a prebuilt binary, force the downloader to resolve this version. If this is unset
-                -- then the downloader will attempt to infer the version from the checked out git tag (if any).
-                --
-                -- Beware that if the FFI ABI changes while tracking main then this may result in blink breaking.
-                force_version = nil,
-                -- When downloading a prebuilt binary, force the downloader to use this system triple. If this is unset
-                -- then the downloader will attempt to infer the system triple from `jit.os` and `jit.arch`.
-                -- Check the latest release for all available system triples
-                --
-                -- Beware that if the FFI ABI changes while tracking main then this may result in blink breaking.
-                force_system_triple = nil,
-            },
-        },
         sources = {
-            completion = {
-                -- Static list of providers to enable, or a function to dynamically enable/disable providers based on the context
-                -- enabled_providers = { "lsp", "path", "snippets", "buffer" },
-                -- Example dynamically picking providers based on the filetype and treesitter node:
-                enabled_providers = function(ctx)
-                    local node = vim.treesitter.get_node()
-                    local ft = vim.bo.filetype
+            default = { "lsp", "path", "luasnip", "buffer", "ripgrep" },
+            -- providers = function(ctx)
+            --     local node = vim.treesitter.get_node()
+            --     if vim.bo.filetype == "lua" then
+            --         return { "lsp", "path" }
+            --     elseif node and vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
+            --         return { "buffer" }
+            --     else
+            --         return { "lsp", "path", "snippets", "buffer",'ripgrep' }
+            --     end
+            -- end,
+            per_filetype = {
+                lua = { "lazydev", "lsp", "path", "luasnip", "buffer" },
+                gitcommit = { "luasnip", "buffer", "path", "git", "ripgrep" },
 
-                    if ft == "lua" then
-                        return { "lazydev", "lsp", "path", "luasnip", "buffer" }
-                    elseif ft == "gitcommit" then
-                        return { "luasnip", "buffer", "path", "git", "ripgrep" }
-                    elseif vim.tbl_contains({ "sql", "mysql", "plsql" }, ft) then
-                        return { "dadbod", "lsp", "path", "luasnip", "buffer" }
-                    -- elseif node and vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
-                    --     return { "buffer", "ripgrep" }
-                    else
-                        return { "lsp", "path", "luasnip", "buffer", "ripgrep" }
-                    end
-                end,
+                sql = { "dadbod", "lsp", "path", "luasnip", "buffer" },
+                mysql = { "dadbod", "lsp", "path", "luasnip", "buffer" },
+                plsql = { "dadbod", "lsp", "path", "luasnip", "buffer" },
             },
-
             -- Please see https://github.com/Saghen/blink.compat for using `nvim-cmp` sources
             providers = {
                 lsp = {
@@ -396,7 +204,7 @@ return {
                     should_show_items = true, -- Whether or not to show the items
                     max_items = nil, -- Maximum number of items to display in the menu
                     min_keyword_length = 0, -- Minimum number of characters in the keyword to trigger the provider
-                    -- fallback_for = { "snippet" }, -- If any of these providers return 0 items, it will fallback to this provider
+                    fallbacks = { "buffer", "lazydev" }, -- If any of these providers return 0 items, it will fallback to this provider
                     score_offset = 0, -- Boost/penalize the score of the items
                     override = nil, -- Override the source's functions
                 },
@@ -433,10 +241,22 @@ return {
                     --   return ctx ~= nil and ctx.trigger.kind == vim.lsp.protocol.CompletionTriggerKind.TriggerCharacter
                     -- end,
                 },
+                luasnip = {
+                    name = "Luasnip",
+                    module = "blink.cmp.sources.luasnip",
+                    score_offset = -3,
+                    fallbacks = { "lsp" },
+                    opts = {
+                        -- Whether to use show_condition for filtering snippets
+                        use_show_condition = true,
+                        -- Whether to show autosnippets in the completion list
+                        show_autosnippets = true,
+                    },
+                },
                 buffer = {
                     name = "Buffer",
                     module = "blink.cmp.sources.buffer",
-                    fallback_for = { "lsp", "snippets" },
+                    fallbacks = { "ripgrep" },
                     -- prefix_min_len = 4,
                     opts = {
                         -- default to all visible buffers
@@ -455,13 +275,15 @@ return {
                 lazydev = {
                     name = "LazyDev",
                     module = "lazydev.integrations.blink",
-                    fallback_for = { "snippet", "lsp" },
                 },
-                dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+                dadbod = {
+                    name = "Dadbod",
+                    module = "vim_dadbod_completion.blink",
+                    fallbacks = { "lsp" },
+                },
                 ripgrep = {
                     module = "blink-ripgrep",
                     name = "Ripgrep",
-                    fallback_for = { "buffer", "lsp", "snippet" },
                     -- the options below are optional, some default values are shown
                     ---@module "blink-ripgrep"
                     ---@type blink-ripgrep.Options
@@ -488,12 +310,6 @@ return {
         },
         appearance = {
             highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
-            -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-            -- Useful for when your theme doesn't support blink.cmp
-            -- Will be removed in a future release
-            use_nvim_cmp_as_default = false,
-            -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-            -- Adjusts spacing to ensure icons are aligned
             nerd_font_variant = "normal",
             kind_icons = {
                 Text = "󰉿",

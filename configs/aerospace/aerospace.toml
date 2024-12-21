@@ -53,8 +53,8 @@ outer.right = 3
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
-# alt-enter = ['exec-and-forget kitty --single-instance']
-alt-enter = ['exec-and-forget wezterm start']
+# cmd-enter = ['exec-and-forget kitty --single-instance']
+cmd-enter = ['exec-and-forget wezterm start']
 # ctrl-cmd-t = ['exec-and-forget kitty']
 alt-f = 'fullscreen'
 shift-alt-q = 'close --quit-if-last-window'
@@ -88,10 +88,10 @@ alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
+cmd-alt-h = 'focus left'
+cmd-alt-j = 'focus down'
+cmd-alt-k = 'focus up'
+cmd-alt-l = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
