@@ -53,6 +53,7 @@ brew install teraldeer
 brew install betterdisplay
 
 brew install marksman tailwindcss-language-server stylua lolcat
+brew install markdownlint-cli2 codespell
 
 defaults write com.apple.dock springboard-rows -int 8
 defaults write com.apple.dock springboard-columns -int 9
