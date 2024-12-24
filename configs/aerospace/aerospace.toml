@@ -168,3 +168,11 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.apple.audio.AudioMIDISetup'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.AppStore'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.tencent.xinWeChat'
+run = ['layout floating']
