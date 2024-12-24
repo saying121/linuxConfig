@@ -108,7 +108,7 @@ return {
                 show_on_x_blocked_trigger_characters = { "'", '"', "(" },
             },
             list = {
-                selection = "auto_insert",
+                selection = "preselect",
             },
             ---@diagnostic disable-next-line: missing-fields
             menu = {
@@ -245,7 +245,7 @@ return {
                     name = "Luasnip",
                     module = "blink.cmp.sources.luasnip",
                     score_offset = -3,
-                    fallbacks = { "lsp" },
+                    -- fallbacks = { "lsp" },
                     opts = {
                         -- Whether to use show_condition for filtering snippets
                         use_show_condition = true,
@@ -303,6 +303,7 @@ return {
                         -- performance issues.
                         -- Examples: "1024" (bytes by default), "200K", "1M", "1G"
                         max_filesize = "1M",
+                        search_casing = "--smart-case",
                     },
                 },
                 git = { name = "Git", module = "blink.compat.source", opts = {} },
