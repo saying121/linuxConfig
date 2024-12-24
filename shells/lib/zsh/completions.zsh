@@ -25,11 +25,14 @@ zi snippet https://github.com/BurntSushi/ripgrep/blob/master/crates/core/flags/c
 zi ice lucid wait as'completion' blockf has'tldr' mv'zsh_tealdeer -> _tldr'
 zi snippet https://github.com/dbrgn/tealdeer/blob/main/completion/zsh_tealdeer
 
-zi ice as"completion"
+zi ice lucid wait as'completion' blockf has'_docker'
 zi snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
-zi ice lucid wait as'completion' blockf mv'git-completion.zsh -> _git'
-zi snippet https://github.com/git/git/blob/master/contrib/completion/git-completion.zsh
+zi ice lucid wait as'completion' blockf has'launchctl'
+zi snippet https://github.com/nilsonholger/osx-zsh-completions/blob/master/_launchctl
+
+# zi ice lucid wait as'completion' blockf mv'git-completion.zsh -> _git'
+# zi snippet https://github.com/git/git/blob/master/contrib/completion/git-completion.zsh
 
 zi ice lucid wait as'completion' blockf has'tmux' pick'completion/zsh'
 zi light greymd/tmux-xpanes
@@ -60,6 +63,8 @@ zi snippet https://github.com/x-motemen/ghq/blob/master/misc/zsh/_ghq
 
 zi ice wait lucid as'completion' blockf has'zoxide'
 zi snippet https://github.com/ajeetdsouza/zoxide/blob/main/contrib/completions/_zoxide
+
+zi wait pack atload=+"zicompinit_fast; zicdreplay" for brew-completions
 
 zi ice wait lucid pick'autopair.zsh'
 zi load hlissner/zsh-autopair

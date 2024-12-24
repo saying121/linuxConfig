@@ -6,7 +6,8 @@ return {
     event = { "BufReadPre" },
     dependencies = {
         -- "hrsh7th/cmp-nvim-lsp",
-        { "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
+        -- { "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
+        "saghen/blink.cmp",
     },
     config = function()
         local lspconfig, LSP = require("lspconfig"), require("public.lsp_attach")
@@ -35,7 +36,8 @@ return {
             capabilities = vim.tbl_deep_extend(
                 "force",
                 LSP.capabilities,
-                require("cmp_nvim_lsp").default_capabilities()
+                -- require("cmp_nvim_lsp").default_capabilities()
+                require("blink.cmp").get_lsp_capabilities()
             ),
         })
 

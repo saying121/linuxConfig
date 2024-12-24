@@ -8,7 +8,7 @@ local get_sehll = function()
     end
 end
 
-local gpus  = wezterm.gui.enumerate_gpus()
+local gpus = wezterm.gui.enumerate_gpus()
 
 return {
     webgpu_preferred_adapter = gpus[1],
@@ -26,7 +26,7 @@ return {
         "WenQuanYi Zen Hei Mono",
         "JetBrains Mono",
     }),
-    font_size = 10.8,
+    font_size = 13.8,
     use_cap_height_to_scale_fallback_fonts = true,
     window_background_opacity = 0.85,
     window_padding = { top = 0, bottom = 0, left = 0, right = 0 },

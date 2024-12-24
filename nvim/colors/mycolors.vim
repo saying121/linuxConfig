@@ -95,3 +95,5 @@ hi MiniIndentscopeSymbol cterm=nocombine gui=nocombine guifg=#2ac3de
 " hi MiniIndentscopeSymbolOff links to MiniIndentscopeSymbol
 
 hi @lsp.type.unresolvedReference cterm=NONE gui=NONE guisp=#db4b4b
+
+hi Pmenu guifg=#c0caf5 guibg=None

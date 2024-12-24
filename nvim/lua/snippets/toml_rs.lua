@@ -130,6 +130,9 @@ local perf = {
     ["enum_dispatch"] = "动态分派方法调用的近乎直接替代，速度高达 10 倍",
     ["opentelemetry"] = "*open telemetry* 提供一组 api、库、代理和收集器服务来从您的应用程序捕获分布式跟踪和指标。您可以使用 prometheus、jaeger 和其他可观察性工具来分析它们。",
     ["tailcall"] = "安全、零成本的尾递归",
+    ["wide"] = "A crate to help you go wide. #simd",
+    ["simdutf8"] = "simd 加速 utf-8 验证 Rust。",
+    ["simd-json"] = "基于 simdjson 端口的高性能 json 解析器",
 }
 local alloc = {
     ["mimalloc"] = "面向性能和安全的嵌入式分配器",
