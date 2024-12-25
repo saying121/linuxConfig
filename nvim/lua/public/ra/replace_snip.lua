@@ -1,5 +1,5 @@
 local replace = {
-    ["let"] = "let ${1:var} = ${2:expr};",
+    -- ["let"] = "let ${1:var} = ${2:expr};",
     ["println!($0)"] = 'println!("$1"$2);$0',
     ["print!($0)"] = 'print!("$1"$2);$0',
     ["eprintln!($0)"] = 'eprintln!("$1"$2);$0',
@@ -15,7 +15,7 @@ local replace = {
     ["debug_assert_ne!($0)"] = "debug_assert_ne!(${1}, ${2});",
     ["assert!($0)"] = "assert!(${1});",
     ["assert_eq!($0)"] = "assert_eq!(${1}, ${2});",
-    ["unsafe"] = "unsafe {\n\t${1}\n}$0",
+    -- ["unsafe"] = "unsafe {\n\t${1}\n}$0",
 }
 
 return replace

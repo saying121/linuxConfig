@@ -278,6 +278,14 @@ local friendly = {
         description = "inlined function",
         prefix = "inline-fn",
     },
+    let = {
+        prefix = { "let" },
+        body = {
+            "let ${1:var} = $2;$0",
+        },
+        description = "let … = …;",
+        scope = "expr",
+    },
     letm = {
         prefix = { "letm" },
         body = {

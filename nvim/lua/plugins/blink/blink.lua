@@ -200,13 +200,40 @@ return {
                     --- See the type definitions for more information.
                     --- Check the enabled_providers config for an example
                     enabled = true, -- Whether or not to enable the provider
-                    transform_items = nil, -- Function to transform the items before they're returned
+                    -- Filter text items from the LSP provider, since we have the buffer provider for that
+                    transform_items = function(_, items)
+                        for _, item in ipairs(items) do
+                            if
+                                item.kind == require("blink.cmp.types").CompletionItemKind.Snippet
+                                and item.filterText == "let"
+                            then
+                                item.score_offset = item.score_offset + 1
+                            end
+                        end
+
+                        return items
+                        -- return vim.tbl_filter(function(item)
+                        --     return item.kind ~= require("blink.cmp.types").CompletionItemKind.Text
+                        -- end, items)
+                    end,
                     should_show_items = true, -- Whether or not to show the items
                     max_items = nil, -- Maximum number of items to display in the menu
                     min_keyword_length = 0, -- Minimum number of characters in the keyword to trigger the provider
                     fallbacks = { "buffer", "lazydev" }, -- If any of these providers return 0 items, it will fallback to this provider
                     score_offset = 0, -- Boost/penalize the score of the items
                     override = nil, -- Override the source's functions
+                },
+                luasnip = {
+                    name = "Luasnip",
+                    module = "blink.cmp.sources.luasnip",
+                    score_offset = -1,
+                    -- fallbacks = { "lsp" },
+                    opts = {
+                        -- Whether to use show_condition for filtering snippets
+                        use_show_condition = true,
+                        -- Whether to show autosnippets in the completion list
+                        show_autosnippets = true,
+                    },
                 },
                 path = {
                     name = "Path",
@@ -240,18 +267,6 @@ return {
                     -- enabled = function(ctx)
                     --   return ctx ~= nil and ctx.trigger.kind == vim.lsp.protocol.CompletionTriggerKind.TriggerCharacter
                     -- end,
-                },
-                luasnip = {
-                    name = "Luasnip",
-                    module = "blink.cmp.sources.luasnip",
-                    score_offset = -3,
-                    -- fallbacks = { "lsp" },
-                    opts = {
-                        -- Whether to use show_condition for filtering snippets
-                        use_show_condition = true,
-                        -- Whether to show autosnippets in the completion list
-                        show_autosnippets = true,
-                    },
                 },
                 buffer = {
                     name = "Buffer",

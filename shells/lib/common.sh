@@ -2,7 +2,7 @@
 # enable color support of ls, less and man, and also add handy aliases
 the_dircolors=dircolors
 # macos install `coreutils`
-if command -v gdircolors &> /dev/null; then
+if command -v gdircolors &>/dev/null; then
     the_dircolors=gdircolors
 fi
 
@@ -210,7 +210,6 @@ debug_rust() {
 # thread_num=$(nproc)
 export MAKEFLAGS="-j"
 
-
 export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
 export PATH=$PATH:~/.linuxConfig/scripts
 export PATH=$PATH:~/.ghcup/bin
@@ -226,7 +225,10 @@ alias daestop="sudo systemctl stop dae"
 export SCCACHE_CACHE_SIZE="40G"
 export RUSTC_WRAPPER=sccache
 
-export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+if command -v brew; then
+    DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+    export DYLD_FALLBACK_LIBRARY_PATH
+fi
 
 export PATH=$PATH:~/.cargo/bin:~/.local/bin:~/go/bin
 export GOPATH=$XDG_DATA_HOME/go
