@@ -226,7 +226,7 @@ return {
                 luasnip = {
                     name = "Luasnip",
                     module = "blink.cmp.sources.luasnip",
-                    score_offset = -1,
+                    score_offset = 0,
                     -- fallbacks = { "lsp" },
                     opts = {
                         -- Whether to use show_condition for filtering snippets
