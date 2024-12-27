@@ -19,19 +19,18 @@ vim.opt.rtp:prepend(dev_path)
 
 local specs = {
     { import = "plugins" },
-    { import = "plugins.nvim-cmp" },
-    { import = "plugins.nvim-dap" },
+    { import = "plugins.blink" },
     { import = "plugins.database" },
-    { import = "plugins.lsps" },
     { import = "plugins.edit" },
+    { import = "plugins.lsps" },
     { import = "plugins.navigation" },
+    { import = "plugins.nvim-dap" },
     { import = "plugins.previews" },
     { import = "plugins.telescope" },
     { import = "plugins.translators" },
     { import = "plugins.treesitter" },
     { import = "plugins.ui" },
     { import = "plugins.utils" },
-    { import = "plugins.blink" },
 }
 
 require("lazy").setup({
@@ -42,12 +41,12 @@ require("lazy").setup({
         lazy = false, -- should plugins be lazy-loaded?
         version = nil, -- version = "*", -- enable this to try installing the latest stable versions of plugins
     },
-    -- lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json", -- lockfile generated after running update.
+    lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json", -- lockfile generated after running update.
     git = {
         -- defaults for the `Lazy log` command
         -- log = { "-10" }, -- show the last 10 commits
         log = { "--since=3 days ago" }, -- show commits from the last 3 days
-        timeout = 20, -- seconds
+        timeout = 30, -- seconds
         url_format = mirror .. "https://github.com/%s.git",
     },
     dev = {
