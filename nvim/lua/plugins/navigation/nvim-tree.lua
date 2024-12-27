@@ -5,30 +5,24 @@ return {
     -- cond = false,
     keys = { "<leader>e" },
     dependencies = {
-        "nvim-tree/nvim-web-devicons", -- file icons
-        {
-            "antosha417/nvim-lsp-file-operations",
-            dependencies = { "nvim-lua/plenary.nvim" },
-            config = function()
-                require("lsp-file-operations").setup({
-                    debug = false,
-                    -- select which file operations to enable
-                    operations = {
-                        willRenameFiles = true,
-                        didRenameFiles = true,
-                        willCreateFiles = true,
-                        didCreateFiles = true,
-                        willDeleteFiles = true,
-                        didDeleteFiles = true,
-                    },
-                    -- how long to wait (in milliseconds) for file rename information before cancelling
-                    timeout_ms = 10000,
-                })
-            end,
-        },
+        "nvim-tree/nvim-web-devicons",
     },
     version = "*",
     config = function()
+        local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "NvimTreeSetup",
+            callback = function()
+                local events = require("nvim-tree.api").events
+                events.subscribe(events.Event.NodeRenamed, function(data)
+                    if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+                        data = data
+                        Snacks.rename.on_rename_file(data.old_name, data.new_name)
+                    end
+                end)
+            end,
+        })
+
         keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
         -- disable netrw at the very start of your init.lua (strongly advised)
         -- vim.g.loaded_netrw = 1
@@ -92,11 +86,6 @@ return {
                             arrow_closed = "",
                         },
                     },
-                },
-            },
-            actions = {
-                open_file = {
-                    quit_on_open = true,
                 },
             },
             diagnostics = {

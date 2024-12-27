@@ -113,8 +113,8 @@ return {
             ---@diagnostic disable-next-line: missing-fields
             menu = {
                 enabled = true,
-                min_width = 15,
-                max_height = 10,
+                min_width = 20,
+                max_height = 30,
                 border = "rounded",
             },
             documentation = {
