@@ -10,6 +10,7 @@ brew install neovim utf8proc kitty wezterm
 brew install thefuck starship
 brew install bash-language-server lua-language-server taplo
 
+brew install deno
 brew install imagemagick
 brew install lua lua@5.1 -f
 brew install --cask nikitabobko/tap/aerospace

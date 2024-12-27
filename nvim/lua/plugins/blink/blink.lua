@@ -6,8 +6,19 @@ return {
     -- optional: provides snippets for the snippet source
     -- dependencies = "rafamadriz/friendly-snippets",
     dependencies = {
-        "L3MON4D3/LuaSnip",
+        -- "L3MON4D3/LuaSnip",
         "mikavilpas/blink-ripgrep.nvim",
+        {
+            "petertriho/cmp-git",
+            opts = {
+                filetypes = {
+                    "gitcommit",
+                    "octo",
+                    "markdown", -- for gh & glab CLI
+                },
+            },
+        },
+        "ribru17/blink-cmp-spell",
     },
     -- use a release tag to download pre-built binaries
     version = "v0.8",
@@ -134,7 +145,6 @@ return {
                     max_height = 20,
                     border = "rounded",
                     winblend = 0,
-                    winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
                     -- Note that the gutter will be disabled when border ~= 'none'
                     scrollbar = true,
                 },
@@ -159,48 +169,27 @@ return {
                 max_height = 10,
                 border = "padded",
                 winblend = 0,
-                winhighlight = "Normal:BlinkCmpSignatureHelp,FloatBorder:BlinkCmpSignatureHelpBorder",
                 scrollbar = false, -- Note that the gutter will be disabled when border ~= 'none'
-                -- Which directions to show the window,
-                -- falling back to the next direction when there's not enough space,
-                -- or another window is in the way
-                direction_priority = { "n", "s" },
                 -- Disable if you run into performance issues
                 treesitter_highlighting = true,
             },
         },
         sources = {
-            default = { "lsp", "path", "luasnip", "buffer", "ripgrep" },
-            -- providers = function(ctx)
-            --     local node = vim.treesitter.get_node()
-            --     if vim.bo.filetype == "lua" then
-            --         return { "lsp", "path" }
-            --     elseif node and vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
-            --         return { "buffer" }
-            --     else
-            --         return { "lsp", "path", "snippets", "buffer",'ripgrep' }
-            --     end
-            -- end,
+            default = { "lsp", "path", "luasnip", "buffer", "ripgrep", "spell" },
             per_filetype = {
-                lua = { "lazydev", "lsp", "path", "luasnip", "buffer" },
-                gitcommit = { "luasnip", "buffer", "path", "git", "ripgrep" },
+                lua = { "lazydev", "lsp", "path", "luasnip", "buffer", "ripgrep", "spell" },
+                gitcommit = { "luasnip", "buffer", "path", "git", "ripgrep", "spell" },
+                ["dap-repl"] = { "dap" },
 
-                sql = { "dadbod", "lsp", "path", "luasnip", "buffer" },
-                mysql = { "dadbod", "lsp", "path", "luasnip", "buffer" },
-                plsql = { "dadbod", "lsp", "path", "luasnip", "buffer" },
+                sql = { "dadbod", "lsp", "luasnip", "buffer" },
+                mysql = { "dadbod", "lsp", "luasnip", "buffer" },
+                plsql = { "dadbod", "lsp", "luasnip", "buffer" },
             },
-            -- Please see https://github.com/Saghen/blink.compat for using `nvim-cmp` sources
             providers = {
                 lsp = {
                     name = "LSP",
                     module = "blink.cmp.sources.lsp",
-
-                    --- *All* of the providers have the following options available
-                    --- NOTE: All of these options may be functions to get dynamic behavior
-                    --- See the type definitions for more information.
-                    --- Check the enabled_providers config for an example
-                    enabled = true, -- Whether or not to enable the provider
-                    -- Filter text items from the LSP provider, since we have the buffer provider for that
+                    enabled = true,
                     transform_items = function(_, items)
                         for _, item in ipairs(items) do
                             if
@@ -248,30 +237,10 @@ return {
                         show_hidden_files_by_default = false,
                     },
                 },
-                snippets = {
-                    name = "Snippets",
-                    module = "blink.cmp.sources.snippets",
-                    score_offset = -3,
-                    opts = {
-                        friendly_snippets = true,
-                        search_paths = { vim.fn.stdpath("config") .. "/snippets" },
-                        global_snippets = { "all" },
-                        extended_filetypes = {},
-                        ignored_filetypes = {},
-                        get_filetype = function(context)
-                            return vim.bo.filetype
-                        end,
-                    },
-
-                    --- Example usage for disabling the snippet provider after pressing trigger characters (i.e. ".")
-                    -- enabled = function(ctx)
-                    --   return ctx ~= nil and ctx.trigger.kind == vim.lsp.protocol.CompletionTriggerKind.TriggerCharacter
-                    -- end,
-                },
                 buffer = {
                     name = "Buffer",
                     module = "blink.cmp.sources.buffer",
-                    fallbacks = { "ripgrep" },
+                    fallbacks = { "ripgrep", "spell" },
                     -- prefix_min_len = 4,
                     opts = {
                         -- default to all visible buffers
@@ -321,7 +290,27 @@ return {
                         search_casing = "--smart-case",
                     },
                 },
-                git = { name = "Git", module = "blink.compat.source", opts = {} },
+                git = { name = "git", module = "blink.compat.source", opts = {} },
+                spell = {
+                    name = "Spell",
+                    module = "blink-cmp-spell",
+                    opts = {
+                        max_entries = 10,
+                        enable_in_context = function()
+                            return true
+                        end,
+                    },
+                },
+                dap = {
+                    name = "dap",
+                    module = "blink.compat.source",
+                    opts = {
+                        max_entries = 10,
+                        enable_in_context = function()
+                            return true
+                        end,
+                    },
+                },
             },
         },
         appearance = {

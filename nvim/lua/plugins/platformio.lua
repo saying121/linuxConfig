@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     "anurag3301/nvim-platformio.lua",
     dependencies = {
@@ -12,5 +13,9 @@ return {
         "Piolib",
         "Piomon",
         "Piodebug",
+        "Piodb",
+    },
+    opts = {
+        lsp = "clangd",
     },
 }
