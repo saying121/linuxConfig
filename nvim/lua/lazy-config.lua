@@ -31,7 +31,6 @@ local specs = {
     { import = "plugins.treesitter" },
     { import = "plugins.ui" },
     { import = "plugins.utils" },
-    { import = "plugins.blink" },
 }
 
 require("lazy").setup({
