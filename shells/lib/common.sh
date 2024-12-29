@@ -224,10 +224,8 @@ alias daestop="sudo systemctl stop dae"
 
 export SCCACHE_CACHE_SIZE="40G"
 export RUSTC_WRAPPER=sccache
-export SCCACHE_CACHE_SIZE=40G
 
-export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
-if command -v brew; then
+if command -v brew 2>&1 >/dev/null; then
     DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
     export DYLD_FALLBACK_LIBRARY_PATH
 fi
@@ -238,3 +236,7 @@ export GOBIN=$XDG_DATA_HOME/go/bin
 export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 
 export EDITOR=nvim
+
+# export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"

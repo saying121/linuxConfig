@@ -465,52 +465,7 @@ local items = {
         body = { "#[inline]", "pub fn ${1:name}() {", "    ${2:unimplemented!();}", "}" },
         description = "inlined function",
         prefix = "inline-fn",
-    },
-    let = {
-        prefix = { "let" },
-        body = {
-            "let ${1:var} = $2;$0",
-        },
-        description = "let … = …;",
-        scope = "expr",
-    },
-    letm = {
-        prefix = { "letm" },
-        body = {
-            "let mut ${1:var} = $2;$0",
-        },
-        description = "let mut … = …;",
-        scope = "expr",
-    },
-    match_opt = {
-        body = {
-            "match ${1:expr} {",
-            "    Some(${2:expr}) => ${3:expr},",
-            "    ${4:None} => ${5:expr},",
-            "}",
-        },
-        description = "match … { … }",
-        prefix = "match_option",
-    },
-    match_res = {
-        body = {
-            "match ${1:expr} {",
-            "    Ok(${2:expr}) => ${3:expr},",
-            "    Err(${4:err}) => ${5:expr},",
-            "}",
-        },
-        description = "match … { … }",
-        prefix = "match_res",
-    },
-    thread_local = {
-        body = { "thread_local!(static ${1:STATIC}: ${2:Type} = ${4:init});" },
-        description = "thread_local!(static …: … = …);",
-        prefix = "thread_local",
-    },
-    try = {
-        body = { "try!(${1})" },
-        description = "try!(…)",
-        prefix = "try",
+        scope = "item",
     },
 }
 
