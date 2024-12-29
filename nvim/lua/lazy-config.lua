@@ -46,7 +46,7 @@ require("lazy").setup({
         -- defaults for the `Lazy log` command
         -- log = { "-10" }, -- show the last 10 commits
         log = { "--since=3 days ago" }, -- show commits from the last 3 days
-        timeout = 30, -- seconds
+        timeout = 60, -- seconds
         url_format = mirror .. "https://github.com/%s.git",
     },
     dev = {

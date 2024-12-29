@@ -18,6 +18,7 @@ return {
         keymap("n", "mi", "<Cmd>TranslateInput<CR>", opts)
 
         require("Trans").setup({
+            dir = vim.fn.stdpath("data") .. "/Trans",
             frontend = {
                 hover = {
                     width = 37,
