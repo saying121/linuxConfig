@@ -225,7 +225,7 @@ alias daestop="sudo systemctl stop dae"
 export RUSTC_WRAPPER=sccache
 export SCCACHE_CACHE_SIZE=40G
 
-if command -v brew; then
+if command -v brew 2>&1 >/dev/null; then
     DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
     export DYLD_FALLBACK_LIBRARY_PATH
 fi

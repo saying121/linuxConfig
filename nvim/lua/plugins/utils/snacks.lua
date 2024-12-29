@@ -8,7 +8,7 @@ return {
         },
     },
     config = function(opts)
-        vim.keymap.set("n", "<leader>go", function()
+        vim.keymap.set({ "n", "x" }, "<leader>go", function()
             Snacks.gitbrowse.open()
         end)
     end,
