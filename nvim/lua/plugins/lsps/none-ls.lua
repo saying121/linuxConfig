@@ -18,10 +18,10 @@ return {
             -- null_ls.builtins.diagnostics.zsh,
             null_ls.builtins.code_actions.refactoring,
             null_ls.builtins.code_actions.gitrebase,
-            null_ls.builtins.diagnostics.sqlfluff.with({
+            null_ls.builtins.diagnostics.sqruff.with({
                 filetypes = { "sql", "mysql" },
             }),
-            null_ls.builtins.formatting.sqlfluff.with({
+            null_ls.builtins.formatting.sqruff.with({
                 filetypes = { "sql", "mysql" },
             }),
             null_ls.builtins.formatting.prettier.with({

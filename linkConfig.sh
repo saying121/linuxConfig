@@ -82,7 +82,6 @@ link_list=(
     ["$HOME/.linuxConfig/X11/Xresources"]="$HOME/.Xresources"
     ["$HOME/.linuxConfig/X11/xinitrc"]="$HOME/.xinitrc"
     ["$HOME/.linuxConfig/X11/xprofile"]="$HOME/.xprofile"
-    ["$HOME/.linuxConfig/configs/.sqlfluff"]="$HOME/.sqlfluff"
     ["$HOME/.linuxConfig/configs/festivalrc"]="$HOME/.festivalrc"
     ["$HOME/.linuxConfig/configs/gtkrc-2.0"]="$HOME/.gtkrc-2.0"
     ["$HOME/.linuxConfig/configs/lessfilter.sh"]="$HOME/.lessfilter"
