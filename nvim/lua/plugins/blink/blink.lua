@@ -127,6 +127,12 @@ return {
                 min_width = 20,
                 max_height = 30,
                 border = "rounded",
+                draw = {
+                    columns = {
+                        { "kind_icon", "label", "label_description", gap = 1 },
+                        -- { "kind" },
+                    },
+                },
             },
             documentation = {
                 -- Controls whether the documentation window will automatically show when selecting a completion item
