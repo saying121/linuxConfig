@@ -4,6 +4,7 @@
     "modules-left": [
         "bluetooth",
         "cpu",
+        "custom/gpu-usage",
         "temperature",
         "memory",
         "hyprland/window"
@@ -19,7 +20,6 @@
         "backlight",
         "pulseaudio",
         "upower",
-        "custom/power",
         "tray"
     ],
     "bluetooth": {
@@ -148,7 +148,7 @@
         "on-click-right": "[[ $(ps -ef | grep -c gnome-calenda[r]) -gt 0 ]] && killall gnome-calendar || gnome-calendar"
     },
     "cpu": {
-        "interval": 5,
+        "interval": 2,
         "format": " \uf2db {}% ",
         "max-length": 10,
         "on-click-right": "[[ $(ps -ef | grep -c plasma-systemmonito[r]) -gt 0 ]] && killall plasma-systemmonitor || plasma-systemmonitor"
@@ -226,5 +226,11 @@
     "custom/background": {
         "format": " ",
         "on-click-right": "~/.linuxConfig/wallpaperengine/rewall.sh"
+    },
+    "custom/gpu-usage": {
+        "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+        "format": "󰢮: {}%",
+        "return-type": "",
+        "interval": 2
     }
 }

@@ -26,6 +26,14 @@
     transition: none;
 }
 
+#custom-gpu-usage {
+    background: @crust;
+    border-radius: 0px 0px 0px 0px;
+    margin: 3px 0px 3px 0px;
+    padding-left: 0px;
+    padding-right: 5px;
+}
+
 #temperature {
     background: @crust;
     border-radius: 0px 0px 0px 0px;

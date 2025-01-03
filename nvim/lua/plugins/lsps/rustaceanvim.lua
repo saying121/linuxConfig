@@ -51,12 +51,8 @@ return {
                     max_width = math.floor(api.nvim_win_get_width(0) * 0.7),
                     max_height = math.floor(api.nvim_win_get_height(0) * 0.7),
 
-                    --- whether the floating window gets automatically focused
-                    --- default: false
-                    ---@type boolean
-                    auto_focus = false,
+                    auto_focus = true,
                 },
-                rustc = { default_edition = "2021" },
             },
             -- LSP configuration
             server = {

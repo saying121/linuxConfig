@@ -190,6 +190,7 @@ return {
                 sql = { "dadbod", "lsp", "luasnip", "buffer" },
                 mysql = { "dadbod", "lsp", "luasnip", "buffer" },
                 plsql = { "dadbod", "lsp", "luasnip", "buffer" },
+                DressingInput = { "path", "ripgrep" },
             },
             providers = {
                 lsp = {
