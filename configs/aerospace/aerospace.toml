@@ -56,7 +56,7 @@ outer.right = 3
 # cmd-enter = ['exec-and-forget kitty --single-instance']
 cmd-enter = ['exec-and-forget wezterm start']
 # ctrl-cmd-t = ['exec-and-forget kitty']
-alt-f = 'fullscreen'
+ctrl-alt-f = 'fullscreen'
 shift-alt-q = 'close --quit-if-last-window'
 
 # All possible keys:

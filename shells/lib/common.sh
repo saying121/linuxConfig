@@ -236,3 +236,7 @@ export GOBIN=$XDG_DATA_HOME/go/bin
 export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 
 export EDITOR=nvim
+
+# export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
