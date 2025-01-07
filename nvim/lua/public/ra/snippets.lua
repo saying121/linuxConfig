@@ -55,6 +55,20 @@ local postfix = {
         requires = "std::sync::Mutex",
         scope = "expr",
     },
+    ["RefCell::new"] = {
+        postfix = "RefCell",
+        body = "RefCell::new(${receiver})",
+        description = "Put the expression into a `RefCell`",
+        requires = "std::cell::RefCell",
+        scope = "expr",
+    },
+    ["Cell::new"] = {
+        postfix = "Cell",
+        body = "Cell::new(${receiver})",
+        description = "Put the expression into a `Cell`",
+        requires = "std::cell::Cell",
+        scope = "expr",
+    },
     ["Arc::new"] = {
         postfix = "Arc",
         body = "Arc::new(${receiver})",
@@ -153,6 +167,320 @@ local postfix = {
 }
 
 local prefix = {
+    main = {
+        prefix = { "main" },
+        body = {
+            "fn main() {",
+            "    ${0:unimplemented!();}",
+            "}",
+        },
+        description = "fn main() { … }",
+        scope = "item",
+    },
+    tokio_main = {
+        prefix = { "tokio_main" },
+        body = {
+            "#[tokio::main]",
+            "async fn main() {",
+            "    ${0:unimplemented!();}",
+            "}",
+        },
+        description = "async fn main() { … }",
+        requires = "tokio",
+        scope = "item",
+    },
+    tokio_head = {
+        prefix = { "tokio_head" },
+        body = {
+            "#[tokio::main]",
+        },
+        description = "Add #[tokio::main]",
+        requires = "tokio",
+        scope = "item",
+    },
+    tokio_test = {
+        prefix = { "tokio_test" },
+        body = {
+            [=[#[tokio::test(${1:flavor = "multi_thread",} worker_threads = ${2:10})]]=],
+        },
+        description = "Add #[tokio::test]",
+        requires = "tokio",
+        scope = "item",
+    },
+    no_std = {
+        prefix = { "no_std" },
+        body = {
+            "#![no_std]",
+        },
+        description = "#![no_std]",
+        scope = "item",
+    },
+    no_core = {
+        prefix = { "no_core" },
+        body = {
+            "#![no_core]",
+        },
+        description = "#![no_core]",
+        scope = "item",
+    },
+    alloc_add = {
+        prefix = { "alloc_add" },
+        body = {
+            "extern crate alloc;",
+        },
+        description = "add `extern crate alloc;`",
+        scope = "item",
+    },
+    feature = {
+        prefix = { "feature" },
+        body = {
+            "#![feature($0)]",
+        },
+        description = "Insert a feature",
+        scope = "item",
+    },
+    extern_fn = {
+        prefix = { "extern-fn" },
+        body = {
+            'extern "C" fn ${1:name}(${2:arg}: ${3:Type}) -> ${4:RetType} {',
+            "    ${5:// add code here}",
+            "}",
+        },
+        description = 'extern "C" fn …(…) { … }',
+        scope = "item",
+    },
+    extern_mod = {
+        prefix = { "extern-mod" },
+        body = {
+            'extern "${1:C}" {',
+            "    ${2:// add code here}",
+            "}",
+        },
+        description = 'extern "C" { … }',
+        scope = "item",
+    },
+    pub_trait = {
+        prefix = { "pub-trait" },
+        body = {
+            "pub trait ${1:Name} {",
+            "    ${2:}",
+            "}",
+        },
+        description = "pub trait",
+        scope = "item",
+    },
+    extern_crate = {
+        prefix = { "extern-crate" },
+        body = {
+            "extern crate ${1:name};",
+        },
+        description = "extern crate …;",
+        scope = "item",
+    },
+    static = {
+        prefix = { "static" },
+        body = {
+            "static ${1:STATIC}: ${2:Type} = ${3:init};",
+        },
+        description = "static …: … = …;",
+        scope = "item",
+    },
+    expect = {
+        prefix = { "expect" },
+        body = {
+            [=[#${1:!}[expect($2, reason = "$3")]]=],
+        },
+        description = "expect lint",
+        scope = "item",
+    },
+    allow = {
+        prefix = { "allow" },
+        body = {
+            [=[#${1:!}[allow($2, reason = "$3")]]=],
+        },
+        description = "allow lint",
+        scope = "item",
+    },
+    deny = {
+        prefix = { "deny" },
+        body = {
+            "#${1:!}[deny($2)]",
+        },
+        description = "#![deny(…)]",
+        scope = "item",
+    },
+    warn = {
+        prefix = { "warn" },
+        body = {
+            "#${1:!}[warn($2)]",
+        },
+        description = "#![warn(…)]",
+        scope = "item",
+    },
+    cfg = {
+        prefix = { "cfg" },
+        body = {
+            "#[cfg($1)]",
+        },
+        description = "#[cfg(…)]",
+        scope = "item",
+    },
+    cfg_attr = {
+        prefix = { "cfg_attr" },
+        body = {
+            "#[cfg_attr($1, $2)]",
+        },
+        description = "#[cfg(…)]",
+        scope = "item",
+    },
+    derive = {
+        prefix = { "derive" },
+        body = {
+            "#[derive($1)]",
+        },
+        description = "#![derive(…)]",
+        scope = "item",
+    },
+    repr = {
+        prefix = { "repr" },
+        body = {
+            "#[repr($1)]",
+        },
+        description = "#[repr(…)]",
+        scope = "item",
+    },
+    macro_use = {
+        prefix = { "macro_use" },
+        body = {
+            "#[macro_use($1)]",
+        },
+        description = "#[macro_use(…)]",
+        scope = "item",
+    },
+    const = {
+        prefix = { "const" },
+        body = {
+            "const ${1:CONST}: ${2:Type} = ${3:init};",
+        },
+        description = "const …: … = …;",
+        scope = "item",
+    },
+    enum = {
+        prefix = { "enum" },
+        body = {
+            "#[derive(Clone, Copy)]",
+            "#[derive(Debug)]",
+            "#[derive(Default)]",
+            "#[derive(PartialEq, Eq, PartialOrd, Ord)]",
+            "enum ${1:Name} {",
+            "    ${2:Variant},",
+            "}",
+        },
+        description = "enum … { … }",
+        scope = "item",
+    },
+    struct = {
+        prefix = { "struct" },
+        body = {
+            "#[derive(Clone, Copy)]",
+            "#[derive(Debug)]",
+            "#[derive(Default)]",
+            "#[derive(PartialEq, Eq, PartialOrd, Ord)]",
+            "pub struct ${1:Name} {",
+            "    ${2:field}: ${3:()},",
+            "}",
+        },
+        description = "struct … { … }",
+        scope = "item",
+    },
+    struct_tuple = {
+        prefix = { "struct_tuple" },
+        body = {
+            "#[derive(Clone, Copy)]",
+            "#[derive(Debug)]",
+            "#[derive(Default)]",
+            "#[derive(PartialEq, Eq, PartialOrd, Ord)]",
+            "pub struct ${1:Name}(${2:()});",
+        },
+        description = "struct …(…);",
+        scope = "item",
+    },
+    struct_unit = {
+        prefix = { "struct_unit" },
+        body = {
+            "#[derive(Clone, Copy)]",
+            "#[derive(Debug)]",
+            "#[derive(Default)]",
+            "#[derive(PartialEq, Eq, PartialOrd, Ord)]",
+            "pub struct ${1:Name};",
+        },
+        description = "struct …(…);",
+        scope = "item",
+    },
+    impl = {
+        prefix = { "impl" },
+        body = {
+            "impl ${1:Type} {",
+            "    $2",
+            "}",
+        },
+        description = "impl … { … }",
+        scope = "item",
+    },
+    impl_trait = {
+        prefix = { "impl_trait" },
+        body = {
+            "impl ${1:Trait} for ${2:Type} {",
+            "    $3",
+            "}",
+        },
+        description = "impl … for … { … }",
+        scope = "item",
+    },
+    mod = {
+        prefix = { "mod" },
+        body = {
+            "mod ${1:name};",
+        },
+        description = "mod …;",
+        scope = "item",
+    },
+    mod_block = {
+        prefix = { "mod_block" },
+        body = {
+            "mod ${1:name} {",
+            "    $2,",
+            "}",
+        },
+        description = "mod … { … }",
+        scope = "item",
+    },
+    type = {
+        prefix = { "type" },
+        body = {
+            "type ${1:Alias} = ${2:Type};",
+        },
+        description = "type … = …;",
+        scope = "item",
+    },
+    dbg_d = {
+        prefix = { "dbg_d" },
+        body = {
+            "#[cfg(debug_assertions)]",
+            "dbg!($1);",
+        },
+        -- description = "type … = …;",
+        scope = "expr",
+    },
+    dbgr_d = {
+        prefix = { "dbgr_d" },
+        body = {
+            "#[cfg(debug_assertions)]",
+            "dbg!(&$1);",
+        },
+        -- description = "type … = …;",
+        scope = "expr",
+    },
     async = {
         prefix = { "async" },
         body = {
@@ -260,9 +588,6 @@ local prefix = {
         description = "subscriber debug",
         scope = "expr",
     },
-}
-
-local friendly = {
     bench = {
         body = {
             "#[bench]",
@@ -272,11 +597,13 @@ local friendly = {
         },
         description = "#[bench]",
         prefix = "bench",
+        scope = "item",
     },
     ["inline-fn"] = {
         body = { "#[inline]", "pub fn ${1:name}() {", "    ${2:unimplemented!();}", "}" },
         description = "inlined function",
         prefix = "inline-fn",
+        scope = "item",
     },
     let = {
         prefix = { "let" },
@@ -294,36 +621,11 @@ local friendly = {
         description = "let mut … = …;",
         scope = "expr",
     },
-    match_opt = {
-        body = {
-            "match ${1:expr} {",
-            "    Some(${2:expr}) => ${3:expr},",
-            "    ${4:None} => ${5:expr},",
-            "}",
-        },
-        description = "match … { … }",
-        prefix = "match_option",
-    },
-    match_res = {
-        body = {
-            "match ${1:expr} {",
-            "    Ok(${2:expr}) => ${3:expr},",
-            "    Err(${4:err}) => ${5:expr},",
-            "}",
-        },
-        description = "match … { … }",
-        prefix = "match_res",
-    },
     thread_local = {
         body = { "thread_local!(static ${1:STATIC}: ${2:Type} = ${4:init});" },
         description = "thread_local!(static …: … = …);",
         prefix = "thread_local",
     },
-    try = {
-        body = { "try!(${1})" },
-        description = "try!(…)",
-        prefix = "try",
-    },
 }
 
-return vim.tbl_deep_extend("force", postfix, prln, postfix_prln, prefix, friendly)
+return vim.tbl_deep_extend("force", postfix, prln, postfix_prln, prefix)

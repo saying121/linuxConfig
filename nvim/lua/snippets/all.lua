@@ -156,15 +156,15 @@ return {
     s({ trig = "box" }, create_box({ padding_length = 8 })),
     s({ trig = "bbox" }, create_box({ padding_length = 18 })),
 
-    s("ext_opt", {
-        i(1, "text1", {
-            node_ext_opts = ext_opts,
-        }),
-        t({ "", "" }),
-        i(2, "text2", {
-            node_ext_opts = ext_opts,
-        }),
-    }),
+    -- s("ext_opt", {
+    --     i(1, "text1", {
+    --         node_ext_opts = ext_opts,
+    --     }),
+    --     t({ "", "" }),
+    --     i(2, "text2", {
+    --         node_ext_opts = ext_opts,
+    --     }),
+    -- }),
     -- s("func", {
     --     i(1, "first1 "),
     --     f(function(args, snip)

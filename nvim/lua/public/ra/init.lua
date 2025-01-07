@@ -94,6 +94,7 @@ return {
         },
         cargo = {
             autoreload = true,
+            targetDir = true,
             buildScripts = {
                 enable = true,
                 invocationLocation = "workspace", -- 指定运行生成脚本的工作目录。-“workspace”：在工作区的根目录中运行工作区的构建脚本。
