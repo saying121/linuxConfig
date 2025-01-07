@@ -97,3 +97,4 @@ hi MiniIndentscopeSymbol cterm=nocombine gui=nocombine guifg=#2ac3de
 hi @lsp.type.unresolvedReference cterm=NONE gui=NONE guisp=#db4b4b
 
 hi Pmenu guifg=#c0caf5 guibg=None
+hi BlinkCmpLabelMatch guifg=#eaa0a9 guibg=None

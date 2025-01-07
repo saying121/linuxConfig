@@ -129,8 +129,17 @@ return {
                 border = "rounded",
                 draw = {
                     columns = {
-                        { "kind_icon", "label", "label_description", gap = 1 },
+                        -- { "kind_icon", "label", "label_description", gap = 1 },
+                        { "kind_icon" },
+                        { "label", gap = 1 },
+
                         -- { "kind" },
+                    },
+                    components = {
+                        label = {
+                            text = require("colorful-menu").blink_components_text,
+                            highlight = require("colorful-menu").blink_components_highlight,
+                        },
                     },
                 },
             },
@@ -322,7 +331,6 @@ return {
         },
         appearance = {
             highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
-            nerd_font_variant = "normal",
             kind_icons = {
                 Text = "󰉿",
                 Method = "󰆧",
