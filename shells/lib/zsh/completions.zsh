@@ -64,6 +64,8 @@ zi snippet https://github.com/x-motemen/ghq/blob/master/misc/zsh/_ghq
 zi ice wait lucid as'completion' blockf has'zoxide'
 zi snippet https://github.com/ajeetdsouza/zoxide/blob/main/contrib/completions/_zoxide
 
+zi light sunlei/zsh-ssh
+
 zi wait pack atload=+"zicompinit_fast; zicdreplay" for brew-completions
 
 zi ice wait lucid pick'autopair.zsh'
