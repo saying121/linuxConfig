@@ -130,21 +130,24 @@ dns:
 
 proxy-groups:
   - name: Google
-    type: load-balance
+    type: url-test
+    interval: 100
     strategy: sticky-sessions
     tolerance: 100
     proxies:
       [香港, 台湾, 新加坡, 美国, Excellent]
 
   - name: 巴哈姆特
-    type: load-balance
+    type: url-test
+    interval: 100
     strategy: sticky-sessions
     tolerance: 100
     proxies:
       [台湾]
 
   - name: Github
-    type: load-balance
+    type: url-test
+    interval: 100
     strategy: sticky-sessions
     tolerance: 100
     proxies:
@@ -156,7 +159,8 @@ proxy-groups:
       [直连]
 
   - name: Excellent
-    type: load-balance
+    type: url-test
+    interval: 100
     strategy: sticky-sessions
     tolerance: 100
     exclude-filter: "日本"
@@ -164,42 +168,52 @@ proxy-groups:
     filter: "(?i)(pq|fny)"
 
   - name: 香港
-    type: load-balance
+    type: url-test
+    interval: 100
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
+    exclude-filter: "(?i)(sanfen|yiyuan)"
     filter: "(?i)港|hk|hongkong|hong kong"
 
   - name: 台湾
     type: url-test
-    # strategy: sticky-sessions
+    interval: 100
+    strategy: sticky-sessions
     tolerance: 100
     include-all: true
+    exclude-filter: "(?i)(sanfen|yiyuan)"
     filter: "(?i)台|tw|taiwan"
 
   - name: 美国
-    type: load-balance
+    type: url-test
+    interval: 100
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
+    exclude-filter: "(?i)(sanfen|yiyuan)"
     filter: "(?i)美|us|unitedstates|united states"
 
   - name: 新加坡
-    type: load-balance
+    type: url-test
+    interval: 100
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
+    exclude-filter: "(?i)(sanfen|yiyuan)"
     filter: "(?i)(新|sg|singapore)"
 
   - name: 日本
-    type: load-balance
+    type: url-test
+    interval: 100
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
+    exclude-filter: "(?i)(sanfen|yiyuan)"
     filter: "(?i)(日本|jp|japan)"
 
   - name: 大流量
-    type: load-balance
+    type: url-test
     strategy: round-robin
     tolerance: 100
     include-all: true
@@ -207,6 +221,7 @@ proxy-groups:
 
   - name: 自动选择
     type: url-test
+    interval: 100
     exclude-filter: "(?i)(直连|日本)"
     include-all: true
     tolerance: 100
