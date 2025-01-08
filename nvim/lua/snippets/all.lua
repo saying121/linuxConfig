@@ -151,10 +151,10 @@ end
 
 return {
     -- https://github.com/L3MON4D3/LuaSnip/wiki/Cool-Snippets#box-comment-like-ultisnips
-    s({ trig = "box_" }, box({ box_width = 24 })),
-    s({ trig = "bbox_" }, box({})),
-    s({ trig = "box" }, create_box({ padding_length = 8 })),
-    s({ trig = "bbox" }, create_box({ padding_length = 18 })),
+    s({ trig = "box_cmt_fixed", desc = "固定大小" }, box({ box_width = 24 })),
+    s({ trig = "bbox_cmt_fixed", desc = "固定大小" }, box({})),
+    s({ trig = "box_cmt_dyn", desc = "动态大小" }, create_box({ padding_length = 8 })),
+    s({ trig = "bbox_cmt_dyn", desc = "动态大小" }, create_box({ padding_length = 18 })),
 
     -- s("ext_opt", {
     --     i(1, "text1", {
