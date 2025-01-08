@@ -18,10 +18,12 @@ return {
         },
     },
     config = function()
+        local extension_path = require("public.utils").find_vscode_codelldb()
+
         local executors = require("rustaceanvim.executors")
 
         ---@type rustaceanvim.Opts
-        vim.g.rustaceanvim = {
+        local cfg = {
             tools = {
                 on_initialized = function(status)
                     local health = status.health
@@ -159,6 +161,31 @@ return {
                     return res
                 end,
             },
+            dap = {
+                adapter = function()
+                    local this_os = vim.uv.os_uname().sysname
+                    if this_os:find("Windows") or this_os:find("Darwin") then
+                        local dap_config = require("rustaceanvim.config").get_codelldb_adapter(
+                            extension_path.codelldb_path,
+                            extension_path.liblldb_path
+                        )
+                        return dap_config
+                    else
+                        -- Archlinux install from aur
+                        return {
+                            type = "server",
+                            host = "127.0.0.1",
+                            port = "port",
+                            executable = {
+                                command = "codelldb",
+                                args = { "--port", "port" },
+                            },
+                        }
+                    end
+                end,
+            },
         }
+
+        vim.g.rustaceanvim = cfg
     end,
 }

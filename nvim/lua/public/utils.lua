@@ -159,4 +159,41 @@ function M.is_git_repo()
     return vim.v.shell_error == 0
 end
 
+function M.find_vscode_codelldb()
+    local extensions_path = vim.env.HOME .. "/.vscode/extensions/"
+    local pattern = "vadimcn%.vscode%-lldb%-([%d%.]+)"
+
+    local latest_version = nil
+
+    for dir in io.popen("ls -d " .. extensions_path .. "vadimcn.vscode-lldb-* 2>/dev/null"):lines() do
+        local version = dir:match(pattern)
+        if version then
+            if not latest_version or version > latest_version then
+                latest_version = version
+            end
+        end
+    end
+
+    local base = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-" .. latest_version
+    local codelldb_path = base
+    local liblldb_path = base
+
+    local this_os = vim.uv.os_uname().sysname
+    -- The path is different on Windows
+    if this_os:find("Windows") then
+        codelldb_path = base .. "\\adapter\\codelldb.exe"
+        liblldb_path = base .. "\\lldb\\bin\\liblldb.dll"
+    else
+        codelldb_path = base .. "/adapter/codelldb"
+        -- The liblldb extension is .so for Linux and .dylib for MacOS
+        liblldb_path = liblldb_path .. "/lldb/lib/liblldb" .. (this_os == "Linux" and ".so" or ".dylib")
+    end
+    local codelldb = {
+        codelldb_path = codelldb_path,
+        liblldb_path = liblldb_path,
+    }
+
+    return codelldb
+end
+
 return M
