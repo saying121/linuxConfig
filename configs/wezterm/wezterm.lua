@@ -4,13 +4,13 @@ local get_sehll = function()
     if wezterm.target_triple == "x86_64-pc-windows-msvc" then
         return { "powershell.exe" }
     else
-        return { "/bin/zsh", "-l" }
+        return { "zsh", "-l" }
     end
 end
 
 local gpus = wezterm.gui.enumerate_gpus()
 
-return {
+local config = {
     webgpu_preferred_adapter = gpus[1],
     max_fps = 60,
     -- front_end = "WebGpu",
@@ -42,3 +42,5 @@ return {
     keys = require("keys"),
     key_tables = require("key_tables"),
 }
+
+return config
