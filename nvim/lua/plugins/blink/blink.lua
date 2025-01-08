@@ -21,7 +21,7 @@ return {
         "ribru17/blink-cmp-spell",
     },
     -- use a release tag to download pre-built binaries
-    version = "v0.8",
+    version = "v0.10",
     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     -- build = 'cargo build --release',
     -- If you use nix, you can build from source using latest nightly rust with:
@@ -56,6 +56,7 @@ return {
             },
         },
         snippets = {
+            preset = "luasnip",
             -- Function to use when expanding LSP provided snippets
             expand = function(snippet)
                 -- vim.snippet.expand(snippet)
@@ -71,31 +72,8 @@ return {
                     expand(snippet)
                 end
             end,
-            -- Function to use when checking if a snippet is active
-            active = function(filter)
-                if filter and filter.direction then
-                    return require("luasnip").jumpable(filter.direction)
-                end
-                return require("luasnip").in_snippet()
-            end,
-            -- Function to use when jumping between tab stops in a snippet, where direction can be negative or positive
-            jump = function(direction)
-                require("luasnip").jump(direction)
-                -- vim.snippet.jump(direction)
-            end,
         },
         completion = {
-            ---@diagnostic disable-next-line: missing-fields
-            keyword = {
-                -- 'prefix' will fuzzy match on the text before the cursor
-                -- 'full' will fuzzy match on the text before *and* after the cursor
-                -- example: 'foo_|_bar' will match 'foo_' for 'prefix' and 'foo__bar' for 'full'
-                range = "prefix",
-                -- Regex used to get the text when fuzzy matching
-                -- regex = "^[-]\\|\\k",
-                -- After matching with regex, any characters matching this regex at the prefix will be excluded
-                exclude_from_prefix_regex = "[\\-]",
-            },
             trigger = {
                 -- When false, will not show the completion window automatically when in a snippet
                 show_in_snippet = true,
@@ -117,9 +95,6 @@ return {
                 -- the completion window when the cursor comes after a trigger character when
                 -- entering insert mode/accepting an item
                 show_on_x_blocked_trigger_characters = { "'", '"', "(" },
-            },
-            list = {
-                selection = "preselect",
             },
             ---@diagnostic disable-next-line: missing-fields
             menu = {
@@ -190,15 +165,15 @@ return {
             },
         },
         sources = {
-            default = { "lsp", "path", "luasnip", "buffer", "ripgrep", "spell" },
+            default = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell" },
             per_filetype = {
-                lua = { "lazydev", "lsp", "path", "luasnip", "buffer", "ripgrep", "spell" },
-                gitcommit = { "luasnip", "buffer", "path", "git", "ripgrep", "spell" },
+                lua = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep", "spell" },
+                gitcommit = { "snippets", "buffer", "path", "git", "ripgrep", "spell" },
                 ["dap-repl"] = { "dap" },
 
-                sql = { "dadbod", "lsp", "luasnip", "buffer" },
-                mysql = { "dadbod", "lsp", "luasnip", "buffer" },
-                plsql = { "dadbod", "lsp", "luasnip", "buffer" },
+                sql = { "dadbod", "lsp", "snippets", "buffer" },
+                mysql = { "dadbod", "lsp", "snippets", "buffer" },
+                plsql = { "dadbod", "lsp", "snippets", "buffer" },
                 DressingInput = { "path", "ripgrep" },
             },
             providers = {
@@ -228,11 +203,12 @@ return {
                     score_offset = 0, -- Boost/penalize the score of the items
                     override = nil, -- Override the source's functions
                 },
-                luasnip = {
-                    name = "Luasnip",
-                    module = "blink.cmp.sources.luasnip",
-                    score_offset = -1,
-                    -- fallbacks = { "lsp" },
+                snippets = {
+                    name = "Snippets",
+                    module = "blink.cmp.sources.snippets",
+                    score_offset = 0,
+
+                    -- For `snippets.preset == 'luasnip'`
                     opts = {
                         -- Whether to use show_condition for filtering snippets
                         use_show_condition = true,
