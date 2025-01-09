@@ -56,6 +56,7 @@ link_list=(
     ["$HOME/.linuxConfig/configs/lf/ctpv"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/microsoft-edge-stable-flags.conf"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/aerospace"]="$HOME/.config"
+    ["$HOME/.linuxConfig/configs/aerospace/borders"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/dunst"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/fcitxs-config/fcitx5"]="$HOME/.config"
     ["$HOME/.linuxConfig/configs/flameshot"]="$HOME/.config"

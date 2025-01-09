@@ -13,7 +13,12 @@ brew install bash-language-server lua-language-server taplo
 brew install deno
 brew install imagemagick
 brew install lua lua@5.1 -f
+
 brew install --cask nikitabobko/tap/aerospace
+brew tap FelixKratz/formulae
+brew install borders
+brew services start borders
+
 brew install bat mdcat
 brew install ctpv lf yazi chafa
 
@@ -62,3 +67,9 @@ defaults write com.apple.dock ResetLaunchPad -bool TRUE
 killall Dock
 
 brew install quarylabs/quary/sqruff
+
+brew reinstall zsh
+brew reinstall pcre pcre2
+# shit not work
+# sudo chsh -s `/opt/homebrew/bin/zsh` $USER
+sudo dscl . -create "/Users/${USER}" UserShell $(brew --prefix)/bin/zsh

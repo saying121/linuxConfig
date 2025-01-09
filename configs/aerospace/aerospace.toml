@@ -1,7 +1,10 @@
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
-after-login-command = ["exec-and-forget sudo ~/.cargo/bin/kanata -n -c ~/.linuxConfig/configs/kanata.kbd"]
+after-login-command = [
+    "exec-and-forget sudo ~/.cargo/bin/kanata -n -c ~/.linuxConfig/configs/kanata.kbd",
+    # 'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
+]
 
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
@@ -41,8 +44,8 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = false
 
 [gaps]
-inner.horizontal = 3
-inner.vertical = 3
+inner.horizontal = 6
+inner.vertical = 6
 outer.left = 3
 outer.bottom = 3
 outer.top = 3
