@@ -42,6 +42,7 @@ local machine_learning = {
     ["tensorflow"] = "tensorflow 的 Rust 语言绑定。",
 }
 local consts = {
+    ["typenum"] = "在 Rust 中编译时数字。",
     ["const_format"] = "编译时字符串格式化",
     ["const_str"] = "compile-time string operations",
 }
