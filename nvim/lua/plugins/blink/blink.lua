@@ -1,25 +1,10 @@
+local api = vim.api
+
 ---@type LazySpec
 return {
     "saghen/blink.cmp",
     cond = true,
     lazy = false, -- lazy loading handled internally
-    -- optional: provides snippets for the snippet source
-    -- dependencies = "rafamadriz/friendly-snippets",
-    dependencies = {
-        -- "L3MON4D3/LuaSnip",
-        "mikavilpas/blink-ripgrep.nvim",
-        {
-            "petertriho/cmp-git",
-            opts = {
-                filetypes = {
-                    "gitcommit",
-                    "octo",
-                    "markdown", -- for gh & glab CLI
-                },
-            },
-        },
-        "ribru17/blink-cmp-spell",
-    },
     -- use a release tag to download pre-built binaries
     version = "v0.10",
     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
@@ -104,14 +89,13 @@ return {
                 border = "rounded",
                 draw = {
                     columns = {
-                        -- { "kind_icon", "label", "label_description", gap = 1 },
                         { "kind_icon" },
                         { "label", gap = 1 },
-
-                        -- { "kind" },
+                        { "source_name" },
                     },
                     components = {
                         label = {
+                            width = { max = 70 },
                             text = require("colorful-menu").blink_components_text,
                             highlight = require("colorful-menu").blink_components_highlight,
                         },
@@ -237,9 +221,10 @@ return {
                     opts = {
                         -- default to all visible buffers
                         get_bufnrs = function()
-                            return vim.iter(vim.api.nvim_list_wins())
+                            -- return vim.iter(api.nvim_list_wins())
+                            return vim.iter({ api.nvim_get_current_win() })
                                 :map(function(win)
-                                    return vim.api.nvim_win_get_buf(win)
+                                    return api.nvim_win_get_buf(win)
                                 end)
                                 :filter(function(buf)
                                     return vim.bo[buf].buftype ~= "nofile"
@@ -306,7 +291,7 @@ return {
             },
         },
         appearance = {
-            highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
+            highlight_ns = api.nvim_create_namespace("blink_cmp"),
             kind_icons = {
                 Text = "󰉿",
                 Method = "󰆧",
@@ -343,5 +328,5 @@ return {
     },
     -- allows extending the enabled_providers array elsewhere in your config
     -- without having to redefine it
-    opts_extend = { "sources.completion.enabled_providers" },
+    opts_extend = { "sources.default" },
 }
