@@ -39,7 +39,15 @@ return {
                 executor = executors.toggleterm,
                 test_executor = executors.toggleterm,
 
-                code_actions = { ui_select_fallback = true },
+                code_actions = {
+                    ui_select_fallback = true,
+                    keys = {
+                        ---@type string | string[]
+                        confirm = { "<CR>" },
+                        ---@type string | string[]
+                        quit = { "q", "<Esc>" },
+                    },
+                },
 
                 enable_nextest = false,
 

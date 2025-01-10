@@ -81,10 +81,6 @@ local crates = {
     ["bitflags"] = "一个类型安全的位掩码标志生成器，对 **C** 风格标志集很有用。它可用于围绕 **C** api 创建符合人体工程学的包装器",
     ["byteorder"] = "这个 crate 提供了以大端或小端顺序编码和解码数字的便捷方法",
     ["flate2"] = "deflate 压缩和解压缩公开为 read/buf 读/写流。支持 miniz oxide 和多个 zlib 实现。支持 zlib、gzip 和原始 deflate 流。",
-    ["lazy_static"] = [[一个宏，用于在 **Rust** 中声明延迟计算的静态变量。
-    （该库已经废弃
-    用 `std::{cell::OnceCell, sync::OnceLock};
-    std::{sync::LazyLock, cell::LazyCell}}` 取代）]],
     ["closure_attr"] = "用于简化闭包捕获的属性宏",
     ["ufmt"] = "μfmt，一个比core：：fmt小（6- 40倍）、快（2- 9倍）、无恐慌的替代品",
 }
@@ -576,6 +572,7 @@ local test = {
     ["mockito"] = "HTTP mocking for Rust!",
 }
 local error_handle = {
+    ["snafu"] = "符合人体工程学的错误处理库",
     ["anyhow"] = "灵活的具体错误类型建立在 std::error::error 之上",
     ["thiserror"] = "推导（错误）",
     ["color-eyre"] = "一个用于恐慌的错误报告处理程序，以及用于为各种错误提供丰富多彩、一致且格式良好的错误报告的 eyre crate。",

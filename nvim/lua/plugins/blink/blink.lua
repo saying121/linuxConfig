@@ -153,6 +153,8 @@ return {
             per_filetype = {
                 lua = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep", "spell" },
                 gitcommit = { "snippets", "buffer", "path", "git", "ripgrep", "spell" },
+                markdown = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell", "git" },
+                octo = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell", "git" },
                 ["dap-repl"] = { "dap" },
 
                 sql = { "dadbod", "lsp", "snippets", "buffer" },
@@ -267,7 +269,17 @@ return {
                         search_casing = "--smart-case",
                     },
                 },
-                git = { name = "git", module = "blink.compat.source", opts = {} },
+                git = {
+                    name = "Git",
+                    module = "blink.compat.source",
+                    opts = {
+                        filetypes = {
+                            "gitcommit",
+                            "octo",
+                            "markdown",
+                        },
+                    },
+                },
                 spell = {
                     name = "Spell",
                     module = "blink-cmp-spell",

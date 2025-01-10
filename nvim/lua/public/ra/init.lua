@@ -110,7 +110,7 @@ return {
                 -- "--offline"
             }, -- 传递给每个 cargo 调用的额外参数。
             extraEnv = {}, -- 在工作区内运行 cargo、rustc 或其他命令时将设置的额外环境变量。用于设置 RUSTFLAGS。
-            features = "all", -- 要激活的功能列表。将其设置为 "all" 以将 --all-features 传递给cargo。
+            -- features = "all", -- 要激活的功能列表。将其设置为 "all" 以将 --all-features 传递给cargo。
             noDefaultFeatures = false, -- 是否将 --no-default-features 传递给cargo
             sysroot = "discover", -- sysroot的相对路径，或“discover”以尝试通过“rustc--print sysroot”自动找到它。
             sysrootQueryMetadata = false, -- Whether to run cargo metadata on the sysroot library allowing rust-analyzer to analyze third-party dependencies of the standard libraries.
