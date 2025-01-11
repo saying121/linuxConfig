@@ -1,4 +1,5 @@
-local replace = {
+local M = {}
+M.snippet = {
     -- ["let"] = "let ${1:var} = ${2:expr};",
     ["println!($0)"] = 'println!("$1"$2);$0',
     ["print!($0)"] = 'print!("$1"$2);$0',
@@ -18,4 +19,10 @@ local replace = {
     -- ["unsafe"] = "unsafe {\n\t${1}\n}$0",
 }
 
-return replace
+M.keyword = {
+    "let",
+    "enum",
+    "struct",
+}
+
+return M

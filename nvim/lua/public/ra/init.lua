@@ -124,7 +124,8 @@ return {
             command = "clippy", -- 用于 cargo check 的命令。
             extraArgs = { "--no-deps", "--message-format=json-diagnostic-rendered-ansi" }, -- cargo check 的额外参数。
             extraEnv = {}, -- 运行 cargo check 时将设置的额外环境变量。扩展 rust-analyzer.cargo.extraEnv 。
-            features = "all", -- 要激活的功能列表。默认为 rust-analyzer.cargo.features 。设置为 "all" ，将 --all-features 传递给Cargo。
+            -- 要激活的功能列表。默认为 rust-analyzer.cargo.features 。设置为 "all" ，将 --all-features 传递给Cargo。
+            -- features = "all",
             invocationLocation = "workspace", -- 指定运行检查的工作目录。-“workspace”：对相应工作区的根目录中的工作区进行检查。
             -- 如果 rust-analyzer.cargo.checkOnSave.invocationStrategy 设置为 once ，则返回到“root”。-“root”：在项目的根目录中运行检查。
             -- 此配置仅在设置了 rust-analyzer.cargo.buildScripts.overrideCommand 时有效。
@@ -133,8 +134,12 @@ return {
             -- 此配置仅在设置了 rust-analyzer.cargo.buildScripts.overrideCommand 时有效。
             noDefaultFeatures = nil, -- 是否将 --no-default-features 传递给Cargo。
             -- overrideCommand = { "cargo", "clippy", "--tests", "--message-format=json-diagnostic-rendered-ansi" },
-            targets = nil, -- 检查特定目标。如果为空，则默认为 rust-analyzer.cargo.target 。
+
+            -- 检查特定目标。如果为空，则默认为 rust-analyzer.cargo.target 。
             -- 可以是单个目标，例如 "x86_64-unknown-linux-gnu" 或目标列表，例如 ["aarch64-apple-darwin", "x86_64-apple-darwin"] 。
+            targets = nil,
+
+            workspace = true,
         },
         completion = {
             autoimport = { enable = true },

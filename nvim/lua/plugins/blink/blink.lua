@@ -1,17 +1,13 @@
 local api = vim.api
+local vfn = vim.fn
+local rust_replace = require("public.ra.replace_snip")
 
 ---@type LazySpec
 return {
     "saghen/blink.cmp",
     cond = true,
     lazy = false, -- lazy loading handled internally
-    -- use a release tag to download pre-built binaries
     version = "v0.10",
-    -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
-
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -47,7 +43,7 @@ return {
                 -- vim.snippet.expand(snippet)
                 local luasnip = require("luasnip")
 
-                local replace = require("public.ra.replace_snip")
+                local replace = rust_replace.snippet
                 local expand = luasnip.lsp_expand
 
                 local temp = replace[snippet]
@@ -168,16 +164,27 @@ return {
                     module = "blink.cmp.sources.lsp",
                     enabled = true,
                     transform_items = function(_, items)
-                        for _, item in ipairs(items) do
-                            if
-                                item.kind == require("blink.cmp.types").CompletionItemKind.Snippet
-                                and item.filterText == "let"
-                            then
-                                item.score_offset = item.score_offset + 1
-                            end
+                        local replace_item = {}
+                        if vim.o.filetype == "rust" then
+                            replace_item = rust_replace.keyword
                         end
 
-                        return items
+                        return vim.tbl_filter(function(item)
+                            -- if ra have `enum`, `let` keyword and snippet only use snippet
+                            if
+                                item.kind == require("blink.cmp.types").CompletionItemKind.Keyword
+                                and vim.tbl_contains(replace_item, item.filterText)
+                            then
+                                -- print(item.filterText)
+                                return false
+                            end
+                            return true
+                            -- return not (
+                            --     item.kind == require("blink.cmp.types").CompletionItemKind.Keyword
+                            --     and vim.tbl_contains(replace_item, item.filterText)
+                            -- )
+                        end, items)
+
                         -- return vim.tbl_filter(function(item)
                         --     return item.kind ~= require("blink.cmp.types").CompletionItemKind.Text
                         -- end, items)
@@ -210,9 +217,9 @@ return {
                         trailing_slash = false,
                         label_trailing_slash = true,
                         get_cwd = function(context)
-                            return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
+                            return vfn.expand(("#%d:p:h"):format(context.bufnr))
                         end,
-                        show_hidden_files_by_default = false,
+                        show_hidden_files_by_default = true,
                     },
                 },
                 buffer = {
@@ -278,7 +285,7 @@ return {
                             return true
                         end
 
-                        vim.fn.system("git rev-parse --is-inside-work-tree")
+                        vfn.system("git rev-parse --is-inside-work-tree")
                         local g = vim.v.shell_error == 0
                         local c = vim.o.filetype == "markdown"
 
