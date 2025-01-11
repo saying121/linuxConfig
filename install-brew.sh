@@ -73,3 +73,5 @@ brew reinstall pcre pcre2
 # shit not work
 # sudo chsh -s `/opt/homebrew/bin/zsh` $USER
 sudo dscl . -create "/Users/${USER}" UserShell $(brew --prefix)/bin/zsh
+
+brew install github gh

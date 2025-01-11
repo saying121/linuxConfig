@@ -149,7 +149,7 @@ return {
             },
         },
         sources = {
-            default = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell" },
+            default = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell", "git" },
             per_filetype = {
                 lua = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep", "spell" },
                 gitcommit = { "snippets", "buffer", "path", "git", "ripgrep", "spell" },
@@ -271,14 +271,22 @@ return {
                 },
                 git = {
                     name = "Git",
-                    module = "blink.compat.source",
-                    opts = {
-                        filetypes = {
-                            "gitcommit",
-                            "octo",
-                            "markdown",
-                        },
-                    },
+                    module = "blink-cmp-git",
+                    score_offset = 1,
+                    enabled = function()
+                        if vim.o.filetype == "gitcommit" then
+                            return true
+                        end
+
+                        vim.fn.system("git rev-parse --is-inside-work-tree")
+                        local g = vim.v.shell_error == 0
+                        local c = vim.o.filetype == "markdown"
+
+                        return c and g
+                    end,
+                    --- @module 'blink-cmp-git'
+                    --- @type blink-cmp-git.Options
+                    opts = {},
                 },
                 spell = {
                     name = "Spell",
