@@ -75,3 +75,5 @@ brew reinstall pcre pcre2
 sudo dscl . -create "/Users/${USER}" UserShell $(brew --prefix)/bin/zsh
 
 brew install github gh
+
+brew install prettier biome asmfmt fnlfmt golines checkmake protolint actionlint

@@ -7,7 +7,8 @@ return {
     event = "VeryLazy",
     dependencies = {
         "kevinhwang91/promise-async",
-        "luukvbaal/statuscol.nvim",
+        -- "luukvbaal/statuscol.nvim",
+        -- "folke/snacks.nvim",
     },
     config = function()
         --- global handler

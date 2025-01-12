@@ -33,8 +33,6 @@ set showmatch                                                  " 高亮显示匹
 set matchpairs=(:),{:},[:],':',\":\"
 set matchtime=1
 
-set foldcolumn=1                                               " 显示折叠提示
-
 set autoindent                                                 " 和前一行缩进相同
 set smartindent                                                " 和前一行有相同缩进量。识别}(不缩进)，识别c语言。#开头行不缩进。
 set cindent                                                    " 用c语言缩进格式
@@ -66,7 +64,11 @@ set conceallevel=2
 
 set nowrap
 
-set fillchars=eob:\ ,fold:\ ,foldopen:,foldclose:,foldsep:
-set foldcolumn=1
+set fillchars=eob:\ ,fold:\ ,foldopen:,foldclose:,foldsep:\  "
+if has('nvim')
+    set foldcolumn=auto:2
+else
+    set foldcolumn=1
+endif
 set foldlevel=99
 set foldlevelstart=99
