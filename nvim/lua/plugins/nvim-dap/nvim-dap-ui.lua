@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
     "rcarriga/nvim-dap-ui",
+    lazy = true,
     dependencies = { "nvim-neotest/nvim-nio" },
     config = function()
         local dapui, keymap = require("dapui"), vim.keymap.set
@@ -62,13 +63,13 @@ return {
                 },
                 {
                     elements = {
-                        -- {
-                        --     id = "repl",
-                        --     size = 0.5,
-                        -- },
+                        {
+                            id = "repl",
+                            size = 0.5,
+                        },
                         {
                             id = "console",
-                            size = 1,
+                            size = 0.5,
                         },
                     },
                     position = "bottom",

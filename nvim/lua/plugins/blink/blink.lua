@@ -144,6 +144,9 @@ return {
                 treesitter_highlighting = true,
             },
         },
+        enabled = function()
+            return (vim.bo.buftype ~= "prompt" and vim.b.completion ~= false) or require("cmp_dap").is_dap_buffer()
+        end,
         sources = {
             default = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell", "git" },
             per_filetype = {
@@ -308,12 +311,6 @@ return {
                 dap = {
                     name = "dap",
                     module = "blink.compat.source",
-                    opts = {
-                        max_entries = 10,
-                        enable_in_context = function()
-                            return true
-                        end,
-                    },
                 },
             },
         },

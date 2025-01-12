@@ -13,7 +13,7 @@ return {
         { "<leader>sc", mode = "n" },
         { "<leader>cl", mode = "n" },
     },
-    dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "nvim-dap" .. "/dependencies"),
+    -- dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "nvim-dap" .. "/dependencies"),
     config = function()
         -- 对各个语言的配置
         require("dap-conf.python")
@@ -69,9 +69,9 @@ return {
             widgets.centered_float(widgets.sessions)
         end)
 
-        local dapui = require("dapui")
         -- 自动开启ui
         dap.listeners.after.event_initialized["dapui_config"] = function()
+            local dapui = require("dapui")
             dapui.open()
             api.nvim_command("DapVirtualTextEnable")
             _G.dapui_for_K = true
@@ -79,17 +79,14 @@ return {
 
         dap.listeners.before.event_terminated["dapui_config"] = function()
             api.nvim_command("DapVirtualTextEnable")
-            -- dapui.close()
             _G.dapui_for_K = false
         end
         dap.listeners.before.event_exited["dapui_config"] = function()
             api.nvim_command("DapVirtualTextEnable")
-            -- dapui.close()
             _G.dapui_for_K = false
         end
         dap.listeners.before.disconnect["dapui_config"] = function()
             api.nvim_command("DapVirtualTextEnable")
-            -- dapui.close()
             _G.dapui_for_K = false
         end
 

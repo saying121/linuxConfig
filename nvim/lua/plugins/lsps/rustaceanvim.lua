@@ -174,11 +174,11 @@ return {
                         -- Archlinux install from aur
                         return {
                             type = "server",
+                            port = "${port}",
                             host = "127.0.0.1",
-                            port = "port",
                             executable = {
                                 command = "codelldb",
-                                args = { "--port", "port" },
+                                args = { "--port", "${port}" },
                             },
                         }
                     end

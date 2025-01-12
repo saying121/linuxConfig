@@ -1,6 +1,10 @@
 ---@type LazySpec
 return {
     "theHamsta/nvim-dap-virtual-text",
+    cmd = {
+        "DapVirtualTextEnable",
+    },
+    lazy = true,
     config = function()
         require("nvim-dap-virtual-text").setup({
             enabled = true,
