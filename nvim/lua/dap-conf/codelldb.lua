@@ -1,22 +1,11 @@
 ---@diagnostic disable: redundant-parameter, unused-local
 local dap = require("dap")
 
+local codelldb_conf = require("public.utils").codelldb_config()
+
 -- never showDisassembly
 -- https://github.com/mfussenegger/nvim-dap/issues/307#issuecomment-929754523
-dap.adapters.codelldb = {
-    type = "server",
-    host = "127.0.0.1",
-    port = "${port}",
-    executable = {
-        command = "codelldb",
-        -- args = { "--liblldb", liblldb_path, "--port", "${port}" },
-        args = { "--port", "${port}" },
-        -- args = { "--port", "${port}", "--params", '\'{"showDisassembly" : "never"}' },
-
-        -- On windows you may have to uncomment this:
-        -- detached = false,
-    },
-}
+dap.adapters.codelldb = codelldb_conf
 
 local util = require("public.utils")
 -- 调用函数，传入当前工作目录和要找的文件夹作为参数

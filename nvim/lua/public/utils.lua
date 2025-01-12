@@ -159,7 +159,13 @@ function M.is_git_repo()
     return vim.v.shell_error == 0
 end
 
-function M.find_vscode_codelldb()
+local function find_vscode_codelldb()
+    if vim.fn.executable("codelldb") == 1 then
+        return {
+            codelldb_path = "codelldb",
+            liblldb_path = nil,
+        }
+    end
     local extensions_path = vim.env.HOME .. "/.vscode/extensions/"
     local pattern = "vadimcn%.vscode%-lldb%-([%d%.]+)"
 
@@ -194,6 +200,36 @@ function M.find_vscode_codelldb()
     }
 
     return codelldb
+end
+
+function M.codelldb_config()
+    if _G.codelldb ~= nil then
+        -- vim.print(_G.codelldb)
+        return _G.codelldb
+    end
+    local config = {
+        type = "server",
+        port = "${port}",
+        host = "127.0.0.1",
+        executable = {
+            args = { "--port", "${port}" },
+            -- On windows you may have to uncomment this:
+            -- detached = false,
+        },
+    }
+
+    local codelldb = find_vscode_codelldb()
+    if codelldb.liblldb_path == nil then
+        config.executable.command = codelldb.codelldb_path
+        _G.codelldb = config
+        return config
+    end
+
+    config.executable.command = codelldb.codelldb_path
+    -- config.executable.args = { "--liblldb", codelldb.liblldb_path, "--port", "${port}" }
+
+    _G.codelldb = config
+    return config
 end
 
 return M
