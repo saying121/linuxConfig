@@ -3,10 +3,11 @@
 export RUNEWIDTH_EASTASIAN=0
 
 # lesspipe.sh 会读取home的.lessfilter
-export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --history=$HOME/.zi/cache/fzfhistory --preview='lesspipe.sh {}' --bind 'alt-p:preview-up,alt-n:preview-down'"
+export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --history=$HOME/.zi/cache/fzfhistory --preview='~/.lessfilter {}' --bind 'alt-p:preview-up,alt-n:preview-down'"
 export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build,dist,vendor} --type f"
 
-export LESSOPEN='|lesspipe.sh %s'
+# export LESSOPEN='|lesspipe.sh %s'
+export LESSOPEN='| ~/.lessfilter %s'
 
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'

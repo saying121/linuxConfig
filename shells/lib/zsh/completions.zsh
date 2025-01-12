@@ -78,7 +78,8 @@ zi load ellie/atuin
 
 zi ice lucid wait has'fzf'
 zi light Aloxaf/fzf-tab
-zi ice wait lucid; zi light Freed-Wu/fzf-tab-source
+zi ice wait lucid
+zi light Freed-Wu/fzf-tab-source
 source ~/.linuxConfig/shells/lib/zsh/fzf-tab.zsh
 
 zi ice wait lucid atload"!_zsh_autosuggest_start"

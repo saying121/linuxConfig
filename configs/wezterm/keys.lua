@@ -68,14 +68,24 @@ local keys = {
         action = act.MoveTabRelative(1),
     },
     {
-        key = "RightArrow",
-        mods = "ALT",
-        action = act.ActivateWindowRelative(1),
-    },
-    {
         key = "LeftArrow",
         mods = "ALT",
-        action = act.ActivateWindowRelative(-1),
+        action = act.ActivatePaneDirection("Left"),
+    },
+    {
+        key = "RightArrow",
+        mods = "ALT",
+        action = act.ActivatePaneDirection("Right"),
+    },
+    {
+        key = "UpArrow",
+        mods = "ALT",
+        action = act.ActivatePaneDirection("Up"),
+    },
+    {
+        key = "DownArrow",
+        mods = "ALT",
+        action = act.ActivatePaneDirection("Down"),
     },
     -- activate pane selection mode with the default alphabet (labels are "a", "s", "d", "f" and so on)
     -- 选择pane 字母
