@@ -761,7 +761,7 @@ perf = { level = "deny", priority = -1 }
 
 ### nursery group
 nursery = { level = "warn", priority = -1 }
-trivial_regex = "allow" # see: https://github.com/rust-lang/rust-clippy/issues/6690
+trivial_regex = "allow"                     # see: https://github.com/rust-lang/rust-clippy/issues/6690
 
 ### pedantic group
 inconsistent_struct_constructor = "warn"

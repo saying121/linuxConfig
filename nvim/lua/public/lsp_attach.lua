@@ -38,10 +38,10 @@ M.on_attach = function(client, bufnr)
                 bufnr = bufnr,
                 filter = function(client1)
                     local reject = {
-                        "lua-ls",
-                        "sqls",
+                        ["lua-ls"] = true,
+                        sqls = true,
                     }
-                    if vim.tbl_contains(reject, client1.name) then
+                    if reject[client1.name] then
                         return false
                     else
                         return true
@@ -58,11 +58,11 @@ M.on_attach = function(client, bufnr)
 
     -- shit
     local lsps = {
-        "lemminx",
-        "jdtls",
-        "tinymist",
+        lemminx = true,
+        jdtls = true,
+        tinymist = true,
     }
-    if vim.tbl_contains(lsps, client.name) then
+    if lsps[client.name] then
         keymap({ "n", "x" }, "<space>f", function()
             lspb.format({ async = true })
         end)
@@ -116,11 +116,11 @@ M.on_attach = function(client, bufnr)
                 scope = "cursor",
             }
             local ft = {
-                "markdown",
-                "python",
-                "rust",
+                markdown = true,
+                python = true,
+                rust = true,
             }
-            if vim.tbl_contains(ft, vim.bo.filetype) then
+            if ft[vim.bo.filetype] then
                 return
             end
             -- api.nvim_win_close(win_id, force)

@@ -417,16 +417,6 @@ local prefix = {
         description = "struct …(…);",
         scope = "item",
     },
-    impl = {
-        prefix = { "impl" },
-        body = {
-            "impl ${1:Type} {",
-            "    $2",
-            "}",
-        },
-        description = "impl … { … }",
-        scope = "item",
-    },
     impl_trait = {
         prefix = { "impl_trait" },
         body = {

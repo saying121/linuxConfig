@@ -20,9 +20,11 @@ M.snippet = {
 }
 
 M.keyword = {
-    "let",
-    "enum",
-    "struct",
+    let = true,
+    enum = true,
+    struct = true,
+    static = true,
+    const = true,
 }
 
 return M

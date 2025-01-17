@@ -84,10 +84,10 @@ return {
                         bufnr = bufnr,
                         filter = function(client)
                             local reject = {
-                                "lua-ls",
-                                "sqls",
+                                ["lua-ls"] = true,
+                                sqls = true,
                             }
-                            if vim.tbl_contains(reject, client.name) then
+                            if reject[client.name] then
                                 return false
                             else
                                 return true

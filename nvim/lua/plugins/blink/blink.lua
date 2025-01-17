@@ -148,12 +148,17 @@ return {
             return (vim.bo.buftype ~= "prompt" and vim.b.completion ~= false) or require("cmp_dap").is_dap_buffer()
         end,
         sources = {
-            default = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell", "git" },
+            default = function()
+                local default = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell" }
+                if vim.bo.ft == "lua" then
+                    table.insert(default, "lazydev")
+                elseif vim.bo.ft == "markdown" then
+                    table.insert(default, "git")
+                end
+                return default
+            end,
             per_filetype = {
-                lua = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep", "spell" },
                 gitcommit = { "snippets", "buffer", "path", "git", "ripgrep", "spell" },
-                markdown = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell", "git" },
-                octo = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell", "git" },
                 ["dap-repl"] = { "dap" },
 
                 sql = { "dadbod", "lsp", "snippets", "buffer" },
@@ -176,7 +181,7 @@ return {
                             -- if ra have `enum`, `let` keyword and snippet only use snippet
                             if
                                 item.kind == require("blink.cmp.types").CompletionItemKind.Keyword
-                                and vim.tbl_contains(replace_item, item.filterText)
+                                and replace_item[item.filterText]
                             then
                                 -- print(item.filterText)
                                 return false
@@ -285,6 +290,15 @@ return {
                     score_offset = 1,
                     enabled = function()
                         if vim.o.filetype == "gitcommit" then
+                            return true
+                        end
+                        local success, node = pcall(vim.treesitter.get_node)
+                        local enable_type = {
+                            comment = true,
+                            line_comment = true,
+                            block_comment = true,
+                        }
+                        if success and node ~= nil and enable_type[node:type()] then
                             return true
                         end
 
