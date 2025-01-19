@@ -516,6 +516,7 @@ local websocket = {
     ["tungstenite"] = "基于流的轻量级 Web 套接字实现",
 }
 local macro = {
+    ["derivative"] = "一组 Rust 的替代“derive”属性",
     ["proc-macro2"] = "编译器的“proc macro” API 的替代实现，用于将基于标记的库与过程宏用例分离。",
     ["darling"] = "一个 proc-macro 库，用于在实现自定义派生时将属性读取到结构中。",
     ["macro_railroad"] = "一个为 Rust 宏生成语法图的库",

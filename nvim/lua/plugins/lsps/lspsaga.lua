@@ -84,7 +84,7 @@ return {
             show_normal_height = 10,
             max_show_width = 0.9,
             max_show_height = 0.6,
-            diagnostic_only_current = true,
+            diagnostic_only_current = false,
             keys = {
                 exec_action = "o",
                 quit = "q",

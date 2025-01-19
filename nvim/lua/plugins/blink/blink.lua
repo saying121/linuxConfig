@@ -222,7 +222,7 @@ return {
                     module = "blink.cmp.sources.path",
                     score_offset = 3,
                     opts = {
-                        trailing_slash = false,
+                        trailing_slash = true,
                         label_trailing_slash = true,
                         get_cwd = function(context)
                             return vfn.expand(("#%d:p:h"):format(context.bufnr))

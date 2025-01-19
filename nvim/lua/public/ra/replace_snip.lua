@@ -25,6 +25,8 @@ M.keyword = {
     struct = true,
     static = true,
     const = true,
+    type = true,
+    mod = true,
 }
 
 return M

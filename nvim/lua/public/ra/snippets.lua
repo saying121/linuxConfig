@@ -83,11 +83,11 @@ local postfix = {
         requires = "std::sync::Arc",
         scope = "expr",
     },
-    ["sync::Weak::clone"] = {
-        postfix = "sync_Weak_clone",
-        body = "Weak::clone(&${receiver})",
-        description = "Put the expression into a `sync::Weak::clone`",
-        requires = "std::sync::Weak",
+    ["Arc::downgrade"] = {
+        postfix = "downgrade",
+        body = "Arc::downgrade(&${receiver})",
+        description = "Put the expression into a `Arc::downgrade`",
+        requires = "std::sync::Arc",
         scope = "expr",
     },
     ["Rc::new"] = {
@@ -471,14 +471,6 @@ local prefix = {
         -- description = "type … = …;",
         scope = "expr",
     },
-    async = {
-        prefix = { "async" },
-        body = {
-            "async $0",
-        },
-        description = "Insert a async call",
-        scope = "expr",
-    },
     thread_spawn = {
         prefix = { "spawn", "tspawn" },
         body = {
@@ -585,6 +577,9 @@ local prefix = {
             "    ${2:b.iter(|| ${3:/* benchmark code */})}",
             "}",
         },
+        -- requires = {
+        --     "test::Bencher",
+        -- },
         description = "#[bench]",
         prefix = "bench",
         scope = "item",
