@@ -31,16 +31,15 @@ M.on_attach = function(client, bufnr)
         end)
     end
 
-    if client.supports_method(methods.textDocument_formatting, { bufnr = bufnr }) then
+    local function lsp_format(reject)
+        local reject = {
+            ["lua-ls"] = true,
+            sqls = true,
+        }
         keymap("n", "<space>f", function()
             lspb.format({
                 async = true,
-                bufnr = bufnr,
                 filter = function(client1)
-                    local reject = {
-                        ["lua-ls"] = true,
-                        sqls = true,
-                    }
                     if reject[client1.name] then
                         return false
                     else
@@ -50,20 +49,16 @@ M.on_attach = function(client, bufnr)
             })
         end)
     end
-    if client.supports_method(methods.textDocument_rangeFormatting, { bufnr = bufnr }) then
-        keymap("x", "<space>f", function()
-            lspb.format({ async = true })
-        end)
-    end
 
-    -- shit
-    local lsps = {
-        lemminx = true,
-        jdtls = true,
-        tinymist = true,
-    }
-    if lsps[client.name] then
-        keymap({ "n", "x" }, "<space>f", function()
+    if client.supports_method(methods.textDocument_formatting, { bufnr = bufnr }) then
+        lsp_format()
+    end
+    if
+        client.supports_method(methods.textDocument_rangeFormatting, { bufnr = bufnr })
+        or client.supports_method(methods.textDocument_rangesFormatting, { bufnr = bufnr })
+    then
+        lsp_format()
+        keymap("x", "<space>f", function()
             lspb.format({ async = true })
         end)
     end
