@@ -149,7 +149,7 @@ return {
         end,
         sources = {
             default = function()
-                local default = { "lsp", "path", "snippets", "buffer", "ripgrep", "spell" }
+                local default = { "lsp", "path", "snippets", "buffer", "ripgrep", "dictionary" }
                 if vim.bo.ft == "lua" then
                     table.insert(default, "lazydev")
                 elseif vim.bo.ft == "markdown" then
@@ -158,7 +158,7 @@ return {
                 return default
             end,
             per_filetype = {
-                gitcommit = { "snippets", "buffer", "path", "git", "ripgrep", "spell" },
+                gitcommit = { "snippets", "buffer", "path", "git", "ripgrep", "dictionary" },
                 ["dap-repl"] = { "dap" },
 
                 sql = { "dadbod", "lsp", "snippets", "buffer" },
@@ -177,13 +177,13 @@ return {
                             replace_item = rust_replace.keyword
                         end
 
+                        ---@param item blink.cmp.CompletionItem
                         return vim.tbl_filter(function(item)
                             -- if ra have `enum`, `let` keyword and snippet only use snippet
                             if
                                 item.kind == require("blink.cmp.types").CompletionItemKind.Keyword
                                 and replace_item[item.filterText]
                             then
-                                -- print(item.filterText)
                                 return false
                             end
                             return true
@@ -233,7 +233,7 @@ return {
                 buffer = {
                     name = "Buffer",
                     module = "blink.cmp.sources.buffer",
-                    fallbacks = { "ripgrep", "spell" },
+                    fallbacks = { "ripgrep", "dictionary" },
                     -- prefix_min_len = 4,
                     opts = {
                         -- default to all visible buffers
@@ -308,22 +308,28 @@ return {
 
                         return c and g
                     end,
-                    --- @module 'blink-cmp-git'
-                    --- @type blink-cmp-git.Options
+                    ---@module 'blink-cmp-git'
+                    ---@type blink-cmp-git.Options
                     opts = {},
                 },
-                spell = {
-                    name = "Spell",
-                    module = "blink-cmp-spell",
+                dictionary = {
+                    name = "Dict",
+                    module = "blink-cmp-dictionary",
                     opts = {
-                        max_entries = 10,
+                        -- Specify the dictionary files' path
+                        -- example: { vim.fn.expand('~/.config/nvim/dictionary/words.dict') }
+                        dictionary_files = nil,
+                        -- All .txt files in these directories will be treated as dictionary files
+                        -- example: { vim.fn.expand('~/.config/nvim/dictionary') }
+                        dictionary_directories = nil,
+                        max_items = 10,
                         enable_in_context = function()
                             return true
                         end,
                     },
                 },
                 dap = {
-                    name = "dap",
+                    name = "Dap",
                     module = "blink.compat.source",
                 },
             },

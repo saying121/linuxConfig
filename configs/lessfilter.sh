@@ -67,9 +67,10 @@ elif [ "$kind" = json ]; then
         jq -Cr . "$1"
     fi
 elif [ "$kind" = vnd.sqlite3 ]; then
-    if has_cmd yes sqlite3 bat; then
-        yes .q | sqlite3 "$1" | bat --color=always -plsql
-    fi
+    file "$1"
+    # if has_cmd yes sqlite3 bat; then
+    #     yes .q | sqlite3 "$1" | bat --color=always -plsql
+    # fi
 # https://github.com/wofr06/lesspipe/pull/107
 elif [ -d "$1" ]; then
     if has_cmd eza; then

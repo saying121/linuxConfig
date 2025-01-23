@@ -166,7 +166,149 @@ local postfix = {
     },
 }
 
-local prefix = {
+local exprs = {
+    -- ["return"] = {
+    --     prefix = { "rt", "return" },
+    --     body = {
+    --         "return $1;",
+    --     },
+    --     description = "return …;",
+    --     scope = "expr",
+    -- },
+    let = {
+        prefix = { "let" },
+        body = {
+            "let ${1:var} = $2;$0",
+        },
+        description = "let … = …;",
+        scope = "expr",
+    },
+    letm = {
+        prefix = { "letm" },
+        body = {
+            "let mut ${1:var} = $2;$0",
+        },
+        description = "let mut … = …;",
+        scope = "expr",
+    },
+    ["tracing_env"] = {
+        prefix = { "tracing_env" },
+        body = {
+            "use std::io;",
+            "use tracing_subscriber::{",
+            "    prelude::__tracing_subscriber_SubscriberExt, util::SubscriberInitExt, EnvFilter,",
+            "};",
+            "",
+            "/// It is also possible to set the `RUST_LOG` environment variable for other level.",
+            "pub fn log_init() {",
+            [[    let env_filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("warn"));]],
+            "    let stderr_layer = tracing_subscriber::fmt::layer().with_writer(io::stderr);",
+            "",
+            "    tracing_subscriber::Registry::default()",
+            "        .with(stderr_layer)",
+            "        .with(env_filter)",
+            "        .init();",
+            "}",
+        },
+        requires = { "tracing_subscriber", "tracing" },
+        description = "subscriber debug",
+        scope = "expr",
+    },
+    ["tracing"] = {
+        prefix = { "tracing_subscriber", "log_sub" },
+        body = {
+            "tracing_subscriber::fmt()",
+            "    .with_max_level(tracing::Level::DEBUG)",
+            "    .with_test_writer()",
+            "    .init();",
+        },
+        requires = { "tracing_subscriber", "tracing" },
+        description = "subscriber debug",
+        scope = "expr",
+    },
+    ["tracing_appender"] = {
+        prefix = { "tracing_appender", "log_sub" },
+        body = {
+            [[let appender = rolling::never("some/path", "xxx.log");]],
+            "let (non_blocking, _guard) = tracing_appender::non_blocking(appender);",
+            "",
+            [[let env_filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info"));]],
+            "",
+            "let file_layer = fmt::layer() .with_thread_ids(true) .with_level(true) .with_ansi(false) .with_writer(non_blocking);",
+            "",
+            "let formatting_layer = fmt::layer() .pretty() .with_writer(std::io::stderr);",
+            "",
+            "Registry::default() .with(env_filter) .with(formatting_layer) .with(file_layer) .init();",
+        },
+        requires = {
+            "tracing_appender::rolling",
+            "tracing_subscriber::fmt",
+            "tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt",
+            "tracing_subscriber::util::SubscriberInitExt",
+            "tracing_subscriber::EnvFilter",
+            "tracing_subscriber::Registry",
+        },
+        description = "subscriber debug",
+        scope = "expr",
+    },
+    dbg_d = {
+        prefix = { "dbg_d" },
+        body = {
+            "#[cfg(debug_assertions)]",
+            "dbg!($1);",
+        },
+        -- description = "type … = …;",
+        scope = "expr",
+    },
+    dbgr_d = {
+        prefix = { "dbgr_d" },
+        body = {
+            "#[cfg(debug_assertions)]",
+            "dbg!(&$1);",
+        },
+        -- description = "type … = …;",
+        scope = "expr",
+    },
+    thread_spawn = {
+        prefix = { "spawn", "tspawn" },
+        body = {
+            "thread::spawn(move || {",
+            "\t$1",
+            "});$0",
+        },
+        description = "Insert a thread::spawn call",
+        requires = "std::thread",
+        scope = "expr",
+    },
+    thread_sleep = {
+        prefix = { "sleep", "tsleep" },
+        body = {
+            "thread::sleep($1);$0",
+        },
+        description = "Insert a thread::sleep",
+        requires = "std::thread",
+        scope = "expr",
+    },
+    tokio_spawn = {
+        prefix = { "tkspawn" },
+        body = {
+            "tokio::spawn(async move {",
+            "\t$1",
+            "});$0",
+        },
+        description = "Insert a tokio::spawn call",
+        requires = "tokio",
+        scope = "expr",
+    },
+    thread_local = {
+        body = { "thread_local!(static ${1:STATIC}: ${2:Type} = ${4:init});" },
+        description = "thread_local!(static …: … = …);",
+        prefix = "thread_local",
+        scope = "expr",
+    },
+}
+
+local items = {
     main = {
         prefix = { "main" },
         body = {
@@ -277,14 +419,57 @@ local prefix = {
         description = "extern crate …;",
         scope = "item",
     },
-    static = {
-        prefix = { "static" },
+    bench = {
         body = {
-            "static ${1:STATIC}: ${2:Type} = ${3:init};",
+            "#[bench]",
+            "fn ${1:name}(b: &mut test::Bencher) {",
+            "    ${2:b.iter(|| ${3:/* benchmark code */})}",
+            "}",
         },
-        description = "static …: … = …;",
+        -- requires = {
+        --     "test::Bencher",
+        -- },
+        description = "#[bench]",
+        prefix = "bench",
         scope = "item",
     },
+    impl_trait = {
+        prefix = { "impl_trait" },
+        body = {
+            "impl ${1:Trait} for ${2:Type} {",
+            "    $3",
+            "}",
+        },
+        description = "impl … for … { … }",
+        scope = "item",
+    },
+    mod = {
+        prefix = { "mod" },
+        body = {
+            "mod ${1:name};",
+        },
+        description = "mod …;",
+        scope = "item",
+    },
+    mod_block = {
+        prefix = { "mod_block" },
+        body = {
+            "mod ${1:name} {",
+            "    $2,",
+            "}",
+        },
+        description = "mod … { … }",
+        scope = "item",
+    },
+    ["inline-fn"] = {
+        body = { "#[inline]", "pub fn ${1:name}() {", "    ${2:unimplemented!();}", "}" },
+        description = "inlined function",
+        prefix = "inline-fn",
+        scope = "item",
+    },
+}
+
+local attrs = {
     expect = {
         prefix = { "expect" },
         body = {
@@ -357,6 +542,17 @@ local prefix = {
         description = "#[macro_use(…)]",
         scope = "item",
     },
+}
+
+local item_expr = {
+    static = {
+        prefix = { "static" },
+        body = {
+            "static ${1:STATIC}: ${2:Type} = ${3:init};",
+        },
+        description = "static …: … = …;",
+        scope = "item",
+    },
     const = {
         prefix = { "const" },
         body = {
@@ -414,35 +610,7 @@ local prefix = {
             "#[derive(PartialEq, Eq, PartialOrd, Ord)]",
             "pub struct ${1:Name};",
         },
-        description = "struct …(…);",
-        scope = "item",
-    },
-    impl_trait = {
-        prefix = { "impl_trait" },
-        body = {
-            "impl ${1:Trait} for ${2:Type} {",
-            "    $3",
-            "}",
-        },
-        description = "impl … for … { … }",
-        scope = "item",
-    },
-    mod = {
-        prefix = { "mod" },
-        body = {
-            "mod ${1:name};",
-        },
-        description = "mod …;",
-        scope = "item",
-    },
-    mod_block = {
-        prefix = { "mod_block" },
-        body = {
-            "mod ${1:name} {",
-            "    $2,",
-            "}",
-        },
-        description = "mod … { … }",
+        description = "struct …;",
         scope = "item",
     },
     type = {
@@ -453,164 +621,12 @@ local prefix = {
         description = "type … = …;",
         scope = "item",
     },
-    dbg_d = {
-        prefix = { "dbg_d" },
-        body = {
-            "#[cfg(debug_assertions)]",
-            "dbg!($1);",
-        },
-        -- description = "type … = …;",
-        scope = "expr",
-    },
-    dbgr_d = {
-        prefix = { "dbgr_d" },
-        body = {
-            "#[cfg(debug_assertions)]",
-            "dbg!(&$1);",
-        },
-        -- description = "type … = …;",
-        scope = "expr",
-    },
-    thread_spawn = {
-        prefix = { "spawn", "tspawn" },
-        body = {
-            "thread::spawn(move || {",
-            "\t$1",
-            "});$0",
-        },
-        description = "Insert a thread::spawn call",
-        requires = "std::thread",
-        scope = "expr",
-    },
-    thread_sleep = {
-        prefix = { "sleep", "tsleep" },
-        body = {
-            "thread::sleep($1);$0",
-        },
-        description = "Insert a thread::sleep",
-        requires = "std::thread",
-        scope = "expr",
-    },
-    tokio_spawn = {
-        prefix = { "tkspawn" },
-        body = {
-            "tokio::spawn(async move {",
-            "\t$1",
-            "});$0",
-        },
-        description = "Insert a tokio::spawn call",
-        requires = "tokio",
-        scope = "expr",
-    },
-    -- ["return"] = {
-    --     prefix = { "rt", "return" },
-    --     body = {
-    --         "return $1;",
-    --     },
-    --     description = "return …;",
-    --     scope = "expr",
-    -- },
-    ["tracing_env"] = {
-        prefix = { "tracing_env" },
-        body = {
-            "use std::io;",
-            "use tracing_subscriber::{",
-            "    prelude::__tracing_subscriber_SubscriberExt, util::SubscriberInitExt, EnvFilter,",
-            "};",
-            "",
-            "/// It is also possible to set the `RUST_LOG` environment variable for other level.",
-            "pub fn log_init() {",
-            [[    let env_filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("warn"));]],
-            "    let stderr_layer = tracing_subscriber::fmt::layer().with_writer(io::stderr);",
-            "",
-            "    tracing_subscriber::Registry::default()",
-            "        .with(stderr_layer)",
-            "        .with(env_filter)",
-            "        .init();",
-            "}",
-        },
-        requires = { "tracing_subscriber", "tracing" },
-        description = "subscriber debug",
-        scope = "expr",
-    },
-    ["tracing"] = {
-        prefix = { "tracing_subscriber", "log_sub" },
-        body = {
-            "tracing_subscriber::fmt()",
-            "    .with_max_level(tracing::Level::DEBUG)",
-            "    .with_test_writer()",
-            "    .init();",
-        },
-        requires = { "tracing_subscriber", "tracing" },
-        description = "subscriber debug",
-        scope = "expr",
-    },
-    ["tracing_appender"] = {
-        prefix = { "tracing_appender", "log_sub" },
-        body = {
-            [[let appender = rolling::never("some/path", "xxx.log");]],
-            "let (non_blocking, _guard) = tracing_appender::non_blocking(appender);",
-            "",
-            [[let env_filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info"));]],
-            "",
-            "let file_layer = fmt::layer() .with_thread_ids(true) .with_level(true) .with_ansi(false) .with_writer(non_blocking);",
-            "",
-            "let formatting_layer = fmt::layer() .pretty() .with_writer(std::io::stderr);",
-            "",
-            "Registry::default() .with(env_filter) .with(formatting_layer) .with(file_layer) .init();",
-        },
-        requires = {
-            "tracing_appender::rolling",
-            "tracing_subscriber::fmt",
-            "tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt",
-            "tracing_subscriber::util::SubscriberInitExt",
-            "tracing_subscriber::EnvFilter",
-            "tracing_subscriber::Registry",
-        },
-        description = "subscriber debug",
-        scope = "expr",
-    },
-    bench = {
-        body = {
-            "#[bench]",
-            "fn ${1:name}(b: &mut test::Bencher) {",
-            "    ${2:b.iter(|| ${3:/* benchmark code */})}",
-            "}",
-        },
-        -- requires = {
-        --     "test::Bencher",
-        -- },
-        description = "#[bench]",
-        prefix = "bench",
-        scope = "item",
-    },
-    ["inline-fn"] = {
-        body = { "#[inline]", "pub fn ${1:name}() {", "    ${2:unimplemented!();}", "}" },
-        description = "inlined function",
-        prefix = "inline-fn",
-        scope = "item",
-    },
-    let = {
-        prefix = { "let" },
-        body = {
-            "let ${1:var} = $2;$0",
-        },
-        description = "let … = …;",
-        scope = "expr",
-    },
-    letm = {
-        prefix = { "letm" },
-        body = {
-            "let mut ${1:var} = $2;$0",
-        },
-        description = "let mut … = …;",
-        scope = "expr",
-    },
-    thread_local = {
-        body = { "thread_local!(static ${1:STATIC}: ${2:Type} = ${4:init});" },
-        description = "thread_local!(static …: … = …);",
-        prefix = "thread_local",
-    },
 }
+local add = {}
+for i, x in pairs(item_expr) do
+    local snip = x
+    snip.scope = "expr"
+    add[i] = snip
+end
 
-return vim.tbl_deep_extend("force", postfix, prln, postfix_prln, prefix)
+return vim.tbl_deep_extend("force", postfix, prln, postfix_prln, exprs, items, attrs, item_expr, add)
