@@ -51,6 +51,7 @@ local embedded = {
     ["embassy"] = "现代嵌入式框架，使用 Rust 和异步。",
 }
 local crates = {
+    ["statum"] = "Rust 的编译时状态机魔法：具有自动转换验证的零样板类型状态模式",
     ["duration-str"] = "持续时间字符串解析器",
     ["ubyte"] = "一个简单的、完整的、const-一切、饱和的、人性化的、没有字节单元的标准库。",
     ["refined_type"] = "`refined_type` 是一个促进类型组合的库，可以简单地描述高效的验证过程和高运行时安全性。",
@@ -91,6 +92,7 @@ local util = {
     ["atoi"] = "直接从安全代码中的 `[u8]` 切片解析整数",
     ["captcha"] = "用于生成验证码的库。",
     ["sscanf"] = "基于正则表达式的 sscanf（格式反转！()）宏",
+    ["scan_fmt"] = "一个简单的类似 scanf() 的 Rust 输入",
     ["regex"] = "**Rust** 正则表达式的实现",
     ["lazy-regex"] = "在编译时检查惰性静态正则表达式",
     ["grep-searcher"] = "作为库的快速面向行正则表达式搜索。",

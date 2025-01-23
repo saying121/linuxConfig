@@ -172,12 +172,7 @@ local function find_vscode_codelldb()
     local latest_version = nil
 
     for dir in io.popen("ls -d " .. extensions_path .. "vadimcn.vscode-lldb-* 2>/dev/null"):lines() do
-        local version = dir:match(pattern)
-        if version then
-            if not latest_version or version > latest_version then
-                latest_version = version
-            end
-        end
+        latest_version = dir:match(pattern)
     end
 
     local base = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-" .. latest_version

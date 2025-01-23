@@ -4,15 +4,36 @@ return {
     priority = 1000,
     ---@type snacks.Config
     opts = {
+        indent = {
+            enabled = false,
+            filter = function(buf)
+                local b = vim.b[buf]
+                local bo = vim.bo[buf]
+                local excluded_filetypes = {
+                    text = true,
+                    Trouble = true,
+                    alpha = true,
+                    dashboard = true,
+                    help = true,
+                    lazy = true,
+                    lspsagafinder = true,
+                    mason = true,
+                    ["neo-tree"] = true,
+                    NvimTree = true,
+                    toggleterm = true,
+                    markdown = true,
+                }
+                return vim.g.snacks_indent
+                    and b.snacks_indent ~= false
+                    and bo.buftype == ""
+                    and not excluded_filetypes[bo.filetype]
+            end,
+        },
         bigfile = {
             enabled = true,
             size = 1.5 * 1024 * 1024, -- 1.5MB
         },
-        gitbrowse = {
-            -- your gitbrowse configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        },
+        gitbrowse = {},
         -- TODO: can't remove foldlevel number
         ---@type snacks.statuscolumn.Config
         statuscolumn = {
