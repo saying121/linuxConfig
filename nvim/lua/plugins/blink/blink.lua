@@ -44,14 +44,11 @@ return {
                 -- vim.snippet.expand(snippet)
                 local luasnip = require("luasnip")
 
-                local replace = rust_replace.snippet
-                local expand = luasnip.lsp_expand
-
-                local temp = replace[snippet]
-                if temp then
-                    expand(temp)
+                local temp = rust_replace.snippet[snippet]
+                if temp ~= nil then
+                    luasnip.lsp_expand(temp)
                 else
-                    expand(snippet)
+                    luasnip.lsp_expand(snippet)
                 end
             end,
         },

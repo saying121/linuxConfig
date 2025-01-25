@@ -59,6 +59,8 @@ return {
             end
 
             require("dashboard").setup({
+                center = true,
+                vertical_center = true,
                 theme = "doom",
                 preview = use_prev,
                 config = {
