@@ -173,22 +173,18 @@ return {
                     module = "blink.cmp.sources.lsp",
                     enabled = true,
                     transform_items = function(_, items)
-                        local replace_item = {}
                         if vim.o.filetype == "rust" then
-                            replace_item = rust_replace.keyword
+                            ---@param item blink.cmp.CompletionItem
+                            return vim.tbl_filter(function(item)
+                                -- if ra have `enum`, `let` keyword and snippet only use snippet
+                                return not (
+                                    item.kind == require("blink.cmp.types").CompletionItemKind.Keyword
+                                    and rust_replace.keyword[item.filterText]
+                                )
+                            end, items)
+                        else
+                            return items
                         end
-
-                        ---@param item blink.cmp.CompletionItem
-                        return vim.tbl_filter(function(item)
-                            -- if ra have `enum`, `let` keyword and snippet only use snippet
-                            if
-                                item.kind == require("blink.cmp.types").CompletionItemKind.Keyword
-                                and replace_item[item.filterText]
-                            then
-                                return false
-                            end
-                            return true
-                        end, items)
                     end,
                     should_show_items = true,
                     max_items = nil,
