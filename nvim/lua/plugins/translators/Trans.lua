@@ -1,3 +1,5 @@
+local prefix = "~/.local/share/nvim/Trans/"
+
 ---@type LazySpec
 return {
     "JuanZoran/Trans.nvim",
@@ -9,6 +11,13 @@ return {
     branch = "v2",
     build = function()
         require("Trans").install()
+        os.execute(
+            "sqlite3 "
+                .. vim.fn.expand(prefix .. "ultimate.db")
+                .. ' "select word from stardict"'
+                .. " >"
+                .. vim.fn.expand(prefix .. "neovim.dict")
+        )
     end,
     dependencies = { "kkharji/sqlite.lua" },
     config = function()

@@ -251,7 +251,7 @@ local exprs = {
         description = "subscriber debug",
         scope = "expr",
     },
-    dbg_d = {
+    dbg_d_expr = {
         prefix = { "dbg_d" },
         body = {
             "#[cfg(debug_assertions)]",
@@ -260,7 +260,7 @@ local exprs = {
         -- description = "type … = …;",
         scope = "expr",
     },
-    dbgr_d = {
+    dbgr_d_expr = {
         prefix = { "dbgr_d" },
         body = {
             "#[cfg(debug_assertions)]",
@@ -553,6 +553,14 @@ local item_expr = {
         description = "static …: … = …;",
         scope = "item",
     },
+    static_ = {
+        prefix = { "static" },
+        body = {
+            "static ${1:STATIC}: ${2:Type} = ${3:init};",
+        },
+        description = "static …: … = …;",
+        scope = "expr",
+    },
     const = {
         prefix = { "const" },
         body = {
@@ -560,6 +568,14 @@ local item_expr = {
         },
         description = "const …: … = …;",
         scope = "item",
+    },
+    const_ = {
+        prefix = { "const" },
+        body = {
+            "const ${1:CONST}: ${2:Type} = ${3:init};",
+        },
+        description = "const …: … = …;",
+        scope = "expr",
     },
     enum = {
         prefix = { "enum" },
@@ -575,6 +591,20 @@ local item_expr = {
         description = "enum … { … }",
         scope = "item",
     },
+    enum_ = {
+        prefix = { "enum" },
+        body = {
+            "#[derive(Clone, Copy)]",
+            "#[derive(Debug)]",
+            "#[derive(Default)]",
+            "#[derive(PartialEq, Eq, PartialOrd, Ord)]",
+            "enum ${1:Name} {",
+            "    ${2:Variant},",
+            "}",
+        },
+        description = "enum … { … }",
+        scope = "expr",
+    },
     struct = {
         prefix = { "struct" },
         body = {
@@ -589,6 +619,20 @@ local item_expr = {
         description = "struct … { … }",
         scope = "item",
     },
+    struct_ = {
+        prefix = { "struct" },
+        body = {
+            "#[derive(Clone, Copy)]",
+            "#[derive(Debug)]",
+            "#[derive(Default)]",
+            "#[derive(PartialEq, Eq, PartialOrd, Ord)]",
+            "pub struct ${1:Name} {",
+            "    ${2:field}: ${3:()},",
+            "}",
+        },
+        description = "struct … { … }",
+        scope = "expr",
+    },
     struct_tuple = {
         prefix = { "struct_tuple" },
         body = {
@@ -600,6 +644,18 @@ local item_expr = {
         },
         description = "struct …(…);",
         scope = "item",
+    },
+    struct_tuple_ = {
+        prefix = { "struct_tuple" },
+        body = {
+            "#[derive(Clone, Copy)]",
+            "#[derive(Debug)]",
+            "#[derive(Default)]",
+            "#[derive(PartialEq, Eq, PartialOrd, Ord)]",
+            "pub struct ${1:Name}(${2:()});",
+        },
+        description = "struct …(…);",
+        scope = "expr",
     },
     struct_unit = {
         prefix = { "struct_unit" },
@@ -613,6 +669,18 @@ local item_expr = {
         description = "struct …;",
         scope = "item",
     },
+    struct_unit_ = {
+        prefix = { "struct_unit" },
+        body = {
+            "#[derive(Clone, Copy)]",
+            "#[derive(Debug)]",
+            "#[derive(Default)]",
+            "#[derive(PartialEq, Eq, PartialOrd, Ord)]",
+            "pub struct ${1:Name};",
+        },
+        description = "struct …;",
+        scope = "expr",
+    },
     type = {
         prefix = { "type" },
         body = {
@@ -621,12 +689,15 @@ local item_expr = {
         description = "type … = …;",
         scope = "item",
     },
+    type_ = {
+        prefix = { "type" },
+        body = {
+            "type ${1:Alias} = ${2:Type};",
+        },
+        description = "type … = …;",
+        scope = "expr",
+    },
 }
-local add = {}
-for i, x in pairs(item_expr) do
-    local snip = x
-    snip.scope = "expr"
-    add[i] = snip
-end
 
-return vim.tbl_deep_extend("force", postfix, prln, postfix_prln, exprs, items, attrs, item_expr, add)
+local rr = vim.tbl_deep_extend("error", postfix, prln, postfix_prln, exprs, items, attrs, item_expr)
+return rr

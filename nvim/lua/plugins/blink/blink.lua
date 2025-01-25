@@ -1,6 +1,7 @@
 local api = vim.api
 local vfn = vim.fn
 local rust_replace = require("public.ra.replace_snip")
+local home = vim.env.HOME
 
 ---@type LazySpec
 return {
@@ -187,28 +188,18 @@ return {
                                 return false
                             end
                             return true
-                            -- return not (
-                            --     item.kind == require("blink.cmp.types").CompletionItemKind.Keyword
-                            --     and vim.tbl_contains(replace_item, item.filterText)
-                            -- )
                         end, items)
-
-                        -- return vim.tbl_filter(function(item)
-                        --     return item.kind ~= require("blink.cmp.types").CompletionItemKind.Text
-                        -- end, items)
                     end,
-                    should_show_items = true, -- Whether or not to show the items
-                    max_items = nil, -- Maximum number of items to display in the menu
-                    min_keyword_length = 0, -- Minimum number of characters in the keyword to trigger the provider
-                    fallbacks = { "buffer", "lazydev" }, -- If any of these providers return 0 items, it will fallback to this provider
-                    score_offset = 0, -- Boost/penalize the score of the items
-                    override = nil, -- Override the source's functions
+                    should_show_items = true,
+                    max_items = nil,
+                    fallbacks = { "buffer", "lazydev", "dictionary" },
+                    score_offset = 0,
                 },
                 snippets = {
                     name = "Snippets",
                     module = "blink.cmp.sources.snippets",
                     score_offset = 0,
-
+                    min_keyword_length = 1,
                     -- For `snippets.preset == 'luasnip'`
                     opts = {
                         -- Whether to use show_condition for filtering snippets
@@ -233,8 +224,7 @@ return {
                 buffer = {
                     name = "Buffer",
                     module = "blink.cmp.sources.buffer",
-                    fallbacks = { "ripgrep", "dictionary" },
-                    -- prefix_min_len = 4,
+                    fallbacks = { "ripgrep" },
                     opts = {
                         -- default to all visible buffers
                         get_bufnrs = function()
@@ -262,24 +252,12 @@ return {
                 ripgrep = {
                     module = "blink-ripgrep",
                     name = "Ripgrep",
-                    -- the options below are optional, some default values are shown
+                    min_keyword_length = 5,
                     ---@module "blink-ripgrep"
                     ---@type blink-ripgrep.Options
                     opts = {
-                        -- For many options, see `rg --help` for an exact description of
-                        -- the values that ripgrep expects.
-
-                        -- the minimum length of the current word to start searching
-                        -- (if the word is shorter than this, the search will not start)
                         prefix_min_len = 5,
-
-                        -- The number of lines to show around each match in the preview window
                         context_size = 5,
-
-                        -- The maximum file size that ripgrep should include in its search.
-                        -- Useful when your project contains large files that might cause
-                        -- performance issues.
-                        -- Examples: "1024" (bytes by default), "200K", "1M", "1G"
                         max_filesize = "1M",
                         search_casing = "--smart-case",
                     },
@@ -313,18 +291,36 @@ return {
                     opts = {},
                 },
                 dictionary = {
+                    min_keyword_length = 4,
                     name = "Dict",
                     module = "blink-cmp-dictionary",
+                    ---@module "blink-cmp-dictionary"
+                    ---@type blink-cmp-dictionary.Options
                     opts = {
-                        -- Specify the dictionary files' path
-                        -- example: { vim.fn.expand('~/.config/nvim/dictionary/words.dict') }
-                        dictionary_files = nil,
-                        -- All .txt files in these directories will be treated as dictionary files
-                        -- example: { vim.fn.expand('~/.config/nvim/dictionary') }
-                        dictionary_directories = nil,
-                        max_items = 10,
-                        enable_in_context = function()
-                            return true
+                        dictionary_files = {
+                            vim.fn.expand("~/.local/share/nvim/Trans/neovim.dict"),
+                        },
+                        separate_output = function(output)
+                            local items = {}
+                            for line in output:gmatch("[^\r\n]+") do
+                                table.insert(items, {
+                                    label = line,
+                                    insert_text = line,
+                                    documentation = {
+                                        get_command = "sqlite3",
+                                        get_command_args = {
+                                            home .. "/.local/share/nvim/Trans/ultimate.db",
+                                            "select translation from stardict where word = '" .. line .. "';",
+                                        },
+                                        ---@diagnostic disable-next-line: redefined-local
+                                        resolve_documentation = function(output)
+                                            print(output)
+                                            return output
+                                        end,
+                                    },
+                                })
+                            end
+                            return items
                         end,
                     },
                 },
