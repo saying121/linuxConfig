@@ -162,8 +162,6 @@ local str_parser = {
 }
 local encoding = {
     ["digest"] = "加密散列函数和消息认证码的特征",
-    ["ring"] = "使用 **Rust** 的安全、快速、小型加密",
-    ["serpent"] = "蛇块密码",
 }
 local find_match = {
     ["fuzzy-matcher"] = "模糊匹配库",
@@ -375,7 +373,6 @@ local async = {
     ["compio"] = "完成基于异步运行时",
     ["monoio"] = "基于 iouring 的每个核心运行时一个线程。",
     ["async-channel"] = "异步多生产者多消费者通道(mpmc)",
-    ["trait-variant"] = "用于处理 Rust 中的 impl 特征的实用程序",
     ["async-once-cell"] = "异步单赋值单元格和惰性值。",
     ["async-lazy"] = "第一次访问时使用异步函数初始化的值。",
     ["smol"] = "一个小而快速的异步运行时",
@@ -618,7 +615,7 @@ local cache = {
 }
 
 local all = vim.tbl_deep_extend(
-    "force",
+    "error",
     cache,
     test,
     data_struct,

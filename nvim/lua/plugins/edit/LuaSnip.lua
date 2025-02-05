@@ -9,7 +9,7 @@ local update_choice_popup = cf.update_choice_popup
 return {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
-    build = "make install_jsregexp", -- install jsregexp (optional!).
+    -- build = "make install_jsregexp", -- install jsregexp (optional!).
     event = { "InsertEnter" },
     lazy = true,
     dependencies = {

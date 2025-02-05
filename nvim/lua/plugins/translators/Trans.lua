@@ -1,4 +1,5 @@
 local prefix = "~/.local/share/nvim/Trans/"
+local vfn = vim.fn
 
 ---@type LazySpec
 return {
@@ -13,11 +14,12 @@ return {
         require("Trans").install()
         os.execute(
             "sqlite3 "
-                .. vim.fn.expand(prefix .. "ultimate.db")
+                .. vfn.expand(prefix .. "ultimate.db")
                 .. ' "select word from stardict"'
                 .. " >"
-                .. vim.fn.expand(prefix .. "neovim.dict")
+                .. vfn.expand(prefix .. "neovim.dict")
         )
+        vim.notify("gen dict", vim.log.levels.INFO)
     end,
     dependencies = { "kkharji/sqlite.lua" },
     config = function()
@@ -27,7 +29,7 @@ return {
         keymap("n", "mi", "<Cmd>TranslateInput<CR>", opts)
 
         require("Trans").setup({
-            dir = vim.fn.stdpath("data") .. "/Trans",
+            dir = vfn.stdpath("data") .. "/Trans",
             frontend = {
                 hover = {
                     width = 37,

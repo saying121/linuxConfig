@@ -53,7 +53,7 @@ return {
     },
     config = function(opts)
         vim.keymap.set({ "n", "x" }, "<leader>go", function()
-            Snacks.gitbrowse.open()
+            require("snacks.gitbrowse").open()
         end)
     end,
 }

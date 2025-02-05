@@ -43,11 +43,11 @@ return {
                 local lsp_name = string.sub(the_file_name, 1, #the_file_name - 4)
 
                 ---@type vim.lsp.ClientConfig
-                local configs = vim.tbl_deep_extend("force", {
+                local client_config = vim.tbl_deep_extend("force", {
                     on_attach = LSP.on_attach,
                 }, require("lsp." .. lsp_name))
 
-                lspconfig[lsp_name].setup(configs)
+                lspconfig[lsp_name].setup(client_config)
             end
         end
     end,

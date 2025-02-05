@@ -31,13 +31,12 @@ return {
         Lua = {
             completion = {
                 enable = true,
-                showWord = false,
-                workspaceWord = false,
+                autoRequire = true,
                 callSnippet = "Replace",
                 displayContext = 0,
-                -- keywordSnippet = "Replace",
                 postfix = "?",
-                -- showWord = "Disable", -- "Fallback",
+                showWord = "Disable",
+                workspaceWord = false,
             },
             runtime = {
                 version = "LuaJIT",
@@ -64,9 +63,6 @@ return {
                 library = lib,
                 checkThirdParty = false,
                 preloadFileSize = 10000,
-            },
-            telemetry = {
-                enable = false,
             },
         },
     },

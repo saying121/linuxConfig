@@ -2,7 +2,7 @@ local api = vim.api
 ---@type LazySpec
 return {
     "saecki/crates.nvim",
-    -- tag = "stable",
+    tag = "stable",
     event = {
         "UIEnter Cargo.toml",
         "BufNewFile Cargo.toml",
@@ -30,14 +30,6 @@ return {
     end,
     config = function()
         local crates = require("crates")
-
-        api.nvim_create_autocmd("BufRead", {
-            group = api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
-            pattern = "Cargo.toml",
-            callback = function()
-                require("cmp").setup.buffer({ sources = { { name = "crates" } } })
-            end,
-        })
 
         crates.setup({
             lsp = {
