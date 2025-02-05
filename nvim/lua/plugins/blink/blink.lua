@@ -148,7 +148,7 @@ return {
         sources = {
             default = function()
                 local default = { "lsp", "path", "snippets", "buffer", "ripgrep", "dictionary" }
-                if vim.bo.ft == "lua" then
+                if vim.bo.ft == "lua" and string.find(vim.fn.expand("%:p"), "nvim/lua") ~= nil then
                     table.insert(default, "lazydev")
                 elseif vim.bo.ft == "markdown" then
                     table.insert(default, "git")
