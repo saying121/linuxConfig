@@ -8,7 +8,7 @@ return {
     "saghen/blink.cmp",
     cond = true,
     lazy = false, -- lazy loading handled internally
-    version = "v0.10",
+    version = "v0.11",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -173,7 +173,7 @@ return {
                         if vim.o.filetype == "rust" then
                             ---@param item blink.cmp.CompletionItem
                             return vim.tbl_filter(function(item)
-                                -- if ra have `enum`, `let` keyword and snippet only use snippet
+                                -- If ra have `enum`, `let` keyword and snippet only use snippet
                                 return not (
                                     item.kind == require("blink.cmp.types").CompletionItemKind.Keyword
                                     and rust_replace.keyword[item.filterText]
@@ -359,7 +359,7 @@ return {
             },
         },
     },
-    -- allows extending the enabled_providers array elsewhere in your config
+    -- Allows extending the enabled_providers array elsewhere in your config
     -- without having to redefine it
     opts_extend = { "sources.default" },
 }

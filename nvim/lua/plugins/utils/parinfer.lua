@@ -1,5 +1,5 @@
 return {
     "eraserhd/parinfer-rust",
-    ft = { "schema", "query" },
+    ft = { "scheme", "query" },
     build = "cargo build --release",
 }
