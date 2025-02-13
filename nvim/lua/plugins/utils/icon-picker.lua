@@ -2,8 +2,7 @@
 return {
     "ziontee113/icon-picker.nvim",
     dependencies = {
-        "stevearc/dressing.nvim",
-        "nvim-telescope/telescope.nvim",
+        "folke/snacks.nvim",
     },
     keys = {
         { "<leader><leader>i", mode = { "n" } },

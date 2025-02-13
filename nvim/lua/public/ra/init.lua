@@ -49,7 +49,7 @@
 ---@field cfgs string[]
 ---@field extraArgs string[]
 ---@field extraEnv string[]
----@field features string[]|string
+---@field features? string[]|string
 ---@field noDefaultFeatures boolean
 ---@field sysroot string
 ---@field sysrootQueryMetadata boolean
@@ -143,6 +143,7 @@ return {
         },
         completion = {
             autoimport = { enable = true },
+            termSearch = { enable = true },
             autoself = { enable = true },
             callable = { snippets = "fill_arguments" }, -- completion 函数时是否添加括号和参数片段。
             limit = nil, -- 要返回的最大 completion 次数。如果 None ，则极限为无穷大。

@@ -12,10 +12,7 @@ return {
     -- build = "make install_jsregexp", -- install jsregexp (optional!).
     event = { "InsertEnter" },
     lazy = true,
-    dependencies = {
-        -- "saadparwaiz1/cmp_luasnip",
-        "rafamadriz/friendly-snippets",
-    },
+    dependencies = { "rafamadriz/friendly-snippets" },
     config = function()
         local luasnip, opts = require("luasnip"), { noremap = true, silent = true }
         local keymap = vim.keymap.set

@@ -2,8 +2,19 @@ return {
     "folke/snacks.nvim",
     lazy = false,
     priority = 1000,
+    init = function()
+        vim.ui.select = function(...)
+            require("lazy").load({ plugins = { "snacks.nvim" } })
+            return Snacks.picker.select(...)
+        end
+    end,
     ---@type snacks.Config
     opts = {
+        picker = {
+            enable = true,
+            ui_select = true,
+        },
+        input = { enabled = true },
         indent = {
             enabled = false,
             filter = function(buf)

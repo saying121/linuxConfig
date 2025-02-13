@@ -53,17 +53,29 @@ return {
             end,
         },
         completion = {
+            list = {
+                selection = {
+                    auto_insert = false,
+                    preselect = true,
+                },
+            },
             trigger = {
                 -- When false, will not show the completion window automatically when in a snippet
                 show_in_snippet = true,
-                -- When true, will show the completion window after typing a character that matches the `keyword.regex`
+                -- When true, will show the completion window after typing any of alphanumerics, `-` or `_`
                 show_on_keyword = true,
                 -- When true, will show the completion window after typing a trigger character
                 show_on_trigger_character = true,
                 -- LSPs can indicate when to show the completion window via trigger characters
                 -- however, some LSPs (i.e. tsserver) return characters that would essentially
                 -- always show the window. We block these by default.
-                show_on_blocked_trigger_characters = { " ", "\n", "\t" },
+                show_on_blocked_trigger_characters = function()
+                    if vim.api.nvim_get_mode().mode == "c" then
+                        return {}
+                    end
+
+                    return { " ", "\n", "\t" }
+                end,
                 -- When both this and show_on_trigger_character are true, will show the completion window
                 -- when the cursor comes after a trigger character after accepting an item
                 show_on_accept_on_trigger_character = true,
@@ -192,6 +204,7 @@ return {
                     name = "Snippets",
                     module = "blink.cmp.sources.snippets",
                     score_offset = 0,
+                    fallbacks = { "buffer", "dictionary" },
                     min_keyword_length = 1,
                     -- For `snippets.preset == 'luasnip'`
                     opts = {
