@@ -129,9 +129,7 @@ return {
         api.nvim_create_autocmd({ "BufEnter" }, {
             group = api.nvim_create_augroup("UfoDetachs", { clear = true }),
             pattern = ft,
-            callback = function()
-                vim.cmd("UfoDetach")
-            end,
+            callback = vim.cmd.UfoDetach,
         })
     end,
 }

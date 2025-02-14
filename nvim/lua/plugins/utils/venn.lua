@@ -11,8 +11,7 @@ return {
             local venn_enabled = vim.inspect(vim.b.venn_enabled)
             if venn_enabled == "nil" then
                 vim.b.venn_enabled = true
-                vim.cmd([[setlocal ve=all]])
-                vim.cmd.setlocal([[ve=all]])
+                vim.cmd.setlocal('ve=all')
 
                 -- draw a line on HJKL keystokes
                 keymap_buf(0, "n", "J", "<C-v>j:VBox<CR>", { noremap = true })
