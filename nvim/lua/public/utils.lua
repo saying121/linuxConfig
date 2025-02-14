@@ -44,18 +44,18 @@ function M.find_root_cwd(be_finded)
 end
 
 --- 合并mod_path目录下的表，他们必须返回一张表，这个函数会把他们放到一个大表中
---- `mod_path == plugins/telescope/dependencies` 时
+--- `mod_path == plugins/plug/dependencies` 时
 --- 目录结构
 --- ```lua
---- ~/.config/nvim/lua/plugins/telescope/dependencies/project.lua
---- ~/.config/nvim/lua/plugins/telescope/dependencies/telescope-dap.lua
+--- ~/.config/nvim/lua/plugins/plug/dependencies/project.lua
+--- ~/.config/nvim/lua/plugins/plug/dependencies/plug-dap.lua
 --- ```
 --- 返回结果
 --- ```lua
 --- ......
 --- {
 --- project.lua -- 返回的表,
---- telescope-dap.lua -- 返回的表,
+--- plug-dap.lua -- 返回的表,
 --- ......
 --- }
 --- ```

@@ -26,7 +26,6 @@ local specs = {
     { import = "plugins.navigation" },
     { import = "plugins.nvim-dap" },
     { import = "plugins.previews" },
-    { import = "plugins.telescope" },
     { import = "plugins.translators" },
     { import = "plugins.treesitter" },
     { import = "plugins.ui" },

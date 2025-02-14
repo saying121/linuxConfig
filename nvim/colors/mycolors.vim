@@ -39,12 +39,6 @@ hi NvimTreeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi NvimTreeNormalNC guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 hi NvimTreeWinSeparator guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 
-" hi TelescopeBorder guibg=NONE cterm=NONE guifg=Cyan ctermfg=NONE
-" hi TelescopeNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-" hi TelescopePreviewNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-" hi TelescopePromptNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-" hi TelescopeResultsNormal guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
-
 hi LazyProgressDone guibg=NONE cterm=NONE guifg=red ctermfg=NONE
 hi LazyProp guibg=NONE cterm=NONE guifg=NONE ctermfg=NONE
 

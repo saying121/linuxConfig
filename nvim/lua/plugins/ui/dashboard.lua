@@ -75,20 +75,11 @@ return {
                         {
                             icon = "󰈢  ",
                             icon_hl = "DashBoardIcon",
-                            desc = "Recently opened files           ",
+                            desc = "New file                        ",
                             desc_hl = "DashBoardCenter",
-                            key = "r",
+                            key = "n",
                             key_hl = "DashBoardShortCut",
-                            action = "Telescope oldfiles",
-                        },
-                        {
-                            icon = "  ",
-                            icon_hl = "DashBoardIcon",
-                            desc = "Find File                     ",
-                            desc_hl = "DashBoardCenter",
-                            key = "f",
-                            key_hl = "DashBoardShortCut",
-                            action = "Telescope find_files find_command=rg,--hidden,--files",
+                            action = "<cmd>ene <BAR> startinsert <CR>",
                         },
                         {
                             icon = "󰒲  ",
@@ -140,7 +131,6 @@ return {
             local alpha = require("alpha")
             local dashboard = require("alpha.themes.dashboard")
             local buttons = {
-                dashboard.button("r", " " .. " Recent files", "<cmd>Telescope oldfiles <CR>"),
                 dashboard.button("n", " " .. " New file", "<cmd>ene <BAR> startinsert <CR>"),
                 dashboard.button("c", " " .. " Config", "<cmd>e $MYVIMRC <CR>"),
                 dashboard.button("l", "󰒲 " .. " Lazy", "<cmd>Lazy<CR>"),

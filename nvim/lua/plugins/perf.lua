@@ -25,14 +25,6 @@ return {
             -- Automatically annotate newly opened buffers if information is available
             annotate_on_open = true,
 
-            -- Options for telescope-based hottest line finders
-            telescope = {
-                -- Enable if possible, otherwise the plugin will fall back to vim.ui.select
-                enabled = pcall(require, "telescope"),
-                -- Annotate inside of the preview window
-                annotate = true,
-            },
-
             -- Node type patterns used to find the function that surrounds the cursor
             ts_function_patterns = {
                 -- These should work for most languages (at least those used with perf)

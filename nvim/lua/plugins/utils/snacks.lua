@@ -1,3 +1,6 @@
+local vfn = vim.fn
+
+---@type LazySpec
 return {
     "folke/snacks.nvim",
     lazy = false,
@@ -63,8 +66,46 @@ return {
         },
     },
     config = function(opts)
-        vim.keymap.set({ "n", "x" }, "<leader>go", function()
-            require("snacks.gitbrowse").open()
+        local keymap = vim.keymap.set
+        local snacks = require("snacks")
+        local picker = snacks.picker
+        local util = require("public.utils")
+
+        keymap({ "n", "x" }, "<leader>go", snacks.gitbrowse.open)
+
+        keymap("n", "<leader>ff", picker.files)
+        keymap("n", "<leader>gf", function()
+            local function is_git_repo()
+                vfn.system("git rev-parse --is-inside-work-tree")
+
+                return vim.v.shell_error == 0
+            end
+            if is_git_repo() then
+                picker.files({ cwd = util.get_root_dir(vfn.getcwd(), "/.git") })
+            else
+                picker.files()
+            end
         end)
+        keymap("n", "<leader>fw", picker.grep)
+        keymap("n", "<leader>gw", function()
+            local function is_git_repo()
+                vfn.system("git rev-parse --is-inside-work-tree")
+
+                return vim.v.shell_error == 0
+            end
+            if is_git_repo() then
+                picker.grep({ cwd = util.get_root_dir(vfn.getcwd(), "/.git") })
+            else
+                picker.grep()
+            end
+        end)
+        keymap("n", "<leader>bf", picker.buffers)
+        keymap("n", "ti", function()
+            -- TODO: layout
+            picker.lsp_implementations()
+        end)
+        keymap("n", "gr", picker.lsp_references)
+
+        keymap("n", "<leader>fo", picker.recent)
     end,
 }
