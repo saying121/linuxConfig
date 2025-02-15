@@ -100,9 +100,19 @@ return {
             end
         end)
         keymap("n", "<leader>bf", picker.buffers)
-        keymap("n", "ti", function()
+        keymap("n", "gI", function()
             -- TODO: layout
-            picker.lsp_implementations()
+            picker.lsp_implementations({
+                layout = {
+                    preset = "vscode",
+                    preview = true,
+                    layout = {
+                        width = 0.8,
+                        height = 0.6,
+                        border = "rounded",
+                    },
+                },
+            })
         end)
         keymap("n", "gr", picker.lsp_references)
 
