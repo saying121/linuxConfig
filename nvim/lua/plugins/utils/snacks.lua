@@ -4,24 +4,33 @@ local vfn = vim.fn
 return {
     "folke/snacks.nvim",
     lazy = false,
-    priority = 1000,
-    init = function()
-        vim.ui.select = function(...)
-            require("lazy").load({ plugins = { "snacks.nvim" } })
-            return Snacks.picker.select(...)
-        end
-    end,
+    priority = 1000000000,
     ---@type snacks.Config
     opts = {
+        image = {
+            enable = true,
+            doc = {
+                enable = true,
+                -- lang = { "markdown", "norg", "image_nvim", "typst", "html", "css" },
+                inline = true,
+            },
+        },
         picker = {
             enable = true,
             ui_select = true,
         },
+        scroll = { enabled = true },
         input = { enabled = true },
+        scope = { enabled = true },
+        chunk = { enabled = true },
+        animate = { enabled = true },
         indent = {
-            enabled = false,
+            enabled = true,
+            priority = 1,
+            only_scope = false, -- only show indent guides of the scope
+            only_current = false, -- only show indent guides in the current window
             filter = function(buf)
-                local b = vim.b[buf]
+                -- local b = vim.b[buf]
                 local bo = vim.bo[buf]
                 local excluded_filetypes = {
                     text = true,
@@ -37,10 +46,7 @@ return {
                     toggleterm = true,
                     markdown = true,
                 }
-                return vim.g.snacks_indent
-                    and b.snacks_indent ~= false
-                    and bo.buftype == ""
-                    and not excluded_filetypes[bo.filetype]
+                return bo.buftype == "" and not excluded_filetypes[bo.filetype]
             end,
         },
         bigfile = {
@@ -65,7 +71,9 @@ return {
             refresh = 50, -- refresh at most every 50ms
         },
     },
-    config = function(opts)
+    config = function(_, opts)
+        require("snacks").setup(opts)
+
         local keymap = vim.keymap.set
         local snacks = require("snacks")
         local picker = snacks.picker
@@ -101,7 +109,6 @@ return {
         end)
         keymap("n", "<leader>bf", picker.buffers)
         keymap("n", "gI", function()
-            -- TODO: layout
             picker.lsp_implementations({
                 layout = {
                     preset = "vscode",

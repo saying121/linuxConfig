@@ -555,6 +555,7 @@ local notify = {
     ["notify"] = "跨平台文件系统通知库",
 }
 local test = {
+    ["no-panic"] = "归因于宏要求编译器证明函数永远不会慌张。",
     ["skeptic"] = "通过 Cargo 测试你的 Rust Markdown 文档",
     ["insta"] = "Rust 的快照测试库",
     ["snapbox"] = "快照测试工具箱",
