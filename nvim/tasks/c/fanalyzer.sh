@@ -8,4 +8,8 @@ VIM_FILEPATH=$1
 
 compiler=gcc
 
+if which gcc-14 >/dev/null; then
+    compiler=gcc-14
+fi
+
 $compiler -fanalyzer "$VIM_FILEPATH"
