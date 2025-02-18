@@ -180,7 +180,7 @@ $pacMan adobe-source-han-serif-cn-fonts \
 fc-cache -fv
 
 # rofi
-$pacMan rofi-lbon-wayland
+$pacMan rofi
 ~/.linuxConfig/rofi/install-rofi-theme.sh
 
 # gnome 显示效果好一点

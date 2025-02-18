@@ -50,6 +50,16 @@ api.nvim_create_autocmd("ColorScheme", {
     end,
 })
 
+local function snacks_img_ok()
+    local line = api.nvim_get_current_line()
+    for _, x in pairs(require("snacks").config.image.formats) do
+        if string.find(line, "%." .. x) then
+            return true
+        end
+    end
+
+    return false
+end
 function _G.show_documentation()
     if _G.dapui_for_K then
         require("dapui").eval()
@@ -57,6 +67,8 @@ function _G.show_documentation()
         vcmd.help(vim.fn.expand("<cword>"))
     elseif vim.tbl_contains({ "man" }, vim.bo.filetype) then
         vcmd.Man(vim.fn.expand("<cword>"))
+    elseif snacks_img_ok() then
+        require("snacks.image").hover()
     elseif not UfoHover() then
         -- vcmd([[Lspsaga hover_doc]])
         vim.lsp.buf.hover()

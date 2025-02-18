@@ -56,8 +56,8 @@ return {
         gitbrowse = {},
         statuscolumn = {
             enabled = true,
-            right = { "mark", "sign" }, -- priority of signs on the left (high to low)
-            left = { "fold", "git" }, -- priority of signs on the right (high to low)
+            left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+            right = { "fold", "git" }, -- priority of signs on the right (high to low)
             folds = {
                 open = true, -- show open fold icons
                 git_hl = false, -- use Git Signs hl for fold icons
@@ -72,33 +72,23 @@ return {
         local picker = snacks.picker
         local util = require("public.utils")
 
+        local function git_picker(fn)
+            if util.is_git_repo() then
+                fn({ cwd = util.get_root_dir(vfn.getcwd(), "/.git") })
+            else
+                fn()
+            end
+        end
+
         keymap({ "n", "x" }, "<leader>go", snacks.gitbrowse.open)
 
         keymap("n", "<leader>ff", picker.files)
         keymap("n", "<leader>gf", function()
-            local function is_git_repo()
-                vfn.system("git rev-parse --is-inside-work-tree")
-
-                return vim.v.shell_error == 0
-            end
-            if is_git_repo() then
-                picker.files({ cwd = util.get_root_dir(vfn.getcwd(), "/.git") })
-            else
-                picker.files()
-            end
+            git_picker(picker.files)
         end)
         keymap("n", "<leader>fw", picker.grep)
         keymap("n", "<leader>gw", function()
-            local function is_git_repo()
-                vfn.system("git rev-parse --is-inside-work-tree")
-
-                return vim.v.shell_error == 0
-            end
-            if is_git_repo() then
-                picker.grep({ cwd = util.get_root_dir(vfn.getcwd(), "/.git") })
-            else
-                picker.grep()
-            end
+            git_picker(picker.grep)
         end)
         keymap("n", "<leader>bf", picker.buffers)
         keymap("n", "gI", function()
