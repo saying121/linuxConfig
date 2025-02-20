@@ -41,18 +41,17 @@ return {
         local function dbui_query()
             vim.fn["db_ui#query"]({})
         end
+
         local function rs_target()
-            ---@diagnostic disable-next-line: missing-parameter
-            return vim.g.rustaceanvim.server.settings()["rust-analyzer"].cargo.target
-                or get_info.parse_rustc_version().host
+            local config = vim.lsp.get_clients({ name = "rust-analyzer" })
+            local c = config[1]
+            ---@diagnostic disable-next-line: undefined-field
+            local target = c.config.default_settings["rust-analyzer"].cargo.target
+            return target or get_info.parse_rustc_version().host
         end
 
         local function rs_cond()
             return vim.bo.filetype == "rust"
-        end
-
-        local function rs_cond()
-            return vim.bo.filetype == "rust" and rs_target()
         end
 
         local function dbui_connections()
