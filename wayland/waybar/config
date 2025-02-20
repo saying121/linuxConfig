@@ -99,8 +99,8 @@
     },
     "network": {
         "interval": 2,
-        "format": "\uf1eb ({signalStrength}% \uf093 {bandwidthUpOctets} \uf019 {bandwidthDownOctets})",
-        "format-wifi": "\uf1eb ({signalStrength}% \uf093 {bandwidthUpOctets} \uf019 {bandwidthDownOctets})",
+        "format": "\uf1eb ({signalStrength}% \uf093 {bandwidthUpBytes} \uf019 {bandwidthDownBytes})",
+        "format-wifi": "\uf1eb ({signalStrength}% \uf093 {bandwidthUpBytes} \uf019 {bandwidthDownBytes})",
         "tooltip-format": "{ifname} via {gwaddr} \uf796",
         "tooltip-format-wifi": "{essid} ({signalStrength}%) \uf1eb",
         "tooltip-format-ethernet": "{ifname} \uf0c1",
@@ -206,31 +206,14 @@
         "width": 30,
         "icon": true
     },
-    "custom/wl-gammarelay-temperature": {
-        "format": "{} ",
-        "exec": "wl-gammarelay-rs watch {t}",
-        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100",
-        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100"
-    },
-    "custom/wl-gammarelay-brightness": {
-        "format": "{}% ",
-        "exec": "wl-gammarelay-rs watch {bp}",
-        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d +0.02",
-        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d -0.02"
-    },
-    "custom/wl-gammarelay-gamma": {
-        "format": "{}% γ",
-        "exec": "wl-gammarelay-rs watch {g}",
-        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateGamma d +0.02",
-        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateGamma d -0.02"
-    },
     "custom/background": {
         "format": " ",
+        "exec-if": "which linux-wallpaperengine",
         "on-click-right": "~/.linuxConfig/wallpaperengine/rewall.sh"
     },
     "custom/gpu-usage": {
         "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
-        "exec-if": "nvidia-smi",
+        "exec-if": "which nvidia-smi",
         "format": "󰢮: {}%",
         "return-type": "",
         "interval": 2

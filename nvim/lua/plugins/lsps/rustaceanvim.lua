@@ -134,10 +134,8 @@ return {
                     end)
                 end,
                 default_settings = require("public.ra"),
-                ---@type table | (fun(project_root:string|nil, default_settings: RustAnzlyzerConfig|nil):table) -- The rust-analyzer settings or a function that creates them.
                 settings = function(project_root, default_settings)
                     project_root = project_root or vim.uv.cwd()
-                    default_settings = require("public.ra")
 
                     local ra = require("rustaceanvim.config.server")
 
