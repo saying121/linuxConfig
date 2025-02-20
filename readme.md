@@ -21,14 +21,13 @@
 ## 如果要使用本配置，执行下面代码，包含 `ranger` 的插件
 
 ```bash
-git clone --recursive https://github.com/saying121/.linuxConfig.git ~/.linuxConfig
+git clone https://github.com/saying121/.linuxConfig.git ~/.linuxConfig
 ```
 
 ### 也可以执行
 
 ```bash
 git clone https://github.com/saying121/linuxConfig.git ~/.linuxConfig
-git submodule update --init --recursive
 ```
 
 ## Nvidia，自行选择是否安装，最好看 archwiki

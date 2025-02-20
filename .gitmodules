@@ -1,6 +1,0 @@
-[submodule "ranger/plugins/ranger_fzf_filter"]
-	path = ranger/plugins/ranger_fzf_filter
-	url = https://github.com/MuXiu1997/ranger-fzf-filter
-[submodule "ranger/plugins/devicon2"]
-	path = ranger/plugins/devicon2
-	url = https://github.com/cdump/ranger-devicons2

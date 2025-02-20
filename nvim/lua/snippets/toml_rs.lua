@@ -51,6 +51,7 @@ local embedded = {
     ["embassy"] = "现代嵌入式框架，使用 Rust 和异步。",
 }
 local crates = {
+    ["rc-zip"] = "zip文件格式的I/O-Agnostic实现",
     ["statum"] = "Rust 的编译时状态机魔法：具有自动转换验证的零样板类型状态模式",
     ["duration-str"] = "持续时间字符串解析器",
     ["ubyte"] = "一个简单的、完整的、const-一切、饱和的、人性化的、没有字节单元的标准库。",

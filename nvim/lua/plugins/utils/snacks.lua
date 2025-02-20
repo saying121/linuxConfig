@@ -18,6 +18,13 @@ return {
         picker = {
             enable = true,
             ui_select = true,
+            win = {
+                input = {
+                    keys = {
+                        ["t"] = { "tab", mode = { "n" } },
+                    },
+                },
+            },
         },
         scroll = { enabled = true },
         input = { enabled = true },
