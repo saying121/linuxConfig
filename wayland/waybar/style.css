@@ -34,6 +34,10 @@
     padding-right: 5px;
 }
 
+#custom-notification {
+  font-family: "NotoSansMono Nerd Font";
+}
+
 #temperature {
     background: @crust;
     border-radius: 0px 0px 0px 0px;

@@ -11,7 +11,6 @@ return {
             enable = true,
             doc = {
                 enable = true,
-                -- lang = { "markdown", "norg", "image_nvim", "typst", "html", "css" },
                 inline = true,
             },
         },

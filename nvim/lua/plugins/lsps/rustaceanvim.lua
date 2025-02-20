@@ -9,7 +9,6 @@ return {
     -- cond=false,
     dependencies = {
         "mfussenegger/nvim-dap",
-        "akinsho/toggleterm.nvim",
         {
             "vxpm/ferris.nvim",
             opts = {
@@ -18,7 +17,57 @@ return {
         },
     },
     config = function()
-        local executors = require("rustaceanvim.executors")
+        ---@type rustaceanvim.Executor
+        ---@diagnostic disable-next-line: unused-local
+        local snacks_exec = {
+            ---@diagnostic disable-next-line: unused-local
+            execute_command = function(command, args, cwd, _)
+                local cmd = args
+                table.insert(cmd, 1, command)
+                local ok, term = pcall(require, "snacks.terminal")
+                if not ok then
+                    vim.schedule(function()
+                        vim.notify("snacks not found.", vim.log.levels.ERROR)
+                    end)
+                    return
+                end
+                term.open(args, { auto_close = false, border = "rounded" })
+            end,
+        }
+
+        ---@type rustaceanvim.Executor
+        local toggle_term_exec = {
+            execute_command = function(command, args, cwd, _)
+                local ok, term = pcall(require, "toggleterm.terminal")
+                if not ok then
+                    vim.schedule(function()
+                        vim.notify("toggleterm not found.", vim.log.levels.ERROR)
+                    end)
+                    return
+                end
+
+                local shell = require("rustaceanvim.shell")
+                term.Terminal
+                    :new({
+                        direction = "float",
+                        dir = cwd,
+                        cmd = shell.make_command_from_args(command, args),
+                        close_on_exit = false,
+                        on_open = function(t)
+                            -- enter normal mode
+                            vim.api.nvim_feedkeys(
+                                vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true),
+                                "",
+                                true
+                            )
+
+                            -- set close keymap
+                            vim.keymap.set("n", "q", "<CMD>close<CR>", { buffer = t.bufnr, noremap = true })
+                        end,
+                    })
+                    :toggle()
+            end,
+        }
 
         ---@type rustaceanvim.Opts
         local cfg = {
@@ -36,8 +85,8 @@ return {
                     end
                 end,
 
-                executor = executors.toggleterm,
-                test_executor = executors.toggleterm,
+                executor = toggle_term_exec,
+                test_executor = toggle_term_exec,
 
                 code_actions = {
                     ui_select_fallback = true,
@@ -62,9 +111,7 @@ return {
                     auto_focus = true,
                 },
             },
-            -- LSP configuration
             server = {
-                ---@type boolean
                 standalone = false,
                 ---@param client vim.lsp.Client
                 ---@param bufnr integer
@@ -134,10 +181,8 @@ return {
                     end)
                 end,
                 default_settings = require("public.ra"),
-                ---@type table | (fun(project_root:string|nil, default_settings: RustAnzlyzerConfig|nil):table) -- The rust-analyzer settings or a function that creates them.
                 settings = function(project_root, default_settings)
                     project_root = project_root or vim.uv.cwd()
-                    default_settings = require("public.ra")
 
                     local ra = require("rustaceanvim.config.server")
 
@@ -164,6 +209,7 @@ return {
             },
         }
 
+        ---@diagnostic disable-next-line: inject-field
         vim.g.rustaceanvim = cfg
     end,
 }

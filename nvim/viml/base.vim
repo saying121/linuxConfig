@@ -44,7 +44,7 @@ set softtabstop=4                                              " 将连续数量
 set smarttab                                                   " 根据文件中其他地方的缩进空格个数来确定一个 tab 是多少个空格
 set expandtab                                                  " 把TAB换成空格
 
-set updatetime=100                                             " swap时文件,防止崩溃,和CursorHole事件时间间隔，用 antoinemadec/FixCursorHold.nvim 解耦CursorHole
+set updatetime=100                                             " swap时间间隔
 set directory=~/.local/share/nvim/swapFile                     " swap文件位置
 set writebackup                                                " 保存成功就删除
 set backup                                                     " 写入前备份文件

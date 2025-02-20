@@ -17,7 +17,7 @@ $pacMan waybar otf-font-awesome \
     swaylock-effects hypridle \
     qt5-wayland qt6-wayland \
     xdg-desktop-portal-hyprland-git xdg-desktop-portal \
-    brightnessctl wlsunset
+    brightnessctl wlsunset swaync
     # mako
     # gnome-calendar \
 

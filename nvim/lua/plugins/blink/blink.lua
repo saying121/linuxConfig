@@ -174,7 +174,6 @@ return {
                 sql = { "dadbod", "lsp", "snippets", "buffer" },
                 mysql = { "dadbod", "lsp", "snippets", "buffer" },
                 plsql = { "dadbod", "lsp", "snippets", "buffer" },
-                DressingInput = { "path", "ripgrep" },
             },
             providers = {
                 lsp = {
@@ -292,9 +291,6 @@ return {
 
                         return c and g
                     end,
-                    ---@module 'blink-cmp-git'
-                    ---@type blink-cmp-git.Options
-                    opts = {},
                 },
                 dictionary = {
                     min_keyword_length = 4,

@@ -2,7 +2,7 @@ return {
     {
         "OXY2DEV/markview.nvim",
         ft = { "markdown" },
-        cond = false,
+        cond = true,
         -- branch = "dev",
         dependencies = {
             "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
@@ -14,6 +14,7 @@ return {
     },
     {
         "MeanderingProgrammer/markdown.nvim",
+        cond = false,
         ft = { "markdown" },
         main = "render-markdown",
         opts = {},

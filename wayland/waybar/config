@@ -20,7 +20,8 @@
         "backlight",
         "pulseaudio",
         "upower",
-        "tray"
+        "tray",
+        "custom/notification"
     ],
     "bluetooth": {
         "format": "\uf294 {status}",
@@ -98,8 +99,8 @@
     },
     "network": {
         "interval": 2,
-        "format": "\uf1eb ({signalStrength}% \uf093 {bandwidthUpOctets} \uf019 {bandwidthDownOctets})",
-        "format-wifi": "\uf1eb ({signalStrength}% \uf093 {bandwidthUpOctets} \uf019 {bandwidthDownOctets})",
+        "format": "\uf1eb ({signalStrength}% \uf093 {bandwidthUpBytes} \uf019 {bandwidthDownBytes})",
+        "format-wifi": "\uf1eb ({signalStrength}% \uf093 {bandwidthUpBytes} \uf019 {bandwidthDownBytes})",
         "tooltip-format": "{ifname} via {gwaddr} \uf796",
         "tooltip-format-wifi": "{essid} ({signalStrength}%) \uf1eb",
         "tooltip-format-ethernet": "{ifname} \uf0c1",
@@ -205,32 +206,36 @@
         "width": 30,
         "icon": true
     },
-    "custom/wl-gammarelay-temperature": {
-        "format": "{} ",
-        "exec": "wl-gammarelay-rs watch {t}",
-        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100",
-        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100"
-    },
-    "custom/wl-gammarelay-brightness": {
-        "format": "{}% ",
-        "exec": "wl-gammarelay-rs watch {bp}",
-        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d +0.02",
-        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d -0.02"
-    },
-    "custom/wl-gammarelay-gamma": {
-        "format": "{}% γ",
-        "exec": "wl-gammarelay-rs watch {g}",
-        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateGamma d +0.02",
-        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateGamma d -0.02"
-    },
     "custom/background": {
         "format": " ",
+        "exec-if": "which linux-wallpaperengine",
         "on-click-right": "~/.linuxConfig/wallpaperengine/rewall.sh"
     },
     "custom/gpu-usage": {
         "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+        "exec-if": "which nvidia-smi",
         "format": "󰢮: {}%",
         "return-type": "",
         "interval": 2
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "sleep 0.1; swaync-client -t -sw",
+        "on-click-right": "sleep 0.1; swaync-client -d -sw",
+        "escape": true
     }
 }

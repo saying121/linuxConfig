@@ -34,7 +34,7 @@ fi
 
 # 开机自启的程序
 exec fusuma & # 触摸板
-exec dunst & # 桌面通知
+exec swaync & # 桌面通知
 exec fcitx5 & # fcitx5 输入法
 exec nm-applet &
 exec cfw &

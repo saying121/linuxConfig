@@ -80,6 +80,7 @@ local function extra_args_()
     }
 end
 local extra_args = extra_args_()
+local check_workspace = false
 
 ---@type RustAnzlyzerConfig
 return {
@@ -118,7 +119,7 @@ return {
             target = nil, -- 编译目标覆盖(target triple).
             unsetTest = {}, -- 取消设置指定板条箱的隐含 #[cfg(test)] 。
         },
-        checkOnSave = false,
+        checkOnSave = not check_workspace, -- shit `RustLsp flyCheck` can't be use on `workspace = false`
         check = {
             allTargets = true,
             command = "clippy", -- 用于 cargo check 的命令。
@@ -139,7 +140,7 @@ return {
             -- 可以是单个目标，例如 "x86_64-unknown-linux-gnu" 或目标列表，例如 ["aarch64-apple-darwin", "x86_64-apple-darwin"] 。
             targets = nil,
 
-            workspace = true,
+            workspace = check_workspace,
         },
         completion = {
             autoimport = { enable = true },
@@ -315,17 +316,6 @@ return {
         },
         typing = {
             autoClosingAngleBrackets = { enable = true }, -- 键入泛型参数列表的左尖括号时是否插入右尖括号。
-        },
-        workspace = {
-            symbol = {
-                search = {
-                    kind = "only_types", -- Workspace symbol search kind.
-                    limit = 128, -- 限制从工作空间符号搜索返回的项目数（默认为128）。
-                    -- 一些客户端，如vs code，在结果筛选时发布新的搜索，
-                    -- 并且不要求在初始搜索中返回所有结果。其他客户要求提前获得所有结果，可能需要更高的限额。
-                    scope = "workspace",
-                },
-            },
         },
     },
 }
