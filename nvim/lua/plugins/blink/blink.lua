@@ -8,7 +8,7 @@ return {
     "saghen/blink.cmp",
     cond = true,
     lazy = false, -- lazy loading handled internally
-    version = "v0.11",
+    version = "*",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -134,6 +134,9 @@ return {
                 enabled = true,
             },
         },
+        fuzzy = {
+            sorts = { "exact", "score", "sort_text" },
+        },
         -- Experimental signature help support
         signature = {
             enabled = false,
@@ -164,6 +167,8 @@ return {
                     table.insert(default, "lazydev")
                 elseif vim.bo.ft == "markdown" then
                     table.insert(default, "git")
+                elseif vim.bo.ft == "bash" or vim.bo.ft == "sh" or vim.bo.ft == "zsh" then
+                    table.insert(default, "env")
                 end
                 return default
             end,
@@ -330,6 +335,11 @@ return {
                 dap = {
                     name = "Dap",
                     module = "blink.compat.source",
+                },
+                env = {
+                    name = "Env",
+                    module = "blink-cmp-env",
+                    opts = {},
                 },
             },
         },
