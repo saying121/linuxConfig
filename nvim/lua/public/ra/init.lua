@@ -80,7 +80,7 @@ local function extra_args_()
     }
 end
 local extra_args = extra_args_()
-local check_workspace = false
+local check_workspace = true
 
 ---@type RustAnzlyzerConfig
 return {

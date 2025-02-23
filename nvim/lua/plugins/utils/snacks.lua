@@ -14,6 +14,7 @@ return {
                 inline = true,
             },
         },
+        explorer = {},
         picker = {
             enable = true,
             ui_select = true,
@@ -21,6 +22,42 @@ return {
                 input = {
                     keys = {
                         ["t"] = { "tab", mode = { "n" } },
+                    },
+                },
+            },
+            sources = {
+                explorer = {
+                    hidden = false,
+                    layout = {
+                        cycle = false,
+                    },
+                    win = {
+                        input = {
+                            ["<Esc>"] = { "", mode = { "n", "x" } },
+                        },
+                        list = {
+                            keys = {
+                                ["t"] = "tab",
+                                ["<Esc>"] = { "", mode = { "n", "x" } },
+                                ["u"] = "explorer_up",
+                                ["a"] = "explorer_add",
+                                ["d"] = "explorer_del",
+                                ["r"] = "explorer_rename",
+                                ["c"] = "explorer_copy",
+                                ["m"] = "explorer_move",
+                                ["o"] = "explorer_open", -- open with system application
+                                ["y"] = { "explorer_yank", mode = { "n", "x" } },
+                                ["p"] = "explorer_paste",
+                                ["U"] = "explorer_update",
+                                ["<c-c>"] = "tcd",
+                                ["<leader>/"] = "picker_grep",
+                                ["<c-t>"] = "terminal",
+                                ["."] = "explorer_focus",
+                                ["I"] = "toggle_ignored",
+                                ["H"] = "toggle_hidden",
+                                ["Z"] = "explorer_close_all",
+                            },
+                        },
                     },
                 },
             },
@@ -101,6 +138,7 @@ return {
             picker.lsp_implementations({
                 layout = {
                     preset = "vscode",
+                    ---@diagnostic disable-next-line: assign-type-mismatch
                     preview = true,
                     layout = {
                         width = 0.8,
@@ -113,5 +151,7 @@ return {
         keymap("n", "gr", picker.lsp_references)
 
         keymap("n", "<leader>fo", picker.recent)
+
+        keymap("n", "<leader>e", picker.explorer)
     end,
 }

@@ -47,7 +47,40 @@ for _, value in pairs(styles) do
     }
 end
 
+local assert = {}
+local asserts = {
+    "assert",
+    "assert_ne",
+    "assert_eq",
+    "assert_matches",
+}
+for _, value in pairs(asserts) do
+    local body = ", $1);"
+    if value == "assert" then
+        body = ");"
+    end
+    assert[value] = {
+        postfix = value,
+        body = value .. "!(${receiver}" .. body,
+        description = "Put the expression into a `" .. value .. "!`",
+        scope = "expr",
+    }
+    local debug_k = "debug_" .. value
+    assert[debug_k] = {
+        postfix = debug_k,
+        body = debug_k .. "!(${receiver}" .. body,
+        description = "Put the expression into a `" .. debug_k .. "!`",
+        scope = "expr",
+    }
+end
+
 local postfix = {
+    ["matches!"] = {
+        postfix = "matches",
+        body = "matches!(${receiver}, $1)",
+        description = "Put the expression into a `matches!`",
+        scope = "expr",
+    },
     ["Mutex::new"] = {
         postfix = "Mutex",
         body = "Mutex::new(${receiver})",
@@ -699,5 +732,5 @@ local item_expr = {
     },
 }
 
-local rr = vim.tbl_deep_extend("error", postfix, prln, postfix_prln, exprs, items, attrs, item_expr)
+local rr = vim.tbl_deep_extend("error", postfix, prln, postfix_prln, exprs, items, attrs, item_expr, assert)
 return rr

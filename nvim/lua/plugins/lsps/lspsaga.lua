@@ -205,7 +205,8 @@ return {
             vcmd.Lspsaga({ "rename", "++project" })
         end)
 
-        require("lspsaga").setup({
+        ---@type LspsagaConfig
+        local sagacf = {
             symbol_in_winbar = {
                 enable = false,
                 hide_keyword = true,
@@ -239,7 +240,8 @@ return {
                 title = true,
                 devicon = true,
             },
-        })
+        }
+        require("lspsaga").setup(sagacf)
 
         keymap({ "n", "t" }, "<M-a>", function()
             vcmd.Lspsaga("term_toggle")

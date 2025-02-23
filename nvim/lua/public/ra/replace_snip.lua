@@ -26,7 +26,7 @@ M.keyword = {
     static = true,
     const = true,
     type = true,
-    mod = true,
+    -- mod = true,
 }
 
 return M
