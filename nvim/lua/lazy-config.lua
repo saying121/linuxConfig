@@ -1,10 +1,11 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local vfn = vim.fn
+local lazypath = vfn.stdpath("data") .. "/lazy/lazy.nvim"
 local mirror = require("public.utils").mirror()
 
 local dev_path = vim.env.HOME .. "/nvim_projects/"
 
 if not vim.uv.fs_stat(lazypath) then
-    vim.fn.system({
+    vfn.system({
         "git",
         "clone",
         "--filter=blob:none",
@@ -35,12 +36,12 @@ local specs = {
 require("lazy").setup({
     -- leave nil when passing the spec as the first argument to setup()
     spec = specs, ---@type table<LazySpec>
-    root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
+    root = vfn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
     defaults = {
         lazy = false, -- should plugins be lazy-loaded?
         version = nil, -- version = "*", -- enable this to try installing the latest stable versions of plugins
     },
-    lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json", -- lockfile generated after running update.
+    lockfile = vfn.stdpath("data") .. "/lazy/lazy-lock.json", -- lockfile generated after running update.
     git = {
         -- defaults for the `Lazy log` command
         -- log = { "-10" }, -- show the last 10 commits
@@ -100,7 +101,7 @@ require("lazy").setup({
     performance = {
         cache = {
             enabled = false,
-            path = vim.fn.stdpath("cache") .. "/lazy/cache",
+            path = vfn.stdpath("cache") .. "/lazy/cache",
             -- Once one of the following events triggers, caching will be disabled.
             -- To cache all modules, set this to `{}`, but that is not recommended.
             disable_events = { "UIEnter", "BufReadPre", "BufWinEnter" },
