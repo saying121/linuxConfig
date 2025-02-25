@@ -31,10 +31,14 @@ M.on_attach = function(client, bufnr)
         end)
     end
 
-    local function lsp_format(reject)
+    local function lsp_format()
         local reject = {
             ["lua-ls"] = true,
             sqls = true,
+            jsonls = true,
+            ["typescript-tools"] = true,
+            vtsls = true,
+            volar = true,
         }
         keymap("n", "<space>f", function()
             lspb.format({

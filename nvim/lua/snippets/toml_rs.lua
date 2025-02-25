@@ -211,6 +211,7 @@ local img = {
     ["plotters"] = "一个 **Rust** 绘图库，专注于 wasm 和本机应用程序的数据绘图",
     ["image"] = "用 **Rust** 编写的成像库。为最常见的图像格式提供基本的过滤器和解码器。",
     ["opencv"] = "opencv 的 **Rust** 绑定",
+    ["nannou"] = "生锈的创意编码框架。",
 }
 local benchmark = {
     ["criterion"] = "criterion.rs 通过快速准确地检测和测量性能改进或回归（即使是很小的改进）来帮助您编写快速代码。您可以自信地进行优化，了解每次更改如何影响代码的性能。",
@@ -699,16 +700,15 @@ path = "<>"
         fmt(
             [[
 [workspace.package]
-edition      = "2021"
-authors      = [""]
-homepage     = ""
-# rust-version = "1.78"
-repository   = ""
+edition = "2024"
+authors = [""]
+homepage = ""
+repository = ""
 
 [workspace]
-members  = ["crates/*"]
-resolver = "2"
-exclude  = [".github", "sample/"]
+members = ["crates/*"]
+resolver = "3"
+exclude = [".github", "sample/"]
         ]],
             {}
         )
