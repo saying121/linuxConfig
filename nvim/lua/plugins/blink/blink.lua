@@ -52,6 +52,21 @@ return {
                 end
             end,
         },
+        cmdline = {
+            keymap = {
+                preset = "none",
+                ["<Tab>"] = { "select_next", "show", "accept" },
+                ["<S-Tab>"] = { "select_prev" },
+                ["<Down>"] = { "select_next" },
+                ["<Up>"] = { "select_prev" },
+                ["<C-n>"] = { "select_next", "fallback" },
+                ["<C-p>"] = { "select_prev", "fallback" },
+                ["<CR>"] = { "accept", "fallback" },
+                ["<C-space>"] = { "show", "hide" },
+                ["<A-u>"] = { "cancel" },
+            },
+            completion = { menu = { auto_show = true } },
+        },
         completion = {
             list = {
                 selection = {
