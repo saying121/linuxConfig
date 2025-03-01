@@ -34,7 +34,7 @@ dap.configurations.rust = dap.configurations.cpp
 dap.configurations.rust[1]["program"] = function()
     local util = require("public.utils")
     -- 调用函数，传入当前工作目录和要找的文件夹作为参数
-    local really_root = util.get_root_dir(vim.uv.cwd(), "/.git")
+    local really_root = util.get_root_dir(vim.uv.cwd(), ".git")
     ---@diagnostic disable-next-line: redundant-parameter
     return vim.fn.input("Path to executable: ", really_root .. "/target/debug/", "file")
 end

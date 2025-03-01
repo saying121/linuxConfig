@@ -117,7 +117,7 @@ return {
 
         local function git_picker(fn)
             if util.is_git_repo() then
-                fn({ cwd = util.get_root_dir(vfn.getcwd(), "/.git") })
+                fn({ cwd = util.get_root_dir(vfn.getcwd(), ".git") })
             else
                 fn()
             end
