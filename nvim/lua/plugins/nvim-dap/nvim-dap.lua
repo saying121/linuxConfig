@@ -1,6 +1,5 @@
 local vfn = vim.fn
 local api = vim.api
-local keymap, opts = vim.keymap.set, { noremap = true, silent = true }
 
 ---@type LazySpec
 return {
@@ -15,6 +14,13 @@ return {
     },
     -- dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "nvim-dap" .. "/dependencies"),
     config = function()
+        ---@param mode string|string[]
+        ---@param lhs string
+        ---@param rhs string|function
+        local function keymap(mode, lhs, rhs)
+            vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true })
+        end
+
         -- 对各个语言的配置
         require("dap-conf.python")
         -- require("dap-conf.lldb-vscode")
@@ -36,25 +42,25 @@ return {
 
         local dap, widgets = require("dap"), require("dap.ui.widgets")
 
-        keymap("n", "<space>b", dap.toggle_breakpoint, opts)
+        keymap("n", "<space>b", dap.toggle_breakpoint)
         keymap("n", "<space>B", function()
-            dap.set_breakpoint(vfn.input("Breakpoint condition: "))
-        end, opts)
+            dap.set_breakpoint(vfn.input("Condition: "), vfn.input("Hit condition: "), vfn.input("Log message: "))
+        end)
         keymap("n", "<space>lp", function()
             dap.set_breakpoint(nil, nil, vfn.input("Log point message: "))
-        end, opts)
+        end)
 
-        keymap({ "n", "i", "t" }, "<F1>", dap.continue, opts)
-        keymap({ "n", "i", "t" }, "<F2>", dap.step_over, opts)
-        keymap({ "n", "i", "t" }, "<F3>", dap.step_into, opts)
-        keymap({ "n", "i", "t" }, "<F4>", dap.step_out, opts)
-        keymap({ "n", "i", "t" }, "<F5>", dap.step_back, opts)
-        keymap({ "n", "i", "t" }, "<F6>", dap.run_last, opts)
-        keymap({ "n", "i", "t" }, "<F7>", dap.terminate, opts)
-        keymap({ "n", "i", "t" }, "<F8>", dap.pause, opts)
-        keymap({ "n", "i", "t" }, "<F9>", dap.disconnect, opts)
-        keymap({ "n", "i", "t" }, "<leader>rtc", dap.run_to_cursor, opts)
-        keymap("n", "<space>dr", dap.repl.open, opts)
+        keymap({ "n", "i", "t" }, "<F1>", dap.continue)
+        keymap({ "n", "i", "t" }, "<F2>", dap.step_over)
+        keymap({ "n", "i", "t" }, "<F3>", dap.step_into)
+        keymap({ "n", "i", "t" }, "<F4>", dap.step_out)
+        keymap({ "n", "i", "t" }, "<F5>", dap.step_back)
+        keymap({ "n", "i", "t" }, "<F6>", dap.run_last)
+        keymap({ "n", "i", "t" }, "<F7>", dap.terminate)
+        keymap({ "n", "i", "t" }, "<F8>", dap.pause)
+        keymap({ "n", "i", "t" }, "<F9>", dap.disconnect)
+        keymap({ "n", "i", "t" }, "<leader>rtc", dap.run_to_cursor)
+        keymap("n", "<space>dr", dap.repl.open)
 
         keymap("n", "<Leader>df", function()
             widgets.centered_float(widgets.frames)
@@ -69,6 +75,10 @@ return {
             widgets.centered_float(widgets.sessions)
         end)
 
+        local pbp = require("persistent-breakpoints.api")
+
+        pbp.load_breakpoints()
+
         -- 自动开启ui
         dap.listeners.after.event_initialized["dapui_config"] = function()
             local dapui = require("dapui")
@@ -79,14 +89,17 @@ return {
 
         dap.listeners.before.event_terminated["dapui_config"] = function()
             api.nvim_command("DapVirtualTextEnable")
+            pbp.store_breakpoints()
             _G.dapui_for_K = false
         end
         dap.listeners.before.event_exited["dapui_config"] = function()
             api.nvim_command("DapVirtualTextEnable")
+            pbp.store_breakpoints()
             _G.dapui_for_K = false
         end
         dap.listeners.before.disconnect["dapui_config"] = function()
             api.nvim_command("DapVirtualTextEnable")
+            pbp.store_breakpoints()
             _G.dapui_for_K = false
         end
 
