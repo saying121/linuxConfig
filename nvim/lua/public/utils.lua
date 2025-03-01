@@ -25,7 +25,7 @@ end
 
 --- 给一个起始目录，向父级目录寻找 目标目录 或 文件
 --- start_dir: 是从哪里开始找
---- be_finded: 被找的目录名字，或者文件名（要带/前缀，例如‘/.git’,'/Cargo.toml'）
+--- be_finded: 被找的目录名字，或者文件名
 ---@param start_dir string
 ---@param be_finded string
 ---@return string | nil
