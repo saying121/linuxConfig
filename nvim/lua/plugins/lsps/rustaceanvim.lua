@@ -89,7 +89,7 @@ return {
                 test_executor = toggle_term_exec,
 
                 code_actions = {
-                    ui_select_fallback = true,
+                    ui_select_fallback = false,
                     keys = {
                         ---@type string | string[]
                         confirm = { "<CR>" },
@@ -172,7 +172,7 @@ return {
                     keymap("n", "<S-CR>", function()
                         vcmd.RustLsp("expandMacro")
                     end)
-                    keymap("n", "<M-S-CR>", function()
+                    keymap({ "n", "x" }, "<M-CR>", function()
                         vcmd.RustLsp("codeAction")
                     end)
 
