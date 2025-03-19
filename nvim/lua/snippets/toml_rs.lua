@@ -31,6 +31,7 @@ local unix = {
     ["daemonize"] = "一个库，使您的代码能够作为守护进程在类 UNIX 系统上运行。",
 }
 local os_crate = {
+    ["eyra"] = "Rust programs written entirely in Rust",
     ["rustix"] = "与 POSIX/Unix/Linux/Winsock 类系统调用的安全 Rust 绑定(uring,memory map,mount,pipe,libc)",
     ["open"] = "使用系统上配置的程序打开路径或 url",
     ["opener"] = "使用系统默认程序打开文件或链接。",
@@ -575,6 +576,7 @@ local test = {
     ["mockito"] = "HTTP mocking for Rust!",
 }
 local error_handle = {
+    ["derive_more"] = "一些更多derive（Trait）选项",
     ["snafu"] = "符合人体工程学的错误处理库",
     ["anyhow"] = "灵活的具体错误类型建立在 std::error::error 之上",
     ["thiserror"] = "推导（错误）",
@@ -586,6 +588,7 @@ local error_handle = {
     ["always-assert"] = "长期运行的健壮应用程序的可恢复断言",
 }
 local data_struct = {
+    ["camino"] = "UTF-8 paths",
     ["bloomfilter"] = "布隆过滤器的实现",
     ["hashbrown"] = "谷歌 SwissTable hash map 的 Rust 端口",
     ["arrayvec"] = "具有固定容量的向量，由数组支持（它也可以存储在堆栈上）。实现固定容量数组 vec 和数组 string。",

@@ -1,3 +1,3 @@
 return {
-    settings = {},
+    settings = require("public.jdtls_"),
 }
