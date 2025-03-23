@@ -3,7 +3,7 @@ Description=kanata
 
 [Service]
 Type=simple
-ExecStart=kanata -c /etc/kanata/kanata.kbd -p 5829
+ExecStart=kanata -c /etc/kanata/kanata.kbd -p 5829 -n
 Restart=no
 
 [Install]
