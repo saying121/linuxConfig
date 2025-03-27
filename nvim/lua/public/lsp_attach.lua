@@ -20,11 +20,11 @@ M.on_attach = function(client, bufnr)
         diagnostic.enable(not diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
     end)
 
-    if client.supports_method(methods.textDocument_signatureHelp, { bufnr = bufnr }) then
+    if client:supports_method(methods.textDocument_signatureHelp, bufnr) then
         keymap("n", "<c-k>", lspb.signature_help)
     end
 
-    if client.supports_method(methods.textDocument_inlayHint, { bufnr = bufnr }) then
+    if client:supports_method(methods.textDocument_inlayHint, bufnr) then
         local _ = pcall(lsp.inlay_hint.enable, true, { bufnr = bufnr })
         keymap("n", "<leader>ih", function()
             lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
@@ -54,12 +54,12 @@ M.on_attach = function(client, bufnr)
         end)
     end
 
-    if client.supports_method(methods.textDocument_formatting, { bufnr = bufnr }) then
+    if client:supports_method(methods.textDocument_formatting, bufnr) then
         lsp_format()
     end
     if
-        client.supports_method(methods.textDocument_rangeFormatting, { bufnr = bufnr })
-        or client.supports_method(methods.textDocument_rangesFormatting, { bufnr = bufnr })
+        client:supports_method(methods.textDocument_rangeFormatting, bufnr)
+        or client:supports_method(methods.textDocument_rangesFormatting, bufnr)
     then
         lsp_format()
         keymap("x", "<space>f", function()
@@ -67,7 +67,7 @@ M.on_attach = function(client, bufnr)
         end)
     end
 
-    if client.supports_method(methods.textDocument_documentHighlight, { bufnr = bufnr }) then
+    if client:supports_method(methods.textDocument_documentHighlight, bufnr) then
         local group_name = "LspDocumentHighlight"
         api.nvim_create_augroup(group_name, { clear = false })
         api.nvim_clear_autocmds({ buffer = bufnr, group = group_name })
@@ -83,7 +83,7 @@ M.on_attach = function(client, bufnr)
         })
     end
 
-    if client.supports_method(methods.codeLens_resolve, { bufnr = bufnr }) then
+    if client:supports_method(methods.codeLens_resolve, bufnr) then
         local group_name = "LspCodeLensRefresh"
         api.nvim_create_augroup(group_name, { clear = false })
         api.nvim_clear_autocmds({ buffer = bufnr, group = group_name })
@@ -103,28 +103,6 @@ M.on_attach = function(client, bufnr)
             api.nvim_set_current_win(winid)
         end
     end)
-    api.nvim_create_autocmd("CursorHold", {
-        buffer = bufnr,
-        callback = function(ev)
-            local f_opts = {
-                focusable = false,
-                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-                border = "rounded",
-                source = "always",
-                prefix = "",
-                scope = "cursor",
-            }
-            local ft = {
-                markdown = true,
-                python = true,
-                rust = true,
-            }
-            if ft[vim.bo.filetype] then
-                return
-            end
-            -- api.nvim_win_close(win_id, force)
-        end,
-    })
 end
 
 M.capabilities = lsp.protocol.make_client_capabilities()

@@ -71,7 +71,7 @@ function _G.show_documentation()
         require("snacks.image").hover()
     elseif not UfoHover() then
         -- vcmd([[Lspsaga hover_doc]])
-        vim.lsp.buf.hover()
+        vim.lsp.buf.hover({ border = "single" })
     end
 end
 
@@ -83,3 +83,17 @@ api.nvim_set_hl(0, "InactiveWindow", { bg = "#0D1B22" })
 -- vim.o.winhighlight = "Normal:Normal,NormalNC:InactiveWindow"
 
 require("lazy-config")
+
+api.nvim_create_autocmd("InsertLeave", {
+    callback = function()
+        if vim.fn.executable("iswitch") == 0 then
+            return
+        end
+        vim.system({ "iswitch", "-s", "com.apple.keylayout.ABC" }, nil, function(proc)
+            if proc.code ~= 0 then
+                vim.notify("Failed to switch input source: " .. proc.stderr, vim.log.levels.WARN)
+            end
+        end)
+    end,
+    desc = "auto switch to abc input",
+})

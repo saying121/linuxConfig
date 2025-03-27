@@ -62,7 +62,7 @@ local codelldb_conf = require("public.utils").codelldb_config()
 dap.adapters.codelldb = codelldb_conf
 
 local util = require("public.utils")
-local git_root = util.get_root_dir(vim.uv.cwd(), ".git")
+local git_root = util.get_root_dir(vim.uv.cwd() or ".", ".git")
 
 local content = nil
 local name
