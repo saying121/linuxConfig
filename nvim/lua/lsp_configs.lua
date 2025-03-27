@@ -3,7 +3,6 @@ local api = vim.api
 local lsp = vim.lsp
 local util = lsp.util
 local diagnostic = vim.diagnostic
-local methods = lsp.protocol.Methods
 local severity = diagnostic.severity
 
 local signs = {
@@ -27,31 +26,35 @@ local virtual_text = {
     --     min = diagnostic.severity.WARN,
     -- },
 
-    ---@param diagnostic vim.Diagnostic
+    ---@param diag vim.Diagnostic
     ---@param i integer
     ---@param total integer
     ---@return string
-    prefix = function(diagnostic, i, total)
-        if signs[diagnostic.severity] then
-            return signs[diagnostic.severity] .. i .. "/" .. total .. ":"
+    prefix = function(diag, i, total)
+        if signs[diag.severity] then
+            return signs[diag.severity] .. i .. "/" .. total .. ":"
         else
             return "" --"●"
         end
     end,
     -- source = "if_many", --- boolean
 
-    ---@param diagnostic vim.Diagnostic
+    ---@param diag vim.Diagnostic
     ---@return string
-    format = function(diagnostic)
-        -- if signs[diagnostic.severity] then
-        --     return signs[diagnostic.severity] .. ": " .. diagnostic.message
+    format = function(diag)
+        -- if signs[diag.severity] then
+        --     return signs[diag.severity] .. ": " .. diag.message
         -- else
-        return diagnostic.message
+        return diag.message
         -- end
     end,
 }
 
 diagnostic.config({
+    virtual_lines = false,
+    -- virtual_lines = {
+    --     current_line = true,
+    -- },
     virtual_text = false,
     -- virtual_text = virtual_text,
     float = { border = "single" },
@@ -65,14 +68,6 @@ diagnostic.config({
     },
     underline = false,
     update_in_insert = false,
-})
-
--- 边框
-lsp.handlers[methods.textDocument_hover] = lsp.with(lsp.handlers.hover, {
-    border = "single",
-})
-lsp.handlers[methods.textDocument_signatureHelp] = lsp.with(lsp.handlers.signature_help, {
-    border = "single",
 })
 
 local function goto_definition(split_cmd)
@@ -90,7 +85,7 @@ local function goto_definition(split_cmd)
         end
 
         if vim.islist(result) then
-            util.jump_to_location(result[1])
+            util.show_document(result[1], "utf-8", { focus = true })
 
             if #result > 1 then
                 -- util.set_qflist(util.locations_to_items(result))
@@ -99,7 +94,7 @@ local function goto_definition(split_cmd)
                 api.nvim_command("wincmd p")
             end
         else
-            util.jump_to_location(result)
+            util.show_document(result, "utf-8", { focus = true })
         end
     end
 

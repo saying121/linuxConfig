@@ -21,6 +21,7 @@ M.snippet = {
 
 M.keyword = {
     let = true,
+    letm = true,
     enum = true,
     struct = true,
     static = true,

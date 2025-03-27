@@ -4,9 +4,9 @@ let mapleader=';'
 " let maplocalleader=';'
 
 nnoremap * *N
-xnoremap * *N
+" xnoremap * *N
 nnoremap # #N
-xnoremap # #N
+" xnoremap # #N
 
 " nnoremap ,, ggVG
 nnoremap ' ;

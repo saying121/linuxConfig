@@ -51,6 +51,7 @@ require("lazy").setup({
     },
     dev = {
         -- directory where you store your local plugin projects
+        ---@type string | fun(plugin: LazyPlugin): string
         path = dev_path,
         ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
         patterns = {
@@ -58,6 +59,7 @@ require("lazy").setup({
             -- "dyninput",
             -- "rustaceanvim",
         }, -- For example {"folke"}
+        fallback = true,
     },
     install = {
         missing = true, -- install missing plugins on startup. This doesn't increase startup time.
