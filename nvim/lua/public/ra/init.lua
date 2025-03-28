@@ -226,10 +226,17 @@ return {
             discriminantHints = { enable = "always" },
             expressionAdjustmentHints = { -- reborrow, loop的返回值
                 enable = "always",
-                hideOutsideUnsafe = true,
+                hideOutsideUnsafe = false,
                 mode = "prefix",
                 -- mode = "postfix ",
             },
+            genericParameterHints = {
+                const = { enable = true },
+                lifetyime = { enable = true },
+                type = { enable = true },
+            },
+            implicitDrops = { enable = true },
+            implicitSizedBoundHints = { enable = true },
             lifetimeElisionHints = { enable = "always", useParameterNames = true },
             maxLength = 20,
             parameterHints = { enable = true },
