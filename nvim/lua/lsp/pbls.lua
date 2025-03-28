@@ -1,3 +1,2 @@
-return {
-
-}
+---@type vim.lsp.Config
+return {}

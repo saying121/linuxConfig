@@ -5,6 +5,11 @@ local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 
+local gpu = {
+    ["amdgpu-sysfs"] = "用于与GPU的Linux内核SYSFS接口进行交互的库（主要针对AMDGPU驱动程序）。",
+    ["nvml-wrapper"] = "NVIDIA管理图书馆的安全且符合人体工程学的生锈包装纸",
+    ["libdrm_amdgpu_sys"] = "RUST的LIBDRM AMDGPU结合，以及从Mesa3d移植的一些方法。",
+}
 local wasm = {
     ["wasmtime"] = "用于公开 wasmtime 运行时的高级 API",
     ["wit-bindgen"] = "rust 绑定生成器和运行时支持 wit 和 Component Model。将 Rust 程序编译到 Component Model 时使用。",
@@ -215,6 +220,7 @@ local img = {
     ["nannou"] = "生锈的创意编码框架。",
 }
 local benchmark = {
+    ["divan"] = "Rust 项目快速而简单的基准测试",
     ["criterion"] = "criterion.rs 通过快速准确地检测和测量性能改进或回归（即使是很小的改进）来帮助您编写快速代码。您可以自信地进行优化，了解每次更改如何影响代码的性能。",
     ["criterion_bencher_compat"] = "Bencher 常用部件的直接更换",
     ["bencher"] = "libtest（不稳定的 rust）基准运行程序的端口，用于 rust 稳定版本。支持运行基准测试并根据名称进行过滤。基准测试执行的工作方式完全相同，仅此而已（警告：black_box仍然丢失！）。",
@@ -671,7 +677,8 @@ local all = vim.tbl_deep_extend(
     consts,
     wasm,
     embedded,
-    alloc
+    alloc,
+    gpu
 )
 -- [package.metadata.wasm-pack.profile.release]
 -- wasm-opt = ['-Os']

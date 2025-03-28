@@ -59,6 +59,7 @@ local clangd_flags = {
 -- local c = ls.choice_node
 
 lspsnips = {}
+---@type vim.lsp.Config
 return {
     ---@param client vim.lsp.Client
     ---@param bufnr integer
