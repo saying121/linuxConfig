@@ -11,7 +11,7 @@ set smartcase                                                  " 搜索智能大
 " 编码设置
 set fileencodings=ucs-bom,default,latin1,utf-8,utf-16,gb2312,gbk,gb18030,cp936        " 检测文件编码，将fileencoding设置为最终编码
 set fileencoding=utf-8                                         " 保存时的文件编码
-set termencoding=utf-8                                         " 终端输出的字符编码
+" set termencoding=utf-8                                         " 终端输出的字符编码
 set fileformat=unix                                            " 设定文件格式为unix
 set fileformats=unix,dos,mac                                   " 识别文件格式
 

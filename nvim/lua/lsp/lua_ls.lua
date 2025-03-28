@@ -26,6 +26,7 @@ for _, value in ipairs(load_plugins) do
     table.insert(lib, plugins_dir .. "/" .. value)
 end
 
+---@type vim.lsp.Config
 return {
     settings = {
         Lua = {

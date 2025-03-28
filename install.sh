@@ -40,7 +40,6 @@ $aurPkg sddm-theme-tokyo-night
 $aurPkg sddm-theme-aerial-git
 $aurPkg sddm-theme-astronaut
 $aurPkg sddm-theme-corners-git
-$aurPkg sddm-nordic-theme-git
 $pacMan plasma packagekit-qt5 packagekit appstream-qt appstream
 
 # 动态壁纸

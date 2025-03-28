@@ -1,5 +1,6 @@
 local my_ft = require("public.ft")
 
+---@type vim.lsp.Config
 local M = {
     filetypes = { "toml" },
     settings = {},
