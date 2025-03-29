@@ -71,7 +71,7 @@ for name, describe in pairs(tb) do
             },
             fmta(name .. "<>: <>", {
                 c(1, {
-                    i(""),
+                    i(1, ""),
                     fmta("(<>)", { i(1, "scope") }),
                 }),
                 i(2, "title"),
