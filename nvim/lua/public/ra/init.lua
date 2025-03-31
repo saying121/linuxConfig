@@ -220,7 +220,7 @@ return {
             bindingModeHints = { enable = true },
             chainingHints = { enable = true },
             closingBraceHints = { enable = true, minLines = 40 },
-            closureCaptureHints = { enable = false },
+            closureCaptureHints = { enable = true },
             closureReturnTypeHints = { enable = "always" }, -- never
             closureStyle = "impl_fn",
             discriminantHints = { enable = "always" },

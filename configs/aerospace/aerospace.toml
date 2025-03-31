@@ -145,6 +145,7 @@ shift-cmd-space = 'layout floating tiling' # Toggle window between floating and 
 [mode.resize.binding]
 minus = 'resize smart -50'
 equal = 'resize smart +50'
+esc = 'mode main'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -189,3 +190,8 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.QuickTimePlayerX'
+run = ['layout floating']
+
