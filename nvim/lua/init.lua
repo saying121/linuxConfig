@@ -69,8 +69,7 @@ function _G.show_documentation()
         vcmd.Man(vim.fn.expand("<cword>"))
     elseif snacks_img_ok() then
         require("snacks.image").hover()
-    elseif not UfoHover() then
-        -- vcmd([[Lspsaga hover_doc]])
+    elseif require("interactive-inlay-hint").interaction_inlay_hint() == 0 then
         vim.lsp.buf.hover({ border = "single" })
     end
 end
