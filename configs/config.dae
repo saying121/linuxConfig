@@ -265,7 +265,7 @@ routing {
     dip(geoip:cn, geoip:private) -> direct
     dip(geoip:cn) && dport(80) -> direct
     domain(geosite:google@cn, geosite:cn) -> direct
-    domain(suffix: ".cn") -> direct
+    domain(suffix: ".cn", suffix: cdn.steampipe.steamcontent.com, suffix: content.steamchina.com) -> direct
 
     domain(geosite:bahamut) -> Taiwan
 

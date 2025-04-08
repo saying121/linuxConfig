@@ -56,8 +56,10 @@ outer.right = 3
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
-cmd-enter = ['exec-and-forget wezterm start']
-ctrl-cmd-t = ['exec-and-forget kitty --single-instance']
+# cmd-enter = ['exec-and-forget wezterm start']
+# ctrl-cmd-t = ['exec-and-forget kitty --single-instance']
+cmd-enter = ['exec-and-forget kitty --single-instance']
+ctrl-cmd-t = ['exec-and-forget wezterm start']
 cmd-alt-f = 'fullscreen'
 shift-cmd-q = 'close --quit-if-last-window'
 
@@ -195,3 +197,6 @@ run = ['layout floating']
 if.app-id = 'com.apple.QuickTimePlayerX'
 run = ['layout floating']
 
+[[on-window-detected]]
+if.app-id = 'com.obsproject.obs-studio'
+run = ['layout floating']
