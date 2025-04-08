@@ -125,9 +125,15 @@ return {
                     keymap("n", "<S-CR>", function()
                         vcmd.RustLsp("expandMacro")
                     end)
-                    keymap({ "n", "x" }, "<M-CR>", function()
-                        vcmd.RustLsp("codeAction")
-                    end)
+                    keymap(
+                        {
+                            "n", --[[ "x" ]]
+                        },
+                        "<M-CR>",
+                        function()
+                            vcmd.RustLsp("codeAction")
+                        end
+                    )
 
                     keymap({ "n", "x" }, "J", function()
                         vcmd.RustLsp("joinLines")
