@@ -5,13 +5,6 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     -- cond = false,
     config = function()
-        -- local ut = require("public.utils")
-
-        -- local cwd = vim.uv.cwd()
-        --
-        -- if ut.is_git_repo() then
-        --     cwd = ut.find_root_cwd(".git")
-        -- end
         local null_ls = require("null-ls")
 
         local sources_table = {
@@ -75,27 +68,7 @@ return {
 
         null_ls.setup({
             sources = sources_table,
-            ---@param _client vim.lsp.Client
-            ---@param bufnr integer
-            on_attach = function(_client, bufnr)
-                vim.keymap.set({ "n", "x" }, "<space>f", function()
-                    vim.lsp.buf.format({
-                        async = true,
-                        bufnr = bufnr,
-                        filter = function(client)
-                            local reject = {
-                                ["lua-ls"] = true,
-                                sqls = true,
-                            }
-                            if reject[client.name] then
-                                return false
-                            else
-                                return true
-                            end
-                        end,
-                    })
-                end, { noremap = true, silent = true })
-            end,
+            on_attach = require("public.lsp_attach").on_attach,
         })
     end,
 }
