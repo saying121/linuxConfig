@@ -38,8 +38,7 @@ return {
             },
         }
         metals_config.init_options.statusBarProvider = "off"
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        metals_config.capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+        metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
 
         return metals_config
     end,
