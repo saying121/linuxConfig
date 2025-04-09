@@ -80,6 +80,7 @@ return {
                     local fts = {
                         ["csv"] = true,
                         ["dockerfile"] = true,
+                        ["rust"] = true,
                     }
 
                     if fts[lang] then
@@ -96,12 +97,7 @@ return {
                         rust = "rust-analyzer",
                         zig = "zls",
                     }
-                    for k, value in pairs(tb) do
-                        if lang == k and #vim.lsp.get_clients({ name = value, bufnr = buf }) > 0 then
-                            -- if lang == k then
-                            return true
-                        end
-                    end
+                    return tb[lang] and #vim.lsp.get_clients({ name = tb[lang], bufnr = buf }) > 0
                 end,
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                 -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
