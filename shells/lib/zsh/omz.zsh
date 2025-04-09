@@ -7,7 +7,7 @@ fi
 
 zi ice wait lucid
 zi snippet OMZP::extract
-zi ice wait lucid
+zi ice lucid wait has'thefuck'
 zi snippet OMZP::thefuck
 
 zi ice wait lucid
