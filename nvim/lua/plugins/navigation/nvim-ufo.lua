@@ -41,13 +41,20 @@ return {
             return newVirtText
         end
 
+        ---@type UfoConfig
         local cf = {
             fold_virt_text_handler = handler,
+            ---@param bufnr number
+            ---@param filetype string file type
+            ---@param buftype string buffer type
+            ---@return UfoProviderEnum|string[]|function|nil
             provider_selector = function(bufnr, filetype, buftype)
                 local ftMap = {
                     vim = { "indent", "treesitter" },
                     python = { "indent", "treesitter" },
-                    git = "",
+                    gitcommit = { "indent" },
+                    dashboard = { "" },
+                    alpha = { "" },
                 }
 
                 if ftMap[filetype] ~= nil then
@@ -118,17 +125,5 @@ return {
                 require("ufo").closeFoldsWith(i)
             end, opts) -- closeAllFolds == closeFoldsWith(0)
         end
-
-        local ft = {
-            "dashboard",
-            "alpha",
-            "dbui",
-        }
-
-        api.nvim_create_autocmd({ "BufEnter" }, {
-            group = api.nvim_create_augroup("UfoDetachs", { clear = true }),
-            pattern = ft,
-            callback = vim.cmd.UfoDetach,
-        })
     end,
 }
