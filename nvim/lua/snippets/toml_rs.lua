@@ -59,6 +59,8 @@ local embedded = {
 local crates = {
     ["bollard"] = "An asynchronous Docker daemon API",
     ["iceoryx2"] = "零拷贝无锁IPC通信",
+    ["unwinding"] = "Unwinding library in Rust and for Rust",
+    ["rc-zip"] = "zip文件格式的I/O-Agnostic实现",
     ["statum"] = "Rust 的编译时状态机魔法：具有自动转换验证的零样板类型状态模式",
     ["duration-str"] = "持续时间字符串解析器",
     ["ubyte"] = "一个简单的、完整的、const-一切、饱和的、人性化的、没有字节单元的标准库。",
@@ -598,6 +600,7 @@ local error_handle = {
     ["always-assert"] = "长期运行的健壮应用程序的可恢复断言",
 }
 local data_struct = {
+    ["fast-math"] = "快速，大概的数学函数版本。",
     ["camino"] = "UTF-8 paths",
     ["bloomfilter"] = "布隆过滤器的实现",
     ["hashbrown"] = "谷歌 SwissTable hash map 的 Rust 端口",
