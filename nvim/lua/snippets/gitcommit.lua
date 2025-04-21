@@ -69,12 +69,16 @@ for name, describe in pairs(tb) do
                 priority = 30000,
                 dscr = describe,
             },
-            fmta(name .. "<>: <>", {
+            fmta(name .. "<><>: <>", {
                 c(1, {
                     i(1, ""),
                     fmta("(<>)", { i(1, "scope") }),
                 }),
-                i(2, "title"),
+                c(2, {
+                    i(1, ""),
+                    i(1, "!"),
+                }),
+                i(3, "title"),
             })
         )
     )

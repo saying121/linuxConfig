@@ -57,7 +57,7 @@ local embedded = {
     ["embassy"] = "现代嵌入式框架，使用 Rust 和异步。",
 }
 local crates = {
-    ["rc-zip"] = "zip文件格式的I/O-Agnostic实现",
+    ["iceoryx2"] = "零拷贝无锁IPC通信",
     ["statum"] = "Rust 的编译时状态机魔法：具有自动转换验证的零样板类型状态模式",
     ["duration-str"] = "持续时间字符串解析器",
     ["ubyte"] = "一个简单的、完整的、const-一切、饱和的、人性化的、没有字节单元的标准库。",
@@ -525,6 +525,7 @@ local websocket = {
     ["tungstenite"] = "基于流的轻量级 Web 套接字实现",
 }
 local macro = {
+    ["facet"] = "Rust 常量与 no_std 反射——你所需的终极派生宏",
     ["unsynn"] = "(Proc-macro) parsing made easy",
     ["derivative"] = "一组 Rust 的替代“derive”属性",
     ["proc-macro2"] = "编译器的“proc macro” API 的替代实现，用于将基于标记的库与过程宏用例分离。",
