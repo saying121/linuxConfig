@@ -140,28 +140,6 @@ return {
                     end)
                 end,
                 default_settings = require("public.ra"),
-                settings = function(project_root, default_settings)
-                    project_root = project_root or vim.uv.cwd()
-
-                    local ra = require("rustaceanvim.config.server")
-
-                    -- if string.find(project_root, "decrypt-browser") then
-                    --     default_settings.cargo.target = { "" }
-                    -- end
-
-                    local st =
-                        ra.load_rust_analyzer_settings(project_root, { settings_file_pattern = "rust-analyzer.json" })
-
-                    -- ---@type RustAnzlyzerConfig
-                    -- local st = ra.load_rust_analyzer_settings(project_root .. "/.vscode", {
-                    --     -- settings_file_pattern = "rust-analyzer.json",
-                    --     settings_file_pattern = "settings.json",
-                    --     default_settings = default_settings,
-                    -- })
-                    local res = vim.tbl_deep_extend("keep", default_settings, st)
-                    -- vim.print(res)
-                    return res
-                end,
             },
             dap = {
                 adapter = require("public.utils").codelldb_config(),
