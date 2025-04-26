@@ -227,7 +227,7 @@ return {
             expressionAdjustmentHints = { -- reborrow, loop的返回值
                 enable = "always",
                 hideOutsideUnsafe = false,
-                mode = "prefix",
+                mode = "prefer_prefix",
                 -- mode = "postfix ",
             },
             genericParameterHints = {
