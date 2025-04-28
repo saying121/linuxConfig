@@ -1,6 +1,5 @@
 ---@type vim.lsp.Config
 return {
-    -- root_dir = require("lspconfig").util.root_pattern(".git"),
     root_dir = function()
         vim.fn.getcwd()
     end,

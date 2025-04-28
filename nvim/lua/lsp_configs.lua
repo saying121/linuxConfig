@@ -5,6 +5,8 @@ local util = lsp.util
 local diagnostic = vim.diagnostic
 local severity = diagnostic.severity
 
+local lsp_attach = require("public.lsp_attach")
+
 local signs = {
     [severity.ERROR] = "", --
     [severity.WARN] = "", --
@@ -102,3 +104,7 @@ local function goto_definition(split_cmd)
 end
 
 lsp.handlers["textDocument/definition"] = goto_definition("vsplit")
+
+lsp.config("*", {
+    on_attach = lsp_attach.on_attach,
+})

@@ -1,6 +1,7 @@
 ---@type vim.lsp.Config
 return {
-    -- root_dir = require("lspconfig").util.root_pattern(".git"),
+    cmd = { "termux-language-server" },
+    filetypes = { "PKGBUILD" },
     single_file_support = true,
     settings = {},
 }
