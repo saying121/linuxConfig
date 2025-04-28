@@ -57,6 +57,7 @@ local embedded = {
     ["embassy"] = "现代嵌入式框架，使用 Rust 和异步。",
 }
 local crates = {
+    ["bollard"] = "An asynchronous Docker daemon API",
     ["iceoryx2"] = "零拷贝无锁IPC通信",
     ["statum"] = "Rust 的编译时状态机魔法：具有自动转换验证的零样板类型状态模式",
     ["duration-str"] = "持续时间字符串解析器",

@@ -62,7 +62,7 @@ return {
                 },
             },
         },
-        scroll = { enabled = true },
+        scroll = { enabled = false },
         input = { enabled = true },
         scope = { enabled = true },
         chunk = { enabled = true },

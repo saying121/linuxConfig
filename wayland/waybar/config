@@ -24,7 +24,7 @@
         "custom/notification"
     ],
     "bluetooth": {
-        "format": "\uf294 {status}",
+        "format": " {status}",
         "format-connected": "\uf294 {device_alias}",
         "format-connected-battery": "\uf294 {device_alias} {device_battery_percentage}%",
         "format-device-preference": [

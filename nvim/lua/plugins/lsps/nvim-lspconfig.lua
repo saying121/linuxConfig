@@ -4,9 +4,6 @@ local vfn = vim.fn
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre" },
-    dependencies = {
-        "saghen/blink.cmp",
-    },
     config = function()
         local lspconfig, LSP = require("lspconfig"), require("public.lsp_attach")
 
@@ -30,8 +27,6 @@ return {
 
         lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
             autostart = true,
-            -- capabilities = LSP.capabilities,
-            capabilities = vim.tbl_deep_extend("force", LSP.capabilities, require("blink.cmp").get_lsp_capabilities()),
         })
 
         -- 要禁用某个 lsp 就去改后缀名
