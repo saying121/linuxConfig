@@ -2,7 +2,7 @@ local vfn = vim.fn
 local lazypath = vfn.stdpath("data") .. "/lazy/lazy.nvim"
 local mirror = require("public.utils").mirror()
 
-local dev_path = vim.env.HOME .. "/nvim_projects/"
+local dev_path = vim.fn.expand("~/nvim-plugin/")
 
 if not vim.uv.fs_stat(lazypath) then
     vfn.system({
