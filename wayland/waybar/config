@@ -155,7 +155,7 @@
         "on-click-right": "[[ $(ps -ef | grep -c plasma-systemmonito[r]) -gt 0 ]] && killall plasma-systemmonitor || plasma-systemmonitor"
     },
     "memory": {
-        "interval": 15,
+        "interval": 10,
         "format": "\uf0c9 {percentage}% {used:0.1f}G/{total:0.1f}G ",
         "tooltip-format": "\uf0c9 {percentage}% {used:0.1f}G/{total:0.1f}G 󰍛{swapPercentage}% {swapUsed}G/{swapTotal}G ",
         "max-length": 26

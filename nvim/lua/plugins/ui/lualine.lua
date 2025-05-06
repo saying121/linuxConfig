@@ -22,12 +22,6 @@ return {
             return str
         end
 
-        -- local function lsp_status()
-        --     vim.lsp.handlers["experimental/serverStatus"] = function(_, result)
-        --         print("Received serverStatus notification:", vim.inspect(result))
-        --     end
-        -- end
-
         local function dbui_statusline()
             return vim.g.loaded_dbui
                     and vim.fn["db_ui#statusline"]({
@@ -44,14 +38,20 @@ return {
 
         local function rs_target()
             local config = vim.lsp.get_clients({ name = "rust-analyzer" })
-            local c = config[1]
             ---@diagnostic disable-next-line: undefined-field
-            local target = c.config.default_settings["rust-analyzer"].cargo.target
-            return target or get_info.parse_rustc_version().host
-        end
+            local target = config[1].config.default_settings["rust-analyzer"].cargo.target
+            local info = get_info.parse_rustc_version()
+            if not info then
+                return target
+            end
+            target = target or info.host
 
-        local function rs_cond()
-            return vim.bo.filetype == "rust"
+            local is_nightly = string.find(info.release, "nightly") ~= nil
+            if is_nightly then
+                return target .. "-" .. info.release
+            else
+                return target
+            end
         end
 
         local function dbui_connections()
@@ -129,24 +129,14 @@ return {
                     {
                         "filename",
                         file_status = true, -- Displays file status (readonly status, modified status)
-                        newfile_status = false, -- Display new file status (new file means no write after created)
+                        newfile_status = true, -- Display new file status (new file means no write after created)
                         path = 3, -- 0: Just the filename
                         -- 1: Relative path
                         -- 2: Absolute path
                         -- 3: Absolute path, with tilde as the home directory
-
-                        shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-                        -- for other components. (terrible name, any suggestions?)
-                        symbols = {
-                            modified = "[+]", -- Text to show when the file is modified.
-                            readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-                            unnamed = "[No Name]", -- Text to show for unnamed buffers.
-                            newfile = "[New]", -- Text to show for newly created file before first write
-                        },
                     },
                 },
                 lualine_x = {
-                    -- lsp_status,
                     { "%M" },
                     {
                         require("noice").api.status.command.get,
@@ -159,10 +149,6 @@ return {
                             return vim.bo.ft == "http"
                         end,
                     },
-                    -- {
-                    --     require("noice").api.status.message.get_hl,
-                    --     cond = require("noice").api.status.message.has,
-                    -- },
                     { rime_status },
                     {
                         "filetype",
@@ -174,24 +160,25 @@ return {
                     },
                     {
                         rs_target,
-                        cond = rs_cond,
-                    },
-                    {
-                        get_info.lsp_clients,
-                        -- icon = " LSP:",
-                        icon = " :",
-                    },
-                    {
-                        "encoding",
                         cond = function()
-                            return vim.api.nvim_get_option_value("fileencoding", { buf = 0 }) ~= "utf-8"
+                            return vim.bo.filetype == "rust"
                         end,
                     },
-                    -- "fileformat",
+                    {
+                        "lsp_status",
+                        icon = " :",
+                    },
                 },
                 lualine_y = {
-                    -- get_info.linux_distro,
-                    get_info.fileformat,
+                    "encoding",
+                    {
+                        "fileformat",
+                        symbols = {
+                            unix = "",
+                            dos = "",
+                            mac = "",
+                        },
+                    },
                 },
                 lualine_z = { "location", "%L" },
             },
