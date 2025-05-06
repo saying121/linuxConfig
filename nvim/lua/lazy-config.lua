@@ -33,6 +33,7 @@ local specs = {
     { import = "plugins.utils" },
 }
 
+---@type LazyConfig
 require("lazy").setup({
     -- leave nil when passing the spec as the first argument to setup()
     spec = specs, ---@type table<LazySpec>
@@ -102,7 +103,7 @@ require("lazy").setup({
     },
     performance = {
         cache = {
-            enabled = false,
+            enabled = true,
             path = vfn.stdpath("cache") .. "/lazy/cache",
             -- Once one of the following events triggers, caching will be disabled.
             -- To cache all modules, set this to `{}`, but that is not recommended.
