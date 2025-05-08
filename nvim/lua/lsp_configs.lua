@@ -105,8 +105,26 @@ end
 
 lsp.handlers["textDocument/definition"] = goto_definition("vsplit")
 
-lsp.config("*", {
-    on_attach = lsp_attach.on_attach,
+---@type vim.lsp.Config
+local default_lsp_config = {
+    capabilities = lsp.protocol.make_client_capabilities(),
+}
+default_lsp_config.capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+}
+lsp.config("*", default_lsp_config)
+
+api.nvim_create_autocmd({ "LspAttach" }, {
+    group = api.nvim_create_augroup("LspAttachConfig", { clear = true }),
+    callback = function(ev)
+        local client = lsp.get_client_by_id(ev.data.client_id)
+        if not client then
+            return
+        end
+
+        lsp_attach.on_attach(client, ev.buf)
+    end,
 })
 
 -- 要禁用某个 lsp 就去改后缀名

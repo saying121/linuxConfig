@@ -68,5 +68,4 @@ return {
         -- "--limit-resutls=1000",
         -- "--malloc-trim",
     },
-    on_attach=require('public.lsp_attach').on_attach
 }

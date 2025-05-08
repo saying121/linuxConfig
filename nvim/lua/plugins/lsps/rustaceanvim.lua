@@ -80,8 +80,6 @@ return {
                         end,
                     })
 
-                    require("public.lsp_attach").on_attach(client, bufnr)
-
                     ---@param mode string|table
                     ---@param lhs string
                     ---@param rhs string|function

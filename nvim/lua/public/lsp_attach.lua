@@ -105,10 +105,4 @@ M.on_attach = function(client, bufnr)
     end)
 end
 
-M.capabilities = lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-}
-
 return M
