@@ -81,7 +81,7 @@ function _G.show_documentation()
         vcmd.Man(vim.fn.expand("<cword>"))
     elseif snacks_img_ok() then
         require("snacks.image").hover()
-    elseif require("interactive-inlay-hint").interaction_inlay_hint() == 0 then
+    elseif not require("interactive-inlay-hint").interaction_inlay_hint() then
         vim.lsp.buf.hover({ border = "single" })
     end
 end

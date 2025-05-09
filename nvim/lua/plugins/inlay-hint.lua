@@ -9,6 +9,14 @@ return {
                 width = 80,
                 height = 40,
             },
+            disable_when = function(hint_list)
+                for _, v in ipairs(hint_list) do
+                    if type(v.inlay_hint.label) == "table" then
+                        return false
+                    end
+                end
+                return true
+            end,
         })
         vim.keymap.set({ "n", "x" }, "<leader>SS", inter_inlay.interaction_inlay_hint)
     end,
