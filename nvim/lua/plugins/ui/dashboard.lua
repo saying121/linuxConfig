@@ -45,7 +45,8 @@ return {
                 },
                 {
                     file_path = M.get_random_file_path("pictures"),
-                    command = "chafa -C on -c full --fg-only --symbols braille ",
+                    -- command = "chafa -C on -c full --fg-only --symbols braille ",
+                    command = "chafa --passthrough=tmux --format=symbols --stretch --align center -c full",
                     file_height = 24,
                     file_width = 45,
                 },
