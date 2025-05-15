@@ -26,14 +26,13 @@ local total = split + split1
 local result = vfn.rand() % total
 -- result = 1
 -- result = 60
+local cond = vfn.argc() == 0 and result < split
 
 ---@type LazySpec
 return {
     {
         "glepnir/dashboard-nvim",
-        cond = function()
-            return vfn.argc() == 0 and result < split
-        end,
+        cond = cond,
         config = function()
             local path_cat = M.get_random_file_path("the_cat")
             local all_prev = {
@@ -125,9 +124,7 @@ return {
                 command = "setlocal nocursorline",
             })
         end,
-        cond = function()
-            return vfn.argc() == 0 and result >= split
-        end,
+        cond = not cond,
         config = function()
             local alpha = require("alpha")
             local dashboard = require("alpha.themes.dashboard")
@@ -160,10 +157,11 @@ return {
             local pic_cat = M.get_random_file_path("pictures")
             local dynamic_header = {
                 type = "terminal",
-                command = "chafa -C on -c full --fg-only --symbols braille " .. pic_cat,
+                command = "chafa --passthrough=tmux --format=symbols --stretch --align center -c full " .. pic_cat,
+                -- command = "chafa -C on -c full --fg-only --symbols braille " .. pic_cat,
                 -- command = "chafa -C true -f sixel -w 9 -s 30 x 40 " .. pic_cat..redirect,
-                width = 190,
-                height = 20,
+                width = 50,
+                height = 30,
                 opts = {
                     position = "center",
                     redraw = true,
