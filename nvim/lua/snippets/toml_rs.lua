@@ -6,6 +6,10 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 
 local gpu = {
+    ["cuda_std"] = "使用Rustc Codegen NVVM的CUDA标准库",
+    ["rust-cuda"] = "Burn是下一代深度学习框架，并不损害灵活性，效率和便携性。",
+    ["burn"] = "Burn是下一代深度学习框架，并不损害灵活性，效率和便携性。",
+    ["cubecl"] = "多平台的高性能计算语言扩展。",
     ["amdgpu-sysfs"] = "用于与GPU的Linux内核SYSFS接口进行交互的库（主要针对AMDGPU驱动程序）。",
     ["nvml-wrapper"] = "NVIDIA管理图书馆的安全且符合人体工程学的生锈包装纸",
     ["libdrm_amdgpu_sys"] = "RUST的LIBDRM AMDGPU结合，以及从Mesa3d移植的一些方法。",
@@ -96,6 +100,7 @@ local crates = {
     ["ufmt"] = "μfmt，一个比core：：fmt小（6- 40倍）、快（2- 9倍）、无恐慌的替代品",
 }
 local util = {
+    ["convert_case"] = "Convert strings into any case",
     ["cfg-if"] = "根据大量 #[cfg] 参数以符合人体工程学的方式定义项目的宏。其结构类似于 if-else 链，第一个匹配的分支是发出的项目。",
     ["indoc"] = "缩进文档文字",
     ["hex-literal"] = "用于在编译时将十六进制字符串转换为字节数组的宏",
@@ -590,6 +595,7 @@ local test = {
     ["mockito"] = "HTTP mocking for Rust!",
 }
 local error_handle = {
+    ["error-stack"] = "A context-aware error-handling library that supports arbitrary attached user data",
     ["derive_more"] = "一些更多derive（Trait）选项",
     ["snafu"] = "符合人体工程学的错误处理库",
     ["anyhow"] = "灵活的具体错误类型建立在 std::error::error 之上",
