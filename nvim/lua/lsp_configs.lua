@@ -9,8 +9,6 @@ local log = vim.lsp.log
 
 local lsp_attach = require("public.lsp_attach")
 
-local lsp_attach = require("public.lsp_attach")
-
 local signs = {
     [severity.ERROR] = "", --
     [severity.WARN] = "", --
