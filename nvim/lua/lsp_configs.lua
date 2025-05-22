@@ -4,6 +4,8 @@ local lsp = vim.lsp
 local util = lsp.util
 local diagnostic = vim.diagnostic
 local severity = diagnostic.severity
+local methods = lsp.protocol.Methods
+local log = vim.lsp.log
 
 local lsp_attach = require("public.lsp_attach")
 
@@ -72,38 +74,50 @@ diagnostic.config({
     update_in_insert = false,
 })
 
-local function goto_definition(split_cmd)
-    local log = vim.lsp.log
-
-    -- note, this handler style is for neovim 0.5.1/0.6, if on 0.5, call with function(_, method, result)
+local function get_locations(split_cmd)
+    ---@type lsp.Handler
     local handler = function(_, result, ctx)
+        local encoding = "utf-8"
+        local client = lsp.get_client_by_id(ctx.client_id)
+        if client then
+            encoding = client.offset_encoding
+        end
         if result == nil or vim.tbl_isempty(result) then
             local _ = log.info() and log.info(ctx.method, "No location found")
             return nil
         end
 
         if split_cmd then
-            vim.cmd(split_cmd)
+            -- vim.cmd(split_cmd)
         end
 
-        if vim.islist(result) then
-            util.show_document(result[1], "utf-8", { focus = true })
-
-            if #result > 1 then
-                -- util.set_qflist(util.locations_to_items(result))
-                vfn.setqflist(util.locations_to_items(result))
-                api.nvim_command("copen")
-                api.nvim_command("wincmd p")
-            end
+        if not vim.islist(result) then
+            util.show_document(result, encoding, { focus = true })
+        elseif #result == 1 then
+            util.show_document(result[1], encoding, { focus = true })
         else
-            util.show_document(result, "utf-8", { focus = true })
+            vim.ui.select(util.locations_to_items(result, encoding), {
+                prompt = "Lsp locations: ",
+                ---@param item vim.quickfix.entry
+                ---@return string
+                format_item = function(item)
+                    return item.text
+                end,
+            }, function(item, _)
+                if not item then
+                    return
+                end
+                vim.cmd("tabedit " .. item.filename)
+                api.nvim_win_set_cursor(0, { item.lnum, item.col - 1 })
+            end)
         end
     end
 
     return handler
 end
 
-lsp.handlers["textDocument/definition"] = goto_definition("vsplit")
+lsp.handlers[methods.textDocument_definition] = get_locations("vsplit")
+-- lsp.handlers[methods.textDocument_implementation] = get_locations("vsplit")
 
 ---@type vim.lsp.Config
 local default_lsp_config = {
