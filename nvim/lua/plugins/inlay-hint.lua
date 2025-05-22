@@ -9,6 +9,7 @@ return {
                 width = 80,
                 height = 40,
             },
+            ui_select = true,
             disable_when = function(hint_list)
                 for _, v in ipairs(hint_list) do
                     if type(v.inlay_hint.label) == "table" then

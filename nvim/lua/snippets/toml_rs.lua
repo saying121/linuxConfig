@@ -577,10 +577,14 @@ local notify = {
     ["notify"] = "跨平台文件系统通知库",
 }
 local test = {
-    ["no-panic"] = "归因于宏要求编译器证明函数永远不会慌张。",
-    ["skeptic"] = "通过 Cargo 测试你的 Rust Markdown 文档",
+    ["serial_test"] = "允许创建串行的生锈测试",
+    ["k9"] = "生锈测试库",
+    ["expect-test"] = "简约快照测试库",
     ["insta"] = "Rust 的快照测试库",
     ["snapbox"] = "快照测试工具箱",
+
+    ["no-panic"] = "归因于宏要求编译器证明函数永远不会慌张。",
+    ["skeptic"] = "通过 Cargo 测试你的 Rust Markdown 文档",
     ["pretty_assertions"] = "使用直接替换覆盖 `assert eq!` 和 `assert ne!`，添加丰富多彩的差异。",
     ["static_assertions"] = "编译时断言以确保满足不变量。",
     ["similar"] = "一个基于 diff 的 Rust 高级 diff 库",
