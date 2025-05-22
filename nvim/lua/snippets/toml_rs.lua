@@ -31,6 +31,7 @@ local transfer = {
     ["whisper-rs"] = "whisper.cpp 的 Rust 绑定",
 }
 local unix = {
+    ["ebpf"] = "EBPF库，专注于开发人员的经验和可操作性。",
     ["which"] = "rust 相当于 unix 命令“which”。在跨平台中找到已安装的可执行文件。",
     ["signal-hook-tokio"] = "tokio 对信号挂钩的支持",
     ["signal-hook"] = "Unix 信号处理",
@@ -117,6 +118,7 @@ local util = {
     ["either"] = "带有变体“Left”和“Right”的枚举“Either”是一种通用的和类型，有两种情况。",
 }
 local parser = {
+    ["winnow"] = "面向字节的零拷贝，解析器组合库",
     ["logos"] = "创建可笑的快速词法",
     ["nom"] = "面向字节、零拷贝、解析器组合器库",
     ["lalrpop"] = "方便的 lr(1) 解析器生成器",
