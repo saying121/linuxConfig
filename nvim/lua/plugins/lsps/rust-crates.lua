@@ -34,9 +34,6 @@ return {
         crates.setup({
             lsp = {
                 enabled = true,
-                on_attach = function(client, bufnr)
-                    require("public.lsp_attach").on_attach(client, bufnr)
-                end,
                 actions = true,
                 completion = true,
                 hover = true,

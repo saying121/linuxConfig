@@ -68,7 +68,6 @@ return {
 
         null_ls.setup({
             sources = sources_table,
-            on_attach = require("public.lsp_attach").on_attach,
         })
     end,
 }

@@ -1,5 +1,5 @@
 local lsp = vim.lsp
-local LSP = require("public.lsp_attach")
+
 ---@type vim.lsp.Config
 return {
     single_file_support = true,
@@ -7,8 +7,6 @@ return {
     ---@param client vim.lsp.Client
     ---@param bufnr integer
     on_attach = function(client,bufnr)
-        LSP.on_attach(client, bufnr)
-
         local orig_rpc_request = client.rpc.request
         function client.rpc.request(method, params, handler, ...)
             local orig_handler = handler

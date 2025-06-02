@@ -12,7 +12,6 @@ return {
         ---@param client vim.lsp.Client
         ---@param bufnr integer
         metals_config.on_attach = function(client, bufnr)
-            require("public.lsp_attach").on_attach(client, bufnr)
             -- require("metals").setup_dap()
         end
         metals_config.settings = {

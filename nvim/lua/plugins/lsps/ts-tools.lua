@@ -7,7 +7,6 @@ return {
     config = function()
         local api = require("typescript-tools.api")
         require("typescript-tools").setup({
-            on_attach = require("public.lsp_attach").on_attach,
             handlers = {
                 ["textDocument/publishDiagnostics"] = api.filter_diagnostics(
                     -- Ignore 'This may be converted to an async function' diagnostics.
