@@ -40,6 +40,10 @@ zstyle ':fzf-tab:complete:git-(diff|restore|add):*' --preview-window=down:3:wrap
 zstyle ':fzf-tab:complete:git-*:options' fzf-flags --preview-window=down:3:wrap --height=50%
 zstyle ':fzf-tab:complete:git:argument-1' fzf-flags --preview-window=down:10:wrap --height=50%
 
+zstyle ':fzf-tab:complete:git-(diff|restore|add):*' --preview-window=down:3:wrap --height=50%
+zstyle ':fzf-tab:complete:git-*:options' fzf-flags --preview-window=down:3:wrap --height=50%
+zstyle ':fzf-tab:complete:git:argument-1' fzf-flags --preview-window=down:10:wrap --height=50%
+
 zstyle ':fzf-tab:complete:_zlua:*' query-string input
 
 # zstyle ':fzf-tab:*' group-colors $'\033[15m' $'\033[14m' $'\033[33m' $'\033[35m' $'\033[15m' $'\033[14m' $'\033[33m' $'\033[35m'
