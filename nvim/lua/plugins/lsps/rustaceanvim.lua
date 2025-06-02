@@ -9,7 +9,6 @@ return {
     -- cond=false,
     dependencies = {
         "mfussenegger/nvim-dap",
-        "akinsho/toggleterm.nvim",
         {
             "vxpm/ferris.nvim",
             opts = {
@@ -18,7 +17,31 @@ return {
         },
     },
     config = function()
-        local executors = require("rustaceanvim.executors")
+        local snacks = {
+            execute_command = function(command, args, cwd, opts)
+                local ok, term = pcall(require, "snacks.terminal")
+                if not ok then
+                    vim.schedule(function()
+                        vim.notify("snacks not found.", vim.log.levels.ERROR)
+                    end)
+                    return
+                end
+
+                local shell = require("rustaceanvim.shell")
+                term.open(shell.make_command_from_args(command, args), {
+                    dir = cwd,
+                    env = opts.env,
+                    cmd = shell.make_command_from_args(command, args),
+                    close_on_exit = false,
+                    auto_close = false,
+                    auto_insert = false,
+                    interactive = false,
+                    win = {
+                        border = "double",
+                    },
+                })
+            end,
+        }
 
         ---@type rustaceanvim.Opts
         local cfg = {
@@ -36,8 +59,8 @@ return {
                     end
                 end,
 
-                executor = executors.toggleterm,
-                test_executor = executors.toggleterm,
+                executor = snacks,
+                test_executor = snacks,
 
                 code_actions = {
                     ui_select_fallback = false,
