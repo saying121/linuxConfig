@@ -1,21 +1,25 @@
 return {
     {
         "OXY2DEV/markview.nvim",
-        ft = { "markdown" },
-        cond = false,
+        ft = { "markdown", "Avante" },
+        -- cond = false,
         -- branch = "dev",
         dependencies = {
             "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
         },
-
-        config = function()
-            require("markview").setup()
-        end,
+        ---@type mkv.config
+        opts = {
+            preview = {
+                filetypes = { "markdown", "Avante" },
+                ignore_buftypes = {},
+            },
+            max_length = 99999,
+        },
     },
     {
-        "MeanderingProgrammer/markdown.nvim",
+        "MeanderingProgrammer/render-markdown",
+        cond = false,
         ft = { "markdown" },
-        main = "render-markdown",
         opts = {},
         name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
         dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you use the mini.nvim suite

@@ -195,6 +195,7 @@ return {
                 mysql = { "dadbod", "lsp", "snippets", "buffer" },
                 plsql = { "dadbod", "lsp", "snippets", "buffer" },
                 DressingInput = { "path", "ripgrep" },
+                AvanteInput = { "path", "ripgrep" },
             },
             providers = {
                 lsp = {

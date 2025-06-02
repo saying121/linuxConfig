@@ -1,0 +1,1 @@
+set scrolloff=0
