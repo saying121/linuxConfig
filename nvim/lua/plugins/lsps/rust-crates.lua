@@ -1,11 +1,10 @@
+local my_ft = require("public.ft")
+
 ---@type LazySpec
 return {
     "saecki/crates.nvim",
     tag = "stable",
-    event = {
-        "UIEnter Cargo.toml",
-        "BufNewFile Cargo.toml",
-    },
+    ft = my_ft.filename["Cargo.toml"],
     config = function()
         local crates = require("crates")
 

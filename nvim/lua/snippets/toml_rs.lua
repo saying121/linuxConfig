@@ -149,7 +149,6 @@ local perf = {
     ["enum_dispatch"] = "动态分派方法调用的近乎直接替代，速度高达 10 倍",
     ["opentelemetry"] = "*open telemetry* 提供一组 api、库、代理和收集器服务来从您的应用程序捕获分布式跟踪和指标。您可以使用 prometheus、jaeger 和其他可观察性工具来分析它们。",
     ["tailcall"] = "安全、零成本的尾递归",
-    ["wide"] = "A crate to help you go wide. #simd",
     ["simdutf8"] = "simd 加速 utf-8 验证 Rust。",
     ["simd-json"] = "基于 simdjson 端口的高性能 json 解析器",
 }
@@ -646,9 +645,20 @@ local cache = {
     ["moka"] = "受 java caffeine 启发的快速并发缓存库",
     ["TinyUFO"] = "以tinylfu作为准入策略、s3-fifo作为逐出策略的内存缓存实现",
 }
+local simd = {
+    ["wide"] = "一个板条箱，可以帮助您宽阔。",
+    ["simdeez"] = "SIMD库在不同的指令集和宽度上抽象",
+    ["pulp"] = "安全通用Simd",
+}
+local arch = {
+    ["safe_arch"] = "通过`＃[cfg()]安全地露出`core::Arch` 的板条箱。",
+    ["safe-transmute"] = "防锈的保障 transmute()",
+}
 
 local all = vim.tbl_deep_extend(
     "error",
+    arch,
+    simd,
     cache,
     test,
     data_struct,

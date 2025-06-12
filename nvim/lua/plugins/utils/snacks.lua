@@ -156,7 +156,11 @@ return {
 
         local term = require("snacks.terminal")
         keymap({ "t", "n" }, "<M-t>", function()
-            term.toggle(nil, { win = { border = "double", position = "float" } })
+            term.toggle(nil, {
+                start_insert = false,
+                auto_insert = false,
+                win = { border = "double", position = "float" },
+            })
         end)
 
         -- keymap({ "t" }, "<M-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)

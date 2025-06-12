@@ -47,6 +47,10 @@ git-fetch-with-cli = true
 linker = "clang"
 rustflags = ["-C", "link-arg=-fuse-ld=mold"]
 
+[target.aarch64-apple-darwin]
+linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+
 [unstable]
 gc = true
 
