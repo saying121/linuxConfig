@@ -654,11 +654,16 @@ local arch = {
     ["safe_arch"] = "通过`＃[cfg()]安全地露出`core::Arch` 的板条箱。",
     ["safe-transmute"] = "防锈的保障 transmute()",
 }
+local profiling = {
+    ["tracy-client"] = "Tracy Profiler的高级绑定到客户库库",
+    ["profiling"] = "该板条箱与其他剖面箱相比提供了非常薄的抽象。",
+}
 
 local all = vim.tbl_deep_extend(
     "error",
     arch,
     simd,
+    profiling,
     cache,
     test,
     data_struct,
