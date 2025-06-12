@@ -1,4 +1,5 @@
 local lib = {
+    "${3rd}/luv/library",
     vim.env.VIMRUNTIME, -- 只有nvim内置的api
 }
 -- vim.api.nvim_get_runtime_file("", true)

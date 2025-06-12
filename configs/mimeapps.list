@@ -82,3 +82,5 @@ x-scheme-handler/lxmusic=lx-music-desktop.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-QVJAR2.desktop
 x-scheme-handler/mid=userapp-Thunderbird-QVJAR2.desktop
 x-scheme-handler/unknown=microsoft-edge.desktop
+clash=clash-verge-handler.desktop
+clash-verge=clash-verge-handler.desktop

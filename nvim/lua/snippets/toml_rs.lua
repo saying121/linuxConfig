@@ -646,9 +646,14 @@ local cache = {
     ["moka"] = "受 java caffeine 启发的快速并发缓存库",
     ["TinyUFO"] = "以tinylfu作为准入策略、s3-fifo作为逐出策略的内存缓存实现",
 }
+local profiling = {
+    ["tracy-client"] = "Tracy Profiler的高级绑定到客户库库",
+    ["profiling"] = "该板条箱与其他剖面箱相比提供了非常薄的抽象。",
+}
 
 local all = vim.tbl_deep_extend(
     "error",
+    profiling,
     cache,
     test,
     data_struct,
