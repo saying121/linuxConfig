@@ -98,3 +98,5 @@ $pacMan easyeffects calf lsp-plugins-lv2 zam-plugins-lv2 mda.lv2 yelp
 # $pacMan orca festival espeak-ng
 
 $aurPkg xwaylandvideobridge wemeet-bin
+
+$pacMan install bitwise programmer-calculator

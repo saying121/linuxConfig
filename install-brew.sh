@@ -79,3 +79,5 @@ brew install prettier biome asmfmt fnlfmt golines checkmake protolint actionlint
 
 brew tap laishulu/homebrew
 brew install macism
+
+brew install bitwise pcalc

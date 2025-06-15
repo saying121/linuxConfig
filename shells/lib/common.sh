@@ -242,3 +242,35 @@ export EDITOR=nvim
 # export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 # export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
+char_to_ascii() {
+    printf '%d' "'$1"
+}
+
+ascii_to_char() {
+    input=$1
+
+    case "$input" in
+    \\x*)
+        printf "%b" "$input"
+        ;;
+    \\o*)
+        echo "oct"
+        printf "%b" "\\0${input:2}"
+        echo
+        ;;
+    \\b*)
+        echo "bin"
+        # 将二进制数转换为十进制数
+        dec_num=$((2#${input:2}))
+        hex_num=$(printf '%x' "$dec_num")
+        printf "%b" "\x$hex_num"
+        echo
+        ;;
+    *)
+        echo "dec"
+        hex_num=$(printf %x "$input")
+        printf "%b" "\x$hex_num"
+        ;;
+    esac
+}
