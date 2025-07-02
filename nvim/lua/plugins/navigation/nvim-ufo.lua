@@ -112,6 +112,7 @@ return {
             require("ufo").peekFoldedLinesUnderCursor()
         end
         keymap("n", "]z", goNextClosedAndPeek, opts)
+        keymap("n", "zK", require("ufo").peekFoldedLinesUnderCursor, opts)
 
         keymap("n", "zR", require("ufo").openAllFolds, opts)
         keymap("n", "zM", require("ufo").closeAllFolds, opts)

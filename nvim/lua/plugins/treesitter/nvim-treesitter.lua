@@ -81,7 +81,6 @@ return {
                         ["rust"] = true,
                         ["csv"] = true,
                         ["dockerfile"] = true,
-                        ["rust"] = true,
                     }
 
                     if fts[lang] then

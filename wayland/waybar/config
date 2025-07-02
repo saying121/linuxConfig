@@ -150,8 +150,8 @@
     },
     "cpu": {
         "interval": 2,
-        "format": " \uf2db {}% ",
-        "max-length": 10,
+        "format": " \uf2db {}% {avg_frequency} GHz ",
+        "max-length": 20,
         "on-click-right": "[[ $(ps -ef | grep -c plasma-systemmonito[r]) -gt 0 ]] && killall plasma-systemmonitor || plasma-systemmonitor"
     },
     "memory": {
