@@ -204,3 +204,19 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'io.github.clash-verge-rev.clash-verge-rev'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.weather'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.clock'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.colliderli.iina'
+run = ['layout floating']

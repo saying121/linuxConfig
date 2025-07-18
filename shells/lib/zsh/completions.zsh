@@ -64,6 +64,9 @@ zi snippet https://github.com/x-motemen/ghq/blob/master/misc/zsh/_ghq
 zi ice wait lucid as'completion' blockf has'zoxide'
 zi snippet https://github.com/ajeetdsouza/zoxide/blob/main/contrib/completions/_zoxide
 
+# zi ice wait lucid as'completion' blockf has'sing-box'
+zi snippet https://github.com/SagerNet/sing-box/blob/main/release/completions/sing-box.zsh
+
 zi light sunlei/zsh-ssh
 
 if command -v brew >/dev/null; then
