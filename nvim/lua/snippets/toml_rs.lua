@@ -41,6 +41,7 @@ local unix = {
     ["daemonize"] = "一个库，使您的代码能够作为守护进程在类 UNIX 系统上运行。",
 }
 local os_crate = {
+    ["aya"] = "AYA是用于Rust编程语言的EBPF库，旨在专注于开发人员的经验和可操作性。",
     ["eyra"] = "Rust programs written entirely in Rust",
     ["rustix"] = "与 POSIX/Unix/Linux/Winsock 类系统调用的安全 Rust 绑定(uring,memory map,mount,pipe,libc)",
     ["open"] = "使用系统上配置的程序打开路径或 url",
@@ -126,6 +127,7 @@ local parser = {
     ["pest"] = "优雅的解析器",
 }
 local some_display = {
+    ["minijinja"] = "强大的模板引擎，用于生锈，依赖性最小",
     ["parse-display"] = "使用通用设置实现显示和 str 的程序宏。",
     ["custom-format"] = "Rust 的自定义格式。",
     ["lazy_format"] = "一个实用程序箱，用于稍后格式化值",
@@ -139,6 +141,7 @@ local iterators = {
     ["simd-itertools"] = "用于常见操作（例如 contains、max、find 等）的 simd 加速替代方案。",
 }
 local algorithms = {
+    ["diff-match-patch-rs"] = "Myer的DIFF算法最快的实现，以执行同步纯文本所需的操作。",
     ["raft"] = "raft算法的Rust语言实现。",
     ["bio"] = [[Rust 的生物信息学库。该库提供了许多算法和数据结构的实现，
         这些算法和数据结构对生物信息学以及其他领域都很有用。]],
@@ -384,6 +387,7 @@ local concurrent = {
     ["flume"] = "一个极快的多生产者渠道(mpmc)",
     ["parking"] = "线程 parking and unparking",
     ["rayon"] = "**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争。它根据运行时的工作负载自动调整并行度。",
+    ["chili"] = "Rust port of Spice, a low-overhead parallelization library",
     ["raw_sync"] = "操作系统同步原语的轻量级包装器",
     ["parking_lot"] = "标准同步原语的更紧凑和高效的实现",
     ["spin"] = "基于自旋的同步原语",
@@ -578,6 +582,7 @@ local notify = {
     ["notify"] = "跨平台文件系统通知库",
 }
 local test = {
+    ["injectorpp"] = "注射剂是一种强大的工具，旨在促进单位测试的编写，而无需仅引入仅用于测试目的的特征。它通过提供一种无缝和有效的方法来抽象依赖性来简化测试过程，以确保您的代码保持清洁和可维护。",
     ["serial_test"] = "允许创建串行的生锈测试",
     ["k9"] = "生锈测试库",
     ["expect-test"] = "简约快照测试库",
@@ -613,6 +618,7 @@ local error_handle = {
     ["always-assert"] = "长期运行的健壮应用程序的可恢复断言",
 }
 local data_struct = {
+    ["ecow"] = "紧凑的，COW的矢量和字符串。",
     ["fast-math"] = "快速，大概的数学函数版本。",
     ["camino"] = "UTF-8 paths",
     ["bloomfilter"] = "布隆过滤器的实现",

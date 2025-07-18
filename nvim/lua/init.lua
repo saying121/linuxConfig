@@ -64,6 +64,9 @@ api.nvim_create_autocmd("ColorScheme", {
 
 local function snacks_img_ok()
     local line = api.nvim_get_current_line()
+    if string.find(line, "%.svg") then
+        return true
+    end
     for _, x in pairs(require("snacks").config.image.formats) do
         if string.find(line, "%." .. x) then
             return true

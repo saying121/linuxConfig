@@ -60,6 +60,7 @@ M.on_attach = function(client, bufnr)
     if
         client:supports_method(methods.textDocument_rangeFormatting, bufnr)
         or client:supports_method(methods.textDocument_rangesFormatting, bufnr)
+        or client.name == "tinymist"
     then
         lsp_format()
         keymap("x", "<space>f", function()

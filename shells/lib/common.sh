@@ -123,7 +123,7 @@ if [[ $(uname -a | grep -c WSL) != 0 ]]; then
     . ~/.linuxConfig/scripts/proxy.sh set
 fi
 
-if [[ $(command -v eza) ]]; then
+if command -v eza >/dev/null; then
     alias ls='eza -F --icons=always'
     alias lsd='eza -F -D --icons=always'
     alias ll='eza -F -lHhig --time-style long-iso --icons=always --git'
@@ -138,6 +138,39 @@ else
     alias lal='ls -al'
     alias lla='ls -al'
     alias l='ls -CF'
+fi
+
+if hash sudo-rs 2>&-; then
+    sudo() {
+        # 1. 初始化一个标志变量，用于记录是否找到了 -E 参数
+        local has_e_flag=0
+
+        # 2. 遍历所有传入的参数 ("$@" 能正确处理带空格的参数)
+        for arg in "$@"; do
+            # 3. 如果当前参数正好是 "-E"
+            if [[ "$arg" == "-E" ]]; then
+                has_e_flag=1
+                break # 4. 找到后，设置标志并立即退出循环，无需再检查后续参数
+            fi
+        done
+
+        # 5. 检查标志变量的值
+        if ((has_e_flag == 1)); then
+            # 如果标志为1 (表示找到了-E)，就调用原始的 sudo 命令
+            # `command` 用来防止函数无限循环调用自身
+            command sudo "$@"
+        else
+            # 否则，调用 sudo-rs
+            sudo-rs "$@"
+        fi
+
+        # if ((${argv[(i) - E]} <= $#)); then
+        #     # 如果找到了 '-E'，就使用 `command` 来调用原始的 sudo 命令，防止无限循环
+        #     command sudo "$@"
+        # else
+        #     sudo-rs "$@"
+        # fi
+    }
 fi
 
 # alias nvid='i3 move scratchpad && neovide'
@@ -227,7 +260,7 @@ alias daestop="sudo systemctl stop dae"
 export SCCACHE_CACHE_SIZE="40G"
 export RUSTC_WRAPPER=sccache
 
-if command -v brew 2>&1 >/dev/null; then
+if command -v brew >/dev/null 2>&1; then
     DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
     export DYLD_FALLBACK_LIBRARY_PATH
 fi

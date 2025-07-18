@@ -99,4 +99,4 @@ $pacMan easyeffects calf lsp-plugins-lv2 zam-plugins-lv2 mda.lv2 yelp
 
 $aurPkg xwaylandvideobridge wemeet-bin
 
-$pacMan install bitwise programmer-calculator
+$aurPkg bitwise programmer-calculator
