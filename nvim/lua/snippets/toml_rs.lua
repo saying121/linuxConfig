@@ -63,6 +63,8 @@ local embedded = {
     ["embassy"] = "现代嵌入式框架，使用 Rust 和异步。",
 }
 local crates = {
+    ["privilege"] = "用于管理权限处理的跨平台库。",
+    ["privdrop"] = "一个全面、安全的用于在基于 Unix 的系统中放弃权限的箱子。",
     ["bollard"] = "An asynchronous Docker daemon API",
     ["iceoryx2"] = "零拷贝无锁IPC通信",
     ["unwinding"] = "Unwinding library in Rust and for Rust",

@@ -1,5 +1,7 @@
 if [[ -e /usr/share/doc/find-the-command/ftc.zsh ]]; then
     source /usr/share/doc/find-the-command/ftc.zsh
+elif [[ -e /usr/share/doc/find-the-command/ftc.bash ]]; then
+    source /usr/share/doc/find-the-command/ftc.bash
 else
     zi ice wait lucid
     zi snippet OMZP::command-not-found

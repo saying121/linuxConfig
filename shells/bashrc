@@ -1,8 +1,6 @@
 # vim:fileencoding=utf-8:ft=sh
 . ~/.linuxConfig/shells/lib/common.sh
 
-. /usr/share/doc/find-the-command/ftc.bash
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
