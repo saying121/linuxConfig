@@ -1,6 +1,5 @@
 local M = {}
 M.snippet = {
-    -- ["let"] = "let ${1:var} = ${2:expr};",
     ["println!($0)"] = 'println!("$1"$2);$0',
     ["print!($0)"] = 'print!("$1"$2);$0',
     ["eprintln!($0)"] = 'eprintln!("$1"$2);$0',
@@ -20,8 +19,6 @@ M.snippet = {
 }
 
 M.keyword = {
-    let = true,
-    letm = true,
     enum = true,
     struct = true,
     static = true,

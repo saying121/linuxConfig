@@ -208,22 +208,6 @@ local exprs = {
     --     description = "return …;",
     --     scope = "expr",
     -- },
-    let = {
-        prefix = { "let" },
-        body = {
-            "let ${1:var} = $2;$0",
-        },
-        description = "let … = …;",
-        scope = "expr",
-    },
-    letm = {
-        prefix = { "letm" },
-        body = {
-            "let mut ${1:var} = $2;$0",
-        },
-        description = "let mut … = …;",
-        scope = "expr",
-    },
     ["tracing_env"] = {
         prefix = { "tracing_env" },
         body = {

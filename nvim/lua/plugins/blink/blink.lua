@@ -322,29 +322,20 @@ return {
                     ---@type blink-cmp-dictionary.Options
                     opts = {
                         dictionary_files = {
-                            vim.fn.expand("~/.local/share/nvim/Trans/neovim.dict"),
+                            home .. "/.local/share/nvim/Trans/neovim.dict",
                         },
-                        separate_output = function(output)
-                            local items = {}
-                            for line in output:gmatch("[^\r\n]+") do
-                                table.insert(items, {
-                                    label = line,
-                                    insert_text = line,
-                                    documentation = {
-                                        get_command = "sqlite3",
-                                        get_command_args = {
-                                            home .. "/.local/share/nvim/Trans/ultimate.db",
-                                            "select translation from stardict where word = '" .. line .. "';",
-                                        },
-                                        ---@diagnostic disable-next-line: redefined-local
-                                        resolve_documentation = function(output)
-                                            print(output)
-                                            return output
-                                        end,
-                                    },
-                                })
-                            end
-                            return items
+                        get_documentation = function(item)
+                            return {
+                                get_command = "sqlite3",
+                                get_command_args = {
+                                    home .. "/.local/share/nvim/Trans/ultimate.db",
+                                    "select translation from stardict where word = '" .. item .. "';",
+                                },
+                                ---@diagnostic disable-next-line: redefined-local
+                                resolve_documentation = function(output)
+                                    return output
+                                end,
+                            }
                         end,
                     },
                 },
