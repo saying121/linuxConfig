@@ -93,6 +93,7 @@ local crates = {
     ["ilhook"] = "提供在 x86 和 x86_64 架构中内联挂钩二进制代码的方法的库",
     ["device_query"] = "一个基本库，用于在没有窗口的情况下按需查询键盘和鼠标状态。",
     ["defer-drop"] = "推迟将大型类型删除到后台线程",
+    ["bon"] = "下一代编译时间检查的构建器生成器，命名函数的参数等等！",
     ["derive_builder"] = "派生 **Rust** 结构的构建器实现",
     ["semver"] = "用于Cargo语义版本控制风格的解析器和评估器",
     ["cookie"] = "http cookie 解析和 cookie jar 管理。支持签名和私有（加密、验证）jar。",

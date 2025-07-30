@@ -284,9 +284,13 @@ return {
                     ---@type blink-ripgrep.Options
                     opts = {
                         prefix_min_len = 5,
-                        context_size = 5,
-                        max_filesize = "1M",
-                        search_casing = "--smart-case",
+                        backend = {
+                            context_size = 5,
+                            ripgrep = {
+                                max_filesize = "1M",
+                                search_casing = "--smart-case",
+                            },
+                        },
                     },
                 },
                 git = {

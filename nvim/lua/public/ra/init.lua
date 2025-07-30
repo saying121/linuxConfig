@@ -143,13 +143,18 @@ return {
             workspace = check_workspace,
         },
         completion = {
-            autoimport = { enable = true },
+            autoimport = {
+                enable = true,
+                exclude = {
+                    { path = "anyhow::Ok", type = "always" },
+                },
+            },
             termSearch = { enable = true },
             autoself = { enable = true },
             callable = { snippets = "fill_arguments" }, -- completion 函数时是否添加括号和参数片段。
             limit = nil, -- 要返回的最大 completion 次数。如果 None ，则极限为无穷大。
             postfix = { enable = true }, -- Whether to show postfix snippets like dbg, if, not, etc.
-            privateEditable = { enable = true },
+            privateEditable = { enable = false },
             snippets = { custom = snippets },
         },
         diagnostics = {
