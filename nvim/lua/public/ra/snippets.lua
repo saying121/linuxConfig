@@ -300,10 +300,13 @@ local exprs = {
     thread_sleep = {
         prefix = { "sleep", "tsleep" },
         body = {
-            "thread::sleep($1);$0",
+            "thread::sleep(Duration::from_secs($1));$0",
         },
         description = "Insert a thread::sleep",
-        requires = "std::thread",
+        requires = {
+            "std::thread",
+            "std::time::Duration",
+        },
         scope = "expr",
     },
     tokio_spawn = {

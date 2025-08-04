@@ -273,6 +273,21 @@ routing {
     domain(regex: '(?i)youtube') -> YouTube
     domain(suffix: v2raya.org) -> proxy_all
     domain(
+        full: ai.google.dev,
+        full: alkalimakersuite-pa.clients6.google.com,
+        full: makersuite.google.com,
+        suffix: bard.google.com,
+        suffix: deepmind.com,
+        suffix: deepmind.google,
+        suffix: gemini.google.com,
+        suffix: generativeai.google,
+        suffix: proactivebackend-pa.googleapis.com,
+        suffix: apis.google.com,
+        keyword: colab,
+        keyword: developerprofiles,
+        keyword: generativelanguage
+    ) -> Excellent
+    domain(
         full: devv.ai
         , full: poe.com
         , keyword: github
