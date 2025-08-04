@@ -150,6 +150,7 @@ local algorithms = {
     ["rust-algorithms"] = "一个 Rust 算法库",
 }
 local perf = {
+    ["cached"] = "通用缓存实现和简化的功能记忆",
     ["enum_dispatch"] = "动态分派方法调用的近乎直接替代，速度高达 10 倍",
     ["opentelemetry"] = "*open telemetry* 提供一组 api、库、代理和收集器服务来从您的应用程序捕获分布式跟踪和指标。您可以使用 prometheus、jaeger 和其他可观察性工具来分析它们。",
     ["tailcall"] = "安全、零成本的尾递归",
