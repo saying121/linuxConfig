@@ -45,6 +45,10 @@ git-fetch-with-cli = true
 
 [target.x86_64-unknown-linux-gnu]
 linker = "clang"
+# rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+rustflags = ["-C", "link-arg=--ld-path=wild"]
+
+[target.'cfg(target_os = "linux")']
 rustflags = ["-C", "link-arg=-fuse-ld=mold"]
 
 [target.aarch64-apple-darwin]
@@ -57,3 +61,6 @@ gc = true
 [profile.profiling]
 inherits = "release"
 debug = true
+
+# [build]
+# target-dir = "/home/saying/.cache/rust-target"
