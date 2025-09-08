@@ -32,37 +32,37 @@ local all = {
     s({
         trig = "bool",
         dscr = "",
-    }, fmta("bool ", {})),
+    }, fmta("bool", {})),
     s({
         trig = "f32",
         dscr = "",
-    }, fmta("f32 ", {})),
+    }, fmta("f32", {})),
     s({
         trig = "f64",
         dscr = "",
-    }, fmta("f64 ", {})),
+    }, fmta("f64", {})),
     s({
         trig = "char",
         dscr = "",
-    }, fmta("char ", {})),
+    }, fmta("char", {})),
     s({
         trig = "string",
         dscr = "",
-    }, fmta("string ", {})),
+    }, fmta("string", {})),
     s({
         trig = "list",
         dscr = "",
-    }, fmt("list<{}> ", { i(1, "") })),
+    }, fmt("list<{}>", { i(1, "") })),
     s({
         trig = "option",
         dscr = "like `Option`",
-    }, fmt("option<{}> ", { i(1, "") })),
+    }, fmt("option<{}>", { i(1, "") })),
     s(
         {
             trig = "result",
             dscr = "",
         },
-        fmt("result<{}, {}> ", {
+        fmt("result<{}, {}>", {
             i(1, "T"),
             i(2, "E"),
         })
@@ -72,7 +72,7 @@ local all = {
             trig = "tuple",
             dscr = "like `(a, b, c)`",
         },
-        fmt("tuple<{},{}> ", {
+        fmt("tuple<{},{}>", {
             i(1, ""),
             i(2, ""),
         })
@@ -247,7 +247,7 @@ for _, value in ipairs(ints) do
         s({
             trig = uint,
             dscr = "",
-        }, fmta(uint .. " ", {}))
+        }, fmta(uint, {}))
     )
 end
 

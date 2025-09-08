@@ -390,6 +390,7 @@ local concurrent = {
 
     ["flume"] = "一个极快的多生产者渠道(mpmc)",
     ["parking"] = "线程 parking and unparking",
+    ["orx-parallel"] = "用于定义为迭代方法组成的计算的性能和可配置的并行计算库。",
     ["rayon"] = "**Rust** 一个数据并行库，它可以让你轻松地把顺序计算转换成并行计算，并且保证没有数据竞争。它根据运行时的工作负载自动调整并行度。",
     ["chili"] = "Rust port of Spice, a low-overhead parallelization library",
     ["raw_sync"] = "操作系统同步原语的轻量级包装器",
