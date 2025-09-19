@@ -1,5 +1,5 @@
-local api  = vim.api
-local lsp  = vim.lsp
+local api = vim.api
+local lsp = vim.lsp
 
 local M = {}
 
