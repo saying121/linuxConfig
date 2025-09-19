@@ -211,11 +211,6 @@ local exprs = {
     ["tracing_env"] = {
         prefix = { "tracing_env" },
         body = {
-            "use std::io;",
-            "use tracing_subscriber::{",
-            "    prelude::__tracing_subscriber_SubscriberExt, util::SubscriberInitExt, EnvFilter,",
-            "};",
-            "",
             "/// It is also possible to set the `RUST_LOG` environment variable for other level.",
             "pub fn log_init() {",
             [[    let env_filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("warn"));]],
@@ -227,7 +222,14 @@ local exprs = {
             "        .init();",
             "}",
         },
-        requires = { "tracing_subscriber", "tracing" },
+        requires = {
+            "std::io",
+            "tracing_subscriber",
+            "tracing",
+            "tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt",
+            "tracing_subscriber::util::SubscriberInitExt",
+            "tracing_subscriber::EnvFilter",
+        },
         description = "subscriber debug",
         scope = "expr",
     },
@@ -244,7 +246,7 @@ local exprs = {
         scope = "expr",
     },
     ["tracing_appender"] = {
-        prefix = { "tracing_appender", "log_sub" },
+        prefix = { "tracing_appender" },
         body = {
             [[let appender = rolling::never("some/path", "xxx.log");]],
             "let (non_blocking, _guard) = tracing_appender::non_blocking(appender);",
