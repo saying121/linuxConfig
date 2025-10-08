@@ -3,7 +3,8 @@ scriptencoding utf-8
 let mapleader=';'
 " let maplocalleader=';'
 
-nnoremap * *N
+nnoremap <silent>* :let @/ = '\<'.expand('<cword>').'\>'<CR>
+" nnoremap * *N
 " xnoremap * *N
 nnoremap # #N
 " xnoremap # #N

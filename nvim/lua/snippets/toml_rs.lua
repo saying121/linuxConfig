@@ -598,6 +598,7 @@ local test = {
     ["skeptic"] = "通过 Cargo 测试你的 Rust Markdown 文档",
     ["pretty_assertions"] = "使用直接替换覆盖 `assert eq!` 和 `assert ne!`，添加丰富多彩的差异。",
     ["static_assertions"] = "编译时断言以确保满足不变量。",
+    ["fast_assert"] = "Rust 更快的 assert！",
     ["similar"] = "一个基于 diff 的 Rust 高级 diff 库",
     ["similar-asserts"] = "提供 assert_eq! 就像具有彩色差异输出资源的宏一样",
     ["testcontainers"] = "一个用于在 Rust 中针对 docker 容器进行集成测试的库。",

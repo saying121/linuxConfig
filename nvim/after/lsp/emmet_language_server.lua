@@ -4,13 +4,13 @@ return {
         "css",
         "eruby",
         "html",
-        "javascript",
-        "javascriptreact",
+        -- "javascript",
+        -- "javascriptreact",
         "less",
         "sass",
         "scss",
         "pug",
-        "typescriptreact",
+        -- "typescriptreact",
     },
     -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
     -- **Note:** only the options listed in the table are supported.

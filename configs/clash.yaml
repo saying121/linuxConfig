@@ -258,6 +258,21 @@ rules:
   - GEOIP,twitter,大流量
   - GEOIP,CN,DIRECT
 
+  # gemini
+  - DOMAIN,ai.google.dev,美国
+  - DOMAIN,alkalimakersuite-pa.clients6.google.com,美国
+  - DOMAIN,makersuite.google.com,美国
+  - DOMAIN-SUFFIX,bard.google.com,美国
+  - DOMAIN-SUFFIX,deepmind.com,美国
+  - DOMAIN-SUFFIX,deepmind.google,美国
+  - DOMAIN-SUFFIX,gemini.google.com,美国
+  - DOMAIN-SUFFIX,generativeai.google,美国
+  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,美国
+  - DOMAIN-SUFFIX,apis.google.com,美国
+  - DOMAIN-KEYWORD,colab,美国
+  - DOMAIN-KEYWORD,developerprofiles,美国
+  - DOMAIN-KEYWORD,generativelanguage,美国
+
   # - DOMAIN,outlook.com,国内
   # - DOMAIN,reddit.com,Google
   # - DST-PORT,80/8080/443/8443,PROXY
