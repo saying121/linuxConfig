@@ -611,6 +611,24 @@ local item_expr = {
         description = "enum … { … }",
         scope = "item",
     },
+    snafu_error = {
+        prefix = { "snafu_error" },
+        body = {
+            "#[derive(snafu::Snafu)]",
+            "#[derive(Debug)]",
+            "#[snafu(visibility(pub))]",
+            "pub enum ${1:Error} {",
+            [=[    #[snafu(display("{source}\n@:{location}"))]]=],
+            "    ${2:Variant} {",
+            "        source: ${3:E},",
+            "        #[snafu(implicit)]",
+            "        location: Location,",
+            "    },",
+            "}",
+        },
+        scope = "item",
+        requires = { "snafu::Snafu", "snafu::Location", "std::backtrace::Backtrace" },
+    },
     enum_ = {
         prefix = { "enum" },
         body = {

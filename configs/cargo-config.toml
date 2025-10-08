@@ -59,6 +59,7 @@ rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 gc = true
 
 [profile.profiling]
+strip = false
 inherits = "release"
 debug = true
 

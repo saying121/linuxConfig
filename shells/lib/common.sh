@@ -140,7 +140,7 @@ else
     alias l='ls -CF'
 fi
 
-if hash sudo-rs 2>&-; then
+if hash sudo-rs >/dev/null 2>&1; then
     sudo() {
         # 1. 初始化一个标志变量，用于记录是否找到了 -E 参数
         local has_e_flag=0
@@ -266,9 +266,9 @@ if command -v brew >/dev/null 2>&1; then
 fi
 
 export PATH=$PATH:~/.cargo/bin:~/.local/bin:~/go/bin
-export GOPATH=$XDG_DATA_HOME/go
-export GOBIN=$XDG_DATA_HOME/go/bin
-export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+export GOPATH=~/.local/share/go
+export GOBIN=~/.local/share/go/bin
+export PATH="$PATH:/opt/homebrew/opt/rustup/bin"
 
 export EDITOR=nvim
 

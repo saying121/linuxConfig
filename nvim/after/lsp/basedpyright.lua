@@ -2,11 +2,21 @@ local lsp = vim.lsp
 
 ---@type vim.lsp.Config
 return {
+    root_markers = {
+        "__init__.py",
+        "pyproject.toml",
+        "setup.py",
+        "setup.cfg",
+        "requirements.txt",
+        "Pipfile",
+        "pyrightconfig.json",
+        ".git",
+    },
     single_file_support = true,
     settings = {},
     ---@param client vim.lsp.Client
     ---@param bufnr integer
-    on_attach = function(client,bufnr)
+    on_attach = function(client, bufnr)
         local orig_rpc_request = client.rpc.request
         function client.rpc.request(method, params, handler, ...)
             local orig_handler = handler
