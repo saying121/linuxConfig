@@ -2,6 +2,7 @@
 return {
     "rcarriga/nvim-dap-ui",
     lazy = true,
+    cond = false,
     dependencies = { "nvim-neotest/nvim-nio" },
     config = function()
         local dapui, keymap = require("dapui"), vim.keymap.set
