@@ -14,6 +14,14 @@ return {
     },
     -- dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "nvim-dap" .. "/dependencies"),
     config = function()
+        vim.api.nvim_create_autocmd({ "FileType" }, {
+            group = vim.api.nvim_create_augroup("dap-keymap", { clear = true }),
+            pattern = { "dap-float" },
+            callback = function(e)
+                vim.keymap.set("n", "q", "<cmd>x<cr>", { buffer = e.buf })
+            end,
+        })
+
         ---@param mode string|string[]
         ---@param lhs string
         ---@param rhs string|function
@@ -80,24 +88,24 @@ return {
         pbp.load_breakpoints()
 
         -- 自动开启ui
-        dap.listeners.after.event_initialized["dapui_config"] = function()
-            local dapui = require("dapui")
-            dapui.open()
+        dap.listeners.after.event_initialized["dapview"] = function()
+            -- local dapui = require("dapui")
+            -- dapui.open()
             api.nvim_command("DapVirtualTextEnable")
             _G.dapui_for_K = true
         end
 
-        dap.listeners.before.event_terminated["dapui_config"] = function()
+        dap.listeners.before.event_terminated["dapview"] = function()
             api.nvim_command("DapVirtualTextEnable")
             pbp.store_breakpoints()
             _G.dapui_for_K = false
         end
-        dap.listeners.before.event_exited["dapui_config"] = function()
+        dap.listeners.before.event_exited["dapview"] = function()
             api.nvim_command("DapVirtualTextEnable")
             pbp.store_breakpoints()
             _G.dapui_for_K = false
         end
-        dap.listeners.before.disconnect["dapui_config"] = function()
+        dap.listeners.before.disconnect["dapview"] = function()
             api.nvim_command("DapVirtualTextEnable")
             pbp.store_breakpoints()
             _G.dapui_for_K = false

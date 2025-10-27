@@ -77,7 +77,8 @@ local function snacks_img_ok()
 end
 function _G.show_documentation()
     if _G.dapui_for_K then
-        require("dapui").eval()
+        require("dap.ui.widgets").hover()
+        -- require("dapui").eval()
     elseif vim.tbl_contains({ "help" }, vim.bo.filetype) then
         vcmd.help(vim.fn.expand("<cword>"))
     elseif vim.tbl_contains({ "man" }, vim.bo.filetype) then

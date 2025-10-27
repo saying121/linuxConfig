@@ -11,7 +11,7 @@ return {
             group = api.nvim_create_augroup("Fmt", { clear = true }),
             pattern = { "typst", "zsh" },
             callback = function()
-                keymap({ "n", "x" }, "<space>f", vim.cmd.GuardFmt, { bufnr = 0 })
+                keymap({ "n", "x" }, "<space>f", vim.cmd.GuardFmt, { buffer = 0 })
             end,
         })
 
