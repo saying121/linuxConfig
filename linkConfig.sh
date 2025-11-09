@@ -52,6 +52,7 @@ fi
 declare -A link_list
 dot_dir=$(git rev-parse --show-toplevel)
 link_list=(
+    ["$dot_dir/configs/rmpc"]="$HOME/.config"
     ["$dot_dir/configs/atuin"]="$HOME/.config"
     ["$dot_dir/configs/kitty"]="$HOME/.config"
     ["$dot_dir/configs/lf"]="$HOME/.config"
@@ -67,8 +68,6 @@ link_list=(
     ["$dot_dir/configs/yazi"]="$HOME/.config"
     ["$dot_dir/formatters/rustfmt"]="$HOME/.config"
     ["$dot_dir/formatters/stylua"]="$HOME/.config"
-    ["$dot_dir/i3"]="$HOME/.config"
-    ["$dot_dir/i3/i3status-rust"]="$HOME/.config"
     ["$dot_dir/nvim"]="$HOME/.config"
     ["$dot_dir/qt5ct"]="$HOME/.config"
     ["$dot_dir/wallpaperengine/betterlockscreen"]="$HOME/.config"
@@ -148,7 +147,7 @@ sudo sed -i.bak 's/^#HibernateDelaySec=.*/HibernateDelaySec=7200/' /etc/systemd/
 
 if [[ $XDG_SESSION_TYPE == wayland ]]; then
     the_cmd="sudo libinput list-devices"
-else
+elif command -v "xinput" >/dev/null; then
     the_cmd="sudo xinput list"
 fi
 
