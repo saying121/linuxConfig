@@ -89,7 +89,7 @@ shift-cmd-q = 'close --quit-if-last-window'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-slash = 'layout tiles horizontal vertical'
-# cmd-comma = 'layout accordion horizontal vertical'
+cmd-comma = 'layout accordion horizontal vertical'
 
 # cmd-g = 'split horizontal'
 # cmd-b = 'split vertical'

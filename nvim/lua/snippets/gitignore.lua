@@ -694,7 +694,7 @@ go.work
         {
             trig = "cpp",
             priority = 30000,
-            dscr =   "cpp ignore",
+            dscr = "cpp ignore",
         },
         fmta([[
 ### C++
@@ -737,7 +737,7 @@ go.work
         {
             trig = "c",
             priority = 30000,
-            dscr =  "c ignore",
+            dscr = "c ignore",
         },
         fmta([[
 ### C
@@ -817,9 +817,7 @@ debug/
 
 rustc-ice*
 
-<>
-
-]] .. mis, { i(1, [[Cargo.lock]]) }, {})
+]] .. mis, {}, {})
     ),
     s({
         trig = "mis",

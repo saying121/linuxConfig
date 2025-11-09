@@ -629,7 +629,7 @@ local item_expr = {
             "}",
         },
         scope = "item",
-        requires = { "snafu::Snafu", "snafu::Location", "std::backtrace::Backtrace" },
+        requires = { "snafu::Location" },
     },
     enum_ = {
         prefix = { "enum" },
