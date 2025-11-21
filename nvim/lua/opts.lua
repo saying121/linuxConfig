@@ -18,7 +18,7 @@ if vim.fn.has("nvim-0.10.0") == 1 then
 end
 
 local buf_height = math.floor(vim.fn.winheight(0) / 2)
-vim.o.scrolloff = buf_height - 10
+vim.o.scrolloff = math.max(0, buf_height - 20)
 
-vim.keymap.set('n', 'gp', "<cmd>pu 0<cr>", { desc = "Paste below"})
-vim.keymap.set('n', 'gP', "<cmd>-1pu 0<cr>", { desc = "Paste above"})
+vim.keymap.set("n", "gp", "<cmd>pu 0<cr>", { desc = "Paste below" })
+vim.keymap.set("n", "gP", "<cmd>-1pu 0<cr>", { desc = "Paste above" })

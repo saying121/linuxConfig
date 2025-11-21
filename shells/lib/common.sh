@@ -1,4 +1,15 @@
 # vim:fileencoding=utf-8:ft=sh
+
+export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
+export PATH=$PATH:~/.linuxConfig/scripts
+export PATH=$PATH:~/.ghcup/bin
+
+export PATH=$PATH:~/.cargo/bin:~/.local/bin:~/go/bin
+export GOPATH=~/.local/share/go
+export GOBIN=~/.local/share/go/bin
+export PATH="$PATH:/opt/homebrew/opt/rustup/bin"
+export PATH="$PATH:$GOBIN"
+
 # enable color support of ls, less and man, and also add handy aliases
 the_dircolors=dircolors
 # macos install `coreutils`
@@ -245,9 +256,7 @@ debug_rust() {
 # thread_num=$(nproc)
 export MAKEFLAGS="-j"
 
-export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
-export PATH=$PATH:~/.linuxConfig/scripts
-export PATH=$PATH:~/.ghcup/bin
+export EDITOR=nvim
 
 alias gitlog="git log --graph --pretty=format:'%>|(12,trunc)%Cred%h%Creset  -  %C(yellow)%<(60,trunc)%s%Creset %Cgreen%<(30,trunc)%d %C(bold blue)%<(15,trunc)%an%Creset%>(1)%>(50)%cd' --date=format-local:'%Y-%m-%d %H:%M:%S'"
 
@@ -264,13 +273,6 @@ if command -v brew >/dev/null 2>&1; then
     DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
     export DYLD_FALLBACK_LIBRARY_PATH
 fi
-
-export PATH=$PATH:~/.cargo/bin:~/.local/bin:~/go/bin
-export GOPATH=~/.local/share/go
-export GOBIN=~/.local/share/go/bin
-export PATH="$PATH:/opt/homebrew/opt/rustup/bin"
-
-export EDITOR=nvim
 
 # export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 # export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
