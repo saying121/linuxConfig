@@ -17,7 +17,7 @@ end
 function M.mirror()
     if vim.env.HTTPS_PROXY == nil then
         return ""
-        -- return "https://mirror.ghproxy.com/"
+        -- return "https://gh-proxy.com/"
     else
         return ""
     end

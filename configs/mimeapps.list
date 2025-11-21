@@ -37,6 +37,8 @@ x-scheme-handler/http=microsoft-edge.desktop;microsoft-edge-stable.desktop;firef
 x-scheme-handler/https=microsoft-edge.desktop;firefox.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird-QVJAR2.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-QVJAR2.desktop;
+image/svg+xml=microsoft-edge.desktop;
+image/gif=org.kde.gwenview.desktop;org.nomacs.ImageLounge.desktop;
 
 [Default Applications]
 application/json=nvim.desktop;
@@ -67,6 +69,7 @@ image/bmp=org.nomacs.ImageLounge.desktop;
 image/heif=org.nomacs.ImageLounge.desktop;
 image/jpeg=org.nomacs.ImageLounge.desktop;
 image/png=org.nomacs.ImageLounge.desktop;
+image/svg+xml=microsoft-edge.desktop
 image/webp=org.nomacs.ImageLounge.desktop;
 image/x-icns=org.kde.gwenview.desktop;
 message/rfc822=userapp-Thunderbird-QVJAR2.desktop

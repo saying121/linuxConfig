@@ -34,7 +34,7 @@ zstyle ':fzf-tab:complete:cargo-(run|rustc|check):options' fzf-flags --preview-w
 zstyle ':fzf-tab:complete:(lcode|perf|rustup|journalctl|jj):*' fzf-flags --preview-window=down:3:wrap --height=50%
 # gcc in macos is gcc-14, g++-14 etc
 zstyle ':fzf-tab:complete:(rg|gcc*|g++*|clang|clang++|psql|perf-*):options' fzf-flags --preview-window=down:3:wrap --height=50%
-zstyle ':fzf-tab:complete:(rustc|perf-*):*' fzf-flags --preview-window=down:3:wrap --height=50%
+zstyle ':fzf-tab:complete:(rustc|sar|dd|strace|perf-*):*' fzf-flags --preview-window=down:3:wrap --height=50%
 
 zstyle ':fzf-tab:complete:git-(diff|restore|add):*' --preview-window=down:3:wrap --height=50%
 zstyle ':fzf-tab:complete:git-*:options' fzf-flags --preview-window=down:3:wrap --height=50%
