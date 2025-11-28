@@ -132,8 +132,8 @@
         (
             name: "Lyrics",
             pane: Split(
-                direction: Vertical,
-                panes: [(size: "25%", pane: Pane(AlbumArt)), (size: "70%", pane: Pane(Lyrics), vertical_align: Bottom)],
+                direction: Horizontal,
+                panes: [(size: "50%", pane: Pane(AlbumArt)), (size: "50%", pane: Pane(Lyrics), vertical_align: Bottom)],
             ),
         ),
         (
