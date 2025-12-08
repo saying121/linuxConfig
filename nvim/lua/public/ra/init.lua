@@ -285,6 +285,7 @@ return {
             ignored = {
                 ["async-trait"] = { "async_trait" },
                 ["tonic"] = { "async_trait" },
+                ["tokio_macros"] = { "main" },
                 ["napi-derive"] = { "napi" },
                 ["async-recursion"] = { "async_recursion" },
             },

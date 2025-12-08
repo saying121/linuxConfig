@@ -455,16 +455,6 @@ local items = {
         prefix = "bench",
         scope = "item",
     },
-    impl_trait = {
-        prefix = { "impl_trait" },
-        body = {
-            "impl ${1:Trait} for ${2:Type} {",
-            "    $3",
-            "}",
-        },
-        description = "impl … for … { … }",
-        scope = "item",
-    },
     mod = {
         prefix = { "mod" },
         body = {
