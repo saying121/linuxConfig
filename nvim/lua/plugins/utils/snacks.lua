@@ -93,7 +93,7 @@ return {
             end,
         },
         bigfile = {
-            enabled = true,
+            enabled = false,
             size = 1.5 * 1024 * 1024, -- 1.5MB
         },
         gitbrowse = {},
@@ -130,8 +130,12 @@ return {
             git_picker(picker.files)
         end)
         keymap("n", "<leader>fw", picker.grep)
+        keymap({ "n", "x" }, "<leader>fc", picker.grep_word)
         keymap("n", "<leader>gw", function()
             git_picker(picker.grep)
+        end)
+        keymap({ "n", "x" }, "<leader>gc", function()
+            git_picker(picker.grep_word)
         end)
         keymap("n", "<leader>bf", picker.buffers)
         keymap("n", "gI", function()

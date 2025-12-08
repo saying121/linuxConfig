@@ -8,3 +8,8 @@ max_height = 9900
 
 [tasks]
 image_bound = [10000, 10000]
+
+[plugin]
+prepend_previewers = [
+    { mime = "audio/*", run = "exifaudio"}
+]
