@@ -9,6 +9,7 @@ vim.opt.listchars = {
 
 vim.g.vimsyn_embed = "lPr"
 vim.g.maplocalleader = ","
+-- vim.g.clipboard = "osc52"
 
 vim.opt.spell = true
 vim.opt.spelllang = { "en_us" }

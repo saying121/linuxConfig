@@ -225,7 +225,7 @@ return {
                     name = "Snippets",
                     module = "blink.cmp.sources.snippets",
                     score_offset = 0,
-                    fallbacks = { "buffer", "dictionary" },
+                    -- fallbacks = { "buffer", "dictionary" },
                     min_keyword_length = 1,
                     -- For `snippets.preset == 'luasnip'`
                     opts = {

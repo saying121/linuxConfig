@@ -9,6 +9,7 @@ export GOPATH=~/.local/share/go
 export GOBIN=~/.local/share/go/bin
 export PATH="$PATH:/opt/homebrew/opt/rustup/bin"
 export PATH="$PATH:$GOBIN"
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 # enable color support of ls, less and man, and also add handy aliases
 the_dircolors=dircolors
