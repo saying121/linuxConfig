@@ -2,7 +2,7 @@
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
 (
-    lyrics_dir: Some("~/Music/musicfox/lyric-wyy-rmpc"),
+    lyrics_dir: Some("~/Music/music/lyric"),
     address: "127.0.0.1:6600",
     password: None,
     theme: None,

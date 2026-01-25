@@ -11,6 +11,8 @@ if vim.env.PROF then
 end
 
 local api, keymap, vcmd = vim.api, vim.keymap.set, vim.cmd
+local ts = vim.treesitter
+local my_ft = require("public.ft")
 require("opts")
 
 package.path = package.path .. ";" .. vim.uv.os_homedir() .. "/.luarocks/share/lua/5.1/?/init.lua;"
@@ -98,6 +100,17 @@ api.nvim_set_hl(0, "InactiveWindow", { bg = "#0D1B22" })
 -- vim.o.winhighlight = "Normal:Normal,NormalNC:InactiveWindow"
 
 require("lazy-config")
+
+local ft = my_ft.filename["Cargo.toml"]
+if type(ft) == "string" then
+    ts.language.register("toml", ft)
+end
+ft = my_ft.filename["rust-toolchain.toml"]
+if type(ft) == "string" then
+    ts.language.register("toml", ft)
+end
+ts.language.register("bash", "PKGBUILD")
+ts.language.register("bash", "zsh")
 
 api.nvim_create_autocmd("InsertLeave", {
     callback = function()

@@ -228,3 +228,19 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.oplus.devicespace'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.tencent.meeting'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.iriun.macwebcam'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.shortcuts'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'mame'
+run = ['layout floating']
