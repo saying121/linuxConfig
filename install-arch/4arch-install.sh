@@ -12,7 +12,9 @@ $pacMan xorg kitty wezterm \
 $pacMan adobe-source-han-serif-cn-fonts \
     adobe-source-han-sans-cn-fonts \
     wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
-    noto-fonts-extra ttf-hack-nerd
+    noto-fonts-extra ttf-hack-nerd \
+    ttf-maplemono ttf-maplemono-cn ttf-maplemono-nf ttf-maplemono-nf-cn
+
 
 $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
     fcitx5-pinyin-zhwiki catppuccin-fcitx5-git fcitx5-table-other vim-fcitx xclip \
@@ -21,7 +23,7 @@ $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
 # fcitx5的设置
 if [[ $(grep -c fcitx /etc/environment) = 0 ]]; then
     echo '
-GTK_IM_MODULE=fcitx5
+# GTK_IM_MODULE=fcitx5
 QT_IM_MODULE=fcitx5
 XMODIFIERS="@im=fcitx5"
 SDL_IM_MODULE=fcitx5

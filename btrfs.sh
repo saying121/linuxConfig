@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-yay -S grub-btrfs snapper snapper-support
+paru -S --needed --noconfirm grub-btrfs snapper snapper-support
 
 sudo systemctl enable --now snapper-cleanup.timer
 sudo systemctl enable --now snapper-timeline.timer

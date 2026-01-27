@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-./proxy.sh
-socket=http://127.0.0.1:7897
-
-# git config --global https.proxy $socket
-# git config --global http.proxy $socket
 git config --global http.postBuffer 524288000
 git config credential.helper 'cache --timeout=3600'
 git config --global url."git@github.com:".insteadOf https://github.com/
@@ -19,7 +14,7 @@ get_package_manager() {
     fi
 }
 pacMan=$(get_package_manager)
-aurPkg='yay -S --needed --noconfirm'
+aurPkg='paru -S --needed --noconfirm'
 
 ~/.linuxConfig/must_install.sh
 

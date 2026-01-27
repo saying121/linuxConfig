@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-./proxy.sh
 # link config
 ~/.linuxConfig/linkConfig.sh
 
@@ -83,7 +82,7 @@ $pacMan foliate festival festival-us \
     openssh ntfs-3g exfat-utils viu \
     pandoc xdg-utils youtube-dl numlockx rsync arch-install-scripts \
     gimagereader-qt tesseract-data-eng tesseract-data-chi_sim \
-    qbittorrent steam mpv
+    qbittorrent mpv
 
 # 缺失的驱动
 $aurPkg ast-firmware upd72020x-fw aic94xx-firmware wd719x-firmware
@@ -116,22 +115,21 @@ $pacMan gst-libav phonon-qt5-gstreamer gst-plugins-good qt5-quickcontrols qt5-gr
 $aurPkg sddm sddm-conf-git xinit-xsession
 $aurPkg sddm-theme-aerial-git
 
-
 # x11,蓝牙耳机自动切换，pavucontrol:音量控制,安装 pipewire-pulse包. 它将代替 pulseaudio包 和 pulseaudio-bluetooth包
 $pacMan pipewire-pulse bluez bluez-utils pulsemixer \
     xorg xorg-xinit xorg-server calc python-pywal network-manager-applet \
     pulseaudio-alsa pavucontrol
 $pacMan redshift
 
-# 锁屏
-$pacMan betterlockscreen xidlehook dex
-betterlockscreen -u ~/.linuxConfig/wallpaperengine/somePictures
-
-# 电源时间
-xset dpms 1200 1800 2400
-# 屏保时间
-xset s 900 900
-sudo systemctl enable betterlockscreen@"$USER"
+# # 锁屏
+# $pacMan betterlockscreen xidlehook dex
+# betterlockscreen -u ~/.linuxConfig/wallpaperengine/somePictures
+#
+# # 电源时间
+# xset dpms 1200 1800 2400
+# # 屏保时间
+# xset s 900 900
+# sudo systemctl enable betterlockscreen@"$USER"
 
 # i3
 $aurPkg i3-wm i3status i3status-rust autotiling feh
@@ -145,10 +143,6 @@ xset +dpms
 
 # 下载工具
 $pacMan lux-dl
-
-# polybar
-# $pacMan polybar
-# ~/.linuxConfig/i3/polybar/install-polybar-theme.sh
 
 # install Gimp
 $pacMan gimp gvfs gutenprint
@@ -175,8 +169,10 @@ $pacMan linux-wifi-hotspot bash-completion haveged
 $pacMan adobe-source-han-serif-cn-fonts \
     adobe-source-han-sans-cn-fonts \
     wqy-zenhei wqy-microhei noto-fonts-cjk noto-fonts-emoji \
-    noto-fonts-extra ttf-hack-nerd ttf-sil-padauk \
-    # nerd-fonts-complete
+    noto-fonts-extra ttf-hack-nerd \
+    ttf-maplemono ttf-maplemono-cn ttf-maplemono-nf ttf-maplemono-nf-cn
+# ttf-sil-padauk \
+# nerd-fonts-complete
 fc-cache -fv
 
 # rofi
