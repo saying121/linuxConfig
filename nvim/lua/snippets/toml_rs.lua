@@ -460,6 +460,7 @@ local serde = {
     ["serde"] = "一个通用的序列化/反序列化框架",
     ["serde_json"] = "一种 json 序列化文件格式",
     ["serde_assert"] = "测试 Serde Serialize 和 Deserialize 实施 的 库 。",
+    ["serde-untagged"] = "该箱提供了 Serde Visitor 实现，有助于反串行未标记枚举。",
     ["rkyv"] = "Rust 的零拷贝反序列化框架",
     ["rmp_serde"] = "rmp 的 serde 绑定",
     ["ser-raw"] = [[简单快速的序列化器

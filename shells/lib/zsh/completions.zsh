@@ -25,7 +25,7 @@ zi snippet https://github.com/BurntSushi/ripgrep/blob/master/crates/core/flags/c
 zi ice lucid wait as'completion' blockf has'tldr' mv'zsh_tealdeer -> _tldr'
 zi snippet https://github.com/dbrgn/tealdeer/blob/main/completion/zsh_tealdeer
 
-zi ice lucid wait as'completion' blockf has'_docker'
+zi ice lucid wait as'completion' blockf has'docker'
 zi snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
 zi ice lucid wait as'completion' blockf has'launchctl'

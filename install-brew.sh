@@ -6,7 +6,7 @@ brew install clash-verge-rev bash
 brew install make cmake xmake pkg-config-wrapper
 brew install fzf fd ripgrep bottom eza
 brew install coreutils fnm
-brew install neovim utf8proc kitty wezterm
+brew install neovim utf8proc kitty wezterm tree-sitter-cli
 brew install thefuck starship
 brew install bash-language-server lua-language-server taplo
 

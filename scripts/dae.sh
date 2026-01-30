@@ -6,6 +6,8 @@
     # sudo cp ~/.linuxConfig/configs/config.dae /etc/dae/config.dae
 # fi
 
+set -xe
+
 sudo mkdir -p /etc/dae/
 sudo install -m 655 ~/.linuxConfig/scripts/updategeo.sh /usr/bin/updategeo
 sudo install -m 644 ~/.linuxConfig/custom-services/updategeo.service /lib/systemd/system/updategeo.service

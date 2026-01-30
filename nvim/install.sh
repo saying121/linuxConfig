@@ -13,7 +13,7 @@ $pacMan fzf ripgrep fd lldb translate-shell \
     luarocks shellcheck \
     zathura zathura-djvu zathura-ps zathura-ps \
     typst deno tesseract actionlint \
-    mold lld sccache silicon
+    mold lld sccache silicon tree-sitter-cli
 # zathura-pdf-mupdf
 $pacMan ruff-lsp vim-language-server lua-language-server bash-language-server \
     gopls yaml-language-server typescript-language-server jdtls gradle marksman \
