@@ -21,7 +21,7 @@ return {
             win = {
                 input = {
                     keys = {
-                        ["t"] = { "tab", mode = { "n" } },
+                        ["t"] = { "tabdrop", mode = { "n" } },
                     },
                 },
             },
@@ -37,7 +37,7 @@ return {
                         },
                         list = {
                             keys = {
-                                ["t"] = "tab",
+                                ["t"] = "tabdrop",
                                 ["<Esc>"] = { "", mode = { "n", "x" } },
                                 ["u"] = "explorer_up",
                                 ["a"] = "explorer_add",

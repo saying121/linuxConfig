@@ -371,6 +371,18 @@ local items = {
         requires = "tokio",
         scope = "item",
     },
+    derive_serde = {
+        prefix = { "derive_serde" },
+        body = {
+            "#[derive(Serialize, Deserialize)]",
+        },
+        description = "Add #[derive(Serialize, Deserialize)]",
+        requires = {
+            "serde::Serialize",
+            "serde::Deserialize",
+        },
+        scope = "item",
+    },
     no_std = {
         prefix = { "no_std" },
         body = {
