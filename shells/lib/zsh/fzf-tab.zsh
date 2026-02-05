@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 #zstyle ':completion:<function>:<completer>:<command>:<argument>:<tag>'
 
 export RUNEWIDTH_EASTASIAN=0
@@ -34,10 +36,10 @@ zstyle ':fzf-tab:complete:(pacman|paru|yay):options' fzf-flags --preview-window=
 
 zstyle ':fzf-tab:complete:(lcode|perf|rustup|journalctl|jj|zi):*' fzf-flags --preview-window=down:3:wrap --height=50%
 
-zstyle ':fzf-tab:complete:(pip-|pip--):argument-1' fzf-flags --preview-window=down:0:wrap --height=50%
-zstyle ':fzf-tab:complete:pip-install:arguement-reset:argument-1' fzf-flags --preview-window=down:0:wrap --height=50% # shit, not hit
+zstyle ':fzf-tab:complete:(pip-|pip--|pip3-|pip3--):argument-1' fzf-flags --preview-window=down:0:wrap --height=50%
+zstyle ':fzf-tab:complete:(pip-install|pip3-install):arguement-reset:argument-1' fzf-flags --preview-window=down:0:wrap --height=50% # shit, not hit
 
-zstyle ':fzf-tab:complete:python:options' fzf-flags --preview-window=down:0:wrap --height=50%
+zstyle ':fzf-tab:complete:(python|python3):options' fzf-flags --preview-window=down:0:wrap --height=50%
 
 zstyle ':fzf-tab:complete:uv:argument-1' fzf-flags --preview-window=down:6:wrap --height=50%
 zstyle ':fzf-tab:complete:(uv|uv-pip-command-*|uv-command-*):options' fzf-flags --preview-window=down:0:wrap --height=50%

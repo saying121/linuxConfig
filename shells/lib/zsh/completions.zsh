@@ -1,9 +1,34 @@
+#!/usr/bin/env zsh
+
 zi ice as"completion"
 zi light https://github.com/ziglang/shell-completions
 
-jj_cmp=~/.local/shells/jj.zsh
-zi ice lucid wait as'completion' atclone"jj util completion zsh > $jj_cmp" blockf has'jj'
-zi snippet $jj_cmp
+zi ice lucid wait'2' \
+    has'uv' \
+    as'completion' \
+    id-as'uv' \
+    blockf \
+    atclone'uv generate-shell-completion zsh >_uv' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
+    has'jj' \
+    as'completion' \
+    id-as'jujutsu' \
+    blockf \
+    atclone'jj util completion zsh > _jj' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
+    has'lcode' \
+    as'completion' \
+    id-as'lcode' \
+    blockf \
+    atclone'lcode --generate zsh > _lcode' \
+    atpull'%atclone'
+zi load z-shell/null
 
 zi ice lucid wait as'completion' blockf
 zi light zchee/zsh-completions

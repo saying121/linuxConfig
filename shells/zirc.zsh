@@ -2,6 +2,7 @@
 
 # 自定义
 source ~/.linuxConfig/shells/zshrc
+source ~/.linuxConfig/shells/lib/zsh/zsh-hook.zsh
 
 typeset -A ZI
 ZI[BIN_DIR]="${HOME}/.zi/bin"
@@ -29,15 +30,6 @@ source ~/.linuxConfig/shells/lib/zsh/completions.zsh
 
 # omz
 source ~/.linuxConfig/shells/lib/zsh/omz.zsh
-
-# zi ice wait lucid service"redis"
-# zi light z-shell/redis
-#
-# GIT_SLEEP_TIME=700
-# GIT_PROJECTS=z-shell/zsh-github-issues:z-shell/zi
-#
-# zi ice wait lucid service"GIT" pick"zsh-github-issues.service.zsh"
-# zi light z-shell/zsh-github-issues
 
 # Misc
 zi ice wait lucid; zi light paulirish/git-open.git
@@ -85,8 +77,6 @@ alias lazyvim="NVIM_APPNAME=lazyvim nvim"
 alias nvchard="NVIM_APPNAME=nvchard nvim"
 
 eval "$(starship init zsh)"
-eval "$(uv generate-shell-completion zsh)"
-
 
 # export CLIPPY_CONF_DIR=~/.config/rustfmt/
 # export RUSTFLAGS="-Z threads=16"
@@ -96,3 +86,11 @@ export PATH=$PATH:~/.local/share/gem/ruby/3.0.0/bin
 # export WASMTIME_DEBUG_BINDGEN=1
 
 # zprof
+
+# pnpm
+export PNPM_HOME="/Users/saying/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
