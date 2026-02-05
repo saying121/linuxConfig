@@ -1,6 +1,10 @@
 zi ice as"completion"
 zi light https://github.com/ziglang/shell-completions
 
+jj_cmp=~/.local/shells/jj.zsh
+zi ice lucid wait as'completion' atclone"jj util completion zsh > $jj_cmp" blockf has'jj'
+zi snippet $jj_cmp
+
 zi ice lucid wait as'completion' blockf
 zi light zchee/zsh-completions
 

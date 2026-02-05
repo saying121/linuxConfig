@@ -32,14 +32,20 @@ zstyle ':fzf-tab:complete:cargo:*' fzf-preview 'cargo help $word | bat --color=a
 zstyle ':fzf-tab:complete:cargo-(run|rustc|check):options' fzf-flags --preview-window=down:0:wrap
 zstyle ':fzf-tab:complete:(pacman|paru|yay):options' fzf-flags --preview-window=down:0:wrap
 
-zstyle ':fzf-tab:complete:(lcode|perf|rustup|journalctl|jj):*' fzf-flags --preview-window=down:3:wrap --height=50%
+zstyle ':fzf-tab:complete:(lcode|perf|rustup|journalctl|jj|zi):*' fzf-flags --preview-window=down:3:wrap --height=50%
+
+zstyle ':fzf-tab:complete:(pip-|pip--):argument-1' fzf-flags --preview-window=down:0:wrap --height=50%
+zstyle ':fzf-tab:complete:pip-install:arguement-reset:argument-1' fzf-flags --preview-window=down:0:wrap --height=50% # shit, not hit
+
+zstyle ':fzf-tab:complete:python:options' fzf-flags --preview-window=down:0:wrap --height=50%
+
+zstyle ':fzf-tab:complete:uv:argument-1' fzf-flags --preview-window=down:6:wrap --height=50%
+zstyle ':fzf-tab:complete:(uv|uv-pip-command-*|uv-command-*):options' fzf-flags --preview-window=down:0:wrap --height=50%
+zstyle ':fzf-tab:complete:uv-command-*:argument-1' fzf-flags --preview-window=down:0:wrap --height=50%
+
 # gcc in macos is gcc-14, g++-14 etc
 zstyle ':fzf-tab:complete:(rg|gcc*|g++*|clang|clang++|psql|perf-*):options' fzf-flags --preview-window=down:3:wrap --height=50%
 zstyle ':fzf-tab:complete:(rustc|sar|dd|strace|perf-*):*' fzf-flags --preview-window=down:3:wrap --height=50%
-
-zstyle ':fzf-tab:complete:git-(diff|restore|add):*' --preview-window=down:3:wrap --height=50%
-zstyle ':fzf-tab:complete:git-*:options' fzf-flags --preview-window=down:3:wrap --height=50%
-zstyle ':fzf-tab:complete:git:argument-1' fzf-flags --preview-window=down:10:wrap --height=50%
 
 zstyle ':fzf-tab:complete:git-(diff|restore|add):*' --preview-window=down:3:wrap --height=50%
 zstyle ':fzf-tab:complete:git-*:options' fzf-flags --preview-window=down:3:wrap --height=50%
