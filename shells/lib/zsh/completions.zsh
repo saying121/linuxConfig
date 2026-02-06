@@ -57,6 +57,9 @@ zi snippet https://github.com/dbrgn/tealdeer/blob/main/completion/zsh_tealdeer
 zi ice lucid wait as'completion' blockf has'docker'
 zi snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
+zi ice lucid wait as'completion' blockf has'mise'
+zi snippet https://github.com/jdx/mise/blob/main/completions/_mise
+
 zi ice lucid wait as'completion' blockf has'launchctl'
 zi snippet https://github.com/nilsonholger/osx-zsh-completions/blob/master/_launchctl
 

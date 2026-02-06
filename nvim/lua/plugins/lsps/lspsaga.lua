@@ -145,7 +145,7 @@ return {
         }
         -- you can use <C-t> to jump back
         keymap("n", "gh", function()
-            vcmd.Lspsaga("finder")
+            vcmd.Lspsaga({ "finder", "++inexist" })
         end)
         -- keymap("n", "gi", function()
         --     vcmd.Lspsaga({ "finder", "imp" })

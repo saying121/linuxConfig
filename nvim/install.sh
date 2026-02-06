@@ -18,9 +18,13 @@ $pacMan fzf ripgrep fd lldb translate-shell \
 $pacMan ruff-lsp vim-language-server lua-language-server bash-language-server \
     gopls yaml-language-server typescript-language-server jdtls gradle marksman \
     texlab typst-lsp revive tidy platformio-core platformio-core-udev biome shfmt \
-    lemminx kotlin-language-server
+    lemminx kotlin-language-server cmake-language-server tinymist tailwindcss-language-server
 
-$aurPkg basedpyright-git
+npm install -g awk-language-server vscode-langservers-extracted dot-language-server @olrtg/emmet-language-server \
+    awk-language-server @vtsls/language-server
+go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
+
+$aurPkg basedpyright-git termux-language-server
 
 $pacMan cargo-flamegraph cargo-binstall cargo-audit cargo-machete cargo-update \
     cargo-nextest grcov cargo-llvm-cov
@@ -66,14 +70,15 @@ fi
 
 # $aurPkg rime-ls rime-essay
 
-$pacMan texlive-core texlive-bin
+$pacMan texlive-basic texlive-bin
 
 # nodejs
 $pacMan fnm npm
 export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/
 fnm install 18
 fnm install 16
-fnm default 18
+fnm install 20
+fnm default 20
 
 sudo npm i -g neovim npm-check-updates
 
@@ -86,15 +91,6 @@ sudo npm i -g neovim npm-check-updates
 
 # 给lldb配置runInTerminal
 # echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-
-if [[ $(grep -c mason /etc/profile) == 0 ]]; then
-    # shellcheck disable=2016
-    echo '
-export PATH=$PATH:~/.local/share/nvim/mason/bin
-    ' | sudo tee -a /etc/profile
-
-    source /etc/profile
-fi
 # export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 #
 # export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/

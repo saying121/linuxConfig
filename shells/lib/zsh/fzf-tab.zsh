@@ -16,10 +16,10 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 
 zstyle ':fzf-tab:*' fzf-command fzf
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:complete:*:*' fzf-flags --height=70%
+zstyle ':fzf-tab:complete:*:*' fzf-flags --height=60%
 # zstyle ':fzf-tab:complete:*:*' fzf-preview 'which $word; echo $group'
 
-# bindkey '^a' alias-expension
+bindkey '^Xa' alias-expension
 bindkey '^Xh' _complete_help
 # zstyle ':completion:alias-expension:*' completer _expand_alias
 
@@ -32,12 +32,15 @@ zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 
 zstyle ':fzf-tab:complete:cargo:*' fzf-preview 'cargo help $word | bat --color=always -plhelp'
 zstyle ':fzf-tab:complete:cargo-(run|rustc|check):options' fzf-flags --preview-window=down:0:wrap
-zstyle ':fzf-tab:complete:(pacman|paru|yay):options' fzf-flags --preview-window=down:0:wrap
+zstyle ':fzf-tab:complete:(rustup):*' fzf-flags --preview-window=down:3:wrap --height=50%
 
-zstyle ':fzf-tab:complete:(lcode|perf|rustup|journalctl|jj|zi):*' fzf-flags --preview-window=down:3:wrap --height=50%
+zstyle ':fzf-tab:complete:(pacman|paru|yay):options' fzf-flags --preview-window=down:0:wrap
+zstyle ':fzf-tab:complete:(fnm):argument-1' fzf-flags --preview-window=down:0:wrap --height=50%
+
+zstyle ':fzf-tab:complete:(lcode|perf|journalctl|jj|zi):*' fzf-flags --preview-window=down:3:wrap --height=50%
 
 zstyle ':fzf-tab:complete:(pip-|pip--|pip3-|pip3--):argument-1' fzf-flags --preview-window=down:0:wrap --height=50%
-zstyle ':fzf-tab:complete:(pip-install|pip3-install):arguement-reset:argument-1' fzf-flags --preview-window=down:0:wrap --height=50% # shit, not hit
+zstyle ':fzf-tab:complete:(pip-install|pip3-install):argument-reset:argument-1' fzf-flags --preview-window=down:0:wrap --height=50% # shit, not hit
 
 zstyle ':fzf-tab:complete:(python|python3):options' fzf-flags --preview-window=down:0:wrap --height=50%
 
@@ -51,7 +54,7 @@ zstyle ':fzf-tab:complete:(rustc|sar|dd|strace|perf-*):*' fzf-flags --preview-wi
 
 zstyle ':fzf-tab:complete:git-(diff|restore|add):*' --preview-window=down:3:wrap --height=50%
 zstyle ':fzf-tab:complete:git-*:options' fzf-flags --preview-window=down:3:wrap --height=50%
-zstyle ':fzf-tab:complete:git:argument-1' fzf-flags --preview-window=down:10:wrap --height=50%
+zstyle ':fzf-tab:complete:git:argument-1' fzf-flags --preview-window=down:7:wrap --height=80%
 
 zstyle ':fzf-tab:complete:_zlua:*' query-string input
 
@@ -63,6 +66,8 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ "$group" == *"process ID"* ]] && ps --pid=$word -o cmd --no-headers -w -w'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
+
+zstyle ':fzf-tab:complete:(mise):argument-rest' fzf-flags --preview-window=down:0:wrap
 
 # zstyle ':fzf-tab:complete:systemctl-status:*' command-arguments '(@)' '--user' fzf-preview 'systemctl --user status -- $word'
 zstyle ':fzf-tab:complete:systemctl:argument-rest' fzf-flags --preview-window=down:5:wrap --height=60%

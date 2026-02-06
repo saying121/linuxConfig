@@ -95,3 +95,4 @@ $pacMan easyeffects calf lsp-plugins-lv2 zam-plugins-lv2 mda.lv2 yelp
 $aurPkg xwaylandvideobridge wemeet-bin
 
 $aurPkg bitwise programmer-calculator
+$pacMan mise usage
