@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-zi ice as"completion"
-zi light https://github.com/ziglang/shell-completions
-
 zi ice lucid wait'2' \
     has'uv' \
     as'completion' \
@@ -30,8 +27,8 @@ zi ice lucid wait'2' \
     atpull'%atclone'
 zi load z-shell/null
 
-zi ice lucid wait as'completion' blockf
-zi light zchee/zsh-completions
+zi ice as"completion"
+zi light https://github.com/ziglang/shell-completions
 
 zi ice lucid wait as'completion'
 zi light zsh-users/zsh-completions

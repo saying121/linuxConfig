@@ -34,25 +34,14 @@ source ~/.linuxConfig/shells/lib/zsh/omz.zsh
 # Misc
 zi ice wait lucid; zi light paulirish/git-open.git
 
-zi ice wait lucid; zi light lesonky/web-search.git
-
 ZVM_VI_EDITOR=nvim
 zi ice depth=1 lucid; zi light jeffreytse/zsh-vi-mode
 
-# zi ice wait lucid; zi light z-shell/H-S-MW
-
 # 这两个插件按照这个顺序加载
-zi ice wait lucid; zi light zsh-users/zsh-history-substring-search
 zi ice wait lucid atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"
 zi light z-shell/F-Sy-H
 # 高亮主题
 # fast-theme ~/.linuxConfig/shells/z-shell.ini
-
-# /bin/cat -v 然后按下按键查看按键对应字符串, C-n,C-p 不知道为啥不成功
-# bindkey '^[[A' history-substring-search-up
-# bindkey '^[[B' history-substring-search-down
-# bindkey '^P' history-substring-search-up
-# bindkey '^N' history-substring-search-down
 
 resume_job() {
     fg
@@ -66,8 +55,8 @@ bindkey '^Z' resume_job
 autoload -U edit-command-line
 # Emacs style
 zle -N edit-command-line
-bindkey '^xe' edit-command-line
-bindkey '^x^e' edit-command-line
+bindkey '^Xe' edit-command-line
+bindkey '^X^e' edit-command-line
 
 ############################################################
 

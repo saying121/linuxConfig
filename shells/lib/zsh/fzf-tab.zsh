@@ -19,7 +19,6 @@ zstyle ':fzf-tab:*' fzf-command fzf
 zstyle ':fzf-tab:complete:*:*' fzf-flags --height=60%
 # zstyle ':fzf-tab:complete:*:*' fzf-preview 'which $word; echo $group'
 
-bindkey '^Xa' alias-expension
 bindkey '^Xh' _complete_help
 # zstyle ':completion:alias-expension:*' completer _expand_alias
 
@@ -40,7 +39,7 @@ zstyle ':fzf-tab:complete:(fnm):argument-1' fzf-flags --preview-window=down:0:wr
 zstyle ':fzf-tab:complete:(lcode|perf|journalctl|jj|zi):*' fzf-flags --preview-window=down:3:wrap --height=50%
 
 zstyle ':fzf-tab:complete:(pip-|pip--|pip3-|pip3--):argument-1' fzf-flags --preview-window=down:0:wrap --height=50%
-zstyle ':fzf-tab:complete:(pip-install|pip3-install):argument-reset:argument-1' fzf-flags --preview-window=down:0:wrap --height=50% # shit, not hit
+zstyle ':fzf-tab:complete:(pip-install|pip3-install):argument-rest' fzf-flags --preview-window=down:0:wrap --height=50%
 
 zstyle ':fzf-tab:complete:(python|python3):options' fzf-flags --preview-window=down:0:wrap --height=50%
 
