@@ -106,7 +106,7 @@ $pacMan dolphin konsole qt5ct kvantum kali-themes
 
 # 输入法相关 中文输入法,支持vim+寄存器的clip
 $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
-    fcitx5-pinyin-zhwiki vim-fcitx xclip fcitx5-table-other catppuccin-fcitx5-git
+    fcitx5-pinyin-zhwiki vim-fcitx xclip fcitx5-table-extra fcitx5-table-other catppuccin-fcitx5-git
 
 # Music
 $aurPkg go-musicfox-git

@@ -17,7 +17,7 @@ $pacMan adobe-source-han-serif-cn-fonts \
 
 
 $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
-    fcitx5-pinyin-zhwiki catppuccin-fcitx5-git fcitx5-table-other vim-fcitx xclip \
+    fcitx5-pinyin-zhwiki catppuccin-fcitx5-git fcitx5-table-extra fcitx5-table-other vim-fcitx xclip \
     vim zsh wget curl neovim dhcpcd iwd sudo git
 
 # fcitx5的设置
