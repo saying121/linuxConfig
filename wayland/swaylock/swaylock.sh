@@ -1,9 +1,19 @@
 #!/bin/bash
 
-wallpaper=~/.linuxConfig/wallpaperengine/somePictures
+DEFAULT_WALLPAPER_DIR="${HOME}/.linuxConfig/wallpaperengine/somePictures"
+KALI_WALLPAPER_DIR="/usr/share/backgrounds/kali"
+
+wallpaper=$KALI_WALLPAPER_DIR
+
+if [ -d "${KALI_WALLPAPER_DIR}" ]; then
+  wallpaper="${KALI_WALLPAPER_DIR}"
+else
+  wallpaper="${DEFAULT_WALLPAPER_DIR}"
+fi
+
 
 c=0
-for file in "$wallpaper"/*; do
+for file in "$wallpaper"/*.{png,jpe?g}; do
     my_array[c]=$file
     ((c++))
 done

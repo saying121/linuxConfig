@@ -6,6 +6,8 @@ repo=/tmp/kali-themes
 git clone --depth=1 https://gitlab.com/kalilinux/packages/kali-themes.git $repo
 cd $repo || exit
 cp -r $repo/share/themes ~/.themes
+cp -r $repo/share/icons ~/.icons
+cp -r $repo/share/color-schemes ~/.local/share/color-schemes
 
 mv ~/.config/qt6ct ~/.config/qt6ct-bak || echo "qt6 skip bak"
 mv ~/.config/qt5ct ~/.config/qt5ct-bak || echo "qt5 skip bak"
@@ -22,18 +24,23 @@ update_config() {
         sed -i "s|^$key=.*|$key=\"$value\"|" "$file"
     else
         # 不存在则追加
-        echo "$key=\"$value\"" >> "$file"
+        echo "$key=\"$value\"" >>"$file"
     fi
 }
 
-FILE=~/.config/gtk-3.0/settings.ini
-update_config "gtk-icon-theme-name" "Kali-Dark" "$FILE"
-update_config "gtk-theme-name" "Kali-Dark" "$FILE"
+ICON="Flat-Remix-Blue-Dark"
+THEME="Kali-Dark"
 
-FILE=~/.config/gtk-4.0/settings.ini
-update_config "gtk-icon-theme-name" "Kali-Dark" "$FILE"
-update_config "gtk-theme-name" "Kali-Dark" "$FILE"
+GTK_CONFS=("$HOME/.gtkrc-2.0" "$HOME/.config/gtk-3.0/settings.ini" "$HOME/.config/gtk-4.0/settings.ini")
+for file in "${GTK_CONFS[@]}"; do
+    echo "update: $file"
+    update_config "gtk-icon-theme-name" $ICON "$file"
+    update_config "gtk-theme-name" $THEME "$file"
+done
 
-FILE=~/.gtkrc-2.0
-update_config "gtk-icon-theme-name" "Kali-Dark" "$FILE"
-update_config "gtk-theme-name" "Kali-Dark" "$FILE"
+QT_CONFS=("$HOME/.config/qt5ct/qt5ct.conf" "$HOME/.config/qt6ct/qt6ct.conf")
+for file in "${QT_CONFS[@]}"; do
+    echo "update: $file"
+    update_config "icon_theme" $ICON "$file"
+    # update_config "color_scheme_path" $THEME "$file" # shit require a theme path
+done
