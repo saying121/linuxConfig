@@ -5,7 +5,13 @@
 export RUNEWIDTH_EASTASIAN=0
 
 # lesspipe.sh 会读取home的.lessfilter
-export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --history=$HOME/.zi/cache/fzfhistory --preview='~/.lessfilter {}' --bind 'alt-p:preview-up,alt-n:preview-down'"
+export FZF_DEFAULT_OPTS="--height 60%
+--layout=reverse
+--history=$HOME/.zi/cache/fzfhistory
+--preview='~/.lessfilter {}'
+--bind 'alt-p:preview-up'
+--bind 'alt-n:preview-down'
+"
 export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build,dist,vendor} --type f"
 
 # export LESSOPEN='|lesspipe.sh %s'
@@ -67,6 +73,7 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ "$group" == *
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 
 zstyle ':fzf-tab:complete:(mise):argument-rest' fzf-flags --preview-window=down:0:wrap
+zstyle ':fzf-tab:complete:(swaylock):options' fzf-flags --preview-window=down:0:wrap
 
 # zstyle ':fzf-tab:complete:systemctl-status:*' command-arguments '(@)' '--user' fzf-preview 'systemctl --user status -- $word'
 zstyle ':fzf-tab:complete:systemctl:argument-rest' fzf-flags --preview-window=down:5:wrap --height=60%

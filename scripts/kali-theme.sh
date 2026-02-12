@@ -9,11 +9,8 @@ cp -r $repo/share/themes ~/.themes
 cp -r $repo/share/icons ~/.icons
 cp -r $repo/share/color-schemes ~/.local/share/color-schemes
 
-mv ~/.config/qt6ct ~/.config/qt6ct-bak || echo "qt6 skip bak"
-mv ~/.config/qt5ct ~/.config/qt5ct-bak || echo "qt5 skip bak"
-
-cp -r $repo/share/qt6ct ~/.config/qt6ct
-cp -r $repo/share/qt5ct ~/.config/qt5ct
+cp -r $repo/share/qt6ct/* ~/.config/qt6ct/
+cp -r $repo/share/qt5ct/* ~/.config/qt5ct/
 
 update_config() {
     local key=$1
