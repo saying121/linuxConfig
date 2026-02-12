@@ -24,7 +24,7 @@ local clangd_flags = {
     -- 在后台自动分析文件（基于complie_commands)
     "--background-index",
     -- 标记compelie_commands.json文件的目录位置
-    "--compile-commands-dir=.",
+    -- "--compile-commands-dir=.",
     -- 告诉clangd用那个clang进行编译，路径参考which clang++的路径
     "--query-driver=/usr/bin/clang++",
     -- 启用 Clang-Tidy 以提供「静态检查」
