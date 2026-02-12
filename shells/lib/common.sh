@@ -225,9 +225,6 @@ LFCD="$HOME/.config/lf/lfcd.sh"
 # shellcheck disable=SC1090
 source "$LFCD"
 
-if which fnm >/dev/null; then
-    eval "$(fnm env --use-on-cd)"
-fi
 # eval "$(jenv init -)"
 
 # shellcheck disable=SC1090

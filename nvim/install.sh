@@ -73,12 +73,9 @@ fi
 $pacMan texlive-basic texlive-bin
 
 # nodejs
-$pacMan fnm npm
-export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/
-fnm install 18
-fnm install 16
-fnm install 20
-fnm default 20
+$pacMan mise npm
+mise i node
+mise use -g node
 
 sudo npm i -g neovim npm-check-updates
 
@@ -92,5 +89,3 @@ sudo npm i -g neovim npm-check-updates
 # 给lldb配置runInTerminal
 # echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
 # export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
-#
-# export FNM_NODE_DIST_MIRROR=https://mirrors.bfsu.edu.cn/nodejs-release/
