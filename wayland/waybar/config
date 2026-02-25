@@ -54,7 +54,8 @@
         }
     },
     "temperature": {
-        "critical-threshold": 80,
+        "critical-threshold": 70,
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
         "format-critical": "\uf2c7 {temperatureC}\u00b0C",
         "format": "\uf2c9 {temperatureC}\u00b0C"
     },
@@ -150,7 +151,7 @@
     },
     "cpu": {
         "interval": 2,
-        "format": " \uf2db {}% {avg_frequency} GHz ",
+        "format": " \uf2db {usage}% {avg_frequency} GHz ",
         "max-length": 20,
         "on-click-right": "[[ $(ps -ef | grep -c plasma-systemmonito[r]) -gt 0 ]] && killall plasma-systemmonitor || plasma-systemmonitor"
     },
