@@ -27,6 +27,15 @@ zi ice lucid wait'2' \
     atpull'%atclone'
 zi load z-shell/null
 
+zi ice lucid wait'2' \
+    has'opencode' \
+    as'completion' \
+    id-as'opencode' \
+    blockf \
+    atclone'opencode completion > _opencode' \
+    atpull'%atclone'
+zi load z-shell/null
+
 zi ice as"completion"
 zi light https://github.com/ziglang/shell-completions
 

@@ -17,12 +17,12 @@ $pacMan waybar otf-font-awesome \
     swaylock-effects hypridle \
     qt5-wayland qt6-wayland \
     xdg-desktop-portal-hyprland xdg-desktop-portal \
-    brightnessctl wlsunset swaync
+    brightnessctl wlsunset swaync swayosd satty
     # mako
     # gnome-calendar \
 
 $pacMan pipewire wireplumber slurp grim
-$aurPkg flameshot-git gojq satty swayosd-git
+$aurPkg flameshot-git gojq-bin
 
 # xrandr-wlr-randr,xprop-wdisplays
 $aurPkg wlr-randr wl-color-picker wl-delicolour-picker hyprpicker hyprprop

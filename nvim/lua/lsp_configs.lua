@@ -121,6 +121,10 @@ lsp.handlers[methods.textDocument_definition] = get_locations("vsplit")
 
 ---@type vim.lsp.Config
 local default_lsp_config = {
+    before_init = function(_, config)
+        local codesettings = require("codesettings")
+        codesettings.with_local_settings(config.name, config)
+    end,
     capabilities = lsp.protocol.make_client_capabilities(),
 }
 default_lsp_config.capabilities.textDocument.foldingRange = {
