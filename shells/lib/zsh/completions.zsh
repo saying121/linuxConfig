@@ -36,6 +36,15 @@ zi ice lucid wait'2' \
     atpull'%atclone'
 zi load z-shell/null
 
+zi ice lucid wait'2' \
+    has'crush' \
+    as'completion' \
+    id-as'crush' \
+    blockf \
+    atclone'crush completion zsh > _crush' \
+    atpull'%atclone'
+zi load z-shell/null
+
 zi ice as"completion"
 zi light https://github.com/ziglang/shell-completions
 

@@ -6,6 +6,15 @@ return {
     version = false, -- 永远不要将此值设置为 "*"！永远不要！
     ---@type avante.Config
     opts = {
+        input = {
+            provider = "snacks", -- "native" | "dressing" | "snacks"
+            provider_opts = {
+                -- Snacks input configuration
+                title = "Avante Input",
+                icon = " ",
+                placeholder = "Enter your API key...",
+            },
+        },
         provider = "deepseek",
         providers = {
             deepseek = {
