@@ -9,6 +9,9 @@ return {
     cond = true,
     lazy = false, -- lazy loading handled internally
     version = "*",
+    dependencies = {
+        "Kaiser-Yang/blink-cmp-avante",
+    },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -195,9 +198,16 @@ return {
                 mysql = { "dadbod", "lsp", "snippets", "buffer" },
                 plsql = { "dadbod", "lsp", "snippets", "buffer" },
                 DressingInput = { "path", "ripgrep" },
-                AvanteInput = { "path", "ripgrep" },
+                AvanteInput = { "avante", "path", "ripgrep" },
             },
             providers = {
+                avante = {
+                    module = "blink-cmp-avante",
+                    name = "Avante",
+                    opts = {
+                        -- options for blink-cmp-avante
+                    },
+                },
                 lsp = {
                     name = "LSP",
                     module = "blink.cmp.sources.lsp",
