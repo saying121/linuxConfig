@@ -1,6 +1,15 @@
 #!/usr/bin/env zsh
 
 zi ice lucid wait'2' \
+    has'wash' \
+    as'completion' \
+    id-as'wash' \
+    blockf \
+    atclone'wash completions zsh' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
     has'uv' \
     as'completion' \
     id-as'uv' \

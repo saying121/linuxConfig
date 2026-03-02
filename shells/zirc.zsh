@@ -1,5 +1,7 @@
 # zmodload zsh/zprof
 
+eval "$(mise activate zsh)"
+
 # 自定义
 source ~/.linuxConfig/shells/zshrc
 source ~/.linuxConfig/shells/lib/zsh/zsh-hook.zsh
@@ -83,4 +85,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-eval "$(mise activate zsh)"

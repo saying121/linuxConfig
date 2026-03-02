@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
-bold=$(tput bold)
-yellow=$(tput setaf 3)
-normal=$(tput sgr0)
+# bold=$(tput bold)
+# yellow=$(tput setaf 3)
+# normal=$(tput sgr0)
+bold='\033[1m'
+yellow='\033[33m'
+normal='\033[0m'
 
 dir=/usr/local/share/dae
-mkdir -p $dir
+[[ -d $dir ]] || mkdir -p $dir
 
 geoip_file=$dir"/geoip.dat"
 geosite_file=$dir"/geosite.dat"
