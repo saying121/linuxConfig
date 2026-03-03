@@ -1,7 +1,7 @@
 [Hotkey]
-# 反复按切换键时进行轮换
+# 按住切换键的修饰键时进行轮换切换
 EnumerateWithTriggerKeys=True
-# 临时在当前和第一个输入法之间切换
+# 临时切换输入法
 AltTriggerKeys=
 # 向前切换输入法
 EnumerateForwardKeys=
@@ -9,22 +9,24 @@ EnumerateForwardKeys=
 EnumerateBackwardKeys=
 # 轮换输入法时跳过第一个输入法
 EnumerateSkipFirst=False
+# 触发修饰键快捷键的时限 (毫秒)
+ModifierOnlyKeyTimeout=250
 
 [Hotkey/TriggerKeys]
 0=Alt+bracketleft
 1=Zenkaku_Hankaku
-
-[Hotkey/EnumerateGroupForwardKeys]
-0=Super+space
-
-[Hotkey/EnumerateGroupBackwardKeys]
-0=Shift+Super+space
 
 [Hotkey/ActivateKeys]
 0=Hangul_Hanja
 
 [Hotkey/DeactivateKeys]
 0=Hangul_Romaja
+
+[Hotkey/EnumerateGroupForwardKeys]
+0=Super+space
+
+[Hotkey/EnumerateGroupBackwardKeys]
+0=Shift+Super+space
 
 [Hotkey/PrevPage]
 0=Up
@@ -60,9 +62,9 @@ CompactInputMethodInformation=True
 ShowFirstInputMethodInformation=True
 # 默认页大小
 DefaultPageSize=5
-# 覆盖 Xkb 选项
+# 覆盖 XKB 选项
 OverrideXkbOption=False
-# 自定义 Xkb 选项
+# 自定义 XKB 选项
 CustomXkbOption=
 # Force Enabled Addons
 EnabledAddons=

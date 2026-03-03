@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 
-# Enhance git clone so that it will cd into the newly cloned directory
+# Enhance git clone and cargo new so that it will cd into the newly created directory
 autoload -Uz add-zsh-hook
-typeset -g last_cloned_dir
+typeset -g last_create_dir
 
-# Preexec: Detect 'git clone' command and set last_cloned_dir so we can cd into it
-_git_clone_preexec() {
+# Preexec: Detect 'git clone' or 'cargo new' command and set last_cloned_dir so we can cd into it
+_create_dir_preexec() {
     local full_cmd="$1"
     local first_word="${full_cmd%% *}"
 
@@ -27,25 +27,43 @@ _git_clone_preexec() {
         # 排除掉以 - 开头的参数
         if [[ "$last_arg" != -* ]]; then
             if [[ "$last_arg" =~ ^(https?|git@|ssh://|git://) ]]; then
-                last_cloned_dir=$(basename "$last_arg" .git)
+                last_create_dir=$(basename "$last_arg" .git)
             else
-                last_cloned_dir="$last_arg"
+                last_create_dir="$last_arg"
             fi
+        fi
+    # 检测 cargo new 命令
+    elif [[ "$full_cmd" =~ "^cargo.*new" ]]; then
+        # 解析参数，找到第一个不以 - 开头的参数作为项目名称
+        local args=(${=full_cmd})
+        local project_name=""
+
+        # 跳过前两个词（cargo 和 new）
+        for ((i=3; i<=${#args}; i++)); do
+            local arg="${args[$i]}"
+            if [[ "$arg" != -* ]]; then
+                project_name="$arg"
+                break
+            fi
+        done
+
+        if [[ -n "$project_name" ]]; then
+            last_create_dir="$project_name"
         fi
     fi
 }
 
 # Precmd: Runs before prompt is shown, and we can cd into our last_cloned_dir
-_git_clone_precmd() {
-  if [[ -n "$last_cloned_dir" ]]; then
-    if [[ -d "$last_cloned_dir" ]]; then
-      printf " \e[32m->\e[0m cd %s\n" "$last_cloned_dir"
-      cd "$last_cloned_dir"
+_create_dir_precmd() {
+  if [[ -n "$last_create_dir" ]]; then
+    if [[ -d "$last_create_dir" ]]; then
+      printf " \e[32m->\e[0m cd %s\n" "$last_create_dir"
+      cd "$last_create_dir"
     fi
     # Reset
-    last_cloned_dir=
+    last_create_dir=
   fi
 }
 
-add-zsh-hook preexec _git_clone_preexec
-add-zsh-hook precmd _git_clone_precmd
+add-zsh-hook preexec _create_dir_preexec
+add-zsh-hook precmd _create_dir_precmd
