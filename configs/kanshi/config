@@ -1,0 +1,15 @@
+output "SKYDATA S.P.A. F27G10U F27G10U14509" {
+    mode 3840x2160@144
+    alias $HOME_1
+}
+
+profile Dock {
+	output eDP-1 disable
+	output $HOME_1 enable
+    exec hyprctl dispatch moveworkspacetomonitor 1 $HOME_1 & hyprctl dispatch workspace 1
+}
+
+profile Laptop {
+	output eDP-1 enable
+    exec hyprctl dispatch moveworkspacetomonitor 1 eDP-1
+}

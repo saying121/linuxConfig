@@ -25,9 +25,6 @@ $pacMan ipcalc
 
 $pacMan sshfs python-nautilus kdeconnect
 
-# Music
-$aurPkg music-you-bin
-
 # theme
 $aurPkg adwaita-qt5-git adwaita-qt6-git kvantum-theme-libawaita-git
 # sddm theme,分多次安装，有的会安装失败
@@ -55,7 +52,7 @@ $pacMan pkgstats
 # 各种查看系统信息的软件
 $pacMan htop atop iotop iftop glances nvtop sysstat plasma-systemmonitor
 # btm 启动 bottom
-$aurPkg bottom cpufetch hardinfo-git # `gpufetch-git
+$aurPkg bottom cpufetch # `gpufetch-git
 
 # markdown browser
 $aurPkg frogmouth carbonyl

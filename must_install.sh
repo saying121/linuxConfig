@@ -30,7 +30,7 @@ sudo pacman -Syyu --noconfirm
 $pacMan yay paru
 # yay -Syyu --noconfirm
 
-$pacMan linux-cachyos linux-cachyos-dbg linux-cachyos-headers linux-zen linux-zen-headers
+$pacMan base base-devel sccache linux-cachyos linux-cachyos-dbg linux-cachyos-headers linux-zen linux-zen-headers
 $pacMan glibc-debug
 
 $pacMan kitty terminology wezterm ttf-nerd-fonts-symbols-mono
@@ -50,7 +50,7 @@ $pacMan figlet ffmpeg \
 
 # 图像查看
 $pacMan gwenview nomacs \
-    opencv-samples vtk glew qt6-base hdf5 opencl-icd-loader java-runtime
+    opencv-samples vtk glew qt6-base hdf5 java-runtime
 $pacMan adios2 cgns ffmpeg fmt gdal gl2ps glew gnuplot graphviz hdf5 java-runtime=11 jsoncpp libarchive libharu liblas lz4 mariadb-libs netcdf openimagedenoise openmpi openvdb openvr openxr ospray pdal postgresql-libs proj python python-matplotlib python-mpi4py qt5-declarative sqlite tk unixodbc verdict
 
 # neovim,vim plugins
@@ -74,9 +74,9 @@ $aurPkg epub-thumbnailer-git
 cd ~/.linuxConfig && git submodule update --init --recursive || echo ''
 
 # 安装lf文件浏览器
-$aurPkg lf-sixel-git
-$pacMan perl-image-exiftool mdcat libreoffice-fresh highlight git-delta atool bat chafa colordiff coreutils fontforge gnupg poppler source-highlight transmission-cli jq pandoc mupdf-tools ffmpegthumbnailer xournalpp openscad
-$aurPkg ctpv-git epub2txt-git
+$pacMan lf
+$pacMan perl-image-exiftool libreoffice-fresh highlight git-delta atool bat chafa colordiff coreutils fontforge gnupg poppler source-highlight transmission-cli jq pandoc mupdf-tools ffmpegthumbnailer xournalpp openscad
+$aurPkg ctpv-git epub2txt-git mdcat
 
 # sudo pacman -Syu --noconfirm
 $pacMan foliate festival festival-us \
@@ -102,11 +102,14 @@ $pacMan pacman-contrib
 $pacMan wireshark-qt wireshark-cli termshark kismet wifite
 
 # 文件管理器
-$pacMan dolphin konsole qt5ct kvantum kali-themes
+$pacMan dolphin konsole qt5ct kvantum
+$aurPkg kali-themes
 
 # 输入法相关 中文输入法,支持vim+寄存器的clip
 $pacMan fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl \
-    fcitx5-pinyin-zhwiki vim-fcitx xclip fcitx5-table-extra fcitx5-table-other catppuccin-fcitx5-git
+    fcitx5-pinyin-zhwiki vim-fcitx xclip fcitx5-table-extra fcitx5-table-other
+
+$aurPkg catppuccin-fcitx5-git
 
 # Music
 $aurPkg go-musicfox-git
@@ -149,8 +152,8 @@ $pacMan lux-dl
 $pacMan gimp gvfs gutenprint
 
 # 各种查看系统信息的软件
-$pacMan htop atop iotop iftop glances sysstat plasma-systemmonitor
-$aurPkg cpufetch fastfetch onefetch fetchfetch hardinfo
+$pacMan htop atop iotop iftop glances sysstat plasma-systemmonitor hardinfo
+$aurPkg cpufetch fastfetch onefetch fetchfetch
 
 # 浏览器
 $aurPkg microsoft-edge-stable-bin google-chrome
@@ -160,7 +163,8 @@ xdg-settings set default-web-browser microsoft-edge-stable.desktop
 $aurPkg visual-studio-code-bin # intellij-idea-ultimate-edition
 
 # 截图,录屏,剪辑
-$pacMan flameshot-git obs-studio wlrobs-hg shotcut v4l2loopback-dkms
+$pacMan obs-studio shotcut v4l2loopback-dkms
+$aurPkg wlrobs-hg flameshot-git
 sudo gpasswd -a "$USER" video
 
 # 热点
@@ -184,7 +188,7 @@ $pacMan rofi
 $pacMan polkit polkit-qt5 polkit-gnome # polkit-kde-agent
 
 # pdf
-$pacMan python-pymupdf python-fonttools python-pillow bibtool termpdf.py-git
+$pacMan python-pymupdf python-fonttools python-pillow bibtool
 
 # 字体，录制gif
 $aurPkg fontpreview gifine

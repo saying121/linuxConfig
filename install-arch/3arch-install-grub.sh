@@ -2,12 +2,6 @@
 
 pacMan="sudo pacman -S --needed --noconfirm"
 
-# 引导和微码
-if [[ $(lscpu | grep -c AMD) != 0 ]]; then
-    $pacMan amd-ucode
-elif [[ $(lscpu | grep -c Intel) != 0 ]]; then
-    $pacMan intel-ucode
-fi
 $pacMan grub efibootmgr os-prober
 
 # 安装grub引导

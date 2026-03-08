@@ -14,10 +14,11 @@ aurPkg='yay -S --needed --noconfirm'
 # 通知,bar,剪贴板
 $pacMan waybar otf-font-awesome \
     cliphist wl-clipboard \
-    swaylock-effects hypridle \
+    hypridle hyprlock \
     qt5-wayland qt6-wayland \
     xdg-desktop-portal-hyprland xdg-desktop-portal \
-    brightnessctl wlsunset swaync swayosd satty
+    brightnessctl wlsunset swaync swayosd satty \
+    kanshi
     # mako
     # gnome-calendar \
 

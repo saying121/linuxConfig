@@ -52,6 +52,7 @@ fi
 declare -A link_list
 dot_dir=$(git rev-parse --show-toplevel)
 link_list=(
+    ["$dot_dir/configs/kanshi"]="$HOME/.config"
     ["$dot_dir/configs/rmpc"]="$HOME/.config"
     ["$dot_dir/configs/atuin"]="$HOME/.config"
     ["$dot_dir/configs/kitty"]="$HOME/.config"
@@ -104,6 +105,7 @@ link_list=(
 )
 
 # 创建必要的目录
+[[ -d ~/.cargo ]] || mkdir ~/.cargo
 [[ -d ~/.config/go-musicfox ]] || mkdir ~/.config/go-musicfox
 [[ -d ~/.config ]] || mkdir ~/.config
 [[ -d ~/.local/share/rime-ls-nvim ]] || mkdir -p ~/.local/share/rime-ls-nvim
@@ -139,21 +141,22 @@ for source_path in "${!link_list[@]}"; do
 done
 
 # 两小时后休眠
-sudo sed -i.bak 's/^#HibernateDelaySec=.*/HibernateDelaySec=7200/' /etc/systemd/sleep.conf
+# sudo sed -i.bak 's/^#HibernateDelaySec=.*/HibernateDelaySec=7200/' /etc/systemd/sleep.conf
 
 [[ -d ~/.config/systemd/user ]] || mkdir -p ~/.config/systemd/user
 
-if [[ $XDG_SESSION_TYPE == wayland ]]; then
-    the_cmd="sudo libinput list-devices"
-elif command -v "xinput" >/dev/null; then
-    the_cmd="sudo xinput list"
-fi
-
-# 判断有没有 touchpad
-if [[ $($the_cmd | grep "[tT]ouchpad" -c) != 0 ]]; then
-    # 配置触摸板
-    if [[ ! -d /etc/X11/xorg.conf.d ]]; then
-        sudo mkdir -p /etc/X11/xorg.conf.d
-    fi
-    sudo cp -f ~/.linuxConfig/X11/20-touchpad.conf /etc/X11/xorg.conf.d/20-touchpad.conf
+# fcitx5的设置
+if [[ $(grep -c fcitx /etc/environment) = 0 ]]; then
+    echo '
+# GTK_IM_MODULE=fcitx5
+# QT_IM_MODULE=fcitx5
+XMODIFIERS="@im=fcitx5"
+SDL_IM_MODULE=fcitx5
+GLFW_IM_MODULE=ibus
+XIM_PROGRAM="fcitx5"
+XIM="fcitx5"
+XIM_ARGS="-d"
+ECORE_IMF_MODULE="xim"
+QT_IM_MODULE=fcitx # wechat
+' | sudo tee -a /etc/environment
 fi

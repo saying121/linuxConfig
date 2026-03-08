@@ -2,15 +2,18 @@
 
 set -ex
 
-repo=/tmp/kali-themes
-git clone --depth=1 https://gitlab.com/kalilinux/packages/kali-themes.git $repo
-cd $repo || exit
-cp -r $repo/share/themes ~/.themes
-cp -r $repo/share/icons ~/.icons
-cp -r $repo/share/color-schemes ~/.local/share/color-schemes
+setup_theme() {
+    paru -S --needed --noconfirm kali-themes
+    repo=/tmp/kali-themes
+    git clone --depth=1 https://gitlab.com/kalilinux/packages/kali-themes.git $repo
+    cd $repo || exit
+    cp -r $repo/share/themes ~/.themes
+    cp -r $repo/share/icons ~/.icons
+    cp -r $repo/share/color-schemes ~/.local/share/color-schemes
 
-cp -r $repo/share/qt6ct/* ~/.config/qt6ct/
-cp -r $repo/share/qt5ct/* ~/.config/qt5ct/
+    cp -r $repo/share/qt6ct/* ~/.config/qt6ct/
+    cp -r $repo/share/qt5ct/* ~/.config/qt5ct/
+}
 
 update_config() {
     local key=$1

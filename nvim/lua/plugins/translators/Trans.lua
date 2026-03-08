@@ -1,5 +1,5 @@
-local prefix = "~/.local/share/nvim/Trans/"
 local vfn = vim.fn
+local prefix = vfn.stdpath("data") .. "/Trans/"
 
 ---@type LazySpec
 return {
@@ -11,6 +11,9 @@ return {
     },
     branch = "v2",
     build = function()
+        require("Trans").setup({
+            dir = prefix,
+        })
         require("Trans").install()
         os.execute(
             "sqlite3 "
@@ -29,7 +32,7 @@ return {
         keymap("n", "mi", "<Cmd>TranslateInput<CR>", opts)
 
         require("Trans").setup({
-            dir = vfn.stdpath("data") .. "/Trans",
+            dir = prefix,
             frontend = {
                 hover = {
                     width = 37,
