@@ -303,7 +303,7 @@ return {
         rust = { analyzerTargetDir = nil }, -- Optional path to a rust-analyzer specific target directory. This prevents rust-analyzer’s cargo check from locking the Cargo.lock at the expense of duplicating build artifacts.
         rustc = { source = nil }, -- Path to the Cargo.toml of the rust compiler workspace, for usage in rustc_private projects, or "discover" to try to automatically find it if the rustc-dev component is installed.
         rustfmt = {
-            extraArgs = extra_args,
+            -- extraArgs = extra_args,
             -- overrideCommand = fmt,
             rangeFormatting = { enable = true },
         },

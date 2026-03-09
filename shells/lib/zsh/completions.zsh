@@ -1,6 +1,15 @@
 #!/usr/bin/env zsh
 
 zi ice lucid wait'2' \
+    has'dora' \
+    as'completion' \
+    id-as'dora' \
+    blockf \
+    atclone'dora completion zsh >_dora' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
     has'wash' \
     as'completion' \
     id-as'wash' \
