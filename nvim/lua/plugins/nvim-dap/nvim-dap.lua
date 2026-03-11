@@ -14,8 +14,8 @@ return {
     },
     -- dependencies = require("public.utils").req_lua_files_return_table("plugins/" .. "nvim-dap" .. "/dependencies"),
     config = function()
-        vim.api.nvim_create_autocmd({ "FileType" }, {
-            group = vim.api.nvim_create_augroup("dap-keymap", { clear = true }),
+        api.nvim_create_autocmd({ "FileType" }, {
+            group = api.nvim_create_augroup("dap-keymap", { clear = true }),
             pattern = { "dap-float" },
             callback = function(e)
                 vim.keymap.set("n", "q", "<cmd>x<cr>", { buffer = e.buf })

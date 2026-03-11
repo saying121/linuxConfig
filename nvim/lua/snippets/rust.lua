@@ -261,7 +261,7 @@ return {
     -- s(
     --     {
     --         trig = "acm",
-    --         dscr = "#[macro_use(…)]",
+    --         dscr = "acm mode input framework",
     --     },
     --     fmta(
     --         [[

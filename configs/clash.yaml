@@ -13,19 +13,6 @@ proxy-providers:
     override:
       additional-prefix: "[yiyuan]"
 
-  sanfen:
-    url: ""
-    type: http
-    interval: 43200
-    health-check:
-      {
-        enable: true,
-        url: "https://www.gstatic.com/generate_204",
-        interval: 300,
-      }
-    override:
-      additional-prefix: "[sanfen]"
-
   fny:
     url: ""
     type: http
@@ -57,6 +44,98 @@ proxies:
     type: direct
     udp: true
 
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+
+  icloud:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
+    path: ./ruleset/icloud.yaml
+    interval: 86400
+
+  apple:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
+    path: ./ruleset/apple.yaml
+    interval: 86400
+
+  google:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
+    path: ./ruleset/google.yaml
+    interval: 86400
+
+  proxy:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    path: ./ruleset/proxy.yaml
+    interval: 86400
+
+  direct:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/direct.yaml
+    interval: 86400
+
+  private:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+    path: ./ruleset/private.yaml
+    interval: 86400
+
+  gfw:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/gfw.yaml
+    interval: 86400
+
+  tld-not-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./ruleset/tld-not-cn.yaml
+    interval: 86400
+
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./ruleset/telegramcidr.yaml
+    interval: 86400
+
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+    path: ./ruleset/cncidr.yaml
+    interval: 86400
+
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+    path: ./ruleset/lancidr.yaml
+    interval: 86400
+
+  applications:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+    path: ./ruleset/applications.yaml
+    interval: 86400
+
 mixed-port: 7890
 ipv6: true
 allow-lan: true
@@ -68,10 +147,19 @@ external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-
 
 geodata-mode: true
 geox-url:
-  geoip: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat"
-  geosite: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
-  mmdb: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb"
-  asn: "https://mirror.ghproxy.com/https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+  geoip: "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat"
+  geosite: "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
+  mmdb: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb"
+  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+
+  #geoip: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat"
+  #geosite: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
+  #mmdb: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb"
+  #asn: "https://mirror.ghproxy.com/https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+
+  #geoip: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  #geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  #mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
 
 find-process-mode: strict
 global-client-fingerprint: chrome
@@ -134,38 +222,29 @@ proxy-groups:
     interval: 100
     strategy: sticky-sessions
     tolerance: 100
-    proxies:
-      [香港, 台湾, 新加坡, 美国, Excellent]
-
-  - name: 巴哈姆特
-    type: url-test
-    interval: 100
-    strategy: sticky-sessions
-    tolerance: 100
-    proxies:
-      [台湾]
+    proxies: [新加坡, 美国, 日本]
 
   - name: Github
     type: url-test
     interval: 100
     strategy: sticky-sessions
     tolerance: 100
-    proxies:
-      [香港, 台湾, 新加坡, 美国, Excellent]
+    proxies: [香港, 台湾, 新加坡, 美国, Proxy]
 
-  - name: 国内
-    type: select
-    proxies:
-      [直连]
-
-  - name: Excellent
+  - name: Proxy
     type: url-test
     interval: 100
     strategy: sticky-sessions
     tolerance: 100
-    exclude-filter: "日本"
     include-all: true
-    filter: "(?i)(pq|fny)"
+    filter: "(?i)(pq|fny|yiyuan)"
+
+  - name: 巴哈姆特
+    type: url-test
+    interval: 100
+    strategy: sticky-sessions
+    tolerance: 100
+    proxies: [台湾]
 
   - name: 香港
     type: url-test
@@ -173,7 +252,6 @@ proxy-groups:
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
-    exclude-filter: "(?i)(sanfen|yiyuan)"
     filter: "(?i)港|hk|hongkong|hong kong"
 
   - name: 台湾
@@ -182,7 +260,6 @@ proxy-groups:
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
-    exclude-filter: "(?i)(sanfen|yiyuan)"
     filter: "(?i)台|tw|taiwan"
 
   - name: 美国
@@ -191,7 +268,6 @@ proxy-groups:
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
-    exclude-filter: "(?i)(sanfen|yiyuan)"
     filter: "(?i)美|us|unitedstates|united states"
 
   - name: 新加坡
@@ -200,7 +276,6 @@ proxy-groups:
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
-    exclude-filter: "(?i)(sanfen|yiyuan)"
     filter: "(?i)(新|sg|singapore)"
 
   - name: 日本
@@ -209,56 +284,56 @@ proxy-groups:
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
-    exclude-filter: "(?i)(sanfen|yiyuan)"
     filter: "(?i)(日本|jp|japan)"
-
-  - name: 大流量
-    type: url-test
-    strategy: round-robin
-    tolerance: 100
-    include-all: true
-    filter: "(?i)(sanfen|yiyuan)"
 
   - name: 自动选择
     type: url-test
     interval: 100
-    exclude-filter: "(?i)(直连|日本)"
+    exclude-filter: "(?i)(直连)"
     include-all: true
     tolerance: 100
 
 rules:
-  - GEOIP,lan,直连,no-resolve
+  - GEOIP,LAN,DIRECT,no-resolve
+  - PROCESS-NAME,qBittorrent,直连,no-resolve
 
   - GEOSITE,apple-cn,DIRECT
   - GEOSITE,apple,DIRECT
   - DOMAIN,discussions.apple.com,DIRECT
   - DOMAIN,apps.apple.com,DIRECT
+  - DOMAIN,gequbao.com,DIRECT
   - DOMAIN,discussionschinese.apple.com,DIRECT
+  - DOMAIN,outlook.com,DIRECT
+  - DOMAIN,login.live.com,DIRECT
+  - GEOSITE,private,DIRECT
+  - GEOSITE,microsoft@cn,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+
+  - DOMAIN,crates.io,Github
+  - DOMAIN,gemini.google.com,Google
 
   - GEOSITE,category-ads-all,REJECT
-  - GEOSITE,private,DIRECT
-  - GEOSITE,pixiv,Google
+  - GEOSITE,pixiv,Proxy
+  - GEOSITE,google-gemini,Google
   - GEOSITE,category-scholar-!cn,Google
-  - GEOSITE,microsoft@cn,DIRECT
-  # - GEOSITE,geolocation-!cn,PROXY
-  - GEOSITE,github,Github
-  - GEOSITE,twitter,大流量
-  - GEOSITE,youtube,大流量
+  # - GEOSITE,geolocation-!cn,Proxy
+  - GEOSITE,github,Proxy
+  - GEOSITE,twitter,Proxy
+  - GEOSITE,youtube,Google
   - GEOSITE,google,Google
-  - GEOSITE,telegram,大流量
-  - GEOSITE,netflix,大流量
+
+  - GEOSITE,netflix,Proxy
   # - GEOSITE,bilibili,哔哩哔哩
   - GEOSITE,bahamut,巴哈姆特
-  - GEOSITE,spotify,Google
+  - GEOSITE,spotify,Proxy
   - GEOSITE,CN,DIRECT
 
   - GEOIP,google,Google
-  - GEOIP,netflix,大流量
-  - GEOIP,telegram,大流量
-  - GEOIP,twitter,大流量
+  - GEOIP,netflix,Google
+  - GEOIP,twitter,Google
   - GEOIP,CN,DIRECT
 
-  # gemini
   - DOMAIN,ai.google.dev,美国
   - DOMAIN,alkalimakersuite-pa.clients6.google.com,美国
   - DOMAIN,makersuite.google.com,美国
@@ -272,8 +347,20 @@ rules:
   - DOMAIN-KEYWORD,colab,美国
   - DOMAIN-KEYWORD,developerprofiles,美国
   - DOMAIN-KEYWORD,generativelanguage,美国
-
-  # - DOMAIN,outlook.com,国内
+  # - DOMAIN,outlook.com,DIRECT
   # - DOMAIN,reddit.com,Google
-  # - DST-PORT,80/8080/443/8443,PROXY
+  # - DST-PORT,80/8080/443/8443,Proxy
+
+  - RULE-SET,reject,REJECT
+  - RULE-SET,google,Proxy
+  - RULE-SET,proxy,Proxy
+  - RULE-SET,telegramcidr,Proxy
+  - RULE-SET,applications,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,icloud,DIRECT
+  - RULE-SET,apple,DIRECT
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,lancidr,DIRECT
+  - RULE-SET,cncidr,DIRECT
+
   - MATCH,Google

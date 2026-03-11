@@ -244,3 +244,15 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-name-regex-substring = 'mame'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'org.qbittorrent.qBittorrent'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.quark.desktop'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.quark.desktop.helper.player'
+run = ['layout floating']
