@@ -144,19 +144,3 @@ done
 # sudo sed -i.bak 's/^#HibernateDelaySec=.*/HibernateDelaySec=7200/' /etc/systemd/sleep.conf
 
 [[ -d ~/.config/systemd/user ]] || mkdir -p ~/.config/systemd/user
-
-# fcitx5的设置
-if [[ $(grep -c fcitx /etc/environment) = 0 ]]; then
-    echo '
-# GTK_IM_MODULE=fcitx5
-# QT_IM_MODULE=fcitx5
-XMODIFIERS="@im=fcitx5"
-SDL_IM_MODULE=fcitx5
-GLFW_IM_MODULE=ibus
-XIM_PROGRAM="fcitx5"
-XIM="fcitx5"
-XIM_ARGS="-d"
-ECORE_IMF_MODULE="xim"
-QT_IM_MODULE=fcitx # wechat
-' | sudo tee -a /etc/environment
-fi
