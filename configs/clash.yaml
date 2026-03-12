@@ -299,6 +299,10 @@ rules:
 
   - GEOSITE,apple-cn,DIRECT
   - GEOSITE,apple,DIRECT
+  - GEOSITE,microsoft@cn,DIRECT
+  - GEOSITE,category-games@cn,DIRECT
+  - GEOSITE,category-game-platforms-download,DIRECT
+  - GEOSITE,geolocation-cn,DIRECT
   - DOMAIN,discussions.apple.com,DIRECT
   - DOMAIN,apps.apple.com,DIRECT
   - DOMAIN,gequbao.com,DIRECT
@@ -311,22 +315,15 @@ rules:
   - DOMAIN,yacd.haishan.me,DIRECT
 
   - DOMAIN,crates.io,Github
-  - DOMAIN,gemini.google.com,Google
 
   - GEOSITE,category-ads-all,REJECT
-  - GEOSITE,pixiv,Proxy
   - GEOSITE,google-gemini,Google
-  - GEOSITE,category-scholar-!cn,Google
-  # - GEOSITE,geolocation-!cn,Proxy
-  - GEOSITE,github,Proxy
-  - GEOSITE,twitter,Proxy
-  - GEOSITE,youtube,Google
   - GEOSITE,google,Google
+  - GEOSITE,category-scholar-!cn,Google
+  - GEOSITE,geolocation-!cn,Proxy
 
-  - GEOSITE,netflix,Proxy
   # - GEOSITE,bilibili,哔哩哔哩
   - GEOSITE,bahamut,巴哈姆特
-  - GEOSITE,spotify,Proxy
   - GEOSITE,CN,DIRECT
 
   - GEOIP,google,Google

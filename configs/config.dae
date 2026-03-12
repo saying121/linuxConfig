@@ -118,7 +118,7 @@ subscription {
     # sf: ""
     # yiyuan: ""
     # fny: ""
-    sf: "file://sf.yml"
+    # sf: "file://sf.yml"
     yiyuan: "file://yiyuan.yml"
     fny: "file://fny.yml"
     pq: "file://pq.yml"
@@ -126,16 +126,11 @@ subscription {
 
 group {
     proxy_all {
-        filter: !name(keyword: "日本")
+        # filter: !name(keyword: "日本")
         policy: min_avg10
     }
     YouTube {
         filter: !name(keyword: "日本") && !subtag(fny) && !subtag(pq)
-        policy: min_avg10
-    }
-
-    Excellent {
-        filter: subtag(fny, pq) && !name(keyword: "日本")
         policy: min_avg10
     }
 
@@ -144,17 +139,18 @@ group {
             regex: '(?i)chatgpt',
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
             keyword: '英国')
-            && !name(keyword: "日本")
+            # && !name(keyword: "日本")
         policy: min_avg10
     }
     Google {
-        filter: name(regex: '(?i)HK', keyword: "香港", regex: '(?i)Hongkong',
+        # filter: name(regex: '(?i)HK', keyword: "香港", regex: '(?i)Hongkong',
+        filter: name(
             keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore',
             regex: '(?i)chatgpt',
             keyword: '台湾', regex: "(?i)Taiwan",
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
-            keyword: '英国')
-            && !name(keyword: "日本")
+            keyword: '英国',
+            keyword: "日本")
         policy: min_avg10
     }
     Hongkong {
@@ -264,46 +260,49 @@ routing {
     domain(geosite:category-ads-all) -> block
     dip(geoip:cn, geoip:private) -> direct
     dip(geoip:cn) && dport(80) -> direct
-    domain(geosite:google@cn, geosite:cn) -> direct
-    domain(suffix: ".cn", suffix: cdn.steampipe.steamcontent.com, suffix: content.steamchina.com) -> direct
+    domain(
+        geosite:cn,
+        geosite:private,
+        geosite:category-games@cn,
+        geosite:category-game-platforms-download,
+        geosite:microsoft@cn,
+        geosite:geolocation-cn
+    ) -> direct
+
+    dip(
+        geoip:us,
+        geoip:netflix,
+        geoip:twitter,
+        geoip:telegram
+    ) -> proxy_all
+    dip(
+        geoip:google
+    ) -> Google
 
     domain(geosite:bahamut) -> Taiwan
+    domain(
+        geosite:google-gemini,
+        geosite:google
+    ) -> Google
+    domain(
+        geosite:gfw,
+        geosite:geolocation-!cn
+    ) -> proxy_all
 
     domain(regex: '(?i)bing', keyword: bing, suffix: bing.com) -> Bing
-    domain(regex: '(?i)youtube') -> YouTube
     domain(suffix: v2raya.org) -> proxy_all
-    domain(
-        full: ai.google.dev,
-        full: alkalimakersuite-pa.clients6.google.com,
-        full: makersuite.google.com,
-        suffix: bard.google.com,
-        suffix: deepmind.com,
-        suffix: deepmind.google,
-        suffix: gemini.google.com,
-        suffix: generativeai.google,
-        suffix: proactivebackend-pa.googleapis.com,
-        suffix: apis.google.com,
-        keyword: colab,
-        keyword: developerprofiles,
-        keyword: generativelanguage
-    ) -> Excellent
     domain(
         full: devv.ai
         , full: poe.com
-        , keyword: github
         , full: aur.archlinux.org
         , full: translate.yandex.com
-        , suffix: deepl.com
         , suffix: medium.com
         , suffix: docs.pola.rs
         , suffix: arc.net
-    ) -> Excellent
-
-    dip(geoip:us, geoip:telegram) -> proxy_all
+    ) -> proxy_all
 
     domain(full: cn.bing.com) -> block
 
-    domain(geosite:gfw, geosite:geolocation-!cn) -> proxy_all
 
     dip(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) -> direct
     pname(curl) -> direct ## 进程名规则 (当绑定WAN接口是只支持本地进程)
@@ -335,8 +334,8 @@ routing {
     # See https://github.com/daeuniverse/dae/discussions/295
     dscp(0x4) -> direct
 
-    # dip(8.8.8.8) && l4proto(tcp) && dport(1-1023, 8443) -> proxy_all
-    # dip(1.1.1.1) && sip(10.0.0.1, 172.20.0.0/16) -> direct
+    dip(8.8.8.8) && l4proto(tcp) && dport(1-1023, 8443) -> proxy_all
+    dip(1.1.1.1) && sip(10.0.0.1, 172.20.0.0/16) -> direct
 
     ## “非“规则
     # 下面代表，域名不是geosite类型为google-scholar或者category-scholar-!cn或者category-scholar-cn
