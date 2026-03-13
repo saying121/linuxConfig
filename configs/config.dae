@@ -42,7 +42,7 @@ global {
     udp_check_dns: 'dns.google.com:53,8.8.8.8,2001:4860:4860::8888'
 
     # 检查间隔
-    check_interval: 30s
+    check_interval: 20s
 
     # 当节点延迟差多少会切换节点
     check_tolerance: 50ms
@@ -125,16 +125,44 @@ subscription {
 }
 
 group {
-    proxy_all {
+    Proxy {
         # filter: !name(keyword: "日本")
         policy: min_avg10
     }
-    YouTube {
-        filter: !name(keyword: "日本") && !subtag(fny) && !subtag(pq)
+    Bahamut {
+        filter: name(keyword: '台湾', keyword: "(?i)Taiwan")
+        # tcp_check_url: 'http://bahamut.com.tw'
         policy: min_avg10
     }
-
+    # Netflix {
+    #     tcp_check_url: 'http://netflix.com'
+    #     policy: min_avg10
+    # }
+    # Github {
+    #     tcp_check_url: 'http://github.com' # shit, need other check url for git clone
+    #     # tcp_check_http_method: CONNECT
+    #     policy: min_avg10
+    # }
+    # Twitter {
+    #     tcp_check_url: 'http://x.com'
+    #     # tcp_check_http_method: CONNECT
+    #     policy: min_avg10
+    # }
+    Openai {
+        tcp_check_url: 'http://chatgpt.com'
+        policy: min_avg10
+    }
+    Steam {
+        tcp_check_url: 'http://test.steampowered.com'
+        policy: min_avg10
+    }
+    Telegram {
+        tcp_check_url: 'http://telegram.org'
+        # tcp_check_http_method: CONNECT
+        policy: min_avg10
+    }
     Bing {
+        tcp_check_url: 'http://bing.com'
         filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore',
             regex: '(?i)chatgpt',
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
@@ -143,6 +171,7 @@ group {
         policy: min_avg10
     }
     Google {
+        tcp_check_url: 'http://google.com'
         # filter: name(regex: '(?i)HK', keyword: "香港", regex: '(?i)Hongkong',
         filter: name(
             keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore',
@@ -153,86 +182,77 @@ group {
             keyword: "日本")
         policy: min_avg10
     }
-    Hongkong {
-        filter: name(keyword: 'HK', keyword: "香港", regex: '(?i)Hongkong')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Singapore {
-        filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    ChatGPT {
-        filter: name(regex: '(?i)chatgpt')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Taiwan {
-        filter: name(keyword: '台湾', keyword: "(?i)Taiwan")
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    America {
-        filter: name(keyword: '美国', keyword: "🇺🇸", regex: '(?i)America')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Japan {
-        filter: name(keyword: '日本', keyword: "🇯🇵")
-            && !name(regex: "倍")
-        policy: min_avg10
-    }
-    UK {
-        filter: name(keyword: '英国')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Netflix {
-        filter: name(regex: '(?i)Netflix', keyword: '奈飞')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Korea {
-        filter: name(keyword: '韩国')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Sweden {
-        filter: name(keyword: '瑞典')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Australia {
-        filter: name(keyword: '澳大利亚')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    France {
-        filter: name(keyword: '法国')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Dubai {
-        filter: name(keyword: '迪拜')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Brazil {
-        filter: name(keyword: '巴西')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Switzerland {
-        filter: name(keyword: '瑞士')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
-    Idian {
-        filter: name(keyword: '印度')
-            && !name(keyword: "日本")
-        policy: min_avg10
-    }
+
+    # Hongkong {
+    #     filter: name(keyword: 'HK', keyword: "香港", regex: '(?i)Hongkong')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # Singapore {
+    #     filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # Taiwan {
+    #     filter: name(keyword: '台湾', keyword: "(?i)Taiwan")
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # America {
+    #     filter: name(keyword: '美国', keyword: "🇺🇸", regex: '(?i)America')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # Japan {
+    #     filter: name(keyword: '日本', keyword: "🇯🇵")
+    #         && !name(regex: "倍")
+    #     policy: min_avg10
+    # }
+    # UK {
+    #     filter: name(keyword: '英国')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # Korea {
+    #     filter: name(keyword: '韩国')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # Sweden {
+    #     filter: name(keyword: '瑞典')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # Australia {
+    #     filter: name(keyword: '澳大利亚')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # France {
+    #     filter: name(keyword: '法国')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # Dubai {
+    #     filter: name(keyword: '迪拜')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # Brazil {
+    #     filter: name(keyword: '巴西')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # Switzerland {
+    #     filter: name(keyword: '瑞士')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
+    # Idian {
+    #     filter: name(keyword: '印度')
+    #         && !name(keyword: "日本")
+    #     policy: min_avg10
+    # }
 }
 
 # 更多的 Routing 样例见 https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/routing.md
@@ -256,14 +276,23 @@ routing {
     # "must_direct" 也可以写作 "direct(must)"。
     # 同样，"must_groupname"也支持不劫持、处理 DNS 流量，相当于"groupname(must)"。
     # groupname指的是出站分组
-
     domain(geosite:category-ads-all) -> block
-    dip(geoip:cn, geoip:private) -> direct
+    domain(full: cn.bing.com) -> block
+    pname(qbittorrent) -> direct ## 进程名规则 (当绑定WAN接口是只支持本地进程)
+    pname(git) -> Proxy
+    domain(geosite:github) -> Proxy
+    domain(geosite:bahamut) -> Bahamut
+    domain(geosite:netflix) -> Proxy
+    domain(geosite:openai) -> Openai
+    domain(geosite:telegram) -> Telegram
+    domain(geosite:twitter) -> Proxy
+    domain(geosite:steam) -> Steam
+    domain(geosite:bing) -> Bing
+    domain(geosite:google-gemini, geosite:google) -> Google
+
     dip(geoip:cn) && dport(80) -> direct
     domain(
-        geosite:cn,
         geosite:private,
-        geosite:category-games@cn,
         geosite:category-game-platforms-download,
         geosite:microsoft@cn,
         geosite:geolocation-cn
@@ -274,23 +303,17 @@ routing {
         geoip:netflix,
         geoip:twitter,
         geoip:telegram
-    ) -> proxy_all
+    ) -> Proxy
     dip(
         geoip:google
     ) -> Google
 
-    domain(geosite:bahamut) -> Taiwan
-    domain(
-        geosite:google-gemini,
-        geosite:google
-    ) -> Google
     domain(
         geosite:gfw,
         geosite:geolocation-!cn
-    ) -> proxy_all
+    ) -> Proxy
 
-    domain(regex: '(?i)bing', keyword: bing, suffix: bing.com) -> Bing
-    domain(suffix: v2raya.org) -> proxy_all
+    domain(suffix: v2raya.org) -> Proxy
     domain(
         full: devv.ai
         , full: poe.com
@@ -299,17 +322,14 @@ routing {
         , suffix: medium.com
         , suffix: docs.pola.rs
         , suffix: arc.net
-    ) -> proxy_all
-
-    domain(full: cn.bing.com) -> block
+    ) -> Proxy
 
 
     dip(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) -> direct
     pname(curl) -> direct ## 进程名规则 (当绑定WAN接口是只支持本地进程)
-    pname(qbittorrent) -> direct ## 进程名规则 (当绑定WAN接口是只支持本地进程)
 
     ## 目的IP规则
-    dip(8.8.8.8) -> proxy_all
+    dip(8.8.8.8) -> Proxy
     # 单个IP段匹配
     # dip(101.97.0.0/16) -> direct
 
@@ -326,7 +346,7 @@ routing {
 
     ## 四层协议规则:
     # tcp
-    l4proto(tcp) -> proxy_all
+    l4proto(tcp) -> Proxy
     # udp
     l4proto(udp) -> direct
 
@@ -334,7 +354,7 @@ routing {
     # See https://github.com/daeuniverse/dae/discussions/295
     dscp(0x4) -> direct
 
-    dip(8.8.8.8) && l4proto(tcp) && dport(1-1023, 8443) -> proxy_all
+    dip(8.8.8.8) && l4proto(tcp) && dport(1-1023, 8443) -> Proxy
     dip(1.1.1.1) && sip(10.0.0.1, 172.20.0.0/16) -> direct
 
     ## “非“规则
@@ -342,21 +362,21 @@ routing {
     !domain(geosite:google-scholar,
         geosite:category-scholar-!cn,
         geosite:category-scholar-cn
-    ) -> proxy_all
+    ) -> Proxy
 
     ## 更复杂的规则
     domain(geosite:geolocation-!cn) &&
         !domain(geosite:google-scholar,
             geosite:category-scholar-!cn,
             geosite:category-scholar-cn
-        ) -> proxy_all
+        ) -> Proxy
 
     ## Must rules
     # 对于以下规则，DNS请求将会被强制重定向到dae，除了mosdns的请求
     # 不同于must_direct/must_my_group，来自mosdns的流量会继续匹配其他规则
     pname(mosdns) -> must_rules
 
-    fallback: proxy_all
+    fallback: Proxy
 
     ## IP版本规则:
     # IPv4
