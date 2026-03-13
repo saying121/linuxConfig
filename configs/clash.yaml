@@ -1,18 +1,5 @@
 # url 里填写自己的订阅,名称不能重复
 proxy-providers:
-  yiyuan:
-    url: ""
-    type: http
-    interval: 43200
-    health-check:
-      {
-        enable: true,
-        url: "https://www.gstatic.com/generate_204",
-        interval: 300,
-      }
-    override:
-      additional-prefix: "[yiyuan]"
-
   fny:
     url: ""
     type: http
@@ -38,103 +25,23 @@ proxy-providers:
       }
     override:
       additional-prefix: "[pq]"
+  yiyuan:
+    url: ""
+    type: http
+    interval: 43200
+    health-check:
+      {
+        enable: true,
+        url: "https://www.gstatic.com/generate_204",
+        interval: 300,
+      }
+    override:
+      additional-prefix: "[yiyuan]"
 
 proxies:
   - name: "直连"
     type: direct
     udp: true
-
-rule-providers:
-  reject:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
-    path: ./ruleset/reject.yaml
-    interval: 86400
-
-  icloud:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
-    path: ./ruleset/icloud.yaml
-    interval: 86400
-
-  apple:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
-    path: ./ruleset/apple.yaml
-    interval: 86400
-
-  google:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
-    path: ./ruleset/google.yaml
-    interval: 86400
-
-  proxy:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
-    path: ./ruleset/proxy.yaml
-    interval: 86400
-
-  direct:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
-    path: ./ruleset/direct.yaml
-    interval: 86400
-
-  private:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
-    path: ./ruleset/private.yaml
-    interval: 86400
-
-  gfw:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
-    path: ./ruleset/gfw.yaml
-    interval: 86400
-
-  tld-not-cn:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
-    path: ./ruleset/tld-not-cn.yaml
-    interval: 86400
-
-  telegramcidr:
-    type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
-    path: ./ruleset/telegramcidr.yaml
-    interval: 86400
-
-  cncidr:
-    type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
-    path: ./ruleset/cncidr.yaml
-    interval: 86400
-
-  lancidr:
-    type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
-    path: ./ruleset/lancidr.yaml
-    interval: 86400
-
-  applications:
-    type: http
-    behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
-    path: ./ruleset/applications.yaml
-    interval: 86400
 
 mixed-port: 7890
 ipv6: true
@@ -218,37 +125,47 @@ dns:
 
 proxy-groups:
   - name: Google
+    url: "http://www.gstatic.com/generate_204"
     type: url-test
-    interval: 100
+    interval: 10
     strategy: sticky-sessions
-    tolerance: 100
-    proxies: [新加坡, 美国, 日本]
+    tolerance: 50
+    proxies: [新加坡, 美国, 日本, 台湾, 英国, 瑞典, 韩国, 迪拜, 瑞士, 澳大利亚]
 
-  - name: Github
+  - name: Bing
+    # url: "http://bing.com"
     type: url-test
-    interval: 100
+    interval: 10
     strategy: sticky-sessions
-    tolerance: 100
-    proxies: [香港, 台湾, 新加坡, 美国, Proxy]
+    tolerance: 50
+    proxies: [新加坡, 美国, 日本, 台湾, 英国, 瑞典, 韩国, 迪拜, 瑞士, 澳大利亚]
 
   - name: Proxy
     type: url-test
-    interval: 100
+    interval: 10
+    strategy: sticky-sessions
+    tolerance: 50
+    include-all: true
+    exclude-filter: "(?i)(直连)"
+
+  - name: Steam
+    url: 'http://test.steampowered.com'
+    type: url-test
+    interval: 10
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
-    filter: "(?i)(pq|fny|yiyuan)"
 
   - name: 巴哈姆特
     type: url-test
-    interval: 100
+    interval: 10
     strategy: sticky-sessions
     tolerance: 100
     proxies: [台湾]
 
   - name: 香港
     type: url-test
-    interval: 100
+    interval: 10
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
@@ -256,7 +173,7 @@ proxy-groups:
 
   - name: 台湾
     type: url-test
-    interval: 100
+    interval: 10
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
@@ -264,7 +181,7 @@ proxy-groups:
 
   - name: 美国
     type: url-test
-    interval: 100
+    interval: 10
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
@@ -272,36 +189,107 @@ proxy-groups:
 
   - name: 新加坡
     type: url-test
-    interval: 100
+    interval: 10
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
-    filter: "(?i)(新|sg|singapore)"
+    filter: "(?i)(新加坡|sg|singapore)"
 
   - name: 日本
     type: url-test
-    interval: 100
+    interval: 10
     strategy: sticky-sessions
     tolerance: 100
     include-all: true
     filter: "(?i)(日本|jp|japan)"
 
-  - name: 自动选择
+  - name: 英国
     type: url-test
-    interval: 100
-    exclude-filter: "(?i)(直连)"
-    include-all: true
+    interval: 10
+    strategy: sticky-sessions
     tolerance: 100
+    include-all: true
+    filter: "英国"
+
+  - name: 澳大利亚
+    type: url-test
+    interval: 10
+    strategy: sticky-sessions
+    tolerance: 100
+    include-all: true
+    filter: "澳大利亚"
+
+  - name: 瑞典
+    type: url-test
+    interval: 10
+    strategy: sticky-sessions
+    tolerance: 100
+    include-all: true
+    filter: "瑞典"
+
+  - name: 韩国
+    type: url-test
+    interval: 10
+    strategy: sticky-sessions
+    tolerance: 100
+    include-all: true
+    filter: "韩国"
+
+  - name: 迪拜
+    type: url-test
+    interval: 10
+    strategy: sticky-sessions
+    tolerance: 100
+    include-all: true
+    filter: "迪拜"
+
+  - name: 瑞士
+    type: url-test
+    interval: 10
+    strategy: sticky-sessions
+    tolerance: 100
+    include-all: true
+    filter: "瑞士"
 
 rules:
   - GEOIP,LAN,DIRECT,no-resolve
-  - PROCESS-NAME,qBittorrent,直连,no-resolve
+  - PROCESS-NAME,qBittorrent,DIRECT,no-resolve
 
+  - GEOSITE,category-ads-all,REJECT
+  - GEOSITE,category-ai-!cn,Google 
   - GEOSITE,apple-cn,DIRECT
-  - GEOSITE,apple,DIRECT
-  - GEOSITE,microsoft@cn,DIRECT
-  - GEOSITE,category-games@cn,DIRECT
-  - GEOSITE,category-game-platforms-download,DIRECT
+
+  # steam 正确判断下载链接使用国内链接 
+  - GEOSITE,category-games-cn,DIRECT
+  - GEOSITE,category-game-platforms-download@cn,DIRECT
+  - GEOSITE,steam@cn,DIRECT
+  - DOMAIN-SUFFIX,cm.steampowered.com,DIRECT
+  - DOMAIN-SUFFIX,steamserver.net,DIRECT
+  - IP-CIDR,45.121.184.0/24,DIRECT
+  - IP-CIDR,103.10.124.0/23,DIRECT
+  - IP-CIDR,103.28.54.0/24,DIRECT
+  - IP-CIDR,146.66.152.0/24,DIRECT
+  - IP-CIDR,146.66.155.0/24,DIRECT
+  - IP-CIDR,153.254.86.0/24,DIRECT
+  - IP-CIDR,155.133.224.0/22,DIRECT
+  - IP-CIDR,155.133.230.0/24,DIRECT
+  - IP-CIDR,155.133.232.0/23,DIRECT
+  - IP-CIDR,155.133.234.0/24,DIRECT
+  - IP-CIDR,155.133.236.0/22,DIRECT
+  - IP-CIDR,155.133.240.0/23,DIRECT
+  - IP-CIDR,155.133.244.0/23,DIRECT
+  - IP-CIDR,155.133.246.0/24,DIRECT
+  - IP-CIDR,155.133.248.0/21,DIRECT
+  - IP-CIDR,162.254.192.0/21,DIRECT
+  - IP-CIDR,185.25.182.0/23,DIRECT
+  - IP-CIDR,190.217.32.0/22,DIRECT
+  - IP-CIDR,192.69.96.0/22,DIRECT
+  - IP-CIDR,205.196.6.0/24,DIRECT
+  - IP-CIDR,208.64.200.0/22,DIRECT
+  - IP-CIDR,208.78.164.0/22,DIRECT
+  - IP-CIDR,205.185.194.0/24,DIRECT
+  - GEOSITE,steam,Steam
+
   - GEOSITE,geolocation-cn,DIRECT
   - DOMAIN,discussions.apple.com,DIRECT
   - DOMAIN,apps.apple.com,DIRECT
@@ -314,50 +302,25 @@ rules:
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
 
-  - DOMAIN,crates.io,Github
-
-  - GEOSITE,category-ads-all,REJECT
   - GEOSITE,google-gemini,Google
   - GEOSITE,google,Google
+  - GEOSITE,bing,Bing
+
   - GEOSITE,category-scholar-!cn,Google
   - GEOSITE,geolocation-!cn,Proxy
 
   # - GEOSITE,bilibili,哔哩哔哩
   - GEOSITE,bahamut,巴哈姆特
-  - GEOSITE,CN,DIRECT
 
   - GEOIP,google,Google
   - GEOIP,netflix,Google
   - GEOIP,twitter,Google
   - GEOIP,CN,DIRECT
 
-  - DOMAIN,ai.google.dev,美国
-  - DOMAIN,alkalimakersuite-pa.clients6.google.com,美国
-  - DOMAIN,makersuite.google.com,美国
-  - DOMAIN-SUFFIX,bard.google.com,美国
-  - DOMAIN-SUFFIX,deepmind.com,美国
-  - DOMAIN-SUFFIX,deepmind.google,美国
-  - DOMAIN-SUFFIX,gemini.google.com,美国
-  - DOMAIN-SUFFIX,generativeai.google,美国
-  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,美国
-  - DOMAIN-SUFFIX,apis.google.com,美国
   - DOMAIN-KEYWORD,colab,美国
   - DOMAIN-KEYWORD,developerprofiles,美国
-  - DOMAIN-KEYWORD,generativelanguage,美国
   # - DOMAIN,outlook.com,DIRECT
-  # - DOMAIN,reddit.com,Google
   # - DST-PORT,80/8080/443/8443,Proxy
 
-  - RULE-SET,reject,REJECT
-  - RULE-SET,google,Proxy
-  - RULE-SET,proxy,Proxy
-  - RULE-SET,telegramcidr,Proxy
-  - RULE-SET,applications,DIRECT
-  - RULE-SET,private,DIRECT
-  - RULE-SET,icloud,DIRECT
-  - RULE-SET,apple,DIRECT
-  - RULE-SET,direct,DIRECT
-  - RULE-SET,lancidr,DIRECT
-  - RULE-SET,cncidr,DIRECT
 
   - MATCH,Google

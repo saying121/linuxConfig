@@ -239,7 +239,7 @@ routing {
     ### 以下是预设规则
 
     # 本地的网络管理器应该直连，以避免在绑定WAN接口的时候出现错误的网络连通性检查结果
-    pname(NetworkManager) -> direct
+    pname(NetworkManager, systemd_resolved) -> direct
 
     # 把它放在前面，可以防止多播应该发送到局域网的数据包被代理转发。
     # "dip" 意思是目的IP.
@@ -256,16 +256,46 @@ routing {
     # 同样，"must_groupname"也支持不劫持、处理 DNS 流量，相当于"groupname(must)"。
     # groupname指的是出站分组
     domain(geosite:category-ads-all) -> block
-    domain(full: cn.bing.com) -> block
     pname(qbittorrent) -> direct ## 进程名规则 (当绑定WAN接口是只支持本地进程)
     pname(git) -> Proxy
     domain(geosite:bahamut) -> Bahamut
-    domain(geosite:openai) -> Google
-    domain(geosite:category-game-platforms-download) -> direct
-    domain(geosite:category-games@cn) -> direct
-    domain(geosite:steam) -> Steam
+    domain(geosite:category-ai-!cn) -> Google
     domain(geosite:bing) -> Bing
     domain(geosite:google-gemini, geosite:google) -> Google
+
+    domain(
+        geosite:category-game-platforms-download@cn,
+        geosite:category-games-cn,
+        geosite:steam@cn,
+        suffix: cm.steampowered.com,
+        suffix: steamserver.net
+    ) -> direct
+    dip(
+        45.121.184.0/24,
+        103.10.124.0/23,
+        103.28.54.0/24,
+        146.66.152.0/24,
+        146.66.155.0/24,
+        153.254.86.0/24,
+        155.133.224.0/22,
+        155.133.230.0/24,
+        155.133.232.0/23,
+        155.133.234.0/24,
+        155.133.236.0/22,
+        155.133.240.0/23,
+        155.133.244.0/23,
+        155.133.246.0/24,
+        155.133.248.0/21,
+        162.254.192.0/21,
+        185.25.182.0/23,
+        190.217.32.0/22,
+        192.69.96.0/22,
+        205.196.6.0/24,
+        208.64.200.0/22,
+        208.78.164.0/22,
+        205.185.194.0/24
+    ) -> direct
+    domain(geosite:steam) -> Steam
 
     dip(geoip:cn) && dport(80) -> direct
     domain(
