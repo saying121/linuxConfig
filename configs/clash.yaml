@@ -130,15 +130,14 @@ proxy-groups:
     interval: 10
     strategy: sticky-sessions
     tolerance: 50
-    proxies: [新加坡, 美国, 日本, 台湾, 英国, 瑞典, 韩国, 迪拜, 瑞士, 澳大利亚]
+    proxies: [新加坡, 美国, 日本]
 
   - name: Bing
-    # url: "http://bing.com"
     type: url-test
     interval: 10
     strategy: sticky-sessions
     tolerance: 50
-    proxies: [新加坡, 美国, 日本, 台湾, 英国, 瑞典, 韩国, 迪拜, 瑞士, 澳大利亚]
+    proxies: [新加坡, 美国, 日本, 瑞士]
 
   - name: Proxy
     type: url-test
@@ -256,7 +255,7 @@ rules:
   - PROCESS-NAME,qBittorrent,DIRECT,no-resolve
 
   - GEOSITE,category-ads-all,REJECT
-  - GEOSITE,category-ai-!cn,Google 
+  - GEOSITE,category-ai-!cn,Google
   - GEOSITE,apple-cn,DIRECT
 
   # steam 正确判断下载链接使用国内链接 
@@ -298,13 +297,13 @@ rules:
   - DOMAIN,outlook.com,DIRECT
   - DOMAIN,login.live.com,DIRECT
   - GEOSITE,private,DIRECT
-  - GEOSITE,microsoft@cn,DIRECT
+  # - GEOSITE,microsoft@cn,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
-
+  
+  - GEOSITE,bing,Bing
   - GEOSITE,google-gemini,Google
   - GEOSITE,google,Google
-  - GEOSITE,bing,Bing
 
   - GEOSITE,category-scholar-!cn,Google
   - GEOSITE,geolocation-!cn,Proxy
@@ -321,6 +320,5 @@ rules:
   - DOMAIN-KEYWORD,developerprofiles,美国
   # - DOMAIN,outlook.com,DIRECT
   # - DST-PORT,80/8080/443/8443,Proxy
-
 
   - MATCH,Google

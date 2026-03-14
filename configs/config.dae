@@ -142,8 +142,6 @@ group {
         filter: name(keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore',
             regex: '(?i)chatgpt',
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
-            keyword: '英国',
-            keyword: '澳大利亚', keyword: '瑞典', keyword: '韩国', keyword: '迪拜', keyword: '瑞士',
             keyword: "日本")
         policy: min_avg10
     }
@@ -154,10 +152,7 @@ group {
         filter: name(
             keyword: '新加坡', keyword: "🇸🇬", regex: '(?i)Singapore',
             regex: '(?i)chatgpt',
-            keyword: '台湾', regex: "(?i)Taiwan",
             keyword: '美国', keyword: "🇺🇸", regex: '(?i)America',
-            keyword: '英国',
-            keyword: '澳大利亚', keyword: '瑞典', keyword: '韩国', keyword: '迪拜', keyword: '瑞士',
             keyword: "日本")
         policy: min_avg10
     }
