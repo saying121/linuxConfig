@@ -256,9 +256,9 @@ rules:
 
   - GEOSITE,category-ads-all,REJECT
   - GEOSITE,category-ai-!cn,Google
-  - GEOSITE,apple-cn,DIRECT
+  - GEOSITE,category-companies@cn,DIRECT
 
-  # steam 正确判断下载链接使用国内链接 
+  # steam 正确判断下载链接使用国内链接
   - GEOSITE,category-games-cn,DIRECT
   - GEOSITE,category-game-platforms-download@cn,DIRECT
   - GEOSITE,steam@cn,DIRECT
@@ -300,7 +300,7 @@ rules:
   # - GEOSITE,microsoft@cn,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
-  
+
   - GEOSITE,bing,Bing
   - GEOSITE,google-gemini,Google
   - GEOSITE,google,Google

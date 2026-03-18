@@ -3,7 +3,6 @@
 set -ex
 
 setup_theme() {
-    paru -S --needed --noconfirm kali-themes
     repo=/tmp/kali-themes
     git clone --depth=1 https://gitlab.com/kalilinux/packages/kali-themes.git $repo
     cd $repo || exit
@@ -15,13 +14,15 @@ setup_theme() {
     cp -r $repo/share/qt5ct/* ~/.config/qt5ct/
 }
 
+paru -S --needed --noconfirm kali-themes
+
 update_config() {
     local key=$1
     local value=$2
     local file=$3
     if grep -q "^$key=" "$file"; then
         # 存在则替换
-        sed -i "s|^$key=.*|$key=\"$value\"|" "$file"
+        sed -i "s|^$key=.*|$key=$value|" "$file"
     else
         # 不存在则追加
         echo "$key=\"$value\"" >>"$file"
@@ -39,8 +40,9 @@ for file in "${GTK_CONFS[@]}"; do
 done
 
 QT_CONFS=("$HOME/.config/qt5ct/qt5ct.conf" "$HOME/.config/qt6ct/qt6ct.conf")
+QT_THEME_PATH="/usr/share/qt5ct/colors/Kali-Dark.conf"
 for file in "${QT_CONFS[@]}"; do
     echo "update: $file"
     update_config "icon_theme" $ICON "$file"
-    # update_config "color_scheme_path" $THEME "$file" # shit require a theme path
+    update_config "color_scheme_path" $QT_THEME_PATH "$file"
 done

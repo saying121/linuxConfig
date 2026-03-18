@@ -75,7 +75,7 @@ cd ~/.linuxConfig && git submodule update --init --recursive || echo ''
 
 # 安装lf文件浏览器
 $pacMan lf
-$pacMan perl-image-exiftool libreoffice-fresh highlight git-delta atool bat chafa colordiff coreutils fontforge gnupg poppler source-highlight transmission-cli jq pandoc mupdf-tools ffmpegthumbnailer xournalpp openscad
+$pacMan perl-image-exiftool libreoffice-fresh libreoffice-fresh-zh-cn highlight git-delta atool bat chafa colordiff coreutils fontforge gnupg poppler source-highlight transmission-cli jq pandoc mupdf-tools ffmpegthumbnailer xournalpp openscad
 $aurPkg ctpv-git epub2txt-git mdcat
 
 # sudo pacman -Syu --noconfirm

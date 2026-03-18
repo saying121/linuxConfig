@@ -251,12 +251,14 @@ routing {
     # 同样，"must_groupname"也支持不劫持、处理 DNS 流量，相当于"groupname(must)"。
     # groupname指的是出站分组
     domain(geosite:category-ads-all) -> block
-    pname(qbittorrent) -> direct ## 进程名规则 (当绑定WAN接口是只支持本地进程)
+    pname(qbittorrent, qq, wechat) -> direct ## 进程名规则 (当绑定WAN接口是只支持本地进程)
     pname(git) -> Proxy
     domain(geosite:bahamut) -> Bahamut
     domain(geosite:category-ai-!cn) -> Google
     domain(geosite:bing) -> Bing
     domain(geosite:google-gemini, geosite:google) -> Google
+
+    domain(suffix: qq.com, full: woshicver.com, geosite:category-companies@cn) -> direct
 
     domain(
         geosite:category-game-platforms-download@cn,
@@ -265,6 +267,7 @@ routing {
         suffix: cm.steampowered.com,
         suffix: steamserver.net
     ) -> direct
+    # steam 正确判断下载链接使用国内链接
     dip(
         45.121.184.0/24,
         103.10.124.0/23,
