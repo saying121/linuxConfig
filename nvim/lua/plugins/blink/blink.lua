@@ -194,13 +194,18 @@ return {
                 gitcommit = { "snippets", "buffer", "path", "git", "ripgrep", "dictionary" },
                 ["dap-repl"] = { "dap" },
 
-                sql = { "dadbod", "lsp", "snippets", "buffer" },
-                mysql = { "dadbod", "lsp", "snippets", "buffer" },
-                plsql = { "dadbod", "lsp", "snippets", "buffer" },
+                sql = { "dadbod_grip", "lsp", "snippets", "buffer" },
+                mysql = { "dadbod_grip", "lsp", "snippets", "buffer" },
+                plsql = { "dadbod_grip", "lsp", "snippets", "buffer" },
                 DressingInput = { "path", "ripgrep" },
                 AvanteInput = { "avante", "path", "ripgrep" },
             },
             providers = {
+                dadbod_grip = {
+                    name = "Grip SQL",
+                    module = "dadbod-grip.completion.blink",
+                    fallbacks = { "lsp" },
+                },
                 avante = {
                     module = "blink-cmp-avante",
                     name = "Avante",
@@ -280,11 +285,6 @@ return {
                 lazydev = {
                     name = "LazyDev",
                     module = "lazydev.integrations.blink",
-                },
-                dadbod = {
-                    name = "Dadbod",
-                    module = "vim_dadbod_completion.blink",
-                    fallbacks = { "lsp" },
                 },
                 ripgrep = {
                     module = "blink-ripgrep",

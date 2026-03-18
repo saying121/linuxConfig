@@ -1,5 +1,10 @@
 ---@type LazySpec
 return {
     "joryeugene/dadbod-grip.nvim",
-    version = "*",
+    -- version = "*",
+    ---@type DadbodGripOpts
+    opts = {
+        completion = false,
+        picker = "snacks",
+    },
 }

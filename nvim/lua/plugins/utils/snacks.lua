@@ -1,4 +1,5 @@
 local vfn = vim.fn
+local api = vim.api
 
 ---@type LazySpec
 return {
@@ -138,21 +139,27 @@ return {
             git_picker(picker.grep_word)
         end)
         keymap("n", "<leader>bf", picker.buffers)
-        keymap("n", "gI", function()
-            picker.lsp_implementations({
-                layout = {
-                    preset = "vscode",
-                    ---@diagnostic disable-next-line: assign-type-mismatch
-                    preview = true,
-                    layout = {
-                        width = 0.8,
-                        height = 0.6,
-                        border = "rounded",
-                    },
-                },
-            })
-        end)
-        keymap("n", "gr", picker.lsp_references)
+
+        api.nvim_create_autocmd({ "LspAttach" }, {
+            group = api.nvim_create_augroup("LspAttachSnacks", { clear = true }),
+            callback = function(ev)
+                keymap("n", "gI", function()
+                    picker.lsp_implementations({
+                        layout = {
+                            preset = "vscode",
+                            ---@diagnostic disable-next-line: assign-type-mismatch
+                            preview = true,
+                            layout = {
+                                width = 0.8,
+                                height = 0.6,
+                                border = "rounded",
+                            },
+                        },
+                    })
+                end, { buffer = ev.buf })
+                keymap("n", "gr", picker.lsp_references, { buffer = ev.buf })
+            end,
+        })
 
         keymap("n", "<leader>fo", picker.recent)
 
