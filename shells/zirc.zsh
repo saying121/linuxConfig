@@ -1,9 +1,10 @@
 # zmodload zsh/zprof
 
 eval "$(mise activate zsh)"
+eval "$(starship init zsh)"
 
 # 自定义
-source ~/.linuxConfig/shells/zshrc
+source ~/.linuxConfig/shells/zshrc # basic
 source ~/.linuxConfig/shells/lib/zsh/zsh-hook.zsh
 
 typeset -A ZI
@@ -44,21 +45,7 @@ zi ice wait lucid atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"
 zi light z-shell/F-Sy-H
 # 高亮主题
 # fast-theme ~/.linuxConfig/shells/z-shell.ini
-
-resume_job() {
-    fg
-}
-
-zle -N resume_job
-bindkey '^Z' resume_job
-
-
-# Enable Ctrl-x-e to edit command line
-autoload -U edit-command-line
-# Emacs style
-zle -N edit-command-line
-bindkey '^Xe' edit-command-line
-bindkey '^X^e' edit-command-line
+zi wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
 
 ############################################################
 
@@ -66,8 +53,6 @@ bindkey '^X^e' edit-command-line
 
 alias lazyvim="NVIM_APPNAME=lazyvim nvim"
 alias nvchard="NVIM_APPNAME=nvchard nvim"
-
-eval "$(starship init zsh)"
 
 # export CLIPPY_CONF_DIR=~/.config/rustfmt/
 # export RUSTFLAGS="-Z threads=16"
@@ -85,3 +70,5 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+source ~/.zprofile

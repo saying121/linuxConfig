@@ -321,4 +321,4 @@ rules:
   # - DOMAIN,outlook.com,DIRECT
   # - DST-PORT,80/8080/443/8443,Proxy
 
-  - MATCH,Google
+  - MATCH,DIRECT

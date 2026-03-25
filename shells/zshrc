@@ -1,4 +1,5 @@
 # vim:fileencoding=utf-8:ft=zsh
+
 . ~/.linuxConfig/shells/lib/common.sh
 
 setopt autocd              # change directory just by typing its name
@@ -15,10 +16,10 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 # hide EOL sign ('%')
 PROMPT_EOL_MARK=""
 
-# # configure key keybindings
+# configure key keybindings
 # bindkey -e                                        # emacs key bindings
 bindkey ' ' magic-space                           # do history expansion on space
-# bindkey '^U' backward-kill-line                   # ctrl + U
+bindkey '^U' backward-kill-line                   # ctrl + U
 bindkey '^[[3;5~' kill-word                       # ctrl + Supr(del)
 bindkey '^[[3~' delete-char                       # delete
 bindkey '^[[1;5C' forward-word                    # ctrl + ->
@@ -67,5 +68,16 @@ setopt hist_verify            # show command with history expansion to user befo
 # force zsh to show the complete history
 alias history="history 0"
 
-# configure `time` format
-TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
+resume_job() {
+    fg
+}
+
+zle -N resume_job
+bindkey '^Z' resume_job
+
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+bindkey '^X^e' edit-command-line

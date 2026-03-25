@@ -1,5 +1,11 @@
 # vim:fileencoding=utf-8:ft=sh
 
+bold=$(tput bold)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+cyan=$(tput setaf 6)
+normal=$(tput sgr0)
+
 export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
 export PATH=$PATH:~/.linuxConfig/scripts
 export PATH=$PATH:~/.ghcup/bin
@@ -304,3 +310,13 @@ ascii_to_char() {
         ;;
     esac
 }
+
+# zsh configure `time` format
+export TIMEFMT="
+${bold}${cyan}<<<<<<<<<<<<<<<<<< >>>>>>>>>>>>>>>>>>${bold}${normal}
+%J
+
+${yellow}real    %E
+user    %U
+sys     %S
+cpu     %P${normal}"

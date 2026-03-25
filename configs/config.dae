@@ -377,7 +377,7 @@ routing {
     # 不同于must_direct/must_my_group，来自mosdns的流量会继续匹配其他规则
     pname(mosdns) -> must_rules
 
-    fallback: Proxy
+    fallback: direct
 
     ## IP版本规则:
     # IPv4
