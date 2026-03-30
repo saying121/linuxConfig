@@ -94,29 +94,33 @@ elif [ "$kind" = javascript ]; then
     fi
 # https://github.com/wofr06/lesspipe/pull/106
 elif [ "$category" = image ]; then
-    # dim="$FZF_PREVIEW_COLUMNS"x"$FZF_PREVIEW_LINES"
-
-    # x,y
-    dim=$(stty size </dev/tty | awk '{printf "%.0fx%.0f", $2/2, $1/1.5}')
-
-    if [[ $dim = x ]]; then
-        dim=$(stty size </dev/tty | awk '{printf "%.0fx%.0f", $2/2, $1/1.5}')
+    dim=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}
+    if [[ $dim == x ]]; then
+        dim=$(stty size </dev/tty | awk '{print $2 "x" $1}')
     elif ! [[ $KITTY_WINDOW_ID ]] && ((FZF_PREVIEW_TOP + FZF_PREVIEW_LINES == $(stty size </dev/tty | awk '{print $1}'))); then
         # Avoid scrolling issue when the Sixel image touches the bottom of the screen
         # * https://github.com/junegunn/fzf/issues/2544
         dim=${FZF_PREVIEW_COLUMNS}x$((FZF_PREVIEW_LINES - 1))
     fi
 
-    if [[ $KITTY_WINDOW_ID ]]; then
+    # 1. Use icat (from Kitty) if kitten is installed
+    if [[ $KITTY_WINDOW_ID ]] || [[ $GHOSTTY_RESOURCES_DIR ]] && command -v kitten >/dev/null; then
         # 1. 'memory' is the fastest option but if you want the image to be scrollable,
         #    you have to use 'stream'.
         #
         # 2. The last line of the output is the ANSI reset code without newline.
         #    This confuses fzf and makes it render scroll offset indicator.
         #    So we remove the last line and append the reset code to its previous line.
-        kitty icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place="$dim"@0x0 "$1" | sed '$d'
+        kitten icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place="$dim@0x0" "$1" | sed '$d' | sed $'$s/$/\e[m/'
     elif has_cmd chafa; then
         chafa -f sixel -s "$dim" "$1"
+
+    # 3. If chafa is not found but imgcat is available, use it on iTerm2
+    elif command -v imgcat >/dev/null; then
+        # NOTE: We should use https://iterm2.com/utilities/it2check to check if the
+        # user is running iTerm2. But for the sake of simplicity, we just assume
+        # that's the case here.
+        imgcat -W "${dim%%x*}" -H "${dim##*x}" "$file"
     elif has_cmd exiftool; then
         exiftool "$1" | bat --color=always -plyaml
     fi

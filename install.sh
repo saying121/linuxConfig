@@ -4,6 +4,7 @@ git config --global http.postBuffer 524288000
 git config credential.helper 'cache --timeout=3600'
 git config --global url."git@github.com:".insteadOf https://github.com/
 git config --global open.https://ssh.github.com.domain github.com # for git-open
+git config --global diff.external difft
 
 get_package_manager() {
     if [[ $(grep -c arch /etc/os-release) != 0 ]]; then

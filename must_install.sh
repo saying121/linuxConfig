@@ -46,7 +46,7 @@ $pacMan figlet ffmpeg \
     bc man net-tools psmisc sudo ripgrep fzf trash-cli wget \
     vim bash eza bat \
     neovim lolcat git lazygit composer eslint cronie sqlite \
-    engrampa pkgfile
+    engrampa pkgfile difftastic
 
 # 图像查看
 $pacMan gwenview nomacs \

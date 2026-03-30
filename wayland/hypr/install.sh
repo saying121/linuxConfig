@@ -18,7 +18,7 @@ $pacMan waybar otf-font-awesome \
     qt5-wayland qt6-wayland \
     xdg-desktop-portal-hyprland xdg-desktop-portal \
     brightnessctl wlsunset swaync swayosd satty \
-    kanshi
+    kanshi awww
     # mako
     # gnome-calendar \
 
