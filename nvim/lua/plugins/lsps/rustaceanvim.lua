@@ -162,10 +162,16 @@ return {
                 end,
                 default_settings = require("public.ra"),
             },
-            dap = {
-                adapter = require("public.utils").codelldb_config(),
-            },
         }
+        local codelldb = require("public.utils").codelldb_config()
+        if codelldb then
+            local dap = {
+                dap = {
+                    adapter = codelldb,
+                },
+            }
+            cfg = vim.tbl_extend("force", cfg, dap)
+        end
 
         vim.g.rustaceanvim = cfg
     end,

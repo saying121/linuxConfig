@@ -166,29 +166,31 @@ local function find_vscode_codelldb()
             liblldb_path = nil,
         }
     end
-    local extensions_path = vim.env.HOME .. "/.vscode/extensions/"
-    local pattern = "vadimcn%.vscode%-lldb%-([%d%.]+)"
 
-    local latest_version = nil
-
-    for dir in io.popen("ls -d " .. extensions_path .. "vadimcn.vscode-lldb-* 2>/dev/null"):lines() do
-        latest_version = dir:match(pattern)
+    local extensions_path = vim.fn.glob("/Users/saying/.vscode/extensions/vadimcn.vscode-lldb-*")
+    if vim.fn.isdirectory(extensions_path) == 0 then
+        return nil
     end
 
-    local base = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-" .. latest_version
-    local codelldb_path = base
-    local liblldb_path = base
+    local codelldb_path = extensions_path
+    local liblldb_path = extensions_path
 
     local this_os = vim.uv.os_uname().sysname
     -- The path is different on Windows
     if this_os:find("Windows") then
-        codelldb_path = base .. "\\adapter\\codelldb.exe"
-        liblldb_path = base .. "\\lldb\\bin\\liblldb.dll"
+        codelldb_path = codelldb_path .. "\\adapter\\codelldb.exe"
+        liblldb_path = liblldb_path .. "\\lldb\\bin\\liblldb.dll"
     else
-        codelldb_path = base .. "/adapter/codelldb"
+        codelldb_path = codelldb_path .. "/adapter/codelldb"
         -- The liblldb extension is .so for Linux and .dylib for MacOS
         liblldb_path = liblldb_path .. "/lldb/lib/liblldb" .. (this_os == "Linux" and ".so" or ".dylib")
     end
+
+    -- 检查 codelldb 可执行文件是否存在
+    if vim.fn.filereadable(codelldb_path) == 0 then
+        return nil
+    end
+
     local codelldb = {
         codelldb_path = codelldb_path,
         liblldb_path = liblldb_path,
@@ -198,10 +200,6 @@ local function find_vscode_codelldb()
 end
 
 function M.codelldb_config()
-    if _G.codelldb ~= nil then
-        -- vim.print(_G.codelldb)
-        return _G.codelldb
-    end
     local config = {
         type = "server",
         port = "${port}",
@@ -214,16 +212,16 @@ function M.codelldb_config()
     }
 
     local codelldb = find_vscode_codelldb()
-    if codelldb.liblldb_path == nil then
+    if codelldb == nil then
+        return nil
+    end
+    if codelldb.codelldb_path then
         config.executable.command = codelldb.codelldb_path
-        _G.codelldb = config
-        return config
+    end
+    if codelldb.liblldb_path then
+        config.executable.args = { "--liblldb", codelldb.liblldb_path, "--port", "${port}" }
     end
 
-    config.executable.command = codelldb.codelldb_path
-    -- config.executable.args = { "--liblldb", codelldb.liblldb_path, "--port", "${port}" }
-
-    _G.codelldb = config
     return config
 end
 

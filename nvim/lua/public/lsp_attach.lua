@@ -91,8 +91,8 @@ M.on_attach = function(client, bufnr)
         api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
             group = group_name,
             buffer = bufnr,
-            callback = function()
-                lsp.codelens.refresh({ bufnr = bufnr })
+            callback = function(ev)
+                lsp.codelens.enable(true, { bufnr = ev.buf })
             end,
         })
     end

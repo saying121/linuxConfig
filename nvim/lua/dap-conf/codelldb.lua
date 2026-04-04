@@ -59,7 +59,9 @@ local codelldb_conf = require("public.utils").codelldb_config()
 
 -- never showDisassembly
 -- https://github.com/mfussenegger/nvim-dap/issues/307#issuecomment-929754523
-dap.adapters.codelldb = codelldb_conf
+if codelldb_conf then
+    dap.adapters.codelldb = codelldb_conf
+end
 
 local util = require("public.utils")
 local git_root = util.get_root_dir(vim.uv.cwd() or ".", ".git")
