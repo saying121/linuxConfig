@@ -52,6 +52,8 @@ fi
 declare -A link_list
 dot_dir=$(git rev-parse --show-toplevel)
 link_list=(
+    ["$dot_dir/configs/DankMaterialShell"]="$HOME/.config"
+    ["$dot_dir/configs/niri"]="$HOME/.config"
     ["$dot_dir/configs/kanshi"]="$HOME/.config"
     ["$dot_dir/configs/rmpc"]="$HOME/.config"
     ["$dot_dir/configs/mpd"]="$HOME/.config"

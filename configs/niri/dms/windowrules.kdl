@@ -1,0 +1,9 @@
+// DMS Window Rules - Managed by DankMaterialShell
+// Do not edit manually - changes may be overwritten
+
+// @id=wr_1779083853523029892 @name=kitty
+window-rule {
+    match app-id="^kitty$"
+    opacity 0.95
+    open-focused true
+}

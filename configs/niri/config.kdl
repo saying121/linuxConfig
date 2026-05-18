@@ -111,7 +111,7 @@ input {
 // https://niri-wm.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 16
+    gaps 10
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -183,6 +183,9 @@ layout {
         // Changing the color space is also supported, check the wiki for more info.
         //
         // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
+        active-gradient from="#33ccffee" to="#00ff99ee" angle=45
+        // 彩虹效果
+        // active-gradient from="red" to="orange" angle=45 in="oklch longer hue"
 
         // You can also color the gradient relative to the entire view
         // of the workspace, rather than relative to just the window itself.
@@ -274,6 +277,7 @@ spawn-at-startup "dms run"
 spawn-at-startup "nm-applet"
 spawn-at-startup "swayosd-server"
 spawn-at-startup "mpd-mpris"
+spawn-at-startup "xrdb ~/.Xresources"
 // spawn-at-startup "hypridle"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -347,9 +351,10 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
+window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+    draw-border-with-background false
 }
 
 binds {
@@ -369,6 +374,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
+    Mod+Tab hotkey-overlay-title="Center Terminal: kitty" { spawn-sh "kitten quick-access-terminal"; }
     Alt+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "~/.linuxConfig/rofi/launcher.sh"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
@@ -641,3 +647,5 @@ include "dms/cursor.kdl"
 
 include "dms/outputs.kdl"
 include "dms/binds.kdl"
+
+include "dms/windowrules.kdl"
