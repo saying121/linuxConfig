@@ -54,6 +54,7 @@ dot_dir=$(git rev-parse --show-toplevel)
 link_list=(
     ["$dot_dir/configs/kanshi"]="$HOME/.config"
     ["$dot_dir/configs/rmpc"]="$HOME/.config"
+    ["$dot_dir/configs/mpd"]="$HOME/.config"
     ["$dot_dir/configs/atuin"]="$HOME/.config"
     ["$dot_dir/configs/kitty"]="$HOME/.config"
     ["$dot_dir/configs/lf"]="$HOME/.config"
