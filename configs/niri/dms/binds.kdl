@@ -1,4 +1,4 @@
 binds {
     Super+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Super+Shift+Semicolon hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
+    // Super+Shift+Semicolon hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 }

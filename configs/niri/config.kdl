@@ -275,7 +275,6 @@ layout {
 // spawn-at-startup "swaync"
 spawn-at-startup "dms" "run"
 spawn-at-startup "nm-applet"
-spawn-at-startup "swayosd-server"
 spawn-at-startup "mpd-mpris"
 // spawn-at-startup "awww-daemon"
 spawn-at-startup "xrdb" "~/.Xresources"
@@ -375,10 +374,13 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Mod+Tab hotkey-overlay-title="Center Terminal: kitty" { spawn-sh "kitten quick-access-terminal"; }
+    Mod+Tab hotkey-overlay-title="Center Terminal: kitty" { spawn "kitten" "quick-access-terminal"; }
     Alt+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "pkill rofi || ~/.linuxConfig/rofi/launcher.sh"; }
-    Mod+Shift+S hotkey-overlay-title="Niri screenshot" { spawn-sh "niri msg action screenshot"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "pkill hyprlock || hyprlock"; }
+    Mod+Shift+S hotkey-overlay-title="Niri screenshot" { spawn "niri" "msg" "action" "screenshot"; }
+    // Super+Alt+L { spawn "pkill hyprlock || hyprlock"; }
+    Super+Shift+Semicolon { spawn "dms" "ipc" "lock" "lock"; }
+
+    Mod+V { spawn "dms" "ipc" "clipboard" "open"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -389,23 +391,23 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
     // "-l 1.0" limits the volume to 100%.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --max-volume 150 --output-volume +5"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --max-volume 150 --output-volume -5"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "swayosd-client --output-volume mute-toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "swayosd-client --input-volume  mute-toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "audio" "increment" "5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "audio" "decrement" "5"; }
+    XF86AudioMute        allow-when-locked=true { spawn "dms" "ipc" "audio" "mute"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "dms" "ipc" "audio" "micmute"; }
 
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+    XF86AudioPlay        allow-when-locked=true { spawn "dms" "ipc" "mpris" "playPause"; }
+    XF86AudioStop        allow-when-locked=true { spawn "dms" "ipc" "mpris" "stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "dms" "ipc" "mpris" "previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn "dms" "ipc" "mpris" "next"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp   allow-when-locked=true { spawn "swayosd-client" "--brightness" "+10"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "swayosd-client" "--brightness" "-10"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "dms" "ipc" "brightness" "increment" "10"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "brightness" "decrement" "10"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
