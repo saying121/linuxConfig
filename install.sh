@@ -95,3 +95,6 @@ $aurPkg xwaylandvideobridge wemeet-bin
 $aurPkg bitwise programmer-calculator
 $pacMan mise usage
 $pacMan mpd mpd-mpris
+
+$pacMan dms niri
+systemctl --user enable --now dms

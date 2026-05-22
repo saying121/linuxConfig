@@ -7,3 +7,27 @@ window-rule {
     opacity 0.95
     open-focused true
 }
+
+// @id=wr_1779171558034789570 @name=org.kde.dolphin
+window-rule {
+    match app-id="^org.kde.dolphin$"
+    open-floating true
+}
+
+// @id=wr_1779175124252926488 @name=wpsoffice
+window-rule {
+    match app-id="^wps$"
+    open-floating true
+}
+
+// @id=wr_1779270252866264223 @name=org.nomacs.ImageLounge
+window-rule {
+    match app-id="^org.nomacs.ImageLounge$"
+    open-floating true
+}
+
+// @id=wr_1779270265249124656 @name=org.quickshell
+window-rule {
+    match app-id="^org.quickshell$"
+    open-floating true
+}

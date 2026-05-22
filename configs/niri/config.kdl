@@ -273,7 +273,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "waybar"
 // spawn-at-startup "swaync"
-spawn-at-startup "dms" "run"
+// spawn-at-startup "dms" "run"
 spawn-at-startup "nm-applet"
 spawn-at-startup "mpd-mpris"
 // spawn-at-startup "awww-daemon"
@@ -285,7 +285,7 @@ spawn-at-startup "xrdb" "~/.Xresources"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
-    // skip-at-startup
+    skip-at-startup
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -376,11 +376,13 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+Tab hotkey-overlay-title="Center Terminal: kitty" { spawn "kitten" "quick-access-terminal"; }
     Alt+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "pkill rofi || ~/.linuxConfig/rofi/launcher.sh"; }
+    Ctrl+Alt+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "pkill rofi || ~/.linuxConfig/rofi/rofiasroot.sh"; }
     Mod+Shift+S hotkey-overlay-title="Niri screenshot" { spawn "niri" "msg" "action" "screenshot"; }
     // Super+Alt+L { spawn "pkill hyprlock || hyprlock"; }
     Super+Shift+Semicolon { spawn "dms" "ipc" "lock" "lock"; }
 
     Mod+V { spawn "dms" "ipc" "clipboard" "open"; }
+    Mod+E { spawn "dolphin"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.

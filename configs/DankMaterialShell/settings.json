@@ -196,7 +196,7 @@
   "dankLauncherV2UnloadOnClose": false,
   "useAutoLocation": false,
   "weatherEnabled": true,
-  "networkPreference": "auto",
+  "networkPreference": "ethernet",
   "iconTheme": "Flat-Remix-Blue-Dark",
   "cursorSettings": {
     "theme": "System Default",
@@ -236,9 +236,9 @@
   "soundNewNotification": true,
   "soundVolumeChanged": true,
   "soundPluggedIn": true,
-  "acMonitorTimeout": 600,
+  "acMonitorTimeout": 1200,
   "acLockTimeout": 300,
-  "acSuspendTimeout": 1800,
+  "acSuspendTimeout": 0,
   "acSuspendBehavior": 0,
   "acProfileName": "",
   "batteryMonitorTimeout": 0,
@@ -410,17 +410,15 @@
         "focusedWindow"
       ],
       "centerWidgets": [
-        "music",
-        "clock",
-        "weather"
+        {
+          "id": "clock",
+          "enabled": true,
+          "clockCompactMode": false
+        }
       ],
       "rightWidgets": [
         {
-          "id": "systemTray",
-          "enabled": true
-        },
-        {
-          "id": "clipboard",
+          "id": "network_speed_monitor",
           "enabled": true
         },
         {
@@ -433,7 +431,7 @@
           "showSwap": false
         },
         {
-          "id": "network_speed_monitor",
+          "id": "systemTray",
           "enabled": true
         },
         {
@@ -562,7 +560,11 @@
   "desktopWidgetGridSettings": {},
   "desktopWidgetInstances": [],
   "desktopWidgetGroups": [],
-  "builtInPluginSettings": {},
+  "builtInPluginSettings": {
+    "dms_settings_search": {
+      "trigger": "?"
+    }
+  },
   "clipboardEnterToPaste": false,
   "launcherPluginVisibility": {},
   "launcherPluginOrder": [],

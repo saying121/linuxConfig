@@ -1,6 +1,24 @@
 #!/usr/bin/env zsh
 
 zi ice lucid wait'2' \
+    has'dms' \
+    as'completion' \
+    id-as'dms' \
+    blockf \
+    atclone'dms completion zsh >_dms' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
+    has'niri' \
+    as'completion' \
+    id-as'niri' \
+    blockf \
+    atclone'niri completions zsh >_niri' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
     has'dora' \
     as'completion' \
     id-as'dora' \

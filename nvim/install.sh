@@ -50,7 +50,7 @@ export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 $thepkg gnuplot
 
 $thepkg perf
-cargo binstall -y flamegraph
+cargo binstall -y flamegraph weave-cli weave-driver
 
 if [[ $(grep -c "osx-ndk-x86" /etc/profile) == 0 ]]; then
     # shellcheck disable=2016
