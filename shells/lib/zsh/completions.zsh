@@ -1,6 +1,24 @@
 #!/usr/bin/env zsh
 
 zi ice lucid wait'2' \
+    has'kind' \
+    as'completion' \
+    id-as'kind' \
+    blockf \
+    atclone'kind completion zsh >_dms' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
+    has'kubectl' \
+    as'completion' \
+    id-as'kubectl' \
+    blockf \
+    atclone'kubectl completion zsh >_dms' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
     has'dms' \
     as'completion' \
     id-as'dms' \

@@ -64,7 +64,13 @@ export PATH=$PATH:~/.local/share/gem/ruby/3.0.0/bin
 # zprof
 
 # pnpm
-export PNPM_HOME="/Users/saying/Library/pnpm"
+if [[ -z "${PNPM_HOME:-}" ]]; then
+  if [[ "$OSTYPE" == darwin* ]]; then
+    export PNPM_HOME="$HOME/Library/pnpm"
+  else
+    export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm"
+  fi
+fi
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;

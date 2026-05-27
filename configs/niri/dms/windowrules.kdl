@@ -31,3 +31,9 @@ window-rule {
     match app-id="^org.quickshell$"
     open-floating true
 }
+
+// @id=wr_1779680019131418746 @name=nm-connection-editor
+window-rule {
+    match app-id="^nm-connection-editor$"
+    open-floating true
+}

@@ -377,7 +377,7 @@ binds {
     Mod+Tab hotkey-overlay-title="Center Terminal: kitty" { spawn "kitten" "quick-access-terminal"; }
     Alt+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "pkill rofi || ~/.linuxConfig/rofi/launcher.sh"; }
     Ctrl+Alt+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "pkill rofi || ~/.linuxConfig/rofi/rofiasroot.sh"; }
-    Mod+Shift+S hotkey-overlay-title="Niri screenshot" { spawn "niri" "msg" "action" "screenshot"; }
+    // Mod+Shift+S hotkey-overlay-title="Niri screenshot" { spawn "niri" "msg" "action" "screenshot"; }
     // Super+Alt+L { spawn "pkill hyprlock || hyprlock"; }
     Super+Shift+Semicolon { spawn "dms" "ipc" "lock" "lock"; }
 
