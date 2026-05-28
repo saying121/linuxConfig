@@ -1,6 +1,7 @@
 [Added Associations]
 application/json=nvim.desktop;
 application/pdf=microsoft-edge.desktop;
+application/vnd.jgraph.mxfile=drawio-2.desktop;drawio.desktop;
 application/x-docbook+xml=nvim.desktop;
 application/x-yaml=nvim.desktop;
 audio/aac=vlc.desktop;mpv.desktop;
@@ -26,8 +27,8 @@ image/avif=org.nomacs.ImageLounge.desktop;org.kde.gwenview.desktop;
 image/bmp=org.nomacs.ImageLounge.desktop;org.kde.gwenview.desktop;feh.desktop;
 image/gif=org.kde.gwenview.desktop;org.nomacs.ImageLounge.desktop;
 image/heif=org.nomacs.ImageLounge.desktop;org.kde.gwenview.desktop;feh.desktop;
-image/jpeg=nomacs-2.desktop;nomacs.desktop;org.nomacs.ImageLounge.desktop;org.kde.gwenview.desktop;feh.desktop;
-image/png=org.nomacs.ImageLounge.desktop;org.kde.gwenview.desktop;feh.desktop;
+image/jpeg=nomacs-4.desktop;nomacs-3.desktop;nomacs-2.desktop;nomacs.desktop;org.nomacs.ImageLounge.desktop;org.kde.gwenview.desktop;feh.desktop;
+image/png=nomacs-5.desktop;org.nomacs.ImageLounge.desktop;org.kde.gwenview.desktop;feh.desktop;
 image/svg+xml=microsoft-edge.desktop;
 image/webp=org.nomacs.ImageLounge.desktop;org.kde.gwenview.desktop;feh.desktop;
 image/x-icns=org.kde.gwenview.desktop;
@@ -43,6 +44,7 @@ x-scheme-handler/mid=userapp-Thunderbird-QVJAR2.desktop;
 [Default Applications]
 application/json=nvim.desktop;
 application/pdf=microsoft-edge.desktop;
+application/vnd.jgraph.mxfile=drawio-2.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=wps-office-wps.desktop
 application/x-docbook+xml=nvim.desktop;
 application/x-yaml=nvim.desktop;
@@ -70,8 +72,8 @@ clash-verge=clash-verge-handler.desktop
 image/avif=org.nomacs.ImageLounge.desktop;
 image/bmp=org.nomacs.ImageLounge.desktop;
 image/heif=org.nomacs.ImageLounge.desktop;
-image/jpeg=nomacs-2.desktop;
-image/png=org.nomacs.ImageLounge.desktop;
+image/jpeg=nomacs-4.desktop;
+image/png=nomacs-5.desktop;
 image/svg+xml=microsoft-edge.desktop
 image/webp=org.nomacs.ImageLounge.desktop;
 image/x-icns=org.kde.gwenview.desktop;

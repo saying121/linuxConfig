@@ -160,6 +160,7 @@ return {
         diagnostics = {
             enable = true,
             disabled = {
+                "E0308",
                 "proc-macro-disabled",
                 "unfulfilled_lint_expectations",
                 -- rustc 的 lint 已经有这些了
@@ -283,9 +284,10 @@ return {
             enable = true,
             attributes = { enable = true },
             ignored = {
+                ["tracing"] = { "instrument" },
                 ["async-trait"] = { "async_trait" },
                 ["tonic"] = { "async_trait" },
-                ["tokio_macros"] = { "main" },
+                ["tokio_macros"] = { "main", "test" },
                 ["napi-derive"] = { "napi" },
                 ["async-recursion"] = { "async_recursion" },
             },
