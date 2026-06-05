@@ -1,9 +1,7 @@
 [source]
-
 [source.crates-io]
 
 [registries]
-
 [registries.bfsu]
 index = "https://mirrors.bfsu.edu.cn/git/crates.io-index.git"
 
@@ -46,10 +44,26 @@ git-fetch-with-cli = true
 # [target.x86_64-unknown-linux-gnu]
 # linker = "clang"
 # rustflags = ["-C", "link-arg=-fuse-ld=mold"]
-# rustflags = ["-C", "link-arg=--ld-path=wild"]
 
 [target.'cfg(target_os = "linux")']
-rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+# rustflags = [
+#   "-C",
+#   "target-cpu=native",
+#   "-C",
+#   "link-arg=-fuse-ld=mold",
+#   "-C",
+#   "link-arg=-Wl,--emit-relocs",
+#   # "-C",
+#   # "link-arg=-Wl,-Map=target/release/test-it.map",
+# ]
+rustflags = [
+  "-C",
+  "target-cpu=native",
+  "-C",
+  "link-arg=-fuse-ld=wild",
+  "-C",
+  "link-arg=-Wl,--got-plt-syms",
+]
 
 [target.aarch64-apple-darwin]
 linker = "clang"
