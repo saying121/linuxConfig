@@ -81,3 +81,5 @@ brew tap laishulu/homebrew
 brew install macism
 
 brew install bitwise pcalc
+
+brew install phoenix-slides

@@ -1,6 +1,33 @@
 #!/usr/bin/env zsh
 
 zi ice lucid wait'2' \
+    has'rg' \
+    as'completion' \
+    id-as'rg' \
+    blockf \
+    atclone'rg --generate complete-zsh >_rg' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
+    has'mise' \
+    as'completion' \
+    id-as'mise' \
+    blockf \
+    atclone'mise completion zsh >_mise' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
+    has'sing-box' \
+    as'completion' \
+    id-as'sing-box' \
+    blockf \
+    atclone'sing-box completion zsh >_sing-box' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
     has'kind' \
     as'completion' \
     id-as'kind' \
@@ -117,17 +144,11 @@ zi snippet https://github.com/bugaevc/wl-clipboard/blob/master/completions/zsh/_
 zi ice lucid wait as'completion' blockf has'wl-paste'
 zi snippet https://github.com/bugaevc/wl-clipboard/blob/master/completions/zsh/_wl-paste
 
-zi ice lucid wait as'completion' blockf has'rg' mv'rg.zsh -> _rg'
-zi snippet https://github.com/BurntSushi/ripgrep/blob/master/crates/core/flags/complete/rg.zsh
-
 zi ice lucid wait as'completion' blockf has'tldr' mv'zsh_tealdeer -> _tldr'
 zi snippet https://github.com/dbrgn/tealdeer/blob/main/completion/zsh_tealdeer
 
 zi ice lucid wait as'completion' blockf has'docker'
 zi snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
-
-zi ice lucid wait as'completion' blockf has'mise'
-zi snippet https://github.com/jdx/mise/blob/main/completions/_mise
 
 zi ice lucid wait as'completion' blockf has'launchctl'
 zi snippet https://github.com/nilsonholger/osx-zsh-completions/blob/master/_launchctl
@@ -164,9 +185,6 @@ zi snippet https://github.com/x-motemen/ghq/blob/master/misc/zsh/_ghq
 
 zi ice wait lucid as'completion' blockf has'zoxide'
 zi snippet https://github.com/ajeetdsouza/zoxide/blob/main/contrib/completions/_zoxide
-
-# zi ice wait lucid as'completion' blockf has'sing-box'
-zi snippet https://github.com/SagerNet/sing-box/blob/main/release/completions/sing-box.zsh
 
 zi light sunlei/zsh-ssh
 

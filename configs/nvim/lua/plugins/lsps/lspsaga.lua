@@ -132,6 +132,11 @@ return {
             left_width = 0.3,
             default = "def+ref",
             layout = "float",
+            ref_opt = {
+                bashls = false,
+                rust_analyzer = false,
+                lua_ls = false,
+            },
             keys = {
                 shuttle = "[w",
                 toggle_or_open = "o", -- toggle expand or open
