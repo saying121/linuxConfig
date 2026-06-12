@@ -9,6 +9,7 @@ normal=$(tput sgr0)
 export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
 export PATH=$PATH:~/.linuxConfig/scripts
 export PATH=$PATH:~/.ghcup/bin
+export PATH=$PATH:/opt/cuda/bin
 
 export PATH=$PATH:~/.cargo/bin:~/.local/bin:~/go/bin
 export GOPATH=~/.local/share/go

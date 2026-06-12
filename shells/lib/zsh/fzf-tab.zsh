@@ -35,6 +35,7 @@ zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 zstyle ':fzf-tab:complete:(cd|tldr|ls|eza|cat):*' fzf-flags --preview-window=right
+zstyle ':fzf-tab:complete:awww:*' fzf-flags --preview-window=right
 
 # zstyle ':fzf-tab:complete:cargo:*' fzf-preview 'cargo help $word | bat --color=always -plhelp'
 zstyle ':fzf-tab:complete:(rustup):argument-1' fzf-flags --preview-window=down:3:wrap --height=50%

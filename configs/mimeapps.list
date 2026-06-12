@@ -90,3 +90,4 @@ x-scheme-handler/lxmusic=lx-music-desktop.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-QVJAR2.desktop
 x-scheme-handler/mid=userapp-Thunderbird-QVJAR2.desktop
 x-scheme-handler/unknown=microsoft-edge.desktop
+x-scheme-handler/ccswitch=cc-switch-handler.desktop

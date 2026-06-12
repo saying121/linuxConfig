@@ -12,7 +12,7 @@ return {
         ---Enable live reloading of settings when config files change; for servers that support it,
         ---this is done via the `workspace/didChangeConfiguration` notification, otherwise the
         ---server is restarted
-        live_reload = false,
+        live_reload = true,
         ---List of loader extensions to use when loading settings; `string` values will be `require`d
         loader_extensions = { "codesettings.extensions.vscode" },
         ---Set up library paths for `lua_ls` automatically to pick up the generated type

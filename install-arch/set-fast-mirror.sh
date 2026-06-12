@@ -11,6 +11,7 @@ rank_mirror() {
     list=$(rankmirrors -n all - <"$1")
 
     echo "$list" | sudo tee /etc/pacman.d/"$2"
+    echo "=======>>>>>>$2"
 }
 
 rank_mirror ./mirror_lists/archlinuxcn cnlist

@@ -11,3 +11,4 @@ picom/
 *.profraw
 *.log
 nohup.out
+.gitattributes

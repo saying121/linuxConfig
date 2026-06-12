@@ -55,7 +55,7 @@ return {
 
             null_ls.builtins.diagnostics.checkmake,
             null_ls.builtins.diagnostics.markdownlint_cli2,
-            null_ls.builtins.diagnostics.vint,
+            -- null_ls.builtins.diagnostics.vint,
             -- null_ls.builtins.diagnostics.selene,
             null_ls.builtins.diagnostics.protolint,
             null_ls.builtins.formatting.protolint,
