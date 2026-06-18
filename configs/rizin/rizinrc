@@ -1,2 +1,4 @@
-aaaa
 e scr.utf8.curvy=true
+e asm.flags.maxname=50
+e cfg.fortunes.file=fun,tips
+#e scr.pager=less -R

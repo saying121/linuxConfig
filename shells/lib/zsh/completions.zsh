@@ -130,6 +130,9 @@ zi ice as"completion"
 zi light https://github.com/ziglang/shell-completions
 
 zi ice lucid wait as'completion'
+zi light saying121/linux-perf-completion
+
+zi ice lucid wait as'completion'
 zi light zsh-users/zsh-completions
 
 zi ice lucid wait as'completion' blockf has'alacritty'
