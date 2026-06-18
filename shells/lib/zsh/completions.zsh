@@ -129,7 +129,7 @@ zi load z-shell/null
 zi ice as"completion"
 zi light https://github.com/ziglang/shell-completions
 
-zi ice lucid wait as'completion'
+zi ice lucid wait as'completion' blockf has'perf'
 zi light saying121/linux-perf-completion
 
 zi ice lucid wait as'completion'
