@@ -1,6 +1,15 @@
 #!/usr/bin/env zsh
 
 zi ice lucid wait'2' \
+    has'sqlx' \
+    as'completion' \
+    id-as'sqlx' \
+    blockf \
+    atclone'sqlx completions zsh >_sqlx' \
+    atpull'%atclone'
+zi load z-shell/null
+
+zi ice lucid wait'2' \
     has'rg' \
     as'completion' \
     id-as'rg' \

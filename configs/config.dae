@@ -258,7 +258,12 @@ routing {
     domain(geosite:bing) -> Bing
     domain(geosite:google-gemini, geosite:google) -> Google
 
-    domain(suffix: qq.com, full: woshicver.com, geosite:category-companies@cn) -> direct
+    domain(
+        suffix: qq.com
+        , full: woshicver.com
+        , geosite:category-companies@cn
+        , keyword: wiwide
+    ) -> direct
 
     domain(
         geosite:category-game-platforms-download@cn,
