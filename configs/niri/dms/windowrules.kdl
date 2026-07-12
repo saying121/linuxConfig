@@ -37,3 +37,9 @@ window-rule {
     match app-id="^nm-connection-editor$"
     open-floating true
 }
+
+// @id=wr_1782742548764574428 @name=wemeetapp
+window-rule {
+    match app-id="^wemeetapp$"
+    open-floating true
+}
