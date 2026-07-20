@@ -44,7 +44,6 @@ zi ice depth=1 lucid; zi light jeffreytse/zsh-vi-mode
 zi ice wait lucid atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"
 zi light z-shell/F-Sy-H
 # 高亮主题
-# fast-theme ~/.linuxConfig/shells/z-shell.ini
 zi wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
 
 ############################################################

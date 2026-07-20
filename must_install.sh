@@ -100,6 +100,7 @@ $pacMan pacman-contrib
 
 # installWireshark cmd:tshark
 $pacMan wireshark-qt wireshark-cli termshark kismet wifite
+sudo usermod -a -G wireshark "$USER"
 
 # 文件管理器
 $pacMan dolphin konsole qt5ct kvantum

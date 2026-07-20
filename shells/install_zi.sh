@@ -13,3 +13,6 @@ yay -S --needed --noconfirm find-the-command
 pkgfile makepkg
 
 [[ -d ~/.zi/cache ]] || mkdir ~/.zi/cache
+
+# fast-theme ~/.linuxConfig/shells/z-shell.ini
+fast-theme CONFIG:overlay
