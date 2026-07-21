@@ -9,9 +9,7 @@ return {
     cond = true,
     lazy = false, -- lazy loading handled internally
     version = "*",
-    dependencies = {
-        "Kaiser-Yang/blink-cmp-avante",
-    },
+    dependencies = {},
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -205,13 +203,6 @@ return {
                     name = "Grip SQL",
                     module = "dadbod-grip.completion.blink",
                     fallbacks = { "lsp" },
-                },
-                avante = {
-                    module = "blink-cmp-avante",
-                    name = "Avante",
-                    opts = {
-                        -- options for blink-cmp-avante
-                    },
                 },
                 lsp = {
                     name = "LSP",

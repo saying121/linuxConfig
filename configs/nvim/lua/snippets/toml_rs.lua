@@ -378,6 +378,7 @@ local net = {
     ["nftables"] = "nftables json api 的安全抽象。它可用于在 Rust 中创建 nftables 规则集并从 json 解析现有的 nftables 规则集。",
 }
 local concurrent = {
+    ["arc-swap"] = "Atomically swappable `Arc`",
     ["thread_local"] = "每个线程对象本地存储",
 
     ["crossbeam"] = "并发编程的工具(mpmc)",

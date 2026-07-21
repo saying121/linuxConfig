@@ -27,6 +27,20 @@ return {
                 },
             },
             sources = {
+                select = {
+                    layout = {
+                        hidden = {},
+                        preset = "vertical",
+                        -- preview = "main",
+                        layout = {
+                            -- box = "vertical",
+                            width = 0.8,
+                            height = 0.6,
+                            border = "rounded",
+                        },
+                    },
+                },
+
                 explorer = {
                     hidden = false,
                     layout = {
@@ -146,9 +160,7 @@ return {
                 keymap("n", "gI", function()
                     picker.lsp_implementations({
                         layout = {
-                            preset = "vscode",
-                            ---@diagnostic disable-next-line: assign-type-mismatch
-                            preview = true,
+                            preset = "vertical",
                             layout = {
                                 width = 0.8,
                                 height = 0.6,

@@ -1,3 +1,4 @@
+config-version = 2
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
@@ -255,4 +256,8 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.quark.desktop.helper.player'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'bevy'
 run = ['layout floating']
