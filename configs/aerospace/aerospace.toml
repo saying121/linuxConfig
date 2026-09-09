@@ -261,3 +261,7 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-name-regex-substring = 'bevy'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Notes'
+run = ['layout floating']
