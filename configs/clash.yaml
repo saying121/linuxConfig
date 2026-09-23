@@ -1,42 +1,55 @@
 # url 里填写自己的订阅,名称不能重复
 proxy-providers:
-  fny:
-    url: ""
-    type: http
-    interval: 43200
-    health-check:
-      {
-        enable: true,
-        url: "https://www.gstatic.com/generate_204",
-        interval: 300,
-      }
-    override:
-      additional-prefix: "[fny]"
+#  yiyuan:
+#    url: ""
+#    type: http
+#    interval: 3200
+#    health-check:
+#      {
+#        enable: true,
+#        url: "https://www.gstatic.com/generate_204",
+#        interval: 300,
+#      }
+#    override:
+#      additional-prefix: "[yiyuan]"
+#  fny:
+#    url: ""
+#    type: http
+#    interval: 3200
+#    health-check:
+#      {
+#        enable: true,
+#        url: "https://www.gstatic.com/generate_204",
+#        interval: 300,
+#      }
+#    override:
+#      additional-prefix: "[fny]"
 
   pq:
     url: ""
     type: http
-    interval: 43200
+    interval: 3200
     health-check:
       {
         enable: true,
-        url: "https://www.gstatic.com/generate_204",
+        #url: "https://www.gstatic.com/generate_204",
+        url: "http://cp.cloudflare.com/generate_204",
         interval: 300,
       }
     override:
       additional-prefix: "[pq]"
-  yiyuan:
-    url: ""
-    type: http
-    interval: 43200
-    health-check:
-      {
-        enable: true,
-        url: "https://www.gstatic.com/generate_204",
-        interval: 300,
-      }
-    override:
-      additional-prefix: "[yiyuan]"
+#  ikuuu:
+#    url: ""
+#    type: http
+#    interval: 3200
+#    health-check:
+#      {
+#        enable: true,
+#        url: "https://www.gstatic.com/generate_204",
+#        interval: 300,
+#      }
+#    override:
+#      additional-prefix: "[ikuuu]"
 
 proxies:
   - name: "直连"
@@ -147,6 +160,14 @@ proxy-groups:
     include-all: true
     exclude-filter: "(?i)(直连)"
 
+  - name: Telegram
+    type: url-test
+    interval: 10
+    strategy: sticky-sessions
+    tolerance: 100
+    include-all: true
+    filter: "0.1倍"
+
   - name: Steam
     url: 'http://test.steampowered.com'
     type: url-test
@@ -253,10 +274,18 @@ proxy-groups:
 rules:
   - GEOIP,LAN,DIRECT,no-resolve
   - PROCESS-NAME,qBittorrent,DIRECT,no-resolve
+  - PROCESS-NAME,TencentMeeting,DIRECT
 
+  - DOMAIN-KEYWORD,gequbao,DIRECT
   - GEOSITE,category-ads-all,REJECT
   - GEOSITE,category-ai-!cn,Google
-  - GEOSITE,category-companies@cn,DIRECT
+  - GEOSITE,apple-cn,DIRECT
+  - GEOSITE,apple@cn,DIRECT
+  #- DOMAIN-KEYWORD,outlook,DIRECT
+  #- DOMAIN,login.live.com,DIRECT
+  - DOMAIN,lib.rs,Google
+  - DOMAIN,static.rust-lang.org,DIRECT
+  - GEOSITE,linguee,Google
 
   # steam 正确判断下载链接使用国内链接
   - GEOSITE,category-games-cn,DIRECT
@@ -292,18 +321,18 @@ rules:
   - GEOSITE,geolocation-cn,DIRECT
   - DOMAIN,discussions.apple.com,DIRECT
   - DOMAIN,apps.apple.com,DIRECT
-  - DOMAIN,gequbao.com,DIRECT
   - DOMAIN,discussionschinese.apple.com,DIRECT
-  - DOMAIN,outlook.com,DIRECT
   - DOMAIN,login.live.com,DIRECT
   - GEOSITE,private,DIRECT
-  # - GEOSITE,microsoft@cn,DIRECT
+  - GEOSITE,microsoft@cn,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
 
   - GEOSITE,bing,Bing
   - GEOSITE,google-gemini,Google
   - GEOSITE,google,Google
+  - PROCESS-NAME,Telegram,Telegram
+  - GEOSITE,telegram,Telegram
 
   - GEOSITE,category-scholar-!cn,Google
   - GEOSITE,geolocation-!cn,Proxy
@@ -312,13 +341,13 @@ rules:
   - GEOSITE,bahamut,巴哈姆特
 
   - GEOIP,google,Google
-  - GEOIP,netflix,Google
-  - GEOIP,twitter,Google
   - GEOIP,CN,DIRECT
 
   - DOMAIN-KEYWORD,colab,美国
   - DOMAIN-KEYWORD,developerprofiles,美国
+  - DOMAIN-KEYWORD,pqjc,Proxy
+  - DOMAIN-KEYWORD,feiniaoyun,Proxy
   # - DOMAIN,outlook.com,DIRECT
   # - DST-PORT,80/8080/443/8443,Proxy
 
-  - MATCH,DIRECT
+  - MATCH,Proxy

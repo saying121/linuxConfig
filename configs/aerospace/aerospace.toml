@@ -265,3 +265,15 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.apple.Notes'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.ruben2776.picview'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'org.krita'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.electron.lark'
+run = ['layout floating']
