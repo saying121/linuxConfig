@@ -277,3 +277,7 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.electron.lark'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.wangchujiang.mousio'
+run = ['layout floating']
